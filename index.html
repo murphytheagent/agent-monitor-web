@@ -5,177 +5,291 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent Monitor</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
   :root {
-    --bg-base: #050816;
-    --bg-surface: rgba(20, 26, 46, 0.92);
-    --bg-surface-2: rgba(30, 38, 64, 0.95);
-    --bg-border: #2a2f3e;
-    --text-main: #e8ebf4;
-    --text-muted: #8f98b3;
-    --text-dim: #657096;
-    --brand: #6da4ff;
-    --good: #4ade80;
-    --warn: #facc15;
-    --bad: #f87171;
-    --stack-queued-border: #49669f;
-    --stack-active-border: #2f8f79;
-    --stack-incomplete-border: #b58544;
-    --stack-finished-border: #6f8fd7;
+    --bg-base: #05030c;
+    --bg-surface: rgba(12, 10, 30, 0.86);
+    --bg-surface-2: rgba(24, 16, 52, 0.9);
+    --bg-border: rgba(74, 239, 255, 0.38);
+    --bg-border-strong: rgba(255, 52, 178, 0.58);
+    --text-main: #eaffff;
+    --text-muted: #99a6d8;
+    --text-dim: #6d79ad;
+    --brand: #38f0ff;
+    --brand-alt: #ff2fb3;
+    --good: #4dffb4;
+    --warn: #ffe66a;
+    --bad: #ff6689;
+    --stack-queued-border: #2fd8ff;
+    --stack-active-border: #38ffb7;
+    --stack-incomplete-border: #ffba4a;
+    --stack-finished-border: #ff4bc1;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
-          background: radial-gradient(circle at 10% 10%, #111f47 0%, transparent 38%),
-                      radial-gradient(circle at 90% 0%, #1f2f5e 0%, transparent 32%),
-                      linear-gradient(150deg, #050816 0%, #080c1f 35%, #0b1228 100%);
-          color: var(--text-main); font-size: 14px; min-height: 100vh; position: relative; overflow-x: hidden; }
+  body {
+    font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
+    background:
+      radial-gradient(circle at 12% 10%, rgba(0, 255, 225, 0.2) 0%, transparent 32%),
+      radial-gradient(circle at 88% 4%, rgba(255, 41, 163, 0.22) 0%, transparent 34%),
+      radial-gradient(circle at 62% 110%, rgba(56, 120, 255, 0.2) 0%, transparent 42%),
+      linear-gradient(150deg, #05030c 0%, #090318 46%, #120720 100%);
+    color: var(--text-main);
+    font-size: 15px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
   body::before, body::after {
     content: "";
     position: fixed;
-    width: 520px;
-    height: 520px;
-    filter: blur(64px);
-    opacity: 0.28;
-    z-index: 0;
     pointer-events: none;
+    z-index: 0;
   }
   body::before {
-    top: -220px;
-    left: -120px;
-    background: #5fa8ff;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(96, 128, 255, 0.08) 0,
+        rgba(96, 128, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 4px
+      ),
+      repeating-linear-gradient(
+        to right,
+        rgba(56, 240, 255, 0.045) 0,
+        rgba(56, 240, 255, 0.045) 1px,
+        transparent 1px,
+        transparent 56px
+      );
+    opacity: 0.34;
   }
   body::after {
-    right: -220px;
-    bottom: -280px;
-    background: #2ea48f;
+    width: 640px;
+    height: 640px;
+    right: -180px;
+    top: -220px;
+    background: radial-gradient(circle, rgba(255, 47, 179, 0.42) 0%, rgba(255, 47, 179, 0) 70%);
+    filter: blur(36px);
+    opacity: 0.62;
   }
 
-  header { display: flex; align-items: center; gap: 12px; padding: 14px 20px;
-            background: rgba(13, 18, 35, 0.88); border-bottom: 1px solid var(--bg-border); flex-wrap: wrap;
-            backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 2; }
-  header h1 { font-size: 16px; font-weight: 600; color: #fff; }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: rgba(6, 6, 22, 0.88);
+    border-bottom: 1px solid var(--bg-border);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.34), inset 0 -1px 0 rgba(255, 52, 178, 0.32);
+    flex-wrap: wrap;
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  header h1 {
+    font-family: "Orbitron", "Rajdhani", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #e9ffff;
+    text-shadow: 0 0 8px rgba(56, 240, 255, 0.56), 0 0 12px rgba(255, 47, 179, 0.42);
+  }
   #last-updated { margin-left: auto; color: var(--text-muted); font-size: 12px; }
 
-  .pill { display: inline-block; padding: 3px 10px; border-radius: 20px;
-           font-size: 12px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
-  .pill-running  { background: #1a4731; color: var(--good); }
-  .pill-sleeping { background: #2a2f3e; color: var(--text-muted); }
-  .pill-pending  { background: #3b2f05; color: var(--warn); }
-  .pill-retrying { background: #3b1a1a; color: var(--bad); }
-  .pill-unknown  { background: #2a2f3e; color: #aaa; }
-  .pill-done     { background: #1a4731; color: var(--good); }
-  .pill-inprog   { background: #1a2f47; color: #60a5fa; }
-  .pill-waiting  { background: #3b2f05; color: var(--warn); }
-  .pill-queued   { background: #2a2f3e; color: #aaa; }
-  .pill-failed   { background: #3b1a1a; color: var(--bad); }
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    font-family: "Orbitron", "Rajdhani", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.24);
+  }
+  .pill-running  { background: rgba(26, 76, 63, 0.4); border-color: rgba(77, 255, 180, 0.5); color: var(--good); }
+  .pill-sleeping { background: rgba(40, 48, 86, 0.38); border-color: rgba(87, 110, 182, 0.44); color: var(--text-muted); }
+  .pill-pending  { background: rgba(88, 58, 8, 0.42); border-color: rgba(255, 230, 106, 0.56); color: var(--warn); }
+  .pill-retrying { background: rgba(95, 26, 46, 0.44); border-color: rgba(255, 102, 137, 0.56); color: var(--bad); }
+  .pill-unknown  { background: rgba(34, 38, 69, 0.36); border-color: rgba(98, 106, 162, 0.38); color: #acb6dd; }
+  .pill-done     { background: rgba(26, 76, 63, 0.4); border-color: rgba(77, 255, 180, 0.5); color: var(--good); }
+  .pill-inprog   { background: rgba(12, 70, 88, 0.4); border-color: rgba(56, 240, 255, 0.58); color: var(--brand); }
+  .pill-waiting  { background: rgba(88, 58, 8, 0.42); border-color: rgba(255, 230, 106, 0.56); color: var(--warn); }
+  .pill-queued   { background: rgba(34, 38, 69, 0.36); border-color: rgba(98, 106, 162, 0.38); color: #acb6dd; }
+  .pill-failed   { background: rgba(95, 26, 46, 0.44); border-color: rgba(255, 102, 137, 0.56); color: var(--bad); }
 
   main { padding: 16px 20px 24px; display: grid; gap: 16px; max-width: 1450px; position: relative; z-index: 1; }
-  .card { background: var(--bg-surface); border: 1px solid var(--bg-border); border-radius: 12px; overflow: hidden;
-           box-shadow: 0 16px 34px rgba(3, 6, 20, 0.3); animation: riseIn 320ms ease-out both; }
-  .card-header { padding: 10px 16px; background: var(--bg-surface-2); border-bottom: 1px solid var(--bg-border);
-                  font-size: 11px; font-weight: 700; text-transform: uppercase;
-                  letter-spacing: 0.8px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+  .card {
+    background: linear-gradient(140deg, rgba(10, 10, 30, 0.9) 0%, rgba(12, 9, 34, 0.86) 100%);
+    border: 1px solid var(--bg-border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 18px 38px rgba(2, 5, 22, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    animation: riseIn 320ms ease-out both;
+  }
+  .card-header {
+    padding: 10px 16px;
+    background: linear-gradient(90deg, rgba(24, 15, 52, 0.94) 0%, rgba(11, 37, 68, 0.88) 100%);
+    border-bottom: 1px solid var(--bg-border);
+    font-family: "Orbitron", "Rajdhani", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #b8f4ff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .card-body { padding: 14px 16px; }
 
   .hb-grid  { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
   .hb-item  { display: flex; flex-direction: column; gap: 2px; }
   .hb-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
-  .hb-val   { font-size: 14px; color: var(--text-main); font-weight: 500; }
-  .hb-note { margin-top: 10px; color: #98a5cb; font-size: 12px; line-height: 1.45; }
-  .hb-note-warn { color: #facc15; }
+  .hb-val   { font-size: 14px; color: var(--text-main); font-weight: 600; }
+  .hb-note { margin-top: 10px; color: #9eb7ff; font-size: 12px; line-height: 1.45; }
+  .hb-note-warn { color: var(--warn); }
 
   .system-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-  .sys-item { border: 1px solid #2e3651; border-radius: 8px; background: rgba(11, 15, 30, 0.8); padding: 10px 12px; }
+  .sys-item { border: 1px solid rgba(66, 221, 255, 0.32); border-radius: 8px; background: rgba(7, 14, 38, 0.82); padding: 10px 12px; }
   .sys-label { color: var(--text-dim); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.7px; }
   .sys-val { color: var(--text-main); font-size: 13px; font-weight: 500; margin-top: 5px; word-break: break-word; }
 
   .stack-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-  .stack-col { border: 1px solid #2d3550; border-radius: 10px; background: rgba(12, 18, 35, 0.82); display: flex;
-                flex-direction: column; min-height: 220px; }
-  .stack-head { padding: 9px 10px; border-bottom: 1px solid #2d3550; display: flex; align-items: center; justify-content: space-between;
-                 font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.7px; font-weight: 700; }
-  .stack-count { background: rgba(19, 26, 46, 0.75); border-radius: 999px; padding: 1px 8px; color: #dce2f3; font-size: 11px; }
+  .stack-col {
+    border: 1px solid rgba(72, 226, 255, 0.35);
+    border-radius: 10px;
+    background: rgba(10, 16, 36, 0.8);
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+  }
+  .stack-head {
+    padding: 9px 10px;
+    border-bottom: 1px solid rgba(74, 239, 255, 0.26);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Orbitron", "Rajdhani", sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+  .stack-count { background: rgba(19, 26, 46, 0.85); border-radius: 999px; border: 1px solid rgba(86, 166, 255, 0.36); padding: 1px 8px; color: #dce2f3; font-size: 11px; }
   .stack-list { display: grid; gap: 8px; padding: 10px; align-content: start; max-height: 300px; overflow-y: auto; }
-  .stack-item { border: 1px solid #2f3752; border-radius: 8px; padding: 8px; background: rgba(17, 24, 45, 0.92); }
-  .stack-item-title { font-size: 12px; line-height: 1.4; color: #dce1f0; margin-bottom: 6px;
-                       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .stack-item-meta { display: flex; justify-content: space-between; gap: 10px; font-size: 11px; color: var(--text-dim); }
-  .stack-empty { color: #556181; font-style: italic; font-size: 12px; padding: 10px; }
-  .stack-col.stack-queued { border-color: var(--stack-queued-border); background: linear-gradient(180deg, rgba(58, 78, 128, 0.35) 0%, rgba(14, 21, 39, 0.9) 100%); }
-  .stack-col.stack-active { border-color: var(--stack-active-border); background: linear-gradient(180deg, rgba(45, 112, 99, 0.35) 0%, rgba(13, 24, 33, 0.9) 100%); }
-  .stack-col.stack-incomplete { border-color: var(--stack-incomplete-border); background: linear-gradient(180deg, rgba(135, 94, 44, 0.35) 0%, rgba(28, 20, 18, 0.9) 100%); }
-  .stack-col.stack-finished { border-color: var(--stack-finished-border); background: linear-gradient(180deg, rgba(90, 114, 179, 0.34) 0%, rgba(14, 19, 38, 0.9) 100%); }
-  .stack-col.stack-queued .stack-head { border-bottom-color: rgba(73, 102, 159, 0.45); color: #d5e0ff; }
-  .stack-col.stack-active .stack-head { border-bottom-color: rgba(47, 143, 121, 0.45); color: #d7fff2; }
-  .stack-col.stack-incomplete .stack-head { border-bottom-color: rgba(181, 133, 68, 0.45); color: #ffe7c7; }
-  .stack-col.stack-finished .stack-head { border-bottom-color: rgba(111, 143, 215, 0.45); color: #dce5ff; }
+  .stack-item { border: 1px solid rgba(71, 148, 255, 0.34); border-radius: 8px; padding: 8px; background: rgba(10, 18, 43, 0.92); }
+  .stack-item-title {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #d9f1ff;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .stack-item-meta { display: flex; justify-content: space-between; gap: 10px; font-size: 11px; color: #a7b4df; }
+  .stack-empty { color: #6578ac; font-style: italic; font-size: 12px; padding: 10px; }
+  .stack-col.stack-queued { border-color: var(--stack-queued-border); background: linear-gradient(180deg, rgba(21, 74, 99, 0.48) 0%, rgba(10, 18, 36, 0.92) 100%); }
+  .stack-col.stack-active { border-color: var(--stack-active-border); background: linear-gradient(180deg, rgba(18, 93, 72, 0.48) 0%, rgba(9, 24, 28, 0.92) 100%); }
+  .stack-col.stack-incomplete { border-color: var(--stack-incomplete-border); background: linear-gradient(180deg, rgba(113, 75, 12, 0.48) 0%, rgba(25, 18, 12, 0.92) 100%); }
+  .stack-col.stack-finished { border-color: var(--stack-finished-border); background: linear-gradient(180deg, rgba(99, 27, 95, 0.44) 0%, rgba(20, 12, 30, 0.92) 100%); }
+  .stack-col.stack-queued .stack-head { border-bottom-color: rgba(47, 216, 255, 0.44); color: #dbf8ff; }
+  .stack-col.stack-active .stack-head { border-bottom-color: rgba(56, 255, 183, 0.45); color: #dbffe8; }
+  .stack-col.stack-incomplete .stack-head { border-bottom-color: rgba(255, 186, 74, 0.45); color: #ffeac4; }
+  .stack-col.stack-finished .stack-head { border-bottom-color: rgba(255, 75, 193, 0.45); color: #ffd9f1; }
 
-  .task-text { line-height: 1.5; color: #c0c8e0; max-height: 88px; overflow-y: auto;
-                word-break: break-word; margin-bottom: 10px; white-space: pre-wrap; }
+  .task-text {
+    line-height: 1.5;
+    color: #cde9ff;
+    max-height: 88px;
+    overflow-y: auto;
+    word-break: break-word;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+  }
   .task-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--text-muted); }
-  .task-meta span b { color: #aaa; }
+  .task-meta span b { color: #bdd8ff; font-weight: 600; }
 
-  .tab-bar { display: flex; border-bottom: 1px solid #2a2f3e; }
+  .tab-bar { display: flex; border-bottom: 1px solid rgba(74, 239, 255, 0.26); }
   .tab-btn  { padding: 8px 16px; font-size: 12px; font-weight: 600; cursor: pointer;
                background: none; border: none; color: var(--text-dim); border-bottom: 2px solid transparent; }
-  .tab-btn:hover  { color: #aaa; }
+  .tab-btn:hover  { color: #d4e4ff; }
   .tab-btn.active { color: var(--brand); border-bottom-color: var(--brand); }
   .tab-content        { display: none; }
   .tab-content.active { display: block; }
 
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { text-align: left; padding: 8px 10px; font-size: 11px; color: #666;
-        text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #2a2f3e; }
-  td { padding: 9px 10px; border-bottom: 1px solid #1e2235; vertical-align: top; }
+  th { text-align: left; padding: 8px 10px; font-size: 11px; color: #8fa3d8;
+        text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid rgba(74, 239, 255, 0.26); }
+  td { padding: 9px 10px; border-bottom: 1px solid rgba(60, 90, 164, 0.35); vertical-align: top; }
   tr:last-child td { border-bottom: none; }
-  tr:hover td { background: #1e2235; }
-  .cell-text { max-width: 420px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #c0c8e0; }
+  tr:hover td { background: rgba(27, 36, 72, 0.78); }
+  .cell-text { max-width: 420px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #d4e8ff; }
   .cell-user { color: var(--text-muted); white-space: nowrap; }
   .cell-age  { color: var(--text-dim); white-space: nowrap; text-align: right; }
-  .empty-row { color: #555; font-style: italic; padding: 16px 10px; }
+  .empty-row { color: #6f7fb2; font-style: italic; padding: 16px 10px; }
 
-  #log-box { font-family: "IBM Plex Mono", "SF Mono", "Fira Code", monospace; font-size: 11.5px;
-              background: #0d1017; border-radius: 4px; padding: 10px 12px;
+  #log-box { font-family: "JetBrains Mono", "SF Mono", "Fira Code", monospace; font-size: 11.5px;
+              background: rgba(7, 10, 22, 0.88); border: 1px solid rgba(74, 239, 255, 0.26); border-radius: 6px; padding: 10px 12px;
               height: 260px; overflow-y: auto; line-height: 1.55;
               white-space: pre-wrap; word-break: break-all; }
-  .log-error   { color: #f87171; }
-  .log-start   { color: #60a5fa; }
-  .log-idle    { color: #555; }
-  .log-enq     { color: #a78bfa; }
-  .log-human   { color: #facc15; }
-  .log-maint   { color: #34d399; }
-  .log-default { color: #888; }
+  .log-error   { color: #ff8cad; }
+  .log-start   { color: #72e8ff; }
+  .log-idle    { color: #7887bb; }
+  .log-enq     { color: #ff76cf; }
+  .log-human   { color: #ffe66a; }
+  .log-maint   { color: #71ffc7; }
+  .log-default { color: #a7b4de; }
 
-  .md-pre { font-family: "IBM Plex Mono", "SF Mono", "Fira Code", monospace; font-size: 12px;
-             white-space: pre-wrap; word-break: break-word; color: #aaa;
-             background: #0d1017; padding: 12px; border-radius: 4px;
+  .md-pre { font-family: "JetBrains Mono", "SF Mono", "Fira Code", monospace; font-size: 12px;
+             white-space: pre-wrap; word-break: break-word; color: #b7c8f2;
+             background: rgba(8, 11, 24, 0.88); border: 1px solid rgba(74, 239, 255, 0.24); padding: 12px; border-radius: 6px;
              max-height: 300px; overflow-y: auto; line-height: 1.6; }
   details summary { cursor: pointer; padding: 10px 16px; font-size: 11px; font-weight: 700;
-                     text-transform: uppercase; letter-spacing: 0.8px; color: #888;
-                     background: #1e2235; border-bottom: 1px solid #2a2f3e; list-style: none; }
+                     text-transform: uppercase; letter-spacing: 0.8px; color: #b9f4ff;
+                     background: linear-gradient(90deg, rgba(23, 14, 52, 0.94) 0%, rgba(10, 30, 55, 0.88) 100%);
+                     border-bottom: 1px solid rgba(74, 239, 255, 0.26); list-style: none; }
   details summary::-webkit-details-marker { display: none; }
   details summary::before { content: "▶ "; }
   details[open] summary::before { content: "▼ "; }
 
-  #refresh-btn { padding: 5px 12px; border-radius: 6px; border: 1px solid #2a2f3e;
-                  background: #1e2235; color: #aaa; font-size: 12px; cursor: pointer; }
-  #refresh-btn:hover { background: #2a2f3e; color: #e0e0e0; }
+  #refresh-btn {
+    padding: 5px 12px;
+    border-radius: 7px;
+    border: 1px solid var(--bg-border);
+    background: linear-gradient(90deg, rgba(19, 35, 73, 0.82) 0%, rgba(56, 20, 77, 0.78) 100%);
+    color: #d9f6ff;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: inset 0 0 10px rgba(56, 240, 255, 0.2);
+  }
+  #refresh-btn:hover {
+    border-color: var(--bg-border-strong);
+    box-shadow: inset 0 0 14px rgba(255, 52, 178, 0.26), 0 0 14px rgba(56, 240, 255, 0.2);
+  }
 
   .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-  .dot-green  { background: #4ade80; box-shadow: 0 0 6px #4ade80aa; }
-  .dot-yellow { background: #facc15; box-shadow: 0 0 6px #facc15aa; }
-  .dot-red    { background: #f87171; box-shadow: 0 0 6px #f87171aa; }
-  .dot-grey   { background: #555; }
-  .section-note { margin-top: 10px; color: #93a0c6; font-size: 12px; line-height: 1.45; }
+  .dot-green  { background: var(--good); box-shadow: 0 0 8px rgba(77, 255, 180, 0.86); }
+  .dot-yellow { background: var(--warn); box-shadow: 0 0 8px rgba(255, 230, 106, 0.82); }
+  .dot-red    { background: var(--bad); box-shadow: 0 0 8px rgba(255, 102, 137, 0.86); }
+  .dot-grey   { background: #6072ab; }
+  .section-note { margin-top: 10px; color: #a6b6e8; font-size: 12px; line-height: 1.45; }
   .gpu-layout { display: grid; gap: 10px; }
   .gpu-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
-  .gpu-item { border: 1px solid #354066; border-radius: 8px; background: rgba(13, 18, 36, 0.86); padding: 10px 12px; }
-  .gpu-title { color: #d4ddfb; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 7px; }
-  .gpu-val { color: #dfe6ff; font-size: 12.5px; line-height: 1.45; }
+  .gpu-item { border: 1px solid rgba(74, 239, 255, 0.3); border-radius: 8px; background: rgba(8, 14, 34, 0.84); padding: 10px 12px; }
+  .gpu-title { color: #d9f4ff; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 7px; }
+  .gpu-val { color: #d0e2ff; font-size: 12.5px; line-height: 1.45; }
   .queue-grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
   .visibility-list { list-style: none; display: grid; gap: 6px; }
-  .visibility-list li { color: #c7d1ef; font-size: 12px; line-height: 1.5; }
-  .visibility-list strong { color: #9fb2e9; font-weight: 600; }
+  .visibility-list li { color: #c8d8ff; font-size: 12px; line-height: 1.5; }
+  .visibility-list strong { color: #7cf2ff; font-weight: 600; }
 
   @keyframes riseIn {
     from { opacity: 0; transform: translateY(5px); }
@@ -260,7 +374,7 @@
 
 <script>
 // Data embedded at file-write time. Used for instant first render in both modes.
-const INITIAL_DATA = {"heartbeat": {"last_updated_utc": "2026-02-22T21:17:32Z", "status": "running_session", "pid": 21233, "loop_count": 1032, "last_exit_code": 0, "last_failure_kind": "none", "transient_retry_attempt": 0, "pending_decision": false, "pending_backoff_sec": 120, "next_sleep_sec": 0}, "system": {"hostname": "redacted-host", "platform": "macOS-26.3-arm64-arm-64bit", "python_version": "3.9.6", "cpu_count": 10, "load_avg": {"one": 2.1, "five": 1.89, "fifteen": 1.76}, "memory_total_bytes": 17179869184, "disk_total_bytes": 245107195904, "disk_used_bytes": 44106223616, "disk_free_bytes": 201000972288, "runner_log_size_bytes": 1143375, "dashboard_pid": null, "dashboard_started_utc": "2026-02-22T21:19:08Z", "local_ips": []}, "gpu": {"enabled": false, "node_alias": "redacted-node", "status": "disabled", "checked_at_utc": null, "cache_age_sec": null, "note": "Disabled by default to avoid intrusive remote polling.", "gpus": [], "queue": {"total_jobs": null, "running_jobs": null, "pending_jobs": null, "other_jobs": null, "my_jobs": null}}, "tasks": {"queued": {"1771791882.440369": {"mention_ts": "1771791882.440369", "thread_ts": "1771791882.440369", "status": "queued", "task_description": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the murphy channel abou…", "summary": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the…", "summary_preview": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771791882.440369", "last_update_ts": "1771791882.440369", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T20:24:42Z"}}}, "active": {"1771749821.471009": {"mention_ts": "1771749821.471009", "thread_ts": "1771749821.471009", "status": "in_progress", "task_description": "There should be some sort of monitor of your health and task list, a frontend project in process, I would like for people to be able to just go to a website and see your frontend,…", "summary": "Added end-to-end task_description objective field, anonymized public requester identifiers, increased monitor refresh cadence to 2s, republished GitHub Pages (…", "summary_preview": "Added end-to-end task_description objective field, anonymized public requester identifiers, increased monitor refresh cadence to 2s, republished GitHub Pages (…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771749821.471009", "last_update_ts": "1771795052.831544", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:43:41Z"}}}, "incomplete": {"1771543280.921039": {"mention_ts": "1771543280.921039", "thread_ts": "1771543280.921039", "status": "waiting_human", "task_description": "Not working.", "summary": "AGENTS.md link-format rule was added and reported in-thread; awaiting human confirmation to close.", "summary_preview": "AGENTS.md link-format rule was added and reported in-thread; awaiting human confirmation to close.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771543280.921039", "last_update_ts": "1771575150.159650", "task_type": "slack_mention", "source": {"user_name": "0920wth", "time_iso": "2026-02-19T23:21:20Z"}}, "1771544976.149449": {"mention_ts": "1771544976.149449", "thread_ts": "1771544976.149449", "status": "waiting_human", "task_description": "Help me summarize the main findings of this paper: \u003c[link].", "summary": "Higher-dimension sweep (d=100,140) is completed and posted in-thread with project-local artifact paths; awaiting human direction on the next high-d experiment …", "summary_preview": "Higher-dimension sweep (d=100,140) is completed and posted in-thread with project-local artifact paths; awaiting human direction on the next high-d experiment …", "mention_text": "(hidden in public snapshot)", "created_ts": "1771548169.531489", "last_update_ts": "1771608254.616670", "task_type": "slack_mention", "source": {"user_name": "0920wth", "time_iso": "2026-02-20T00:42:49Z"}}, "1771656764.671299": {"mention_ts": "1771656764.671299", "thread_ts": "1771656764.671299", "status": "waiting_human", "task_description": "Compare your design and features with openclaw's, are you better in any regard?", "summary": "Task response is already posted; latest checkpoint was recorded and committed locally, but completion is blocked pending human confirmation on report wording a…", "summary_preview": "Task response is already posted; latest checkpoint was recorded and committed locally, but completion is blocked pending human confirmation on report wording a…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771656764.671299", "last_update_ts": "1771658023.573304", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T06:52:44Z"}}, "1771660238.729239": {"mention_ts": "1771660238.729239", "thread_ts": "1771660238.729239", "status": "waiting_human", "task_description": "Maintenance checklist.", "summary": "Maintenance pass completed: reviewed repo health, fixed and merged gd project PR, updated root submodule pointer; waiting on human decisions for pre-existing r…", "summary_preview": "Maintenance pass completed: reviewed repo health, fixed and merged gd project PR, updated root submodule pointer; waiting on human decisions for pre-existing r…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771660214.463245", "last_update_ts": "1771660746.348368", "task_type": "maintenance_reflect", "source": {"user_name": "supervisor", "time_iso": "2026-02-21T07:50:14Z"}}, "1771661351.374639": {"mention_ts": "1771661351.374639", "thread_ts": "1771661351.374639", "status": "waiting_human", "task_description": "On project small-swe-train, pull from main, and get started with data ingestion.", "summary": "Applied human instruction to mark task waiting_human; posted thread confirmation and checkpointed reports with no new code changes.", "summary_preview": "Applied human instruction to mark task waiting_human; posted thread confirmation and checkpointed reports with no new code changes.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771661351.374639", "last_update_ts": "1771666501.835485", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T08:09:11Z"}}, "1771667148.825919": {"mention_ts": "1771667148.825919", "thread_ts": "1771667148.825919", "status": "waiting_human", "task_description": "Small-swe-train, work remote branch feature/sdpo-integration-blueprint, it contains a root level blueprint, follow that, note your progress in it, and write tests.", "summary": "Re-checked PR #4 and live thread, found no new actionable Codex/human feedback, reconfirmed branch-main compatibility and full local tests (67 passed, 1 skippe…", "summary_preview": "Re-checked PR #4 and live thread, found no new actionable Codex/human feedback, reconfirmed branch-main compatibility and full local tests (67 passed, 1 skippe…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771667148.825919", "last_update_ts": "1771717376.239095", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T09:45:48Z"}}, "1771735130.243469": {"mention_ts": "1771735130.243469", "thread_ts": "1771735130.243469", "status": "waiting_human", "task_description": "Gh repo clone Rah-M14/Project_LEQ then: • read the two documents in detail • find any mismatch or confusion • what is a MVP implementation plan?", "summary": "Scaffold and MVP/mismatch analysis are complete; task is blocked pending user confirmation of probe vs no-probe variant and first environment target.", "summary_preview": "Scaffold and MVP/mismatch analysis are complete; task is blocked pending user confirmation of probe vs no-probe variant and first environment target.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771735130.243469", "last_update_ts": "1771735945.298759", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T04:38:50Z"}}, "1771749091.141509": {"mention_ts": "1771749091.141509", "thread_ts": "1771749091.141509", "status": "waiting_human", "task_description": "How have you been using your memory in your session?", "summary": "All approved memory-upgrade work is implemented and revalidated (111 supervisor tests passing); task is waiting on final human confirmation in-thread per root-…", "summary_preview": "All approved memory-upgrade work is implemented and revalidated (111 supervisor tests passing); task is waiting on final human confirmation in-thread per root-…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771749091.141509", "last_update_ts": "1771756441.675347", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:31:31Z"}}, "1771753564.797789": {"mention_ts": "1771753564.797789", "thread_ts": "1771753564.797789", "status": "in_progress", "task_description": "Address \u003c[link] fix, test with GPUs, update docs, commit, and merge this PR.", "summary": "Opened fix PR #6 for on-policy batch env concurrency + per-task patch init, validated with successful 8-GPU/10-step Slurm run (job 424), updated reports/checkp…", "summary_preview": "Opened fix PR #6 for on-policy batch env concurrency + per-task patch init, validated with successful 8-GPU/10-step Slurm run (job 424), updated reports/checkp…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771753564.797789", "last_update_ts": "1771794929.543563", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T09:46:04Z"}}}, "finished": {"1771749231.663359": {"mention_ts": "1771749231.663359", "thread_ts": "1771749231.663359", "status": "done", "task_description": "Based on recent tasks and workflows from me and tianhao wang, what can be improved in your design and our way of using you?", "summary": "Answered follow-up on skill auto-discovery/reload behavior in-thread, updated report/memory, and finalized task artifacts.", "summary_preview": "Answered follow-up on skill auto-discovery/reload behavior in-thread, updated report/memory, and finalized task artifacts.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771749231.663359", "last_update_ts": "1771757382.883335", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:33:51Z"}}, "1771748878.174109": {"mention_ts": "1771748878.174109", "thread_ts": "1771748878.174109", "status": "done", "task_description": "Can you send me files or pictures from slack?", "summary": "Delivered PDF upload in-thread, ran additional PDF/image upload tests successfully, and marked the feature done by Zhi in ROADMAP.md.", "summary_preview": "Delivered PDF upload in-thread, ran additional PDF/image upload tests successfully, and marked the feature done by Zhi in ROADMAP.md.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771748878.174109", "last_update_ts": "1771754195.520603", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:27:58Z"}}, "1771739105.778959": {"mention_ts": "1771739105.778959", "thread_ts": "1771739105.778959", "status": "done", "task_description": "Work on PR4 of small-swe-train, pull, check comments, don't stop until you have RFT part completely done and everything wired in, one metric is to run a full rollout + train step …", "summary": "Human approved root instruction updates; completed final PR #4 review-thread fix in commit d220c52, revalidated tests, confirmed unresolved active review threa…", "summary_preview": "Human approved root instruction updates; completed final PR #4 review-thread fix in commit d220c52, revalidated tests, confirmed unresolved active review threa…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771739105.778959", "last_update_ts": "1771752143.965883", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T05:45:05Z"}}, "1771660218.903549": {"mention_ts": "1771660218.903549", "thread_ts": "1771660218.903549", "status": "done", "task_description": "Based on your current src and recent five root git commits, update ROADMAP.md, and maintain a changelog based on root level git history, this is only for the agent's source code, …", "summary": "Committed all requested root-level roadmap/changelog/protocol updates in root commit a3f13d3 and posted in-thread completion confirmation.", "summary_preview": "Committed all requested root-level roadmap/changelog/protocol updates in root commit a3f13d3 and posted in-thread completion confirmation.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771660218.903549", "last_update_ts": "1771667251.848644", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T09:44:33Z"}}, "1771579678.414229": {"mention_ts": "1771579678.414229", "thread_ts": "1771579678.414229", "status": "done", "task_description": "Delete what we have now for the codebase of small swe train, and get in the research mode to draft a plan with me, with clear math and implementation blueprint.", "summary": "Implemented v1.6 interface scaffolding (types/parser/canonicalizer/adapters/masking/tests), pushed design branch, merged PR #2 to main, and posted thread closu…", "summary_preview": "Implemented v1.6 interface scaffolding (types/parser/canonicalizer/adapters/masking/tests), pushed design branch, merged PR #2 to main, and posted thread closu…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771579678.414229", "last_update_ts": "1771657082.681982", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T09:27:58Z"}}, "1771634797.184319": {"mention_ts": "1771634797.184319", "thread_ts": "1771634797.184319", "status": "done", "task_description": "Check your PRs, any feedbacks?", "summary": "Checked open PRs and reported feedback status in-thread; 2 PRs have actionable comments, 1 has no major issues.", "summary_preview": "Checked open PRs and reported feedback status in-thread; 2 PRs have actionable comments, 1 has no major issues.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771634797.184319", "last_update_ts": "1771635906.659841", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T00:46:37Z"}}, "1771443304.562299": {"mention_ts": "1771443304.562299", "thread_ts": "1771443304.562299", "status": "done", "task_description": "One long term project i want to initiate is to improve your chatgpt mcp server implementation, the first goal of this project is to implement the capability of uploading files in …", "summary": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; u…", "summary_preview": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; u…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771551175.566439", "last_update_ts": "1771628609.828777", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T01:32:55Z"}}, "1771541706.964229": {"mention_ts": "1771541706.964229", "thread_ts": "1771541706.964229", "status": "done", "task_description": "Fork this repo: hao-ai-lab/research-agent with gh and compare its design with yours.", "summary": "Thread already closed per human instruction; no-pending get_chatgpt_response semantics set to conversation-snapshot mode and closure artifacts were verified.", "summary_preview": "Thread already closed per human instruction; no-pending get_chatgpt_response semantics set to conversation-snapshot mode and closure artifacts were verified.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771544084.399509", "last_update_ts": "1771628492.397040", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-19T23:34:44Z"}}, "1771580731.031149": {"mention_ts": "1771580731.031149", "thread_ts": "1771580731.031149", "status": "done", "task_description": "Your github related protocol should be updated, you should only be able to: • perform any local git command as instructed • use gh to manage/create/delete/fork remote github repos…", "summary": "Synced project codebases to GitHub SSH remotes, opened PR-based syncs with @codex for three project repos, verified MCP repos are aligned, and checkpointed coo…", "summary_preview": "Synced project codebases to GitHub SSH remotes, opened PR-based syncs with @codex for three project repos, verified MCP repos are aligned, and checkpointed coo…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771580731.031149", "last_update_ts": "1771616326.501596", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T09:45:31Z"}}, "1771553355.096239": {"mention_ts": "1771553355.096239", "thread_ts": "1771553355.096239", "status": "done", "task_description": "How long do you keep tasks in incomplete?", "summary": "Confirmed waiting_human incomplete retention is enforced at MAX_INCOMPLETE_RETENTION (default 2592000s/30d), kept existing patch, and closed task after human c…", "summary_preview": "Confirmed waiting_human incomplete retention is enforced at MAX_INCOMPLETE_RETENTION (default 2592000s/30d), kept existing patch, and closed task after human c…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771553355.096239", "last_update_ts": "1771584355.289691", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T02:09:15Z"}}}}, "log_tail": ["(hidden in public snapshot)"], "goals_md": "(hidden in public snapshot)", "memory_md": "(hidden in public snapshot)", "visibility": {"mode": "public_snapshot", "audience": "Anyone with the GitHub Pages URL.", "goals_memory_access": "Hidden in public snapshot export.", "task_text_access": "Thread-scoped task_description plus compact previews; requester display names are shown.", "log_access": "Hidden in public snapshot export.", "source_code_exposure": "No repository files are published by this dashboard output."}, "server_time_utc": "2026-02-22T21:19:08Z"};
+const INITIAL_DATA = {"polling": {"supervisor_poll_interval_sec": 120, "frontend_poll_interval_sec": 120}, "visibility": {"mode": "public_snapshot", "audience": "Anyone with the GitHub Pages URL.", "goals_memory_access": "Hidden in public snapshot export.", "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.", "log_access": "Hidden in public snapshot export.", "source_code_exposure": "No repository files are published by this dashboard output."}};
 const API_STATUS_PATH = "status.json";
 
 const STATUS_STYLES = {
@@ -418,7 +532,7 @@ function render(data) {
       <div class="task-text">${esc(txt)}</div>
       <div class="task-meta">
         ${statusPill(t.status)}
-        <span><b>Requester:</b> ${esc(t.source && t.source.user_name || '—')}</span>
+        <span><b>Requester:</b> [redacted]</span>
         <span><b>Age:</b> ${taskAge(t.created_ts)}</span>
         <span><b>Thread:</b> ${esc(t.thread_ts || '—')}</span>
       </div>`;
@@ -441,7 +555,7 @@ function render(data) {
           <div class="stack-item">
             <div class="stack-item-title">${esc(compactTaskText(t, 88))}</div>
             <div class="stack-item-meta">
-              <span>${esc((t.source && t.source.user_name) || '—')}</span>
+              <span>[redacted]</span>
               <span>${taskAge(t.created_ts)}</span>
             </div>
           </div>
@@ -573,24 +687,45 @@ function render(data) {
 // Render immediately from embedded data (instant, no network round-trip)
 render(INITIAL_DATA);
 
-// Over HTTP: also poll /api/status every 2s for live DOM updates without page reload
-function fetchAndRender() {
-  if (!API_STATUS_PATH) return;
-  fetch(API_STATUS_PATH)
+const canPoll = Boolean(API_STATUS_PATH) && location.protocol !== 'file:';
+document.getElementById('refresh-btn').onclick = canPoll ? () => fetchAndRender(true) : () => location.reload();
+
+function resolvePollIntervalMs(data) {
+  const fallback = Number(data?.polling?.supervisor_poll_interval_sec ?? 2);
+  const raw = Number(data?.polling?.frontend_poll_interval_sec ?? fallback);
+  const sec = Number.isFinite(raw) && raw > 0
+    ? raw
+    : (Number.isFinite(fallback) && fallback > 0 ? fallback : 2);
+  return Math.max(1000, Math.round(sec * 1000));
+}
+
+let pollTimer = null;
+function scheduleNextPoll(data) {
+  if (!canPoll) return;
+  if (pollTimer) clearTimeout(pollTimer);
+  pollTimer = setTimeout(() => fetchAndRender(false), resolvePollIntervalMs(data));
+}
+
+// Over HTTP: poll /api/status for live DOM updates without page reload.
+function fetchAndRender(scheduleNext=true) {
+  if (!API_STATUS_PATH) return Promise.resolve(null);
+  return fetch(API_STATUS_PATH)
     .then(r => r.json())
-    .then(render)
+    .then(data => {
+      render(data);
+      if (scheduleNext) scheduleNextPoll(data);
+      return data;
+    })
     .catch(() => {
       document.getElementById('last-updated').textContent = 'Poll failed — retrying…';
+      if (scheduleNext) scheduleNextPoll(INITIAL_DATA);
+      return null;
     });
 }
 
-const canPoll = Boolean(API_STATUS_PATH) && location.protocol !== 'file:';
-document.getElementById('refresh-btn').onclick = canPoll
-  ? fetchAndRender
-  : () => location.reload();
-
 if (canPoll) {
-  setInterval(fetchAndRender, 2000);
+  scheduleNextPoll(INITIAL_DATA);
+  fetchAndRender(true);
 }
 </script>
 </body>
