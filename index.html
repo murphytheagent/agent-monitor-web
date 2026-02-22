@@ -18,6 +18,10 @@
     --good: #4ade80;
     --warn: #facc15;
     --bad: #f87171;
+    --stack-queued-border: #49669f;
+    --stack-active-border: #2f8f79;
+    --stack-incomplete-border: #b58544;
+    --stack-finished-border: #6f8fd7;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
@@ -77,6 +81,8 @@
   .hb-item  { display: flex; flex-direction: column; gap: 2px; }
   .hb-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
   .hb-val   { font-size: 14px; color: var(--text-main); font-weight: 500; }
+  .hb-note { margin-top: 10px; color: #98a5cb; font-size: 12px; line-height: 1.45; }
+  .hb-note-warn { color: #facc15; }
 
   .system-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
   .sys-item { border: 1px solid #2e3651; border-radius: 8px; background: rgba(11, 15, 30, 0.8); padding: 10px 12px; }
@@ -88,15 +94,23 @@
                 flex-direction: column; min-height: 220px; }
   .stack-head { padding: 9px 10px; border-bottom: 1px solid #2d3550; display: flex; align-items: center; justify-content: space-between;
                  font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.7px; font-weight: 700; }
-  .stack-count { background: #2a2f3e; border-radius: 999px; padding: 1px 8px; color: #d3d8ea; font-size: 11px; }
+  .stack-count { background: rgba(19, 26, 46, 0.75); border-radius: 999px; padding: 1px 8px; color: #dce2f3; font-size: 11px; }
   .stack-list { display: grid; gap: 8px; padding: 10px; align-content: start; max-height: 300px; overflow-y: auto; }
   .stack-item { border: 1px solid #2f3752; border-radius: 8px; padding: 8px; background: rgba(17, 24, 45, 0.92); }
   .stack-item-title { font-size: 12px; line-height: 1.4; color: #dce1f0; margin-bottom: 6px;
                        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .stack-item-meta { display: flex; justify-content: space-between; gap: 10px; font-size: 11px; color: var(--text-dim); }
   .stack-empty { color: #556181; font-style: italic; font-size: 12px; padding: 10px; }
+  .stack-col.stack-queued { border-color: var(--stack-queued-border); background: linear-gradient(180deg, rgba(58, 78, 128, 0.35) 0%, rgba(14, 21, 39, 0.9) 100%); }
+  .stack-col.stack-active { border-color: var(--stack-active-border); background: linear-gradient(180deg, rgba(45, 112, 99, 0.35) 0%, rgba(13, 24, 33, 0.9) 100%); }
+  .stack-col.stack-incomplete { border-color: var(--stack-incomplete-border); background: linear-gradient(180deg, rgba(135, 94, 44, 0.35) 0%, rgba(28, 20, 18, 0.9) 100%); }
+  .stack-col.stack-finished { border-color: var(--stack-finished-border); background: linear-gradient(180deg, rgba(90, 114, 179, 0.34) 0%, rgba(14, 19, 38, 0.9) 100%); }
+  .stack-col.stack-queued .stack-head { border-bottom-color: rgba(73, 102, 159, 0.45); color: #d5e0ff; }
+  .stack-col.stack-active .stack-head { border-bottom-color: rgba(47, 143, 121, 0.45); color: #d7fff2; }
+  .stack-col.stack-incomplete .stack-head { border-bottom-color: rgba(181, 133, 68, 0.45); color: #ffe7c7; }
+  .stack-col.stack-finished .stack-head { border-bottom-color: rgba(111, 143, 215, 0.45); color: #dce5ff; }
 
-  .task-text { line-height: 1.5; color: #c0c8e0; max-height: 120px; overflow-y: auto;
+  .task-text { line-height: 1.5; color: #c0c8e0; max-height: 88px; overflow-y: auto;
                 word-break: break-word; margin-bottom: 10px; white-space: pre-wrap; }
   .task-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--text-muted); }
   .task-meta span b { color: #aaa; }
@@ -152,6 +166,16 @@
   .dot-yellow { background: #facc15; box-shadow: 0 0 6px #facc15aa; }
   .dot-red    { background: #f87171; box-shadow: 0 0 6px #f87171aa; }
   .dot-grey   { background: #555; }
+  .section-note { margin-top: 10px; color: #93a0c6; font-size: 12px; line-height: 1.45; }
+  .gpu-layout { display: grid; gap: 10px; }
+  .gpu-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  .gpu-item { border: 1px solid #354066; border-radius: 8px; background: rgba(13, 18, 36, 0.86); padding: 10px 12px; }
+  .gpu-title { color: #d4ddfb; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 7px; }
+  .gpu-val { color: #dfe6ff; font-size: 12.5px; line-height: 1.45; }
+  .queue-grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+  .visibility-list { list-style: none; display: grid; gap: 6px; }
+  .visibility-list li { color: #c7d1ef; font-size: 12px; line-height: 1.5; }
+  .visibility-list strong { color: #9fb2e9; font-weight: 600; }
 
   @keyframes riseIn {
     from { opacity: 0; transform: translateY(5px); }
@@ -181,12 +205,10 @@
 <main>
   <div class="card">
     <div class="card-header">Supervisor</div>
-    <div class="card-body"><div class="hb-grid" id="hb-grid"></div></div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">System Snapshot</div>
-    <div class="card-body"><div class="system-grid" id="system-grid"></div></div>
+    <div class="card-body">
+      <div class="hb-grid" id="hb-grid"></div>
+      <div class="hb-note" id="hb-note"></div>
+    </div>
   </div>
 
   <div class="card">
@@ -214,8 +236,26 @@
   </div>
 
   <div class="card">
+    <div class="card-header">System Snapshot</div>
+    <div class="card-body"><div class="system-grid" id="system-grid"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">GPU Node + Slurm Queue</div>
+    <div class="card-body">
+      <div class="gpu-layout" id="gpu-body"></div>
+      <div class="section-note" id="gpu-note"></div>
+    </div>
+  </div>
+
+  <div class="card">
     <div class="card-header">Recent Log Events</div>
     <div class="card-body" style="padding:10px 12px"><div id="log-box"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Visibility + Permissions</div>
+    <div class="card-body"><ul class="visibility-list" id="visibility-list"></ul></div>
   </div>
 
   <div class="card">
@@ -234,7 +274,7 @@
 
 <script>
 // Data embedded at file-write time. Used for instant first render in both modes.
-const INITIAL_DATA = {"heartbeat": {"last_updated_utc": "2026-02-22T12:03:54Z", "status": "running_session", "pid": 21233, "loop_count": 790, "last_exit_code": 0, "last_failure_kind": "none", "transient_retry_attempt": 0, "pending_decision": false, "pending_backoff_sec": 120, "next_sleep_sec": 0}, "system": {"hostname": "redacted-host", "platform": "macOS-26.3-arm64-arm-64bit", "python_version": "3.9.6", "cpu_count": 10, "load_avg": {"one": 1.63, "five": 1.65, "fifteen": 1.59}, "memory_total_bytes": 17179869184, "disk_total_bytes": 245107195904, "disk_used_bytes": 44071456768, "disk_free_bytes": 201035739136, "runner_log_size_bytes": 1074070, "dashboard_pid": 54158, "dashboard_started_utc": "2026-02-22T12:05:27Z", "local_ips": []}, "tasks": {"queued": {}, "active": {"1771749821.471009": {"mention_ts": "1771749821.471009", "thread_ts": "1771749821.471009", "status": "in_progress", "summary": "Published additional GitHub Pages hardening fixes (attribute quote escaping + script-safe JSON embedding) in agent-monitor-web commit 10e29148c8412c27006885e2d52c56e7bc897bb9, confirmed the live URL still returns HTTP 200 and active non-outdated PR review threads are 0, posted an in-thread verification request, and re-checked at 2026-02-22 12:00 UTC with no human feedback yet.", "mention_text": "Published additional GitHub Pages hardening fixes (attribute quote escaping + script-safe JSON embedding) in agent-monitor-web commit 10e29148c8412c27006885e2d52c56e7bc897bb9, confirmed the live URL still returns HTTP 200 and active non-outdated PR review threads are 0, posted an in-thread verification request, and re-checked at 2026-02-22 12:00 UTC with no human feedback yet.", "created_ts": "1771749821.471009", "last_update_ts": "1771761834.060539", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:43:41Z"}}}, "incomplete": {"1771543280.921039": {"mention_ts": "1771543280.921039", "thread_ts": "1771543280.921039", "status": "waiting_human", "summary": "AGENTS.md link-format rule was added and reported in-thread; awaiting human confirmation to close.", "mention_text": "AGENTS.md link-format rule was added and reported in-thread; awaiting human confirmation to close.", "created_ts": "1771543280.921039", "last_update_ts": "1771575150.159650", "task_type": "slack_mention", "source": {"user_name": "0920wth", "time_iso": "2026-02-19T23:21:20Z"}}, "1771544976.149449": {"mention_ts": "1771544976.149449", "thread_ts": "1771544976.149449", "status": "waiting_human", "summary": "Higher-dimension sweep (d=100,140) is completed and posted in-thread with project-local artifact paths; awaiting human direction on the next high-d experiment step.", "mention_text": "Higher-dimension sweep (d=100,140) is completed and posted in-thread with project-local artifact paths; awaiting human direction on the next high-d experiment step.", "created_ts": "1771548169.531489", "last_update_ts": "1771608254.616670", "task_type": "slack_mention", "source": {"user_name": "0920wth", "time_iso": "2026-02-20T00:42:49Z"}}, "1771656764.671299": {"mention_ts": "1771656764.671299", "thread_ts": "1771656764.671299", "status": "waiting_human", "summary": "Task response is already posted; latest checkpoint was recorded and committed locally, but completion is blocked pending human confirmation on report wording and root-repo remote/PR target.", "mention_text": "Task response is already posted; latest checkpoint was recorded and committed locally, but completion is blocked pending human confirmation on report wording and root-repo remote/PR target.", "created_ts": "1771656764.671299", "last_update_ts": "1771658023.573304", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T06:52:44Z"}}, "1771660238.729239": {"mention_ts": "1771660238.729239", "thread_ts": "1771660238.729239", "status": "waiting_human", "summary": "Maintenance pass completed: reviewed repo health, fixed and merged gd project PR, updated root submodule pointer; waiting on human decisions for pre-existing root prompt edit and missing root remote.", "mention_text": "Maintenance pass completed: reviewed repo health, fixed and merged gd project PR, updated root submodule pointer; waiting on human decisions for pre-existing root prompt edit and missing root remote.", "created_ts": "1771660214.463245", "last_update_ts": "1771660746.348368", "task_type": "maintenance_reflect", "source": {"user_name": "supervisor", "time_iso": "2026-02-21T07:50:14Z"}}, "1771661351.374639": {"mention_ts": "1771661351.374639", "thread_ts": "1771661351.374639", "status": "waiting_human", "summary": "Applied human instruction to mark task waiting_human; posted thread confirmation and checkpointed reports with no new code changes.", "mention_text": "Applied human instruction to mark task waiting_human; posted thread confirmation and checkpointed reports with no new code changes.", "created_ts": "1771661351.374639", "last_update_ts": "1771666501.835485", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T08:09:11Z"}}, "1771667148.825919": {"mention_ts": "1771667148.825919", "thread_ts": "1771667148.825919", "status": "waiting_human", "summary": "Re-checked PR #4 and live thread, found no new actionable Codex/human feedback, reconfirmed branch-main compatibility and full local tests (67 passed, 1 skipped), posted Slack handoff update, and checkpointed coordination docs in root commit e9d6fc7553652af008c909097275ecfc4db79c4c.", "mention_text": "Re-checked PR #4 and live thread, found no new actionable Codex/human feedback, reconfirmed branch-main compatibility and full local tests (67 passed, 1 skipped), posted Slack handoff update, and checkpointed coordination docs in root commit e9d6fc7553652af008c909097275ecfc4db79c4c.", "created_ts": "1771667148.825919", "last_update_ts": "1771717376.239095", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T09:45:48Z"}}, "1771735130.243469": {"mention_ts": "1771735130.243469", "thread_ts": "1771735130.243469", "status": "waiting_human", "summary": "Scaffold and MVP/mismatch analysis are complete; task is blocked pending user confirmation of probe vs no-probe variant and first environment target.", "mention_text": "Scaffold and MVP/mismatch analysis are complete; task is blocked pending user confirmation of probe vs no-probe variant and first environment target.", "created_ts": "1771735130.243469", "last_update_ts": "1771735945.298759", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T04:38:50Z"}}, "1771749091.141509": {"mention_ts": "1771749091.141509", "thread_ts": "1771749091.141509", "status": "waiting_human", "summary": "All approved memory-upgrade work is implemented and revalidated (111 supervisor tests passing); task is waiting on final human confirmation in-thread per root-change review gate.", "mention_text": "All approved memory-upgrade work is implemented and revalidated (111 supervisor tests passing); task is waiting on final human confirmation in-thread per root-change review gate.", "created_ts": "1771749091.141509", "last_update_ts": "1771756441.675347", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:31:31Z"}}, "1771753564.797789": {"mention_ts": "1771753564.797789", "thread_ts": "1771753564.797789", "status": "waiting_human", "summary": "Re-checked thread/PR #5 (clean, no human feedback), posted follow-up direction request, then paused on unexpected pre-existing root worktree edits and asked user how to scope checkpoint commit.", "mention_text": "Re-checked thread/PR #5 (clean, no human feedback), posted follow-up direction request, then paused on unexpected pre-existing root worktree edits and asked user how to scope checkpoint commit.", "created_ts": "1771753564.797789", "last_update_ts": "1771760326.686924", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T09:46:04Z"}}}, "finished": {"1771749231.663359": {"mention_ts": "1771749231.663359", "thread_ts": "1771749231.663359", "status": "done", "summary": "Answered follow-up on skill auto-discovery/reload behavior in-thread, updated report/memory, and finalized task artifacts.", "mention_text": "Answered follow-up on skill auto-discovery/reload behavior in-thread, updated report/memory, and finalized task artifacts.", "created_ts": "1771749231.663359", "last_update_ts": "1771757382.883335", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:33:51Z"}}, "1771748878.174109": {"mention_ts": "1771748878.174109", "thread_ts": "1771748878.174109", "status": "done", "summary": "Delivered PDF upload in-thread, ran additional PDF/image upload tests successfully, and marked the feature done by Zhi in ROADMAP.md.", "mention_text": "Delivered PDF upload in-thread, ran additional PDF/image upload tests successfully, and marked the feature done by Zhi in ROADMAP.md.", "created_ts": "1771748878.174109", "last_update_ts": "1771754195.520603", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:27:58Z"}}, "1771739105.778959": {"mention_ts": "1771739105.778959", "thread_ts": "1771739105.778959", "status": "done", "summary": "Human approved root instruction updates; completed final PR #4 review-thread fix in commit d220c52, revalidated tests, confirmed unresolved active review threads = 0, posted in-thread completion update, and checkpointed coordination docs.", "mention_text": "Human approved root instruction updates; completed final PR #4 review-thread fix in commit d220c52, revalidated tests, confirmed unresolved active review threads = 0, posted in-thread completion update, and checkpointed coordination docs.", "created_ts": "1771739105.778959", "last_update_ts": "1771752143.965883", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T05:45:05Z"}}, "1771660218.903549": {"mention_ts": "1771660218.903549", "thread_ts": "1771660218.903549", "status": "done", "summary": "Committed all requested root-level roadmap/changelog/protocol updates in root commit a3f13d3 and posted in-thread completion confirmation.", "mention_text": "Committed all requested root-level roadmap/changelog/protocol updates in root commit a3f13d3 and posted in-thread completion confirmation.", "created_ts": "1771660218.903549", "last_update_ts": "1771667251.848644", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T09:44:33Z"}}, "1771579678.414229": {"mention_ts": "1771579678.414229", "thread_ts": "1771579678.414229", "status": "done", "summary": "Implemented v1.6 interface scaffolding (types/parser/canonicalizer/adapters/masking/tests), pushed design branch, merged PR #2 to main, and posted thread closure update.", "mention_text": "Implemented v1.6 interface scaffolding (types/parser/canonicalizer/adapters/masking/tests), pushed design branch, merged PR #2 to main, and posted thread closure update.", "created_ts": "1771579678.414229", "last_update_ts": "1771657082.681982", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T09:27:58Z"}}, "1771634797.184319": {"mention_ts": "1771634797.184319", "thread_ts": "1771634797.184319", "status": "done", "summary": "Checked open PRs and reported feedback status in-thread; 2 PRs have actionable comments, 1 has no major issues.", "mention_text": "Checked open PRs and reported feedback status in-thread; 2 PRs have actionable comments, 1 has no major issues.", "created_ts": "1771634797.184319", "last_update_ts": "1771635906.659841", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T00:46:37Z"}}, "1771443304.562299": {"mention_ts": "1771443304.562299", "thread_ts": "1771443304.562299", "status": "done", "summary": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; user confirmed the lock direction for the next implementation step.", "mention_text": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; user confirmed the lock direction for the next implementation step.", "created_ts": "1771551175.566439", "last_update_ts": "1771628609.828777", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T01:32:55Z"}}, "1771541706.964229": {"mention_ts": "1771541706.964229", "thread_ts": "1771541706.964229", "status": "done", "summary": "Thread already closed per human instruction; no-pending get_chatgpt_response semantics set to conversation-snapshot mode and closure artifacts were verified.", "mention_text": "Thread already closed per human instruction; no-pending get_chatgpt_response semantics set to conversation-snapshot mode and closure artifacts were verified.", "created_ts": "1771544084.399509", "last_update_ts": "1771628492.397040", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-19T23:34:44Z"}}, "1771580731.031149": {"mention_ts": "1771580731.031149", "thread_ts": "1771580731.031149", "status": "done", "summary": "Synced project codebases to GitHub SSH remotes, opened PR-based syncs with @codex for three project repos, verified MCP repos are aligned, and checkpointed coordination updates in root commit 0a1656c.", "mention_text": "Synced project codebases to GitHub SSH remotes, opened PR-based syncs with @codex for three project repos, verified MCP repos are aligned, and checkpointed coordination updates in root commit 0a1656c.", "created_ts": "1771580731.031149", "last_update_ts": "1771616326.501596", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T09:45:31Z"}}, "1771553355.096239": {"mention_ts": "1771553355.096239", "thread_ts": "1771553355.096239", "status": "done", "summary": "Confirmed waiting_human incomplete retention is enforced at MAX_INCOMPLETE_RETENTION (default 2592000s/30d), kept existing patch, and closed task after human confirmation.", "mention_text": "Confirmed waiting_human incomplete retention is enforced at MAX_INCOMPLETE_RETENTION (default 2592000s/30d), kept existing patch, and closed task after human confirmation.", "created_ts": "1771553355.096239", "last_update_ts": "1771584355.289691", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T02:09:15Z"}}}}, "log_tail": ["(hidden in public snapshot)"], "goals_md": "(hidden in public snapshot)", "memory_md": "(hidden in public snapshot)", "server_time_utc": "2026-02-22T12:05:27Z"};
+const INITIAL_DATA = {"heartbeat": {"last_updated_utc": "2026-02-22T20:21:16Z", "status": "running_session", "pid": 21233, "loop_count": 1028, "last_exit_code": 0, "last_failure_kind": "none", "transient_retry_attempt": 0, "pending_decision": false, "pending_backoff_sec": 120, "next_sleep_sec": 0}, "system": {"hostname": "redacted-host", "platform": "macOS-26.3-arm64-arm-64bit", "python_version": "3.9.6", "cpu_count": 10, "load_avg": {"one": 1.63, "five": 1.56, "fifteen": 1.55}, "memory_total_bytes": 17179869184, "disk_total_bytes": 245107195904, "disk_used_bytes": 44111814656, "disk_free_bytes": 200995381248, "runner_log_size_bytes": 1142057, "dashboard_pid": null, "dashboard_started_utc": "2026-02-22T20:29:03Z", "local_ips": []}, "gpu": {"enabled": false, "node_alias": "tianhaowang-gpu0", "status": "disabled", "checked_at_utc": null, "cache_age_sec": null, "note": "Disabled by default to avoid intrusive remote polling.", "gpus": [], "queue": {"total_jobs": null, "running_jobs": null, "pending_jobs": null, "other_jobs": null, "my_jobs": null}}, "tasks": {"queued": {}, "active": {"1771749821.471009": {"mention_ts": "1771749821.471009", "thread_ts": "1771749821.471009", "status": "in_progress", "summary": "Fixed two new PR #1 findings (script embedding \u003c \u003e \u0026 escaping and falsy-value rendering), published agent-monitor-web commit 0052dbc6d168f6792c3d7f1b5bc32a6f95…", "summary_preview": "Fixed two new PR #1 findings (script embedding \u003c \u003e \u0026 escaping and falsy-value rendering), published agent-monitor-web commit 0052dbc6d168f6792c3d7f1b5bc32a6f95…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771749821.471009", "last_update_ts": "1771791676.582001", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:43:41Z"}}}, "incomplete": {"1771543280.921039": {"mention_ts": "1771543280.921039", "thread_ts": "1771543280.921039", "status": "waiting_human", "summary": "AGENTS.md link-format rule was added and reported in-thread; awaiting human confirmation to close.", "summary_preview": "AGENTS.md link-format rule was added and reported in-thread; awaiting human confirmation to close.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771543280.921039", "last_update_ts": "1771575150.159650", "task_type": "slack_mention", "source": {"user_name": "0920wth", "time_iso": "2026-02-19T23:21:20Z"}}, "1771544976.149449": {"mention_ts": "1771544976.149449", "thread_ts": "1771544976.149449", "status": "waiting_human", "summary": "Higher-dimension sweep (d=100,140) is completed and posted in-thread with project-local artifact paths; awaiting human direction on the next high-d experiment …", "summary_preview": "Higher-dimension sweep (d=100,140) is completed and posted in-thread with project-local artifact paths; awaiting human direction on the next high-d experiment …", "mention_text": "(hidden in public snapshot)", "created_ts": "1771548169.531489", "last_update_ts": "1771608254.616670", "task_type": "slack_mention", "source": {"user_name": "0920wth", "time_iso": "2026-02-20T00:42:49Z"}}, "1771656764.671299": {"mention_ts": "1771656764.671299", "thread_ts": "1771656764.671299", "status": "waiting_human", "summary": "Task response is already posted; latest checkpoint was recorded and committed locally, but completion is blocked pending human confirmation on report wording a…", "summary_preview": "Task response is already posted; latest checkpoint was recorded and committed locally, but completion is blocked pending human confirmation on report wording a…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771656764.671299", "last_update_ts": "1771658023.573304", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T06:52:44Z"}}, "1771660238.729239": {"mention_ts": "1771660238.729239", "thread_ts": "1771660238.729239", "status": "waiting_human", "summary": "Maintenance pass completed: reviewed repo health, fixed and merged gd project PR, updated root submodule pointer; waiting on human decisions for pre-existing r…", "summary_preview": "Maintenance pass completed: reviewed repo health, fixed and merged gd project PR, updated root submodule pointer; waiting on human decisions for pre-existing r…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771660214.463245", "last_update_ts": "1771660746.348368", "task_type": "maintenance_reflect", "source": {"user_name": "supervisor", "time_iso": "2026-02-21T07:50:14Z"}}, "1771661351.374639": {"mention_ts": "1771661351.374639", "thread_ts": "1771661351.374639", "status": "waiting_human", "summary": "Applied human instruction to mark task waiting_human; posted thread confirmation and checkpointed reports with no new code changes.", "summary_preview": "Applied human instruction to mark task waiting_human; posted thread confirmation and checkpointed reports with no new code changes.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771661351.374639", "last_update_ts": "1771666501.835485", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T08:09:11Z"}}, "1771667148.825919": {"mention_ts": "1771667148.825919", "thread_ts": "1771667148.825919", "status": "waiting_human", "summary": "Re-checked PR #4 and live thread, found no new actionable Codex/human feedback, reconfirmed branch-main compatibility and full local tests (67 passed, 1 skippe…", "summary_preview": "Re-checked PR #4 and live thread, found no new actionable Codex/human feedback, reconfirmed branch-main compatibility and full local tests (67 passed, 1 skippe…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771667148.825919", "last_update_ts": "1771717376.239095", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T09:45:48Z"}}, "1771735130.243469": {"mention_ts": "1771735130.243469", "thread_ts": "1771735130.243469", "status": "waiting_human", "summary": "Scaffold and MVP/mismatch analysis are complete; task is blocked pending user confirmation of probe vs no-probe variant and first environment target.", "summary_preview": "Scaffold and MVP/mismatch analysis are complete; task is blocked pending user confirmation of probe vs no-probe variant and first environment target.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771735130.243469", "last_update_ts": "1771735945.298759", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T04:38:50Z"}}, "1771749091.141509": {"mention_ts": "1771749091.141509", "thread_ts": "1771749091.141509", "status": "waiting_human", "summary": "All approved memory-upgrade work is implemented and revalidated (111 supervisor tests passing); task is waiting on final human confirmation in-thread per root-…", "summary_preview": "All approved memory-upgrade work is implemented and revalidated (111 supervisor tests passing); task is waiting on final human confirmation in-thread per root-…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771749091.141509", "last_update_ts": "1771756441.675347", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:31:31Z"}}, "1771753564.797789": {"mention_ts": "1771753564.797789", "thread_ts": "1771753564.797789", "status": "waiting_human", "summary": "Re-checked thread/PR #5 (clean, no human feedback), posted follow-up direction request, then paused on unexpected pre-existing root worktree edits and asked us…", "summary_preview": "Re-checked thread/PR #5 (clean, no human feedback), posted follow-up direction request, then paused on unexpected pre-existing root worktree edits and asked us…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771753564.797789", "last_update_ts": "1771760326.686924", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T09:46:04Z"}}}, "finished": {"1771749231.663359": {"mention_ts": "1771749231.663359", "thread_ts": "1771749231.663359", "status": "done", "summary": "Answered follow-up on skill auto-discovery/reload behavior in-thread, updated report/memory, and finalized task artifacts.", "summary_preview": "Answered follow-up on skill auto-discovery/reload behavior in-thread, updated report/memory, and finalized task artifacts.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771749231.663359", "last_update_ts": "1771757382.883335", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:33:51Z"}}, "1771748878.174109": {"mention_ts": "1771748878.174109", "thread_ts": "1771748878.174109", "status": "done", "summary": "Delivered PDF upload in-thread, ran additional PDF/image upload tests successfully, and marked the feature done by Zhi in ROADMAP.md.", "summary_preview": "Delivered PDF upload in-thread, ran additional PDF/image upload tests successfully, and marked the feature done by Zhi in ROADMAP.md.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771748878.174109", "last_update_ts": "1771754195.520603", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T08:27:58Z"}}, "1771739105.778959": {"mention_ts": "1771739105.778959", "thread_ts": "1771739105.778959", "status": "done", "summary": "Human approved root instruction updates; completed final PR #4 review-thread fix in commit d220c52, revalidated tests, confirmed unresolved active review threa…", "summary_preview": "Human approved root instruction updates; completed final PR #4 review-thread fix in commit d220c52, revalidated tests, confirmed unresolved active review threa…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771739105.778959", "last_update_ts": "1771752143.965883", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-22T05:45:05Z"}}, "1771660218.903549": {"mention_ts": "1771660218.903549", "thread_ts": "1771660218.903549", "status": "done", "summary": "Committed all requested root-level roadmap/changelog/protocol updates in root commit a3f13d3 and posted in-thread completion confirmation.", "summary_preview": "Committed all requested root-level roadmap/changelog/protocol updates in root commit a3f13d3 and posted in-thread completion confirmation.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771660218.903549", "last_update_ts": "1771667251.848644", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T09:44:33Z"}}, "1771579678.414229": {"mention_ts": "1771579678.414229", "thread_ts": "1771579678.414229", "status": "done", "summary": "Implemented v1.6 interface scaffolding (types/parser/canonicalizer/adapters/masking/tests), pushed design branch, merged PR #2 to main, and posted thread closu…", "summary_preview": "Implemented v1.6 interface scaffolding (types/parser/canonicalizer/adapters/masking/tests), pushed design branch, merged PR #2 to main, and posted thread closu…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771579678.414229", "last_update_ts": "1771657082.681982", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T09:27:58Z"}}, "1771634797.184319": {"mention_ts": "1771634797.184319", "thread_ts": "1771634797.184319", "status": "done", "summary": "Checked open PRs and reported feedback status in-thread; 2 PRs have actionable comments, 1 has no major issues.", "summary_preview": "Checked open PRs and reported feedback status in-thread; 2 PRs have actionable comments, 1 has no major issues.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771634797.184319", "last_update_ts": "1771635906.659841", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-21T00:46:37Z"}}, "1771443304.562299": {"mention_ts": "1771443304.562299", "thread_ts": "1771443304.562299", "status": "done", "summary": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; u…", "summary_preview": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; u…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771551175.566439", "last_update_ts": "1771628609.828777", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T01:32:55Z"}}, "1771541706.964229": {"mention_ts": "1771541706.964229", "thread_ts": "1771541706.964229", "status": "done", "summary": "Thread already closed per human instruction; no-pending get_chatgpt_response semantics set to conversation-snapshot mode and closure artifacts were verified.", "summary_preview": "Thread already closed per human instruction; no-pending get_chatgpt_response semantics set to conversation-snapshot mode and closure artifacts were verified.", "mention_text": "(hidden in public snapshot)", "created_ts": "1771544084.399509", "last_update_ts": "1771628492.397040", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-19T23:34:44Z"}}, "1771580731.031149": {"mention_ts": "1771580731.031149", "thread_ts": "1771580731.031149", "status": "done", "summary": "Synced project codebases to GitHub SSH remotes, opened PR-based syncs with @codex for three project repos, verified MCP repos are aligned, and checkpointed coo…", "summary_preview": "Synced project codebases to GitHub SSH remotes, opened PR-based syncs with @codex for three project repos, verified MCP repos are aligned, and checkpointed coo…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771580731.031149", "last_update_ts": "1771616326.501596", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T09:45:31Z"}}, "1771553355.096239": {"mention_ts": "1771553355.096239", "thread_ts": "1771553355.096239", "status": "done", "summary": "Confirmed waiting_human incomplete retention is enforced at MAX_INCOMPLETE_RETENTION (default 2592000s/30d), kept existing patch, and closed task after human c…", "summary_preview": "Confirmed waiting_human incomplete retention is enforced at MAX_INCOMPLETE_RETENTION (default 2592000s/30d), kept existing patch, and closed task after human c…", "mention_text": "(hidden in public snapshot)", "created_ts": "1771553355.096239", "last_update_ts": "1771584355.289691", "task_type": "slack_mention", "source": {"user_name": "wangzhi0467", "time_iso": "2026-02-20T02:09:15Z"}}}}, "log_tail": ["(hidden in public snapshot)"], "goals_md": "(hidden in public snapshot)", "memory_md": "(hidden in public snapshot)", "visibility": {"mode": "public_snapshot", "audience": "Anyone with the GitHub Pages URL.", "goals_memory_access": "Hidden in public snapshot export.", "task_text_access": "Compact summary previews only.", "log_access": "Hidden in public snapshot export.", "source_code_exposure": "No repository files are published by this dashboard output."}, "server_time_utc": "2026-02-22T20:29:03Z"};
 const API_STATUS_PATH = "status.json";
 
 const STATUS_STYLES = {
@@ -243,6 +283,12 @@ const STATUS_STYLES = {
   sleeping_pending:   ['pill-pending',  'dot-yellow', 'Waiting (human)'],
   retrying_transient: ['pill-retrying', 'dot-red',    'Retrying'],
   starting:           ['pill-sleeping', 'dot-grey',   'Starting'],
+};
+const STACK_STYLE_BY_BUCKET = {
+  queued: 'stack-queued',
+  active: 'stack-active',
+  incomplete: 'stack-incomplete',
+  finished: 'stack-finished',
 };
 
 function esc(s) {
@@ -253,10 +299,14 @@ function esc(s) {
     .replace(/"/g,'&quot;')
     .replace(/'/g,'&#39;');
 }
+function ageSeconds(ts) {
+  if (!ts) return null;
+  const sec = Math.floor((Date.now() - new Date(ts).getTime()) / 1000);
+  return sec < 0 ? 0 : sec;
+}
 function age(ts) {
-  if (!ts) return '—';
-  const d = Math.floor((Date.now() - new Date(ts).getTime()) / 1000);
-  if (d < 0)    return '0s';
+  const d = ageSeconds(ts);
+  if (d == null) return '—';
   if (d < 60)   return d + 's';
   if (d < 3600) return Math.floor(d/60) + 'm ' + (d%60) + 's';
   return Math.floor(d/3600) + 'h ' + Math.floor((d%3600)/60) + 'm';
@@ -290,9 +340,18 @@ function sortTasks(items) {
     return bTs - aTs;
   });
 }
+function rawTaskText(t) {
+  return String(
+    t.summary_preview ??
+    t.summary ??
+    t.mention_text ??
+    '(no text)'
+  ).replace(/\s+/g, ' ').trim();
+}
 function compactTaskText(t, limit=90) {
-  const raw = String(t.summary || t.mention_text || '(no text)').replace(/\s+/g, ' ').trim();
-  return raw.length > limit ? raw.substring(0, limit) + '…' : raw;
+  const raw = rawTaskText(t);
+  if (raw.length <= limit) return raw;
+  return raw.substring(0, Math.max(limit - 1, 0)) + '…';
 }
 function statusPill(s) {
   const m = {done:'pill-done',in_progress:'pill-inprog',waiting_human:'pill-waiting',queued:'pill-queued',failed:'pill-failed'};
@@ -316,10 +375,22 @@ function logClass(l) {
   if (/maintenance|reflect/.test(l)) return 'log-maint';
   return 'log-default';
 }
+function formatTime(ts) {
+  if (!ts) return '—';
+  const d = new Date(ts);
+  if (Number.isNaN(d.getTime())) return String(ts);
+  return d.toLocaleString();
+}
+function heartbeatFreshness(ageSec) {
+  if (ageSec == null) return 'unknown';
+  if (ageSec <= 15) return 'fresh';
+  if (ageSec <= 60) return 'delayed';
+  return 'stale';
+}
 
 function render(data) {
   const hb    = data.heartbeat;
-  const tasks = data.tasks;
+  const tasks = data.tasks || {};
 
   // Status pill
   const [pillCls, dotCls, label] = (hb && STATUS_STYLES[hb.status]) || ['pill-unknown','dot-grey','?'];
@@ -328,19 +399,107 @@ function render(data) {
   pillEl.textContent = label;
 
   // Supervisor stats
+  const hbGridEl = document.getElementById('hb-grid');
+  const hbNoteEl = document.getElementById('hb-note');
   if (hb) {
-    document.getElementById('hb-grid').innerHTML = [
+    const hbAgeSec = ageSeconds(hb.last_updated_utc);
+    const freshness = heartbeatFreshness(hbAgeSec);
+    hbGridEl.innerHTML = [
       ['Loop',             hb.loop_count ?? '—'],
       ['PID',              hb.pid ?? '—'],
       ['Last exit',        hb.last_exit_code ?? '—'],
       ['Failure kind',     hb.last_failure_kind || '—'],
+      ['Retry attempt',    hb.transient_retry_attempt ?? '—'],
+      ['Backoff',          hb.pending_backoff_sec != null ? hb.pending_backoff_sec + 's' : '—'],
       ['Next sleep',       hb.next_sleep_sec != null ? hb.next_sleep_sec + 's' : '—'],
       ['Pending decision', hb.pending_decision ? '⚠ Yes' : 'No'],
-      ['Heartbeat age',    age(hb.last_updated_utc)],
+      ['Heartbeat age',    hbAgeSec == null ? '—' : `${age(hb.last_updated_utc)} (${freshness})`],
+      ['Heartbeat updated', formatTime(hb.last_updated_utc)],
     ].map(([l, v]) =>
       `<div class="hb-item"><span class="hb-label">${l}</span><span class="hb-val">${esc(v)}</span></div>`
     ).join('');
+    hbNoteEl.textContent =
+      hbAgeSec == null
+        ? 'Heartbeat age is unavailable because last_updated_utc is missing.'
+        : `Heartbeat age = seconds since supervisor last wrote .agent/heartbeat.json (${hbAgeSec}s).`;
+    hbNoteEl.className = 'hb-note' + ((hbAgeSec != null && hbAgeSec > 60) ? ' hb-note-warn' : '');
+  } else {
+    hbGridEl.innerHTML = '<div class="hb-item"><span class="hb-label">State</span><span class="hb-val">No heartbeat data</span></div>';
+    hbNoteEl.textContent = 'Heartbeat age is the elapsed time since .agent/heartbeat.json was last refreshed by the supervisor loop.';
+    hbNoteEl.className = 'hb-note';
   }
+
+  // Active task
+  const active = Object.values(tasks.active || {});
+  document.getElementById('active-dot').className = 'dot ' + (active.length ? 'dot-green' : 'dot-grey');
+  const abody = document.getElementById('active-body');
+  if (active.length) {
+    const t = active[0];
+    const txt = compactTaskText(t, 220);
+    abody.innerHTML = `
+      <div class="task-text">${esc(txt)}</div>
+      <div class="task-meta">
+        ${statusPill(t.status)}
+        <span><b>Requester:</b> ${esc(t.source && t.source.user_name || '—')}</span>
+        <span><b>Age:</b> ${taskAge(t.created_ts)}</span>
+        <span><b>Thread:</b> ${esc(t.thread_ts || '—')}</span>
+      </div>`;
+  } else {
+    abody.innerHTML = '<p style="color:#555;font-style:italic">No active task</p>';
+  }
+
+  // Task stacks
+  const stackDefs = [
+    ['queued', 'Queued'],
+    ['active', 'Active'],
+    ['incomplete', 'Incomplete'],
+    ['finished', 'Finished'],
+  ];
+  const stackGrid = document.getElementById('stack-grid');
+  stackGrid.innerHTML = stackDefs.map(([bucket, label]) => {
+    const items = sortTasks(Object.values(tasks[bucket] || {}));
+    const listHtml = items.length
+      ? items.slice(0, 12).map(t => `
+          <div class="stack-item">
+            <div class="stack-item-title">${esc(compactTaskText(t, 88))}</div>
+            <div class="stack-item-meta">
+              <span>${esc((t.source && t.source.user_name) || '—')}</span>
+              <span>${taskAge(t.created_ts)}</span>
+            </div>
+          </div>
+        `).join('')
+      : '<div class="stack-empty">No tasks</div>';
+    return `
+      <section class="stack-col ${STACK_STYLE_BY_BUCKET[bucket] || ''}">
+        <div class="stack-head">
+          <span>${esc(label)}</span>
+          <span class="stack-count">${items.length}</span>
+        </div>
+        <div class="stack-list">${listHtml}</div>
+      </section>
+    `;
+  }).join('');
+
+  // Task tables
+  ['queued', 'active', 'incomplete', 'finished'].forEach(b => {
+    const items = sortTasks(Object.values(tasks[b] || {}));
+    document.getElementById('cnt-' + b).innerHTML = badge(items.length);
+    const tbl = document.getElementById('tbl-' + b);
+    if (!items.length) {
+      tbl.innerHTML = '<tr><td class="empty-row" colspan="4">No tasks</td></tr>';
+      return;
+    }
+    const head = '<thead><tr><th>Task / Summary</th><th>Status</th><th>Requester</th><th style="text-align:right">Age</th></tr></thead>';
+    tbl.innerHTML = head + '<tbody>' + items.map(t => {
+      const txt = compactTaskText(t, 96);
+      return `<tr>
+        <td class="cell-text">${esc(txt)}</td>
+        <td>${statusPill(t.status)}</td>
+        <td class="cell-user">${esc(t.source && t.source.user_name || '—')}</td>
+        <td class="cell-age">${taskAge(t.created_ts)}</td>
+      </tr>`;
+    }).join('') + '</tbody>';
+  });
 
   // System snapshot
   const sys = data.system || {};
@@ -362,78 +521,63 @@ function render(data) {
     `<div class="sys-item"><div class="sys-label">${esc(l)}</div><div class="sys-val">${esc(v)}</div></div>`
   ).join('');
 
-  // Active task
-  const active = tasks ? Object.values(tasks.active || {}) : [];
-  document.getElementById('active-dot').className = 'dot ' + (active.length ? 'dot-green' : 'dot-grey');
-  const abody = document.getElementById('active-body');
-  if (active.length) {
-    const t = active[0];
-    const txt = (t.mention_text || '').substring(0, 600);
-    abody.innerHTML = `
-      <div class="task-text">${esc(txt)}${t.mention_text && t.mention_text.length > 600 ? '…' : ''}</div>
-      <div class="task-meta">
-        ${statusPill(t.status)}
-        <span><b>Requester:</b> ${esc(t.source && t.source.user_name || '—')}</span>
-        <span><b>Age:</b> ${taskAge(t.created_ts)}</span>
-        <span><b>Thread:</b> ${esc(t.thread_ts || '—')}</span>
-        ${t.summary ? `<span><b>Summary:</b> ${esc(t.summary)}</span>` : ''}
+  // GPU + Slurm snapshot (optional)
+  const gpu = data.gpu || {};
+  const gpuBody = document.getElementById('gpu-body');
+  const gpuNote = document.getElementById('gpu-note');
+  if (!gpu.enabled) {
+    gpuBody.innerHTML = `
+      <div class="gpu-item">
+        <div class="gpu-title">Status</div>
+        <div class="gpu-val">Disabled by default to avoid intrusive remote polling.</div>
       </div>`;
+    gpuNote.textContent = 'Enable with --gpu-monitor on. Collection is cached and low-frequency.';
+    gpuNote.className = 'section-note';
   } else {
-    abody.innerHTML = '<p style="color:#555;font-style:italic">No active task</p>';
-  }
+    const queue = gpu.queue || {};
+    const queueRows = [
+      ['Total jobs', queue.total_jobs ?? '—'],
+      ['Running', queue.running_jobs ?? '—'],
+      ['Pending', queue.pending_jobs ?? '—'],
+      ['My jobs', queue.my_jobs ?? '—'],
+    ];
+    const queueHtml = queueRows.map(([labelText, valueText]) => `
+      <div class="gpu-item">
+        <div class="gpu-title">${esc(labelText)}</div>
+        <div class="gpu-val">${esc(valueText)}</div>
+      </div>
+    `).join('');
 
-  // Task stacks
-  const stackDefs = [
-    ['queued', 'Queued'],
-    ['active', 'Active'],
-    ['incomplete', 'Incomplete'],
-    ['finished', 'Finished'],
-  ];
-  const stackGrid = document.getElementById('stack-grid');
-  stackGrid.innerHTML = stackDefs.map(([bucket, label]) => {
-    const items = sortTasks(tasks ? Object.values(tasks[bucket] || {}) : []);
-    const listHtml = items.length
-      ? items.slice(0, 10).map(t => `
-          <div class="stack-item">
-            <div class="stack-item-title">${esc(compactTaskText(t))}</div>
-            <div class="stack-item-meta">
-              <span>${esc((t.source && t.source.user_name) || '—')}</span>
-              <span>${taskAge(t.created_ts)}</span>
-            </div>
+    const gpus = Array.isArray(gpu.gpus) ? gpu.gpus : [];
+    const gpuCards = gpus.length
+      ? gpus.map(row => `
+          <div class="gpu-item">
+            <div class="gpu-title">GPU ${esc(row.index ?? '?')} · ${esc(row.name || 'Unknown')}</div>
+            <div class="gpu-val">Utilization: ${esc(row.utilization_gpu_pct != null ? row.utilization_gpu_pct + '%' : '—')}</div>
+            <div class="gpu-val">Memory: ${esc(row.memory_used_mb != null ? row.memory_used_mb : '—')} / ${esc(row.memory_total_mb != null ? row.memory_total_mb : '—')} MB</div>
+            <div class="gpu-val">Temperature: ${esc(row.temperature_c != null ? row.temperature_c + '°C' : '—')}</div>
           </div>
         `).join('')
-      : '<div class="stack-empty">No tasks</div>';
-    return `
-      <section class="stack-col">
-        <div class="stack-head">
-          <span>${esc(label)}</span>
-          <span class="stack-count">${items.length}</span>
-        </div>
-        <div class="stack-list">${listHtml}</div>
-      </section>
-    `;
-  }).join('');
+      : '<div class="gpu-item"><div class="gpu-title">GPU Data</div><div class="gpu-val">No GPU rows returned.</div></div>';
 
-  // Task tables
-  ['queued', 'active', 'incomplete', 'finished'].forEach(b => {
-    const items = sortTasks(tasks ? Object.values(tasks[b] || {}) : []);
-    document.getElementById('cnt-' + b).innerHTML = badge(items.length);
-    const tbl = document.getElementById('tbl-' + b);
-    if (!items.length) {
-      tbl.innerHTML = '<tr><td class="empty-row" colspan="4">No tasks</td></tr>';
-      return;
+    gpuBody.innerHTML = `
+      <div class="queue-grid">${queueHtml}</div>
+      <div class="gpu-grid">${gpuCards}</div>
+    `;
+
+    const noteParts = [
+      `Node: ${gpu.node_alias || '—'}`,
+      `Last check: ${formatTime(gpu.checked_at_utc)}`,
+    ];
+    if (gpu.cache_age_sec != null) {
+      noteParts.push(`cache age ${gpu.cache_age_sec}s`);
     }
-    const head = '<thead><tr><th>Task / Summary</th><th>Status</th><th>Requester</th><th style="text-align:right">Age</th></tr></thead>';
-    tbl.innerHTML = head + '<tbody>' + items.map(t => {
-      const txt = compactTaskText(t, 180);
-      return `<tr>
-        <td class="cell-text" title="${esc(t.mention_text || '')}">${esc(txt.substring(0, 80))}${txt.length > 80 ? '…' : ''}</td>
-        <td>${statusPill(t.status)}</td>
-        <td class="cell-user">${esc(t.source && t.source.user_name || '—')}</td>
-        <td class="cell-age">${taskAge(t.created_ts)}</td>
-      </tr>`;
-    }).join('') + '</tbody>';
-  });
+    if (gpu.note) {
+      noteParts.push(String(gpu.note));
+    }
+    gpuNote.textContent = noteParts.join(' · ');
+    gpuNote.className = 'section-note' + ((gpu.status === 'ok' || gpu.status === 'partial') ? '' : ' hb-note-warn');
+  }
 
   // Log tail
   const logEl = document.getElementById('log-box');
@@ -449,6 +593,19 @@ function render(data) {
   // Goals & memory
   document.getElementById('goals-pre').textContent  = data.goals_md  || '(not found)';
   document.getElementById('memory-pre').textContent = data.memory_md || '(not found)';
+
+  // Visibility + permissions
+  const vis = data.visibility || {};
+  const visRows = [
+    ['Audience', vis.audience || '—'],
+    ['Goals/Memory', vis.goals_memory_access || '—'],
+    ['Task Text', vis.task_text_access || '—'],
+    ['Logs', vis.log_access || '—'],
+    ['Source-Code Exposure', vis.source_code_exposure || '—'],
+  ];
+  document.getElementById('visibility-list').innerHTML = visRows.map(([l, v]) =>
+    `<li><strong>${esc(l)}:</strong> ${esc(v)}</li>`
+  ).join('');
 
   // Timestamp
   const src = data.server_time_utc ? new Date(data.server_time_utc).toLocaleTimeString() : '?';
