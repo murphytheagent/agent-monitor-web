@@ -687,31 +687,45 @@ function render(data) {
 // Render immediately from embedded data (instant, no network round-trip)
 render(INITIAL_DATA);
 
-// Over HTTP: poll /api/status for live DOM updates without page reload
-function fetchAndRender() {
-  if (!API_STATUS_PATH) return;
-  fetch(API_STATUS_PATH)
-    .then(r => r.json())
-    .then(render)
-    .catch(() => {
-      document.getElementById('last-updated').textContent = 'Poll failed — retrying…';
-    });
-}
-
 const canPoll = Boolean(API_STATUS_PATH) && location.protocol !== 'file:';
-document.getElementById('refresh-btn').onclick = canPoll
-  ? fetchAndRender
-  : () => location.reload();
+document.getElementById('refresh-btn').onclick = canPoll ? () => fetchAndRender(true) : () => location.reload();
 
 function resolvePollIntervalMs(data) {
-  const raw = Number(data?.polling?.frontend_poll_interval_sec ?? 2);
-  const sec = Number.isFinite(raw) && raw > 0 ? raw : 2;
+  const fallback = Number(data?.polling?.supervisor_poll_interval_sec ?? 2);
+  const raw = Number(data?.polling?.frontend_poll_interval_sec ?? fallback);
+  const sec = Number.isFinite(raw) && raw > 0
+    ? raw
+    : (Number.isFinite(fallback) && fallback > 0 ? fallback : 2);
   return Math.max(1000, Math.round(sec * 1000));
 }
 
+let pollTimer = null;
+function scheduleNextPoll(data) {
+  if (!canPoll) return;
+  if (pollTimer) clearTimeout(pollTimer);
+  pollTimer = setTimeout(() => fetchAndRender(false), resolvePollIntervalMs(data));
+}
+
+// Over HTTP: poll /api/status for live DOM updates without page reload.
+function fetchAndRender(scheduleNext=true) {
+  if (!API_STATUS_PATH) return Promise.resolve(null);
+  return fetch(API_STATUS_PATH)
+    .then(r => r.json())
+    .then(data => {
+      render(data);
+      if (scheduleNext) scheduleNextPoll(data);
+      return data;
+    })
+    .catch(() => {
+      document.getElementById('last-updated').textContent = 'Poll failed — retrying…';
+      if (scheduleNext) scheduleNextPoll(INITIAL_DATA);
+      return null;
+    });
+}
+
 if (canPoll) {
-  fetchAndRender();
-  setInterval(fetchAndRender, resolvePollIntervalMs(INITIAL_DATA));
+  scheduleNextPoll(INITIAL_DATA);
+  fetchAndRender(true);
 }
 </script>
 </body>
