@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-22T20:21:16Z",
+    "last_updated_utc": "2026-02-22T20:34:37Z",
     "status": "running_session",
     "pid": 21233,
-    "loop_count": 1028,
+    "loop_count": 1029,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,22 +17,22 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.63,
-      "five": 1.56,
-      "fifteen": 1.55
+      "one": 1.6,
+      "five": 1.57,
+      "fifteen": 1.56
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44111814656,
-    "disk_free_bytes": 200995381248,
-    "runner_log_size_bytes": 1142057,
+    "disk_used_bytes": 44118134784,
+    "disk_free_bytes": 200989061120,
+    "runner_log_size_bytes": 1142412,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-22T20:29:03Z",
+    "dashboard_started_utc": "2026-02-22T20:35:47Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": false,
-    "node_alias": "tianhaowang-gpu0",
+    "node_alias": "redacted-node",
     "status": "disabled",
     "checked_at_utc": null,
     "cache_age_sec": null,
@@ -47,17 +47,33 @@
     }
   },
   "tasks": {
-    "queued": {},
+    "queued": {
+      "1771791882.440369": {
+        "mention_ts": "1771791882.440369",
+        "thread_ts": "1771791882.440369",
+        "status": "queued",
+        "summary": "## Mention (mention_ts=1771791882.440369) - Thread ID: 1771791882.440369 - Timestamp: 2026-02-22T20:24:42Z - User ID: U08HX3SH33R - User Name: wangzhi0467 - Ch…",
+        "summary_preview": "## Mention (mention_ts=1771791882.440369) - Thread ID: 1771791882.440369 - Timestamp: 2026-02-22T20:24:42Z - User ID: U08HX3SH33R - User Name: wangzhi0467 - Ch…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771791882.440369",
+        "last_update_ts": "1771791882.440369",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "wangzhi0467",
+          "time_iso": "2026-02-22T20:24:42Z"
+        }
+      }
+    },
     "active": {
       "1771749821.471009": {
         "mention_ts": "1771749821.471009",
         "thread_ts": "1771749821.471009",
         "status": "in_progress",
-        "summary": "Fixed two new PR #1 findings (script embedding < > & escaping and falsy-value rendering), published agent-monitor-web commit 0052dbc6d168f6792c3d7f1b5bc32a6f95…",
-        "summary_preview": "Fixed two new PR #1 findings (script embedding < > & escaping and falsy-value rendering), published agent-monitor-web commit 0052dbc6d168f6792c3d7f1b5bc32a6f95…",
+        "summary": "Implemented and published the requested monitor updates (stronger public redaction/compact task previews, color-coded task blocks, heartbeat-age explanation, s…",
+        "summary_preview": "Implemented and published the requested monitor updates (stronger public redaction/compact task previews, color-coded task blocks, heartbeat-age explanation, s…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1771749821.471009",
-        "last_update_ts": "1771791676.582001",
+        "last_update_ts": "1771792477.009453",
         "task_type": "slack_mention",
         "source": {
           "user_name": "wangzhi0467",
@@ -368,5 +384,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-22T20:29:03Z"
+  "server_time_utc": "2026-02-22T20:35:47Z"
 }
