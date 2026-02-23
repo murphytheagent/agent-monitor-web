@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T05:26:20Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T05:29:56Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1113,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.53,
-      "five": 1.61,
-      "fifteen": 1.59
+      "one": 1.46,
+      "five": 1.58,
+      "fifteen": 1.57
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44144898048,
-    "disk_free_bytes": 200962297856,
-    "runner_log_size_bytes": 1169154,
+    "disk_used_bytes": 44144742400,
+    "disk_free_bytes": 200962453504,
+    "runner_log_size_bytes": 1169321,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T05:29:54Z",
+    "dashboard_started_utc": "2026-02-23T05:31:55Z",
     "local_ips": []
   },
   "gpu": {
@@ -113,24 +113,7 @@
         }
       }
     },
-    "active": {
-      "1771809318.257109": {
-        "mention_ts": "1771809318.257109",
-        "thread_ts": "1771809318.257109",
-        "status": "in_progress",
-        "task_description": "[user] when you use GPU node, how do you make sure the venv is built there?",
-        "summary": "Canonical GPU-node path normalization is complete; Slurm env-build job 436 remains RUNNING (rechecked 2026-02-23 05:22 UTC) with active uv/ninja/nvcc/cicc comp…",
-        "summary_preview": "Canonical GPU-node path normalization is complete; Slurm env-build job 436 remains RUNNING (rechecked 2026-02-23 05:22 UTC) with active uv/ninja/nvcc/cicc comp…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771809318.257109",
-        "last_update_ts": "1771824380.343360",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T04:27:35Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -342,6 +325,22 @@
       }
     },
     "finished": {
+      "1771809318.257109": {
+        "mention_ts": "1771809318.257109",
+        "thread_ts": "1771809318.257109",
+        "status": "done",
+        "task_description": "[user] when you use GPU node, how do you make sure the venv is built there?",
+        "summary": "Verified Slurm job 436 completed successfully (ExitCode 0:0), confirmed canonical small-swe-train path/venv provenance on tianhaowang-gpu0, validated post-run …",
+        "summary_preview": "Verified Slurm job 436 completed successfully (ExitCode 0:0), confirmed canonical small-swe-train path/venv provenance on tianhaowang-gpu0, validated post-run …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771809318.257109",
+        "last_update_ts": "1771824596.033848",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T04:27:35Z"
+        }
+      },
       "1771798134.999029": {
         "mention_ts": "1771798134.999029",
         "thread_ts": "1771798134.999029",
@@ -485,22 +484,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-20T09:27:58Z"
         }
-      },
-      "1771634797.184319": {
-        "mention_ts": "1771634797.184319",
-        "thread_ts": "1771634797.184319",
-        "status": "done",
-        "task_description": "[user] check your PRs, any feedbacks?",
-        "summary": "Checked open PRs and reported feedback status in-thread; 2 PRs have actionable comments, 1 has no major issues.",
-        "summary_preview": "Checked open PRs and reported feedback status in-thread; 2 PRs have actionable comments, 1 has no major issues.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771634797.184319",
-        "last_update_ts": "1771635906.659841",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-21T00:46:37Z"
-        }
       }
     }
   },
@@ -521,5 +504,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T05:29:54Z"
+  "server_time_utc": "2026-02-23T05:31:55Z"
 }
