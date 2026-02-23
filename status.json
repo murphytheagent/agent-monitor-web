@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T06:12:11Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T06:16:43Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1123,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.68,
-      "five": 1.65,
-      "fifteen": 1.59
+      "one": 1.5,
+      "five": 1.6,
+      "fifteen": 1.58
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44150411264,
-    "disk_free_bytes": 200956784640,
-    "runner_log_size_bytes": 1173262,
+    "disk_used_bytes": 44150390784,
+    "disk_free_bytes": 200956805120,
+    "runner_log_size_bytes": 1173429,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T06:16:33Z",
+    "dashboard_started_utc": "2026-02-23T06:18:34Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,24 +48,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771817727.883159": {
-        "mention_ts": "1771817727.883159",
-        "thread_ts": "1771817727.883159",
-        "status": "in_progress",
-        "task_description": "[user].",
-        "summary": "Diagnosed monitor 404: public GitHub Pages stopped serving after repo became private/Pages deployment returned 404; posted root-cause details in-thread and req…",
-        "summary_preview": "Diagnosed monitor 404: public GitHub Pages stopped serving after repo became private/Pages deployment returned 404; posted root-cause details in-thread and req…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771820871.945559",
-        "last_update_ts": "1771827131.632511",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T04:27:51Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -309,6 +292,22 @@
       }
     },
     "finished": {
+      "1771817727.883159": {
+        "mention_ts": "1771817727.883159",
+        "thread_ts": "1771817727.883159",
+        "status": "done",
+        "task_description": "[user].",
+        "summary": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note…",
+        "summary_preview": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771820871.945559",
+        "last_update_ts": "1771827403.044854",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T04:27:51Z"
+        }
+      },
       "1771813058.516519": {
         "mention_ts": "1771813058.516519",
         "thread_ts": "1771813058.516519",
@@ -452,22 +451,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T05:45:05Z"
         }
-      },
-      "1771660218.903549": {
-        "mention_ts": "1771660218.903549",
-        "thread_ts": "1771660218.903549",
-        "status": "done",
-        "task_description": "[user] based on your current src and recent five root git commits, update ROADMAP.md, and maintain a changelog based on root level git history, this is only for the agent's source…",
-        "summary": "Committed all requested root-level roadmap/changelog/protocol updates in root commit a3f13d3 and posted in-thread completion confirmation.",
-        "summary_preview": "Committed all requested root-level roadmap/changelog/protocol updates in root commit a3f13d3 and posted in-thread completion confirmation.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771660218.903549",
-        "last_update_ts": "1771667251.848644",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-21T09:44:33Z"
-        }
       }
     }
   },
@@ -488,5 +471,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T06:16:33Z"
+  "server_time_utc": "2026-02-23T06:18:35Z"
 }
