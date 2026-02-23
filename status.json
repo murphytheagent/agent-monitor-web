@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T19:31:12Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T19:43:11Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1235,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.22,
-      "five": 1.43,
-      "fifteen": 1.47
+      "one": 1.67,
+      "five": 1.54,
+      "fifteen": 1.51
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44264353792,
-    "disk_free_bytes": 200842842112,
-    "runner_log_size_bytes": 1218286,
+    "disk_used_bytes": 44264574976,
+    "disk_free_bytes": 200842620928,
+    "runner_log_size_bytes": 1218453,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T19:42:30Z",
+    "dashboard_started_utc": "2026-02-23T19:44:32Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,24 +48,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771841009.140679": {
-        "mention_ts": "1771841009.140679",
-        "thread_ts": "1771841009.140679",
-        "status": "in_progress",
-        "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
-        "summary": "Pushed small-swe-train commit 13dc81e to fix OnPolicyRFTDataset empty-result cache poisoning with regression tests, posted separate explicit @codex review, kep…",
-        "summary_preview": "Pushed small-swe-train commit 13dc81e to fix OnPolicyRFTDataset empty-result cache poisoning with regression tests, posted separate explicit @codex review, kep…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841009.140679",
-        "last_update_ts": "1771875072.438311",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:03:29Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -290,6 +273,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T10:12:00Z"
         }
+      },
+      "1771841009.140679": {
+        "mention_ts": "1771841009.140679",
+        "thread_ts": "1771841009.140679",
+        "status": "in_progress",
+        "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
+        "summary": "Pushed small-swe-train commit f19d288 to reduce RFT loop checkpoint storage (hf_model-only), posted separate explicit @codex review comment, canceled jobs 467/…",
+        "summary_preview": "Pushed small-swe-train commit f19d288 to reduce RFT loop checkpoint storage (hf_model-only), posted separate explicit @codex review comment, canceled jobs 467/…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841009.140679",
+        "last_update_ts": "1771875791.411652",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T10:03:29Z"
+        }
       }
     },
     "finished": {
@@ -472,5 +471,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T19:42:30Z"
+  "server_time_utc": "2026-02-23T19:44:32Z"
 }
