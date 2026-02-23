@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T03:28:23Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T03:30:29Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1106,
+    "loop_count": 1107,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.13,
-      "five": 1.33,
-      "fifteen": 1.45
+      "one": 1.35,
+      "five": 1.36,
+      "fifteen": 1.44
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44134981632,
-    "disk_free_bytes": 200972214272,
-    "runner_log_size_bytes": 1166427,
+    "disk_used_bytes": 44192137216,
+    "disk_free_bytes": 200915058688,
+    "runner_log_size_bytes": 1166562,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T03:30:12Z",
+    "dashboard_started_utc": "2026-02-23T03:32:14Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,22 +48,6 @@
   },
   "tasks": {
     "queued": {
-      "1771811137.780489": {
-        "mention_ts": "1771811137.780489",
-        "thread_ts": "1771811137.780489",
-        "status": "queued",
-        "task_description": "[user] <[link] has the latest update 4 hours ago, we need continuous live real time refreshing of the monitor.",
-        "summary": "[user] <[link] has the latest update 4 hours ago, we need continuous live real time refreshing of the monitor.",
-        "summary_preview": "[user] <[link] has the latest update 4 hours ago, we need continuous live real time refreshing of the monitor.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771811137.780489",
-        "last_update_ts": "1771811137.780489",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T01:45:37Z"
-        }
-      },
       "1771811175.735769": {
         "mention_ts": "1771811175.735769",
         "thread_ts": "1771811175.735769",
@@ -113,7 +97,24 @@
         }
       }
     },
-    "active": {},
+    "active": {
+      "1771811137.780489": {
+        "mention_ts": "1771811137.780489",
+        "thread_ts": "1771811137.780489",
+        "status": "in_progress",
+        "task_description": "[user] <[link] has the latest update 4 hours ago, we need continuous live real time refreshing of the monitor.",
+        "summary": "[user] <[link] has the latest update 4 hours ago, we need continuous live real time refreshing of the monitor.",
+        "summary_preview": "[user] <[link] has the latest update 4 hours ago, we need continuous live real time refreshing of the monitor.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771811137.780489",
+        "last_update_ts": "1771817429.036009",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T01:45:37Z"
+        }
+      }
+    },
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -504,5 +505,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T03:30:12Z"
+  "server_time_utc": "2026-02-23T03:32:14Z"
 }
