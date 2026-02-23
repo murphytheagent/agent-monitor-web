@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T06:18:48Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T06:21:27Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1124,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.99,
-      "five": 1.72,
-      "fifteen": 1.62
+      "one": 1.36,
+      "five": 1.56,
+      "fifteen": 1.57
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44152737792,
-    "disk_free_bytes": 200954458112,
-    "runner_log_size_bytes": 1173777,
+    "disk_used_bytes": 44148690944,
+    "disk_free_bytes": 200958504960,
+    "runner_log_size_bytes": 1173944,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T06:20:36Z",
+    "dashboard_started_utc": "2026-02-23T06:22:38Z",
     "local_ips": []
   },
   "gpu": {
@@ -65,24 +65,7 @@
         }
       }
     },
-    "active": {
-      "1771811175.735769": {
-        "mention_ts": "1771811175.735769",
-        "thread_ts": "1771811175.735769",
-        "status": "in_progress",
-        "task_description": "[user] can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testing codex review acces…",
-        "summary": "Codex review was validated on a private test PR, and all currently public project repos were switched to private; waiting for human decision on monitor hosting…",
-        "summary_preview": "Codex review was validated on a private test PR, and all currently public project repos were switched to private; waiting for human decision on monitor hosting…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771811175.735769",
-        "last_update_ts": "1771827528.835568",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T01:46:15Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -310,6 +293,22 @@
       }
     },
     "finished": {
+      "1771811175.735769": {
+        "mention_ts": "1771811175.735769",
+        "thread_ts": "1771811175.735769",
+        "status": "done",
+        "task_description": "[user] can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testing codex review acces…",
+        "summary": "Confirmed monitor repo/public URL restored, recorded default-private policy with deployment exception, posted in-thread completion, and checkpointed report/mem…",
+        "summary_preview": "Confirmed monitor repo/public URL restored, recorded default-private policy with deployment exception, posted in-thread completion, and checkpointed report/mem…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771811175.735769",
+        "last_update_ts": "1771827687.148782",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T01:46:15Z"
+        }
+      },
       "1771817727.883159": {
         "mention_ts": "1771817727.883159",
         "thread_ts": "1771817727.883159",
@@ -453,22 +452,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T08:27:58Z"
         }
-      },
-      "1771739105.778959": {
-        "mention_ts": "1771739105.778959",
-        "thread_ts": "1771739105.778959",
-        "status": "done",
-        "task_description": "[user] work on PR4 of small-swe-train, pull, check comments, don't stop until you have RFT part completely done and everything wired in, one metric is to run a full rollout + trai…",
-        "summary": "Human approved root instruction updates; completed final PR #4 review-thread fix in commit d220c52, revalidated tests, confirmed unresolved active review threa…",
-        "summary_preview": "Human approved root instruction updates; completed final PR #4 review-thread fix in commit d220c52, revalidated tests, confirmed unresolved active review threa…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771739105.778959",
-        "last_update_ts": "1771752143.965883",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T05:45:05Z"
-        }
       }
     }
   },
@@ -489,5 +472,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T06:20:36Z"
+  "server_time_utc": "2026-02-23T06:22:38Z"
 }
