@@ -274,6 +274,10 @@
     border-color: var(--bg-border-strong);
     box-shadow: inset 0 0 14px rgba(255, 52, 178, 0.26), 0 0 14px rgba(56, 240, 255, 0.2);
   }
+  #refresh-btn:disabled {
+    opacity: 0.7;
+    cursor: wait;
+  }
 
   .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
   .dot-green  { background: var(--good); box-shadow: 0 0 8px rgba(77, 255, 180, 0.86); }
@@ -687,8 +691,16 @@ function render(data) {
 // Render immediately from embedded data (instant, no network round-trip)
 render(INITIAL_DATA);
 
+const refreshBtn = document.getElementById('refresh-btn');
 const canPoll = Boolean(API_STATUS_PATH) && location.protocol !== 'file:';
-document.getElementById('refresh-btn').onclick = canPoll ? () => fetchAndRender(true) : () => location.reload();
+refreshBtn.onclick = canPoll ? () => fetchAndRender(true, true) : () => location.reload();
+
+function resolveStatusUrl() {
+  const rawPath = String(API_STATUS_PATH || '');
+  if (!rawPath) return '';
+  const sep = rawPath.includes('?') ? '&' : '?';
+  return `${rawPath}${sep}_ts=${Date.now()}`;
+}
 
 function resolvePollIntervalMs(data) {
   const fallback = Number(data?.polling?.supervisor_poll_interval_sec ?? 2);
@@ -700,6 +712,7 @@ function resolvePollIntervalMs(data) {
 }
 
 let pollTimer = null;
+let fetchInFlight = false;
 function scheduleNextPoll(data) {
   if (!canPoll) return;
   if (pollTimer) clearTimeout(pollTimer);
@@ -707,10 +720,22 @@ function scheduleNextPoll(data) {
 }
 
 // Over HTTP: poll /api/status for live DOM updates without page reload.
-function fetchAndRender(scheduleNext=true) {
+function fetchAndRender(scheduleNext=true, manual=false) {
   if (!API_STATUS_PATH) return Promise.resolve(null);
-  return fetch(API_STATUS_PATH)
-    .then(r => r.json())
+  if (fetchInFlight) return Promise.resolve(null);
+  fetchInFlight = true;
+  if (manual) refreshBtn.disabled = true;
+  return fetch(resolveStatusUrl(), {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+      },
+    })
+    .then(r => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.json();
+    })
     .then(data => {
       render(data);
       if (scheduleNext) scheduleNextPoll(data);
@@ -720,6 +745,10 @@ function fetchAndRender(scheduleNext=true) {
       document.getElementById('last-updated').textContent = 'Poll failed — retrying…';
       if (scheduleNext) scheduleNextPoll(INITIAL_DATA);
       return null;
+    })
+    .finally(() => {
+      fetchInFlight = false;
+      if (manual) refreshBtn.disabled = false;
     });
 }
 
