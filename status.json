@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T03:30:29Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T03:37:28Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1107,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.09,
-      "five": 1.28,
-      "fifteen": 1.38
+      "one": 1.5,
+      "five": 1.39,
+      "fifteen": 1.42
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44141060096,
-    "disk_free_bytes": 200966135808,
-    "runner_log_size_bytes": 1166562,
+    "disk_used_bytes": 44140982272,
+    "disk_free_bytes": 200966213632,
+    "runner_log_size_bytes": 1166729,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T03:36:17Z",
+    "dashboard_started_utc": "2026-02-23T03:38:18Z",
     "local_ips": []
   },
   "gpu": {
@@ -97,24 +97,7 @@
         }
       }
     },
-    "active": {
-      "1771811137.780489": {
-        "mention_ts": "1771811137.780489",
-        "thread_ts": "1771811137.780489",
-        "status": "in_progress",
-        "task_description": "[user] <[link] has the latest update 4 hours ago, we need continuous live real time refreshing of the monitor.",
-        "summary": "[user] <[link] has the latest update 4 hours ago, we need continuous live real time refreshing of the monitor.",
-        "summary_preview": "[user] <[link] has the latest update 4 hours ago, we need continuous live real time refreshing of the monitor.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771811137.780489",
-        "last_update_ts": "1771817429.036009",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T01:45:37Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -323,6 +306,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T01:15:18Z"
         }
+      },
+      "1771811137.780489": {
+        "mention_ts": "1771811137.780489",
+        "thread_ts": "1771811137.780489",
+        "status": "waiting_human",
+        "task_description": "[user] <[link] has the latest update 4 hours ago, we need continuous live real time refreshing of the monitor.",
+        "summary": "Implemented and published cache-busting live polling + refresh-button fix for agent-monitor-web; requested user verification in-thread before closure.",
+        "summary_preview": "Implemented and published cache-busting live polling + refresh-button fix for agent-monitor-web; requested user verification in-thread before closure.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771811137.780489",
+        "last_update_ts": "1771817848.191507",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T01:45:37Z"
+        }
       }
     },
     "finished": {
@@ -505,5 +504,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T03:36:17Z"
+  "server_time_utc": "2026-02-23T03:38:18Z"
 }
