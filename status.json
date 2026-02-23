@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T07:21:57Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T07:24:02Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1150,
+    "loop_count": 1151,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.42,
-      "five": 1.47,
-      "fifteen": 1.49
+      "one": 1.56,
+      "five": 1.5,
+      "fifteen": 1.5
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44149723136,
-    "disk_free_bytes": 200957472768,
-    "runner_log_size_bytes": 1184243,
+    "disk_used_bytes": 44153446400,
+    "disk_free_bytes": 200953749504,
+    "runner_log_size_bytes": 1184534,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T07:23:30Z",
+    "dashboard_started_utc": "2026-02-23T07:25:32Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,7 +48,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771831315.650959": {
+        "mention_ts": "1771831315.650959",
+        "thread_ts": "1771831315.650959",
+        "status": "in_progress",
+        "task_description": "[user] I replied to your waiting_human maintenance task but it is still in incomplete.",
+        "summary": "[user] I replied to your waiting_human maintenance task but it is still in incomplete.",
+        "summary_preview": "[user] I replied to your waiting_human maintenance task but it is still in incomplete.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771831315.650959",
+        "last_update_ts": "1771831442.641763",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T07:21:55Z"
+        }
+      }
+    },
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -455,5 +472,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T07:23:30Z"
+  "server_time_utc": "2026-02-23T07:25:32Z"
 }
