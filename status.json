@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T06:16:43Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T06:18:48Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1123,
+    "loop_count": 1124,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.5,
-      "five": 1.6,
-      "fifteen": 1.58
+      "one": 1.99,
+      "five": 1.72,
+      "fifteen": 1.62
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44150390784,
-    "disk_free_bytes": 200956805120,
-    "runner_log_size_bytes": 1173429,
+    "disk_used_bytes": 44152737792,
+    "disk_free_bytes": 200954458112,
+    "runner_log_size_bytes": 1173777,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T06:18:34Z",
+    "dashboard_started_utc": "2026-02-23T06:20:36Z",
     "local_ips": []
   },
   "gpu": {
@@ -47,8 +47,42 @@
     }
   },
   "tasks": {
-    "queued": {},
-    "active": {},
+    "queued": {
+      "1771827474.009799": {
+        "mention_ts": "1771827474.009799",
+        "thread_ts": "1771827474.009799",
+        "status": "queued",
+        "task_description": "[user] when is the last time you did maintenance task, Friday?",
+        "summary": "[user] when is the last time you did maintenance task, Friday?",
+        "summary_preview": "[user] when is the last time you did maintenance task, Friday?",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771827474.009799",
+        "last_update_ts": "1771827474.009799",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T06:17:54Z"
+        }
+      }
+    },
+    "active": {
+      "1771811175.735769": {
+        "mention_ts": "1771811175.735769",
+        "thread_ts": "1771811175.735769",
+        "status": "in_progress",
+        "task_description": "[user] can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testing codex review acces…",
+        "summary": "Codex review was validated on a private test PR, and all currently public project repos were switched to private; waiting for human decision on monitor hosting…",
+        "summary_preview": "Codex review was validated on a private test PR, and all currently public project repos were switched to private; waiting for human decision on monitor hosting…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771811175.735769",
+        "last_update_ts": "1771827528.835568",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T01:46:15Z"
+        }
+      }
+    },
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -258,22 +292,6 @@
           "time_iso": "2026-02-22T22:41:05Z"
         }
       },
-      "1771811175.735769": {
-        "mention_ts": "1771811175.735769",
-        "thread_ts": "1771811175.735769",
-        "status": "waiting_human",
-        "task_description": "[user] can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testing codex review acces…",
-        "summary": "Codex review was validated on a private test PR, and all currently public project repos were switched to private; waiting for human decision on monitor hosting…",
-        "summary_preview": "Codex review was validated on a private test PR, and all currently public project repos were switched to private; waiting for human decision on monitor hosting…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771811175.735769",
-        "last_update_ts": "1771825362.600734",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T01:46:15Z"
-        }
-      },
       "1771816766.927089": {
         "mention_ts": "1771816766.927089",
         "thread_ts": "1771816766.927089",
@@ -471,5 +489,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T06:18:35Z"
+  "server_time_utc": "2026-02-23T06:20:36Z"
 }
