@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T21:04:40Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T21:06:46Z",
+    "status": "running_session",
     "pid": 6180,
-    "loop_count": 1,
+    "loop_count": 2,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.54,
-      "five": 1.66,
-      "fifteen": 1.71
+      "one": 1.74,
+      "five": 1.73,
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44278177792,
-    "disk_free_bytes": 200829018112,
-    "runner_log_size_bytes": 1221384,
+    "disk_used_bytes": 44274556928,
+    "disk_free_bytes": 200832638976,
+    "runner_log_size_bytes": 1221616,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T21:05:44Z",
+    "dashboard_started_utc": "2026-02-23T21:07:45Z",
     "local_ips": []
   },
   "gpu": {
@@ -97,7 +97,24 @@
         }
       }
     },
-    "active": {},
+    "active": {
+      "1771841520.464849": {
+        "mention_ts": "1771841520.464849",
+        "thread_ts": "1771841520.464849",
+        "status": "in_progress",
+        "task_description": "Consider in small-swe-train, how will step-SDPO be implemented?",
+        "summary": "Locked step-SDPO plan to rollout-mask-only assistant-token training, documented concrete tool_agent->swe_bridge_agent integration sequence, posted in-thread go…",
+        "summary_preview": "Locked step-SDPO plan to rollout-mask-only assistant-token training, documented concrete tool_agent->swe_bridge_agent integration sequence, posted in-thread go…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841520.464849",
+        "last_update_ts": "1771880806.330981",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:54:05Z"
+        }
+      }
+    },
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -306,22 +323,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T07:37:35Z"
         }
-      },
-      "1771841520.464849": {
-        "mention_ts": "1771841520.464849",
-        "thread_ts": "1771841520.464849",
-        "status": "in_progress",
-        "task_description": "Consider in small-swe-train, how will step-SDPO be implemented?",
-        "summary": "Locked step-SDPO plan to rollout-mask-only assistant-token training, documented concrete tool_agent->swe_bridge_agent integration sequence, posted in-thread go…",
-        "summary_preview": "Locked step-SDPO plan to rollout-mask-only assistant-token training, documented concrete tool_agent->swe_bridge_agent integration sequence, posted in-thread go…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841520.464849",
-        "last_update_ts": "1771880680.887698",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:54:05Z"
-        }
       }
     },
     "finished": {
@@ -504,5 +505,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T21:05:44Z"
+  "server_time_utc": "2026-02-23T21:07:45Z"
 }
