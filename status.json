@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T23:16:05Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T23:18:11Z",
+    "status": "running_session",
     "pid": 6180,
-    "loop_count": 9,
+    "loop_count": 10,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.6,
-      "five": 1.53,
-      "fifteen": 1.52
+      "one": 1.96,
+      "five": 1.63,
+      "fifteen": 1.56
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44286476288,
-    "disk_free_bytes": 200820719616,
-    "runner_log_size_bytes": 1224666,
+    "disk_used_bytes": 44288958464,
+    "disk_free_bytes": 200818237440,
+    "runner_log_size_bytes": 1224953,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T23:17:22Z",
+    "dashboard_started_utc": "2026-02-23T23:19:24Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,16 +48,34 @@
   },
   "tasks": {
     "queued": {
+      "1771886372.809259": {
+        "mention_ts": "1771886372.809259",
+        "thread_ts": "1771886372.809259",
+        "status": "queued",
+        "task_description": "Can you switch the GPU monitor on our monitor to default on?",
+        "summary": "Can you switch the GPU monitor on our monitor to default on?",
+        "summary_preview": "Can you switch the GPU monitor on our monitor to default on?",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771886372.809259",
+        "last_update_ts": "1771886372.809259",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T22:39:32Z"
+        }
+      }
+    },
+    "active": {
       "1771832276.357899": {
         "mention_ts": "1771832276.357899",
         "thread_ts": "1771832276.357899",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Resolve the objective requested in this task thread.",
         "summary": "Resolve the objective requested in this task thread.",
         "summary_preview": "Resolve the objective requested in this task thread.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1771880029.083799",
-        "last_update_ts": "1771880029.083799",
+        "last_update_ts": "1771888691.910503",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -65,7 +83,6 @@
         }
       }
     },
-    "active": {},
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -504,5 +521,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T23:17:22Z"
+  "server_time_utc": "2026-02-23T23:19:24Z"
 }
