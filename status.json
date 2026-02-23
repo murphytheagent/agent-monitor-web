@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T10:55:26Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T10:57:32Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1220,
+    "loop_count": 1221,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.59,
-      "five": 1.59,
-      "fifteen": 1.56
+      "one": 1.69,
+      "five": 1.66,
+      "fifteen": 1.59
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44215869440,
-    "disk_free_bytes": 200891326464,
-    "runner_log_size_bytes": 1212248,
+    "disk_used_bytes": 44212944896,
+    "disk_free_bytes": 200894251008,
+    "runner_log_size_bytes": 1212543,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T10:56:36Z",
+    "dashboard_started_utc": "2026-02-23T10:58:38Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,7 +48,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771841520.464849": {
+        "mention_ts": "1771841520.464849",
+        "thread_ts": "1771841520.464849",
+        "status": "in_progress",
+        "task_description": "[user] consider in small-swe-train, how will step-SDPO be implemented?",
+        "summary": "Research answers and recommended step-SDPO hook-integration path were posted in-thread; no new @mention arrived, so work is paused pending human direction on i…",
+        "summary_preview": "Research answers and recommended step-SDPO hook-integration path were posted in-thread; no new @mention arrived, so work is paused pending human direction on i…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841520.464849",
+        "last_update_ts": "1771844252.165695",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T10:12:00Z"
+        }
+      }
+    },
     "incomplete": {
       "1771544976.149449": {
         "mention_ts": "1771544976.149449",
@@ -274,32 +291,16 @@
           "time_iso": "2026-02-23T07:44:56Z"
         }
       },
-      "1771841520.464849": {
-        "mention_ts": "1771841520.464849",
-        "thread_ts": "1771841520.464849",
-        "status": "in_progress",
-        "task_description": "[user] consider in small-swe-train, how will step-SDPO be implemented?",
-        "summary": "Research answers and recommended step-SDPO hook-integration path were posted in-thread; no new @mention arrived, so work is paused pending human direction on i…",
-        "summary_preview": "Research answers and recommended step-SDPO hook-integration path were posted in-thread; no new @mention arrived, so work is paused pending human direction on i…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841520.464849",
-        "last_update_ts": "1771843958.032454",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:12:00Z"
-        }
-      },
       "1771841009.140679": {
         "mention_ts": "1771841009.140679",
         "thread_ts": "1771841009.140679",
-        "status": "waiting_human",
+        "status": "in_progress",
         "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
         "summary": "Reconciled PR #8/thread state, confirmed requested runtime follow-ups are present with @codex requested, and asked human to choose merge review vs fresh Slurm …",
         "summary_preview": "Reconciled PR #8/thread state, confirmed requested runtime follow-ups are present with @codex requested, and asked human to choose merge review vs fresh Slurm …",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1771841009.140679",
-        "last_update_ts": "1771844126.278874",
+        "last_update_ts": "1771844252.157216",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -487,5 +488,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T10:56:36Z"
+  "server_time_utc": "2026-02-23T10:58:38Z"
 }
