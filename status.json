@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T02:46:23Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T02:48:28Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1102,
+    "loop_count": 1103,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.45,
-      "five": 1.57,
-      "fifteen": 1.61
+      "one": 1.99,
+      "five": 1.64,
+      "fifteen": 1.62
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44122873856,
-    "disk_free_bytes": 200984322048,
-    "runner_log_size_bytes": 1165109,
+    "disk_used_bytes": 44125822976,
+    "disk_free_bytes": 200981372928,
+    "runner_log_size_bytes": 1165244,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T02:47:35Z",
+    "dashboard_started_utc": "2026-02-23T02:49:37Z",
     "local_ips": []
   },
   "gpu": {
@@ -113,7 +113,24 @@
         }
       }
     },
-    "active": {},
+    "active": {
+      "1771795925.781909": {
+        "mention_ts": "1771795925.781909",
+        "thread_ts": "1771795925.781909",
+        "status": "in_progress",
+        "task_description": "[user] make your monitor UI more cyberpunk and also redact all the usernames meaning just not show who is behind the task.",
+        "summary": "Enabled operational real-time hosted monitor publishing via persistent tmux loop, verified config-driven 120s commits on agent-monitor-web main, and requested …",
+        "summary_preview": "Enabled operational real-time hosted monitor publishing via persistent tmux loop, verified config-driven 120s commits on agent-monitor-web main, and requested …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771795925.781909",
+        "last_update_ts": "1771814908.702841",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T01:04:37Z"
+        }
+      }
+    },
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -257,22 +274,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T01:03:48Z"
-        }
-      },
-      "1771795925.781909": {
-        "mention_ts": "1771795925.781909",
-        "thread_ts": "1771795925.781909",
-        "status": "in_progress",
-        "task_description": "[user] make your monitor UI more cyberpunk and also redact all the usernames meaning just not show who is behind the task.",
-        "summary": "Enabled operational real-time hosted monitor publishing via persistent tmux loop, verified config-driven 120s commits on agent-monitor-web main, and requested …",
-        "summary_preview": "Enabled operational real-time hosted monitor publishing via persistent tmux loop, verified config-driven 120s commits on agent-monitor-web main, and requested …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771795925.781909",
-        "last_update_ts": "1771814199.716835",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T01:04:37Z"
         }
       },
       "1771749091.141509": {
@@ -488,5 +489,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T02:47:35Z"
+  "server_time_utc": "2026-02-23T02:49:37Z"
 }
