@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T20:48:49Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T20:50:16Z",
+    "status": "sleeping",
     "pid": 99811,
     "loop_count": 1,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.52,
-      "five": 1.72,
-      "fifteen": 1.72
+      "one": 1.99,
+      "five": 1.78,
+      "fifteen": 1.74
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44274397184,
-    "disk_free_bytes": 200832798720,
-    "runner_log_size_bytes": 1219852,
+    "disk_used_bytes": 44272320512,
+    "disk_free_bytes": 200834875392,
+    "runner_log_size_bytes": 1220016,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T20:49:30Z",
+    "dashboard_started_utc": "2026-02-23T20:51:32Z",
     "local_ips": []
   },
   "gpu": {
@@ -81,24 +81,7 @@
         }
       }
     },
-    "active": {
-      "1771841009.140679": {
-        "mention_ts": "1771841009.140679",
-        "thread_ts": "1771841009.140679",
-        "status": "in_progress",
-        "task_description": "On PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
-        "summary": "Small 8-GPU e2e run succeeded (job 473), PR #8 got follow-up fix fc8e00a, and two new PRs were opened as requested: #9 collector concurrency and #10 flash-attn…",
-        "summary_preview": "Small 8-GPU e2e run succeeded (job 473), PR #8 got follow-up fix fc8e00a, and two new PRs were opened as requested: #9 collector concurrency and #10 flash-attn…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841009.140679",
-        "last_update_ts": "1771879729.550691",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:03:29Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -326,6 +309,22 @@
       }
     },
     "finished": {
+      "1771841009.140679": {
+        "mention_ts": "1771841009.140679",
+        "thread_ts": "1771841009.140679",
+        "status": "done",
+        "task_description": "On PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
+        "summary": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
+        "summary_preview": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841009.140679",
+        "last_update_ts": "1771879816.194354",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T10:03:29Z"
+        }
+      },
       "1771831315.650959": {
         "mention_ts": "1771831315.650959",
         "thread_ts": "1771831315.650959",
@@ -469,22 +468,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T21:29:35Z"
         }
-      },
-      "1771791882.440369": {
-        "mention_ts": "1771791882.440369",
-        "thread_ts": "1771791882.440369",
-        "status": "done",
-        "task_description": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the murphy channel abou…",
-        "summary": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
-        "summary_preview": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771791882.440369",
-        "last_update_ts": "1771798209.363401",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T20:24:42Z"
-        }
       }
     }
   },
@@ -505,5 +488,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T20:49:30Z"
+  "server_time_utc": "2026-02-23T20:51:32Z"
 }
