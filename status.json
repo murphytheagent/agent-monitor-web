@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T03:01:50Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T03:16:45Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1104,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.72,
-      "five": 1.61,
-      "fifteen": 1.6
+      "one": 1.8,
+      "five": 1.65,
+      "fifteen": 1.61
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44129513472,
-    "disk_free_bytes": 200977682432,
-    "runner_log_size_bytes": 1165603,
+    "disk_used_bytes": 44133261312,
+    "disk_free_bytes": 200973934592,
+    "runner_log_size_bytes": 1165770,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T03:16:00Z",
+    "dashboard_started_utc": "2026-02-23T03:18:02Z",
     "local_ips": []
   },
   "gpu": {
@@ -113,24 +113,7 @@
         }
       }
     },
-    "active": {
-      "1771800065.419449": {
-        "mention_ts": "1771800065.419449",
-        "thread_ts": "1771800065.419449",
-        "status": "in_progress",
-        "task_description": "[user] ok, what now for small-swe-train?",
-        "summary": "Checked PR #7 feedback with gh, pushed commit 5778e3b to preserve failure-path trajectory history, updated reports/goals, and posted in-thread request for conf…",
-        "summary_preview": "Checked PR #7 feedback with gh, pushed commit 5778e3b to preserve failure-path trajectory history, updated reports/goals, and posted in-thread request for conf…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771800065.419449",
-        "last_update_ts": "1771815710.243573",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T22:41:05Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -306,6 +289,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T01:04:37Z"
+        }
+      },
+      "1771800065.419449": {
+        "mention_ts": "1771800065.419449",
+        "thread_ts": "1771800065.419449",
+        "status": "in_progress",
+        "task_description": "[user] ok, what now for small-swe-train?",
+        "summary": "Opened separate runtime-wiring PR #8 (commits a82470c and 144548c), wired on-policy RFT runtime/rejection modules, passed local pytest, completed Slurm GPU pro…",
+        "summary_preview": "Opened separate runtime-wiring PR #8 (commits a82470c and 144548c), wired on-policy RFT runtime/rejection modules, passed local pytest, completed Slurm GPU pro…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771800065.419449",
+        "last_update_ts": "1771816605.167087",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T22:41:05Z"
         }
       }
     },
@@ -489,5 +488,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T03:16:00Z"
+  "server_time_utc": "2026-02-23T03:18:02Z"
 }
