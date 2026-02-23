@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T05:32:01Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T05:42:42Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1114,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.47,
-      "five": 1.47,
-      "fifteen": 1.5
+      "one": 1.63,
+      "five": 1.53,
+      "fifteen": 1.52
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44148928512,
-    "disk_free_bytes": 200958267392,
-    "runner_log_size_bytes": 1169559,
+    "disk_used_bytes": 44149551104,
+    "disk_free_bytes": 200957644800,
+    "runner_log_size_bytes": 1169726,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T05:42:03Z",
+    "dashboard_started_utc": "2026-02-23T05:44:05Z",
     "local_ips": []
   },
   "gpu": {
@@ -97,24 +97,7 @@
         }
       }
     },
-    "active": {
-      "1771811175.735769": {
-        "mention_ts": "1771811175.735769",
-        "thread_ts": "1771811175.735769",
-        "status": "in_progress",
-        "task_description": "[user] can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testing codex review acces…",
-        "summary": "[user] can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testin…",
-        "summary_preview": "[user] can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testin…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771811175.735769",
-        "last_update_ts": "1771824721.155143",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T01:46:15Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -323,6 +306,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T22:41:05Z"
         }
+      },
+      "1771811175.735769": {
+        "mention_ts": "1771811175.735769",
+        "thread_ts": "1771811175.735769",
+        "status": "waiting_human",
+        "task_description": "[user] can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testing codex review acces…",
+        "summary": "Codex review was validated on a private test PR, and all currently public project repos were switched to private; waiting for human decision on monitor hosting…",
+        "summary_preview": "Codex review was validated on a private test PR, and all currently public project repos were switched to private; waiting for human decision on monitor hosting…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771811175.735769",
+        "last_update_ts": "1771825362.600734",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T01:46:15Z"
+        }
       }
     },
     "finished": {
@@ -505,5 +504,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T05:42:04Z"
+  "server_time_utc": "2026-02-23T05:44:05Z"
 }
