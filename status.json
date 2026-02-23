@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T02:39:23Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T02:41:27Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1101,
+    "loop_count": 1102,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.71,
-      "five": 1.69,
-      "fifteen": 1.64
+      "one": 2.09,
+      "five": 1.81,
+      "fifteen": 1.69
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44132139008,
-    "disk_free_bytes": 200975056896,
-    "runner_log_size_bytes": 1164807,
+    "disk_used_bytes": 44131803136,
+    "disk_free_bytes": 200975392768,
+    "runner_log_size_bytes": 1164942,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T02:39:28Z",
+    "dashboard_started_utc": "2026-02-23T02:41:30Z",
     "local_ips": []
   },
   "gpu": {
@@ -113,7 +113,24 @@
         }
       }
     },
-    "active": {},
+    "active": {
+      "1771800065.419449": {
+        "mention_ts": "1771800065.419449",
+        "thread_ts": "1771800065.419449",
+        "status": "in_progress",
+        "task_description": "[user] ok, what now for small-swe-train?",
+        "summary": "Checked PR #7 feedback with gh, pushed commit 6f355c3 splitting dedicated RFT trainer and adding rollout identity artifacts/task_id safeguards, posted Slack+PR…",
+        "summary_preview": "Checked PR #7 feedback with gh, pushed commit 6f355c3 splitting dedicated RFT trainer and adding rollout identity artifacts/task_id safeguards, posted Slack+PR…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771800065.419449",
+        "last_update_ts": "1771814487.796448",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T22:41:05Z"
+        }
+      }
+    },
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -273,22 +290,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T01:04:37Z"
-        }
-      },
-      "1771800065.419449": {
-        "mention_ts": "1771800065.419449",
-        "thread_ts": "1771800065.419449",
-        "status": "in_progress",
-        "task_description": "[user] ok, what now for small-swe-train?",
-        "summary": "Checked PR #7 feedback with gh, pushed commit 6f355c3 splitting dedicated RFT trainer and adding rollout identity artifacts/task_id safeguards, posted Slack+PR…",
-        "summary_preview": "Checked PR #7 feedback with gh, pushed commit 6f355c3 splitting dedicated RFT trainer and adding rollout identity artifacts/task_id safeguards, posted Slack+PR…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771800065.419449",
-        "last_update_ts": "1771814075.617725",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T22:41:05Z"
         }
       },
       "1771749091.141509": {
@@ -488,5 +489,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T02:39:28Z"
+  "server_time_utc": "2026-02-23T02:41:30Z"
 }
