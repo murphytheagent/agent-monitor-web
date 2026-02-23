@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T20:24:05Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T20:26:11Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1236,
+    "loop_count": 1237,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.51,
-      "five": 1.66,
-      "fifteen": 1.65
+      "one": 1.42,
+      "five": 1.58,
+      "fifteen": 1.62
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44263321600,
-    "disk_free_bytes": 200843874304,
-    "runner_log_size_bytes": 1218858,
+    "disk_used_bytes": 44265340928,
+    "disk_free_bytes": 200841854976,
+    "runner_log_size_bytes": 1219149,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T20:25:08Z",
+    "dashboard_started_utc": "2026-02-23T20:27:10Z",
     "local_ips": []
   },
   "gpu": {
@@ -47,8 +47,58 @@
     }
   },
   "tasks": {
-    "queued": {},
-    "active": {},
+    "queued": {
+      "1771878213.934349": {
+        "mention_ts": "1771878213.934349",
+        "thread_ts": "1771878213.934349",
+        "status": "queued",
+        "task_description": "[user] go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offloading, this is suppo…",
+        "summary": "[user] go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offlo…",
+        "summary_preview": "[user] go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offlo…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771878213.934349",
+        "last_update_ts": "1771878213.934349",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:23:33Z"
+        }
+      },
+      "1771878311.544899": {
+        "mention_ts": "1771878311.544899",
+        "thread_ts": "1771878311.544899",
+        "status": "queued",
+        "task_description": "[user] go work on PR#10 of small swe train, we will rebuild flash attn securely, test the default using flash attn 2 RFT loop with small config override, and finally update makefi…",
+        "summary": "[user] go work on PR#10 of small swe train, we will rebuild flash attn securely, test the default using flash attn 2 RFT loop with small config override, and f…",
+        "summary_preview": "[user] go work on PR#10 of small swe train, we will rebuild flash attn securely, test the default using flash attn 2 RFT loop with small config override, and f…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771878311.544899",
+        "last_update_ts": "1771878311.544899",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:25:11Z"
+        }
+      }
+    },
+    "active": {
+      "1771841009.140679": {
+        "mention_ts": "1771841009.140679",
+        "thread_ts": "1771841009.140679",
+        "status": "in_progress",
+        "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
+        "summary": "Small 8-GPU e2e run succeeded (job 473), PR #8 got follow-up fix fc8e00a, and two new PRs were opened as requested: #9 collector concurrency and #10 flash-attn…",
+        "summary_preview": "Small 8-GPU e2e run succeeded (job 473), PR #8 got follow-up fix fc8e00a, and two new PRs were opened as requested: #9 collector concurrency and #10 flash-attn…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841009.140679",
+        "last_update_ts": "1771878371.145911",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T10:03:29Z"
+        }
+      }
+    },
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -273,22 +323,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T10:12:00Z"
         }
-      },
-      "1771841009.140679": {
-        "mention_ts": "1771841009.140679",
-        "thread_ts": "1771841009.140679",
-        "status": "in_progress",
-        "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
-        "summary": "Small 8-GPU e2e run succeeded (job 473), PR #8 got follow-up fix fc8e00a, and two new PRs were opened as requested: #9 collector concurrency and #10 flash-attn…",
-        "summary_preview": "Small 8-GPU e2e run succeeded (job 473), PR #8 got follow-up fix fc8e00a, and two new PRs were opened as requested: #9 collector concurrency and #10 flash-attn…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841009.140679",
-        "last_update_ts": "1771878245.690810",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:03:29Z"
-        }
       }
     },
     "finished": {
@@ -471,5 +505,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T20:25:09Z"
+  "server_time_utc": "2026-02-23T20:27:10Z"
 }
