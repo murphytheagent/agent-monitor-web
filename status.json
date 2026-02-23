@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T21:49:19Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T21:51:24Z",
+    "status": "running_session",
     "pid": 6180,
-    "loop_count": 6,
+    "loop_count": 7,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.54,
-      "five": 1.68,
-      "fifteen": 1.66
+      "one": 1.93,
+      "five": 1.73,
+      "fifteen": 1.67
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44275032064,
-    "disk_free_bytes": 200832163840,
-    "runner_log_size_bytes": 1223478,
+    "disk_used_bytes": 44276547584,
+    "disk_free_bytes": 200830648320,
+    "runner_log_size_bytes": 1223710,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T21:50:17Z",
+    "dashboard_started_utc": "2026-02-23T21:52:19Z",
     "local_ips": []
   },
   "gpu": {
@@ -81,7 +81,24 @@
         }
       }
     },
-    "active": {},
+    "active": {
+      "1771841520.464849": {
+        "mention_ts": "1771841520.464849",
+        "thread_ts": "1771841520.464849",
+        "status": "in_progress",
+        "task_description": "Consider in small-swe-train, how will step-SDPO be implemented?",
+        "summary": "Detailed step-SDPO markdown plan was already delivered in-thread at 2026-02-23 21:18 UTC, and there are no newer human replies; implementation remains paused a…",
+        "summary_preview": "Detailed step-SDPO markdown plan was already delivered in-thread at 2026-02-23 21:18 UTC, and there are no newer human replies; implementation remains paused a…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841520.464849",
+        "last_update_ts": "1771883484.538002",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:54:05Z"
+        }
+      }
+    },
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -291,22 +308,6 @@
           "time_iso": "2026-02-23T07:37:35Z"
         }
       },
-      "1771841520.464849": {
-        "mention_ts": "1771841520.464849",
-        "thread_ts": "1771841520.464849",
-        "status": "in_progress",
-        "task_description": "Consider in small-swe-train, how will step-SDPO be implemented?",
-        "summary": "Detailed step-SDPO markdown plan was already delivered in-thread at 2026-02-23 21:18 UTC, and there are no newer human replies; implementation remains paused a…",
-        "summary_preview": "Detailed step-SDPO markdown plan was already delivered in-thread at 2026-02-23 21:18 UTC, and there are no newer human replies; implementation remains paused a…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841520.464849",
-        "last_update_ts": "1771883181.516957",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:54:05Z"
-        }
-      },
       "1771878213.934349": {
         "mention_ts": "1771878213.934349",
         "thread_ts": "1771878213.934349",
@@ -504,5 +505,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T21:50:17Z"
+  "server_time_utc": "2026-02-23T21:52:19Z"
 }
