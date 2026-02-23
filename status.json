@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T16:03:41Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T16:05:48Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1225,
+    "loop_count": 1226,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.91,
-      "five": 1.6,
-      "fifteen": 1.53
+      "one": 1.41,
+      "five": 1.55,
+      "fifteen": 1.52
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44281954304,
-    "disk_free_bytes": 200825241600,
-    "runner_log_size_bytes": 1214330,
+    "disk_used_bytes": 44282318848,
+    "disk_free_bytes": 200824877056,
+    "runner_log_size_bytes": 1214568,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T16:05:13Z",
+    "dashboard_started_utc": "2026-02-23T16:07:15Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,7 +48,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771841009.140679": {
+        "mention_ts": "1771841009.140679",
+        "thread_ts": "1771841009.140679",
+        "status": "in_progress",
+        "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
+        "summary": "Pushed commits 149c65c and cf5af70 to harden trainer flash-attn guards and add qwen_vl_utils shim, confirmed 8-GPU no-flash step-0 train/checkpoint success (jo…",
+        "summary_preview": "Pushed commits 149c65c and cf5af70 to harden trainer flash-attn guards and add qwen_vl_utils shim, confirmed 8-GPU no-flash step-0 train/checkpoint success (jo…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841009.140679",
+        "last_update_ts": "1771862748.263199",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T10:03:29Z"
+        }
+      }
+    },
     "incomplete": {
       "1771544976.149449": {
         "mention_ts": "1771544976.149449",
@@ -289,22 +306,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T10:12:00Z"
         }
-      },
-      "1771841009.140679": {
-        "mention_ts": "1771841009.140679",
-        "thread_ts": "1771841009.140679",
-        "status": "in_progress",
-        "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
-        "summary": "Pushed commits 149c65c and cf5af70 to harden trainer flash-attn guards and add qwen_vl_utils shim, confirmed 8-GPU no-flash step-0 train/checkpoint success (jo…",
-        "summary_preview": "Pushed commits 149c65c and cf5af70 to harden trainer flash-attn guards and add qwen_vl_utils shim, confirmed 8-GPU no-flash step-0 train/checkpoint success (jo…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841009.140679",
-        "last_update_ts": "1771862621.832037",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:03:29Z"
-        }
       }
     },
     "finished": {
@@ -487,5 +488,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T16:05:13Z"
+  "server_time_utc": "2026-02-23T16:07:15Z"
 }
