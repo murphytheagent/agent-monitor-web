@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T05:52:38Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T05:54:44Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1116,
+    "loop_count": 1117,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.45,
-      "five": 1.63,
-      "fifteen": 1.57
+      "one": 1.5,
+      "five": 1.58,
+      "fifteen": 1.56
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44146397184,
-    "disk_free_bytes": 200960798720,
-    "runner_log_size_bytes": 1170536,
+    "disk_used_bytes": 44146634752,
+    "disk_free_bytes": 200960561152,
+    "runner_log_size_bytes": 1170774,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T05:54:14Z",
+    "dashboard_started_utc": "2026-02-23T05:56:16Z",
     "local_ips": []
   },
   "gpu": {
@@ -47,17 +47,18 @@
     }
   },
   "tasks": {
-    "queued": {
+    "queued": {},
+    "active": {
       "1771817727.883159": {
         "mention_ts": "1771817727.883159",
         "thread_ts": "1771817727.883159",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "[user].",
         "summary": "[user].",
         "summary_preview": "[user].",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1771820871.945559",
-        "last_update_ts": "1771820871.945559",
+        "last_update_ts": "1771826084.157537",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -65,7 +66,6 @@
         }
       }
     },
-    "active": {},
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -488,5 +488,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T05:54:14Z"
+  "server_time_utc": "2026-02-23T05:56:16Z"
 }
