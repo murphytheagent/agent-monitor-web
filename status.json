@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T06:10:05Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T06:12:11Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1122,
+    "loop_count": 1123,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.75,
-      "five": 1.68,
-      "fifteen": 1.59
+      "one": 1.88,
+      "five": 1.73,
+      "fifteen": 1.61
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44156321792,
-    "disk_free_bytes": 200950874112,
-    "runner_log_size_bytes": 1172967,
+    "disk_used_bytes": 44146425856,
+    "disk_free_bytes": 200960770048,
+    "runner_log_size_bytes": 1173262,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T06:10:28Z",
+    "dashboard_started_utc": "2026-02-23T06:12:29Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,7 +48,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771817727.883159": {
+        "mention_ts": "1771817727.883159",
+        "thread_ts": "1771817727.883159",
+        "status": "in_progress",
+        "task_description": "[user].",
+        "summary": "Diagnosed monitor 404: public GitHub Pages stopped serving after repo became private/Pages deployment returned 404; posted root-cause details in-thread and req…",
+        "summary_preview": "Diagnosed monitor 404: public GitHub Pages stopped serving after repo became private/Pages deployment returned 404; posted root-cause details in-thread and req…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771820871.945559",
+        "last_update_ts": "1771827131.632511",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T04:27:51Z"
+        }
+      }
+    },
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -289,22 +306,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T03:19:26Z"
         }
-      },
-      "1771817727.883159": {
-        "mention_ts": "1771817727.883159",
-        "thread_ts": "1771817727.883159",
-        "status": "waiting_human",
-        "task_description": "[user].",
-        "summary": "Diagnosed monitor 404: public GitHub Pages stopped serving after repo became private/Pages deployment returned 404; posted root-cause details in-thread and req…",
-        "summary_preview": "Diagnosed monitor 404: public GitHub Pages stopped serving after repo became private/Pages deployment returned 404; posted root-cause details in-thread and req…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771820871.945559",
-        "last_update_ts": "1771827005.595090",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T04:27:51Z"
-        }
       }
     },
     "finished": {
@@ -487,5 +488,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T06:10:28Z"
+  "server_time_utc": "2026-02-23T06:12:29Z"
 }
