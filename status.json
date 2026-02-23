@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T16:30:37Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T16:56:45Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1227,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.81,
-      "five": 1.63,
-      "fifteen": 1.57
+      "one": 1.68,
+      "five": 1.6,
+      "fifteen": 1.56
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44248707072,
-    "disk_free_bytes": 200858488832,
-    "runner_log_size_bytes": 1214973,
+    "disk_used_bytes": 44252344320,
+    "disk_free_bytes": 200854851584,
+    "runner_log_size_bytes": 1215140,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T16:56:00Z",
+    "dashboard_started_utc": "2026-02-23T16:58:01Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,24 +48,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771841009.140679": {
-        "mention_ts": "1771841009.140679",
-        "thread_ts": "1771841009.140679",
-        "status": "in_progress",
-        "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
-        "summary": "Reproduced the prior flash-path startup failure context (job 459), launched a fresh default-runtime 8-GPU run (job 461) on commit cf5af70, and confirmed stable…",
-        "summary_preview": "Reproduced the prior flash-path startup failure context (job 459), launched a fresh default-runtime 8-GPU run (job 461) on commit cf5af70, and confirmed stable…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841009.140679",
-        "last_update_ts": "1771864237.554199",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:03:29Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771544976.149449": {
         "mention_ts": "1771544976.149449",
@@ -306,6 +289,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T10:12:00Z"
         }
+      },
+      "1771841009.140679": {
+        "mention_ts": "1771841009.140679",
+        "thread_ts": "1771841009.140679",
+        "status": "in_progress",
+        "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
+        "summary": "Pushed PR #8 commit 620bf61 with loop-safety fixes, validated via pytest, and completed fresh 8-GPU 2-step runtime e2e run (job 462, COMPLETED 0:0) with traine…",
+        "summary_preview": "Pushed PR #8 commit 620bf61 with loop-safety fixes, validated via pytest, and completed fresh 8-GPU 2-step runtime e2e run (job 462, COMPLETED 0:0) with traine…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841009.140679",
+        "last_update_ts": "1771865805.631201",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T10:03:29Z"
+        }
       }
     },
     "finished": {
@@ -488,5 +487,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T16:56:00Z"
+  "server_time_utc": "2026-02-23T16:58:02Z"
 }
