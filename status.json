@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T06:05:30Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T06:07:36Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1121,
+    "loop_count": 1122,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.67,
-      "five": 1.57,
-      "fifteen": 1.54
+      "one": 1.9,
+      "five": 1.67,
+      "fifteen": 1.58
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44154978304,
-    "disk_free_bytes": 200952217600,
-    "runner_log_size_bytes": 1172505,
+    "disk_used_bytes": 44155338752,
+    "disk_free_bytes": 200951857152,
+    "runner_log_size_bytes": 1172800,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T06:06:24Z",
+    "dashboard_started_utc": "2026-02-23T06:08:26Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,7 +48,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771817727.883159": {
+        "mention_ts": "1771817727.883159",
+        "thread_ts": "1771817727.883159",
+        "status": "in_progress",
+        "task_description": "[user].",
+        "summary": "Posted required ACK and requested clarification because the mention only pinged the bot without actionable task details.",
+        "summary_preview": "Posted required ACK and requested clarification because the mention only pinged the bot without actionable task details.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771820871.945559",
+        "last_update_ts": "1771826856.948430",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T04:27:51Z"
+        }
+      }
+    },
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -289,22 +306,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T03:19:26Z"
         }
-      },
-      "1771817727.883159": {
-        "mention_ts": "1771817727.883159",
-        "thread_ts": "1771817727.883159",
-        "status": "waiting_human",
-        "task_description": "[user].",
-        "summary": "Posted required ACK and requested clarification because the mention only pinged the bot without actionable task details.",
-        "summary_preview": "Posted required ACK and requested clarification because the mention only pinged the bot without actionable task details.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771820871.945559",
-        "last_update_ts": "1771826226.453040",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T04:27:51Z"
-        }
       }
     },
     "finished": {
@@ -487,5 +488,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T06:06:24Z"
+  "server_time_utc": "2026-02-23T06:08:26Z"
 }
