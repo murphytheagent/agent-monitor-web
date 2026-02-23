@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T02:36:39Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T02:39:23Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1101,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.53,
-      "five": 1.68,
-      "fifteen": 1.63
+      "one": 1.71,
+      "five": 1.69,
+      "fifteen": 1.64
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44132065280,
-    "disk_free_bytes": 200975130624,
-    "runner_log_size_bytes": 1164640,
+    "disk_used_bytes": 44132139008,
+    "disk_free_bytes": 200975056896,
+    "runner_log_size_bytes": 1164807,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T02:37:26Z",
+    "dashboard_started_utc": "2026-02-23T02:39:28Z",
     "local_ips": []
   },
   "gpu": {
@@ -113,24 +113,7 @@
         }
       }
     },
-    "active": {
-      "1771749091.141509": {
-        "mention_ts": "1771749091.141509",
-        "thread_ts": "1771749091.141509",
-        "status": "in_progress",
-        "task_description": "[user] how have you been using your memory in your session?",
-        "summary": "Prompt-memory and maintenance-hygiene updates remain implemented and validated; no new human reply after latest checkpoint, so task stays pending confirmation.",
-        "summary_preview": "Prompt-memory and maintenance-hygiene updates remain implemented and validated; no new human reply after latest checkpoint, so task stays pending confirmation.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771749091.141509",
-        "last_update_ts": "1771814199.723748",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T08:31:31Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -306,6 +289,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T22:41:05Z"
+        }
+      },
+      "1771749091.141509": {
+        "mention_ts": "1771749091.141509",
+        "thread_ts": "1771749091.141509",
+        "status": "waiting_human",
+        "task_description": "[user] how have you been using your memory in your session?",
+        "summary": "Human clarified status semantics; posted in-thread correction, updated report/memory, and set this task to waiting_human pending final confirmation.",
+        "summary_preview": "Human clarified status semantics; posted in-thread correction, updated report/memory, and set this task to waiting_human pending final confirmation.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771749091.141509",
+        "last_update_ts": "1771814363.571684",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T08:31:31Z"
         }
       }
     },
@@ -489,5 +488,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T02:37:26Z"
+  "server_time_utc": "2026-02-23T02:39:28Z"
 }
