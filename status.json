@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T20:50:16Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T20:52:22Z",
+    "status": "running_session",
     "pid": 99811,
-    "loop_count": 1,
+    "loop_count": 2,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.99,
-      "five": 1.78,
-      "fifteen": 1.74
+      "one": 2.05,
+      "five": 1.77,
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44272320512,
-    "disk_free_bytes": 200834875392,
-    "runner_log_size_bytes": 1220016,
+    "disk_used_bytes": 44273659904,
+    "disk_free_bytes": 200833536000,
+    "runner_log_size_bytes": 1220248,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T20:51:32Z",
+    "dashboard_started_utc": "2026-02-23T20:53:33Z",
     "local_ips": []
   },
   "gpu": {
@@ -81,7 +81,24 @@
         }
       }
     },
-    "active": {},
+    "active": {
+      "1771832276.357899": {
+        "mention_ts": "1771832276.357899",
+        "thread_ts": "1771832276.357899",
+        "status": "in_progress",
+        "task_description": "Maintenance checklist: 1) Review recent work across reports/, projects/, deliverables/, recent code changes, and recent Slack thread interactions.",
+        "summary": "Completed maintenance audit and memory/project cleanup; posted Slack summary and review request, now waiting on human decisions for PR merges, MCP ahead-by-2 b…",
+        "summary_preview": "Completed maintenance audit and memory/project cleanup; posted Slack summary and review request, now waiting on human decisions for PR merges, MCP ahead-by-2 b…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771832255.134205",
+        "last_update_ts": "1771879942.388805",
+        "task_type": "maintenance_reflect",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T07:37:35Z"
+        }
+      }
+    },
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -257,22 +274,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T03:19:26Z"
-        }
-      },
-      "1771832276.357899": {
-        "mention_ts": "1771832276.357899",
-        "thread_ts": "1771832276.357899",
-        "status": "in_progress",
-        "task_description": "Maintenance checklist: 1) Review recent work across reports/, projects/, deliverables/, recent code changes, and recent Slack thread interactions.",
-        "summary": "Completed maintenance audit and memory/project cleanup; posted Slack summary and review request, now waiting on human decisions for PR merges, MCP ahead-by-2 b…",
-        "summary_preview": "Completed maintenance audit and memory/project cleanup; posted Slack summary and review request, now waiting on human decisions for PR merges, MCP ahead-by-2 b…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771832255.134205",
-        "last_update_ts": "1771879729.542524",
-        "task_type": "maintenance_reflect",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T07:37:35Z"
         }
       },
       "1771832696.332649": {
@@ -488,5 +489,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T20:51:32Z"
+  "server_time_utc": "2026-02-23T20:53:33Z"
 }
