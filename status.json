@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T07:37:39Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T07:46:02Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1153,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.18,
-      "five": 1.42,
+      "one": 1.47,
+      "five": 1.44,
       "fifteen": 1.48
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44158996480,
-    "disk_free_bytes": 200948199424,
-    "runner_log_size_bytes": 1185426,
+    "disk_used_bytes": 44158992384,
+    "disk_free_bytes": 200948203520,
+    "runner_log_size_bytes": 1185593,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T07:45:50Z",
+    "dashboard_started_utc": "2026-02-23T07:47:51Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,24 +48,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance.reflect": {
-        "mention_ts": "maintenance.reflect",
-        "thread_ts": "maintenance.reflect",
-        "status": "in_progress",
-        "task_description": "Maintenance checklist.",
-        "summary": "Maintenance checklist.",
-        "summary_preview": "Maintenance checklist.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771832255.134205",
-        "last_update_ts": "1771832259.915371",
-        "task_type": "maintenance_reflect",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T07:37:35Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -274,6 +257,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T03:19:26Z"
         }
+      },
+      "maintenance.reflect": {
+        "mention_ts": "maintenance.reflect",
+        "thread_ts": "1771832276.357899",
+        "status": "waiting_human",
+        "task_description": "Maintenance checklist.",
+        "summary": "Completed maintenance audit and memory/project cleanup; posted Slack summary and review request, now waiting on human decisions for PR merges, MCP ahead-by-2 b…",
+        "summary_preview": "Completed maintenance audit and memory/project cleanup; posted Slack summary and review request, now waiting on human decisions for PR merges, MCP ahead-by-2 b…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771832255.134205",
+        "last_update_ts": "1771832762.865776",
+        "task_type": "maintenance_reflect",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T07:37:35Z"
+        }
       }
     },
     "finished": {
@@ -456,5 +455,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T07:45:50Z"
+  "server_time_utc": "2026-02-23T07:47:52Z"
 }
