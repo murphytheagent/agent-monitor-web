@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T07:29:16Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T07:31:22Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1151,
+    "loop_count": 1152,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.26,
-      "five": 1.39,
-      "fifteen": 1.45
+      "one": 1.61,
+      "five": 1.51,
+      "fifteen": 1.49
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44152123392,
-    "disk_free_bytes": 200955072512,
-    "runner_log_size_bytes": 1184701,
+    "disk_used_bytes": 44209168384,
+    "disk_free_bytes": 200898027520,
+    "runner_log_size_bytes": 1184939,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T07:29:36Z",
+    "dashboard_started_utc": "2026-02-23T07:31:37Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,7 +48,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771831315.650959": {
+        "mention_ts": "1771831315.650959",
+        "thread_ts": "1771831315.650959",
+        "status": "in_progress",
+        "task_description": "[user] I replied to your waiting_human maintenance task but it is still in incomplete.",
+        "summary": "Fixed supervisor waiting_human recheck to include maintenance_reflect thread replies, added regression coverage, and requested human review in-thread.",
+        "summary_preview": "Fixed supervisor waiting_human recheck to include maintenance_reflect thread replies, added regression coverage, and requested human review in-thread.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771831315.650959",
+        "last_update_ts": "1771831882.256617",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T07:21:55Z"
+        }
+      }
+    },
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -273,22 +290,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T03:19:26Z"
         }
-      },
-      "1771831315.650959": {
-        "mention_ts": "1771831315.650959",
-        "thread_ts": "1771831315.650959",
-        "status": "in_progress",
-        "task_description": "[user] I replied to your waiting_human maintenance task but it is still in incomplete.",
-        "summary": "Fixed supervisor waiting_human recheck to include maintenance_reflect thread replies, added regression coverage, and requested human review in-thread.",
-        "summary_preview": "Fixed supervisor waiting_human recheck to include maintenance_reflect thread replies, added regression coverage, and requested human review in-thread.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771831315.650959",
-        "last_update_ts": "1771831756.572582",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T07:21:55Z"
-        }
       }
     },
     "finished": {
@@ -471,5 +472,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T07:29:36Z"
+  "server_time_utc": "2026-02-23T07:31:37Z"
 }
