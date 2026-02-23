@@ -604,9 +604,9 @@ function render(data) {
     gpuBody.innerHTML = `
       <div class="gpu-item">
         <div class="gpu-title">Status</div>
-        <div class="gpu-val">Disabled by default to avoid intrusive remote polling.</div>
+        <div class="gpu-val">GPU monitor disabled for this run.</div>
       </div>`;
-    gpuNote.textContent = 'Enable with --gpu-monitor on. Collection is cached and low-frequency.';
+    gpuNote.textContent = 'Run with --gpu-monitor on to re-enable. Collection is cached and low-frequency.';
     gpuNote.className = 'section-note';
   } else {
     const queue = gpu.queue || {};
