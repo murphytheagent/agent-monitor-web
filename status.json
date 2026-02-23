@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T02:59:45Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T03:01:50Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1103,
+    "loop_count": 1104,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.42,
-      "five": 1.57,
-      "fifteen": 1.58
+      "one": 1.85,
+      "five": 1.66,
+      "fifteen": 1.61
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44127125504,
-    "disk_free_bytes": 200980070400,
-    "runner_log_size_bytes": 1165458,
+    "disk_used_bytes": 44127592448,
+    "disk_free_bytes": 200979603456,
+    "runner_log_size_bytes": 1165603,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T03:01:48Z",
+    "dashboard_started_utc": "2026-02-23T03:03:50Z",
     "local_ips": []
   },
   "gpu": {
@@ -113,7 +113,24 @@
         }
       }
     },
-    "active": {},
+    "active": {
+      "1771800065.419449": {
+        "mention_ts": "1771800065.419449",
+        "thread_ts": "1771800065.419449",
+        "status": "in_progress",
+        "task_description": "[user] ok, what now for small-swe-train?",
+        "summary": "Checked PR #7 feedback with gh, pushed commit 5778e3b to preserve failure-path trajectory history, updated reports/goals, and posted in-thread request for conf…",
+        "summary_preview": "Checked PR #7 feedback with gh, pushed commit 5778e3b to preserve failure-path trajectory history, updated reports/goals, and posted in-thread request for conf…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771800065.419449",
+        "last_update_ts": "1771815710.243573",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T22:41:05Z"
+        }
+      }
+    },
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -273,22 +290,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T08:31:31Z"
-        }
-      },
-      "1771800065.419449": {
-        "mention_ts": "1771800065.419449",
-        "thread_ts": "1771800065.419449",
-        "status": "waiting_human",
-        "task_description": "[user] ok, what now for small-swe-train?",
-        "summary": "Checked PR #7 feedback with gh, pushed commit 5778e3b to preserve failure-path trajectory history, updated reports/goals, and posted in-thread request for conf…",
-        "summary_preview": "Checked PR #7 feedback with gh, pushed commit 5778e3b to preserve failure-path trajectory history, updated reports/goals, and posted in-thread request for conf…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771800065.419449",
-        "last_update_ts": "1771814783.650873",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T22:41:05Z"
         }
       },
       "1771795925.781909": {
@@ -488,5 +489,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T03:01:48Z"
+  "server_time_utc": "2026-02-23T03:03:50Z"
 }
