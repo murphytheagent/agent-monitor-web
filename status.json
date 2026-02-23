@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T19:07:59Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T19:10:04Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1232,
+    "loop_count": 1233,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.26,
-      "five": 1.47,
+      "one": 1.61,
+      "five": 1.49,
       "fifteen": 1.49
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44268236800,
-    "disk_free_bytes": 200838959104,
-    "runner_log_size_bytes": 1217285,
+    "disk_used_bytes": 44268457984,
+    "disk_free_bytes": 200838737920,
+    "runner_log_size_bytes": 1217476,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T19:10:01Z",
+    "dashboard_started_utc": "2026-02-23T19:12:03Z",
     "local_ips": []
   },
   "gpu": {
@@ -48,7 +48,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771841009.140679": {
+        "mention_ts": "1771841009.140679",
+        "thread_ts": "1771841009.140679",
+        "status": "in_progress",
+        "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
+        "summary": "Addressed 8-GPU rollout requirement by pushing small-swe-train commit 3fd20ba (run_rft.sh now defaults vLLM tensor parallel to NPROC_PER_NODE), canceled job 46…",
+        "summary_preview": "Addressed 8-GPU rollout requirement by pushing small-swe-train commit 3fd20ba (run_rft.sh now defaults vLLM tensor parallel to NPROC_PER_NODE), canceled job 46…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841009.140679",
+        "last_update_ts": "1771873804.817978",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T10:03:29Z"
+        }
+      }
+    },
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -273,22 +290,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T10:12:00Z"
         }
-      },
-      "1771841009.140679": {
-        "mention_ts": "1771841009.140679",
-        "thread_ts": "1771841009.140679",
-        "status": "in_progress",
-        "task_description": "[user] on PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
-        "summary": "Addressed 8-GPU rollout requirement by pushing small-swe-train commit 3fd20ba (run_rft.sh now defaults vLLM tensor parallel to NPROC_PER_NODE), canceled job 46…",
-        "summary_preview": "Addressed 8-GPU rollout requirement by pushing small-swe-train commit 3fd20ba (run_rft.sh now defaults vLLM tensor parallel to NPROC_PER_NODE), canceled job 46…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841009.140679",
-        "last_update_ts": "1771873679.075120",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:03:29Z"
-        }
       }
     },
     "finished": {
@@ -471,5 +472,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T19:10:01Z"
+  "server_time_utc": "2026-02-23T19:12:03Z"
 }
