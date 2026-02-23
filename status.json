@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T02:34:35Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-23T02:36:39Z",
+    "status": "running_session",
     "pid": 21233,
-    "loop_count": 1100,
+    "loop_count": 1101,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.63,
-      "five": 1.76,
-      "fifteen": 1.65
+      "one": 1.53,
+      "five": 1.68,
+      "fifteen": 1.63
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44131569664,
-    "disk_free_bytes": 200975626240,
-    "runner_log_size_bytes": 1164448,
+    "disk_used_bytes": 44132065280,
+    "disk_free_bytes": 200975130624,
+    "runner_log_size_bytes": 1164640,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T02:35:25Z",
+    "dashboard_started_utc": "2026-02-23T02:37:26Z",
     "local_ips": []
   },
   "gpu": {
@@ -113,7 +113,24 @@
         }
       }
     },
-    "active": {},
+    "active": {
+      "1771749091.141509": {
+        "mention_ts": "1771749091.141509",
+        "thread_ts": "1771749091.141509",
+        "status": "in_progress",
+        "task_description": "[user] how have you been using your memory in your session?",
+        "summary": "Prompt-memory and maintenance-hygiene updates remain implemented and validated; no new human reply after latest checkpoint, so task stays pending confirmation.",
+        "summary_preview": "Prompt-memory and maintenance-hygiene updates remain implemented and validated; no new human reply after latest checkpoint, so task stays pending confirmation.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771749091.141509",
+        "last_update_ts": "1771814199.723748",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T08:31:31Z"
+        }
+      }
+    },
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -259,32 +276,16 @@
           "time_iso": "2026-02-23T01:03:48Z"
         }
       },
-      "1771749091.141509": {
-        "mention_ts": "1771749091.141509",
-        "thread_ts": "1771749091.141509",
-        "status": "in_progress",
-        "task_description": "[user] how have you been using your memory in your session?",
-        "summary": "Prompt-memory and maintenance-hygiene updates remain implemented and validated; no new human reply after latest checkpoint, so task stays pending confirmation.",
-        "summary_preview": "Prompt-memory and maintenance-hygiene updates remain implemented and validated; no new human reply after latest checkpoint, so task stays pending confirmation.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771749091.141509",
-        "last_update_ts": "1771813267.331178",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T08:31:31Z"
-        }
-      },
       "1771795925.781909": {
         "mention_ts": "1771795925.781909",
         "thread_ts": "1771795925.781909",
-        "status": "waiting_human",
+        "status": "in_progress",
         "task_description": "[user] make your monitor UI more cyberpunk and also redact all the usernames meaning just not show who is behind the task.",
         "summary": "Enabled operational real-time hosted monitor publishing via persistent tmux loop, verified config-driven 120s commits on agent-monitor-web main, and requested …",
         "summary_preview": "Enabled operational real-time hosted monitor publishing via persistent tmux loop, verified config-driven 120s commits on agent-monitor-web main, and requested …",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1771795925.781909",
-        "last_update_ts": "1771813142.571991",
+        "last_update_ts": "1771814199.716835",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -488,5 +489,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T02:35:25Z"
+  "server_time_utc": "2026-02-23T02:37:26Z"
 }
