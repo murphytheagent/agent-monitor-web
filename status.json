@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T05:20:56Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-23T05:24:15Z",
+    "status": "sleeping",
     "pid": 21233,
     "loop_count": 1112,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,17 +17,17 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.18,
-      "five": 1.4,
-      "fifteen": 1.53
+      "one": 1.75,
+      "five": 1.52,
+      "fifteen": 1.56
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44140732416,
-    "disk_free_bytes": 200966463488,
-    "runner_log_size_bytes": 1168749,
+    "disk_used_bytes": 44140572672,
+    "disk_free_bytes": 200966623232,
+    "runner_log_size_bytes": 1168916,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-23T05:23:48Z",
+    "dashboard_started_utc": "2026-02-23T05:25:50Z",
     "local_ips": []
   },
   "gpu": {
@@ -113,24 +113,7 @@
         }
       }
     },
-    "active": {
-      "1771809318.257109": {
-        "mention_ts": "1771809318.257109",
-        "thread_ts": "1771809318.257109",
-        "status": "in_progress",
-        "task_description": "[user] when you use GPU node, how do you make sure the venv is built there?",
-        "summary": "Canonical GPU-node path normalization is complete and documented; Slurm env-build job 436 remains RUNNING with active uv/ninja/nvcc/cicc flash-attn compilation…",
-        "summary_preview": "Canonical GPU-node path normalization is complete and documented; Slurm env-build job 436 remains RUNNING with active uv/ninja/nvcc/cicc flash-attn compilation…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771809318.257109",
-        "last_update_ts": "1771824056.624205",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T04:27:35Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771543280.921039": {
         "mention_ts": "1771543280.921039",
@@ -339,6 +322,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T22:41:05Z"
         }
+      },
+      "1771809318.257109": {
+        "mention_ts": "1771809318.257109",
+        "thread_ts": "1771809318.257109",
+        "status": "in_progress",
+        "task_description": "[user] when you use GPU node, how do you make sure the venv is built there?",
+        "summary": "Canonical GPU-node path normalization is complete; Slurm env-build job 436 remains RUNNING (rechecked 2026-02-23 05:22 UTC) with active uv/ninja/nvcc/cicc comp…",
+        "summary_preview": "Canonical GPU-node path normalization is complete; Slurm env-build job 436 remains RUNNING (rechecked 2026-02-23 05:22 UTC) with active uv/ninja/nvcc/cicc comp…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771809318.257109",
+        "last_update_ts": "1771824255.139925",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T04:27:35Z"
+        }
       }
     },
     "finished": {
@@ -521,5 +520,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-23T05:23:48Z"
+  "server_time_utc": "2026-02-23T05:25:50Z"
 }
