@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-23T23:31:32Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-24T01:03:46Z",
+    "status": "sleeping",
     "pid": 6180,
     "loop_count": 12,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.95,
+      "one": 1.84,
       "five": 2.0,
-      "fifteen": 1.89
+      "fifteen": 1.91
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44325449728,
-    "disk_free_bytes": 200781746176,
-    "runner_log_size_bytes": 1225808,
+    "disk_used_bytes": 44322365440,
+    "disk_free_bytes": 200784830464,
+    "runner_log_size_bytes": 1225973,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T01:03:32Z",
+    "dashboard_started_utc": "2026-02-24T01:05:38Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T01:03:32Z",
+    "checked_at_utc": "2026-02-24T01:05:38Z",
     "cache_age_sec": 0,
     "note": "Remote GPU/queue data unavailable for this snapshot.",
     "gpus": [],
@@ -48,24 +48,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771878311.544899": {
-        "mention_ts": "1771878311.544899",
-        "thread_ts": "1771878311.544899",
-        "status": "in_progress",
-        "task_description": "Go work on PR#10 of small swe train, we will rebuild flash attn securely, test the default using flash attn 2 RFT loop with small config override, and finally update makefile to r…",
-        "summary": "PR #10 updated with flash-attn rebuild hardening and Blackwell defaults, validated by Slurm rebuild job 479 and 8-GPU small RFT flash-attn2 run job 481 (both c…",
-        "summary_preview": "PR #10 updated with flash-attn rebuild hardening and Blackwell defaults, validated by Slurm rebuild job 479 and 8-GPU small RFT flash-attn2 run job 481 (both c…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771878311.544899",
-        "last_update_ts": "1771889492.415960",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:25:11Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -338,6 +321,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T22:39:32Z"
         }
+      },
+      "1771878311.544899": {
+        "mention_ts": "1771878311.544899",
+        "thread_ts": "1771878311.544899",
+        "status": "waiting_human",
+        "task_description": "Go work on PR#10 of small swe train, we will rebuild flash attn securely, test the default using flash attn 2 RFT loop with small config override, and finally update makefile to r…",
+        "summary": "Completed clean [code] wipe/rebuild validation for PR #10: after fixes [code] (Python 3.13 Makefile env pin) and [code] ( [code] train dep), Slurm rebuild [cod…",
+        "summary_preview": "Completed clean [code] wipe/rebuild validation for PR #10: after fixes [code] (Python 3.13 Makefile env pin) and [code] ( [code] train dep), Slurm rebuild [cod…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771878311.544899",
+        "last_update_ts": "1771895026.198193",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:25:11Z"
+        }
       }
     },
     "finished": {
@@ -520,5 +519,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T01:03:36Z"
+  "server_time_utc": "2026-02-24T01:05:42Z"
 }
