@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T21:21:17Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-24T21:23:36Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 292,
+    "loop_count": 293,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.62,
-      "five": 1.54,
-      "fifteen": 1.55
+      "one": 1.54,
+      "five": 1.58,
+      "fifteen": 1.57
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44076969984,
-    "disk_free_bytes": 201030225920,
-    "runner_log_size_bytes": 1376314,
+    "disk_used_bytes": 44073062400,
+    "disk_free_bytes": 201034133504,
+    "runner_log_size_bytes": 1376614,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T21:22:52Z",
+    "dashboard_started_utc": "2026-02-24T21:24:55Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-24T21:22:53Z",
+    "checked_at_utc": "2026-02-24T21:24:55Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -68,7 +68,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 33
       },
       {
         "index": 4,
@@ -106,7 +106,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771927570.778669": {
+        "mention_ts": "1771927570.778669",
+        "thread_ts": "1771927570.778669",
+        "status": "in_progress",
+        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
+        "summary": "Ran dedicated 8-GPU 8/8 boundary validation (Slurm job 523) with new swe_bridge_agent stop counters, confirmed global_step=1 completion, answered Docker/loop s…",
+        "summary_preview": "Ran dedicated 8-GPU 8/8 boundary validation (Slurm job 523) with new swe_bridge_agent stop counters, confirmed global_step=1 completion, answered Docker/loop s…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771927570.778669",
+        "last_update_ts": "1771968216.899452",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-24T10:06:10Z"
+        }
+      }
+    },
     "incomplete": {
       "1771667148.825919": {
         "mention_ts": "1771667148.825919",
@@ -411,22 +428,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T10:02:29Z"
         }
-      },
-      "1771927570.778669": {
-        "mention_ts": "1771927570.778669",
-        "thread_ts": "1771927570.778669",
-        "status": "waiting_human",
-        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
-        "summary": "Ran dedicated 8-GPU 8/8 boundary validation (Slurm job 523) with new swe_bridge_agent stop counters, confirmed global_step=1 completion, answered Docker/loop s…",
-        "summary_preview": "Ran dedicated 8-GPU 8/8 boundary validation (Slurm job 523) with new swe_bridge_agent stop counters, confirmed global_step=1 completion, answered Docker/loop s…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771927570.778669",
-        "last_update_ts": "1771964859.519808",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T10:06:10Z"
-        }
       }
     },
     "finished": {
@@ -609,5 +610,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T21:22:53Z"
+  "server_time_utc": "2026-02-24T21:24:55Z"
 }
