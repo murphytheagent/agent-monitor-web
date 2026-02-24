@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T08:35:54Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-24T08:43:20Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 31,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,34 +17,34 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.04,
-      "five": 1.42,
-      "fifteen": 1.5
+      "one": 1.47,
+      "five": 1.52,
+      "fifteen": 1.53
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44948955136,
-    "disk_free_bytes": 200158240768,
-    "runner_log_size_bytes": 1272554,
+    "disk_used_bytes": 44952031232,
+    "disk_free_bytes": 200155164672,
+    "runner_log_size_bytes": 1272719,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T08:41:21Z",
+    "dashboard_started_utc": "2026-02-24T08:43:24Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-24T08:41:21Z",
+    "checked_at_utc": "2026-02-24T08:43:24Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 91303,
         "memory_total_mb": 97887,
-        "temperature_c": 60
+        "temperature_c": 62
       },
       {
         "index": 1,
@@ -52,12 +52,12 @@
         "utilization_gpu_pct": 98,
         "memory_used_mb": 89623,
         "memory_total_mb": 97887,
-        "temperature_c": 59
+        "temperature_c": 61
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 89623,
         "memory_total_mb": 97887,
         "temperature_c": 57
@@ -68,15 +68,15 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 89623,
         "memory_total_mb": 97887,
-        "temperature_c": 60
+        "temperature_c": 57
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 89623,
         "memory_total_mb": 97887,
-        "temperature_c": 59
+        "temperature_c": 53
       },
       {
         "index": 5,
@@ -84,46 +84,29 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 89623,
         "memory_total_mb": 97887,
-        "temperature_c": 58
+        "temperature_c": 56
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 93,
         "memory_used_mb": 89623,
         "memory_total_mb": 97887,
-        "temperature_c": 61
+        "temperature_c": 53
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 89623,
         "memory_total_mb": 97887,
-        "temperature_c": 61
+        "temperature_c": 53
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771841520.464849": {
-        "mention_ts": "1771841520.464849",
-        "thread_ts": "1771841520.464849",
-        "status": "in_progress",
-        "task_description": "Consider in small-swe-train, how will step-SDPO be implemented?",
-        "summary": "Uploaded the detailed step-SDPO markdown as a thread attachment (F0AH1SNUG0Z), updated AGENTS/session/memory rules for waiting_human status semantics and small…",
-        "summary_preview": "Uploaded the detailed step-SDPO markdown as a thread attachment (F0AH1SNUG0Z), updated AGENTS/session/memory rules for waiting_human status semantics and small…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841520.464849",
-        "last_update_ts": "1771922154.594278",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:54:05Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771661351.374639": {
         "mention_ts": "1771661351.374639",
@@ -412,6 +395,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T03:19:26Z"
         }
+      },
+      "1771841520.464849": {
+        "mention_ts": "1771841520.464849",
+        "thread_ts": "1771841520.464849",
+        "status": "waiting_human",
+        "task_description": "Consider in small-swe-train, how will step-SDPO be implemented?",
+        "summary": "Reviewed attached refined step-SDPO PDF against small-swe-train main (9bd740b), confirmed plan is sound with four concrete pre-coding edits, posted findings in…",
+        "summary_preview": "Reviewed attached refined step-SDPO PDF against small-swe-train main (9bd740b), confirmed plan is sound with four concrete pre-coding edits, posted findings in…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841520.464849",
+        "last_update_ts": "1771922599.594127",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:54:05Z"
+        }
       }
     },
     "finished": {
@@ -594,5 +593,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T08:41:22Z"
+  "server_time_utc": "2026-02-24T08:43:25Z"
 }
