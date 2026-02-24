@@ -290,7 +290,6 @@
   .gpu-item { border: 1px solid rgba(74, 239, 255, 0.3); border-radius: 8px; background: rgba(8, 14, 34, 0.84); padding: 10px 12px; }
   .gpu-title { color: #d9f4ff; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 7px; }
   .gpu-val { color: #d0e2ff; font-size: 12.5px; line-height: 1.45; }
-  .queue-grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
   .visibility-list { list-style: none; display: grid; gap: 6px; }
   .visibility-list li { color: #c8d8ff; font-size: 12px; line-height: 1.5; }
   .visibility-list strong { color: #7cf2ff; font-weight: 600; }
@@ -345,7 +344,7 @@
   </div>
 
   <div class="card">
-    <div class="card-header">GPU Node + Slurm Queue</div>
+    <div class="card-header">GPU Snapshot</div>
     <div class="card-body">
       <div class="gpu-layout" id="gpu-body"></div>
       <div class="section-note" id="gpu-note"></div>
@@ -596,7 +595,7 @@ function render(data) {
     `<div class="sys-item"><div class="sys-label">${esc(l)}</div><div class="sys-val">${esc(v)}</div></div>`
   ).join('');
 
-  // GPU + Slurm snapshot (optional)
+  // GPU snapshot (optional)
   const gpu = data.gpu || {};
   const gpuBody = document.getElementById('gpu-body');
   const gpuNote = document.getElementById('gpu-note');
@@ -609,36 +608,17 @@ function render(data) {
     gpuNote.textContent = 'Run with --gpu-monitor on to re-enable. Collection is cached and low-frequency.';
     gpuNote.className = 'section-note';
   } else {
-    const queue = gpu.queue || {};
-    const queueRows = [
-      ['Total jobs', queue.total_jobs ?? '—'],
-      ['Running', queue.running_jobs ?? '—'],
-      ['Pending', queue.pending_jobs ?? '—'],
-      ['My jobs', queue.my_jobs ?? '—'],
-    ];
-    const queueHtml = queueRows.map(([labelText, valueText]) => `
-      <div class="gpu-item">
-        <div class="gpu-title">${esc(labelText)}</div>
-        <div class="gpu-val">${esc(valueText)}</div>
-      </div>
-    `).join('');
-
     const gpus = Array.isArray(gpu.gpus) ? gpu.gpus : [];
     const gpuCards = gpus.length
       ? gpus.map(row => `
           <div class="gpu-item">
             <div class="gpu-title">GPU ${esc(row.index ?? '?')} · ${esc(row.name || 'Unknown')}</div>
-            <div class="gpu-val">Utilization: ${esc(row.utilization_gpu_pct != null ? row.utilization_gpu_pct + '%' : '—')}</div>
-            <div class="gpu-val">Memory: ${esc(row.memory_used_mb != null ? row.memory_used_mb : '—')} / ${esc(row.memory_total_mb != null ? row.memory_total_mb : '—')} MB</div>
-            <div class="gpu-val">Temperature: ${esc(row.temperature_c != null ? row.temperature_c + '°C' : '—')}</div>
+            <div class="gpu-val">util ${esc(row.utilization_gpu_pct != null ? row.utilization_gpu_pct + '%' : '—')} · mem ${esc(row.memory_used_mb != null ? row.memory_used_mb : '—')} / ${esc(row.memory_total_mb != null ? row.memory_total_mb : '—')} MB · temp ${esc(row.temperature_c != null ? row.temperature_c + '°C' : '—')}</div>
           </div>
         `).join('')
-      : '<div class="gpu-item"><div class="gpu-title">GPU Data</div><div class="gpu-val">No GPU rows returned.</div></div>';
+      : '<div class="gpu-item"><div class="gpu-title">GPU Data</div><div class="gpu-val">No GPU rows returned from nvidia-smi.</div></div>';
 
-    gpuBody.innerHTML = `
-      <div class="queue-grid">${queueHtml}</div>
-      <div class="gpu-grid">${gpuCards}</div>
-    `;
+    gpuBody.innerHTML = `<div class="gpu-grid">${gpuCards}</div>`;
 
     const noteParts = [
       `Node: ${gpu.node_alias || '—'}`,

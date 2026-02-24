@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T01:03:46Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-24T01:05:52Z",
+    "status": "running_session",
     "pid": 6180,
-    "loop_count": 12,
+    "loop_count": 13,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,38 +17,48 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.84,
-      "five": 2.0,
-      "fifteen": 1.91
+      "one": 1.92,
+      "five": 1.94,
+      "fifteen": 1.89
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44322365440,
-    "disk_free_bytes": 200784830464,
-    "runner_log_size_bytes": 1225973,
+    "disk_used_bytes": 44323627008,
+    "disk_free_bytes": 200783568896,
+    "runner_log_size_bytes": 1226207,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T01:05:38Z",
+    "dashboard_started_utc": "2026-02-24T01:07:43Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T01:05:38Z",
+    "checked_at_utc": "2026-02-24T01:07:43Z",
     "cache_age_sec": 0,
-    "note": "Remote GPU/queue data unavailable for this snapshot.",
-    "gpus": [],
-    "queue": {
-      "total_jobs": null,
-      "running_jobs": null,
-      "pending_jobs": null,
-      "other_jobs": null,
-      "my_jobs": null
-    }
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771886372.809259": {
+        "mention_ts": "1771886372.809259",
+        "thread_ts": "1771886372.809259",
+        "status": "in_progress",
+        "task_description": "Can you switch the GPU monitor on our monitor to default on?",
+        "summary": "Set monitor GPU status to default-on in dashboard CLI/UI messaging, validated default run shows enabled, and requested in-thread confirmation.",
+        "summary_preview": "Set monitor GPU status to default-on in dashboard CLI/UI messaging, validated default run shows enabled, and requested in-thread confirmation.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771886372.809259",
+        "last_update_ts": "1771895152.677851",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T22:39:32Z"
+        }
+      }
+    },
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -306,22 +316,6 @@
           "time_iso": "2026-02-23T20:53:49Z"
         }
       },
-      "1771886372.809259": {
-        "mention_ts": "1771886372.809259",
-        "thread_ts": "1771886372.809259",
-        "status": "in_progress",
-        "task_description": "Can you switch the GPU monitor on our monitor to default on?",
-        "summary": "Set monitor GPU status to default-on in dashboard CLI/UI messaging, validated default run shows enabled, and requested in-thread confirmation.",
-        "summary_preview": "Set monitor GPU status to default-on in dashboard CLI/UI messaging, validated default run shows enabled, and requested in-thread confirmation.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771886372.809259",
-        "last_update_ts": "1771889492.407100",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T22:39:32Z"
-        }
-      },
       "1771878311.544899": {
         "mention_ts": "1771878311.544899",
         "thread_ts": "1771878311.544899",
@@ -519,5 +513,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T01:05:42Z"
+  "server_time_utc": "2026-02-24T01:07:47Z"
 }
