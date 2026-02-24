@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T17:30:35Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-24T17:32:55Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 224,
+    "loop_count": 225,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,31 +17,48 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.0,
-      "five": 1.78,
-      "fifteen": 1.64
+      "one": 2.16,
+      "five": 1.93,
+      "fifteen": 1.71
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44989329408,
-    "disk_free_bytes": 200117866496,
-    "runner_log_size_bytes": 1349397,
+    "disk_used_bytes": 44990840832,
+    "disk_free_bytes": 200116355072,
+    "runner_log_size_bytes": 1349541,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T17:32:51Z",
+    "dashboard_started_utc": "2026-02-24T17:34:57Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T17:32:51Z",
+    "checked_at_utc": "2026-02-24T17:34:57Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771927570.778669": {
+        "mention_ts": "1771927570.778669",
+        "thread_ts": "1771927570.778669",
+        "status": "in_progress",
+        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
+        "summary": "Advanced PR #13 with Phase C metadata propagation commit 1124672 (strict handoff validation + SDPO prompt wiring), validated targeted pytest suites, and posted…",
+        "summary_preview": "Advanced PR #13 with Phase C metadata propagation commit 1124672 (strict handoff validation + SDPO prompt wiring), validated targeted pytest suites, and posted…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771927570.778669",
+        "last_update_ts": "1771954375.755518",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-24T10:06:10Z"
+        }
+      }
+    },
     "incomplete": {
       "1771667148.825919": {
         "mention_ts": "1771667148.825919",
@@ -346,22 +363,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T10:02:29Z"
         }
-      },
-      "1771927570.778669": {
-        "mention_ts": "1771927570.778669",
-        "thread_ts": "1771927570.778669",
-        "status": "waiting_human",
-        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
-        "summary": "Advanced PR #13 with Phase C metadata propagation commit 1124672 (strict handoff validation + SDPO prompt wiring), validated targeted pytest suites, and posted…",
-        "summary_preview": "Advanced PR #13 with Phase C metadata propagation commit 1124672 (strict handoff validation + SDPO prompt wiring), validated targeted pytest suites, and posted…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771927570.778669",
-        "last_update_ts": "1771953259.074010",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T10:06:10Z"
-        }
       }
     },
     "finished": {
@@ -544,5 +545,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T17:32:55Z"
+  "server_time_utc": "2026-02-24T17:35:01Z"
 }
