@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T17:02:48Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-24T17:14:19Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 217,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,48 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.7,
-      "five": 1.65,
-      "fifteen": 1.59
+      "one": 1.46,
+      "five": 1.58,
+      "fifteen": 1.57
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44985499648,
-    "disk_free_bytes": 200121696256,
-    "runner_log_size_bytes": 1346310,
+    "disk_used_bytes": 44987523072,
+    "disk_free_bytes": 200119672832,
+    "runner_log_size_bytes": 1346476,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T17:14:00Z",
+    "dashboard_started_utc": "2026-02-24T17:16:05Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T17:14:00Z",
+    "checked_at_utc": "2026-02-24T17:16:05Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771927570.778669": {
-        "mention_ts": "1771927570.778669",
-        "thread_ts": "1771927570.778669",
-        "status": "in_progress",
-        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
-        "summary": "Merged small-swe-train PR #11 and opened PR #13 implementing step-SDPO Phase A/B (launcher hygiene + baseline multi-turn config defaults).",
-        "summary_preview": "Merged small-swe-train PR #11 and opened PR #13 implementing step-SDPO Phase A/B (launcher hygiene + baseline multi-turn config defaults).",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771927570.778669",
-        "last_update_ts": "1771952568.216913",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T10:06:10Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771667148.825919": {
         "mention_ts": "1771667148.825919",
@@ -363,6 +346,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T10:02:29Z"
         }
+      },
+      "1771927570.778669": {
+        "mention_ts": "1771927570.778669",
+        "thread_ts": "1771927570.778669",
+        "status": "waiting_human",
+        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
+        "summary": "Advanced PR #13 with Phase C metadata propagation commit 1124672 (strict handoff validation + SDPO prompt wiring), validated targeted pytest suites, and posted…",
+        "summary_preview": "Advanced PR #13 with Phase C metadata propagation commit 1124672 (strict handoff validation + SDPO prompt wiring), validated targeted pytest suites, and posted…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771927570.778669",
+        "last_update_ts": "1771953259.074010",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-24T10:06:10Z"
+        }
       }
     },
     "finished": {
@@ -545,5 +544,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T17:14:04Z"
+  "server_time_utc": "2026-02-24T17:16:09Z"
 }
