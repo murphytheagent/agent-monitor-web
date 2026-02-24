@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T01:05:52Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-24T01:09:09Z",
+    "status": "sleeping",
     "pid": 6180,
     "loop_count": 13,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,48 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.92,
-      "five": 1.94,
-      "fifteen": 1.89
+      "one": 1.83,
+      "five": 1.85,
+      "fifteen": 1.85
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44323627008,
-    "disk_free_bytes": 200783568896,
-    "runner_log_size_bytes": 1226207,
+    "disk_used_bytes": 44307931136,
+    "disk_free_bytes": 200799264768,
+    "runner_log_size_bytes": 1226372,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T01:07:43Z",
+    "dashboard_started_utc": "2026-02-24T01:09:49Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T01:07:43Z",
+    "checked_at_utc": "2026-02-24T01:09:49Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771886372.809259": {
-        "mention_ts": "1771886372.809259",
-        "thread_ts": "1771886372.809259",
-        "status": "in_progress",
-        "task_description": "Can you switch the GPU monitor on our monitor to default on?",
-        "summary": "Set monitor GPU status to default-on in dashboard CLI/UI messaging, validated default run shows enabled, and requested in-thread confirmation.",
-        "summary_preview": "Set monitor GPU status to default-on in dashboard CLI/UI messaging, validated default run shows enabled, and requested in-thread confirmation.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771886372.809259",
-        "last_update_ts": "1771895152.677851",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T22:39:32Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -331,6 +314,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T20:25:11Z"
         }
+      },
+      "1771886372.809259": {
+        "mention_ts": "1771886372.809259",
+        "thread_ts": "1771886372.809259",
+        "status": "waiting_human",
+        "task_description": "Can you switch the GPU monitor on our monitor to default on?",
+        "summary": "Simplified GPU monitor panel to nvidia-smi-style output, removed Slurm job counters including 'My jobs', and requested in-thread confirmation.",
+        "summary_preview": "Simplified GPU monitor panel to nvidia-smi-style output, removed Slurm job counters including 'My jobs', and requested in-thread confirmation.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771886372.809259",
+        "last_update_ts": "1771895349.433219",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T22:39:32Z"
+        }
       }
     },
     "finished": {
@@ -513,5 +512,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T01:07:47Z"
+  "server_time_utc": "2026-02-24T01:09:53Z"
 }
