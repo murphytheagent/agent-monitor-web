@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T05:51:54Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-24T05:54:14Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 9,
+    "loop_count": 10,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,31 +17,48 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.53,
-      "five": 1.56,
-      "fifteen": 1.71
+      "one": 1.4,
+      "five": 1.55,
+      "fifteen": 1.69
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44551684096,
-    "disk_free_bytes": 200555511808,
-    "runner_log_size_bytes": 1248877,
+    "disk_used_bytes": 44554522624,
+    "disk_free_bytes": 200552673280,
+    "runner_log_size_bytes": 1249255,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T05:52:44Z",
+    "dashboard_started_utc": "2026-02-24T05:54:49Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T05:52:44Z",
+    "checked_at_utc": "2026-02-24T05:54:50Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771906196.179619": {
+        "mention_ts": "1771906196.179619",
+        "thread_ts": "1771906196.179619",
+        "status": "in_progress",
+        "task_description": "!restart.",
+        "summary": "Processed !restart by sending SIGHUP to supervisor PID 15923; runner log confirmed hot_restart_requested. Awaiting human confirmation of restart behavior.",
+        "summary_preview": "Processed !restart by sending SIGHUP to supervisor PID 15923; runner log confirmed hot_restart_requested. Awaiting human confirmation of restart behavior.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771906196.179619",
+        "last_update_ts": "1771912454.302683",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-24T04:09:56Z"
+        }
+      }
+    },
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -331,22 +348,6 @@
           "time_iso": "2026-02-23T20:23:33Z"
         }
       },
-      "1771906196.179619": {
-        "mention_ts": "1771906196.179619",
-        "thread_ts": "1771906196.179619",
-        "status": "waiting_human",
-        "task_description": "!restart.",
-        "summary": "Processed !restart by sending SIGHUP to supervisor PID 15923; runner log confirmed hot_restart_requested. Awaiting human confirmation of restart behavior.",
-        "summary_preview": "Processed !restart by sending SIGHUP to supervisor PID 15923; runner log confirmed hot_restart_requested. Awaiting human confirmation of restart behavior.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771906196.179619",
-        "last_update_ts": "1771906498.867214",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T04:09:56Z"
-        }
-      },
       "1771816766.927089": {
         "mention_ts": "1771816766.927089",
         "thread_ts": "1771816766.927089",
@@ -544,5 +545,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T05:52:48Z"
+  "server_time_utc": "2026-02-24T05:54:54Z"
 }
