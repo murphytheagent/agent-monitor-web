@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T20:15:24Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-24T20:27:39Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 269,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.75,
+      "one": 1.77,
       "five": 1.62,
       "fifteen": 1.58
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44997734400,
-    "disk_free_bytes": 200109461504,
-    "runner_log_size_bytes": 1367063,
+    "disk_used_bytes": 45000376320,
+    "disk_free_bytes": 200106819584,
+    "runner_log_size_bytes": 1367229,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T20:25:40Z",
+    "dashboard_started_utc": "2026-02-24T20:27:42Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-24T20:25:40Z",
+    "checked_at_utc": "2026-02-24T20:27:42Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -68,7 +68,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 4,
@@ -76,7 +76,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 26
       },
       {
         "index": 5,
@@ -106,24 +106,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771927570.778669": {
-        "mention_ts": "1771927570.778669",
-        "thread_ts": "1771927570.778669",
-        "status": "in_progress",
-        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
-        "summary": "Answered the validation-scope question with concrete Slurm job-518 evidence, clarified user-turn vs tool-response counting semantics, checkpointed coordination…",
-        "summary_preview": "Answered the validation-scope question with concrete Slurm job-518 evidence, clarified user-turn vs tool-response counting semantics, checkpointed coordination…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771927570.778669",
-        "last_update_ts": "1771964124.927757",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T10:06:10Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771667148.825919": {
         "mention_ts": "1771667148.825919",
@@ -428,6 +411,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T10:02:29Z"
         }
+      },
+      "1771927570.778669": {
+        "mention_ts": "1771927570.778669",
+        "thread_ts": "1771927570.778669",
+        "status": "waiting_human",
+        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
+        "summary": "Ran dedicated 8-GPU 8/8 boundary validation (Slurm job 523) with new swe_bridge_agent stop counters, confirmed global_step=1 completion, answered Docker/loop s…",
+        "summary_preview": "Ran dedicated 8-GPU 8/8 boundary validation (Slurm job 523) with new swe_bridge_agent stop counters, confirmed global_step=1 completion, answered Docker/loop s…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771927570.778669",
+        "last_update_ts": "1771964859.519808",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-24T10:06:10Z"
+        }
       }
     },
     "finished": {
@@ -610,5 +609,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T20:25:41Z"
+  "server_time_utc": "2026-02-24T20:27:43Z"
 }
