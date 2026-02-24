@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T02:57:04Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-24T03:04:50Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 2,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,48 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.73,
-      "five": 1.64,
-      "fifteen": 1.63
+      "one": 2.83,
+      "five": 2.06,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44508389376,
-    "disk_free_bytes": 200598806528,
-    "runner_log_size_bytes": 1231102,
+    "disk_used_bytes": 44498624512,
+    "disk_free_bytes": 200608571392,
+    "runner_log_size_bytes": 1231266,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T03:03:22Z",
+    "dashboard_started_utc": "2026-02-24T03:05:27Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T03:03:22Z",
+    "checked_at_utc": "2026-02-24T03:05:27Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771878213.934349": {
-        "mention_ts": "1771878213.934349",
-        "thread_ts": "1771878213.934349",
-        "status": "in_progress",
-        "task_description": "Go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offloading, this is supposed to …",
-        "summary": "Completed realistic flash-attn profiling: job 489 finished (00:20:40, max RSS ~291GB), validated stage timings for both steps, and recommended max_in_flight=32…",
-        "summary_preview": "Completed realistic flash-attn profiling: job 489 finished (00:20:40, max RSS ~291GB), validated stage timings for both steps, and recommended max_in_flight=32…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771878213.934349",
-        "last_update_ts": "1771901824.225512",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:23:33Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -347,6 +330,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T02:48:38Z"
         }
+      },
+      "1771878213.934349": {
+        "mention_ts": "1771878213.934349",
+        "thread_ts": "1771878213.934349",
+        "status": "waiting_human",
+        "task_description": "Go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offloading, this is supposed to …",
+        "summary": "Centralized and locked PR #9 rollout defaults (collector max_in_flight=32, 8-GPU TP/DP=2/4), updated config/script/runtime wiring with tests, merged PR #9 into…",
+        "summary_preview": "Centralized and locked PR #9 rollout defaults (collector max_in_flight=32, 8-GPU TP/DP=2/4), updated config/script/runtime wiring with tests, merged PR #9 into…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771878213.934349",
+        "last_update_ts": "1771902290.961719",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:23:33Z"
+        }
       }
     },
     "finished": {
@@ -529,5 +528,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T03:03:26Z"
+  "server_time_utc": "2026-02-24T03:05:31Z"
 }
