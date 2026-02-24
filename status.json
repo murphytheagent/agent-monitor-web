@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T02:48:45Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-24T02:54:44Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 1,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,48 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.85,
-      "five": 1.68,
+      "one": 1.63,
+      "five": 1.66,
       "fifteen": 1.65
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44499783680,
-    "disk_free_bytes": 200607412224,
-    "runner_log_size_bytes": 1230649,
+    "disk_used_bytes": 44502401024,
+    "disk_free_bytes": 200604794880,
+    "runner_log_size_bytes": 1230813,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T02:52:54Z",
+    "dashboard_started_utc": "2026-02-24T02:55:00Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T02:52:54Z",
+    "checked_at_utc": "2026-02-24T02:55:00Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance.projects": {
-        "mention_ts": "maintenance.projects",
-        "thread_ts": "maintenance.projects",
-        "status": "in_progress",
-        "task_description": "Run project index maintenance and assemble project JSONs.",
-        "summary": "Run project index maintenance and assemble project JSONs.",
-        "summary_preview": "Run project index maintenance and assemble project JSONs.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771901318.895596",
-        "last_update_ts": "1771901325.587283",
-        "task_type": "maintenance_projects",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T02:48:38Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -347,6 +330,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T20:23:33Z"
         }
+      },
+      "maintenance.projects": {
+        "mention_ts": "maintenance.projects",
+        "thread_ts": "1771901577.956549",
+        "status": "waiting_human",
+        "task_description": "Run project index maintenance and assemble project JSONs.",
+        "summary": "Rebuilt .agent/project_index.json for 5 projects (21 classified threads), assembled .agent/projects/*.json, verified thread counts, and posted Slack summary pl…",
+        "summary_preview": "Rebuilt .agent/project_index.json for 5 projects (21 classified threads), assembled .agent/projects/*.json, verified thread counts, and posted Slack summary pl…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771901318.895596",
+        "last_update_ts": "1771901684.657511",
+        "task_type": "maintenance_projects",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-24T02:48:38Z"
+        }
       }
     },
     "finished": {
@@ -529,5 +528,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T02:52:58Z"
+  "server_time_utc": "2026-02-24T02:55:04Z"
 }
