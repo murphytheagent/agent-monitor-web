@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T10:00:49Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-24T10:03:09Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 59,
+    "loop_count": 60,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,31 +17,48 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.39,
-      "five": 1.62,
-      "fifteen": 1.57
+      "one": 1.68,
+      "five": 1.63,
+      "fifteen": 1.58
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44965044224,
-    "disk_free_bytes": 200142151680,
-    "runner_log_size_bytes": 1283910,
+    "disk_used_bytes": 44966301696,
+    "disk_free_bytes": 200140894208,
+    "runner_log_size_bytes": 1284204,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T10:01:06Z",
+    "dashboard_started_utc": "2026-02-24T10:03:12Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T10:01:06Z",
+    "checked_at_utc": "2026-02-24T10:03:12Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771927349.932099": {
+        "mention_ts": "1771927349.932099",
+        "thread_ts": "1771927349.932099",
+        "status": "in_progress",
+        "task_description": "Take origin main latest commit of small swe train, test which configuration leads to RFT e2e run that doesn't skip the trainer.",
+        "summary": "Take origin main latest commit of small swe train, test which configuration leads to RFT e2e run that doesn't skip the trainer.",
+        "summary_preview": "Take origin main latest commit of small swe train, test which configuration leads to RFT e2e run that doesn't skip the trainer.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771927349.932099",
+        "last_update_ts": "1771927389.969002",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-24T10:02:29Z"
+        }
+      }
+    },
     "incomplete": {
       "1771667148.825919": {
         "mention_ts": "1771667148.825919",
@@ -512,5 +529,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T10:01:10Z"
+  "server_time_utc": "2026-02-24T10:03:16Z"
 }
