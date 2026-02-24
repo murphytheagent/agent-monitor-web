@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T09:26:47Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-24T09:32:47Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 47,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.62,
-      "five": 1.69,
-      "fifteen": 1.59
+      "one": 1.23,
+      "five": 1.54,
+      "fifteen": 1.54
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44959027200,
-    "disk_free_bytes": 200148168704,
-    "runner_log_size_bytes": 1278968,
+    "disk_used_bytes": 44959035392,
+    "disk_free_bytes": 200148160512,
+    "runner_log_size_bytes": 1279133,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T09:32:26Z",
+    "dashboard_started_utc": "2026-02-24T09:34:29Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-24T09:32:26Z",
+    "checked_at_utc": "2026-02-24T09:34:29Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -68,7 +68,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 4,
@@ -106,24 +106,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771841520.464849": {
-        "mention_ts": "1771841520.464849",
-        "thread_ts": "1771841520.464849",
-        "status": "in_progress",
-        "task_description": "Consider in small-swe-train, how will step-SDPO be implemented?",
-        "summary": "Opened PR #11 to main with a tracked refined step-SDPO plan (deliverables D0-D6, authoritative config flow, and e2e-from-RFT success gate), posted @codex revie…",
-        "summary_preview": "Opened PR #11 to main with a tracked refined step-SDPO plan (deliverables D0-D6, authoritative config flow, and e2e-from-RFT success gate), posted @codex revie…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841520.464849",
-        "last_update_ts": "1771925207.698875",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:54:05Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771661351.374639": {
         "mention_ts": "1771661351.374639",
@@ -412,6 +395,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T03:19:26Z"
         }
+      },
+      "1771841520.464849": {
+        "mention_ts": "1771841520.464849",
+        "thread_ts": "1771841520.464849",
+        "status": "waiting_human",
+        "task_description": "Consider in small-swe-train, how will step-SDPO be implemented?",
+        "summary": "Updated PR #11 with an expanded root-level step-SDPO guiding plan based on the collaborator PDF plus D0..D6 deliverables, uploaded the markdown as a thread att…",
+        "summary_preview": "Updated PR #11 with an expanded root-level step-SDPO guiding plan based on the collaborator PDF plus D0..D6 deliverables, uploaded the markdown as a thread att…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841520.464849",
+        "last_update_ts": "1771925566.645980",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:54:05Z"
+        }
       }
     },
     "finished": {
@@ -594,5 +593,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T09:32:27Z"
+  "server_time_utc": "2026-02-24T09:34:29Z"
 }
