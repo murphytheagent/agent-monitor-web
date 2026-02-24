@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T01:19:45Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-24T01:21:52Z",
+    "status": "running_session",
     "pid": 6180,
-    "loop_count": 18,
+    "loop_count": 19,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,31 +17,48 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.87,
-      "five": 1.88,
-      "fifteen": 1.85
+      "one": 1.33,
+      "five": 1.67,
+      "fifteen": 1.76
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44314144768,
-    "disk_free_bytes": 200793051136,
-    "runner_log_size_bytes": 1228297,
+    "disk_used_bytes": 44315430912,
+    "disk_free_bytes": 200791764992,
+    "runner_log_size_bytes": 1228588,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T01:20:16Z",
+    "dashboard_started_utc": "2026-02-24T01:22:22Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T01:20:16Z",
+    "checked_at_utc": "2026-02-24T01:22:22Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771878213.934349": {
+        "mention_ts": "1771878213.934349",
+        "thread_ts": "1771878213.934349",
+        "status": "in_progress",
+        "task_description": "Go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offloading, this is supposed to …",
+        "summary": "Addressed PR #9 feedback with commits b1f4eee/9124b05/d4c35a3, validated tests, ran Slurm rollout benchmarks (jobs 476/477) showing ~3.13x collector speedup an…",
+        "summary_preview": "Addressed PR #9 feedback with commits b1f4eee/9124b05/d4c35a3, validated tests, ran Slurm rollout benchmarks (jobs 476/477) showing ~3.13x collector speedup an…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771878213.934349",
+        "last_update_ts": "1771896112.494449",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:23:33Z"
+        }
+      }
+    },
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -265,22 +282,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T20:54:05Z"
-        }
-      },
-      "1771878213.934349": {
-        "mention_ts": "1771878213.934349",
-        "thread_ts": "1771878213.934349",
-        "status": "waiting_human",
-        "task_description": "Go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offloading, this is supposed to …",
-        "summary": "Addressed PR #9 feedback with commits b1f4eee/9124b05/d4c35a3, validated tests, ran Slurm rollout benchmarks (jobs 476/477) showing ~3.13x collector speedup an…",
-        "summary_preview": "Addressed PR #9 feedback with commits b1f4eee/9124b05/d4c35a3, validated tests, ran Slurm rollout benchmarks (jobs 476/477) showing ~3.13x collector speedup an…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771878213.934349",
-        "last_update_ts": "1771885967.167517",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:23:33Z"
         }
       },
       "1771832276.357899": {
@@ -512,5 +513,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T01:20:20Z"
+  "server_time_utc": "2026-02-24T01:22:26Z"
 }
