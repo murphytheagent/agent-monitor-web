@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T04:01:17Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-24T04:09:16Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 23,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,48 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.75,
-      "five": 1.93,
-      "fifteen": 1.89
+      "one": 1.77,
+      "five": 1.9,
+      "fifteen": 1.88
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44516478976,
-    "disk_free_bytes": 200590716928,
-    "runner_log_size_bytes": 1239307,
+    "disk_used_bytes": 44518608896,
+    "disk_free_bytes": 200588587008,
+    "runner_log_size_bytes": 1239472,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T04:08:11Z",
+    "dashboard_started_utc": "2026-02-24T04:10:16Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T04:08:11Z",
+    "checked_at_utc": "2026-02-24T04:10:16Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771878213.934349": {
-        "mention_ts": "1771878213.934349",
-        "thread_ts": "1771878213.934349",
-        "status": "in_progress",
-        "task_description": "Go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offloading, this is supposed to …",
-        "summary": "Updated PR #8 with TP/DP fallback fix + regression + README/implementation docs refresh (commit 5500367), resolved active PR #8 thread, retargeted PR #8 base t…",
-        "summary_preview": "Updated PR #8 with TP/DP fallback fix + regression + README/implementation docs refresh (commit 5500367), resolved active PR #8 thread, retargeted PR #8 base t…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771878213.934349",
-        "last_update_ts": "1771905677.710351",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:23:33Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -347,6 +330,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T02:48:38Z"
         }
+      },
+      "1771878213.934349": {
+        "mention_ts": "1771878213.934349",
+        "thread_ts": "1771878213.934349",
+        "status": "waiting_human",
+        "task_description": "Go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offloading, this is supposed to …",
+        "summary": "Addressed final PR #8 review comment with commit 68bf108, added regression coverage, resolved active thread, and posted Slack completion/review request; PR #8 …",
+        "summary_preview": "Addressed final PR #8 review comment with commit 68bf108, added regression coverage, resolved active thread, and posted Slack completion/review request; PR #8 …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771878213.934349",
+        "last_update_ts": "1771906156.230897",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:23:33Z"
+        }
       }
     },
     "finished": {
@@ -529,5 +528,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T04:08:15Z"
+  "server_time_utc": "2026-02-24T04:10:20Z"
 }
