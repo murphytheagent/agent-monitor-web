@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T02:45:40Z",
-    "status": "sleeping",
-    "pid": 6180,
-    "loop_count": 22,
+    "last_updated_utc": "2026-02-24T02:48:38Z",
+    "status": "starting",
+    "pid": 15923,
+    "loop_count": 0,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,30 +17,47 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.63,
-      "five": 1.71,
-      "fifteen": 1.67
+      "one": 1.93,
+      "five": 1.77,
+      "fifteen": 1.69
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44501053440,
-    "disk_free_bytes": 200606142464,
-    "runner_log_size_bytes": 1229922,
+    "disk_used_bytes": 44501377024,
+    "disk_free_bytes": 200605818880,
+    "runner_log_size_bytes": 1230561,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T02:46:38Z",
+    "dashboard_started_utc": "2026-02-24T02:48:43Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T02:46:38Z",
+    "checked_at_utc": "2026-02-24T02:48:43Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
-    "queued": {},
+    "queued": {
+      "maintenance.projects": {
+        "mention_ts": "maintenance.projects",
+        "thread_ts": "maintenance.projects",
+        "status": "queued",
+        "task_description": "Run project index maintenance and assemble project JSONs.",
+        "summary": "Run project index maintenance and assemble project JSONs.",
+        "summary_preview": "Run project index maintenance and assemble project JSONs.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771901318.895596",
+        "last_update_ts": "1771901318.895596",
+        "task_type": "maintenance_projects",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-24T02:48:38Z"
+        }
+      }
+    },
     "active": {},
     "incomplete": {
       "1771656764.671299": {
@@ -512,5 +529,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T02:46:42Z"
+  "server_time_utc": "2026-02-24T02:48:47Z"
 }
