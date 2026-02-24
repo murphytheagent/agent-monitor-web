@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T05:54:14Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-24T05:56:28Z",
+    "status": "sleeping",
     "pid": 15923,
-    "loop_count": 10,
+    "loop_count": 1,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -18,47 +18,30 @@
     "cpu_count": 10,
     "load_avg": {
       "one": 1.4,
-      "five": 1.55,
-      "fifteen": 1.69
+      "five": 1.56,
+      "fifteen": 1.67
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44554522624,
-    "disk_free_bytes": 200552673280,
-    "runner_log_size_bytes": 1249255,
+    "disk_used_bytes": 44555853824,
+    "disk_free_bytes": 200551342080,
+    "runner_log_size_bytes": 1250112,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T05:54:49Z",
+    "dashboard_started_utc": "2026-02-24T05:56:55Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-24T05:54:50Z",
+    "checked_at_utc": "2026-02-24T05:56:55Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771906196.179619": {
-        "mention_ts": "1771906196.179619",
-        "thread_ts": "1771906196.179619",
-        "status": "in_progress",
-        "task_description": "!restart.",
-        "summary": "Processed !restart by sending SIGHUP to supervisor PID 15923; runner log confirmed hot_restart_requested. Awaiting human confirmation of restart behavior.",
-        "summary_preview": "Processed !restart by sending SIGHUP to supervisor PID 15923; runner log confirmed hot_restart_requested. Awaiting human confirmation of restart behavior.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771906196.179619",
-        "last_update_ts": "1771912454.302683",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T04:09:56Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771656764.671299": {
         "mention_ts": "1771656764.671299",
@@ -366,6 +349,22 @@
       }
     },
     "finished": {
+      "1771906196.179619": {
+        "mention_ts": "1771906196.179619",
+        "thread_ts": "1771906196.179619",
+        "status": "done",
+        "task_description": "!restart.",
+        "summary": "Restart request was already processed; human confirmed Murphy restarted on its own, and task was closed with final in-thread updates and a root checkpoint comm…",
+        "summary_preview": "Restart request was already processed; human confirmed Murphy restarted on its own, and task was closed with final in-thread updates and a root checkpoint comm…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771906196.179619",
+        "last_update_ts": "1771912582.247629",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-24T04:09:56Z"
+        }
+      },
       "1771908580.861819": {
         "mention_ts": "1771908580.861819",
         "thread_ts": "1771908580.861819",
@@ -509,22 +508,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T02:17:38Z"
         }
-      },
-      "1771809318.257109": {
-        "mention_ts": "1771809318.257109",
-        "thread_ts": "1771809318.257109",
-        "status": "done",
-        "task_description": "Verified Slurm job 436 completed successfully (ExitCode 0:0), confirmed canonical small-swe-train path/venv provenance on tianhaowang-gpu0, validated post-run cleanup, posted fina…",
-        "summary": "Verified Slurm job 436 completed successfully (ExitCode 0:0), confirmed canonical small-swe-train path/venv provenance on tianhaowang-gpu0, validated post-run …",
-        "summary_preview": "Verified Slurm job 436 completed successfully (ExitCode 0:0), confirmed canonical small-swe-train path/venv provenance on tianhaowang-gpu0, validated post-run …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771809318.257109",
-        "last_update_ts": "1771824596.033848",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T04:27:35Z"
-        }
       }
     }
   },
@@ -545,5 +528,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T05:54:54Z"
+  "server_time_utc": "2026-02-24T05:56:59Z"
 }
