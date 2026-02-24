@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-24T08:24:00Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-24T08:26:21Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 28,
+    "loop_count": 29,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,96 +17,48 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.39,
-      "five": 1.51,
-      "fifteen": 1.51
+      "one": 1.46,
+      "five": 1.48,
+      "fifteen": 1.5
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44947611648,
-    "disk_free_bytes": 200159584256,
-    "runner_log_size_bytes": 1271391,
+    "disk_used_bytes": 44950228992,
+    "disk_free_bytes": 200156966912,
+    "runner_log_size_bytes": 1271689,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-24T08:24:52Z",
+    "dashboard_started_utc": "2026-02-24T08:26:55Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-02-24T08:24:52Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-02-24T08:26:55Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 88889,
-        "memory_total_mb": 97887,
-        "temperature_c": 66
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 28
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 28
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 28
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 27
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 28
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 27
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 28
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771878213.934349": {
+        "mention_ts": "1771878213.934349",
+        "thread_ts": "1771878213.934349",
+        "status": "in_progress",
+        "task_description": "Go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offloading, this is supposed to …",
+        "summary": "Addressed final PR #8 review comment with commit 68bf108, added regression coverage, resolved active thread, and posted Slack completion/review request; PR #8 …",
+        "summary_preview": "Addressed final PR #8 review comment with commit 68bf108, added regression coverage, resolved active thread, and posted Slack completion/review request; PR #8 …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771878213.934349",
+        "last_update_ts": "1771921581.116010",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:23:33Z"
+        }
+      }
+    },
     "incomplete": {
       "1771661351.374639": {
         "mention_ts": "1771661351.374639",
@@ -364,32 +316,16 @@
           "time_iso": "2026-02-24T02:48:38Z"
         }
       },
-      "1771878213.934349": {
-        "mention_ts": "1771878213.934349",
-        "thread_ts": "1771878213.934349",
-        "status": "waiting_human",
-        "task_description": "Go work on PR#9 of small swe train, we will parallelize collector task dispatch, each trajectory runs end to end as a task without many turn level offloading, this is supposed to …",
-        "summary": "Addressed final PR #8 review comment with commit 68bf108, added regression coverage, resolved active thread, and posted Slack completion/review request; PR #8 …",
-        "summary_preview": "Addressed final PR #8 review comment with commit 68bf108, added regression coverage, resolved active thread, and posted Slack completion/review request; PR #8 …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771878213.934349",
-        "last_update_ts": "1771906156.230897",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:23:33Z"
-        }
-      },
       "1771816766.927089": {
         "mention_ts": "1771816766.927089",
         "thread_ts": "1771816766.927089",
-        "status": "waiting_human",
+        "status": "in_progress",
         "task_description": "What's the current status of experiments on the sample complexity gap between gd and sgd?",
         "summary": "Completed larger-d GD-vs-SGD sweep at d={180,220}, posted in-thread results/artifact path, and requested feedback on next sweep direction.",
         "summary_preview": "Completed larger-d GD-vs-SGD sweep at d={180,220}, posted in-thread results/artifact path, and requested feedback on next sweep direction.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1771816766.927089",
-        "last_update_ts": "1771911059.188937",
+        "last_update_ts": "1771921581.103399",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -593,5 +529,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-24T08:24:53Z"
+  "server_time_utc": "2026-02-24T08:26:59Z"
 }
