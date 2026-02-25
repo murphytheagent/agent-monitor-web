@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.68,
-      "five": 1.6,
-      "fifteen": 1.63
+      "one": 1.61,
+      "five": 1.69,
+      "fifteen": 1.67
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44323831808,
-    "disk_free_bytes": 200783364096,
-    "runner_log_size_bytes": 1409253,
+    "disk_used_bytes": 44320354304,
+    "disk_free_bytes": 200786841600,
+    "runner_log_size_bytes": 1409312,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-25T01:09:29Z",
+    "dashboard_started_utc": "2026-02-25T01:11:31Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-25T01:09:29Z",
+    "checked_at_utc": "2026-02-25T01:11:31Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -379,11 +379,13 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-25T00:52:57Z"
         }
-      },
+      }
+    },
+    "finished": {
       "1771979314.682409": {
         "mention_ts": "1771979314.682409",
         "thread_ts": "1771979314.682409",
-        "status": "waiting_human",
+        "status": "done",
         "task_description": "Run maintenance reflection checklist and summarize findings.",
         "summary": "Force-finished: stuck in infinite maintenance loop",
         "summary_preview": "Force-finished: stuck in infinite maintenance loop",
@@ -395,9 +397,7 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-25T00:25:22Z"
         }
-      }
-    },
-    "finished": {
+      },
       "1771980057.419759": {
         "mention_ts": "1771980057.419759",
         "thread_ts": "1771980057.419759",
@@ -541,22 +541,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-21T07:50:14Z"
         }
-      },
-      "1771827474.009799": {
-        "mention_ts": "1771827474.009799",
-        "thread_ts": "1771827474.009799",
-        "status": "done",
-        "task_description": "Answer the question above.",
-        "summary": "Answered the follow-up in-thread with verified cause: monitor shows maintenance in incomplete because maintenance_reflect task 1771660238.729239 is waiting_hum…",
-        "summary_preview": "Answered the follow-up in-thread with verified cause: monitor shows maintenance in incomplete because maintenance_reflect task 1771660238.729239 is waiting_hum…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771827474.009799",
-        "last_update_ts": "1771830185.965520",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T06:58:15Z"
-        }
       }
     }
   },
@@ -577,5 +561,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-25T01:09:30Z"
+  "server_time_utc": "2026-02-25T01:11:32Z"
 }
