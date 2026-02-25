@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-25T03:01:51Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-25T03:08:29Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 1,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,48 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.25,
-      "five": 1.88,
-      "fifteen": 1.82
+      "one": 2.2,
+      "five": 1.9,
+      "fifteen": 1.83
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44670230528,
-    "disk_free_bytes": 200436965376,
-    "runner_log_size_bytes": 1427123,
+    "disk_used_bytes": 44671602688,
+    "disk_free_bytes": 200435593216,
+    "runner_log_size_bytes": 1428118,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-25T03:07:35Z",
+    "dashboard_started_utc": "2026-02-25T03:09:41Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-25T03:07:35Z",
+    "checked_at_utc": "2026-02-25T03:09:41Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1771987928.789359",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review fixed maintenance phase/key normalization regressions in commit fd604f6, validated 140 supervisor tests passing, and requested human direction…",
-        "summary_preview": "Developer review fixed maintenance phase/key normalization regressions in commit fd604f6, validated 140 supervisor tests passing, and requested human direction…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771987554.221020",
-        "last_update_ts": "1771988511.090311",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T02:45:54Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771735130.243469": {
         "mention_ts": "1771735130.243469",
@@ -334,6 +317,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1771987928.789359",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review (second pass): full codebase audit found no critical issues post-fix. Applied two minor cleanups (exception narrowing in maintenance.py, dead …",
+        "summary_preview": "Developer review (second pass): full codebase audit found no critical issues post-fix. Applied two minor cleanups (exception narrowing in maintenance.py, dead …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771987554.221020",
+        "last_update_ts": "1771988902.400730",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-25T02:45:54Z"
+        }
+      },
       "1771980057.419759": {
         "mention_ts": "1771980057.419759",
         "thread_ts": "1771980057.419759",
@@ -477,22 +476,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T01:46:15Z"
         }
-      },
-      "1771817727.883159": {
-        "mention_ts": "1771817727.883159",
-        "thread_ts": "1771817727.883159",
-        "status": "done",
-        "task_description": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note to keep the monitor…",
-        "summary": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note…",
-        "summary_preview": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771820871.945559",
-        "last_update_ts": "1771827403.044854",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T04:27:51Z"
-        }
       }
     }
   },
@@ -513,5 +496,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-25T03:07:39Z"
+  "server_time_utc": "2026-02-25T03:09:45Z"
 }
