@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-25T00:01:28Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-25T00:03:47Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 5,
+    "loop_count": 6,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.23,
-      "five": 1.85,
-      "fifteen": 1.72
+      "one": 1.86,
+      "five": 1.77,
+      "fifteen": 1.7
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44105490432,
-    "disk_free_bytes": 201001705472,
-    "runner_log_size_bytes": 1402509,
+    "disk_used_bytes": 44095295488,
+    "disk_free_bytes": 201011900416,
+    "runner_log_size_bytes": 1402805,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-25T00:02:10Z",
+    "dashboard_started_utc": "2026-02-25T00:04:13Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-25T00:02:10Z",
+    "checked_at_utc": "2026-02-25T00:04:13Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -60,7 +60,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 3,
@@ -106,7 +106,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771832276.357899": {
+        "mention_ts": "1771832276.357899",
+        "thread_ts": "1771832276.357899",
+        "status": "in_progress",
+        "task_description": "Resolve the objective requested in this task thread.",
+        "summary": "Recovered missing report for this thread, confirmed prior requested maintenance actions were already completed, and posted follow-up requesting the remaining p…",
+        "summary_preview": "Recovered missing report for this thread, confirmed prior requested maintenance actions were already completed, and posted follow-up requesting the remaining p…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771880029.083799",
+        "last_update_ts": "1771977827.069597",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:53:49Z"
+        }
+      }
+    },
     "incomplete": {
       "1771735130.243469": {
         "mention_ts": "1771735130.243469",
@@ -250,22 +267,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T07:37:35Z"
-        }
-      },
-      "1771832276.357899": {
-        "mention_ts": "1771832276.357899",
-        "thread_ts": "1771832276.357899",
-        "status": "waiting_human",
-        "task_description": "Resolve the objective requested in this task thread.",
-        "summary": "Recovered missing report for this thread, confirmed prior requested maintenance actions were already completed, and posted follow-up requesting the remaining p…",
-        "summary_preview": "Recovered missing report for this thread, confirmed prior requested maintenance actions were already completed, and posted follow-up requesting the remaining p…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771880029.083799",
-        "last_update_ts": "1771888891.831766",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:53:49Z"
         }
       },
       "1771878311.544899": {
@@ -577,5 +578,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-25T00:02:11Z"
+  "server_time_utc": "2026-02-25T00:04:14Z"
 }
