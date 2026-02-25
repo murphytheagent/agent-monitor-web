@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-25T11:31:26Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-25T11:35:43Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 123,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.72,
-      "five": 1.54,
-      "fifteen": 1.53
+      "one": 1.31,
+      "five": 1.45,
+      "fifteen": 1.49
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 47011082240,
-    "disk_free_bytes": 198096113664,
-    "runner_log_size_bytes": 1485260,
+    "disk_used_bytes": 47011872768,
+    "disk_free_bytes": 198095323136,
+    "runner_log_size_bytes": 1485426,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-25T11:34:19Z",
+    "dashboard_started_utc": "2026-02-25T11:36:22Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-25T11:34:19Z",
+    "checked_at_utc": "2026-02-25T11:36:22Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -106,24 +106,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771927570.778669": {
-        "mention_ts": "1771927570.778669",
-        "thread_ts": "1771927570.778669",
-        "status": "in_progress",
-        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
-        "summary": "Validated PR #13 head b3e6508 with monitored 8-GPU boundary e2e (job 555 completed), posted PR/Slack evidence updates, and checkpointed report/project/goal/mem…",
-        "summary_preview": "Validated PR #13 head b3e6508 with monitored 8-GPU boundary e2e (job 555 completed), posted PR/Slack evidence updates, and checkpointed report/project/goal/mem…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771927570.778669",
-        "last_update_ts": "1772019086.820431",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T03:56:27Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771753564.797789": {
         "mention_ts": "1771753564.797789",
@@ -380,6 +363,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-25T01:17:56Z"
         }
+      },
+      "1771927570.778669": {
+        "mention_ts": "1771927570.778669",
+        "thread_ts": "1771927570.778669",
+        "status": "waiting_human",
+        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
+        "summary": "Revalidated PR #13 head b3e6508 coherence after latest 8-GPU evidence, posted thread update requesting merge-vs-next-slice direction, and checkpointed report/p…",
+        "summary_preview": "Revalidated PR #13 head b3e6508 coherence after latest 8-GPU evidence, posted thread update requesting merge-vs-next-slice direction, and checkpointed report/p…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771927570.778669",
+        "last_update_ts": "1772019343.150738",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-25T03:56:27Z"
+        }
       }
     },
     "finished": {
@@ -562,5 +561,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-25T11:34:20Z"
+  "server_time_utc": "2026-02-25T11:36:22Z"
 }
