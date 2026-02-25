@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-25T03:54:25Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-25T04:42:28Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 21,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,48 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.89,
-      "five": 1.74,
+      "one": 1.81,
+      "five": 1.72,
       "fifteen": 1.68
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 45043716096,
-    "disk_free_bytes": 200063479808,
-    "runner_log_size_bytes": 1435840,
+    "disk_used_bytes": 45042147328,
+    "disk_free_bytes": 200065048576,
+    "runner_log_size_bytes": 1436005,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-25T04:41:39Z",
+    "dashboard_started_utc": "2026-02-25T04:43:45Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-25T04:41:39Z",
+    "checked_at_utc": "2026-02-25T04:43:45Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771982276.912269": {
-        "mention_ts": "1771982276.912269",
-        "thread_ts": "1771982276.912269",
-        "status": "in_progress",
-        "task_description": "Research on what a SWE agent should have in its tools, and compare against what small-swe-agent currently supports.",
-        "summary": "Delivered a research report on SWE-agent tool requirements vs the current small-swe-agent baseline, checkpointed artifacts, and requested human review for next…",
-        "summary_preview": "Delivered a research report on SWE-agent tool requirements vs the current small-swe-agent baseline, checkpointed artifacts, and requested human review for next…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771982276.912269",
-        "last_update_ts": "1771991665.952767",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T01:17:56Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771735130.243469": {
         "mention_ts": "1771735130.243469",
@@ -315,6 +298,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T10:02:29Z"
         }
+      },
+      "1771982276.912269": {
+        "mention_ts": "1771982276.912269",
+        "thread_ts": "1771982276.912269",
+        "status": "waiting_human",
+        "task_description": "Research on what a SWE agent should have in its tools, and compare against what small-swe-agent currently supports.",
+        "summary": "Delivered a follow-up decision memo recommending a hybrid JSON-control-plane plus CodeAct-style code-first tool evolution, checkpointed artifacts, and requeste…",
+        "summary_preview": "Delivered a follow-up decision memo recommending a hybrid JSON-control-plane plus CodeAct-style code-first tool evolution, checkpointed artifacts, and requeste…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771982276.912269",
+        "last_update_ts": "1771994547.929551",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-25T01:17:56Z"
+        }
       }
     },
     "finished": {
@@ -497,5 +496,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-25T04:41:43Z"
+  "server_time_utc": "2026-02-25T04:43:49Z"
 }
