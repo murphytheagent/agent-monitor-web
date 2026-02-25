@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-25T00:34:07Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-25T00:37:42Z",
+    "status": "sleeping",
     "pid": 15923,
-    "loop_count": 15,
+    "loop_count": 1,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.72,
-      "five": 1.69,
-      "fifteen": 1.66
+      "one": 1.54,
+      "five": 1.61,
+      "fifteen": 1.63
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44128559104,
-    "disk_free_bytes": 200978636800,
-    "runner_log_size_bytes": 1406512,
+    "disk_used_bytes": 44130131968,
+    "disk_free_bytes": 200977063936,
+    "runner_log_size_bytes": 1407512,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-25T00:36:52Z",
+    "dashboard_started_utc": "2026-02-25T00:38:54Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-25T00:36:52Z",
+    "checked_at_utc": "2026-02-25T00:38:54Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -106,24 +106,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "developer.review": {
-        "mention_ts": "developer.review",
-        "thread_ts": "developer.review",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary_preview": "Developer review: audit recent agent work and fix/improve system code.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771979640.808231",
-        "last_update_ts": "1771979647.217469",
-        "task_type": "developer_review",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T00:34:00Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771735130.243469": {
         "mention_ts": "1771735130.243469",
@@ -399,6 +382,22 @@
       }
     },
     "finished": {
+      "1771979836.901809": {
+        "mention_ts": "1771979836.901809",
+        "thread_ts": "1771979836.901809",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: all 135 tests pass, supervisor code clean, memory/goals/projects accurate. Fixed AGENTS.md MAX_JOBS regression (8->2). Flagged uncommitted AG…",
+        "summary_preview": "Developer review: all 135 tests pass, supervisor code clean, memory/goals/projects accurate. Fixed AGENTS.md MAX_JOBS regression (8->2). Flagged uncommitted AG…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771979640.808231",
+        "last_update_ts": "1771979856.207909",
+        "task_type": "developer_review",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-25T00:34:00Z"
+        }
+      },
       "1771832276.357899": {
         "mention_ts": "1771832276.357899",
         "thread_ts": "1771832276.357899",
@@ -542,22 +541,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T01:46:15Z"
         }
-      },
-      "1771817727.883159": {
-        "mention_ts": "1771817727.883159",
-        "thread_ts": "1771817727.883159",
-        "status": "done",
-        "task_description": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note to keep the monitor…",
-        "summary": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note…",
-        "summary_preview": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771820871.945559",
-        "last_update_ts": "1771827403.044854",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T04:27:51Z"
-        }
       }
     }
   },
@@ -578,5 +561,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-25T00:36:53Z"
+  "server_time_utc": "2026-02-25T00:38:55Z"
 }
