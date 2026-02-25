@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-25T01:16:27Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-25T01:18:46Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 3,
+    "loop_count": 4,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.68,
-      "five": 1.84,
-      "fifteen": 1.76
+      "one": 2.07,
+      "five": 2.0,
+      "fifteen": 1.83
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44320145408,
-    "disk_free_bytes": 200787050496,
-    "runner_log_size_bytes": 1411012,
+    "disk_used_bytes": 44319772672,
+    "disk_free_bytes": 200787423232,
+    "runner_log_size_bytes": 1411304,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-25T01:17:38Z",
+    "dashboard_started_utc": "2026-02-25T01:19:41Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-25T01:17:38Z",
+    "checked_at_utc": "2026-02-25T01:19:41Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -42,15 +42,15 @@
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 78959,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 28
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 78763,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 33
       },
@@ -58,7 +58,7 @@
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 78763,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 34
       },
@@ -66,7 +66,7 @@
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 78763,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 34
       },
@@ -74,7 +74,7 @@
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 78763,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 32
       },
@@ -82,7 +82,7 @@
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 78763,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 33
       },
@@ -90,7 +90,7 @@
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 78763,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 33
       },
@@ -98,15 +98,32 @@
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 78763,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1771982276.912269": {
+        "mention_ts": "1771982276.912269",
+        "thread_ts": "1771982276.912269",
+        "status": "in_progress",
+        "task_description": "Research on what a SWE agent should have in its tools, and compare against what small-swe-agent currently supports.",
+        "summary": "Research on what a SWE agent should have in its tools, and compare against what small-swe-agent currently supports.",
+        "summary_preview": "Research on what a SWE agent should have in its tools, and compare against what small-swe-agent currently supports.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771982276.912269",
+        "last_update_ts": "1771982326.951603",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-25T01:17:56Z"
+        }
+      }
+    },
     "incomplete": {
       "1771735130.243469": {
         "mention_ts": "1771735130.243469",
@@ -561,5 +578,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-25T01:17:39Z"
+  "server_time_utc": "2026-02-25T01:19:41Z"
 }
