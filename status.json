@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-25T00:03:47Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-25T00:07:04Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 6,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.3,
-      "five": 1.59,
-      "fifteen": 1.63
+      "one": 1.82,
+      "five": 1.69,
+      "fifteen": 1.66
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44101533696,
-    "disk_free_bytes": 201005662208,
-    "runner_log_size_bytes": 1402805,
+    "disk_used_bytes": 44101767168,
+    "disk_free_bytes": 201005428736,
+    "runner_log_size_bytes": 1402969,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-25T00:06:15Z",
+    "dashboard_started_utc": "2026-02-25T00:08:18Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-25T00:06:15Z",
+    "checked_at_utc": "2026-02-25T00:08:18Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -76,7 +76,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 26
+        "temperature_c": 27
       },
       {
         "index": 5,
@@ -106,24 +106,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771832276.357899": {
-        "mention_ts": "1771832276.357899",
-        "thread_ts": "1771832276.357899",
-        "status": "in_progress",
-        "task_description": "Resolve the objective requested in this task thread.",
-        "summary": "Recovered missing report for this thread, confirmed prior requested maintenance actions were already completed, and posted follow-up requesting the remaining p…",
-        "summary_preview": "Recovered missing report for this thread, confirmed prior requested maintenance actions were already completed, and posted follow-up requesting the remaining p…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771880029.083799",
-        "last_update_ts": "1771977827.069597",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:53:49Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771735130.243469": {
         "mention_ts": "1771735130.243469",
@@ -399,6 +382,22 @@
       }
     },
     "finished": {
+      "1771832276.357899": {
+        "mention_ts": "1771832276.357899",
+        "thread_ts": "1771832276.357899",
+        "status": "done",
+        "task_description": "Resolve the objective requested in this task thread.",
+        "summary": "Added deferred agent-monitor-web pointer-policy options to ROADMAP.md (AGENT-015), posted in-thread completion update, and closed the maintenance thread.",
+        "summary_preview": "Added deferred agent-monitor-web pointer-policy options to ROADMAP.md (AGENT-015), posted in-thread completion update, and closed the maintenance thread.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771880029.083799",
+        "last_update_ts": "1771978023.618337",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T20:53:49Z"
+        }
+      },
       "1771927570.778669": {
         "mention_ts": "1771927570.778669",
         "thread_ts": "1771927570.778669",
@@ -542,22 +541,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T04:27:51Z"
         }
-      },
-      "1771813058.516519": {
-        "mention_ts": "1771813058.516519",
-        "thread_ts": "1771813058.516519",
-        "status": "done",
-        "task_description": "Explain how is you different from ChatGPT, under which cases should I turn to you for help instead of directly asking ChatGPT?",
-        "summary": "Posted ACK and explained when to use this agent vs ChatGPT; added explicit completion message in-thread.",
-        "summary_preview": "Posted ACK and explained when to use this agent vs ChatGPT; added explicit completion message in-thread.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771813058.516519",
-        "last_update_ts": "1771825617.742441",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T02:17:38Z"
-        }
       }
     }
   },
@@ -578,5 +561,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-25T00:06:16Z"
+  "server_time_utc": "2026-02-25T00:08:19Z"
 }
