@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-25T05:00:57Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-25T05:09:36Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 1,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,31 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.52,
-      "five": 1.71,
-      "fifteen": 1.7
+      "one": 2.14,
+      "five": 1.82,
+      "fifteen": 1.74
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44856197120,
-    "disk_free_bytes": 200250998784,
-    "runner_log_size_bytes": 1437283,
+    "disk_used_bytes": 44855832576,
+    "disk_free_bytes": 200251363328,
+    "runner_log_size_bytes": 1437447,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-25T05:08:20Z",
+    "dashboard_started_utc": "2026-02-25T05:10:23Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-25T05:08:20Z",
+    "checked_at_utc": "2026-02-25T05:10:23Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 91235,
         "memory_total_mb": 97887,
         "temperature_c": 51
@@ -57,73 +57,56 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 97,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 52
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 52
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 54
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 55
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 92,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 57
+        "temperature_c": 52
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 57
+        "temperature_c": 52
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1771927570.778669": {
-        "mention_ts": "1771927570.778669",
-        "thread_ts": "1771927570.778669",
-        "status": "in_progress",
-        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
-        "summary": "Synced PR #13 branch to latest main ( [code] ), landed review-requested bridge-loop fixes ( [code] ) for prompt sourcing/config flow/pool sizing, answered dist…",
-        "summary_preview": "Synced PR #13 branch to latest main ( [code] ), landed review-requested bridge-loop fixes ( [code] ) for prompt sourcing/config flow/pool sizing, answered dist…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771927570.778669",
-        "last_update_ts": "1771995657.598061",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T03:56:27Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771753564.797789": {
         "mention_ts": "1771753564.797789",
@@ -380,6 +363,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-25T01:17:56Z"
         }
+      },
+      "1771927570.778669": {
+        "mention_ts": "1771927570.778669",
+        "thread_ts": "1771927570.778669",
+        "status": "waiting_human",
+        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
+        "summary": "Posted thread update after attempting a fresh monitored 8-GPU rerun for PR #13 ( [code] ): duplicate pending jobs ( [code] / [code] ) were cleaned, rerun remai…",
+        "summary_preview": "Posted thread update after attempting a fresh monitored 8-GPU rerun for PR #13 ( [code] ): duplicate pending jobs ( [code] / [code] ) were cleaned, rerun remai…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771927570.778669",
+        "last_update_ts": "1771996175.841257",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-25T03:56:27Z"
+        }
       }
     },
     "finished": {
@@ -562,5 +561,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-25T05:08:21Z"
+  "server_time_utc": "2026-02-25T05:10:25Z"
 }
