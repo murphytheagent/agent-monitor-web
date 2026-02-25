@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-25T01:42:02Z",
+    "last_updated_utc": "2026-02-25T01:44:20Z",
     "status": "sleeping",
     "pid": 15923,
-    "loop_count": 11,
+    "loop_count": 12,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,39 +17,39 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.52,
-      "five": 1.82,
-      "fifteen": 1.69
+      "one": 1.77,
+      "five": 1.8,
+      "fifteen": 1.7
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 44666363904,
-    "disk_free_bytes": 200440832000,
-    "runner_log_size_bytes": 1414197,
+    "disk_used_bytes": 44667584512,
+    "disk_free_bytes": 200439611392,
+    "runner_log_size_bytes": 1414589,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-25T01:44:11Z",
+    "dashboard_started_utc": "2026-02-25T01:46:13Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-25T01:44:11Z",
+    "checked_at_utc": "2026-02-25T01:46:13Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 90,
         "memory_used_mb": 91235,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 51
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 91,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
         "temperature_c": 51
@@ -57,50 +57,50 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 55
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 93,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 54
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 91,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
         "temperature_c": 51
       },
       {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
-        "memory_used_mb": 89555,
-        "memory_total_mb": 97887,
-        "temperature_c": 49
-      },
-      {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 93,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 53
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 53
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 92,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 52
       }
     ]
   },
@@ -364,22 +364,6 @@
           "time_iso": "2026-02-24T10:02:29Z"
         }
       },
-      "developer.review": {
-        "mention_ts": "developer.review",
-        "thread_ts": "developer.review",
-        "status": "waiting_human",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Force-finished: stuck in infinite maintenance loop",
-        "summary_preview": "Force-finished: stuck in infinite maintenance loop",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771980777.759310",
-        "last_update_ts": "1771981243.751639",
-        "task_type": "developer_review",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T00:52:57Z"
-        }
-      },
       "1771982276.912269": {
         "mention_ts": "1771982276.912269",
         "thread_ts": "1771982276.912269",
@@ -398,22 +382,6 @@
       }
     },
     "finished": {
-      "1771979314.682409": {
-        "mention_ts": "1771979314.682409",
-        "thread_ts": "1771979314.682409",
-        "status": "done",
-        "task_description": "Run maintenance reflection checklist and summarize findings.",
-        "summary": "Force-finished: stuck in infinite maintenance loop",
-        "summary_preview": "Force-finished: stuck in infinite maintenance loop",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771979122.696622",
-        "last_update_ts": "1771981243.751639",
-        "task_type": "maintenance_reflect",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T00:25:22Z"
-        }
-      },
       "1771980057.419759": {
         "mention_ts": "1771980057.419759",
         "thread_ts": "1771980057.419759",
@@ -428,22 +396,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-25T00:40:57Z"
-        }
-      },
-      "1771979836.901809": {
-        "mention_ts": "1771979836.901809",
-        "thread_ts": "1771979836.901809",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: all 135 tests pass, supervisor code clean, memory/goals/projects accurate. Fixed AGENTS.md MAX_JOBS regression (8->2). Flagged uncommitted AG…",
-        "summary_preview": "Developer review: all 135 tests pass, supervisor code clean, memory/goals/projects accurate. Fixed AGENTS.md MAX_JOBS regression (8->2). Flagged uncommitted AG…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771979640.808231",
-        "last_update_ts": "1771979856.207909",
-        "task_type": "developer_review",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T00:34:00Z"
         }
       },
       "1771832276.357899": {
@@ -542,20 +494,52 @@
           "time_iso": "2026-02-23T07:21:55Z"
         }
       },
-      "1771660238.729239": {
-        "mention_ts": "1771660238.729239",
-        "thread_ts": "1771660238.729239",
+      "1771827474.009799": {
+        "mention_ts": "1771827474.009799",
+        "thread_ts": "1771827474.009799",
         "status": "done",
-        "task_description": "Maintenance checklist: 1) Review recent work across reports/, projects/, deliverables/, and recent code changes.",
-        "summary": "Maintenance reflect task manually moved to finished after confirmed human reply and explicit closure instruction in thread 1771831315.650959.",
-        "summary_preview": "Maintenance reflect task manually moved to finished after confirmed human reply and explicit closure instruction in thread 1771831315.650959.",
+        "task_description": "Answer the question above.",
+        "summary": "Answered the follow-up in-thread with verified cause: monitor shows maintenance in incomplete because maintenance_reflect task 1771660238.729239 is waiting_hum…",
+        "summary_preview": "Answered the follow-up in-thread with verified cause: monitor shows maintenance in incomplete because maintenance_reflect task 1771660238.729239 is waiting_hum…",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771660214.463245",
-        "last_update_ts": "1771832018.842365",
-        "task_type": "maintenance_reflect",
+        "created_ts": "1771827474.009799",
+        "last_update_ts": "1771830185.965520",
+        "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-02-21T07:50:14Z"
+          "time_iso": "2026-02-23T06:58:15Z"
+        }
+      },
+      "1771811175.735769": {
+        "mention_ts": "1771811175.735769",
+        "thread_ts": "1771811175.735769",
+        "status": "done",
+        "task_description": "Can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testing codex review access, reme…",
+        "summary": "Confirmed monitor repo/public URL restored, recorded default-private policy with deployment exception, posted in-thread completion, and checkpointed report/mem…",
+        "summary_preview": "Confirmed monitor repo/public URL restored, recorded default-private policy with deployment exception, posted in-thread completion, and checkpointed report/mem…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771811175.735769",
+        "last_update_ts": "1771827687.148782",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T01:46:15Z"
+        }
+      },
+      "1771817727.883159": {
+        "mention_ts": "1771817727.883159",
+        "thread_ts": "1771817727.883159",
+        "status": "done",
+        "task_description": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note to keep the monitor…",
+        "summary": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note…",
+        "summary_preview": "Restored monitor availability by switching agent-monitor-web back to public, re-enabling Pages on main, verifying HTTP 200, and recording a durable policy note…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771820871.945559",
+        "last_update_ts": "1771827403.044854",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T04:27:51Z"
         }
       }
     }
@@ -577,5 +561,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-25T01:44:11Z"
+  "server_time_utc": "2026-02-25T01:46:14Z"
 }
