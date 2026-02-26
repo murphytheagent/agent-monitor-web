@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T05:27:22Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-26T05:31:34Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 22,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,113 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.64,
-      "five": 1.6,
-      "fifteen": 1.66
+      "one": 2.1,
+      "five": 1.77,
+      "fifteen": 1.71
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46864154624,
-    "disk_free_bytes": 198243041280,
-    "runner_log_size_bytes": 1632298,
+    "disk_used_bytes": 46866829312,
+    "disk_free_bytes": 198240366592,
+    "runner_log_size_bytes": 1632463,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T05:30:37Z",
+    "dashboard_started_utc": "2026-02-26T05:32:39Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-02-26T05:30:37Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-02-26T05:32:39Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 74400,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 74388,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 74388,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 74388,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 74388,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 74388,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 74388,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 74388,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772083053.947029": {
-        "mention_ts": "1772083053.947029",
-        "thread_ts": "1772083053.947029",
-        "status": "in_progress",
-        "task_description": "Create a folder called 'issue'.",
-        "summary": "Create a folder called 'issue'.",
-        "summary_preview": "Create a folder called 'issue'.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772083444.455329",
-        "last_update_ts": "1772083642.307785",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T05:24:04Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771832696.332649": {
         "mention_ts": "1771832696.332649",
@@ -319,6 +237,22 @@
       }
     },
     "finished": {
+      "1772083053.947029": {
+        "mention_ts": "1772083053.947029",
+        "thread_ts": "1772083053.947029",
+        "status": "done",
+        "task_description": "Create a folder called 'issue'.",
+        "summary": "Created issue/ and saved Zhi's issue description plus both attached screenshots; posted in-thread completion and committed task report (8b938d4).",
+        "summary_preview": "Created issue/ and saved Zhi's issue description plus both attached screenshots; posted in-thread completion and committed task report (8b938d4).",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772083444.455329",
+        "last_update_ts": "1772083894.567220",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T05:24:04Z"
+        }
+      },
       "1772076432.916209": {
         "mention_ts": "1772076432.916209",
         "thread_ts": "1772076432.916209",
@@ -462,22 +396,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T10:03:29Z"
         }
-      },
-      "1771831315.650959": {
-        "mention_ts": "1771831315.650959",
-        "thread_ts": "1771831315.650959",
-        "status": "done",
-        "task_description": "I replied to your waiting_human maintenance task but it is still in incomplete.",
-        "summary": "Confirmed user approval, manually moved maintenance task 1771660238.729239 from incomplete to finished, and posted closure updates in both threads.",
-        "summary_preview": "Confirmed user approval, manually moved maintenance task 1771660238.729239 from incomplete to finished, and posted closure updates in both threads.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771831315.650959",
-        "last_update_ts": "1771832134.462323",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T07:21:55Z"
-        }
       }
     }
   },
@@ -498,5 +416,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T05:30:38Z"
+  "server_time_utc": "2026-02-26T05:32:43Z"
 }
