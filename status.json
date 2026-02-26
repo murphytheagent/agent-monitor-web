@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T05:51:59Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-26T05:55:05Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 26,
+    "loop_count": 1,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,96 +17,65 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.52,
-      "five": 1.67,
-      "fifteen": 1.74
+      "one": 1.42,
+      "five": 1.59,
+      "fifteen": 1.69
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46876958720,
-    "disk_free_bytes": 198230237184,
-    "runner_log_size_bytes": 1633658,
+    "disk_used_bytes": 46878212096,
+    "disk_free_bytes": 198228983808,
+    "runner_log_size_bytes": 1634747,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T05:53:20Z",
+    "dashboard_started_utc": "2026-02-26T05:55:23Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-02-26T05:53:20Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-02-26T05:55:23Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 75150,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 75164,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 75164,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 75164,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 75164,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 75164,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 75164,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 75164,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
-    "queued": {},
-    "active": {},
+    "queued": {
+      "1772083914.447099": {
+        "mention_ts": "1772083914.447099",
+        "thread_ts": "1772083914.447099",
+        "status": "queued",
+        "task_description": "Use consult.ask with model=\"deep\" to prove that the sum of 1/p over all primes p diverges.",
+        "summary": "Posted ACK, used consult.ask (model=deep) to produce a full rigorous proof that sum of reciprocal primes diverges, saved report, and posted completion in threa…",
+        "summary_preview": "Posted ACK, used consult.ask (model=deep) to produce a full rigorous proof that sum of reciprocal primes diverges, saved report, and posted completion in threa…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772083914.447099",
+        "last_update_ts": "1772085304.633198",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T05:31:54Z"
+        }
+      }
+    },
+    "active": {
+      "1772083053.947029": {
+        "mention_ts": "1772083053.947029",
+        "thread_ts": "1772083053.947029",
+        "status": "in_progress",
+        "task_description": "Create a folder called 'issue'.",
+        "summary": "Created issue/ and saved Zhi's issue description plus both attached screenshots; posted in-thread completion and committed task report (8b938d4).",
+        "summary_preview": "Created issue/ and saved Zhi's issue description plus both attached screenshots; posted in-thread completion and committed task report (8b938d4).",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772083444.455329",
+        "last_update_ts": "1772085304.639997",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T05:24:04Z"
+        }
+      }
+    },
     "incomplete": {
       "1771832696.332649": {
         "mention_ts": "1771832696.332649",
@@ -302,38 +271,6 @@
       }
     },
     "finished": {
-      "1772083914.447099": {
-        "mention_ts": "1772083914.447099",
-        "thread_ts": "1772083914.447099",
-        "status": "done",
-        "task_description": "Use consult.ask with model=\"deep\" to prove that the sum of 1/p over all primes p diverges.",
-        "summary": "Posted ACK, used consult.ask (model=deep) to produce a full rigorous proof that sum of reciprocal primes diverges, saved report, and posted completion in threa…",
-        "summary_preview": "Posted ACK, used consult.ask (model=deep) to produce a full rigorous proof that sum of reciprocal primes diverges, saved report, and posted completion in threa…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772083914.447099",
-        "last_update_ts": "1772084712.347434",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T05:31:54Z"
-        }
-      },
-      "1772083053.947029": {
-        "mention_ts": "1772083053.947029",
-        "thread_ts": "1772083053.947029",
-        "status": "done",
-        "task_description": "Create a folder called 'issue'.",
-        "summary": "Created issue/ and saved Zhi's issue description plus both attached screenshots; posted in-thread completion and committed task report (8b938d4).",
-        "summary_preview": "Created issue/ and saved Zhi's issue description plus both attached screenshots; posted in-thread completion and committed task report (8b938d4).",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772083444.455329",
-        "last_update_ts": "1772083894.567220",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T05:24:04Z"
-        }
-      },
       "1772076432.916209": {
         "mention_ts": "1772076432.916209",
         "thread_ts": "1772076432.916209",
@@ -461,6 +398,38 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T02:48:38Z"
         }
+      },
+      "1771841009.140679": {
+        "mention_ts": "1771841009.140679",
+        "thread_ts": "1771841009.140679",
+        "status": "done",
+        "task_description": "On PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
+        "summary": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
+        "summary_preview": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771841009.140679",
+        "last_update_ts": "1771879816.194354",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T10:03:29Z"
+        }
+      },
+      "1771831315.650959": {
+        "mention_ts": "1771831315.650959",
+        "thread_ts": "1771831315.650959",
+        "status": "done",
+        "task_description": "I replied to your waiting_human maintenance task but it is still in incomplete.",
+        "summary": "Confirmed user approval, manually moved maintenance task 1771660238.729239 from incomplete to finished, and posted closure updates in both threads.",
+        "summary_preview": "Confirmed user approval, manually moved maintenance task 1771660238.729239 from incomplete to finished, and posted closure updates in both threads.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771831315.650959",
+        "last_update_ts": "1771832134.462323",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T07:21:55Z"
+        }
       }
     }
   },
@@ -481,5 +450,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T05:53:21Z"
+  "server_time_utc": "2026-02-26T05:55:27Z"
 }
