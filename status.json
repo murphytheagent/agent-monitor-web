@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T22:59:10Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-26T23:01:29Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 137,
+    "loop_count": 138,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,96 +17,48 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.49,
-      "five": 1.56,
-      "fifteen": 1.6
+      "one": 1.96,
+      "five": 1.63,
+      "fifteen": 1.61
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46865272832,
-    "disk_free_bytes": 198241923072,
-    "runner_log_size_bytes": 1679037,
+    "disk_used_bytes": 46866571264,
+    "disk_free_bytes": 198240624640,
+    "runner_log_size_bytes": 1679227,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T23:00:38Z",
+    "dashboard_started_utc": "2026-02-26T23:02:40Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-02-26T23:00:38Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-02-26T23:02:40Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 39531,
-        "memory_total_mb": 97887,
-        "temperature_c": 34
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 34715,
-        "memory_total_mb": 97887,
-        "temperature_c": 33
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 33695,
-        "memory_total_mb": 97887,
-        "temperature_c": 34
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 32855,
-        "memory_total_mb": 97887,
-        "temperature_c": 34
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 29657,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 28675,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 28097,
-        "memory_total_mb": 97887,
-        "temperature_c": 33
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 25955,
-        "memory_total_mb": 97887,
-        "temperature_c": 33
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772102085.104579": {
+        "mention_ts": "1772102085.104579",
+        "thread_ts": "1772102085.104579",
+        "status": "in_progress",
+        "task_description": "Do deep consult.ask to research with zip of latest commit of PR 13 of swe train as attachment: • the goal is to perform good on terminal bench and swe bench pro, what should i tra…",
+        "summary": "Delivered follow-up deep consult in-thread with updated assumptions (no runtime truncation), a concrete teacher-signal design and verification gates, and code-…",
+        "summary_preview": "Delivered follow-up deep consult in-thread with updated assumptions (no runtime truncation), a concrete teacher-signal design and verification gates, and code-…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772102085.104579",
+        "last_update_ts": "1772146889.459088",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T10:34:45Z"
+        }
+      }
+    },
     "incomplete": {
       "1771878311.544899": {
         "mention_ts": "1771878311.544899",
@@ -347,22 +299,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T08:38:24Z"
         }
-      },
-      "1772102085.104579": {
-        "mention_ts": "1772102085.104579",
-        "thread_ts": "1772102085.104579",
-        "status": "waiting_human",
-        "task_description": "Do deep consult.ask to research with zip of latest commit of PR 13 of swe train as attachment: • the goal is to perform good on terminal bench and swe bench pro, what should i tra…",
-        "summary": "Delivered follow-up deep consult in-thread with updated assumptions (no runtime truncation), a concrete teacher-signal design and verification gates, and code-…",
-        "summary_preview": "Delivered follow-up deep consult in-thread with updated assumptions (no runtime truncation), a concrete teacher-signal design and verification gates, and code-…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772102085.104579",
-        "last_update_ts": "1772146060.997755",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T10:34:45Z"
-        }
       }
     },
     "finished": {
@@ -545,5 +481,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T23:00:39Z"
+  "server_time_utc": "2026-02-26T23:02:44Z"
 }
