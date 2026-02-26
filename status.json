@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T05:13:49Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-26T05:22:33Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 20,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.35,
+      "one": 1.6,
       "five": 1.64,
-      "fifteen": 1.74
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46865018880,
-    "disk_free_bytes": 198242177024,
-    "runner_log_size_bytes": 1631655,
+    "disk_used_bytes": 46867730432,
+    "disk_free_bytes": 198239465472,
+    "runner_log_size_bytes": 1631820,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T05:22:27Z",
+    "dashboard_started_utc": "2026-02-26T05:24:29Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-26T05:22:27Z",
+    "checked_at_utc": "2026-02-26T05:24:29Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -44,7 +44,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 29
       },
       {
         "index": 1,
@@ -52,7 +52,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 2,
@@ -60,7 +60,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 29
       },
       {
         "index": 3,
@@ -68,7 +68,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 29
       },
       {
         "index": 4,
@@ -76,7 +76,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 5,
@@ -84,7 +84,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 29
       },
       {
         "index": 6,
@@ -92,7 +92,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 7,
@@ -100,30 +100,13 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 29
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772076432.916209": {
-        "mention_ts": "1772076432.916209",
-        "thread_ts": "1772076432.916209",
-        "status": "in_progress",
-        "task_description": "On small swe train, I have a few design questions: • how does our trained model evaluate?",
-        "summary": "Answered small-swe-train design questions in-thread with concrete guidance on eval harness architecture, JSON vs XML tool format, Endless Terminals training us…",
-        "summary_preview": "Answered small-swe-train design questions in-thread with concrete guidance on eval harness architecture, JSON vs XML tool format, Endless Terminals training us…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772076432.916209",
-        "last_update_ts": "1772082829.684269",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T05:13:05Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771832696.332649": {
         "mention_ts": "1771832696.332649",
@@ -303,6 +286,22 @@
       }
     },
     "finished": {
+      "1772076432.916209": {
+        "mention_ts": "1772076432.916209",
+        "thread_ts": "1772076432.916209",
+        "status": "done",
+        "task_description": "On small swe train, I have a few design questions: • how does our trained model evaluate?",
+        "summary": "Completed the follow-up scope by opening four research-only small-swe-train PRs (#14-#17), each with one root-level markdown initial commit, and posted an in-t…",
+        "summary_preview": "Completed the follow-up scope by opening four research-only small-swe-train PRs (#14-#17), each with one root-level markdown initial commit, and posted an in-t…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772076432.916209",
+        "last_update_ts": "1772083353.098347",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T05:13:05Z"
+        }
+      },
       "1772080474.439369": {
         "mention_ts": "1772080474.439369",
         "thread_ts": "1772080474.439369",
@@ -446,22 +445,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T07:21:55Z"
         }
-      },
-      "1771827474.009799": {
-        "mention_ts": "1771827474.009799",
-        "thread_ts": "1771827474.009799",
-        "status": "done",
-        "task_description": "Answer the question above.",
-        "summary": "Answered the follow-up in-thread with verified cause: monitor shows maintenance in incomplete because maintenance_reflect task 1771660238.729239 is waiting_hum…",
-        "summary_preview": "Answered the follow-up in-thread with verified cause: monitor shows maintenance in incomplete because maintenance_reflect task 1771660238.729239 is waiting_hum…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771827474.009799",
-        "last_update_ts": "1771830185.965520",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T06:58:15Z"
-        }
       }
     }
   },
@@ -482,5 +465,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T05:22:28Z"
+  "server_time_utc": "2026-02-26T05:24:30Z"
 }
