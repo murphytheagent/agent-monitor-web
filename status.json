@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T10:25:22Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-26T13:39:39Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 9,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.62,
-      "five": 1.79,
-      "fifteen": 1.81
+      "one": 1.67,
+      "five": 1.72,
+      "fifteen": 1.78
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46652436480,
-    "disk_free_bytes": 198454759424,
-    "runner_log_size_bytes": 1642525,
+    "disk_used_bytes": 46650773504,
+    "disk_free_bytes": 198456422400,
+    "runner_log_size_bytes": 1642689,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T13:39:31Z",
+    "dashboard_started_utc": "2026-02-26T13:41:33Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-26T13:39:31Z",
+    "checked_at_utc": "2026-02-26T13:41:33Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -106,24 +106,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772076432.916209": {
-        "mention_ts": "1772076432.916209",
-        "thread_ts": "1772076432.916209",
-        "status": "in_progress",
-        "task_description": "On small swe train, I have a few design questions: • how does our trained model evaluate?",
-        "summary": "Completed the follow-up scope by opening four research-only small-swe-train PRs (#14-#17), each with one root-level markdown initial commit, and posted an in-t…",
-        "summary_preview": "Completed the follow-up scope by opening four research-only small-swe-train PRs (#14-#17), each with one root-level markdown initial commit, and posted an in-t…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772076432.916209",
-        "last_update_ts": "1772101522.400520",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T08:38:24Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771878311.544899": {
         "mention_ts": "1771878311.544899",
@@ -348,6 +331,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T07:21:52Z"
         }
+      },
+      "1772076432.916209": {
+        "mention_ts": "1772076432.916209",
+        "thread_ts": "1772076432.916209",
+        "status": "waiting_human",
+        "task_description": "On small swe train, I have a few design questions: • how does our trained model evaluate?",
+        "summary": "Completed deep consult-backed research updates for small-swe-train PRs #14-#17, pushed branch commits (0273b65, d41b5c7, bb4927b, a032c4f), posted updated-plan…",
+        "summary_preview": "Completed deep consult-backed research updates for small-swe-train PRs #14-#17, pushed branch commits (0273b65, d41b5c7, bb4927b, a032c4f), posted updated-plan…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772076432.916209",
+        "last_update_ts": "1772113179.557565",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T08:38:24Z"
+        }
       }
     },
     "finished": {
@@ -530,5 +529,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T13:39:32Z"
+  "server_time_utc": "2026-02-26T13:41:34Z"
 }
