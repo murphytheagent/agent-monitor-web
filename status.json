@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T04:36:53Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-26T04:39:50Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 6,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,48 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.55,
-      "five": 2.04,
+      "one": 1.92,
+      "five": 2.0,
       "fifteen": 1.92
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 47030157312,
-    "disk_free_bytes": 198077038592,
-    "runner_log_size_bytes": 1627527,
+    "disk_used_bytes": 47028101120,
+    "disk_free_bytes": 198079094784,
+    "runner_log_size_bytes": 1627691,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T04:39:01Z",
+    "dashboard_started_utc": "2026-02-26T04:41:06Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-26T04:39:01Z",
+    "checked_at_utc": "2026-02-26T04:41:06Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772080474.439369": {
-        "mention_ts": "1772080474.439369",
-        "thread_ts": "1772080474.439369",
-        "status": "in_progress",
-        "task_description": "What's the PR #2 for the gd-vs-online-sgd project?",
-        "summary": "What's the PR #2 for the gd-vs-online-sgd project?",
-        "summary_preview": "What's the PR #2 for the gd-vs-online-sgd project?",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772080474.439369",
-        "last_update_ts": "1772080613.385347",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T04:34:34Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771832696.332649": {
         "mention_ts": "1771832696.332649",
@@ -234,6 +217,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-25T03:56:27Z"
+        }
+      },
+      "1772080474.439369": {
+        "mention_ts": "1772080474.439369",
+        "thread_ts": "1772080474.439369",
+        "status": "waiting_human",
+        "task_description": "What's the PR #2 for the gd-vs-online-sgd project?",
+        "summary": "Provided PR #2 details for gd-vs-online-sgd-sample-complexity-gap (open, mergeable, failing review-with-tracking check) and requested explicit human merge dire…",
+        "summary_preview": "Provided PR #2 details for gd-vs-online-sgd-sample-complexity-gap (open, mergeable, failing review-with-tracking check) and requested explicit human merge dire…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772080474.439369",
+        "last_update_ts": "1772080790.026638",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T04:34:34Z"
         }
       }
     },
@@ -417,5 +416,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T04:39:05Z"
+  "server_time_utc": "2026-02-26T04:41:10Z"
 }
