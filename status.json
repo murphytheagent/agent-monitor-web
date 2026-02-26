@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T05:11:35Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-26T05:13:49Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 19,
+    "loop_count": 20,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,31 +17,113 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.78,
-      "five": 1.68,
-      "fifteen": 1.8
+      "one": 2.02,
+      "five": 1.84,
+      "fifteen": 1.85
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46851231744,
-    "disk_free_bytes": 198255964160,
-    "runner_log_size_bytes": 1631419,
+    "disk_used_bytes": 46855557120,
+    "disk_free_bytes": 198251638784,
+    "runner_log_size_bytes": 1631655,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T05:12:06Z",
+    "dashboard_started_utc": "2026-02-26T05:14:12Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "unavailable",
-    "checked_at_utc": "2026-02-26T05:12:06Z",
+    "status": "ok",
+    "checked_at_utc": "2026-02-26T05:14:12Z",
     "cache_age_sec": 0,
-    "note": "Remote GPU data unavailable for this snapshot.",
-    "gpus": []
+    "note": "Low-frequency cached nvidia-smi snapshot.",
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
+        "memory_total_mb": 97887,
+        "temperature_c": 31
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
+        "memory_total_mb": 97887,
+        "temperature_c": 31
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
+        "memory_total_mb": 97887,
+        "temperature_c": 30
+      },
+      {
+        "index": 3,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
+        "memory_total_mb": 97887,
+        "temperature_c": 30
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
+        "memory_total_mb": 97887,
+        "temperature_c": 30
+      },
+      {
+        "index": 5,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
+        "memory_total_mb": 97887,
+        "temperature_c": 30
+      },
+      {
+        "index": 6,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
+        "memory_total_mb": 97887,
+        "temperature_c": 30
+      },
+      {
+        "index": 7,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
+        "memory_total_mb": 97887,
+        "temperature_c": 31
+      }
+    ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772076432.916209": {
+        "mention_ts": "1772076432.916209",
+        "thread_ts": "1772076432.916209",
+        "status": "in_progress",
+        "task_description": "On small swe train, I have a few design questions: • how does our trained model evaluate?",
+        "summary": "Answered small-swe-train design questions in-thread with concrete guidance on eval harness architecture, JSON vs XML tool format, Endless Terminals training us…",
+        "summary_preview": "Answered small-swe-train design questions in-thread with concrete guidance on eval harness architecture, JSON vs XML tool format, Endless Terminals training us…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772076432.916209",
+        "last_update_ts": "1772082829.684269",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T05:13:05Z"
+        }
+      }
+    },
     "incomplete": {
       "1771832696.332649": {
         "mention_ts": "1771832696.332649",
@@ -253,22 +335,6 @@
           "time_iso": "2026-02-26T04:12:38Z"
         }
       },
-      "1772076432.916209": {
-        "mention_ts": "1772076432.916209",
-        "thread_ts": "1772076432.916209",
-        "status": "done",
-        "task_description": "On small swe train, I have a few design questions: • how does our trained model evaluate?",
-        "summary": "Answered small-swe-train design questions in-thread with concrete guidance on eval harness architecture, JSON vs XML tool format, Endless Terminals training us…",
-        "summary_preview": "Answered small-swe-train design questions in-thread with concrete guidance on eval harness architecture, JSON vs XML tool format, Endless Terminals training us…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772076432.916209",
-        "last_update_ts": "1772076870.791602",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T03:27:12Z"
-        }
-      },
       "1771980057.419759": {
         "mention_ts": "1771980057.419759",
         "thread_ts": "1771980057.419759",
@@ -380,6 +446,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T07:21:55Z"
         }
+      },
+      "1771827474.009799": {
+        "mention_ts": "1771827474.009799",
+        "thread_ts": "1771827474.009799",
+        "status": "done",
+        "task_description": "Answer the question above.",
+        "summary": "Answered the follow-up in-thread with verified cause: monitor shows maintenance in incomplete because maintenance_reflect task 1771660238.729239 is waiting_hum…",
+        "summary_preview": "Answered the follow-up in-thread with verified cause: monitor shows maintenance in incomplete because maintenance_reflect task 1771660238.729239 is waiting_hum…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771827474.009799",
+        "last_update_ts": "1771830185.965520",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T06:58:15Z"
+        }
       }
     }
   },
@@ -400,5 +482,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T05:12:10Z"
+  "server_time_utc": "2026-02-26T05:14:12Z"
 }
