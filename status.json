@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T06:42:50Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-26T06:49:59Z",
+    "status": "sleeping",
     "pid": 15923,
-    "loop_count": 10,
+    "loop_count": 1,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,48 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.57,
-      "five": 1.78,
-      "fifteen": 1.79
+      "one": 1.88,
+      "five": 1.85,
+      "fifteen": 1.81
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46894514176,
-    "disk_free_bytes": 198212681728,
-    "runner_log_size_bytes": 1639167,
+    "disk_used_bytes": 46897680384,
+    "disk_free_bytes": 198209515520,
+    "runner_log_size_bytes": 1640052,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T06:49:34Z",
+    "dashboard_started_utc": "2026-02-26T06:51:39Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-26T06:49:34Z",
+    "checked_at_utc": "2026-02-26T06:51:39Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772088105.605729",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Maintenance phase-0 reflection completed: repos/docs reconciled, PR/check state audited, submodule hygiene verified, and human merge/CI-policy decisions reques…",
-        "summary_preview": "Maintenance phase-0 reflection completed: repos/docs reconciled, PR/check state audited, submodule hygiene verified, and human merge/CI-policy decisions reques…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772087762.287056",
-        "last_update_ts": "1772088170.039925",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T06:36:02Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771832696.332649": {
         "mention_ts": "1771832696.332649",
@@ -254,6 +237,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1772088105.605729",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: fixed 5 issues (crash-safe timestamp sorting, resolve_user_name error logging, template substring fix, claude dep check, fallback outcome pat…",
+        "summary_preview": "Developer review: fixed 5 issues (crash-safe timestamp sorting, resolve_user_name error logging, template substring fix, claude dep check, fallback outcome pat…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772087762.287056",
+        "last_update_ts": "1772088594.465045",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T06:36:02Z"
+        }
+      },
       "1772083914.447099": {
         "mention_ts": "1772083914.447099",
         "thread_ts": "1772083914.447099",
@@ -397,22 +396,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T02:48:38Z"
         }
-      },
-      "1771841009.140679": {
-        "mention_ts": "1771841009.140679",
-        "thread_ts": "1771841009.140679",
-        "status": "done",
-        "task_description": "On PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
-        "summary": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
-        "summary_preview": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841009.140679",
-        "last_update_ts": "1771879816.194354",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:03:29Z"
-        }
       }
     }
   },
@@ -433,5 +416,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T06:49:38Z"
+  "server_time_utc": "2026-02-26T06:51:43Z"
 }
