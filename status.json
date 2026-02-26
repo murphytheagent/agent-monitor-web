@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T13:41:59Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-26T15:44:55Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 10,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.89,
-      "five": 1.98,
-      "fifteen": 1.91
+      "one": 2.0,
+      "five": 2.03,
+      "fifteen": 1.93
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46648385536,
-    "disk_free_bytes": 198458810368,
-    "runner_log_size_bytes": 1642873,
+    "disk_used_bytes": 46648823808,
+    "disk_free_bytes": 198458372096,
+    "runner_log_size_bytes": 1643038,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T15:43:57Z",
+    "dashboard_started_utc": "2026-02-26T15:45:59Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-26T15:43:57Z",
+    "checked_at_utc": "2026-02-26T15:45:59Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -106,24 +106,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772102085.104579": {
-        "mention_ts": "1772102085.104579",
-        "thread_ts": "1772102085.104579",
-        "status": "in_progress",
-        "task_description": "Do deep consult.ask to research with zip of latest commit of PR 13 of swe train as attachment: • the goal is to perform good on terminal bench and swe bench pro, what should i tra…",
-        "summary": "Do deep consult.ask to research with zip of latest commit of PR 13 of swe train as attachment: • the goal is to perform good on terminal bench and swe bench pr…",
-        "summary_preview": "Do deep consult.ask to research with zip of latest commit of PR 13 of swe train as attachment: • the goal is to perform good on terminal bench and swe bench pr…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772102085.104579",
-        "last_update_ts": "1772113318.895613",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T10:34:45Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771878311.544899": {
         "mention_ts": "1771878311.544899",
@@ -364,6 +347,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T08:38:24Z"
         }
+      },
+      "1772102085.104579": {
+        "mention_ts": "1772102085.104579",
+        "thread_ts": "1772102085.104579",
+        "status": "waiting_human",
+        "task_description": "Do deep consult.ask to research with zip of latest commit of PR 13 of swe train as attachment: • the goal is to perform good on terminal bench and swe bench pro, what should i tra…",
+        "summary": "Completed three deep consult rounds with PR13 zip+SDPO paper context and delivered full markdown report in-thread covering data curriculum, eval scaling, annea…",
+        "summary_preview": "Completed three deep consult rounds with PR13 zip+SDPO paper context and delivered full markdown report in-thread covering data curriculum, eval scaling, annea…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772102085.104579",
+        "last_update_ts": "1772120694.794220",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T10:34:45Z"
+        }
       }
     },
     "finished": {
@@ -546,5 +545,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T15:43:58Z"
+  "server_time_utc": "2026-02-26T15:46:00Z"
 }
