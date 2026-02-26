@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T05:56:14Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-26T06:02:28Z",
+    "status": "sleeping",
     "pid": 15923,
-    "loop_count": 2,
+    "loop_count": 1,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.52,
+      "one": 1.57,
       "five": 1.66,
-      "fifteen": 1.69
+      "fifteen": 1.68
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46877659136,
-    "disk_free_bytes": 198229536768,
-    "runner_log_size_bytes": 1635038,
+    "disk_used_bytes": 46873276416,
+    "disk_free_bytes": 198233919488,
+    "runner_log_size_bytes": 1636073,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T06:01:34Z",
+    "dashboard_started_utc": "2026-02-26T06:03:39Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-26T06:01:34Z",
+    "checked_at_utc": "2026-02-26T06:03:39Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -44,7 +44,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 31
       },
       {
         "index": 1,
@@ -89,7 +89,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 2,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 31
@@ -106,24 +106,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772083914.447099": {
-        "mention_ts": "1772083914.447099",
-        "thread_ts": "1772083914.447099",
-        "status": "in_progress",
-        "task_description": "Use consult.ask with model=\"deep\" to prove that the sum of 1/p over all primes p diverges.",
-        "summary": "Posted ACK, used consult.ask (model=deep) to produce a full rigorous proof that sum of reciprocal primes diverges, saved report, and posted completion in threa…",
-        "summary_preview": "Posted ACK, used consult.ask (model=deep) to produce a full rigorous proof that sum of reciprocal primes diverges, saved report, and posted completion in threa…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772083914.447099",
-        "last_update_ts": "1772085373.834111",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T05:31:54Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771832696.332649": {
         "mention_ts": "1771832696.332649",
@@ -319,6 +302,22 @@
       }
     },
     "finished": {
+      "1772083914.447099": {
+        "mention_ts": "1772083914.447099",
+        "thread_ts": "1772083914.447099",
+        "status": "done",
+        "task_description": "Use consult.ask with model=\"deep\" to prove that the sum of 1/p over all primes p diverges.",
+        "summary": "Generated and uploaded a readable PDF proof to the thread (F0AH6G83HD4), posted completion, and updated report/memory checkpoints.",
+        "summary_preview": "Generated and uploaded a readable PDF proof to the thread (F0AH6G83HD4), posted completion, and updated report/memory checkpoints.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772083914.447099",
+        "last_update_ts": "1772085707.945584",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T05:31:54Z"
+        }
+      },
       "1772083053.947029": {
         "mention_ts": "1772083053.947029",
         "thread_ts": "1772083053.947029",
@@ -462,22 +461,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T02:48:38Z"
         }
-      },
-      "1771841009.140679": {
-        "mention_ts": "1771841009.140679",
-        "thread_ts": "1771841009.140679",
-        "status": "done",
-        "task_description": "On PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
-        "summary": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
-        "summary_preview": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841009.140679",
-        "last_update_ts": "1771879816.194354",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:03:29Z"
-        }
       }
     }
   },
@@ -498,5 +481,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T06:01:37Z"
+  "server_time_utc": "2026-02-26T06:03:40Z"
 }
