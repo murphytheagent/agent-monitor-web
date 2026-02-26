@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T02:56:24Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-26T03:02:00Z",
+    "status": "sleeping",
     "pid": 15923,
-    "loop_count": 447,
+    "loop_count": 1,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,130 +17,32 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.59,
-      "five": 1.75,
-      "fifteen": 1.65
+      "one": 1.4,
+      "five": 1.63,
+      "fifteen": 1.62
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 47333015552,
-    "disk_free_bytes": 197774180352,
-    "runner_log_size_bytes": 1614116,
+    "disk_used_bytes": 47330258944,
+    "disk_free_bytes": 197776936960,
+    "runner_log_size_bytes": 1615184,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T03:00:57Z",
+    "dashboard_started_utc": "2026-02-26T03:03:00Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-02-26T03:00:57Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-02-26T03:03:00Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 29
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 29
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772074506.178529",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Completed maintenance reflection, reconciled project/memory docs, and posted Slack summary; waiting on human merge and policy decisions for open PRs and monito…",
-        "summary_preview": "Completed maintenance reflection, reconciled project/memory docs, and posted Slack summary; waiting on human merge and policy decisions for open PRs and monito…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772074084.090006",
-        "last_update_ts": "1772074584.870572",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T02:48:04Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
-      "1771795925.781909": {
-        "mention_ts": "1771795925.781909",
-        "thread_ts": "1771795925.781909",
-        "status": "waiting_human",
-        "task_description": "Please only mark this close when you make it real-time.",
-        "summary": "Fixed GitHub Pages source-branch mismatch (task/1771749821-gh-pages -> main), verified repeated daemon-driven deployments on main, and posted run IDs in-thread…",
-        "summary_preview": "Fixed GitHub Pages source-branch mismatch (task/1771749821-gh-pages -> main), verified repeated daemon-driven deployments on main, and posted run IDs in-thread…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771795925.781909",
-        "last_update_ts": "1771815585.480621",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T01:04:37Z"
-        }
-      },
       "1771811137.780489": {
         "mention_ts": "1771811137.780489",
         "thread_ts": "1771811137.780489",
@@ -367,6 +269,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1772074506.178529",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: added missing [code] field to worker outcome schema in session.md, improved error context in 4 bare except blocks in runtime.py. All 140 test…",
+        "summary_preview": "Developer review: added missing [code] field to worker outcome schema in session.md, improved error context in 4 bare except blocks in runtime.py. All 140 test…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772074084.090006",
+        "last_update_ts": "1772074915.571723",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T02:48:04Z"
+        }
+      },
       "1771980057.419759": {
         "mention_ts": "1771980057.419759",
         "thread_ts": "1771980057.419759",
@@ -510,22 +428,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T04:27:51Z"
         }
-      },
-      "1771813058.516519": {
-        "mention_ts": "1771813058.516519",
-        "thread_ts": "1771813058.516519",
-        "status": "done",
-        "task_description": "Explain how is you different from ChatGPT, under which cases should I turn to you for help instead of directly asking ChatGPT?",
-        "summary": "Posted ACK and explained when to use this agent vs ChatGPT; added explicit completion message in-thread.",
-        "summary_preview": "Posted ACK and explained when to use this agent vs ChatGPT; added explicit completion message in-thread.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771813058.516519",
-        "last_update_ts": "1771825617.742441",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T02:17:38Z"
-        }
       }
     }
   },
@@ -546,5 +448,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T03:00:58Z"
+  "server_time_utc": "2026-02-26T03:03:04Z"
 }
