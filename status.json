@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T07:50:43Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-26T07:53:01Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 5,
+    "loop_count": 6,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,31 +17,65 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.46,
-      "five": 1.64,
-      "fifteen": 1.74
+      "one": 1.44,
+      "five": 1.57,
+      "fifteen": 1.69
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46671929344,
-    "disk_free_bytes": 198435266560,
-    "runner_log_size_bytes": 1641235,
+    "disk_used_bytes": 46673141760,
+    "disk_free_bytes": 198434054144,
+    "runner_log_size_bytes": 1641417,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T07:52:18Z",
+    "dashboard_started_utc": "2026-02-26T07:54:23Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-26T07:52:18Z",
+    "checked_at_utc": "2026-02-26T07:54:23Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
-    "queued": {},
-    "active": {},
+    "queued": {
+      "1772090512.587429": {
+        "mention_ts": "1772090512.587429",
+        "thread_ts": "1772090512.587429",
+        "status": "queued",
+        "task_description": "Here are notes for a research project about multi-pass rl, which I worked on a while ago but got stuck on.",
+        "summary": "Here are notes for a research project about multi-pass rl, which I worked on a while ago but got stuck on.",
+        "summary_preview": "Here are notes for a research project about multi-pass rl, which I worked on a while ago but got stuck on.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772090512.587429",
+        "last_update_ts": "1772090512.587429",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T07:21:52Z"
+        }
+      }
+    },
+    "active": {
+      "1772089301.597079": {
+        "mention_ts": "1772089301.597079",
+        "thread_ts": "1772089301.597079",
+        "status": "in_progress",
+        "task_description": "Another project I'm thinking about is like this: There is paper arguing that for heavy-tailed data distribution, memorization is necessary for good generalization.",
+        "summary": "Another project I'm thinking about is like this: There is paper arguing that for heavy-tailed data distribution, memorization is necessary for good generalizat…",
+        "summary_preview": "Another project I'm thinking about is like this: There is paper arguing that for heavy-tailed data distribution, memorization is necessary for good generalizat…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772089301.597079",
+        "last_update_ts": "1772092381.097408",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T07:01:41Z"
+        }
+      }
+    },
     "incomplete": {
       "1771832696.332649": {
         "mention_ts": "1771832696.332649",
@@ -432,5 +466,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T07:52:22Z"
+  "server_time_utc": "2026-02-26T07:54:27Z"
 }
