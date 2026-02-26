@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-26T06:21:42Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-26T06:23:48Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 6,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,48 +17,31 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.77,
-      "five": 1.76,
-      "fifteen": 1.71
+      "one": 1.89,
+      "five": 1.81,
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 46880968704,
-    "disk_free_bytes": 198226227200,
-    "runner_log_size_bytes": 1637661,
+    "disk_used_bytes": 46876364800,
+    "disk_free_bytes": 198230831104,
+    "runner_log_size_bytes": 1637825,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-26T06:22:23Z",
+    "dashboard_started_utc": "2026-02-26T06:24:29Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-26T06:22:23Z",
+    "checked_at_utc": "2026-02-26T06:24:29Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772083914.447099": {
-        "mention_ts": "1772083914.447099",
-        "thread_ts": "1772083914.447099",
-        "status": "in_progress",
-        "task_description": "Use consult.ask with model=\"deep\" to prove that the sum of 1/p over all primes p diverges.",
-        "summary": "Generated a new PDF from LaTeX source, uploaded it to the Slack thread (F0AH6JX9SKG), confirmed understanding, and posted explicit completion.",
-        "summary_preview": "Generated a new PDF from LaTeX source, uploaded it to the Slack thread (F0AH6JX9SKG), confirmed understanding, and posted explicit completion.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772083914.447099",
-        "last_update_ts": "1772086901.670285",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T06:18:53Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771832696.332649": {
         "mention_ts": "1771832696.332649",
@@ -251,6 +234,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T05:22:31Z"
         }
+      },
+      "1772083914.447099": {
+        "mention_ts": "1772083914.447099",
+        "thread_ts": "1772083914.447099",
+        "status": "waiting_human",
+        "task_description": "Use consult.ask with model=\"deep\" to prove that the sum of 1/p over all primes p diverges.",
+        "summary": "Clarified in-thread that the PDF was uploaded once (F0AH6JX9SKG) and appeared twice because a follow-up message reused the same link; committed report updates …",
+        "summary_preview": "Clarified in-thread that the PDF was uploaded once (F0AH6JX9SKG) and appeared twice because a follow-up message reused the same link; committed report updates …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772083914.447099",
+        "last_update_ts": "1772087027.716055",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T06:18:53Z"
+        }
       }
     },
     "finished": {
@@ -433,5 +432,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-26T06:22:27Z"
+  "server_time_utc": "2026-02-26T06:24:33Z"
 }
