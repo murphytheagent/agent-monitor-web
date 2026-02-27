@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-27T00:26:16Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-27T00:28:32Z",
+    "status": "running_session",
     "pid": 15923,
-    "loop_count": 138,
+    "loop_count": 139,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 120
+    "next_sleep_sec": 0
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.66,
-      "five": 1.69,
-      "fifteen": 1.75
+      "one": 1.95,
+      "five": 1.76,
+      "fifteen": 1.76
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 48251277312,
-    "disk_free_bytes": 196855918592,
-    "runner_log_size_bytes": 1679393,
+    "disk_used_bytes": 48549675008,
+    "disk_free_bytes": 196557520896,
+    "runner_log_size_bytes": 1679579,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-27T00:26:31Z",
+    "dashboard_started_utc": "2026-02-27T00:28:33Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-27T00:26:31Z",
+    "checked_at_utc": "2026-02-27T00:28:33Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -42,7 +42,7 @@
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 28757,
+        "memory_used_mb": 28759,
         "memory_total_mb": 97887,
         "temperature_c": 32
       },
@@ -68,7 +68,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 4,
@@ -106,7 +106,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772147293.279449": {
+        "mention_ts": "1772147293.279449",
+        "thread_ts": "1772147293.279449",
+        "status": "in_progress",
+        "task_description": "Create a project for this manuscript.",
+        "summary": "Create a project for this manuscript.",
+        "summary_preview": "Create a project for this manuscript.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772147293.279449",
+        "last_update_ts": "1772152112.660812",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T23:08:13Z"
+        }
+      }
+    },
     "incomplete": {
       "1771878311.544899": {
         "mention_ts": "1771878311.544899",
@@ -545,5 +562,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-27T00:26:32Z"
+  "server_time_utc": "2026-02-27T00:28:34Z"
 }
