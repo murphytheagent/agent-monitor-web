@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-27T00:42:43Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-27T01:32:42Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 140,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,24 +17,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.48,
-      "five": 1.82,
+      "one": 1.97,
+      "five": 1.87,
       "fifteen": 1.97
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 64487669760,
-    "disk_free_bytes": 180619526144,
-    "runner_log_size_bytes": 1679935,
+    "disk_used_bytes": 64499949568,
+    "disk_free_bytes": 180607246336,
+    "runner_log_size_bytes": 1680101,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-27T01:31:46Z",
+    "dashboard_started_utc": "2026-02-27T01:33:49Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-27T01:31:46Z",
+    "checked_at_utc": "2026-02-27T01:33:49Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -44,7 +44,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 32
       },
       {
         "index": 1,
@@ -60,7 +60,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 3,
@@ -106,24 +106,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772102085.104579": {
-        "mention_ts": "1772102085.104579",
-        "thread_ts": "1772102085.104579",
-        "status": "in_progress",
-        "task_description": "Do deep consult.ask to research with zip of latest commit of PR 13 of swe train as attachment: • the goal is to perform good on terminal bench and swe bench pro, what should i tra…",
-        "summary": "Delivered corrected comprehensive PR13 follow-up anchored to 2d1b3cd, posted in-thread update, and opened four plan-first actionable PRs (#18-#21) with @codex …",
-        "summary_preview": "Delivered corrected comprehensive PR13 follow-up anchored to 2d1b3cd, posted in-thread update, and opened four plan-first actionable PRs (#18-#21) with @codex …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772102085.104579",
-        "last_update_ts": "1772152963.056635",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T10:34:45Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771878311.544899": {
         "mention_ts": "1771878311.544899",
@@ -380,6 +363,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T23:08:13Z"
         }
+      },
+      "1772102085.104579": {
+        "mention_ts": "1772102085.104579",
+        "thread_ts": "1772102085.104579",
+        "status": "waiting_human",
+        "task_description": "Do deep consult.ask to research with zip of latest commit of PR 13 of swe train as attachment: • the goal is to perform good on terminal bench and swe bench pro, what should i tra…",
+        "summary": "Ran deep consult plan-judgment and pushed detailed updates to PRs #18-#21 with explicit implementation checklists, invariants, test matrices, rollback paths, a…",
+        "summary_preview": "Ran deep consult plan-judgment and pushed detailed updates to PRs #18-#21 with explicit implementation checklists, invariants, test matrices, rollback paths, a…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772102085.104579",
+        "last_update_ts": "1772155961.643310",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T10:34:45Z"
+        }
       }
     },
     "finished": {
@@ -562,5 +561,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-27T01:31:47Z"
+  "server_time_utc": "2026-02-27T01:33:49Z"
 }
