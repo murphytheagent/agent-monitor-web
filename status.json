@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-27T03:50:31Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-27T03:54:05Z",
+    "status": "sleeping",
     "pid": 15923,
     "loop_count": 164,
     "last_exit_code": 0,
@@ -9,7 +9,7 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0
+    "next_sleep_sec": 120
   },
   "system": {
     "hostname": "redacted-host",
@@ -17,34 +17,34 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.78,
-      "five": 1.61,
-      "fifteen": 1.53
+      "one": 1.5,
+      "five": 1.56,
+      "fifteen": 1.51
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 64722432000,
-    "disk_free_bytes": 180384763904,
-    "runner_log_size_bytes": 1686998,
+    "disk_used_bytes": 64718372864,
+    "disk_free_bytes": 180388823040,
+    "runner_log_size_bytes": 1687164,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-27T03:52:35Z",
+    "dashboard_started_utc": "2026-02-27T03:54:37Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-27T03:52:35Z",
+    "checked_at_utc": "2026-02-27T03:54:37Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 32625,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 33
       },
       {
         "index": 1,
@@ -52,7 +52,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 31
       },
       {
         "index": 2,
@@ -68,7 +68,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 4,
@@ -106,24 +106,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772089024.812379": {
-        "mention_ts": "1772089024.812379",
-        "thread_ts": "1772089024.812379",
-        "status": "in_progress",
-        "task_description": "Misha belkin's work on mechanistic interpretability is based on RFM, which is more supervised approach.",
-        "summary": "Uploaded the requested PDF write-up in-thread (F0AH7LH01P0), created project workspace [code] , registered it as a project submodule, and requested human choic…",
-        "summary_preview": "Uploaded the requested PDF write-up in-thread (F0AH7LH01P0), created project workspace [code] , registered it as a project submodule, and requested human choic…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772089024.812379",
-        "last_update_ts": "1772164230.741810",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T06:57:04Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771908580.861819": {
         "mention_ts": "1771908580.861819",
@@ -348,6 +331,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T07:01:41Z"
         }
+      },
+      "1772089024.812379": {
+        "mention_ts": "1772089024.812379",
+        "thread_ts": "1772089024.812379",
+        "status": "waiting_human",
+        "task_description": "Misha belkin's work on mechanistic interpretability is based on RFM, which is more supervised approach.",
+        "summary": "Posted a clearer plain-language explanation of the semi-supervised RFM/AGOP + GBA-SAE approach in-thread and requested the remaining phase-1 choices (supervisi…",
+        "summary_preview": "Posted a clearer plain-language explanation of the semi-supervised RFM/AGOP + GBA-SAE approach in-thread and requested the remaining phase-1 choices (supervisi…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772089024.812379",
+        "last_update_ts": "1772164444.734186",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-26T06:57:04Z"
+        }
       }
     },
     "finished": {
@@ -530,5 +529,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-27T03:52:36Z"
+  "server_time_utc": "2026-02-27T03:54:38Z"
 }
