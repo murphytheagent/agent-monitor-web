@@ -1,16 +1,17 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T00:04:32Z",
-    "status": "restarting",
-    "pid": 15923,
-    "loop_count": 21,
+    "last_updated_utc": "2026-02-28T00:06:58Z",
+    "status": "sleeping",
+    "pid": 53263,
+    "loop_count": 8,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
-    "poll_interval": 5
+    "next_sleep_sec": 5,
+    "poll_interval": 5,
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
@@ -18,24 +19,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.77,
-      "five": 1.81,
-      "fifteen": 1.83
+      "one": 1.81,
+      "five": 1.75,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66079383552,
-    "disk_free_bytes": 179027812352,
-    "runner_log_size_bytes": 1816281,
+    "disk_used_bytes": 66102042624,
+    "disk_free_bytes": 179005153280,
+    "runner_log_size_bytes": 1818027,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T00:04:57Z",
+    "dashboard_started_utc": "2026-02-28T00:07:02Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-28T00:04:57Z",
+    "checked_at_utc": "2026-02-28T00:07:02Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
@@ -417,5 +418,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T00:05:01Z"
+  "server_time_utc": "2026-02-28T00:07:06Z"
 }
