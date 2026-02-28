@@ -1,17 +1,31 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T00:32:08Z",
-    "status": "draining_queue",
+    "last_updated_utc": "2026-02-28T00:34:09Z",
+    "status": "workers_active",
     "pid": 60904,
-    "loop_count": 106734,
+    "loop_count": 12,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772237465.347469",
+        "started_at": 1772238778,
+        "elapsed_sec": 71
+      },
+      {
+        "slot": 1,
+        "task": "1772234881.931459",
+        "started_at": 1772238779,
+        "elapsed_sec": 70
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,24 +33,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 3.31,
-      "five": 3.3,
-      "fifteen": 2.7
+      "one": 2.84,
+      "five": 3.14,
+      "fifteen": 2.72
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66118447104,
-    "disk_free_bytes": 178988748800,
-    "runner_log_size_bytes": 1820219,
+    "disk_used_bytes": 66118819840,
+    "disk_free_bytes": 178988376064,
+    "runner_log_size_bytes": 1821662,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T00:32:08Z",
+    "dashboard_started_utc": "2026-02-28T00:34:13Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-28T00:32:08Z",
+    "checked_at_utc": "2026-02-28T00:34:13Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
@@ -53,7 +67,7 @@
         "summary_preview": "Find the current best known upper and lower bounds for the Ramsey number R(5,5).",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772237465.347469",
-        "last_update_ts": "1772237493.241709",
+        "last_update_ts": "1772238778.372458",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -69,7 +83,7 @@
         "summary_preview": "Reviewed both OpenAI posts, discussed synthesis with Athena, and delivered a final Markdown file in-thread with prioritized actionable upgrades for this codeba…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772234881.931459",
-        "last_update_ts": "1772238113.330627",
+        "last_update_ts": "1772238778.700558",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -435,5 +449,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T00:32:12Z"
+  "server_time_utc": "2026-02-28T00:34:17Z"
 }
