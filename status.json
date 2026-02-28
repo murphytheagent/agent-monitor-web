@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T23:44:03Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-28T23:45:23Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 160,
+    "loop_count": 172,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,39 +11,64 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772322310.684819",
+        "started_at": 1772322317,
+        "elapsed_sec": 6
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.48,
-      "five": 1.69,
-      "fifteen": 1.63
+      "one": 1.17,
+      "five": 1.56,
+      "fifteen": 1.58
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66720641024,
-    "disk_free_bytes": 178386554880,
-    "runner_log_size_bytes": 26012134,
+    "disk_used_bytes": 66720964608,
+    "disk_free_bytes": 178386231296,
+    "runner_log_size_bytes": 26012270,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T23:44:04Z",
+    "dashboard_started_utc": "2026-02-28T23:26:37Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-28T23:44:04Z",
+    "checked_at_utc": "2026-02-28T23:45:28Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772322310.684819": {
+        "mention_ts": "1772322310.684819",
+        "thread_ts": "1772322310.684819",
+        "status": "in_progress",
+        "task_description": "Should be working now.",
+        "summary": "Should be working now.",
+        "summary_preview": "Should be working now.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772322310.684819",
+        "last_update_ts": "1772322317.171506",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T23:45:10Z"
+        }
+      }
+    },
     "incomplete": {
       "1771927570.778669": {
         "mention_ts": "1771927570.778669",
@@ -843,5 +868,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T23:44:08Z"
+  "server_time_utc": "2026-02-28T23:45:32Z"
 }
