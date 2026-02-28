@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T00:06:58Z",
-    "status": "sleeping",
-    "pid": 53263,
-    "loop_count": 8,
+    "last_updated_utc": "2026-02-28T00:25:52Z",
+    "status": "draining_queue",
+    "pid": 60904,
+    "loop_count": 22427,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
     "max_workers": 2
   },
@@ -19,31 +19,64 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.81,
-      "five": 1.75,
-      "fifteen": 1.79
+      "one": 3.05,
+      "five": 2.58,
+      "fifteen": 2.2
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66102042624,
-    "disk_free_bytes": 179005153280,
-    "runner_log_size_bytes": 1818027,
+    "disk_used_bytes": 66107183104,
+    "disk_free_bytes": 179000012800,
+    "runner_log_size_bytes": 1820219,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T00:07:02Z",
+    "dashboard_started_utc": "2026-02-28T00:25:52Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-28T00:07:02Z",
+    "checked_at_utc": "2026-02-28T00:25:52Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772237465.347469": {
+        "mention_ts": "1772237465.347469",
+        "thread_ts": "1772237465.347469",
+        "status": "in_progress",
+        "task_description": "Find the current best known upper and lower bounds for the Ramsey number R(5,5).",
+        "summary": "Find the current best known upper and lower bounds for the Ramsey number R(5,5).",
+        "summary_preview": "Find the current best known upper and lower bounds for the Ramsey number R(5,5).",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772237465.347469",
+        "last_update_ts": "1772237493.241709",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T00:11:05Z"
+        }
+      },
+      "1772234881.931459": {
+        "mention_ts": "1772234881.931459",
+        "thread_ts": "1772234881.931459",
+        "status": "in_progress",
+        "task_description": "Please read: • <[link] • <[link] discussion with Athena, extract useful actionable ideas that can be introduced to your own codebase to better your engineering capability.",
+        "summary": "Reviewed both OpenAI posts, discussed synthesis with Athena, and delivered a final Markdown file in-thread with prioritized actionable upgrades for this codeba…",
+        "summary_preview": "Reviewed both OpenAI posts, discussed synthesis with Athena, and delivered a final Markdown file in-thread with prioritized actionable upgrades for this codeba…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772234881.931459",
+        "last_update_ts": "1772238113.330627",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-27T23:28:01Z"
+        }
+      }
+    },
     "incomplete": {
       "1771982276.912269": {
         "mention_ts": "1771982276.912269",
@@ -220,25 +253,25 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T06:57:04Z"
         }
-      },
-      "1772234881.931459": {
-        "mention_ts": "1772234881.931459",
-        "thread_ts": "1772234881.931459",
-        "status": "waiting_human",
-        "task_description": "Please read: • <[link] • <[link] discussion with Athena, extract useful actionable ideas that can be introduced to your own codebase to better your engineering capability.",
-        "summary": "Reviewed both OpenAI posts, discussed synthesis with Athena, and delivered a final Markdown file in-thread with prioritized actionable upgrades for this codeba…",
-        "summary_preview": "Reviewed both OpenAI posts, discussed synthesis with Athena, and delivered a final Markdown file in-thread with prioritized actionable upgrades for this codeba…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772234881.931459",
-        "last_update_ts": "1772236987.956854",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-27T23:28:01Z"
-        }
       }
     },
     "finished": {
+      "1772237476.923639": {
+        "mention_ts": "1772237476.923639",
+        "thread_ts": "1772237476.923639",
+        "status": "done",
+        "task_description": "What is the state of the art on the Kakeya conjecture over finite fields vs over the reals?",
+        "summary": "Delivered an Athena-backed finite-field vs real Kakeya state-of-the-art comparison with open problems, plus an in-thread PDF attachment.",
+        "summary_preview": "Delivered an Athena-backed finite-field vs real Kakeya state-of-the-art comparison with open problems, plus an in-thread PDF attachment.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772237476.923639",
+        "last_update_ts": "1772238112.916057",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T00:11:16Z"
+        }
+      },
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "1772174634.948139",
@@ -382,22 +415,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T02:48:38Z"
         }
-      },
-      "1771841009.140679": {
-        "mention_ts": "1771841009.140679",
-        "thread_ts": "1771841009.140679",
-        "status": "done",
-        "task_description": "On PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
-        "summary": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
-        "summary_preview": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841009.140679",
-        "last_update_ts": "1771879816.194354",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:03:29Z"
-        }
       }
     }
   },
@@ -418,5 +435,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T00:07:06Z"
+  "server_time_utc": "2026-02-28T00:25:56Z"
 }
