@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T09:33:46Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-02-28T09:35:41Z",
+    "status": "sleeping",
     "pid": 60904,
-    "loop_count": 2020,
+    "loop_count": 2037,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1772234881.931459",
-        "started_at": 1772269786,
-        "elapsed_sec": 1440
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,24 +19,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.69,
-      "five": 1.77,
-      "fifteen": 1.81
+      "one": 1.37,
+      "five": 1.65,
+      "fifteen": 1.75
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66612641792,
-    "disk_free_bytes": 178494554112,
-    "runner_log_size_bytes": 1831373,
+    "disk_used_bytes": 66614657024,
+    "disk_free_bytes": 178492538880,
+    "runner_log_size_bytes": 1831518,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T09:33:47Z",
+    "dashboard_started_utc": "2026-02-28T09:35:49Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-28T09:33:47Z",
+    "checked_at_utc": "2026-02-28T09:35:49Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -52,9 +44,9 @@
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 22545,
+        "memory_used_mb": 28399,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       },
       {
         "index": 1,
@@ -70,7 +62,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 3,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772234881.931459": {
-        "mention_ts": "1772234881.931459",
-        "thread_ts": "1772234881.931459",
-        "status": "in_progress",
-        "task_description": "Please read: • <[link] • <[link] discussion with Athena, extract useful actionable ideas that can be introduced to your own codebase to better your engineering capability.",
-        "summary": "Refreshed the deliverable to the current codebase into 5 high-priority items and delivered the final markdown file in-thread for review.",
-        "summary_preview": "Refreshed the deliverable to the current codebase into 5 high-priority items and delivered the final markdown file in-thread for review.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772234881.931459",
-        "last_update_ts": "1772269785.846506",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T09:04:59Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772050909.127889": {
         "mention_ts": "1772050909.127889",
@@ -309,6 +284,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-28T04:37:54Z"
+        }
+      },
+      "1772234881.931459": {
+        "mention_ts": "1772234881.931459",
+        "thread_ts": "1772234881.931459",
+        "status": "waiting_human",
+        "task_description": "Please read: • <[link] • <[link] discussion with Athena, extract useful actionable ideas that can be introduced to your own codebase to better your engineering capability.",
+        "summary": "Delivered an in-thread markdown attachment with detailed implementation plans for approved items 3, 4, and 5; awaiting human review.",
+        "summary_preview": "Delivered an in-thread markdown attachment with detailed implementation plans for approved items 3, 4, and 5; awaiting human review.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772234881.931459",
+        "last_update_ts": "1772271294.658358",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T09:04:59Z"
         }
       }
     },
@@ -901,5 +892,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T09:33:48Z"
+  "server_time_utc": "2026-02-28T09:35:50Z"
 }
