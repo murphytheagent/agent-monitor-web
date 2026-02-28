@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T06:05:26Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-02-28T06:07:32Z",
+    "status": "sleeping",
     "pid": 60904,
-    "loop_count": 173,
+    "loop_count": 192,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772257818.870139",
-        "started_at": 1772257847,
-        "elapsed_sec": 878
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,24 +19,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.7,
-      "five": 1.8,
-      "fifteen": 1.77
+      "one": 1.31,
+      "five": 1.62,
+      "fifteen": 1.7
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66707156992,
-    "disk_free_bytes": 178400038912,
-    "runner_log_size_bytes": 1830755,
+    "disk_used_bytes": 66709331968,
+    "disk_free_bytes": 178397863936,
+    "runner_log_size_bytes": 1830900,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T06:05:31Z",
+    "dashboard_started_utc": "2026-02-28T06:07:34Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-28T06:05:31Z",
+    "checked_at_utc": "2026-02-28T06:07:34Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -70,7 +62,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 3,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772257818.870139": {
-        "mention_ts": "1772257818.870139",
-        "thread_ts": "1772257818.870139",
-        "status": "in_progress",
-        "task_description": "Consult Athena with your current codebase, what component should be packaged into skills?",
-        "summary": "Consult Athena with your current codebase, what component should be packaged into skills?",
-        "summary_preview": "Consult Athena with your current codebase, what component should be packaged into skills?",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772257818.870139",
-        "last_update_ts": "1772257846.832941",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T05:50:18Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772050909.127889": {
         "mention_ts": "1772050909.127889",
@@ -309,6 +284,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-28T04:37:54Z"
+        }
+      },
+      "1772257818.870139": {
+        "mention_ts": "1772257818.870139",
+        "thread_ts": "1772257818.870139",
+        "status": "waiting_human",
+        "task_description": "Consult Athena with your current codebase, what component should be packaged into skills?",
+        "summary": "Consulted Athena with codebase context, delivered markdown plan attachment prioritizing [code] skill packaging, awaiting human review/closure.",
+        "summary_preview": "Consulted Athena with codebase context, delivered markdown plan attachment prioritizing [code] skill packaging, awaiting human review/closure.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772257818.870139",
+        "last_update_ts": "1772258764.944801",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T05:50:18Z"
         }
       }
     },
@@ -908,5 +899,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T06:05:32Z"
+  "server_time_utc": "2026-02-28T06:07:35Z"
 }
