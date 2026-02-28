@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T03:26:21Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-02-28T03:28:24Z",
+    "status": "sleeping",
     "pid": 60904,
-    "loop_count": 191,
+    "loop_count": 210,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772249110.027539",
-        "started_at": 1772249133,
-        "elapsed_sec": 47
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,24 +19,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.54,
-      "five": 1.75,
-      "fifteen": 1.75
+      "one": 1.58,
+      "five": 1.71,
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65948577792,
-    "disk_free_bytes": 179158618112,
-    "runner_log_size_bytes": 1827178,
+    "disk_used_bytes": 65950576640,
+    "disk_free_bytes": 179156619264,
+    "runner_log_size_bytes": 1827417,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T03:26:22Z",
+    "dashboard_started_utc": "2026-02-28T03:28:24Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-28T03:26:22Z",
+    "checked_at_utc": "2026-02-28T03:28:25Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 1,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772249110.027539": {
-        "mention_ts": "1772249110.027539",
-        "thread_ts": "1772249110.027539",
-        "status": "in_progress",
-        "task_description": "Why didn't you respond to this thread: <[link] You are always supposed to ACK and respond, isn't that in your protocol?",
-        "summary": "Why didn't you respond to this thread: <[link] You are always supposed to ACK and respond, isn't that in your protocol?",
-        "summary_preview": "Why didn't you respond to this thread: <[link] You are always supposed to ACK and respond, isn't that in your protocol?",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772249110.027539",
-        "last_update_ts": "1772249133.530774",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T03:25:10Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771982276.912269": {
         "mention_ts": "1771982276.912269",
@@ -313,6 +288,22 @@
       }
     },
     "finished": {
+      "1772249110.027539": {
+        "mention_ts": "1772249110.027539",
+        "thread_ts": "1772249110.027539",
+        "status": "done",
+        "task_description": "Why didn't you respond to this thread: <[link] You are always supposed to ACK and respond, isn't that in your protocol?",
+        "summary": "Acknowledged the thread and explained the missed response: prior run hit Slack tool startup failure and was incorrectly marked done without delivery evidence.",
+        "summary_preview": "Acknowledged the thread and explained the missed response: prior run hit Slack tool startup failure and was incorrectly marked done without delivery evidence.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772249110.027539",
+        "last_update_ts": "1772249271.521867",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T03:25:10Z"
+        }
+      },
       "1772248442.649139": {
         "mention_ts": "1772248442.649139",
         "thread_ts": "1772248442.649139",
@@ -456,22 +447,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-25T00:40:57Z"
         }
-      },
-      "1771832276.357899": {
-        "mention_ts": "1771832276.357899",
-        "thread_ts": "1771832276.357899",
-        "status": "done",
-        "task_description": "Resolve the objective requested in this task thread.",
-        "summary": "Added deferred agent-monitor-web pointer-policy options to ROADMAP.md (AGENT-015), posted in-thread completion update, and closed the maintenance thread.",
-        "summary_preview": "Added deferred agent-monitor-web pointer-policy options to ROADMAP.md (AGENT-015), posted in-thread completion update, and closed the maintenance thread.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771880029.083799",
-        "last_update_ts": "1771978023.618337",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:53:49Z"
-        }
       }
     }
   },
@@ -492,5 +467,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T03:26:23Z"
+  "server_time_utc": "2026-02-28T03:28:25Z"
 }
