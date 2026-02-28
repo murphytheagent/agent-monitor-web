@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T11:15:48Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-02-28T11:17:48Z",
+    "status": "sleeping",
     "pid": 60904,
-    "loop_count": 2921,
+    "loop_count": 2939,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772276949.262459",
-        "started_at": 1772276982,
-        "elapsed_sec": 365
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,24 +19,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.71,
-      "five": 1.6,
+      "one": 1.87,
+      "five": 1.62,
       "fifteen": 1.59
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66578714624,
-    "disk_free_bytes": 178528481280,
-    "runner_log_size_bytes": 1831939,
+    "disk_used_bytes": 66569543680,
+    "disk_free_bytes": 178537652224,
+    "runner_log_size_bytes": 1832084,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T11:15:51Z",
+    "dashboard_started_utc": "2026-02-28T11:17:53Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-28T11:15:51Z",
+    "checked_at_utc": "2026-02-28T11:17:53Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -70,7 +62,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 3,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772276949.262459": {
-        "mention_ts": "1772276949.262459",
-        "thread_ts": "1772276949.262459",
-        "status": "in_progress",
-        "task_description": "Review PR 13, find bugs, fix bugs, repeat, only hold on when you hit a real design question, keep in scope, don't over-engineer, use the latest commit in PR 13.",
-        "summary": "Review PR 13, find bugs, fix bugs, repeat, only hold on when you hit a real design question, keep in scope, don't over-engineer, use the latest commit in PR 13.",
-        "summary_preview": "Review PR 13, find bugs, fix bugs, repeat, only hold on when you hit a real design question, keep in scope, don't over-engineer, use the latest commit in PR 13.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772276949.262459",
-        "last_update_ts": "1772276982.073559",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T11:09:09Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772050909.127889": {
         "mention_ts": "1772050909.127889",
@@ -313,6 +288,22 @@
       }
     },
     "finished": {
+      "1772276949.262459": {
+        "mention_ts": "1772276949.262459",
+        "thread_ts": "1772276949.262459",
+        "status": "done",
+        "task_description": "Review PR 13, find bugs, fix bugs, repeat, only hold on when you hit a real design question, keep in scope, don't over-engineer, use the latest commit in PR 13.",
+        "summary": "Reviewed PR #13 latest head, fixed Bash-3 launcher and prompt-contract regressions in commit b8f58e1, reran full tests green, and resolved the remaining active…",
+        "summary_preview": "Reviewed PR #13 latest head, fixed Bash-3 launcher and prompt-contract regressions in commit b8f58e1, reran full tests green, and resolved the remaining active…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772276949.262459",
+        "last_update_ts": "1772277387.993158",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T11:09:09Z"
+        }
+      },
       "1772234881.931459": {
         "mention_ts": "1772234881.931459",
         "thread_ts": "1772234881.931459",
@@ -917,5 +908,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T11:15:52Z"
+  "server_time_utc": "2026-02-28T11:17:54Z"
 }
