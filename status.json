@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T03:18:04Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-02-28T03:20:13Z",
+    "status": "sleeping",
     "pid": 60904,
-    "loop_count": 115,
+    "loop_count": 135,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772248442.649139",
-        "started_at": 1772248470,
-        "elapsed_sec": 213
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,24 +19,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.33,
-      "five": 1.49,
-      "fifteen": 1.61
+      "one": 2.71,
+      "five": 2.03,
+      "fifteen": 1.81
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65940000768,
-    "disk_free_bytes": 179167195136,
-    "runner_log_size_bytes": 1826803,
+    "disk_used_bytes": 65944088576,
+    "disk_free_bytes": 179163107328,
+    "runner_log_size_bytes": 1827042,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T03:18:13Z",
+    "dashboard_started_utc": "2026-02-28T03:20:15Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-28T03:18:13Z",
+    "checked_at_utc": "2026-02-28T03:20:15Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -94,7 +86,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 6,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772248442.649139": {
-        "mention_ts": "1772248442.649139",
-        "thread_ts": "1772248442.649139",
-        "status": "in_progress",
-        "task_description": "This task is marked done with no clear indication, and no further followups after I mentioned you again, please investigate what happened, and make issue notes about it if this is…",
-        "summary": "This task is marked done with no clear indication, and no further followups after I mentioned you again, please investigate what happened, and make issue notes…",
-        "summary_preview": "This task is marked done with no clear indication, and no further followups after I mentioned you again, please investigate what happened, and make issue notes…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772248442.649139",
-        "last_update_ts": "1772248470.554357",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T03:14:02Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771982276.912269": {
         "mention_ts": "1771982276.912269",
@@ -313,6 +288,22 @@
       }
     },
     "finished": {
+      "1772248442.649139": {
+        "mention_ts": "1772248442.649139",
+        "thread_ts": "1772248442.649139",
+        "status": "done",
+        "task_description": "This task is marked done with no clear indication, and no further followups after I mentioned you again, please investigate what happened, and make issue notes about it if this is…",
+        "summary": "Confirmed a real bug: task reopened and reran, but Slack MCP delivery failed while outcome still marked done; filed developer issue notes and incident report.",
+        "summary_preview": "Confirmed a real bug: task reopened and reran, but Slack MCP delivery failed while outcome still marked done; filed developer issue notes and incident report.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772248442.649139",
+        "last_update_ts": "1772248758.071820",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T03:14:02Z"
+        }
+      },
       "1772234881.931459": {
         "mention_ts": "1772234881.931459",
         "thread_ts": "1772234881.931459",
@@ -456,22 +447,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T20:53:49Z"
         }
-      },
-      "1771906196.179619": {
-        "mention_ts": "1771906196.179619",
-        "thread_ts": "1771906196.179619",
-        "status": "done",
-        "task_description": "!restart.",
-        "summary": "Restart request was already processed; human confirmed Murphy restarted on its own, and task was closed with final in-thread updates and a root checkpoint comm…",
-        "summary_preview": "Restart request was already processed; human confirmed Murphy restarted on its own, and task was closed with final in-thread updates and a root checkpoint comm…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771906196.179619",
-        "last_update_ts": "1771912582.247629",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T04:09:56Z"
-        }
       }
     }
   },
@@ -492,5 +467,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T03:18:13Z"
+  "server_time_utc": "2026-02-28T03:20:16Z"
 }
