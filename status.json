@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T02:29:15Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-28T02:31:15Z",
+    "status": "workers_active",
     "pid": 60904,
-    "loop_count": 78,
+    "loop_count": 96,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772234881.931459",
+        "started_at": 1772245854,
+        "elapsed_sec": 21
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,24 +27,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.87,
-      "five": 1.87,
-      "fifteen": 1.76
+      "one": 1.66,
+      "five": 1.76,
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66103459840,
-    "disk_free_bytes": 179003736064,
-    "runner_log_size_bytes": 1825225,
+    "disk_used_bytes": 66103566336,
+    "disk_free_bytes": 179003629568,
+    "runner_log_size_bytes": 1825413,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T02:29:18Z",
+    "dashboard_started_utc": "2026-02-28T02:31:20Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-28T02:29:18Z",
+    "checked_at_utc": "2026-02-28T02:31:20Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -94,7 +102,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 26
+        "temperature_c": 27
       },
       {
         "index": 7,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772234881.931459": {
+        "mention_ts": "1772234881.931459",
+        "thread_ts": "1772234881.931459",
+        "status": "in_progress",
+        "task_description": "Please read: • <[link] • <[link] discussion with Athena, extract useful actionable ideas that can be introduced to your own codebase to better your engineering capability.",
+        "summary": "Redid the task with a self-contained Athena consult using an attached local context bundle and delivered a new in-thread Markdown file with prioritized, codeba…",
+        "summary_preview": "Redid the task with a self-contained Athena consult using an attached local context bundle and delivered a new in-thread Markdown file with prioritized, codeba…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772234881.931459",
+        "last_update_ts": "1772245854.130688",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T02:30:33Z"
+        }
+      }
+    },
     "incomplete": {
       "1771982276.912269": {
         "mention_ts": "1771982276.912269",
@@ -288,22 +313,6 @@
       }
     },
     "finished": {
-      "1772234881.931459": {
-        "mention_ts": "1772234881.931459",
-        "thread_ts": "1772234881.931459",
-        "status": "done",
-        "task_description": "Please read: • <[link] • <[link] discussion with Athena, extract useful actionable ideas that can be introduced to your own codebase to better your engineering capability.",
-        "summary": "Redid the task with a self-contained Athena consult using an attached local context bundle and delivered a new in-thread Markdown file with prioritized, codeba…",
-        "summary_preview": "Redid the task with a self-contained Athena consult using an attached local context bundle and delivered a new in-thread Markdown file with prioritized, codeba…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772234881.931459",
-        "last_update_ts": "1772241900.394759",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-27T23:28:01Z"
-        }
-      },
       "1772237476.923639": {
         "mention_ts": "1772237476.923639",
         "thread_ts": "1772237476.923639",
@@ -447,6 +456,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T04:09:56Z"
         }
+      },
+      "1771544976.149449": {
+        "mention_ts": "1771544976.149449",
+        "thread_ts": "1771544976.149449",
+        "status": "done",
+        "task_description": "Summarized arXiv 2602.02431 in-thread with theorem-level findings on sample-complexity separation between full-batch GD and one-pass SGD.",
+        "summary": "Confirmed thread closure in Slack, recorded closure checkpoints in report/daily memory, and committed task-specific coordination updates.",
+        "summary_preview": "Confirmed thread closure in Slack, recorded closure checkpoints in report/daily memory, and committed task-specific coordination updates.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771544976.149449",
+        "last_update_ts": "1771911350.085025",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-24T04:42:52Z"
+        }
       }
     }
   },
@@ -467,5 +492,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T02:29:19Z"
+  "server_time_utc": "2026-02-28T02:31:21Z"
 }
