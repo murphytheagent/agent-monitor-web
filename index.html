@@ -329,7 +329,7 @@
   </div>
 
   <div class="card">
-    <div class="card-header"><span class="dot" id="active-dot"></span><span id="active-header">Active Task</span></div>
+    <div class="card-header"><span class="dot" id="active-dot"></span>Active Task</div>
     <div class="card-body" id="active-body"></div>
   </div>
 
@@ -509,7 +509,6 @@ function render(data) {
       ['Next sleep',       hb.next_sleep_sec != null ? hb.next_sleep_sec + 's' : '—'],
       ['Pending decision', hb.pending_decision ? '⚠ Yes' : 'No'],
       ['Heartbeat age',    hbAgeSec == null ? '—' : `${age(hb.last_updated_utc)} (${freshness})`],
-      ['Max workers',      hb.max_workers ?? 1],
       ['Heartbeat updated', formatTime(hb.last_updated_utc)],
     ].map(([l, v]) =>
       `<div class="hb-item"><span class="hb-label">${l}</span><span class="hb-val">${esc(v)}</span></div>`
@@ -525,46 +524,21 @@ function render(data) {
     hbNoteEl.className = 'hb-note';
   }
 
-  // Active task(s) — supports parallel workers
+  // Active task
   const active = Object.values(tasks.active || {});
-  const workers = (hb && hb.active_workers) || [];
-  const maxWorkers = (hb && hb.max_workers) || 1;
   document.getElementById('active-dot').className = 'dot ' + (active.length ? 'dot-green' : 'dot-grey');
-  document.getElementById('active-header').textContent = maxWorkers >= 2
-    ? `Active Tasks (${active.length}/${maxWorkers} slots)`
-    : 'Active Task';
   const abody = document.getElementById('active-body');
   if (active.length) {
-    if (maxWorkers >= 2 && workers.length > 0) {
-      // Parallel mode: show per-worker cards
-      abody.innerHTML = active.map(t => {
-        const txt = compactTaskText(t, 220);
-        const w = workers.find(w => w.task === t.mention_ts);
-        const slotInfo = w ? `<span><b>Slot:</b> ${w.slot}</span><span><b>Elapsed:</b> ${w.elapsed_sec}s</span>` : '';
-        return `
-          <div style="border-left:3px solid #4caf50;padding:4px 8px;margin-bottom:6px">
-            <div class="task-text">${esc(txt)}</div>
-            <div class="task-meta">
-              ${statusPill(t.status)}
-              ${slotInfo}
-              <span><b>Age:</b> ${taskAge(t.created_ts)}</span>
-              <span><b>Thread:</b> ${esc(t.thread_ts || '—')}</span>
-            </div>
-          </div>`;
-      }).join('');
-    } else {
-      // Serial mode: single active task
-      const t = active[0];
-      const txt = compactTaskText(t, 220);
-      abody.innerHTML = `
-        <div class="task-text">${esc(txt)}</div>
-        <div class="task-meta">
-          ${statusPill(t.status)}
-          <span><b>Requester:</b> [redacted]</span>
-          <span><b>Age:</b> ${taskAge(t.created_ts)}</span>
-          <span><b>Thread:</b> ${esc(t.thread_ts || '—')}</span>
-        </div>`;
-    }
+    const t = active[0];
+    const txt = compactTaskText(t, 220);
+    abody.innerHTML = `
+      <div class="task-text">${esc(txt)}</div>
+      <div class="task-meta">
+        ${statusPill(t.status)}
+        <span><b>Requester:</b> [redacted]</span>
+        <span><b>Age:</b> ${taskAge(t.created_ts)}</span>
+        <span><b>Thread:</b> ${esc(t.thread_ts || '—')}</span>
+      </div>`;
   } else {
     abody.innerHTML = '<p style="color:#555;font-style:italic">No active task</p>';
   }
