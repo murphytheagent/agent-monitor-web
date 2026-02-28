@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T22:13:44Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-02-28T22:23:46Z",
+    "status": "sleeping",
     "pid": 60904,
-    "loop_count": 1,
+    "loop_count": 8,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
     "max_workers": 2
   },
@@ -19,34 +19,34 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.62,
-      "five": 1.76,
+      "one": 1.65,
+      "five": 1.75,
       "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66658598912,
-    "disk_free_bytes": 178448596992,
-    "runner_log_size_bytes": 26008998,
+    "disk_used_bytes": 66656919552,
+    "disk_free_bytes": 178450276352,
+    "runner_log_size_bytes": 26009999,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T22:21:44Z",
+    "dashboard_started_utc": "2026-02-28T22:23:47Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-28T22:21:44Z",
+    "checked_at_utc": "2026-02-28T22:23:47Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 28431,
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 32625,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 56
       },
       {
         "index": 1,
@@ -108,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772280896.913149",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Phase-0 maintenance reflection complete: audited recent work, updated memory/goals/project docs, merged small-swe-train PR #13, and posted Slack summary with r…",
-        "summary_preview": "Phase-0 maintenance reflection complete: audited recent work, updated memory/goals/project docs, merged small-swe-train PR #13, and posted Slack summary with r…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772280395.544397",
-        "last_update_ts": "1772316823.865713",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T12:06:35Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771927570.778669": {
         "mention_ts": "1771927570.778669",
@@ -289,6 +272,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1772280896.913149",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: added delivery guard (done without agent reply -> waiting_human), resolved 3 issue files, added heavy-tail .gitignore, updated submodule poin…",
+        "summary_preview": "Developer review: added delivery guard (done without agent reply -> waiting_human), resolved 3 issue files, added heavy-tail .gitignore, updated submodule poin…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772280395.544397",
+        "last_update_ts": "1772317377.656167",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T12:06:35Z"
+        }
+      },
       "1772276949.262459": {
         "mention_ts": "1772276949.262459",
         "thread_ts": "1772276949.262459",
@@ -893,5 +892,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T22:21:45Z"
+  "server_time_utc": "2026-02-28T22:23:48Z"
 }
