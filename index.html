@@ -382,10 +382,13 @@ const API_STATUS_PATH = "status.json";
 
 const STATUS_STYLES = {
   running_session:    ['pill-running',  'dot-green',  'Running'],
+  workers_active:     ['pill-running',  'dot-green',  'Running'],
+  draining_queue:     ['pill-running',  'dot-green',  'Draining'],
   sleeping:           ['pill-sleeping', 'dot-grey',   'Sleeping'],
   sleeping_pending:   ['pill-pending',  'dot-yellow', 'Waiting (human)'],
   retrying_transient: ['pill-retrying', 'dot-red',    'Retrying'],
   starting:           ['pill-sleeping', 'dot-grey',   'Starting'],
+  restarting:         ['pill-pending',  'dot-yellow', 'Restarting'],
 };
 const STACK_STYLE_BY_BUCKET = {
   queued: 'stack-queued',
