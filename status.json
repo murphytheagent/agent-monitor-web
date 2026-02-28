@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T23:30:48Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-28T23:31:27Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 39,
+    "loop_count": 45,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,39 +11,64 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772321448.856999",
+        "started_at": 1772321476,
+        "elapsed_sec": 11
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.7,
-      "five": 1.59,
-      "fifteen": 1.57
+      "one": 1.48,
+      "five": 1.54,
+      "fifteen": 1.56
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66662920192,
-    "disk_free_bytes": 178444275712,
-    "runner_log_size_bytes": 26011853,
+    "disk_used_bytes": 66720886784,
+    "disk_free_bytes": 178386309120,
+    "runner_log_size_bytes": 26011989,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T23:26:37Z",
+    "dashboard_started_utc": "2026-02-28T23:31:30Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-02-28T23:30:48Z",
+    "checked_at_utc": "2026-02-28T23:31:30Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772321448.856999": {
+        "mention_ts": "1772321448.856999",
+        "thread_ts": "1772321448.856999",
+        "status": "in_progress",
+        "task_description": "Are you running inside a local tmux session?",
+        "summary": "Are you running inside a local tmux session?",
+        "summary_preview": "Are you running inside a local tmux session?",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772321448.856999",
+        "last_update_ts": "1772321475.994017",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T23:30:48Z"
+        }
+      }
+    },
     "incomplete": {
       "1771927570.778669": {
         "mention_ts": "1771927570.778669",
@@ -827,5 +852,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T23:30:52Z"
+  "server_time_utc": "2026-02-28T23:31:34Z"
 }
