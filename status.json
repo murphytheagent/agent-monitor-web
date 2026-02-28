@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T04:37:41Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-02-28T04:39:46Z",
+    "status": "workers_active",
     "pid": 60904,
-    "loop_count": 134,
+    "loop_count": 153,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772253474.200459",
+        "started_at": 1772253489,
+        "elapsed_sec": 97
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,24 +27,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.21,
-      "five": 1.8,
-      "fifteen": 1.68
+      "one": 1.74,
+      "five": 1.73,
+      "fifteen": 1.67
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66842382336,
-    "disk_free_bytes": 178264813568,
-    "runner_log_size_bytes": 1829250,
+    "disk_used_bytes": 66849923072,
+    "disk_free_bytes": 178257272832,
+    "runner_log_size_bytes": 1829386,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T04:37:46Z",
+    "dashboard_started_utc": "2026-02-28T04:39:48Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-28T04:37:46Z",
+    "checked_at_utc": "2026-02-28T04:39:48Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +54,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 32
       },
       {
         "index": 1,
@@ -54,7 +62,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 2,
@@ -62,7 +70,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 29
+        "temperature_c": 28
       },
       {
         "index": 3,
@@ -70,7 +78,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 29
+        "temperature_c": 28
       },
       {
         "index": 4,
@@ -78,7 +86,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 5,
@@ -86,7 +94,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 6,
@@ -94,7 +102,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 26
       },
       {
         "index": 7,
@@ -102,13 +110,30 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772253474.200459": {
+        "mention_ts": "1772253474.200459",
+        "thread_ts": "1772253474.200459",
+        "status": "in_progress",
+        "task_description": "This thread (<[link] is again moved to finished without notifying human, this is faulty on two levels: • after you sent a draft, of course the task should be set to waiting human …",
+        "summary": "This thread (<[link] is again moved to finished without notifying human, this is faulty on two levels: • after you sent a draft, of course the task should be s…",
+        "summary_preview": "This thread (<[link] is again moved to finished without notifying human, this is faulty on two levels: • after you sent a draft, of course the task should be s…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772253474.200459",
+        "last_update_ts": "1772253488.800781",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T04:37:54Z"
+        }
+      }
+    },
     "incomplete": {
       "1771982276.912269": {
         "mention_ts": "1771982276.912269",
@@ -467,5 +492,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T04:37:47Z"
+  "server_time_utc": "2026-02-28T04:39:49Z"
 }
