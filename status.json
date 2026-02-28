@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T04:29:32Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-02-28T04:31:37Z",
+    "status": "sleeping",
     "pid": 60904,
-    "loop_count": 59,
+    "loop_count": 78,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772234881.931459",
-        "started_at": 1772252893,
-        "elapsed_sec": 78
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,24 +19,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.44,
-      "five": 1.6,
-      "fifteen": 1.68
+      "one": 1.16,
+      "five": 1.42,
+      "fifteen": 1.59
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66484109312,
-    "disk_free_bytes": 178623086592,
-    "runner_log_size_bytes": 1829105,
+    "disk_used_bytes": 66479972352,
+    "disk_free_bytes": 178627223552,
+    "runner_log_size_bytes": 1829250,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T04:29:37Z",
+    "dashboard_started_utc": "2026-02-28T04:31:39Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-28T04:29:37Z",
+    "checked_at_utc": "2026-02-28T04:31:39Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772234881.931459": {
-        "mention_ts": "1772234881.931459",
-        "thread_ts": "1772234881.931459",
-        "status": "in_progress",
-        "task_description": "Please read: • <[link] • <[link] discussion with Athena, extract useful actionable ideas that can be introduced to your own codebase to better your engineering capability.",
-        "summary": "Refreshed the deliverable against the current codebase and produced a condensed markdown with 5 highest-impact engineering priorities.",
-        "summary_preview": "Refreshed the deliverable against the current codebase and produced a condensed markdown with 5 highest-impact engineering priorities.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772234881.931459",
-        "last_update_ts": "1772252893.479578",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T04:27:33Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1771982276.912269": {
         "mention_ts": "1771982276.912269",
@@ -313,6 +288,22 @@
       }
     },
     "finished": {
+      "1772234881.931459": {
+        "mention_ts": "1772234881.931459",
+        "thread_ts": "1772234881.931459",
+        "status": "done",
+        "task_description": "Please read: • <[link] • <[link] discussion with Athena, extract useful actionable ideas that can be introduced to your own codebase to better your engineering capability.",
+        "summary": "Refreshed the deliverable to the current codebase into 5 high-priority items and delivered the final markdown file in-thread for review.",
+        "summary_preview": "Refreshed the deliverable to the current codebase into 5 high-priority items and delivered the final markdown file in-thread for review.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772234881.931459",
+        "last_update_ts": "1772253070.400387",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T04:27:33Z"
+        }
+      },
       "1772249110.027539": {
         "mention_ts": "1772249110.027539",
         "thread_ts": "1772249110.027539",
@@ -456,22 +447,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-25T00:40:57Z"
         }
-      },
-      "1771832276.357899": {
-        "mention_ts": "1771832276.357899",
-        "thread_ts": "1771832276.357899",
-        "status": "done",
-        "task_description": "Resolve the objective requested in this task thread.",
-        "summary": "Added deferred agent-monitor-web pointer-policy options to ROADMAP.md (AGENT-015), posted in-thread completion update, and closed the maintenance thread.",
-        "summary_preview": "Added deferred agent-monitor-web pointer-policy options to ROADMAP.md (AGENT-015), posted in-thread completion update, and closed the maintenance thread.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771880029.083799",
-        "last_update_ts": "1771978023.618337",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:53:49Z"
-        }
       }
     }
   },
@@ -492,5 +467,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T04:29:38Z"
+  "server_time_utc": "2026-02-28T04:31:40Z"
 }
