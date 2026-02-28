@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-02-28T04:43:48Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-02-28T04:45:52Z",
+    "status": "sleeping",
     "pid": 60904,
-    "loop_count": 190,
+    "loop_count": 209,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772253474.200459",
-        "started_at": 1772253489,
-        "elapsed_sec": 339
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,24 +19,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.97,
-      "five": 1.79,
-      "fifteen": 1.69
+      "one": 1.58,
+      "five": 1.7,
+      "fifteen": 1.67
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66854137856,
-    "disk_free_bytes": 178253058048,
-    "runner_log_size_bytes": 1829459,
+    "disk_used_bytes": 66856718336,
+    "disk_free_bytes": 178250477568,
+    "runner_log_size_bytes": 1829604,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T04:43:53Z",
+    "dashboard_started_utc": "2026-02-28T04:45:55Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-02-28T04:43:53Z",
+    "checked_at_utc": "2026-02-28T04:45:55Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -52,9 +44,9 @@
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 22545,
+        "memory_used_mb": 28591,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       },
       {
         "index": 1,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772253474.200459": {
-        "mention_ts": "1772253474.200459",
-        "thread_ts": "1772253474.200459",
-        "status": "in_progress",
-        "task_description": "This thread (<[link] is again moved to finished without notifying human, this is faulty on two levels: • after you sent a draft, of course the task should be set to waiting human …",
-        "summary": "This thread (<[link] is again moved to finished without notifying human, this is faulty on two levels: • after you sent a draft, of course the task should be s…",
-        "summary_preview": "This thread (<[link] is again moved to finished without notifying human, this is faulty on two levels: • after you sent a draft, of course the task should be s…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772253474.200459",
-        "last_update_ts": "1772253488.800781",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T04:37:54Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772050909.127889": {
         "mention_ts": "1772050909.127889",
@@ -293,6 +268,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T06:57:04Z"
+        }
+      },
+      "1772253474.200459": {
+        "mention_ts": "1772253474.200459",
+        "thread_ts": "1772253474.200459",
+        "status": "waiting_human",
+        "task_description": "This thread (<[link] is again moved to finished without notifying human, this is faulty on two levels: • after you sent a draft, of course the task should be set to waiting human …",
+        "summary": "Issue logged and guardrail memorized; file-bucket rollback done for task 1772234881.931459, but supervisor-owned task state still needs human/supervisor rollba…",
+        "summary_preview": "Issue logged and guardrail memorized; file-bucket rollback done for task 1772234881.931459, but supervisor-owned task state still needs human/supervisor rollba…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772253474.200459",
+        "last_update_ts": "1772253869.443849",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T04:37:54Z"
         }
       }
     },
@@ -476,5 +467,5 @@
     "log_access": "Hidden in public snapshot export.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-02-28T04:43:54Z"
+  "server_time_utc": "2026-02-28T04:45:56Z"
 }
