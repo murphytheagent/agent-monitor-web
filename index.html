@@ -492,7 +492,7 @@ function render(data) {
   const tasks = data.tasks || {};
 
   // Status pill
-  const [pillCls, dotCls, label] = (hb && STATUS_STYLES[hb.status]) || ['pill-unknown','dot-grey','?'];
+  const [pillCls, dotCls, label] = (hb && STATUS_STYLES[hb.status]) || (hb ? ['pill-unknown','dot-grey', hb.status || '?'] : ['pill-unknown','dot-grey','?']);
   const pillEl = document.getElementById('status-pill');
   pillEl.className = 'pill ' + pillCls;
   pillEl.textContent = label;
