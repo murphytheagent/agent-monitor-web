@@ -16,27 +16,27 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.63,
-      "five": 1.61,
-      "fifteen": 1.59
+      "one": 1.82,
+      "five": 1.65,
+      "fifteen": 1.61
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66707525632,
-    "disk_free_bytes": 178399670272,
+    "disk_used_bytes": 66707648512,
+    "disk_free_bytes": 178399547392,
     "runner_log_size_bytes": 26012561,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T23:26:37Z",
+    "dashboard_started_utc": "2026-03-01T05:28:18Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-01T05:28:15Z",
+    "checked_at_utc": "2026-03-01T05:28:18Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,8 +59,8 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 13,
-        "memory_used_mb": 14815,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 22545,
         "memory_total_mb": 97887,
         "temperature_c": 41
       },
@@ -99,10 +99,10 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 32625,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 54
       }
     ]
   },
@@ -892,5 +892,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-01T05:28:16Z"
+  "server_time_utc": "2026-03-01T05:28:19Z"
 }
