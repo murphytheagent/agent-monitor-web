@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-01T10:23:33Z",
+    "last_updated_utc": "2026-03-01T10:25:29Z",
     "status": "sleeping",
     "pid": 15833,
-    "loop_count": 5984,
+    "loop_count": 6001,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,45 +16,45 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.33,
-      "five": 1.63,
-      "fifteen": 1.7
+      "one": 1.58,
+      "five": 1.61,
+      "fifteen": 1.68
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66643460096,
-    "disk_free_bytes": 178463735808,
-    "runner_log_size_bytes": 26012561,
+    "disk_used_bytes": 66644475904,
+    "disk_free_bytes": 178462720000,
+    "runner_log_size_bytes": 26012634,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-01T10:23:34Z",
+    "dashboard_started_utc": "2026-02-28T23:26:37Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-01T10:23:34Z",
+    "checked_at_utc": "2026-03-01T10:25:35Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
-        "memory_used_mb": 23013,
+        "utilization_gpu_pct": 98,
+        "memory_used_mb": 32625,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 50
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 32625,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 46
       },
       {
         "index": 2,
@@ -67,10 +67,10 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 15,
-        "memory_used_mb": 12583,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 42
+        "temperature_c": 33
       },
       {
         "index": 4,
@@ -86,7 +86,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 31
       },
       {
         "index": 6,
@@ -94,7 +94,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 31
       },
       {
         "index": 7,
@@ -110,22 +110,6 @@
     "queued": {},
     "active": {},
     "incomplete": {
-      "1772090512.587429": {
-        "mention_ts": "1772090512.587429",
-        "thread_ts": "1772090512.587429",
-        "status": "waiting_human",
-        "task_description": "Here are notes for a research project about multi-pass rl, which I worked on a while ago but got stuck on.",
-        "summary": "Reviewed attached multi-pass RL notes with two deep Athena consults, delivered a detailed math audit plus theorem roadmap in reports/1772090512.587429.md, and …",
-        "summary_preview": "Reviewed attached multi-pass RL notes with two deep Athena consults, delivered a detailed math audit plus theorem roadmap in reports/1772090512.587429.md, and …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772090512.587429",
-        "last_update_ts": "1772101516.366218",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T07:21:52Z"
-        }
-      },
       "1772076432.916209": {
         "mention_ts": "1772076432.916209",
         "thread_ts": "1772076432.916209",
@@ -892,5 +876,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-01T10:23:35Z"
+  "server_time_utc": "2026-03-01T10:25:36Z"
 }
