@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-01T01:20:30Z",
+    "last_updated_utc": "2026-03-01T01:22:08Z",
     "status": "sleeping",
     "pid": 15833,
-    "loop_count": 1038,
+    "loop_count": 1053,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,64 +16,48 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.72,
-      "five": 1.7,
-      "fifteen": 1.67
+      "one": 1.99,
+      "five": 1.77,
+      "fifteen": 1.7
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66721832960,
-    "disk_free_bytes": 178385362944,
-    "runner_log_size_bytes": 26012415,
+    "disk_used_bytes": 66723221504,
+    "disk_free_bytes": 178383974400,
+    "runner_log_size_bytes": 26012488,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-01T01:20:35Z",
+    "dashboard_started_utc": "2026-02-28T23:26:37Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-01T01:20:35Z",
+    "checked_at_utc": "2026-03-01T01:22:11Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 71,
+        "utilization_gpu_pct": 69,
         "memory_used_mb": 33511,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 57
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
+        "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 32
       },
       {
         "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 33511,
-        "memory_total_mb": 97887,
-        "temperature_c": 58
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
-        "memory_used_mb": 33511,
-        "memory_total_mb": 97887,
-        "temperature_c": 56
-      },
-      {
-        "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
         "memory_used_mb": 22545,
@@ -81,28 +65,44 @@
         "temperature_c": 34
       },
       {
+        "index": 3,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 22545,
+        "memory_total_mb": 97887,
+        "temperature_c": 33
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 22545,
+        "memory_total_mb": 97887,
+        "temperature_c": 31
+      },
+      {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 1,
+        "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 32
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
+        "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 32
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 69,
-        "memory_used_mb": 33511,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 22545,
         "memory_total_mb": 97887,
-        "temperature_c": 59
+        "temperature_c": 33
       }
     ]
   },
@@ -110,22 +110,6 @@
     "queued": {},
     "active": {},
     "incomplete": {
-      "1771927570.778669": {
-        "mention_ts": "1771927570.778669",
-        "thread_ts": "1771927570.778669",
-        "status": "waiting_human",
-        "task_description": "Merge <[link] and open a new PR to implement the first few manageable stages of this plan.",
-        "summary": "Implemented rollout-only SDPO e2e mode on PR #13 (commit 5280870), validated with full local tests and monitored 2-step 8-GPU run (job 573) showing rollout-onl…",
-        "summary_preview": "Implemented rollout-only SDPO e2e mode on PR #13 (commit 5280870), validated with full local tests and monitored 2-step 8-GPU run (job 573) showing rollout-onl…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771927570.778669",
-        "last_update_ts": "1772068872.829832",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T03:56:27Z"
-        }
-      },
       "1772083351.346569": {
         "mention_ts": "1772083351.346569",
         "thread_ts": "1772083351.346569",
@@ -924,5 +908,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-01T01:20:35Z"
+  "server_time_utc": "2026-03-01T01:22:12Z"
 }
