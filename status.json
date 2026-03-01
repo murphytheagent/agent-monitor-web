@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-01T12:14:35Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-01T12:24:38Z",
+    "status": "restarting",
     "pid": 15833,
     "loop_count": 6921,
     "last_exit_code": 0,
@@ -19,48 +19,31 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.63,
-      "five": 1.62,
-      "fifteen": 1.58
+      "one": 2.01,
+      "five": 1.78,
+      "fifteen": 1.64
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 66643238912,
-    "disk_free_bytes": 178463956992,
-    "runner_log_size_bytes": 26013072,
+    "disk_used_bytes": 66642489344,
+    "disk_free_bytes": 178464706560,
+    "runner_log_size_bytes": 26013747,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-02-28T23:26:37Z",
+    "dashboard_started_utc": "2026-03-01T12:24:38Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-03-01T12:22:35Z",
+    "checked_at_utc": "2026-03-01T12:24:38Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772367207.251679",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Completed phase-0 maintenance reflection: updated memory/goals/project docs, audited PR readiness, and posted Slack summary with developer-review flags.",
-        "summary_preview": "Completed phase-0 maintenance reflection: updated memory/goals/project docs, audited PR readiness, and posted Slack summary with developer-review flags.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772366795.969045",
-        "last_update_ts": "1772367275.362845",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-01T12:06:35Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772076432.916209": {
         "mention_ts": "1772076432.916209",
@@ -192,6 +175,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1772367207.251679",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: fixed DEFAULT_CHANNEL_ID drift and CLAUDECODE env leak in fallback merge, implemented bounded thread-context packing (plan 07) with 7 new tes…",
+        "summary_preview": "Developer review: fixed DEFAULT_CHANNEL_ID drift and CLAUDECODE env leak in fallback merge, implemented bounded thread-context packing (plan 07) with 7 new tes…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772366795.969045",
+        "last_update_ts": "1772367877.980891",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-01T12:06:35Z"
+        }
+      },
       "1772321448.856999": {
         "mention_ts": "1772321448.856999",
         "thread_ts": "1772321448.856999",
@@ -812,5 +811,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-01T12:22:39Z"
+  "server_time_utc": "2026-03-01T12:24:42Z"
 }
