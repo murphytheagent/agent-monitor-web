@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-02T10:55:39Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-02T10:57:41Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 12605,
+    "loop_count": 12624,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772391564.389579",
+        "started_at": 1772448997,
+        "elapsed_sec": 64
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,31 +27,48 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.91,
-      "five": 1.71,
-      "fifteen": 1.61
+      "one": 2.01,
+      "five": 1.78,
+      "fifteen": 1.65
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65982697472,
-    "disk_free_bytes": 179124498432,
-    "runner_log_size_bytes": 26020309,
+    "disk_used_bytes": 65982783488,
+    "disk_free_bytes": 179124412416,
+    "runner_log_size_bytes": 26020449,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T10:55:39Z",
+    "dashboard_started_utc": "2026-03-02T10:57:43Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-03-02T10:55:39Z",
+    "checked_at_utc": "2026-03-02T10:57:43Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772391564.389579": {
+        "mention_ts": "1772391564.389579",
+        "thread_ts": "1772391564.389579",
+        "status": "in_progress",
+        "task_description": "• fork git@github.com:Zhi0467/cot-loop.git • initiate project on cot loop detection • research with Athena if my current approach is good, the ultimate goal is to predict whether …",
+        "summary": "Posted consolidated thread delivery with corrected matched-token results (k20 14/60, k10 23/60 positives), confirmed MLP ROC-AUC > linear at both thresholds, a…",
+        "summary_preview": "Posted consolidated thread delivery with corrected matched-token results (k20 14/60, k10 23/60 positives), confirmed MLP ROC-AUC > linear at both thresholds, a…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772391564.389579",
+        "last_update_ts": "1772448997.071040",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-01T18:59:24Z"
+        }
+      }
+    },
     "incomplete": {
       "1772155917.195489": {
         "mention_ts": "1772155917.195489",
@@ -123,22 +148,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-28T23:45:10Z"
-        }
-      },
-      "1772391564.389579": {
-        "mention_ts": "1772391564.389579",
-        "thread_ts": "1772391564.389579",
-        "status": "waiting_human",
-        "task_description": "• fork git@github.com:Zhi0467/cot-loop.git • initiate project on cot loop detection • research with Athena if my current approach is good, the ultimate goal is to predict whether …",
-        "summary": "Posted consolidated thread delivery with corrected matched-token results (k20 14/60, k10 23/60 positives), confirmed MLP ROC-AUC > linear at both thresholds, a…",
-        "summary_preview": "Posted consolidated thread delivery with corrected matched-token results (k20 14/60, k10 23/60 positives), confirmed MLP ROC-AUC > linear at both thresholds, a…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772391564.389579",
-        "last_update_ts": "1772406621.110554",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-01T18:59:24Z"
         }
       },
       "1772422639.171219": {
@@ -843,5 +852,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T10:55:43Z"
+  "server_time_utc": "2026-03-02T10:57:47Z"
 }
