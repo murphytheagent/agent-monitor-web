@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-02T13:59:52Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-02T14:17:01Z",
+    "status": "restarting",
     "pid": 15833,
     "loop_count": 14215,
     "last_exit_code": 0,
@@ -16,7 +16,7 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
       "one": 1.78,
@@ -25,107 +25,25 @@
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65931673600,
-    "disk_free_bytes": 179175522304,
-    "runner_log_size_bytes": 26110524,
+    "disk_used_bytes": 65930899456,
+    "disk_free_bytes": 179176296448,
+    "runner_log_size_bytes": 26111199,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T14:17:00Z",
+    "dashboard_started_utc": "2026-03-02T14:17:01Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-03-02T14:17:00Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-03-02T14:17:01Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 29
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772459815.249359",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Maintenance reflection completed: memory/goals/docs refreshed, PR readiness audited, one skill candidate and one permission-gap issue+plan logged, and Slack su…",
-        "summary_preview": "Maintenance reflection completed: memory/goals/docs refreshed, PR readiness audited, one skill candidate and one permission-gap issue+plan logged, and Slack su…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772453201.689184",
-        "last_update_ts": "1772459992.008385",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-02T12:06:41Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772155917.195489": {
         "mention_ts": "1772155917.195489",
@@ -257,6 +175,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1772459815.249359",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review complete: fixed advance_phase task-text-file loss bug, implemented Slack API retry/backoff hardening (plan 08, 7 tests), created 3 Codex skill…",
+        "summary_preview": "Developer review complete: fixed advance_phase task-text-file loss bug, implemented Slack API retry/backoff hardening (plan 08, 7 tests), created 3 Codex skill…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772453201.689184",
+        "last_update_ts": "1772461020.791305",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-02T12:06:41Z"
+        }
+      },
       "1772391564.389579": {
         "mention_ts": "1772391564.389579",
         "thread_ts": "1772391564.389579",
@@ -941,5 +875,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T14:17:03Z"
+  "server_time_utc": "2026-03-02T14:17:05Z"
 }
