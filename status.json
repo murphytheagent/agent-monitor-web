@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-02T04:19:52Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-02T04:21:58Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 8914,
+    "loop_count": 8934,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,40 +11,32 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772422639.171219",
-        "started_at": 1772422650,
-        "elapsed_sec": 2542
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.5,
+      "one": 1.76,
       "five": 1.73,
-      "fifteen": 1.83
+      "fifteen": 1.81
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65951498240,
-    "disk_free_bytes": 179155697664,
-    "runner_log_size_bytes": 26020164,
+    "disk_used_bytes": 65953619968,
+    "disk_free_bytes": 179153575936,
+    "runner_log_size_bytes": 26020309,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T04:19:56Z",
+    "dashboard_started_utc": "2026-03-01T12:24:38Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-02T04:19:56Z",
+    "checked_at_utc": "2026-03-02T04:21:59Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 94,
         "memory_used_mb": 91235,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 51
       },
       {
         "index": 1,
@@ -67,39 +59,39 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 91,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 48
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 93,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 48
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 91,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 47
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 47
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
         "temperature_c": 50
@@ -107,7 +99,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
         "temperature_c": 50
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772422639.171219": {
-        "mention_ts": "1772422639.171219",
-        "thread_ts": "1772422639.171219",
-        "status": "in_progress",
-        "task_description": "On small-swe-train, research with Athena on how to incorporate: • nebius/SWE-rebench • SWE-bench/SWE-smith-go • SWE-bench/SWE-smith-js • SWE-bench/SWE-smith-ts into our training m…",
-        "summary": "On small-swe-train, research with Athena on how to incorporate: • nebius/SWE-rebench • SWE-bench/SWE-smith-go • SWE-bench/SWE-smith-js • SWE-bench/SWE-smith-ts…",
-        "summary_preview": "On small-swe-train, research with Athena on how to incorporate: • nebius/SWE-rebench • SWE-bench/SWE-smith-go • SWE-bench/SWE-smith-js • SWE-bench/SWE-smith-ts…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772422639.171219",
-        "last_update_ts": "1772422649.942327",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-02T03:37:19Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772155917.195489": {
         "mention_ts": "1772155917.195489",
@@ -229,6 +204,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-01T18:59:24Z"
+        }
+      },
+      "1772422639.171219": {
+        "mention_ts": "1772422639.171219",
+        "thread_ts": "1772422639.171219",
+        "status": "waiting_human",
+        "task_description": "On small-swe-train, research with Athena on how to incorporate: • nebius/SWE-rebench • SWE-bench/SWE-smith-go • SWE-bench/SWE-smith-js • SWE-bench/SWE-smith-ts into our training m…",
+        "summary": "Delivered Athena-backed integration research for SWE-rebench and SWE-smith-go/js/ts with a phased, codebase-tailored rollout plan and in-thread PDF attachment.",
+        "summary_preview": "Delivered Athena-backed integration research for SWE-rebench and SWE-smith-go/js/ts with a phased, codebase-tailored rollout plan and in-thread PDF attachment.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772422639.171219",
+        "last_update_ts": "1772425204.582174",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-02T03:37:19Z"
         }
       }
     },
@@ -917,5 +908,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T04:19:57Z"
+  "server_time_utc": "2026-03-02T04:22:00Z"
 }
