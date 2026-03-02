@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-02T11:54:51Z",
+    "last_updated_utc": "2026-03-02T11:54:57Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 13157,
+    "loop_count": 13158,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,20 +17,20 @@
         "slot": 0,
         "task": "1772391564.389579",
         "started_at": 1772448997,
-        "elapsed_sec": 3494
+        "elapsed_sec": 3500
       },
       {
         "slot": 1,
         "task": "1772450286.162839",
         "started_at": 1772451366,
-        "elapsed_sec": 1125
+        "elapsed_sec": 1131
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
       "one": 1.77,
@@ -39,18 +39,18 @@
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65993490432,
-    "disk_free_bytes": 179113705472,
+    "disk_used_bytes": 65993633792,
+    "disk_free_bytes": 179113562112,
     "runner_log_size_bytes": 26020866,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-01T12:24:38Z",
+    "dashboard_started_utc": "2026-03-02T11:55:00Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-02T11:54:57Z",
+    "checked_at_utc": "2026-03-02T11:55:00Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -81,7 +81,7 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 87529,
         "memory_total_mb": 97887,
         "temperature_c": 48
@@ -92,7 +92,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87561,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 46
       },
       {
         "index": 5,
@@ -955,5 +955,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T11:54:58Z"
+  "server_time_utc": "2026-03-02T11:55:00Z"
 }
