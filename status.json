@@ -16,34 +16,116 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.27,
-      "five": 1.6,
-      "fifteen": 1.64
+      "one": 1.41,
+      "five": 1.62,
+      "fifteen": 1.65
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65949167616,
-    "disk_free_bytes": 179158028288,
-    "runner_log_size_bytes": 26019743,
+    "disk_used_bytes": 65949790208,
+    "disk_free_bytes": 179157405696,
+    "runner_log_size_bytes": 26019800,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-01T12:24:38Z",
+    "dashboard_started_utc": "2026-03-02T03:04:27Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "unavailable",
-    "checked_at_utc": "2026-03-02T03:04:25Z",
+    "status": "ok",
+    "checked_at_utc": "2026-03-02T03:04:27Z",
     "cache_age_sec": 0,
-    "note": "Remote GPU data unavailable for this snapshot.",
-    "gpus": []
+    "note": "Low-frequency cached nvidia-smi snapshot.",
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 94,
+        "memory_used_mb": 91235,
+        "memory_total_mb": 97887,
+        "temperature_c": 51
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 94,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 50
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 93,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 51
+      },
+      {
+        "index": 3,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 94,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 50
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 95,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
+      },
+      {
+        "index": 5,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 96,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 55
+      },
+      {
+        "index": 6,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 96,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 53
+      },
+      {
+        "index": 7,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 95,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
+      }
+    ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772392615.533439": {
+        "mention_ts": "1772392615.533439",
+        "thread_ts": "1772392615.533439",
+        "status": "in_progress",
+        "task_description": "Here is an idea I have about making a frontier math research dataset, with emphasis on how agents must be agentic and navigate massive context to solve a task, unlike normal math …",
+        "summary": "Posted missing in-thread completion evidence after the final instruction and confirmed both requested steps: remote bootstrap plus Milestone 1 PR #1 delivery.",
+        "summary_preview": "Posted missing in-thread completion evidence after the final instruction and confirmed both requested steps: remote bootstrap plus Milestone 1 PR #1 delivery.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772392615.533439",
+        "last_update_ts": "1772420667.411047",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-01T19:16:55Z"
+        }
+      }
+    },
     "incomplete": {
       "1772155917.195489": {
         "mention_ts": "1772155917.195489",
@@ -139,22 +221,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-01T18:59:24Z"
-        }
-      },
-      "1772392615.533439": {
-        "mention_ts": "1772392615.533439",
-        "thread_ts": "1772392615.533439",
-        "status": "waiting_human",
-        "task_description": "Here is an idea I have about making a frontier math research dataset, with emphasis on how agents must be agentic and navigate massive context to solve a task, unlike normal math …",
-        "summary": "Posted missing in-thread completion evidence after the final instruction and confirmed both requested steps: remote bootstrap plus Milestone 1 PR #1 delivery.",
-        "summary_preview": "Posted missing in-thread completion evidence after the final instruction and confirmed both requested steps: remote bootstrap plus Milestone 1 PR #1 delivery.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772392615.533439",
-        "last_update_ts": "1772416712.156585",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-01T19:16:55Z"
         }
       }
     },
@@ -827,5 +893,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T03:04:25Z"
+  "server_time_utc": "2026-03-02T03:04:28Z"
 }
