@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-02T00:39:32Z",
+    "last_updated_utc": "2026-03-02T00:41:28Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 6840,
+    "loop_count": 6858,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,37 +17,102 @@
         "slot": 0,
         "task": "1772392615.533439",
         "started_at": 1772411897,
-        "elapsed_sec": 75
+        "elapsed_sec": 191
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.51,
-      "five": 1.68,
-      "fifteen": 1.74
+      "one": 1.99,
+      "five": 1.82,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65723625472,
-    "disk_free_bytes": 179383570432,
-    "runner_log_size_bytes": 26018597,
+    "disk_used_bytes": 65726222336,
+    "disk_free_bytes": 179380973568,
+    "runner_log_size_bytes": 26018670,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T00:39:33Z",
+    "dashboard_started_utc": "2026-03-01T12:24:38Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "unavailable",
-    "checked_at_utc": "2026-03-02T00:39:33Z",
+    "status": "ok",
+    "checked_at_utc": "2026-03-02T00:41:33Z",
     "cache_age_sec": 0,
-    "note": "Remote GPU data unavailable for this snapshot.",
-    "gpus": []
+    "note": "Low-frequency cached nvidia-smi snapshot.",
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
+        "memory_total_mb": 97887,
+        "temperature_c": 31
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
+        "memory_total_mb": 97887,
+        "temperature_c": 31
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
+        "memory_total_mb": 97887,
+        "temperature_c": 31
+      },
+      {
+        "index": 3,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 2,
+        "memory_used_mb": 0,
+        "memory_total_mb": 97887,
+        "temperature_c": 32
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
+        "memory_total_mb": 97887,
+        "temperature_c": 30
+      },
+      {
+        "index": 5,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
+        "memory_total_mb": 97887,
+        "temperature_c": 30
+      },
+      {
+        "index": 6,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
+        "memory_total_mb": 97887,
+        "temperature_c": 30
+      },
+      {
+        "index": 7,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
+        "memory_total_mb": 97887,
+        "temperature_c": 31
+      }
+    ]
   },
   "tasks": {
     "queued": {},
@@ -70,22 +135,6 @@
       }
     },
     "incomplete": {
-      "1772147293.279449": {
-        "mention_ts": "1772147293.279449",
-        "thread_ts": "1772147293.279449",
-        "status": "waiting_human",
-        "task_description": "Create a project for this manuscript.",
-        "summary": "Created a new manuscript project workspace, completed an online similar-work scan, and delivered a PDF roadmap in-thread with future directions and a concrete …",
-        "summary_preview": "Created a new manuscript project workspace, completed an online similar-work scan, and delivered a PDF roadmap in-thread with future directions and a concrete …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772147293.279449",
-        "last_update_ts": "1772152825.987429",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T23:08:13Z"
-        }
-      },
       "1772102085.104579": {
         "mention_ts": "1772102085.104579",
         "thread_ts": "1772102085.104579",
@@ -868,5 +917,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T00:39:37Z"
+  "server_time_utc": "2026-03-02T00:41:35Z"
 }
