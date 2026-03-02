@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-02T12:05:08Z",
+    "last_updated_utc": "2026-03-02T12:07:08Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 13251,
+    "loop_count": 13269,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,40 +17,40 @@
         "slot": 0,
         "task": "1772391564.389579",
         "started_at": 1772448997,
-        "elapsed_sec": 4110
+        "elapsed_sec": 4230
       },
       {
         "slot": 1,
         "task": "1772450286.162839",
         "started_at": 1772451366,
-        "elapsed_sec": 1742
+        "elapsed_sec": 1862
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.67,
-      "five": 1.79,
-      "fifteen": 1.68
+      "one": 1.55,
+      "five": 1.72,
+      "fifteen": 1.67
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65983475712,
-    "disk_free_bytes": 179123720192,
-    "runner_log_size_bytes": 26020866,
+    "disk_used_bytes": 65982009344,
+    "disk_free_bytes": 179125186560,
+    "runner_log_size_bytes": 26020930,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T12:05:11Z",
+    "dashboard_started_utc": "2026-03-01T12:24:38Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-02T12:05:11Z",
+    "checked_at_utc": "2026-03-02T12:07:12Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -60,7 +60,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 88226,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 46
       },
       {
         "index": 1,
@@ -68,23 +68,23 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87579,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 48
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 87557,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 46
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 87557,
+        "memory_used_mb": 87561,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 46
       },
       {
         "index": 4,
@@ -92,36 +92,53 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87561,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 48
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 87529,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 32
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 87533,
+        "memory_used_mb": 87573,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 47
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 87499,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 30
       }
     ]
   },
   "tasks": {
-    "queued": {},
+    "queued": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
+        "status": "queued",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772453201.689184",
+        "last_update_ts": "1772453201.689184",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-02T12:06:41Z"
+        }
+      }
+    },
     "active": {
       "1772391564.389579": {
         "mention_ts": "1772391564.389579",
@@ -317,22 +334,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-01T19:29:11Z"
-        }
-      },
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772367207.251679",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: fixed DEFAULT_CHANNEL_ID drift and CLAUDECODE env leak in fallback merge, implemented bounded thread-context packing (plan 07) with 7 new tes…",
-        "summary_preview": "Developer review: fixed DEFAULT_CHANNEL_ID drift and CLAUDECODE env leak in fallback merge, implemented bounded thread-context packing (plan 07) with 7 new tes…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772366795.969045",
-        "last_update_ts": "1772367877.980891",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-01T12:06:35Z"
         }
       },
       "1772321448.856999": {
@@ -955,5 +956,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T12:05:11Z"
+  "server_time_utc": "2026-03-02T12:07:13Z"
 }
