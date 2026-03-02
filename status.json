@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-02T13:43:31Z",
+    "last_updated_utc": "2026-03-02T13:45:29Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 14158,
+    "loop_count": 14176,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,102 +17,37 @@
         "slot": 1,
         "task": "1772450286.162839",
         "started_at": 1772451366,
-        "elapsed_sec": 7645
+        "elapsed_sec": 7763
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.6,
-      "five": 1.56,
-      "fifteen": 1.57
+      "one": 1.14,
+      "five": 1.41,
+      "fifteen": 1.51
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65935409152,
-    "disk_free_bytes": 179171786752,
-    "runner_log_size_bytes": 26103843,
+    "disk_used_bytes": 65931497472,
+    "disk_free_bytes": 179175698432,
+    "runner_log_size_bytes": 26105859,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T13:43:31Z",
+    "dashboard_started_utc": "2026-03-01T12:24:38Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-03-02T13:43:31Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-03-02T13:45:29Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 30,
-        "memory_used_mb": 71320,
-        "memory_total_mb": 97887,
-        "temperature_c": 38
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 71442,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 71404,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 71352,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 71364,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 71400,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 71398,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 71430,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {
@@ -125,7 +60,7 @@
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772453201.689184",
-        "last_update_ts": "1772459011.425440",
+        "last_update_ts": "1772459129.293343",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
@@ -950,5 +885,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T13:43:32Z"
+  "server_time_utc": "2026-03-02T13:45:33Z"
 }
