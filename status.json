@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-02T01:12:06Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-02T01:14:07Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 7142,
+    "loop_count": 7161,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,104 +11,129 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772392615.533439",
+        "started_at": 1772413935,
+        "elapsed_sec": 112
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.37,
+      "one": 1.46,
       "five": 1.48,
-      "fifteen": 1.54
+      "fifteen": 1.53
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65764528128,
-    "disk_free_bytes": 179342667776,
-    "runner_log_size_bytes": 26018815,
+    "disk_used_bytes": 65764446208,
+    "disk_free_bytes": 179342749696,
+    "runner_log_size_bytes": 26018955,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T01:12:14Z",
+    "dashboard_started_utc": "2026-03-01T12:24:38Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-02T01:12:14Z",
+    "checked_at_utc": "2026-03-02T01:14:13Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 92,
         "memory_used_mb": 91235,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 49
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 48
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 45
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 45
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 92,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 47
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 93,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 47
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 90,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 53
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 89555,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 52
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772392615.533439": {
+        "mention_ts": "1772392615.533439",
+        "thread_ts": "1772392615.533439",
+        "status": "in_progress",
+        "task_description": "Here is an idea I have about making a frontier math research dataset, with emphasis on how agents must be agentic and navigate massive context to solve a task, unlike normal math …",
+        "summary": "Posted in-thread completion for FrontierTrace project initialization and roadmap/docs consolidation; awaiting human direction to start Milestone 1 schema freez…",
+        "summary_preview": "Posted in-thread completion for FrontierTrace project initialization and roadmap/docs consolidation; awaiting human direction to start Milestone 1 schema freez…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772392615.533439",
+        "last_update_ts": "1772413934.778672",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-01T19:16:55Z"
+        }
+      }
+    },
     "incomplete": {
       "1772102085.104579": {
         "mention_ts": "1772102085.104579",
@@ -220,22 +245,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-01T18:59:24Z"
-        }
-      },
-      "1772392615.533439": {
-        "mention_ts": "1772392615.533439",
-        "thread_ts": "1772392615.533439",
-        "status": "waiting_human",
-        "task_description": "Here is an idea I have about making a frontier math research dataset, with emphasis on how agents must be agentic and navigate massive context to solve a task, unlike normal math …",
-        "summary": "Posted in-thread completion for FrontierTrace project initialization and roadmap/docs consolidation; awaiting human direction to start Milestone 1 schema freez…",
-        "summary_preview": "Posted in-thread completion for FrontierTrace project initialization and roadmap/docs consolidation; awaiting human direction to start Milestone 1 schema freez…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772392615.533439",
-        "last_update_ts": "1772412143.647477",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-01T19:16:55Z"
         }
       }
     },
@@ -908,5 +917,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T01:12:14Z"
+  "server_time_utc": "2026-03-02T01:14:15Z"
 }
