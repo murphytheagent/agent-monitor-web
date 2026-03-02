@@ -1,88 +1,63 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-02T13:47:37Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-02T13:49:36Z",
+    "status": "running_session",
     "pid": 15833,
-    "loop_count": 14196,
+    "loop_count": 14214,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1772450286.162839",
-        "started_at": 1772451366,
-        "elapsed_sec": 7891
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.84,
-      "five": 1.57,
-      "fifteen": 1.55
+      "one": 1.45,
+      "five": 1.5,
+      "fifteen": 1.52
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65931759616,
-    "disk_free_bytes": 179175436288,
-    "runner_log_size_bytes": 26108099,
+    "disk_used_bytes": 65927921664,
+    "disk_free_bytes": 179179274240,
+    "runner_log_size_bytes": 26110299,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T13:47:39Z",
+    "dashboard_started_utc": "2026-03-01T12:24:38Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-03-02T13:47:39Z",
+    "checked_at_utc": "2026-03-02T13:49:41Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
-    "queued": {
+    "queued": {},
+    "active": {
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "maintenance",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Run maintenance reflection checklist and summarize findings.",
         "summary": "Run maintenance reflection checklist and summarize findings.",
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772453201.689184",
-        "last_update_ts": "1772459257.907288",
+        "last_update_ts": "1772459376.769978",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-02T12:06:41Z"
-        }
-      }
-    },
-    "active": {
-      "1772450286.162839": {
-        "mention_ts": "1772450286.162839",
-        "thread_ts": "1772450286.162839",
-        "status": "in_progress",
-        "task_description": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + final wandb logs are wr…",
-        "summary": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + fin…",
-        "summary_preview": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + fin…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772450286.162839",
-        "last_update_ts": "1772451365.611713",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-02T11:18:06Z"
         }
       }
     },
@@ -197,6 +172,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-02T11:17:59Z"
+        }
+      },
+      "1772450286.162839": {
+        "mention_ts": "1772450286.162839",
+        "thread_ts": "1772450286.162839",
+        "status": "waiting_human",
+        "task_description": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + final wandb logs are wr…",
+        "summary": "Verified main SDPO E2E, reproduced WandB incompleteness, shipped fix in PR #22, and validated Slurm job 668 with WandB run o7m4x1jw finished at training/global…",
+        "summary_preview": "Verified main SDPO E2E, reproduced WandB incompleteness, shipped fix in PR #22, and validated Slurm job 668 with WandB run o7m4x1jw finished at training/global…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772450286.162839",
+        "last_update_ts": "1772459376.431044",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-02T11:18:06Z"
         }
       }
     },
@@ -885,5 +876,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T13:47:43Z"
+  "server_time_utc": "2026-03-02T13:49:45Z"
 }
