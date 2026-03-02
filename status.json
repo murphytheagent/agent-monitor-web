@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-02T01:55:03Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-02T01:56:57Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 7546,
+    "loop_count": 7564,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,39 +11,129 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772392615.533439",
+        "started_at": 1772416517,
+        "elapsed_sec": 99
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.8,
-      "five": 1.63,
+      "one": 1.58,
+      "five": 1.65,
       "fifteen": 1.6
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65767673856,
-    "disk_free_bytes": 179339522048,
-    "runner_log_size_bytes": 26019458,
+    "disk_used_bytes": 65767137280,
+    "disk_free_bytes": 179340058624,
+    "runner_log_size_bytes": 26019598,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T01:55:03Z",
+    "dashboard_started_utc": "2026-03-01T12:24:38Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "unavailable",
-    "checked_at_utc": "2026-03-02T01:55:03Z",
+    "status": "ok",
+    "checked_at_utc": "2026-03-02T01:57:02Z",
     "cache_age_sec": 0,
-    "note": "Remote GPU data unavailable for this snapshot.",
-    "gpus": []
+    "note": "Low-frequency cached nvidia-smi snapshot.",
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 94,
+        "memory_used_mb": 91235,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 95,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 51
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 95,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
+      },
+      {
+        "index": 3,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 96,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 53
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 94,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 49
+      },
+      {
+        "index": 5,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 95,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 50
+      },
+      {
+        "index": 6,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 96,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
+      },
+      {
+        "index": 7,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 94,
+        "memory_used_mb": 89555,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
+      }
+    ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772392615.533439": {
+        "mention_ts": "1772392615.533439",
+        "thread_ts": "1772392615.533439",
+        "status": "in_progress",
+        "task_description": "Here is an idea I have about making a frontier math research dataset, with emphasis on how agents must be agentic and navigate massive context to solve a task, unlike normal math …",
+        "summary": "Completed requested order: bootstrapped FrontierTrace GitHub remote and opened Milestone 1 schema-freeze PR (#1) with frozen schemas, evaluator contract, and 1…",
+        "summary_preview": "Completed requested order: bootstrapped FrontierTrace GitHub remote and opened Milestone 1 schema-freeze PR (#1) with frozen schemas, evaluator contract, and 1…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772392615.533439",
+        "last_update_ts": "1772416517.039053",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-01T19:16:55Z"
+        }
+      }
+    },
     "incomplete": {
       "1772155917.195489": {
         "mention_ts": "1772155917.195489",
@@ -139,22 +229,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-01T18:59:24Z"
-        }
-      },
-      "1772392615.533439": {
-        "mention_ts": "1772392615.533439",
-        "thread_ts": "1772392615.533439",
-        "status": "waiting_human",
-        "task_description": "Here is an idea I have about making a frontier math research dataset, with emphasis on how agents must be agentic and navigate massive context to solve a task, unlike normal math …",
-        "summary": "Completed requested order: bootstrapped FrontierTrace GitHub remote and opened Milestone 1 schema-freeze PR (#1) with frozen schemas, evaluator contract, and 1…",
-        "summary_preview": "Completed requested order: bootstrapped FrontierTrace GitHub remote and opened Milestone 1 schema-freeze PR (#1) with frozen schemas, evaluator contract, and 1…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772392615.533439",
-        "last_update_ts": "1772416496.838213",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-01T19:16:55Z"
         }
       }
     },
@@ -827,5 +901,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-02T01:55:03Z"
+  "server_time_utc": "2026-03-02T01:57:03Z"
 }
