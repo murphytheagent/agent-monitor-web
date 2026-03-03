@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T20:59:31Z",
+    "last_updated_utc": "2026-03-03T21:01:37Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 2433,
+    "loop_count": 2453,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -15,42 +15,36 @@
     "active_workers": [
       {
         "slot": 0,
-        "task": "1772567818.880349",
-        "started_at": 1772571422,
-        "elapsed_sec": 148
-      },
-      {
-        "slot": 1,
         "task": "1772555674.302409",
-        "started_at": 1772571565,
-        "elapsed_sec": 5
+        "started_at": 1772571678,
+        "elapsed_sec": 18
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.87,
-      "five": 1.86,
-      "fifteen": 1.78
+      "one": 1.81,
+      "five": 1.82,
+      "fifteen": 1.76
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 67401932800,
-    "disk_free_bytes": 177705263104,
-    "runner_log_size_bytes": 45670620,
+    "disk_used_bytes": 67404685312,
+    "disk_free_bytes": 177702510592,
+    "runner_log_size_bytes": 45673916,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T20:59:36Z",
+    "dashboard_started_utc": "2026-03-03T16:49:10Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-03-03T20:59:36Z",
+    "checked_at_utc": "2026-03-03T21:01:41Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
@@ -58,22 +52,6 @@
   "tasks": {
     "queued": {},
     "active": {
-      "1772567818.880349": {
-        "mention_ts": "1772567818.880349",
-        "thread_ts": "1772567818.880349",
-        "status": "in_progress",
-        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
-        "summary": "Re-polled Slack thread at 2026-03-03 20:52 UTC; no new human follow-up after delivery, so sequencing/approval is still pending.",
-        "summary_preview": "Re-polled Slack thread at 2026-03-03 20:52 UTC; no new human follow-up after delivery, so sequencing/approval is still pending.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772567818.880349",
-        "last_update_ts": "1772571422.456367",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:56:58Z"
-        }
-      },
       "1772555674.302409": {
         "mention_ts": "1772555674.302409",
         "thread_ts": "1772555674.302409",
@@ -83,7 +61,7 @@
         "summary_preview": "1.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772566447.268049",
-        "last_update_ts": "1772571564.729450",
+        "last_update_ts": "1772571678.554779",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -138,6 +116,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T20:17:48Z"
+        }
+      },
+      "1772567818.880349": {
+        "mention_ts": "1772567818.880349",
+        "thread_ts": "1772567818.880349",
+        "status": "in_progress",
+        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
+        "summary": "Re-polled Slack thread at 2026-03-03 20:57 UTC; no new human follow-up after delivery, so sequencing/approval is still pending.",
+        "summary_preview": "Re-polled Slack thread at 2026-03-03 20:57 UTC; no new human follow-up after delivery, so sequencing/approval is still pending.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772567818.880349",
+        "last_update_ts": "1772571616.124862",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T19:56:58Z"
         }
       }
     },
@@ -858,5 +852,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T20:59:40Z"
+  "server_time_utc": "2026-03-03T21:01:45Z"
 }
