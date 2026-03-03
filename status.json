@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T04:43:19Z",
+    "last_updated_utc": "2026-03-03T04:45:21Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 8165,
+    "loop_count": 8185,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,72 +17,72 @@
         "slot": 0,
         "task": "1772450286.162839",
         "started_at": 1772506195,
-        "elapsed_sec": 6804
+        "elapsed_sec": 6926
       },
       {
         "slot": 1,
         "task": "1772450279.478169",
         "started_at": 1772511395,
-        "elapsed_sec": 1604
+        "elapsed_sec": 1726
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.14,
-      "five": 1.85,
-      "fifteen": 1.73
+      "one": 1.52,
+      "five": 1.71,
+      "fifteen": 1.69
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65797656576,
-    "disk_free_bytes": 179309539328,
-    "runner_log_size_bytes": 26113497,
+    "disk_used_bytes": 65795461120,
+    "disk_free_bytes": 179311734784,
+    "runner_log_size_bytes": 26113570,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T14:17:01Z",
+    "dashboard_started_utc": "2026-03-03T04:45:24Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T04:43:24Z",
+    "checked_at_utc": "2026-03-03T04:45:24Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 14607,
+        "utilization_gpu_pct": 98,
+        "memory_used_mb": 14609,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 45
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 15255,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 15257,
         "memory_total_mb": 97887,
         "temperature_c": 44
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 15255,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 15257,
         "memory_total_mb": 97887,
         "temperature_c": 44
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 15255,
+        "utilization_gpu_pct": 98,
+        "memory_used_mb": 15257,
         "memory_total_mb": 97887,
         "temperature_c": 44
       },
@@ -157,22 +157,6 @@
       }
     },
     "incomplete": {
-      "1772253474.200459": {
-        "mention_ts": "1772253474.200459",
-        "thread_ts": "1772253474.200459",
-        "status": "waiting_human",
-        "task_description": "This thread (<[link] is again moved to finished without notifying human, this is faulty on two levels: • after you sent a draft, of course the task should be set to waiting human …",
-        "summary": "Issue logged and guardrail memorized; file-bucket rollback done for task 1772234881.931459, but supervisor-owned task state still needs human/supervisor rollba…",
-        "summary_preview": "Issue logged and guardrail memorized; file-bucket rollback done for task 1772234881.931459, but supervisor-owned task state still needs human/supervisor rollba…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772253474.200459",
-        "last_update_ts": "1772253869.443849",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T04:37:54Z"
-        }
-      },
       "1772322310.684819": {
         "mention_ts": "1772322310.684819",
         "thread_ts": "1772322310.684819",
@@ -923,5 +907,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T04:43:25Z"
+  "server_time_utc": "2026-03-03T04:45:25Z"
 }
