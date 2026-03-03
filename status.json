@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T21:39:46Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-03T21:44:51Z",
+    "status": "restarting",
     "pid": 15833,
     "loop_count": 2824,
     "last_exit_code": 0,
@@ -9,88 +9,41 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772555674.302409",
-        "started_at": 1772573961,
-        "elapsed_sec": 25
-      },
-      {
-        "slot": 1,
-        "task": "1772567818.880349",
-        "started_at": 1772573986,
-        "elapsed_sec": 0
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.32,
-      "five": 1.7,
-      "fifteen": 1.79
+      "one": 1.61,
+      "five": 1.69,
+      "fifteen": 1.77
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 67419660288,
-    "disk_free_bytes": 177687535616,
-    "runner_log_size_bytes": 45723098,
+    "disk_used_bytes": 67421130752,
+    "disk_free_bytes": 177686065152,
+    "runner_log_size_bytes": 45724287,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T21:43:40Z",
+    "dashboard_started_utc": "2026-03-03T21:44:51Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-03-03T21:43:40Z",
+    "checked_at_utc": "2026-03-03T21:44:51Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772555674.302409": {
-        "mention_ts": "1772555674.302409",
-        "thread_ts": "1772555674.302409",
-        "status": "in_progress",
-        "task_description": "Chatgpt mcp chrome: push the commit, request codex review in the PR again and wait for response.",
-        "summary": "Chatgpt mcp chrome: push the commit, request codex review in the PR again and wait for response.",
-        "summary_preview": "Chatgpt mcp chrome: push the commit, request codex review in the PR again and wait for response.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772566447.268049",
-        "last_update_ts": "1772573961.257552",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:34:07Z"
-        }
-      },
-      "1772567818.880349": {
-        "mention_ts": "1772567818.880349",
-        "thread_ts": "1772567818.880349",
-        "status": "in_progress",
-        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
-        "summary": "Re-polled Slack thread at 2026-03-03 21:32 UTC and confirmed no new human follow-up after the implementation delivery ( [code] ); sequencing/approval remains p…",
-        "summary_preview": "Re-polled Slack thread at 2026-03-03 21:32 UTC and confirmed no new human follow-up after the implementation delivery ( [code] ); sequencing/approval remains p…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772567818.880349",
-        "last_update_ts": "1772573986.320941",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:56:58Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -139,9 +92,41 @@
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T20:17:48Z"
         }
+      },
+      "1772567818.880349": {
+        "mention_ts": "1772567818.880349",
+        "thread_ts": "1772567818.880349",
+        "status": "in_progress",
+        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
+        "summary": "Re-polled Slack thread at 2026-03-03 21:40 UTC and confirmed no new human follow-up after the implementation delivery ( [code] ); sequencing/approval remains p…",
+        "summary_preview": "Re-polled Slack thread at 2026-03-03 21:40 UTC and confirmed no new human follow-up after the implementation delivery ( [code] ); sequencing/approval remains p…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772567818.880349",
+        "last_update_ts": "1772574291.577131",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T19:56:58Z"
+        }
       }
     },
     "finished": {
+      "1772555674.302409": {
+        "mention_ts": "1772555674.302409",
+        "thread_ts": "1772555674.302409",
+        "status": "done",
+        "task_description": "Chatgpt mcp chrome: push the commit, request codex review in the PR again and wait for response.",
+        "summary": "Pushed chatgpt-mcp-chrome commit, re-requested Codex on improve-chatgpt-mcp PR #3 and received a clean response, and posted clarifications in-thread.",
+        "summary_preview": "Pushed chatgpt-mcp-chrome commit, re-requested Codex on improve-chatgpt-mcp PR #3 and received a clean response, and posted clarifications in-thread.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772566447.268049",
+        "last_update_ts": "1772574290.965279",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T19:34:07Z"
+        }
+      },
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "1772555674.302409",
@@ -858,5 +843,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T21:43:44Z"
+  "server_time_utc": "2026-03-03T21:44:55Z"
 }
