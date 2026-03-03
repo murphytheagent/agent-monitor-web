@@ -30,51 +30,51 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.56,
-      "five": 1.58,
-      "fifteen": 1.6
+      "one": 2.6,
+      "five": 1.93,
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65842372608,
-    "disk_free_bytes": 179264823296,
+    "disk_used_bytes": 65844731904,
+    "disk_free_bytes": 179262464000,
     "runner_log_size_bytes": 26113875,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T06:07:17Z",
+    "dashboard_started_utc": "2026-03-02T14:17:01Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T06:07:17Z",
+    "checked_at_utc": "2026-03-03T06:09:19Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 97,
-        "memory_used_mb": 29260,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 29262,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 50
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 99,
-        "memory_used_mb": 12372,
+        "memory_used_mb": 12374,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 41
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 99,
-        "memory_used_mb": 12372,
+        "memory_used_mb": 12374,
         "memory_total_mb": 97887,
         "temperature_c": 39
       },
@@ -82,7 +82,7 @@
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 99,
-        "memory_used_mb": 12372,
+        "memory_used_mb": 12374,
         "memory_total_mb": 97887,
         "temperature_c": 39
       },
@@ -114,19 +114,20 @@
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 62093,
+        "memory_used_mb": 62095,
         "memory_total_mb": 97887,
-        "temperature_c": 62
+        "temperature_c": 63
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
+    "active": {},
+    "incomplete": {
       "1772450279.478169": {
         "mention_ts": "1772450279.478169",
         "thread_ts": "1772450279.478169",
-        "status": "in_progress",
+        "status": "waiting_human",
         "task_description": "Go work on PR 18 and 19 of small swe train in order, start with reading comments and fetching main.",
         "summary": "Implemented and pushed PR #18 with passing focused tests, submitted required Slurm E2E job 662, and requested a human decision because the run is blocked by ac…",
         "summary_preview": "Implemented and pushed PR #18 with passing focused tests, submitted required Slurm E2E job 662, and requested a human decision because the run is blocked by ac…",
@@ -142,7 +143,7 @@
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
         "thread_ts": "1772450286.162839",
-        "status": "in_progress",
+        "status": "waiting_human",
         "task_description": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + final wandb logs are wr…",
         "summary": "Addressed PR #22 review comments with commit 50412ab and passing launcher tests (45 passed, 2 skipped); Slack in-thread delivery remains blocked in this runtim…",
         "summary_preview": "Addressed PR #22 review comments with commit 50412ab and passing launcher tests (45 passed, 2 skipped); Slack in-thread delivery remains blocked in this runtim…",
@@ -153,24 +154,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T05:11:13Z"
-        }
-      }
-    },
-    "incomplete": {
-      "1772322310.684819": {
-        "mention_ts": "1772322310.684819",
-        "thread_ts": "1772322310.684819",
-        "status": "waiting_human",
-        "task_description": "Should be working now.",
-        "summary": "Posted ACK and confirmed in-thread posting is working; waiting for next instruction.",
-        "summary_preview": "Posted ACK and confirmed in-thread posting is working; waiting for next instruction.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772322310.684819",
-        "last_update_ts": "1772322488.321411",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T23:45:10Z"
         }
       },
       "1772422639.171219": {
@@ -907,5 +890,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T06:07:17Z"
+  "server_time_utc": "2026-03-03T06:09:20Z"
 }
