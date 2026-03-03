@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T23:26:46Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-03T23:53:12Z",
+    "status": "restarting",
     "pid": 15833,
     "loop_count": 1002,
     "last_exit_code": 0,
@@ -9,66 +9,41 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772578262.213499",
-        "started_at": 1772580267,
-        "elapsed_sec": 138
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.36,
-      "five": 1.82,
-      "fifteen": 1.96
+      "one": 1.63,
+      "five": 1.83,
+      "fifteen": 1.95
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 68928720896,
-    "disk_free_bytes": 176178475008,
-    "runner_log_size_bytes": 45734623,
+    "disk_used_bytes": 68931670016,
+    "disk_free_bytes": 176175525888,
+    "runner_log_size_bytes": 45735467,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T23:52:25Z",
+    "dashboard_started_utc": "2026-03-03T23:53:12Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-03-03T23:52:25Z",
+    "checked_at_utc": "2026-03-03T23:53:12Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772578262.213499": {
-        "mention_ts": "1772578262.213499",
-        "thread_ts": "1772578262.213499",
-        "status": "in_progress",
-        "task_description": "Please generate a brief visualization of the overall framework and workflow of the current system.",
-        "summary": "Delivered revised single integrated architecture+workflow figure in-thread with project lifecycle and Athena consult flow (file_id=F0AJAKNSW2J, ts=1772580008.7…",
-        "summary_preview": "Delivered revised single integrated architecture+workflow figure in-thread with project lifecycle and Athena consult flow (file_id=F0AJAKNSW2J, ts=1772580008.7…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772578262.213499",
-        "last_update_ts": "1772580267.340743",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T22:57:37Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -132,6 +107,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T19:56:58Z"
+        }
+      },
+      "1772578262.213499": {
+        "mention_ts": "1772578262.213499",
+        "thread_ts": "1772578262.213499",
+        "status": "waiting_human",
+        "task_description": "Please generate a brief visualization of the overall framework and workflow of the current system.",
+        "summary": "Posted cleaner integrated v3 architecture+workflow figure in-thread (file_id=F0AJ6E8N42F) and answered follow-up workflow/skill question.",
+        "summary_preview": "Posted cleaner integrated v3 architecture+workflow figure in-thread (file_id=F0AJ6E8N42F) and answered follow-up workflow/skill question.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772578262.213499",
+        "last_update_ts": "1772581991.715073",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T22:57:37Z"
         }
       }
     },
@@ -868,5 +859,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T23:52:29Z"
+  "server_time_utc": "2026-03-03T23:53:16Z"
 }
