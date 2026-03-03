@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T12:37:25Z",
+    "last_updated_utc": "2026-03-03T12:39:26Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 2743,
+    "loop_count": 2763,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -14,47 +14,53 @@
     "max_workers": 2,
     "active_workers": [
       {
+        "slot": 0,
+        "task": "1772505481.005139",
+        "started_at": 1772541500,
+        "elapsed_sec": 66
+      },
+      {
         "slot": 1,
         "task": "1772450279.478169",
         "started_at": 1772539805,
-        "elapsed_sec": 1640
+        "elapsed_sec": 1761
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.85,
-      "five": 1.67,
-      "fifteen": 1.69
+      "one": 1.52,
+      "five": 1.61,
+      "fifteen": 1.66
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65972211712,
-    "disk_free_bytes": 179134984192,
-    "runner_log_size_bytes": 26134154,
+    "disk_used_bytes": 65940119552,
+    "disk_free_bytes": 179167076352,
+    "runner_log_size_bytes": 26135235,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T07:56:29Z",
+    "dashboard_started_utc": "2026-03-03T12:39:30Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T12:37:29Z",
+    "checked_at_utc": "2026-03-03T12:39:30Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 39,
+        "utilization_gpu_pct": 40,
         "memory_used_mb": 63409,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 39
       },
       {
         "index": 1,
@@ -67,10 +73,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 14,
         "memory_used_mb": 18091,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       },
       {
         "index": 3,
@@ -83,7 +89,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 32,
+        "utilization_gpu_pct": 83,
         "memory_used_mb": 24404,
         "memory_total_mb": 97887,
         "temperature_c": 38
@@ -91,10 +97,10 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 57,
+        "utilization_gpu_pct": 18,
         "memory_used_mb": 22406,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 6,
@@ -102,7 +108,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 16058,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 7,
@@ -125,7 +131,7 @@
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772539603.267078",
-        "last_update_ts": "1772541445.308958",
+        "last_update_ts": "1772541494.060698",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
@@ -148,6 +154,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T10:50:35Z"
+        }
+      },
+      "1772505481.005139": {
+        "mention_ts": "1772505481.005139",
+        "thread_ts": "1772505481.005139",
+        "status": "in_progress",
+        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
+        "summary": "Completed data-first PR#2 follow-up with official RFM on matched ID/OOD datasets, delivered full in-thread metrics/interpretation and generated final 6-page fi…",
+        "summary_preview": "Completed data-first PR#2 follow-up with official RFM on matched ID/OOD datasets, delivered full in-thread metrics/interpretation and generated final 6-page fi…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772505481.005139",
+        "last_update_ts": "1772541499.991194",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T10:48:11Z"
         }
       }
     },
@@ -182,22 +204,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-02T03:37:19Z"
-        }
-      },
-      "1772505481.005139": {
-        "mention_ts": "1772505481.005139",
-        "thread_ts": "1772505481.005139",
-        "status": "in_progress",
-        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
-        "summary": "Completed data-first PR#2 follow-up with official RFM on matched ID/OOD datasets, delivered full in-thread metrics/interpretation and generated final 6-page fi…",
-        "summary_preview": "Completed data-first PR#2 follow-up with official RFM on matched ID/OOD datasets, delivered full in-thread metrics/interpretation and generated final 6-page fi…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772505481.005139",
-        "last_update_ts": "1772541316.342588",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T10:48:11Z"
         }
       }
     },
@@ -886,5 +892,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T12:37:30Z"
+  "server_time_utc": "2026-03-03T12:39:31Z"
 }
