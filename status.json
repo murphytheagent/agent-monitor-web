@@ -24,27 +24,27 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.75,
-      "five": 1.81,
-      "fifteen": 1.79
+      "one": 1.61,
+      "five": 1.78,
+      "fifteen": 1.78
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65926696960,
-    "disk_free_bytes": 179180498944,
+    "disk_used_bytes": 65926692864,
+    "disk_free_bytes": 179180503040,
     "runner_log_size_bytes": 26130102,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T12:08:52Z",
+    "dashboard_started_utc": "2026-03-03T07:56:29Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T12:08:52Z",
+    "checked_at_utc": "2026-03-03T12:08:56Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -78,12 +78,12 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 58349,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 46
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 36,
+        "utilization_gpu_pct": 34,
         "memory_used_mb": 26686,
         "memory_total_mb": 97887,
         "temperature_c": 38
@@ -91,7 +91,7 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 20,
+        "utilization_gpu_pct": 31,
         "memory_used_mb": 24688,
         "memory_total_mb": 97887,
         "temperature_c": 37
@@ -99,10 +99,10 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 59,
+        "utilization_gpu_pct": 25,
         "memory_used_mb": 32286,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 36
       },
       {
         "index": 7,
@@ -886,5 +886,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T12:08:52Z"
+  "server_time_utc": "2026-03-03T12:08:57Z"
 }
