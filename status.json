@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T02:34:05Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-03T02:34:13Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 6917,
+    "loop_count": 6918,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,20 +11,12 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1772422639.171219",
-        "started_at": 1772504757,
-        "elapsed_sec": 487
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
       "one": 1.4,
@@ -33,42 +25,25 @@
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65951428608,
-    "disk_free_bytes": 179155767296,
-    "runner_log_size_bytes": 26112861,
+    "disk_used_bytes": 65951166464,
+    "disk_free_bytes": 179156029440,
+    "runner_log_size_bytes": 26112936,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T14:17:01Z",
+    "dashboard_started_utc": "2026-03-03T02:34:14Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-03-03T02:34:12Z",
+    "checked_at_utc": "2026-03-03T02:34:14Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772422639.171219": {
-        "mention_ts": "1772422639.171219",
-        "thread_ts": "1772422639.171219",
-        "status": "in_progress",
-        "task_description": "On small-swe-train, research with Athena on how to incorporate: • nebius/SWE-rebench • SWE-bench/SWE-smith-go • SWE-bench/SWE-smith-js • SWE-bench/SWE-smith-ts into our training m…",
-        "summary": "Delivered Athena-backed integration research for SWE-rebench and SWE-smith-go/js/ts with a phased, codebase-tailored rollout plan and in-thread PDF attachment.",
-        "summary_preview": "Delivered Athena-backed integration research for SWE-rebench and SWE-smith-go/js/ts with a phased, codebase-tailored rollout plan and in-thread PDF attachment.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772422639.171219",
-        "last_update_ts": "1772504757.466930",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-02T03:37:19Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772253474.200459": {
         "mention_ts": "1772253474.200459",
@@ -132,6 +107,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T01:50:23Z"
+        }
+      },
+      "1772422639.171219": {
+        "mention_ts": "1772422639.171219",
+        "thread_ts": "1772422639.171219",
+        "status": "waiting_human",
+        "task_description": "On small-swe-train, research with Athena on how to incorporate: • nebius/SWE-rebench • SWE-bench/SWE-smith-go • SWE-bench/SWE-smith-js • SWE-bench/SWE-smith-ts into our training m…",
+        "summary": "Opened small-swe-train PR #23 with explicit M0-M3 integration milestones and clear delivery boundaries, posted @codex review trigger, and delivered the PR summ…",
+        "summary_preview": "Opened small-swe-train PR #23 with explicit M0-M3 integration milestones and clear delivery boundaries, posted @codex review trigger, and delivered the PR summ…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772422639.171219",
+        "last_update_ts": "1772505252.704599",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-02T03:37:19Z"
         }
       }
     },
@@ -836,5 +827,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T02:34:16Z"
+  "server_time_utc": "2026-03-03T02:34:18Z"
 }
