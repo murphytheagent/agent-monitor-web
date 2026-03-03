@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T06:56:57Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-03T06:58:16Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 240,
+    "loop_count": 253,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,40 +11,32 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772505481.005139",
-        "started_at": 1772520614,
-        "elapsed_sec": 403
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.96,
-      "five": 1.78,
-      "fifteen": 1.74
+      "one": 1.6,
+      "five": 1.74,
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65825267712,
-    "disk_free_bytes": 179281928192,
-    "runner_log_size_bytes": 26116475,
+    "disk_used_bytes": 65825181696,
+    "disk_free_bytes": 179282014208,
+    "runner_log_size_bytes": 26116739,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T06:32:34Z",
+    "dashboard_started_utc": "2026-03-03T06:58:20Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T06:57:00Z",
+    "checked_at_utc": "2026-03-03T06:58:20Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 29
+        "temperature_c": 28
       },
       {
         "index": 1,
@@ -107,33 +99,16 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 87,
+        "utilization_gpu_pct": 90,
         "memory_used_mb": 92495,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 49
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772505481.005139": {
-        "mention_ts": "1772505481.005139",
-        "thread_ts": "1772505481.005139",
-        "status": "in_progress",
-        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
-        "summary": "Completed a PR #2 follow-up audit focused on last-token final and mean-pool final, including class-imbalance interpretation for ROC-AUC/F1/accuracy and a concr…",
-        "summary_preview": "Completed a PR #2 follow-up audit focused on last-token final and mean-pool final, including class-imbalance interpretation for ROC-AUC/F1/accuracy and a concr…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772505481.005139",
-        "last_update_ts": "1772520613.671231",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T02:38:01Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -181,6 +156,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T05:09:25Z"
+        }
+      },
+      "1772505481.005139": {
+        "mention_ts": "1772505481.005139",
+        "thread_ts": "1772505481.005139",
+        "status": "in_progress",
+        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
+        "summary": "Delivered in-thread PR #2 follow-up audit for last-token final and mean-pool final: ROC-AUC/F1/accuracy under imbalance, explanation of last-token ID-OOD delta…",
+        "summary_preview": "Delivered in-thread PR #2 follow-up audit for last-token final and mean-pool final: ROC-AUC/F1/accuracy under imbalance, explanation of last-token ID-OOD delta…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772505481.005139",
+        "last_update_ts": "1772521040.569754",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T02:38:01Z"
         }
       }
     },
@@ -885,5 +876,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T06:57:00Z"
+  "server_time_utc": "2026-03-03T06:58:21Z"
 }
