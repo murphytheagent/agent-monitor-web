@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T07:15:14Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-03T07:16:39Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 420,
+    "loop_count": 434,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,40 +11,48 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772505481.005139",
+        "started_at": 1772522199,
+        "elapsed_sec": 0
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.52,
-      "five": 1.66,
+      "one": 1.7,
+      "five": 1.67,
       "fifteen": 1.68
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65851412480,
-    "disk_free_bytes": 179255783424,
-    "runner_log_size_bytes": 26117807,
+    "disk_used_bytes": 65851879424,
+    "disk_free_bytes": 179255316480,
+    "runner_log_size_bytes": 26117890,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T06:32:34Z",
+    "dashboard_started_utc": "2026-03-03T07:16:44Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T07:15:18Z",
+    "checked_at_utc": "2026-03-03T07:16:44Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 91,
-        "memory_used_mb": 16563,
+        "utilization_gpu_pct": 90,
+        "memory_used_mb": 16565,
         "memory_total_mb": 97887,
         "temperature_c": 53
       },
@@ -54,61 +62,78 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 12352,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 42
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 12352,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 42
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 12352,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 40
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
-        "memory_used_mb": 11655,
+        "utilization_gpu_pct": 95,
+        "memory_used_mb": 20312,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 44
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "memory_used_mb": 693,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 31
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "memory_used_mb": 693,
         "memory_total_mb": 97887,
-        "temperature_c": 26
+        "temperature_c": 31
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "memory_used_mb": 693,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 31
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772505481.005139": {
+        "mention_ts": "1772505481.005139",
+        "thread_ts": "1772505481.005139",
+        "status": "in_progress",
+        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
+        "summary": "Re-polled thread after prior full PR#2 follow-up delivery; no new human messages or executable actions remain, so task stays waiting_human.",
+        "summary_preview": "Re-polled thread after prior full PR#2 follow-up delivery; no new human messages or executable actions remain, so task stays waiting_human.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772505481.005139",
+        "last_update_ts": "1772522199.432301",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T02:38:01Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -156,22 +181,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T05:09:25Z"
-        }
-      },
-      "1772505481.005139": {
-        "mention_ts": "1772505481.005139",
-        "thread_ts": "1772505481.005139",
-        "status": "in_progress",
-        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
-        "summary": "Re-polled thread after prior full PR#2 follow-up delivery; no new human messages or executable actions remain, so task stays waiting_human.",
-        "summary_preview": "Re-polled thread after prior full PR#2 follow-up delivery; no new human messages or executable actions remain, so task stays waiting_human.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772505481.005139",
-        "last_update_ts": "1772522015.614305",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T02:38:01Z"
         }
       }
     },
@@ -876,5 +885,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T07:15:19Z"
+  "server_time_utc": "2026-03-03T07:16:45Z"
 }
