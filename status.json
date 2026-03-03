@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T12:06:49Z",
+    "last_updated_utc": "2026-03-03T12:08:50Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 2441,
+    "loop_count": 2461,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,40 +17,34 @@
         "slot": 0,
         "task": "1772505481.005139",
         "started_at": 1772534920,
-        "elapsed_sec": 4689
-      },
-      {
-        "slot": 1,
-        "task": "1772450279.478169",
-        "started_at": 1772537503,
-        "elapsed_sec": 2105
+        "elapsed_sec": 4810
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.73,
-      "five": 1.8,
-      "fifteen": 1.78
+      "one": 1.75,
+      "five": 1.81,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65926250496,
-    "disk_free_bytes": 179180945408,
-    "runner_log_size_bytes": 26127702,
+    "disk_used_bytes": 65926696960,
+    "disk_free_bytes": 179180498944,
+    "runner_log_size_bytes": 26130102,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T07:56:29Z",
+    "dashboard_started_utc": "2026-03-03T12:08:52Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T12:06:54Z",
+    "checked_at_utc": "2026-03-03T12:08:52Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -65,10 +59,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 58351,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 45
       },
       {
         "index": 2,
@@ -81,15 +75,15 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 58349,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 44
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 30,
+        "utilization_gpu_pct": 36,
         "memory_used_mb": 26686,
         "memory_total_mb": 97887,
         "temperature_c": 38
@@ -97,18 +91,18 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 69,
+        "utilization_gpu_pct": 20,
         "memory_used_mb": 24688,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 37
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 59,
         "memory_used_mb": 32286,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       },
       {
         "index": 7,
@@ -131,7 +125,7 @@
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772539603.267078",
-        "last_update_ts": "1772539603.267078",
+        "last_update_ts": "1772539730.362983",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
@@ -154,22 +148,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T10:48:11Z"
-        }
-      },
-      "1772450279.478169": {
-        "mention_ts": "1772450279.478169",
-        "thread_ts": "1772450279.478169",
-        "status": "in_progress",
-        "task_description": "Go work on PR 18 and 19 of small swe train in order, start with reading comments and fetching main.",
-        "summary": "PR #18 remains code-clean (no unresolved review threads, broad pytest pass), but required 8-GPU Slurm E2E is still blocked by external job 709 and queued submi…",
-        "summary_preview": "PR #18 remains code-clean (no unresolved review threads, broad pytest pass), but required 8-GPU Slurm E2E is still blocked by external job 709 and queued submi…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772450279.478169",
-        "last_update_ts": "1772537503.595434",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T10:50:35Z"
         }
       }
     },
@@ -204,6 +182,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-02T03:37:19Z"
+        }
+      },
+      "1772450279.478169": {
+        "mention_ts": "1772450279.478169",
+        "thread_ts": "1772450279.478169",
+        "status": "in_progress",
+        "task_description": "Go work on PR 18 and 19 of small swe train in order, start with reading comments and fetching main.",
+        "summary": "PR #18 remains code/review clean and the required 8-GPU gate was re-submitted as Slurm job 729, but after a full 30-minute monitor window (2026-03-03 11:34-12:…",
+        "summary_preview": "PR #18 remains code/review clean and the required 8-GPU gate was re-submitted as Slurm job 729, but after a full 30-minute monitor window (2026-03-03 11:34-12:…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772450279.478169",
+        "last_update_ts": "1772539621.596856",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T10:50:35Z"
         }
       }
     },
@@ -892,5 +886,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T12:06:54Z"
+  "server_time_utc": "2026-03-03T12:08:52Z"
 }
