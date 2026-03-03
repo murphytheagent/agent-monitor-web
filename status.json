@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T02:44:35Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-03T02:46:40Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 7017,
+    "loop_count": 7037,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,64 +11,39 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772505481.005139",
-        "started_at": 1772505499,
-        "elapsed_sec": 376
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.17,
-      "five": 1.91,
-      "fifteen": 1.72
+      "one": 1.65,
+      "five": 1.81,
+      "fifteen": 1.7
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65779830784,
-    "disk_free_bytes": 179327365120,
-    "runner_log_size_bytes": 26113072,
+    "disk_used_bytes": 65781575680,
+    "disk_free_bytes": 179325620224,
+    "runner_log_size_bytes": 26113217,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T02:44:42Z",
+    "dashboard_started_utc": "2026-03-02T14:17:01Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-03-03T02:44:42Z",
+    "checked_at_utc": "2026-03-03T02:46:46Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772505481.005139": {
-        "mention_ts": "1772505481.005139",
-        "thread_ts": "1772505481.005139",
-        "status": "in_progress",
-        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
-        "summary": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
-        "summary_preview": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772505481.005139",
-        "last_update_ts": "1772505498.807609",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T02:38:01Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772253474.200459": {
         "mention_ts": "1772253474.200459",
@@ -148,6 +123,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-02T03:37:19Z"
+        }
+      },
+      "1772505481.005139": {
+        "mention_ts": "1772505481.005139",
+        "thread_ts": "1772505481.005139",
+        "status": "waiting_human",
+        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
+        "summary": "Completed a PR #2 follow-up audit focused on last-token final and mean-pool final, including class-imbalance interpretation for ROC-AUC/F1/accuracy and a concr…",
+        "summary_preview": "Completed a PR #2 follow-up audit focused on last-token final and mean-pool final, including class-imbalance interpretation for ROC-AUC/F1/accuracy and a concr…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772505481.005139",
+        "last_update_ts": "1772505945.469538",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T02:38:01Z"
         }
       }
     },
@@ -852,5 +843,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T02:44:46Z"
+  "server_time_utc": "2026-03-03T02:46:50Z"
 }
