@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T22:21:40Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-03T22:22:23Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 363,
+    "loop_count": 370,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,42 +11,56 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772567818.880349",
+        "started_at": 1772576518,
+        "elapsed_sec": 25
+      },
+      {
+        "slot": 1,
+        "task": "1772505481.005139",
+        "started_at": 1772576543,
+        "elapsed_sec": 0
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.46,
-      "five": 1.64,
-      "fifteen": 1.66
+      "one": 1.48,
+      "five": 1.63,
+      "fifteen": 1.65
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 67429699584,
-    "disk_free_bytes": 177677496320,
-    "runner_log_size_bytes": 45727622,
+    "disk_used_bytes": 67429343232,
+    "disk_free_bytes": 177677852672,
+    "runner_log_size_bytes": 45727890,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T21:44:51Z",
+    "dashboard_started_utc": "2026-03-03T22:22:29Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T22:21:43Z",
+    "checked_at_utc": "2026-03-03T22:22:29Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 74,
-        "memory_used_mb": 11393,
+        "utilization_gpu_pct": 73,
+        "memory_used_mb": 11395,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 44
       },
       {
         "index": 1,
@@ -54,7 +68,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 47909,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 46
       },
       {
         "index": 2,
@@ -62,7 +76,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 47814,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 49
       },
       {
         "index": 3,
@@ -70,7 +84,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 18687,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 4,
@@ -108,7 +122,40 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772567818.880349": {
+        "mention_ts": "1772567818.880349",
+        "thread_ts": "1772567818.880349",
+        "status": "in_progress",
+        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
+        "summary": "Re-polled thread 1772567818.880349 at 2026-03-03 22:16 UTC and confirmed there is still no new human follow-up after the implementation delivery message at 202…",
+        "summary_preview": "Re-polled thread 1772567818.880349 at 2026-03-03 22:16 UTC and confirmed there is still no new human follow-up after the implementation delivery message at 202…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772567818.880349",
+        "last_update_ts": "1772576518.289194",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T19:56:58Z"
+        }
+      },
+      "1772505481.005139": {
+        "mention_ts": "1772505481.005139",
+        "thread_ts": "1772505481.005139",
+        "status": "in_progress",
+        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
+        "summary": "Resumed after human [code] ; SSH recovered, posted required preflight, relaunched larger multi-source rebuild as Slurm job 743 (after quick 742 launcher-fix), …",
+        "summary_preview": "Resumed after human [code] ; SSH recovered, posted required preflight, relaunched larger multi-source rebuild as Slurm job 743 (after quick 742 launcher-fix), …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772505481.005139",
+        "last_update_ts": "1772576543.285684",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T22:04:32Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -140,38 +187,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-02T03:37:19Z"
-        }
-      },
-      "1772567818.880349": {
-        "mention_ts": "1772567818.880349",
-        "thread_ts": "1772567818.880349",
-        "status": "in_progress",
-        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
-        "summary": "Re-polled thread 1772567818.880349 at 2026-03-03 22:16 UTC and confirmed there is still no new human follow-up after the implementation delivery message at 202…",
-        "summary_preview": "Re-polled thread 1772567818.880349 at 2026-03-03 22:16 UTC and confirmed there is still no new human follow-up after the implementation delivery message at 202…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772567818.880349",
-        "last_update_ts": "1772576335.584105",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:56:58Z"
-        }
-      },
-      "1772505481.005139": {
-        "mention_ts": "1772505481.005139",
-        "thread_ts": "1772505481.005139",
-        "status": "in_progress",
-        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
-        "summary": "Resumed after human [code] ; SSH recovered, posted required preflight, relaunched larger multi-source rebuild as Slurm job 743 (after quick 742 launcher-fix), …",
-        "summary_preview": "Resumed after human [code] ; SSH recovered, posted required preflight, relaunched larger multi-source rebuild as Slurm job 743 (after quick 742 launcher-fix), …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772505481.005139",
-        "last_update_ts": "1772576359.975723",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T22:04:32Z"
         }
       }
     },
@@ -908,5 +923,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T22:21:44Z"
+  "server_time_utc": "2026-03-03T22:22:29Z"
 }
