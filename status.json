@@ -1,42 +1,50 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T15:04:18Z",
-    "status": "draining_queue",
+    "last_updated_utc": "2026-03-03T15:04:21Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 117250,
+    "loop_count": 117715,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772450279.478169",
+        "started_at": 1772550261,
+        "elapsed_sec": 0
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 3.02,
-      "five": 2.32,
-      "fifteen": 1.9
+      "one": 2.94,
+      "five": 2.31,
+      "fifteen": 1.91
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65965510656,
-    "disk_free_bytes": 179141685248,
-    "runner_log_size_bytes": 38899352,
+    "disk_used_bytes": 65965297664,
+    "disk_free_bytes": 179141898240,
+    "runner_log_size_bytes": 38951505,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T15:04:18Z",
+    "dashboard_started_utc": "2026-03-03T07:56:29Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T15:04:18Z",
+    "checked_at_utc": "2026-03-03T15:04:21Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -51,7 +59,7 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 13,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 18091,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -59,7 +67,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 9,
+        "utilization_gpu_pct": 25,
         "memory_used_mb": 18687,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -75,10 +83,10 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 57,
+        "utilization_gpu_pct": 58,
         "memory_used_mb": 24064,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 42
       },
       {
         "index": 5,
@@ -117,7 +125,7 @@
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772539603.267078",
-        "last_update_ts": "1772550258.280501",
+        "last_update_ts": "1772550261.188127",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
@@ -125,7 +133,24 @@
         }
       }
     },
-    "active": {},
+    "active": {
+      "1772450279.478169": {
+        "mention_ts": "1772450279.478169",
+        "thread_ts": "1772450279.478169",
+        "status": "in_progress",
+        "task_description": "Go work on PR 18 and 19 of small swe train in order, start with reading comments and fetching main.",
+        "summary": "Re-validated PR #18/#19 review-thread state (both unresolved non-outdated counts remained 0 with CLEAN merge status), ran another bounded high-frequency monito…",
+        "summary_preview": "Re-validated PR #18/#19 review-thread state (both unresolved non-outdated counts remained 0 with CLEAN merge status), ran another bounded high-frequency monito…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772450279.478169",
+        "last_update_ts": "1772550260.804019",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T10:50:35Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -173,22 +198,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T10:48:11Z"
-        }
-      },
-      "1772450279.478169": {
-        "mention_ts": "1772450279.478169",
-        "thread_ts": "1772450279.478169",
-        "status": "in_progress",
-        "task_description": "Go work on PR 18 and 19 of small swe train in order, start with reading comments and fetching main.",
-        "summary": "Re-validated PR #18/#19 review-thread state (both unresolved non-outdated counts remained 0 with CLEAN merge status), ran another bounded high-frequency monito…",
-        "summary_preview": "Re-validated PR #18/#19 review-thread state (both unresolved non-outdated counts remained 0 with CLEAN merge status), ran another bounded high-frequency monito…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772450279.478169",
-        "last_update_ts": "1772550080.802271",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T10:50:35Z"
         }
       }
     },
@@ -877,5 +886,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T15:04:19Z"
+  "server_time_utc": "2026-03-03T15:04:21Z"
 }
