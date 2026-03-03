@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T01:54:19Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-03T01:56:24Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 6532,
+    "loop_count": 6552,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,129 +11,39 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772450286.162839",
-        "started_at": 1772502625,
-        "elapsed_sec": 234
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.17,
-      "five": 1.43,
-      "fifteen": 1.5
+      "one": 1.85,
+      "five": 1.63,
+      "fifteen": 1.57
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65972908032,
-    "disk_free_bytes": 179134287872,
-    "runner_log_size_bytes": 26112221,
+    "disk_used_bytes": 65962725376,
+    "disk_free_bytes": 179144470528,
+    "runner_log_size_bytes": 26112366,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T01:54:25Z",
+    "dashboard_started_utc": "2026-03-02T14:17:01Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-03-03T01:54:25Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-03-03T01:56:29Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 29
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772450286.162839": {
-        "mention_ts": "1772450286.162839",
-        "thread_ts": "1772450286.162839",
-        "status": "in_progress",
-        "task_description": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + final wandb logs are wr…",
-        "summary": "Main SDPO E2E verification and WandB finalization fix were completed and validated (PR #22, Slurm job 668, run o7m4x1jw at training/global_step=2); human-repor…",
-        "summary_preview": "Main SDPO E2E verification and WandB finalization fix were completed and validated (PR #22, Slurm job 668, run o7m4x1jw at training/global_step=2); human-repor…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772450286.162839",
-        "last_update_ts": "1772502624.669839",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T01:50:23Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772253474.200459": {
         "mention_ts": "1772253474.200459",
@@ -197,6 +107,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-02T11:17:59Z"
+        }
+      },
+      "1772450286.162839": {
+        "mention_ts": "1772450286.162839",
+        "thread_ts": "1772450286.162839",
+        "status": "waiting_human",
+        "task_description": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + final wandb logs are wr…",
+        "summary": "SDPO E2E verification and WandB finalization fix are complete and validated (PR #22, Slurm job 668, run o7m4x1jw at training/global_step=2), but this runtime c…",
+        "summary_preview": "SDPO E2E verification and WandB finalization fix are complete and validated (PR #22, Slurm job 668, run o7m4x1jw at training/global_step=2), but this runtime c…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772450286.162839",
+        "last_update_ts": "1772502896.596958",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T01:50:23Z"
         }
       }
     },
@@ -901,5 +827,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T01:54:29Z"
+  "server_time_utc": "2026-03-03T01:56:33Z"
 }
