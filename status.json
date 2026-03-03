@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T23:23:32Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-03T23:24:57Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 970,
+    "loop_count": 984,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,42 +11,50 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772578262.213499",
+        "started_at": 1772580267,
+        "elapsed_sec": 30
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.3,
-      "five": 2.17,
-      "fifteen": 2.11
+      "one": 2.25,
+      "five": 2.19,
+      "fifteen": 2.12
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 68910551040,
-    "disk_free_bytes": 176196644864,
-    "runner_log_size_bytes": 45734352,
+    "disk_used_bytes": 68909031424,
+    "disk_free_bytes": 176198164480,
+    "runner_log_size_bytes": 45734492,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T23:23:36Z",
+    "dashboard_started_utc": "2026-03-03T21:44:51Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T23:23:36Z",
+    "checked_at_utc": "2026-03-03T23:25:03Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 73,
-        "memory_used_mb": 11397,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 9485,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 38
       },
       {
         "index": 1,
@@ -67,7 +75,7 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 7,
         "memory_used_mb": 18687,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -75,7 +83,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 24,
+        "utilization_gpu_pct": 13,
         "memory_used_mb": 15369,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -94,7 +102,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 26
       },
       {
         "index": 7,
@@ -102,13 +110,30 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 28
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772578262.213499": {
+        "mention_ts": "1772578262.213499",
+        "thread_ts": "1772578262.213499",
+        "status": "in_progress",
+        "task_description": "Please generate a brief visualization of the overall framework and workflow of the current system.",
+        "summary": "Delivered revised single integrated architecture+workflow figure in-thread with project lifecycle and Athena consult flow (file_id=F0AJAKNSW2J, ts=1772580008.7…",
+        "summary_preview": "Delivered revised single integrated architecture+workflow figure in-thread with project lifecycle and Athena consult flow (file_id=F0AJAKNSW2J, ts=1772580008.7…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772578262.213499",
+        "last_update_ts": "1772580267.340743",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T22:57:37Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -172,22 +197,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T19:56:58Z"
-        }
-      },
-      "1772578262.213499": {
-        "mention_ts": "1772578262.213499",
-        "thread_ts": "1772578262.213499",
-        "status": "waiting_human",
-        "task_description": "Please generate a brief visualization of the overall framework and workflow of the current system.",
-        "summary": "Delivered revised single integrated architecture+workflow figure in-thread with project lifecycle and Athena consult flow (file_id=F0AJAKNSW2J, ts=1772580008.7…",
-        "summary_preview": "Delivered revised single integrated architecture+workflow figure in-thread with project lifecycle and Athena consult flow (file_id=F0AJAKNSW2J, ts=1772580008.7…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772578262.213499",
-        "last_update_ts": "1772580106.289612",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T22:57:37Z"
         }
       }
     },
@@ -924,5 +933,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T23:23:36Z"
+  "server_time_utc": "2026-03-03T23:25:04Z"
 }
