@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T22:57:05Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-03T22:58:25Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 712,
+    "loop_count": 725,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,40 +11,48 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772578262.213499",
+        "started_at": 1772578668,
+        "elapsed_sec": 36
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.57,
-      "five": 2.12,
-      "fifteen": 2.03
+      "one": 1.74,
+      "five": 2.04,
+      "fifteen": 2.0
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 67566186496,
-    "disk_free_bytes": 177541009408,
-    "runner_log_size_bytes": 45733540,
+    "disk_used_bytes": 67568025600,
+    "disk_free_bytes": 177539170304,
+    "runner_log_size_bytes": 45733728,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T22:57:08Z",
+    "dashboard_started_utc": "2026-03-03T21:44:51Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T22:57:08Z",
+    "checked_at_utc": "2026-03-03T22:58:29Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 73,
-        "memory_used_mb": 11395,
+        "utilization_gpu_pct": 75,
+        "memory_used_mb": 11397,
         "memory_total_mb": 97887,
         "temperature_c": 44
       },
@@ -54,7 +62,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 18093,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       },
       {
         "index": 2,
@@ -67,7 +75,7 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 18687,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -75,7 +83,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 4,
         "memory_used_mb": 15369,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772578262.213499": {
+        "mention_ts": "1772578262.213499",
+        "thread_ts": "1772578262.213499",
+        "status": "in_progress",
+        "task_description": "Please generate a brief visualization of the overall framework and workflow of the current system.",
+        "summary": "Delivered a rendered framework/workflow figure in-thread as a Slack attachment (file_id=F0AJRF2HAHF, ts=1772578522.553199).",
+        "summary_preview": "Delivered a rendered framework/workflow figure in-thread as a Slack attachment (file_id=F0AJRF2HAHF, ts=1772578522.553199).",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772578262.213499",
+        "last_update_ts": "1772578668.537639",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T22:57:37Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -176,22 +201,6 @@
       }
     },
     "finished": {
-      "1772578262.213499": {
-        "mention_ts": "1772578262.213499",
-        "thread_ts": "1772578262.213499",
-        "status": "done",
-        "task_description": "Please generate a brief visualization of the overall framework and workflow of the current system.",
-        "summary": "Delivered a rendered framework/workflow figure in-thread as a Slack attachment (file_id=F0AJRF2HAHF, ts=1772578522.553199).",
-        "summary_preview": "Delivered a rendered framework/workflow figure in-thread as a Slack attachment (file_id=F0AJRF2HAHF, ts=1772578522.553199).",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772578262.213499",
-        "last_update_ts": "1772578592.836375",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T22:51:02Z"
-        }
-      },
       "1772555674.302409": {
         "mention_ts": "1772555674.302409",
         "thread_ts": "1772555674.302409",
@@ -924,5 +933,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T22:57:09Z"
+  "server_time_utc": "2026-03-03T22:58:30Z"
 }
