@@ -1,56 +1,42 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T14:03:02Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-03T14:05:08Z",
+    "status": "draining_queue",
     "pid": 15833,
-    "loop_count": 23711,
+    "loop_count": 26993,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772505481.005139",
-        "started_at": 1772546390,
-        "elapsed_sec": 191
-      },
-      {
-        "slot": 1,
-        "task": "1772450279.478169",
-        "started_at": 1772544523,
-        "elapsed_sec": 2059
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.09,
-      "five": 1.78,
-      "fifteen": 1.7
+      "one": 1.86,
+      "five": 1.79,
+      "fifteen": 1.71
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65926488064,
-    "disk_free_bytes": 179180707840,
-    "runner_log_size_bytes": 28440244,
+    "disk_used_bytes": 65928097792,
+    "disk_free_bytes": 179179098112,
+    "runner_log_size_bytes": 28807925,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T14:03:08Z",
+    "dashboard_started_utc": "2026-03-03T07:56:29Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T14:03:08Z",
+    "checked_at_utc": "2026-03-03T14:05:08Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -65,7 +51,7 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 15,
+        "utilization_gpu_pct": 17,
         "memory_used_mb": 18091,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -73,7 +59,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 6,
+        "utilization_gpu_pct": 3,
         "memory_used_mb": 18687,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -89,7 +75,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 59,
+        "utilization_gpu_pct": 57,
         "memory_used_mb": 24060,
         "memory_total_mb": 97887,
         "temperature_c": 42
@@ -116,7 +102,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 693,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       }
     ]
   },
@@ -131,7 +117,7 @@
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772539603.267078",
-        "last_update_ts": "1772546384.333329",
+        "last_update_ts": "1772546708.465269",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
@@ -139,40 +125,7 @@
         }
       }
     },
-    "active": {
-      "1772450279.478169": {
-        "mention_ts": "1772450279.478169",
-        "thread_ts": "1772450279.478169",
-        "status": "in_progress",
-        "task_description": "Go work on PR 18 and 19 of small swe train in order, start with reading comments and fetching main.",
-        "summary": "Re-synced PR #18/#19 branches, rechecked review threads (still zero unresolved non-outdated on both), and completed another full bounded monitor window for req…",
-        "summary_preview": "Re-synced PR #18/#19 branches, rechecked review threads (still zero unresolved non-outdated on both), and completed another full bounded monitor window for req…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772450279.478169",
-        "last_update_ts": "1772544522.870824",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T10:50:35Z"
-        }
-      },
-      "1772505481.005139": {
-        "mention_ts": "1772505481.005139",
-        "thread_ts": "1772505481.005139",
-        "status": "in_progress",
-        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
-        "summary": "Re-polled at 2026-03-03 13:53 UTC and confirmed no new human replies after the 2026-03-03 12:32 UTC final delivery; skipped duplicate in-thread posting and kep…",
-        "summary_preview": "Re-polled at 2026-03-03 13:53 UTC and confirmed no new human replies after the 2026-03-03 12:32 UTC final delivery; skipped duplicate in-thread posting and kep…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772505481.005139",
-        "last_update_ts": "1772546390.384802",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T10:48:11Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -204,6 +157,38 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-02T03:37:19Z"
+        }
+      },
+      "1772505481.005139": {
+        "mention_ts": "1772505481.005139",
+        "thread_ts": "1772505481.005139",
+        "status": "in_progress",
+        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
+        "summary": "Re-polled at 2026-03-03 14:00 UTC and confirmed no new human replies after the 2026-03-03 12:32 UTC final delivery; skipped duplicate in-thread posting and kep…",
+        "summary_preview": "Re-polled at 2026-03-03 14:00 UTC and confirmed no new human replies after the 2026-03-03 12:32 UTC final delivery; skipped duplicate in-thread posting and kep…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772505481.005139",
+        "last_update_ts": "1772546613.110355",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T10:48:11Z"
+        }
+      },
+      "1772450279.478169": {
+        "mention_ts": "1772450279.478169",
+        "thread_ts": "1772450279.478169",
+        "status": "in_progress",
+        "task_description": "Go work on PR 18 and 19 of small swe train in order, start with reading comments and fetching main.",
+        "summary": "Re-synced PR #18/#19 branches, rechecked review threads (still zero unresolved non-outdated on both), and completed another full bounded monitor window for req…",
+        "summary_preview": "Re-synced PR #18/#19 branches, rechecked review threads (still zero unresolved non-outdated on both), and completed another full bounded monitor window for req…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772450279.478169",
+        "last_update_ts": "1772546689.366214",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T10:50:35Z"
         }
       }
     },
@@ -892,5 +877,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T14:03:09Z"
+  "server_time_utc": "2026-03-03T14:05:09Z"
 }
