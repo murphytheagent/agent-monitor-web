@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T20:24:14Z",
+    "last_updated_utc": "2026-03-03T20:26:17Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 2087,
+    "loop_count": 2107,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -15,52 +15,52 @@
     "active_workers": [
       {
         "slot": 0,
-        "task": "1772555674.302409",
-        "started_at": 1772569442,
-        "elapsed_sec": 12
+        "task": "1772567818.880349",
+        "started_at": 1772569559,
+        "elapsed_sec": 18
       },
       {
         "slot": 1,
         "task": "1772505481.005139",
         "started_at": 1772569069,
-        "elapsed_sec": 384
+        "elapsed_sec": 507
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.72,
-      "five": 1.72,
-      "fifteen": 1.67
+      "one": 2.56,
+      "five": 1.9,
+      "fifteen": 1.74
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 67404689408,
-    "disk_free_bytes": 177702506496,
-    "runner_log_size_bytes": 45639621,
+    "disk_used_bytes": 67406041088,
+    "disk_free_bytes": 177701154816,
+    "runner_log_size_bytes": 45642546,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T20:24:19Z",
+    "dashboard_started_utc": "2026-03-03T16:49:10Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T20:24:19Z",
+    "checked_at_utc": "2026-03-03T20:26:19Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 73,
+        "utilization_gpu_pct": 74,
         "memory_used_mb": 11399,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 45
       },
       {
         "index": 1,
@@ -76,12 +76,12 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 19378,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 21,
         "memory_used_mb": 19378,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -89,7 +89,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 17,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 15369,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -139,20 +139,20 @@
           "time_iso": "2026-03-03T20:17:48Z"
         }
       },
-      "1772555674.302409": {
-        "mention_ts": "1772555674.302409",
-        "thread_ts": "1772555674.302409",
+      "1772567818.880349": {
+        "mention_ts": "1772567818.880349",
+        "thread_ts": "1772567818.880349",
         "status": "in_progress",
-        "task_description": "1.",
-        "summary": "1.",
-        "summary_preview": "1.",
+        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
+        "summary": "Completed PR18-21 retarget/implementation delivery earlier; latest redispatch check found no new human follow-up, so the thread remains waiting for sequencing/…",
+        "summary_preview": "Completed PR18-21 retarget/implementation delivery earlier; latest redispatch check found no new human follow-up, so the thread remains waiting for sequencing/…",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772566447.268049",
-        "last_update_ts": "1772569441.941783",
+        "created_ts": "1772567818.880349",
+        "last_update_ts": "1772569559.080281",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:34:07Z"
+          "time_iso": "2026-03-03T19:56:58Z"
         }
       }
     },
@@ -189,20 +189,20 @@
           "time_iso": "2026-03-02T03:37:19Z"
         }
       },
-      "1772567818.880349": {
-        "mention_ts": "1772567818.880349",
-        "thread_ts": "1772567818.880349",
+      "1772555674.302409": {
+        "mention_ts": "1772555674.302409",
+        "thread_ts": "1772555674.302409",
         "status": "in_progress",
-        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
-        "summary": "Completed PR18-21 retarget/implementation delivery earlier; latest redispatch check found no new human follow-up, so the thread remains waiting for sequencing/…",
-        "summary_preview": "Completed PR18-21 retarget/implementation delivery earlier; latest redispatch check found no new human follow-up, so the thread remains waiting for sequencing/…",
+        "task_description": "1.",
+        "summary": "1.",
+        "summary_preview": "1.",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772567818.880349",
-        "last_update_ts": "1772569367.554631",
+        "created_ts": "1772566447.268049",
+        "last_update_ts": "1772569558.807776",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:56:58Z"
+          "time_iso": "2026-03-03T19:34:07Z"
         }
       }
     },
@@ -923,5 +923,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T20:24:20Z"
+  "server_time_utc": "2026-03-03T20:26:20Z"
 }
