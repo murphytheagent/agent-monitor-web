@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T02:19:28Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-03T02:21:38Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 6775,
+    "loop_count": 6796,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,39 +11,64 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772450286.162839",
+        "started_at": 1772504387,
+        "elapsed_sec": 110
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.53,
-      "five": 1.62,
-      "fifteen": 1.67
+      "one": 1.82,
+      "five": 1.66,
+      "fifteen": 1.68
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65950060544,
-    "disk_free_bytes": 179157135360,
-    "runner_log_size_bytes": 26112366,
+    "disk_used_bytes": 65951236096,
+    "disk_free_bytes": 179155959808,
+    "runner_log_size_bytes": 26112506,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T02:19:34Z",
+    "dashboard_started_utc": "2026-03-02T14:17:01Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-03-03T02:19:34Z",
+    "checked_at_utc": "2026-03-03T02:21:38Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772450286.162839": {
+        "mention_ts": "1772450286.162839",
+        "thread_ts": "1772450286.162839",
+        "status": "in_progress",
+        "task_description": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + final wandb logs are wr…",
+        "summary": "SDPO E2E verification and WandB finalization fix are complete and validated (PR #22, Slurm job 668, run o7m4x1jw at training/global_step=2), but this runtime c…",
+        "summary_preview": "SDPO E2E verification and WandB finalization fix are complete and validated (PR #22, Slurm job 668, run o7m4x1jw at training/global_step=2), but this runtime c…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772450286.162839",
+        "last_update_ts": "1772504387.542811",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T01:50:23Z"
+        }
+      }
+    },
     "incomplete": {
       "1772253474.200459": {
         "mention_ts": "1772253474.200459",
@@ -107,22 +132,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-02T11:17:59Z"
-        }
-      },
-      "1772450286.162839": {
-        "mention_ts": "1772450286.162839",
-        "thread_ts": "1772450286.162839",
-        "status": "waiting_human",
-        "task_description": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + final wandb logs are wr…",
-        "summary": "SDPO E2E verification and WandB finalization fix are complete and validated (PR #22, Slurm job 668, run o7m4x1jw at training/global_step=2), but this runtime c…",
-        "summary_preview": "SDPO E2E verification and WandB finalization fix are complete and validated (PR #22, Slurm job 668, run o7m4x1jw at training/global_step=2), but this runtime c…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772450286.162839",
-        "last_update_ts": "1772502896.596958",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T01:50:23Z"
         }
       }
     },
@@ -827,5 +836,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T02:19:38Z"
+  "server_time_utc": "2026-03-03T02:21:42Z"
 }
