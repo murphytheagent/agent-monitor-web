@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T00:27:54Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-03T00:29:54Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 5703,
+    "loop_count": 5722,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,42 +11,50 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772450286.162839",
+        "started_at": 1772497776,
+        "elapsed_sec": 18
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.74,
-      "five": 1.73,
-      "fifteen": 1.67
+      "one": 1.42,
+      "five": 1.61,
+      "fifteen": 1.63
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65974398976,
-    "disk_free_bytes": 179132796928,
-    "runner_log_size_bytes": 26111744,
+    "disk_used_bytes": 65970356224,
+    "disk_free_bytes": 179136839680,
+    "runner_log_size_bytes": 26111884,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T00:27:59Z",
+    "dashboard_started_utc": "2026-03-02T14:17:01Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T00:27:59Z",
+    "checked_at_utc": "2026-03-03T00:30:00Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 77,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 14531,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 47
       },
       {
         "index": 1,
@@ -78,7 +86,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 697,
         "memory_total_mb": 97887,
-        "temperature_c": 31
+        "temperature_c": 32
       },
       {
         "index": 5,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772450286.162839": {
+        "mention_ts": "1772450286.162839",
+        "thread_ts": "1772450286.162839",
+        "status": "in_progress",
+        "task_description": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + final wandb logs are wr…",
+        "summary": "Verified main SDPO E2E, reproduced WandB incompleteness, shipped fix in PR #22, and validated Slurm job 668 with WandB run o7m4x1jw finished at training/global…",
+        "summary_preview": "Verified main SDPO E2E, reproduced WandB incompleteness, shipped fix in PR #22, and validated Slurm job 668 with WandB run o7m4x1jw finished at training/global…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772450286.162839",
+        "last_update_ts": "1772497775.856038",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-02T11:18:06Z"
+        }
+      }
+    },
     "incomplete": {
       "1772253474.200459": {
         "mention_ts": "1772253474.200459",
@@ -172,22 +197,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-02T11:17:59Z"
-        }
-      },
-      "1772450286.162839": {
-        "mention_ts": "1772450286.162839",
-        "thread_ts": "1772450286.162839",
-        "status": "waiting_human",
-        "task_description": "The last commit to main small swe train by me is not yet verified e2e with the default slurm launch, do it, monitor, and make sure the run can finish e2e + final wandb logs are wr…",
-        "summary": "Verified main SDPO E2E, reproduced WandB incompleteness, shipped fix in PR #22, and validated Slurm job 668 with WandB run o7m4x1jw finished at training/global…",
-        "summary_preview": "Verified main SDPO E2E, reproduced WandB incompleteness, shipped fix in PR #22, and validated Slurm job 668 with WandB run o7m4x1jw finished at training/global…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772450286.162839",
-        "last_update_ts": "1772459376.431044",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-02T11:18:06Z"
         }
       }
     },
@@ -892,5 +901,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T00:27:59Z"
+  "server_time_utc": "2026-03-03T00:30:00Z"
 }
