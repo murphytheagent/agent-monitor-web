@@ -3,7 +3,7 @@
     "last_updated_utc": "2026-03-03T13:26:27Z",
     "status": "draining_queue",
     "pid": 15833,
-    "loop_count": 17811,
+    "loop_count": 17859,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,7 +16,7 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
       "one": 2.84,
@@ -25,11 +25,11 @@
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65904156672,
-    "disk_free_bytes": 179203039232,
-    "runner_log_size_bytes": 27798162,
+    "disk_used_bytes": 65904173056,
+    "disk_free_bytes": 179203022848,
+    "runner_log_size_bytes": 27803650,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T07:56:29Z",
+    "dashboard_started_utc": "2026-03-03T13:26:27Z",
     "local_ips": []
   },
   "gpu": {
@@ -107,18 +107,17 @@
     ]
   },
   "tasks": {
-    "queued": {},
-    "active": {
+    "queued": {
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "maintenance",
-        "status": "in_progress",
+        "status": "queued",
         "task_description": "Run maintenance reflection checklist and summarize findings.",
         "summary": "Run maintenance reflection checklist and summarize findings.",
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772539603.267078",
-        "last_update_ts": "1772544387.546128",
+        "last_update_ts": "1772544387.799230",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
@@ -126,6 +125,7 @@
         }
       }
     },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
