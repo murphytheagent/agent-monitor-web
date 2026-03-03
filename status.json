@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T22:46:09Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-03T22:46:52Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 606,
+    "loop_count": 613,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,40 +11,32 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772505481.005139",
-        "started_at": 1772577757,
-        "elapsed_sec": 211
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.53,
-      "five": 1.88,
-      "fifteen": 1.86
+      "one": 1.48,
+      "five": 1.83,
+      "fifteen": 1.84
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 67441467392,
-    "disk_free_bytes": 177665728512,
-    "runner_log_size_bytes": 45731403,
+    "disk_used_bytes": 67442614272,
+    "disk_free_bytes": 177664581632,
+    "runner_log_size_bytes": 45731645,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T21:44:51Z",
+    "dashboard_started_utc": "2026-03-03T22:46:57Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T22:46:14Z",
+    "checked_at_utc": "2026-03-03T22:46:57Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +51,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 6,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 18093,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 2,
@@ -75,18 +67,18 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 20,
         "memory_used_mb": 18687,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 24,
         "memory_used_mb": 15369,
         "memory_total_mb": 97887,
-        "temperature_c": 31
+        "temperature_c": 32
       },
       {
         "index": 5,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772505481.005139": {
-        "mention_ts": "1772505481.005139",
-        "thread_ts": "1772505481.005139",
-        "status": "in_progress",
-        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
-        "summary": "Continued resumed cot-loop run monitoring: Slurm job 743 remains RUNNING for the locked MLP+last_token_final+OOD multi-source rebuild; rollout labeling progres…",
-        "summary_preview": "Continued resumed cot-loop run monitoring: Slurm job 743 remains RUNNING for the locked MLP+last_token_final+OOD multi-source rebuild; rollout labeling progres…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772505481.005139",
-        "last_update_ts": "1772577756.909561",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T22:04:32Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -181,6 +156,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T19:56:58Z"
+        }
+      },
+      "1772505481.005139": {
+        "mention_ts": "1772505481.005139",
+        "thread_ts": "1772505481.005139",
+        "status": "waiting_human",
+        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
+        "summary": "Processed explicit !stop, canceled active Slurm job 743 at 2026-03-03 22:43 UTC, posted in-thread stop confirmation, and paused the cot-loop rebuild pending ne…",
+        "summary_preview": "Processed explicit !stop, canceled active Slurm job 743 at 2026-03-03 22:43 UTC, posted in-thread stop confirmation, and paused the cot-loop rebuild pending ne…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772505481.005139",
+        "last_update_ts": "1772577993.296453",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T22:04:32Z"
         }
       }
     },
@@ -917,5 +908,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T22:46:15Z"
+  "server_time_utc": "2026-03-03T22:46:57Z"
 }
