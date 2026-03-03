@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T00:56:52Z",
+    "last_updated_utc": "2026-03-03T00:58:56Z",
     "status": "sleeping",
     "pid": 15833,
-    "loop_count": 5980,
+    "loop_count": 6000,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,37 +16,37 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.7,
-      "five": 1.66,
-      "fifteen": 1.6
+      "one": 3.48,
+      "five": 2.09,
+      "fifteen": 1.76
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65954885632,
-    "disk_free_bytes": 179152310272,
+    "disk_used_bytes": 65957281792,
+    "disk_free_bytes": 179149914112,
     "runner_log_size_bytes": 26112029,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T14:17:01Z",
+    "dashboard_started_utc": "2026-03-03T00:58:57Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T00:56:55Z",
+    "checked_at_utc": "2026-03-03T00:58:57Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 83,
         "memory_used_mb": 7893,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 47
       },
       {
         "index": 1,
@@ -70,7 +70,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 697,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       },
       {
         "index": 4,
@@ -892,5 +892,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T00:56:56Z"
+  "server_time_utc": "2026-03-03T00:58:58Z"
 }
