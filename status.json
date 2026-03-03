@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T02:36:13Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-03T02:38:19Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 6937,
+    "loop_count": 6957,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,104 +11,64 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772505481.005139",
+        "started_at": 1772505499,
+        "elapsed_sec": 0
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.69,
-      "five": 1.57,
+      "one": 1.53,
+      "five": 1.58,
       "fifteen": 1.58
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65952284672,
-    "disk_free_bytes": 179154911232,
-    "runner_log_size_bytes": 26112936,
+    "disk_used_bytes": 65954078720,
+    "disk_free_bytes": 179153117184,
+    "runner_log_size_bytes": 26113072,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T02:36:20Z",
+    "dashboard_started_utc": "2026-03-02T14:17:01Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-03-03T02:36:20Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-03-03T02:38:23Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 31
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 30
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772505481.005139": {
+        "mention_ts": "1772505481.005139",
+        "thread_ts": "1772505481.005139",
+        "status": "in_progress",
+        "task_description": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
+        "summary": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
+        "summary_preview": "A few things to investigate on your latest experiments with cot-loop, PR#2: • is it the right metric to look at ROC-AUC?",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772505481.005139",
+        "last_update_ts": "1772505498.807609",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T02:38:01Z"
+        }
+      }
+    },
     "incomplete": {
       "1772253474.200459": {
         "mention_ts": "1772253474.200459",
@@ -892,5 +852,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T02:36:24Z"
+  "server_time_utc": "2026-03-03T02:38:27Z"
 }
