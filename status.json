@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T14:47:52Z",
+    "last_updated_utc": "2026-03-03T14:47:58Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 85951,
+    "loop_count": 85952,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,14 +17,14 @@
         "slot": 1,
         "task": "1772450279.478169",
         "started_at": 1772548923,
-        "elapsed_sec": 349
+        "elapsed_sec": 355
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
       "one": 1.76,
@@ -33,18 +33,18 @@
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65947394048,
-    "disk_free_bytes": 179159801856,
-    "runner_log_size_bytes": 35394276,
+    "disk_used_bytes": 65947541504,
+    "disk_free_bytes": 179159654400,
+    "runner_log_size_bytes": 35394388,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T14:47:57Z",
+    "dashboard_started_utc": "2026-03-03T07:56:29Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T14:47:57Z",
+    "checked_at_utc": "2026-03-03T14:47:58Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +59,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 18091,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       },
       {
         "index": 2,
@@ -83,7 +83,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 90,
+        "utilization_gpu_pct": 71,
         "memory_used_mb": 24064,
         "memory_total_mb": 97887,
         "temperature_c": 43
@@ -125,7 +125,7 @@
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772539603.267078",
-        "last_update_ts": "1772549272.700336",
+        "last_update_ts": "1772549278.550074",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
@@ -886,5 +886,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T14:47:58Z"
+  "server_time_utc": "2026-03-03T14:47:59Z"
 }
