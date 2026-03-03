@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T21:59:13Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-03T22:00:03Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 142,
+    "loop_count": 150,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,40 +11,32 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772567818.880349",
-        "started_at": 1772574960,
-        "elapsed_sec": 193
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.65,
-      "five": 1.66,
-      "fifteen": 1.69
+      "one": 1.68,
+      "five": 1.67,
+      "fifteen": 1.68
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 67430555648,
-    "disk_free_bytes": 177676640256,
-    "runner_log_size_bytes": 45725150,
+    "disk_used_bytes": 67431596032,
+    "disk_free_bytes": 177675599872,
+    "runner_log_size_bytes": 45725521,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T21:44:51Z",
+    "dashboard_started_utc": "2026-03-03T22:00:04Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T21:59:15Z",
+    "checked_at_utc": "2026-03-03T22:00:04Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,15 +51,15 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 24,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 18093,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 18687,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -75,10 +67,10 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 24,
         "memory_used_mb": 18687,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       },
       {
         "index": 4,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772567818.880349": {
-        "mention_ts": "1772567818.880349",
-        "thread_ts": "1772567818.880349",
-        "status": "in_progress",
-        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
-        "summary": "Re-polled the Slack thread at 2026-03-03 21:49 UTC; no new human follow-up after the implementation delivery ( [code] ), and sequencing/approval is still pendi…",
-        "summary_preview": "Re-polled the Slack thread at 2026-03-03 21:49 UTC; no new human follow-up after the implementation delivery ( [code] ), and sequencing/approval is still pendi…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772567818.880349",
-        "last_update_ts": "1772574959.812452",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:56:58Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -181,6 +156,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T20:17:48Z"
+        }
+      },
+      "1772567818.880349": {
+        "mention_ts": "1772567818.880349",
+        "thread_ts": "1772567818.880349",
+        "status": "in_progress",
+        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
+        "summary": "Re-polled the Slack thread at 2026-03-03 21:56 UTC and confirmed there is still no new human follow-up after the implementation delivery ( [code] ); PR stack u…",
+        "summary_preview": "Re-polled the Slack thread at 2026-03-03 21:56 UTC and confirmed there is still no new human follow-up after the implementation delivery ( [code] ); PR stack u…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772567818.880349",
+        "last_update_ts": "1772575178.317443",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T19:56:58Z"
         }
       }
     },
@@ -917,5 +908,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T21:59:16Z"
+  "server_time_utc": "2026-03-03T22:00:04Z"
 }
