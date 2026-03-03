@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T03:23:32Z",
+    "last_updated_utc": "2026-03-03T03:23:39Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 7393,
+    "loop_count": 7394,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,14 +17,14 @@
         "slot": 0,
         "task": "1772450286.162839",
         "started_at": 1772506195,
-        "elapsed_sec": 2017
+        "elapsed_sec": 2024
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
       "one": 1.26,
@@ -33,86 +33,21 @@
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65772965888,
-    "disk_free_bytes": 179334230016,
+    "disk_used_bytes": 65773105152,
+    "disk_free_bytes": 179334090752,
     "runner_log_size_bytes": 26113357,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-02T14:17:01Z",
+    "dashboard_started_utc": "2026-03-03T03:23:39Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-03-03T03:23:38Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-03-03T03:23:40Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 4,
-        "memory_total_mb": 97887,
-        "temperature_c": 28
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 4,
-        "memory_total_mb": 97887,
-        "temperature_c": 27
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 4,
-        "memory_total_mb": 97887,
-        "temperature_c": 28
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 561,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 4,
-        "memory_total_mb": 97887,
-        "temperature_c": 27
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 4,
-        "memory_total_mb": 97887,
-        "temperature_c": 27
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 4,
-        "memory_total_mb": 97887,
-        "temperature_c": 27
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 4,
-        "memory_total_mb": 97887,
-        "temperature_c": 27
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
@@ -917,5 +852,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T03:23:38Z"
+  "server_time_utc": "2026-03-03T03:23:44Z"
 }
