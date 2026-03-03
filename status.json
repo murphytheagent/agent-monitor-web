@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-03T09:30:06Z",
+    "last_updated_utc": "2026-03-03T09:31:26Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 911,
+    "loop_count": 924,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,41 +17,41 @@
         "slot": 0,
         "task": "1772505481.005139",
         "started_at": 1772530175,
-        "elapsed_sec": 30
+        "elapsed_sec": 110
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.81,
-      "five": 1.62,
-      "fifteen": 1.6
+      "one": 1.51,
+      "five": 1.57,
+      "fifteen": 1.58
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 65913835520,
-    "disk_free_bytes": 179193360384,
+    "disk_used_bytes": 65915052032,
+    "disk_free_bytes": 179192143872,
     "runner_log_size_bytes": 26125021,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T07:56:29Z",
+    "dashboard_started_utc": "2026-03-03T09:31:32Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-03T09:30:10Z",
+    "checked_at_utc": "2026-03-03T09:31:32Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 7,
         "memory_used_mb": 91449,
         "memory_total_mb": 97887,
         "temperature_c": 34
@@ -59,10 +59,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 33,
-        "memory_used_mb": 24311,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 32546,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 33
       },
       {
         "index": 2,
@@ -70,7 +70,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 24311,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 33
       },
       {
         "index": 3,
@@ -78,7 +78,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 45635,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 33
       },
       {
         "index": 4,
@@ -86,7 +86,7 @@
         "utilization_gpu_pct": 90,
         "memory_used_mb": 95690,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 39
       },
       {
         "index": 5,
@@ -885,5 +885,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-03T09:30:11Z"
+  "server_time_utc": "2026-03-03T09:31:32Z"
 }
