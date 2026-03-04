@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-04T20:44:03Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-04T20:45:53Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 57,
+    "loop_count": 74,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,50 +11,58 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772649415.965119",
+        "started_at": 1772657135,
+        "elapsed_sec": 18
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.98,
-      "five": 1.94,
-      "fifteen": 1.82
+      "one": 1.58,
+      "five": 1.82,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85046792192,
-    "disk_free_bytes": 160060403712,
-    "runner_log_size_bytes": 46057374,
+    "disk_used_bytes": 85046972416,
+    "disk_free_bytes": 160060223488,
+    "runner_log_size_bytes": 46057693,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-04T20:38:02Z",
+    "dashboard_started_utc": "2026-03-04T20:45:57Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-04T20:44:08Z",
+    "checked_at_utc": "2026-03-04T20:45:57Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 25235,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 23125,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 33
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 25235,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 22949,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 33
       },
       {
         "index": 2,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772649415.965119": {
+        "mention_ts": "1772649415.965119",
+        "thread_ts": "1772649415.965119",
+        "status": "in_progress",
+        "task_description": "On pr 18 small swe train, what's the current default for teacher reprompt and results of last two pilot studies?",
+        "summary": "Answered PR18 teacher-reprompt defaults and reported the last two pilot summaries (runs 771 and 775) with noise/runtime interpretation.",
+        "summary_preview": "Answered PR18 teacher-reprompt defaults and reported the last two pilot summaries (runs 771 and 775) with noise/runtime interpretation.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772649415.965119",
+        "last_update_ts": "1772657134.886628",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-04T20:45:24Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -270,22 +295,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-04T18:56:03Z"
-        }
-      },
-      "1772649415.965119": {
-        "mention_ts": "1772649415.965119",
-        "thread_ts": "1772649415.965119",
-        "status": "done",
-        "task_description": "On pr 18 small swe train, what's the current default for teacher reprompt and results of last two pilot studies?",
-        "summary": "Answered PR18 teacher-reprompt defaults and reported the last two pilot summaries (runs 771 and 775) with noise/runtime interpretation.",
-        "summary_preview": "Answered PR18 teacher-reprompt defaults and reported the last two pilot summaries (runs 771 and 775) with noise/runtime interpretation.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772649415.965119",
-        "last_update_ts": "1772653651.543394",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-04T18:36:55Z"
         }
       },
       "1772606689.474009": {
@@ -1039,6 +1048,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-20T02:09:15Z"
         }
+      },
+      "1771544884.640199": {
+        "mention_ts": "1771544884.640199",
+        "thread_ts": "1771544884.640199",
+        "status": "done",
+        "task_description": "Help me summarize the main findings of this paper: <[link].",
+        "summary": "Reviewed arXiv 2510.13680 and posted a concise main-findings summary in the Slack thread.",
+        "summary_preview": "Reviewed arXiv 2510.13680 and posted a concise main-findings summary in the Slack thread.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771544884.640199",
+        "last_update_ts": "1771547793.242921",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-19T23:48:04Z"
+        }
       }
     }
   },
@@ -1052,5 +1077,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-04T20:44:09Z"
+  "server_time_utc": "2026-03-04T20:45:59Z"
 }
