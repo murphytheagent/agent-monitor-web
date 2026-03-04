@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-04T06:02:02Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-04T06:04:05Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 3506,
+    "loop_count": 3525,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,64 +11,39 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772567818.880349",
-        "started_at": 1772603886,
-        "elapsed_sec": 236
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.99,
-      "five": 1.73,
-      "fifteen": 1.64
+      "one": 1.47,
+      "five": 1.6,
+      "fifteen": 1.6
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 86078427136,
-    "disk_free_bytes": 159028768768,
-    "runner_log_size_bytes": 45742612,
+    "disk_used_bytes": 86079119360,
+    "disk_free_bytes": 159028076544,
+    "runner_log_size_bytes": 45742854,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T23:53:12Z",
+    "dashboard_started_utc": "2026-03-04T06:04:05Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "unavailable",
-    "checked_at_utc": "2026-03-04T06:02:03Z",
+    "checked_at_utc": "2026-03-04T06:04:05Z",
     "cache_age_sec": 0,
     "note": "Remote GPU data unavailable for this snapshot.",
     "gpus": []
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772567818.880349": {
-        "mention_ts": "1772567818.880349",
-        "thread_ts": "1772567818.880349",
-        "status": "in_progress",
-        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
-        "summary": "Cleaned stale remote artifacts (home usage 71% -> 67%), retried integrated PR18-whole E2E (job 756), then hit node-level blocker ( [code] DRAIN, launch_failed_…",
-        "summary_preview": "Cleaned stale remote artifacts (home usage 71% -> 67%), retried integrated PR18-whole E2E (job 756), then hit node-level blocker ( [code] DRAIN, launch_failed_…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772567818.880349",
-        "last_update_ts": "1772603885.747690",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:56:58Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -180,6 +155,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-04T03:53:07Z"
+        }
+      },
+      "1772567818.880349": {
+        "mention_ts": "1772567818.880349",
+        "thread_ts": "1772567818.880349",
+        "status": "waiting_human",
+        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
+        "summary": "Processed explicit !stop, posted one in-thread pause acknowledgement, and left the small-swe merged-stack E2E path paused after the node-level DRAIN blocker (w…",
+        "summary_preview": "Processed explicit !stop, posted one in-thread pause acknowledgement, and left the small-swe merged-stack E2E path paused after the node-level DRAIN blocker (w…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772567818.880349",
+        "last_update_ts": "1772604128.574919",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T19:56:58Z"
         }
       }
     },
@@ -964,5 +955,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-04T06:02:04Z"
+  "server_time_utc": "2026-03-04T06:04:06Z"
 }
