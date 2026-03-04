@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-04T09:10:08Z",
+    "last_updated_utc": "2026-03-04T09:12:11Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 5237,
+    "loop_count": 5256,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,34 +17,34 @@
         "slot": 0,
         "task": "1772606689.474009",
         "started_at": 1772612160,
-        "elapsed_sec": 3247
+        "elapsed_sec": 3370
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.18,
-      "five": 2.21,
-      "fifteen": 2.14
+      "one": 2.12,
+      "five": 2.13,
+      "fifteen": 2.11
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85694562304,
-    "disk_free_bytes": 159412633600,
+    "disk_used_bytes": 85694758912,
+    "disk_free_bytes": 159412436992,
     "runner_log_size_bytes": 45745473,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-04T09:10:13Z",
+    "dashboard_started_utc": "2026-03-03T23:53:12Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-04T09:10:13Z",
+    "checked_at_utc": "2026-03-04T09:12:15Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,7 +59,7 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 15,
+        "utilization_gpu_pct": 35,
         "memory_used_mb": 91467,
         "memory_total_mb": 97887,
         "temperature_c": 34
@@ -83,7 +83,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 10,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 45653,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -1045,5 +1045,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-04T09:10:13Z"
+  "server_time_utc": "2026-03-04T09:12:16Z"
 }
