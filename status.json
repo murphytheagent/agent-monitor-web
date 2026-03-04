@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-04T20:11:57Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-04T20:24:57Z",
+    "status": "restarting",
     "pid": 15833,
     "loop_count": 11238,
     "last_exit_code": 0,
@@ -9,42 +9,34 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1772648456.008729",
-        "started_at": 1772653363,
-        "elapsed_sec": 1753
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.85,
-      "five": 1.73,
-      "fifteen": 1.78
+      "one": 2.29,
+      "five": 1.85,
+      "fifteen": 1.81
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85046484992,
-    "disk_free_bytes": 160060710912,
-    "runner_log_size_bytes": 46054998,
+    "disk_used_bytes": 85047812096,
+    "disk_free_bytes": 160059383808,
+    "runner_log_size_bytes": 46055842,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-04T20:23:32Z",
+    "dashboard_started_utc": "2026-03-04T20:24:57Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-04T20:23:32Z",
+    "checked_at_utc": "2026-03-04T20:24:57Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -52,17 +44,17 @@
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 22545,
+        "memory_used_mb": 22969,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 32
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 22545,
+        "memory_used_mb": 22835,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 32
       },
       {
         "index": 2,
@@ -70,7 +62,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 3,
@@ -78,7 +70,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 4,
@@ -86,7 +78,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 26
       },
       {
         "index": 5,
@@ -133,24 +125,7 @@
         }
       }
     },
-    "active": {
-      "1772648456.008729": {
-        "mention_ts": "1772648456.008729",
-        "thread_ts": "1772648456.008729",
-        "status": "in_progress",
-        "task_description": "For training LLMs, standard RL training aims to maximize the expected reward.",
-        "summary": "Initialized project llm-rl-kl-duality, worked with Athena, and delivered a PDF showing the exact KL-regularized RL <-> reverse-KL distillation bridge plus cons…",
-        "summary_preview": "Initialized project llm-rl-kl-duality, worked with Athena, and delivered a PDF showing the exact KL-regularized RL <-> reverse-KL distillation bridge plus cons…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772648456.008729",
-        "last_update_ts": "1772653363.514864",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-04T18:56:03Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -282,6 +257,22 @@
       }
     },
     "finished": {
+      "1772648456.008729": {
+        "mention_ts": "1772648456.008729",
+        "thread_ts": "1772648456.008729",
+        "status": "done",
+        "task_description": "For training LLMs, standard RL training aims to maximize the expected reward.",
+        "summary": "Delivered a literature-grounded KL-RL vs self-distillation objective taxonomy and no-KL analysis, with updated PDF attachment posted in-thread.",
+        "summary_preview": "Delivered a literature-grounded KL-RL vs self-distillation objective taxonomy and no-KL analysis, with updated PDF attachment posted in-thread.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772648456.008729",
+        "last_update_ts": "1772655897.030751",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-04T18:56:03Z"
+        }
+      },
       "1772649415.965119": {
         "mention_ts": "1772649415.965119",
         "thread_ts": "1772649415.965119",
@@ -1078,5 +1069,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-04T20:23:33Z"
+  "server_time_utc": "2026-03-04T20:24:58Z"
 }
