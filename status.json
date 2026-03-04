@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-04T03:38:52Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-04T03:40:50Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 2161,
+    "loop_count": 2180,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,42 +11,56 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772567818.880349",
+        "started_at": 1772595564,
+        "elapsed_sec": 85
+      },
+      {
+        "slot": 1,
+        "task": "1772595551.861009",
+        "started_at": 1772595564,
+        "elapsed_sec": 85
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.98,
-      "five": 1.71,
-      "fifteen": 1.67
+      "one": 1.22,
+      "five": 1.57,
+      "fifteen": 1.61
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 69131202560,
-    "disk_free_bytes": 175975993344,
-    "runner_log_size_bytes": 45737809,
+    "disk_used_bytes": 69132468224,
+    "disk_free_bytes": 175974727680,
+    "runner_log_size_bytes": 45738155,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-03T23:53:12Z",
+    "dashboard_started_utc": "2026-03-04T03:40:53Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-04T03:38:54Z",
+    "checked_at_utc": "2026-03-04T03:40:53Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 73,
+        "utilization_gpu_pct": 75,
         "memory_used_mb": 11397,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 45
       },
       {
         "index": 1,
@@ -54,15 +68,15 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 62889,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 36
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 61,
         "memory_used_mb": 20969,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 42
       },
       {
         "index": 3,
@@ -70,7 +84,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 20969,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 36
       },
       {
         "index": 4,
@@ -99,16 +113,49 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 28
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772567818.880349": {
+        "mention_ts": "1772567818.880349",
+        "thread_ts": "1772567818.880349",
+        "status": "in_progress",
+        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
+        "summary": "Processed the new human [code] follow-up (2026-03-03 22:51 UTC), posted a single in-thread stop acknowledgement at 2026-03-03 22:53 UTC (ts 1772578385.778269),…",
+        "summary_preview": "Processed the new human [code] follow-up (2026-03-03 22:51 UTC), posted a single in-thread stop acknowledgement at 2026-03-03 22:53 UTC (ts 1772578385.778269),…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772567818.880349",
+        "last_update_ts": "1772595564.032877",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T19:56:58Z"
+        }
+      },
+      "1772595551.861009": {
+        "mention_ts": "1772595551.861009",
+        "thread_ts": "1772595551.861009",
+        "status": "in_progress",
+        "task_description": "你能用notebooklm吗.",
+        "summary": "你能用notebooklm吗.",
+        "summary_preview": "你能用notebooklm吗.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772595551.861009",
+        "last_update_ts": "1772595564.412862",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-04T03:39:11Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -156,22 +203,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T22:04:32Z"
-        }
-      },
-      "1772567818.880349": {
-        "mention_ts": "1772567818.880349",
-        "thread_ts": "1772567818.880349",
-        "status": "waiting_human",
-        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
-        "summary": "Processed the new human [code] follow-up (2026-03-03 22:51 UTC), posted a single in-thread stop acknowledgement at 2026-03-03 22:53 UTC (ts 1772578385.778269),…",
-        "summary_preview": "Processed the new human [code] follow-up (2026-03-03 22:51 UTC), posted a single in-thread stop acknowledgement at 2026-03-03 22:53 UTC (ts 1772578385.778269),…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772567818.880349",
-        "last_update_ts": "1772578568.909421",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:56:58Z"
         }
       },
       "1772582101.674029": {
@@ -940,5 +971,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-04T03:38:54Z"
+  "server_time_utc": "2026-03-04T03:40:54Z"
 }
