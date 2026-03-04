@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-04T04:52:35Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-04T04:54:36Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 2853,
+    "loop_count": 2872,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,50 +11,42 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772567818.880349",
-        "started_at": 1772597699,
-        "elapsed_sec": 2255
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.14,
-      "five": 1.83,
-      "fifteen": 1.8
+      "one": 1.65,
+      "five": 1.77,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85717164032,
-    "disk_free_bytes": 159390031872,
-    "runner_log_size_bytes": 45740709,
+    "disk_used_bytes": 85717987328,
+    "disk_free_bytes": 159389208576,
+    "runner_log_size_bytes": 45740951,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-04T04:52:41Z",
+    "dashboard_started_utc": "2026-03-03T23:53:12Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-04T04:52:41Z",
+    "checked_at_utc": "2026-03-04T04:54:40Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 63,
         "memory_used_mb": 8969,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 42
       },
       {
         "index": 1,
@@ -67,10 +59,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 19,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 24311,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 33
       },
       {
         "index": 3,
@@ -92,48 +84,31 @@
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "memory_used_mb": 20179,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 30
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "memory_used_mb": 20775,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 30
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "memory_used_mb": 18989,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 30
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772567818.880349": {
-        "mention_ts": "1772567818.880349",
-        "thread_ts": "1772567818.880349",
-        "status": "in_progress",
-        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
-        "summary": "Completed another iterative Codex closure pass: fixed newly surfaced PR18/20/21 findings with focused regressions/tests, posted consolidated in-thread update, …",
-        "summary_preview": "Completed another iterative Codex closure pass: fixed newly surfaced PR18/20/21 findings with focused regressions/tests, posted consolidated in-thread update, …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772567818.880349",
-        "last_update_ts": "1772597699.550442",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:56:58Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -245,6 +220,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-04T03:53:07Z"
+        }
+      },
+      "1772567818.880349": {
+        "mention_ts": "1772567818.880349",
+        "thread_ts": "1772567818.880349",
+        "status": "waiting_human",
+        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
+        "summary": "Completed autonomous PR18 E2E continuation preflight/cleanup and submitted gate job 748 on latest head d5d2b23, but bounded 30-minute monitoring stayed blocked…",
+        "summary_preview": "Completed autonomous PR18 E2E continuation preflight/cleanup and submitted gate job 748 on latest head d5d2b23, but bounded 30-minute monitoring stayed blocked…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772567818.880349",
+        "last_update_ts": "1772600076.373221",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-03T19:56:58Z"
         }
       }
     },
@@ -1029,5 +1020,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-04T04:52:41Z"
+  "server_time_utc": "2026-03-04T04:54:41Z"
 }
