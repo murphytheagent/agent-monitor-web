@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-04T12:05:38Z",
+    "last_updated_utc": "2026-03-04T12:07:37Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 6844,
+    "loop_count": 6862,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,52 +17,52 @@
         "slot": 0,
         "task": "1772606689.474009",
         "started_at": 1772622701,
-        "elapsed_sec": 3237
+        "elapsed_sec": 3356
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.79,
-      "five": 1.64,
-      "fifteen": 1.62
+      "one": 1.72,
+      "five": 1.68,
+      "fifteen": 1.64
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85297881088,
-    "disk_free_bytes": 159809314816,
-    "runner_log_size_bytes": 45747032,
+    "disk_used_bytes": 85295951872,
+    "disk_free_bytes": 159811244032,
+    "runner_log_size_bytes": 45748104,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-04T12:05:40Z",
+    "dashboard_started_utc": "2026-03-03T23:53:12Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-04T12:05:40Z",
+    "checked_at_utc": "2026-03-04T12:07:38Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 65952,
+        "utilization_gpu_pct": 98,
+        "memory_used_mb": 55128,
         "memory_total_mb": 97887,
-        "temperature_c": 58
+        "temperature_c": 55
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 68,
-        "memory_used_mb": 33503,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 22885,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 34
       },
       {
         "index": 2,
@@ -92,30 +92,47 @@
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 28283,
+        "memory_used_mb": 28485,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 36
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 28199,
+        "utilization_gpu_pct": 90,
+        "memory_used_mb": 32379,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 44
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 28197,
+        "utilization_gpu_pct": 91,
+        "memory_used_mb": 28209,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 41
       }
     ]
   },
   "tasks": {
-    "queued": {},
+    "queued": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
+        "status": "queued",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772626004.361057",
+        "last_update_ts": "1772626057.720796",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-04T12:06:44Z"
+        }
+      }
+    },
     "active": {
       "1772606689.474009": {
         "mention_ts": "1772606689.474009",
@@ -327,22 +344,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T19:34:07Z"
-        }
-      },
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772555674.302409",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: implemented plan 09 (merge-failure state enforcement, annotation-only mode), created slurm-gpu-memory-contention Codex skill, initialized 2 s…",
-        "summary_preview": "Developer review: implemented plan 09 (merge-failure state enforcement, annotation-only mode), created slurm-gpu-memory-contention Codex skill, initialized 2 s…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772539603.267078",
-        "last_update_ts": "1772556550.166186",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T12:06:43Z"
         }
       },
       "1772450279.478169": {
@@ -1045,5 +1046,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-04T12:05:40Z"
+  "server_time_utc": "2026-03-04T12:07:38Z"
 }
