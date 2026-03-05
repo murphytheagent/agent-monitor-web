@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T13:58:43Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-05T14:00:38Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 751,
+    "loop_count": 768,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,40 +11,32 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772582101.674029",
-        "started_at": 1772718871,
-        "elapsed_sec": 251
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.19,
-      "five": 1.97,
-      "fifteen": 1.85
+      "one": 2.25,
+      "five": 2.07,
+      "fifteen": 1.91
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85409947648,
-    "disk_free_bytes": 159697248256,
-    "runner_log_size_bytes": 46074185,
+    "disk_used_bytes": 85412032512,
+    "disk_free_bytes": 159695163392,
+    "runner_log_size_bytes": 46074484,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-05T12:35:09Z",
+    "dashboard_started_utc": "2026-03-05T14:00:40Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-05T13:58:45Z",
+    "checked_at_utc": "2026-03-05T14:00:40Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 88252,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 46
       },
       {
         "index": 1,
@@ -62,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87535,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 47
       },
       {
         "index": 2,
@@ -78,7 +70,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87583,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 47
       },
       {
         "index": 4,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772582101.674029": {
-        "mention_ts": "1772582101.674029",
-        "thread_ts": "1772582101.674029",
-        "status": "in_progress",
-        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
-        "summary": "Resolved remaining Codex review threads on PR #2, pushed fixes, and job 811 continues running with 812 pending.",
-        "summary_preview": "Resolved remaining Codex review threads on PR #2, pushed fixes, and job 811 continues running with 812 pending.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772582101.674029",
-        "last_update_ts": "1772718871.386462",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-05T13:00:08Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -261,6 +236,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-04T23:57:18Z"
+        }
+      },
+      "1772582101.674029": {
+        "mention_ts": "1772582101.674029",
+        "thread_ts": "1772582101.674029",
+        "status": "in_progress",
+        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
+        "summary": "Checked k=5 run status; job 811 still running (~140/695 rollouts per DP rank), job 812 pending; posted Slack update and logged progress.",
+        "summary_preview": "Checked k=5 run status; job 811 still running (~140/695 rollouts per DP rank), job 812 pending; posted Slack update and logged progress.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772582101.674029",
+        "last_update_ts": "1772719129.542769",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-05T13:00:08Z"
         }
       }
     },
@@ -1077,5 +1068,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T13:58:45Z"
+  "server_time_utc": "2026-03-05T14:00:41Z"
 }
