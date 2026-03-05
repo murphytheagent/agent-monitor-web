@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T18:50:53Z",
+    "last_updated_utc": "2026-03-05T18:52:51Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 3441,
+    "loop_count": 3459,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -14,53 +14,47 @@
     "max_workers": 2,
     "active_workers": [
       {
-        "slot": 0,
-        "task": "1772582101.674029",
-        "started_at": 1772736535,
-        "elapsed_sec": 117
-      },
-      {
         "slot": 1,
         "task": "1772685247.978359",
         "started_at": 1772730019,
-        "elapsed_sec": 6633
+        "elapsed_sec": 6751
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.35,
-      "five": 2.11,
-      "fifteen": 1.97
+      "one": 1.55,
+      "five": 1.91,
+      "fifteen": 1.91
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85529972736,
-    "disk_free_bytes": 159577223168,
-    "runner_log_size_bytes": 46089967,
+    "disk_used_bytes": 85529780224,
+    "disk_free_bytes": 159577415680,
+    "runner_log_size_bytes": 46090335,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-05T12:35:09Z",
+    "dashboard_started_utc": "2026-03-05T18:52:56Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-05T18:50:56Z",
+    "checked_at_utc": "2026-03-05T18:52:56Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 75,
-        "memory_used_mb": 16305,
+        "utilization_gpu_pct": 72,
+        "memory_used_mb": 14799,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 42
       },
       {
         "index": 1,
@@ -92,7 +86,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 26
+        "temperature_c": 27
       },
       {
         "index": 5,
@@ -137,22 +131,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-05T17:00:03Z"
-        }
-      },
-      "1772582101.674029": {
-        "mention_ts": "1772582101.674029",
-        "thread_ts": "1772582101.674029",
-        "status": "in_progress",
-        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
-        "summary": "Ran a remote storage hygiene check (home 69% used, no running jobs), updated project/goal tracking, and posted a concise in-thread update.",
-        "summary_preview": "Ran a remote storage hygiene check (home 69% used, no running jobs), updated project/goal tracking, and posted a concise in-thread update.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772582101.674029",
-        "last_update_ts": "1772736534.840248",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-05T13:00:08Z"
         }
       }
     },
@@ -283,6 +261,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-04T23:57:18Z"
+        }
+      },
+      "1772582101.674029": {
+        "mention_ts": "1772582101.674029",
+        "thread_ts": "1772582101.674029",
+        "status": "in_progress",
+        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
+        "summary": "Checked PR #2 review threads (0 unresolved) and remote queue/disk usage (no jobs; home 69% used).",
+        "summary_preview": "Checked PR #2 review threads (0 unresolved) and remote queue/disk usage (no jobs; home 69% used).",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772582101.674029",
+        "last_update_ts": "1772736730.347634",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-05T13:00:08Z"
         }
       }
     },
@@ -1099,5 +1093,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T18:50:57Z"
+  "server_time_utc": "2026-03-05T18:52:57Z"
 }
