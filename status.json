@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T12:59:37Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-05T13:01:21Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 217,
+    "loop_count": 232,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,32 +11,40 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772582101.674029",
+        "started_at": 1772715620,
+        "elapsed_sec": 60
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.14,
-      "five": 1.96,
-      "fifteen": 1.8
+      "one": 1.47,
+      "five": 1.75,
+      "fifteen": 1.74
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85415649280,
-    "disk_free_bytes": 159691546624,
-    "runner_log_size_bytes": 46071730,
+    "disk_used_bytes": 85416214528,
+    "disk_free_bytes": 159690981376,
+    "runner_log_size_bytes": 46072001,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-05T12:35:09Z",
+    "dashboard_started_utc": "2026-03-05T13:01:23Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-05T12:59:38Z",
+    "checked_at_utc": "2026-03-05T13:01:23Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -62,7 +70,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 3,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772582101.674029": {
+        "mention_ts": "1772582101.674029",
+        "thread_ts": "1772582101.674029",
+        "status": "in_progress",
+        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
+        "summary": "Handled explicit !stop for cot-loop thread: confirmed 782 had already failed, canceled queued dependent job 783, posted stop acknowledgement in-thread, and pau…",
+        "summary_preview": "Handled explicit !stop for cot-loop thread: confirmed 782 had already failed, canceled queued dependent job 783, posted stop acknowledgement in-thread, and pau…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772582101.674029",
+        "last_update_ts": "1772715619.846619",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-05T13:00:08Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -220,22 +245,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-03T19:56:58Z"
-        }
-      },
-      "1772582101.674029": {
-        "mention_ts": "1772582101.674029",
-        "thread_ts": "1772582101.674029",
-        "status": "waiting_human",
-        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
-        "summary": "Handled explicit !stop for cot-loop thread: confirmed 782 had already failed, canceled queued dependent job 783, posted stop acknowledgement in-thread, and pau…",
-        "summary_preview": "Handled explicit !stop for cot-loop thread: confirmed 782 had already failed, canceled queued dependent job 783, posted stop acknowledgement in-thread, and pau…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772582101.674029",
-        "last_update_ts": "1772650816.842011",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-04T12:20:25Z"
         }
       },
       "1772648456.008729": {
@@ -1068,5 +1077,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T12:59:39Z"
+  "server_time_utc": "2026-03-05T13:01:23Z"
 }
