@@ -1,42 +1,42 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T12:05:57Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-05T12:06:47Z",
+    "status": "running_session",
     "pid": 15833,
-    "loop_count": 8474,
+    "loop_count": 8481,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
     "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.31,
-      "five": 2.01,
-      "fifteen": 1.9
+      "one": 1.92,
+      "five": 1.95,
+      "fifteen": 1.89
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85400104960,
-    "disk_free_bytes": 159707090944,
-    "runner_log_size_bytes": 46070291,
+    "disk_used_bytes": 85398851584,
+    "disk_free_bytes": 159708344320,
+    "runner_log_size_bytes": 46070505,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-05T12:06:06Z",
+    "dashboard_started_utc": "2026-03-04T20:38:02Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-05T12:06:06Z",
+    "checked_at_utc": "2026-03-05T12:08:07Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -108,7 +108,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
+        "status": "in_progress",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772712407.214729",
+        "last_update_ts": "1772712407.226069",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-05T12:06:47Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -286,22 +303,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-05T05:21:51Z"
-        }
-      },
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772653236.695429",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: fixed 2 bugs (_peek_next_is_maintenance filter inconsistency, stale _base_branch in WorkerSlot), triaged 6 issues and 10 plans, advanced plan…",
-        "summary_preview": "Developer review: fixed 2 bugs (_peek_next_is_maintenance filter inconsistency, stale _base_branch in WorkerSlot), triaged 6 issues and 10 plans, advanced plan…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772626004.361057",
-        "last_update_ts": "1772656682.146024",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-04T12:06:44Z"
         }
       },
       "1772606689.474009": {
@@ -1055,6 +1056,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-20T02:09:15Z"
         }
+      },
+      "1771544884.640199": {
+        "mention_ts": "1771544884.640199",
+        "thread_ts": "1771544884.640199",
+        "status": "done",
+        "task_description": "Help me summarize the main findings of this paper: <[link].",
+        "summary": "Reviewed arXiv 2510.13680 and posted a concise main-findings summary in the Slack thread.",
+        "summary_preview": "Reviewed arXiv 2510.13680 and posted a concise main-findings summary in the Slack thread.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771544884.640199",
+        "last_update_ts": "1771547793.242921",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-19T23:48:04Z"
+        }
       }
     }
   },
@@ -1068,5 +1085,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T12:06:06Z"
+  "server_time_utc": "2026-03-05T12:08:08Z"
 }
