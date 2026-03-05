@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T23:43:03Z",
+    "last_updated_utc": "2026-03-05T23:44:58Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 6140,
+    "loop_count": 6158,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,101 +16,101 @@
       {
         "slot": 0,
         "task": "1772685247.978359",
-        "started_at": 1772753347,
-        "elapsed_sec": 835
+        "started_at": 1772754215,
+        "elapsed_sec": 82
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.15,
-      "five": 2.0,
-      "fifteen": 1.93
+      "one": 1.61,
+      "five": 1.84,
+      "fifteen": 1.87
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 103486287872,
-    "disk_free_bytes": 141620908032,
-    "runner_log_size_bytes": 46094833,
+    "disk_used_bytes": 103485566976,
+    "disk_free_bytes": 141621628928,
+    "runner_log_size_bytes": 46095733,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-05T23:43:04Z",
+    "dashboard_started_utc": "2026-03-05T12:35:09Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-05T23:43:04Z",
+    "checked_at_utc": "2026-03-05T23:45:03Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 90295,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 42
+        "temperature_c": 29
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
-        "memory_used_mb": 90295,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 29
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
-        "memory_used_mb": 90295,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 29
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 90295,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 41
+        "temperature_c": 29
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
-        "memory_used_mb": 90295,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 28
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 90295,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 42
+        "temperature_c": 29
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 90295,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 42
+        "temperature_c": 28
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 91,
-        "memory_used_mb": 90295,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 41
+        "temperature_c": 29
       }
     ]
   },
@@ -126,7 +126,7 @@
         "summary_preview": "Reran the full 8-GPU RFT/pilot/SDPO chain (jobs 826/827/828) with step-1 RFT training completed, updated blueprint/reporting, and delivered the consolidated re…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772685247.978359",
-        "last_update_ts": "1772753347.235554",
+        "last_update_ts": "1772754215.567459",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -1077,5 +1077,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T23:43:06Z"
+  "server_time_utc": "2026-03-05T23:45:04Z"
 }
