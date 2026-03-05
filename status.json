@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T00:28:01Z",
+    "last_updated_utc": "2026-03-05T00:29:56Z",
     "status": "workers_active",
     "pid": 15833,
-    "loop_count": 2131,
+    "loop_count": 2149,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,103 +16,38 @@
       {
         "slot": 0,
         "task": "1772649415.965119",
-        "started_at": 1772670107,
-        "elapsed_sec": 374
+        "started_at": 1772670507,
+        "elapsed_sec": 88
       }
     ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.8,
-      "five": 2.02,
-      "fifteen": 2.16
+      "one": 1.73,
+      "five": 1.92,
+      "fifteen": 2.1
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85111472128,
-    "disk_free_bytes": 159995723776,
-    "runner_log_size_bytes": 46058543,
+    "disk_used_bytes": 85110132736,
+    "disk_free_bytes": 159997063168,
+    "runner_log_size_bytes": 46058868,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-05T00:28:01Z",
+    "dashboard_started_utc": "2026-03-04T20:38:02Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-03-05T00:28:01Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-03-05T00:30:02Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
-        "memory_used_mb": 74897,
-        "memory_total_mb": 97887,
-        "temperature_c": 47
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
-        "memory_used_mb": 74897,
-        "memory_total_mb": 97887,
-        "temperature_c": 46
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 33676,
-        "memory_total_mb": 97887,
-        "temperature_c": 34
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 25894,
-        "memory_total_mb": 97887,
-        "temperature_c": 33
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 25932,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 25932,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 33,
-        "memory_used_mb": 23199,
-        "memory_total_mb": 97887,
-        "temperature_c": 33
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 33,
-        "memory_used_mb": 23199,
-        "memory_total_mb": 97887,
-        "temperature_c": 34
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
@@ -122,11 +57,11 @@
         "thread_ts": "1772649415.965119",
         "status": "in_progress",
         "task_description": "On pr 18 small swe train, what's the current default for teacher reprompt and results of last two pilot studies?",
-        "summary": "Stabilized the dynamic-middle teacher-reprompt pilot chain: canceled failed/stalled runs, fixed launcher pathing, validated max_model_len=24576 startup, and la…",
-        "summary_preview": "Stabilized the dynamic-middle teacher-reprompt pilot chain: canceled failed/stalled runs, fixed launcher pathing, validated max_model_len=24576 startup, and la…",
+        "summary": "Revalidated PR18 teacher-reprompt defaults and confirmed latest two completed pilot results (771 positive, 775 zero), posted thread update, and continued monit…",
+        "summary_preview": "Revalidated PR18 teacher-reprompt defaults and confirmed latest two completed pilot results (771 positive, 775 zero), posted thread update, and continued monit…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1772649415.965119",
-        "last_update_ts": "1772670106.709130",
+        "last_update_ts": "1772670507.550438",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -1077,5 +1012,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T00:28:02Z"
+  "server_time_utc": "2026-03-05T00:30:02Z"
 }
