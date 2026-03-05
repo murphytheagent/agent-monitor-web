@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T12:16:24Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-05T12:35:09Z",
+    "status": "restarting",
     "pid": 15833,
     "loop_count": 8482,
     "last_exit_code": 0,
@@ -19,24 +19,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.58,
-      "five": 1.7,
-      "fifteen": 1.77
+      "one": 1.55,
+      "five": 1.69,
+      "fifteen": 1.76
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85411991552,
-    "disk_free_bytes": 159695204352,
-    "runner_log_size_bytes": 46070729,
+    "disk_used_bytes": 85411639296,
+    "disk_free_bytes": 159695556608,
+    "runner_log_size_bytes": 46071404,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-04T20:38:02Z",
+    "dashboard_started_utc": "2026-03-05T12:35:09Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-05T12:34:45Z",
+    "checked_at_utc": "2026-03-05T12:35:09Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -108,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772712892.979209",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Maintenance phase 0 complete: updated memory/goals and small-swe-train summary; PR audit found no merge-ready items and flagged submodule mapping + stale READM…",
-        "summary_preview": "Maintenance phase 0 complete: updated memory/goals and small-swe-train summary; PR audit found no merge-ready items and flagged submodule mapping + stale READM…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772712407.214729",
-        "last_update_ts": "1772712984.508160",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-05T12:06:47Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -273,6 +256,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1772712892.979209",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: fixed 2 runtime.py bugs (merge_instructions crash guard, serial startup recovery), cleaned stale mcp/chatgpt-mcp gitlink, consolidated 4 plan…",
+        "summary_preview": "Developer review: fixed 2 runtime.py bugs (merge_instructions crash guard, serial startup recovery), cleaned stale mcp/chatgpt-mcp gitlink, consolidated 4 plan…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772712407.214729",
+        "last_update_ts": "1772714108.679047",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-05T12:06:47Z"
+        }
+      },
       "1772649415.965119": {
         "mention_ts": "1772649415.965119",
         "thread_ts": "1772649415.965119",
@@ -1056,22 +1055,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-20T02:09:15Z"
         }
-      },
-      "1771544884.640199": {
-        "mention_ts": "1771544884.640199",
-        "thread_ts": "1771544884.640199",
-        "status": "done",
-        "task_description": "Help me summarize the main findings of this paper: <[link].",
-        "summary": "Reviewed arXiv 2510.13680 and posted a concise main-findings summary in the Slack thread.",
-        "summary_preview": "Reviewed arXiv 2510.13680 and posted a concise main-findings summary in the Slack thread.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771544884.640199",
-        "last_update_ts": "1771547793.242921",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-19T23:48:04Z"
-        }
       }
     }
   },
@@ -1085,5 +1068,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T12:34:46Z"
+  "server_time_utc": "2026-03-05T12:35:10Z"
 }
