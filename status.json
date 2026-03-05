@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T13:13:36Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-05T13:13:51Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 344,
+    "loop_count": 346,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,32 +11,40 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772582101.674029",
+        "started_at": 1772716425,
+        "elapsed_sec": 5
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.85,
-      "five": 2.02,
-      "fifteen": 1.89
+      "one": 1.66,
+      "five": 1.97,
+      "fifteen": 1.88
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85404106752,
-    "disk_free_bytes": 159703089152,
-    "runner_log_size_bytes": 46072370,
+    "disk_used_bytes": 85404397568,
+    "disk_free_bytes": 159702798336,
+    "runner_log_size_bytes": 46072453,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-05T13:13:38Z",
+    "dashboard_started_utc": "2026-03-05T12:35:09Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-05T13:13:38Z",
+    "checked_at_utc": "2026-03-05T13:13:55Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772582101.674029": {
+        "mention_ts": "1772582101.674029",
+        "thread_ts": "1772582101.674029",
+        "status": "in_progress",
+        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
+        "summary": "Resumed the k=5 three-view run, cleaned home storage, and requeued jobs 809/810 (dataset running, ablation pending).",
+        "summary_preview": "Resumed the k=5 three-view run, cleaned home storage, and requeued jobs 809/810 (dataset running, ablation pending).",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772582101.674029",
+        "last_update_ts": "1772716424.888261",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-05T13:00:08Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -236,22 +261,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-04T23:57:18Z"
-        }
-      },
-      "1772582101.674029": {
-        "mention_ts": "1772582101.674029",
-        "thread_ts": "1772582101.674029",
-        "status": "in_progress",
-        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
-        "summary": "Resumed the k=5 three-view run, cleaned home storage, and requeued jobs 809/810 (dataset running, ablation pending).",
-        "summary_preview": "Resumed the k=5 three-view run, cleaned home storage, and requeued jobs 809/810 (dataset running, ablation pending).",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772582101.674029",
-        "last_update_ts": "1772716238.646593",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-05T13:00:08Z"
         }
       }
     },
@@ -1068,5 +1077,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T13:13:39Z"
+  "server_time_utc": "2026-03-05T13:13:56Z"
 }
