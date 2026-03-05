@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T16:09:19Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-05T16:11:16Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 1943,
+    "loop_count": 1961,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,50 +11,42 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772582101.674029",
-        "started_at": 1772725996,
-        "elapsed_sec": 962
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.65,
-      "five": 2.33,
-      "fifteen": 2.08
+      "one": 2.25,
+      "five": 2.22,
+      "fifteen": 2.06
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85506412544,
-    "disk_free_bytes": 159600783360,
-    "runner_log_size_bytes": 46081325,
+    "disk_used_bytes": 85506539520,
+    "disk_free_bytes": 159600656384,
+    "runner_log_size_bytes": 46081695,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-05T12:35:09Z",
+    "dashboard_started_utc": "2026-03-05T16:11:21Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-05T16:09:24Z",
+    "checked_at_utc": "2026-03-05T16:11:21Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 51851,
+        "utilization_gpu_pct": 97,
+        "memory_used_mb": 56703,
         "memory_total_mb": 97887,
-        "temperature_c": 67
+        "temperature_c": 66
       },
       {
         "index": 1,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772582101.674029": {
-        "mention_ts": "1772582101.674029",
-        "thread_ts": "1772582101.674029",
-        "status": "in_progress",
-        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
-        "summary": "Monitored k=5 run: job 811 still running (~612–652/695 rollouts), job 812 pending; confirmed PR #2 Codex review clean and posted Slack update/report.",
-        "summary_preview": "Monitored k=5 run: job 811 still running (~612–652/695 rollouts), job 812 pending; confirmed PR #2 Codex review clean and posted Slack update/report.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772582101.674029",
-        "last_update_ts": "1772725996.477998",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-05T13:00:08Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -261,6 +236,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-04T23:57:18Z"
+        }
+      },
+      "1772582101.674029": {
+        "mention_ts": "1772582101.674029",
+        "thread_ts": "1772582101.674029",
+        "status": "in_progress",
+        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
+        "summary": "Updated consolidated PR2 findings (merged upstream doc changes) and pushed the refresh; regenerated PDF locally; job 811 still running in train-completion phas…",
+        "summary_preview": "Updated consolidated PR2 findings (merged upstream doc changes) and pushed the refresh; regenerated PDF locally; job 811 still running in train-completion phas…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772582101.674029",
+        "last_update_ts": "1772726980.036557",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-05T13:00:08Z"
         }
       }
     },
@@ -1077,5 +1068,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T16:09:24Z"
+  "server_time_utc": "2026-03-05T16:11:22Z"
 }
