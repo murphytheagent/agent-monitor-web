@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T21:28:17Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-05T21:30:15Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 4883,
+    "loop_count": 4901,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,42 +11,50 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772685247.978359",
+        "started_at": 1772746130,
+        "elapsed_sec": 85
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.94,
-      "five": 2.21,
-      "fifteen": 2.02
+      "one": 1.38,
+      "five": 1.93,
+      "fifteen": 1.93
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 102137278464,
-    "disk_free_bytes": 142969917440,
-    "runner_log_size_bytes": 46092694,
+    "disk_used_bytes": 102127247360,
+    "disk_free_bytes": 142979948544,
+    "runner_log_size_bytes": 46092777,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-05T21:28:20Z",
+    "dashboard_started_utc": "2026-03-05T12:35:09Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-05T21:28:20Z",
+    "checked_at_utc": "2026-03-05T21:30:20Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 71,
-        "memory_used_mb": 14799,
+        "utilization_gpu_pct": 89,
+        "memory_used_mb": 14801,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 50
       },
       {
         "index": 1,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772685247.978359": {
+        "mention_ts": "1772685247.978359",
+        "thread_ts": "1772685247.978359",
+        "status": "in_progress",
+        "task_description": "Your recent work on small swe is on PR 18, but you didn't push it, this is an issue because then I couldn't review your PR.",
+        "summary": "Completed the requested RFT/pilot/SDPO E2E runs for PR #18, reported results (with a sign correction), and updated the project docs with the new run evidence.",
+        "summary_preview": "Completed the requested RFT/pilot/SDPO E2E runs for PR #18, reported results (with a sign correction), and updated the project docs with the new run evidence.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772685247.978359",
+        "last_update_ts": "1772746130.248639",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-05T17:00:03Z"
+        }
+      }
+    },
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -252,22 +277,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-05T13:00:08Z"
-        }
-      },
-      "1772685247.978359": {
-        "mention_ts": "1772685247.978359",
-        "thread_ts": "1772685247.978359",
-        "status": "in_progress",
-        "task_description": "Your recent work on small swe is on PR 18, but you didn't push it, this is an issue because then I couldn't review your PR.",
-        "summary": "Completed the requested RFT/pilot/SDPO E2E runs for PR #18, reported results (with a sign correction), and updated the project docs with the new run evidence.",
-        "summary_preview": "Completed the requested RFT/pilot/SDPO E2E runs for PR #18, reported results (with a sign correction), and updated the project docs with the new run evidence.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772685247.978359",
-        "last_update_ts": "1772745946.467940",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-05T17:00:03Z"
         }
       }
     },
@@ -1084,5 +1093,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T21:28:20Z"
+  "server_time_utc": "2026-03-05T21:30:21Z"
 }
