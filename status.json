@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-05T15:08:08Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-05T15:10:09Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 1382,
+    "loop_count": 1401,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,40 +11,32 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772582101.674029",
-        "started_at": 1772722857,
-        "elapsed_sec": 430
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.92,
-      "five": 1.72,
-      "fifteen": 1.71
+      "one": 1.48,
+      "five": 1.68,
+      "fifteen": 1.7
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 85421207552,
-    "disk_free_bytes": 159685988352,
-    "runner_log_size_bytes": 46078550,
+    "disk_used_bytes": 85419216896,
+    "disk_free_bytes": 159687979008,
+    "runner_log_size_bytes": 46078920,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-05T15:08:09Z",
+    "dashboard_started_utc": "2026-03-05T12:35:09Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-05T15:08:09Z",
+    "checked_at_utc": "2026-03-05T15:10:10Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 88252,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 49
       },
       {
         "index": 1,
@@ -62,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87535,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 2,
@@ -70,7 +62,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87541,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 48
       },
       {
         "index": 3,
@@ -86,7 +78,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87529,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 5,
@@ -94,7 +86,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87533,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 44
       },
       {
         "index": 6,
@@ -110,30 +102,13 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87559,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 48
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772582101.674029": {
-        "mention_ts": "1772582101.674029",
-        "thread_ts": "1772582101.674029",
-        "status": "in_progress",
-        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
-        "summary": "Checked job 811 rollout progress (~324–360/695 per DP rank), verified storage/cleanup, updated the report, and posted a Slack status update; job 812 remains pe…",
-        "summary_preview": "Checked job 811 rollout progress (~324–360/695 per DP rank), verified storage/cleanup, updated the report, and posted a Slack status update; job 812 remains pe…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772582101.674029",
-        "last_update_ts": "1772722856.831084",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-05T13:00:08Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772450286.162839": {
         "mention_ts": "1772450286.162839",
@@ -261,6 +236,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-04T23:57:18Z"
+        }
+      },
+      "1772582101.674029": {
+        "mention_ts": "1772582101.674029",
+        "thread_ts": "1772582101.674029",
+        "status": "in_progress",
+        "task_description": "Cot loop detection, summarize all existing experiments and findings in one document, send to me or via PR commits, push commits to PR 2 in cot loop detection so I can review your …",
+        "summary": "Monitored job 811 (rollouts ~404–440/695 per DP rank) with job 812 still dependency-pending; updated report/project/goal notes and posted a Slack checkpoint.",
+        "summary_preview": "Monitored job 811 (rollouts ~404–440/695 per DP rank) with job 812 still dependency-pending; updated report/project/goal notes and posted a Slack checkpoint.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772582101.674029",
+        "last_update_ts": "1772723408.983092",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-05T13:00:08Z"
         }
       }
     },
@@ -1077,5 +1068,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-05T15:08:10Z"
+  "server_time_utc": "2026-03-05T15:10:10Z"
 }
