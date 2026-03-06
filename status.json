@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-06T12:27:53Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-06T12:37:40Z",
+    "status": "restarting",
     "pid": 15833,
     "loop_count": 5742,
     "last_exit_code": 0,
@@ -16,27 +16,27 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.47,
-      "five": 1.66,
-      "fifteen": 1.65
+      "one": 1.37,
+      "five": 1.55,
+      "fifteen": 1.6
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 104349061120,
-    "disk_free_bytes": 140758134784,
-    "runner_log_size_bytes": 46100883,
+    "disk_used_bytes": 104348184576,
+    "disk_free_bytes": 140759011328,
+    "runner_log_size_bytes": 46101558,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-06T12:35:45Z",
+    "dashboard_started_utc": "2026-03-06T12:37:40Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-06T12:35:45Z",
+    "checked_at_utc": "2026-03-06T12:37:40Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +54,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 2,
@@ -86,7 +86,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 17739,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 32
       },
       {
         "index": 6,
@@ -102,30 +102,13 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772799944.839769",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Completed maintenance reflection: refreshed memory/goals/project summaries, updated active project docs, audited open PR readiness, and filed a PR-readiness sk…",
-        "summary_preview": "Completed maintenance reflection: refreshed memory/goals/project summaries, updated active project docs, audited open PR readiness, and filed a PR-readiness sk…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772798807.015668",
-        "last_update_ts": "1772800073.158583",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-06T12:06:47Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772505481.005139": {
         "mention_ts": "1772505481.005139",
@@ -241,6 +224,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1772799944.839769",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review complete: fixed claimed_by inconsistency and encoding bug, triaged 5 plans (deleted 04/05/06/39/40), implemented plan 40 as project-pr-readine…",
+        "summary_preview": "Developer review complete: fixed claimed_by inconsistency and encoding bug, triaged 5 plans (deleted 04/05/06/39/40), implemented plan 40 as project-pr-readine…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772798807.015668",
+        "last_update_ts": "1772800659.707240",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-06T12:06:47Z"
+        }
+      },
       "1772785118.872169": {
         "mention_ts": "1772785118.872169",
         "thread_ts": "1772785118.872169",
@@ -1024,22 +1023,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-20T09:45:31Z"
         }
-      },
-      "1771553355.096239": {
-        "mention_ts": "1771553355.096239",
-        "thread_ts": "1771553355.096239",
-        "status": "done",
-        "task_description": "How long do you keep tasks in incomplete?",
-        "summary": "Confirmed waiting_human incomplete retention is enforced at MAX_INCOMPLETE_RETENTION (default 2592000s/30d), kept existing patch, and closed task after human c…",
-        "summary_preview": "Confirmed waiting_human incomplete retention is enforced at MAX_INCOMPLETE_RETENTION (default 2592000s/30d), kept existing patch, and closed task after human c…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771553355.096239",
-        "last_update_ts": "1771584355.289691",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-20T02:09:15Z"
-        }
       }
     }
   },
@@ -1053,5 +1036,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-06T12:35:45Z"
+  "server_time_utc": "2026-03-06T12:37:41Z"
 }
