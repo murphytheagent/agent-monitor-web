@@ -1,42 +1,42 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-06T12:05:02Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-06T12:06:47Z",
+    "status": "running_session",
     "pid": 15833,
-    "loop_count": 5725,
+    "loop_count": 5741,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
     "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.59,
-      "five": 1.55,
-      "fifteen": 1.51
+      "one": 1.63,
+      "five": 1.51,
+      "fifteen": 1.5
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 104336449536,
-    "disk_free_bytes": 140770746368,
-    "runner_log_size_bytes": 46100445,
+    "disk_used_bytes": 104335802368,
+    "disk_free_bytes": 140771393536,
+    "runner_log_size_bytes": 46100659,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-06T01:46:14Z",
+    "dashboard_started_utc": "2026-03-06T12:07:09Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-06T12:05:07Z",
+    "checked_at_utc": "2026-03-06T12:07:09Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -91,10 +91,10 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 89,
-        "memory_used_mb": 18143,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 22305,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 33
       },
       {
         "index": 7,
@@ -108,7 +108,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
+        "status": "in_progress",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772798807.015668",
+        "last_update_ts": "1772798807.023731",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-06T12:06:47Z"
+        }
+      }
+    },
     "incomplete": {
       "1772505481.005139": {
         "mention_ts": "1772505481.005139",
@@ -254,22 +271,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-05T22:16:28Z"
-        }
-      },
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772712892.979209",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: fixed 2 runtime.py bugs (merge_instructions crash guard, serial startup recovery), cleaned stale mcp/chatgpt-mcp gitlink, consolidated 4 plan…",
-        "summary_preview": "Developer review: fixed 2 runtime.py bugs (merge_instructions crash guard, serial startup recovery), cleaned stale mcp/chatgpt-mcp gitlink, consolidated 4 plan…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772712407.214729",
-        "last_update_ts": "1772714108.679047",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-05T12:06:47Z"
         }
       },
       "1772649415.965119": {
@@ -1023,6 +1024,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-20T09:45:31Z"
         }
+      },
+      "1771553355.096239": {
+        "mention_ts": "1771553355.096239",
+        "thread_ts": "1771553355.096239",
+        "status": "done",
+        "task_description": "How long do you keep tasks in incomplete?",
+        "summary": "Confirmed waiting_human incomplete retention is enforced at MAX_INCOMPLETE_RETENTION (default 2592000s/30d), kept existing patch, and closed task after human c…",
+        "summary_preview": "Confirmed waiting_human incomplete retention is enforced at MAX_INCOMPLETE_RETENTION (default 2592000s/30d), kept existing patch, and closed task after human c…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771553355.096239",
+        "last_update_ts": "1771584355.289691",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-20T02:09:15Z"
+        }
       }
     }
   },
@@ -1036,5 +1053,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-06T12:05:08Z"
+  "server_time_utc": "2026-03-06T12:07:10Z"
 }
