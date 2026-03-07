@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-07T00:34:51Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-07T00:36:50Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 6747,
+    "loop_count": 6766,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,66 +11,74 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1772840342.898069",
+        "started_at": 1772843810,
+        "elapsed_sec": 0
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.64,
-      "five": 1.84,
-      "fifteen": 1.77
+      "one": 1.94,
+      "five": 1.86,
+      "fifteen": 1.78
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 104354799616,
-    "disk_free_bytes": 140752396288,
-    "runner_log_size_bytes": 46104398,
+    "disk_used_bytes": 104357326848,
+    "disk_free_bytes": 140749869056,
+    "runner_log_size_bytes": 46104481,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-06T12:37:40Z",
+    "dashboard_started_utc": "2026-03-07T00:36:51Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-07T00:34:51Z",
+    "checked_at_utc": "2026-03-07T00:36:51Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 88328,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 47
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 73529,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 45
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 73529,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 46
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 73529,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 45
       },
       {
         "index": 4,
@@ -86,15 +94,15 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 45
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 44
       },
       {
         "index": 7,
@@ -102,13 +110,30 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 44
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1772840342.898069": {
+        "mention_ts": "1772840342.898069",
+        "thread_ts": "1772840342.898069",
+        "status": "in_progress",
+        "task_description": "Something that fundamentally sucks for agent is waiting on tool response, scenarios could be monitoring a small training run, installing a package, or compilation.",
+        "summary": "Added a shell-first async control-plane MVP plan with derived-attention/CAS-ack semantics and posted a fourth PDF update in Slack.",
+        "summary_preview": "Added a shell-first async control-plane MVP plan with derived-attention/CAS-ack semantics and posted a fourth PDF update in Slack.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772840342.898069",
+        "last_update_ts": "1772843809.644951",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-06T23:39:02Z"
+        }
+      }
+    },
     "incomplete": {
       "1772597410.327959": {
         "mention_ts": "1772597410.327959",
@@ -188,22 +213,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-05T17:00:03Z"
-        }
-      },
-      "1772840342.898069": {
-        "mention_ts": "1772840342.898069",
-        "thread_ts": "1772840342.898069",
-        "status": "in_progress",
-        "task_description": "Something that fundamentally sucks for agent is waiting on tool response, scenarios could be monitoring a small training run, installing a package, or compilation.",
-        "summary": "Added a shell-first async control-plane MVP plan with derived-attention/CAS-ack semantics and posted a fourth PDF update in Slack.",
-        "summary_preview": "Added a shell-first async control-plane MVP plan with derived-attention/CAS-ack semantics and posted a fourth PDF update in Slack.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772840342.898069",
-        "last_update_ts": "1772843628.722375",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-06T23:39:02Z"
         }
       }
     },
@@ -1020,5 +1029,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-07T00:34:51Z"
+  "server_time_utc": "2026-03-07T00:36:52Z"
 }
