@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-07T01:42:11Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-07T01:44:14Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 7396,
+    "loop_count": 7416,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,74 +11,66 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772840342.898069",
-        "started_at": 1772846798,
-        "elapsed_sec": 932
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.36,
-      "five": 1.49,
-      "fifteen": 1.58
+      "one": 1.96,
+      "five": 1.67,
+      "fifteen": 1.63
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 104390004736,
-    "disk_free_bytes": 140717191168,
-    "runner_log_size_bytes": 46106285,
+    "disk_used_bytes": 104389865472,
+    "disk_free_bytes": 140717330432,
+    "runner_log_size_bytes": 46106653,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-07T01:42:16Z",
+    "dashboard_started_utc": "2026-03-06T12:37:40Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-07T01:42:16Z",
+    "checked_at_utc": "2026-03-07T01:44:18Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 89836,
+        "utilization_gpu_pct": 98,
+        "memory_used_mb": 77306,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 43
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 73529,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 44
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 73529,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 44
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 73529,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 43
       },
       {
         "index": 4,
@@ -86,54 +78,37 @@
         "utilization_gpu_pct": 98,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 43
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 44
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 44
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 44
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772840342.898069": {
-        "mention_ts": "1772840342.898069",
-        "thread_ts": "1772840342.898069",
-        "status": "in_progress",
-        "task_description": "Something that fundamentally sucks for agent is waiting on tool response, scenarios could be monitoring a small training run, installing a package, or compilation.",
-        "summary": "Extended the async-wakeup analysis to budgeted multi-job delivery: bounded search found a 4-step stranded-sibling-job counterexample for mutable task-level att…",
-        "summary_preview": "Extended the async-wakeup analysis to budgeted multi-job delivery: bounded search found a 4-step stranded-sibling-job counterexample for mutable task-level att…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772840342.898069",
-        "last_update_ts": "1772846798.327992",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-06T23:39:02Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772597410.327959": {
         "mention_ts": "1772597410.327959",
@@ -213,6 +188,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-05T17:00:03Z"
+        }
+      },
+      "1772840342.898069": {
+        "mention_ts": "1772840342.898069",
+        "thread_ts": "1772840342.898069",
+        "status": "in_progress",
+        "task_description": "Something that fundamentally sucks for agent is waiting on tool response, scenarios could be monitoring a small training run, installing a package, or compilation.",
+        "summary": "Added a v9 scheduler-policy note: validated that non-urgent completions need checkpoint-aware deferral, posted the PDF in Slack, and recorded the follow-up pla…",
+        "summary_preview": "Added a v9 scheduler-policy note: validated that non-urgent completions need checkpoint-aware deferral, posted the PDF in Slack, and recorded the follow-up pla…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772840342.898069",
+        "last_update_ts": "1772847767.704974",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-06T23:39:02Z"
         }
       }
     },
@@ -1029,5 +1020,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-07T01:42:17Z"
+  "server_time_utc": "2026-03-07T01:44:19Z"
 }
