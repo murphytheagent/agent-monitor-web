@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-07T00:57:17Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-07T00:59:16Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 6962,
+    "loop_count": 6981,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,55 +11,47 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772840342.898069",
-        "started_at": 1772844479,
-        "elapsed_sec": 558
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.08,
-      "five": 1.82,
+      "one": 1.79,
+      "five": 1.79,
       "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 104361058304,
-    "disk_free_bytes": 140746137600,
-    "runner_log_size_bytes": 46104932,
+    "disk_used_bytes": 104362790912,
+    "disk_free_bytes": 140744404992,
+    "runner_log_size_bytes": 46105300,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-07T00:57:21Z",
+    "dashboard_started_utc": "2026-03-06T12:37:40Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-07T00:57:21Z",
+    "checked_at_utc": "2026-03-07T00:59:20Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 89978,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 48
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 73529,
         "memory_total_mb": 97887,
         "temperature_c": 44
@@ -67,73 +59,56 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 73529,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 45
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 73529,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 45
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 33,
+        "utilization_gpu_pct": 81,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 41
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 41
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 47,
+        "utilization_gpu_pct": 66,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 41
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 41
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772840342.898069": {
-        "mention_ts": "1772840342.898069",
-        "thread_ts": "1772840342.898069",
-        "status": "in_progress",
-        "task_description": "Something that fundamentally sucks for agent is waiting on tool response, scenarios could be monitoring a small training run, installing a package, or compilation.",
-        "summary": "Mapped the shell-job async MVP onto the current supervisor, added a v5 wire-up plan with per-dispatch lease tokens, and posted the new PDF update in Slack.",
-        "summary_preview": "Mapped the shell-job async MVP onto the current supervisor, added a v5 wire-up plan with per-dispatch lease tokens, and posted the new PDF update in Slack.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772840342.898069",
-        "last_update_ts": "1772844478.935394",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-06T23:39:02Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772597410.327959": {
         "mention_ts": "1772597410.327959",
@@ -213,6 +188,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-05T17:00:03Z"
+        }
+      },
+      "1772840342.898069": {
+        "mention_ts": "1772840342.898069",
+        "thread_ts": "1772840342.898069",
+        "status": "in_progress",
+        "task_description": "Something that fundamentally sucks for agent is waiting on tool response, scenarios could be monitoring a small training run, installing a package, or compilation.",
+        "summary": "Validated the async wakeup lease/ack protocol with a deterministic simulator, added the tests-and-observability follow-up plan, uploaded the v6 PDF update in S…",
+        "summary_preview": "Validated the async wakeup lease/ack protocol with a deterministic simulator, added the tests-and-observability follow-up plan, uploaded the v6 PDF update in S…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772840342.898069",
+        "last_update_ts": "1772845107.438803",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-06T23:39:02Z"
         }
       }
     },
@@ -1029,5 +1020,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-07T00:57:21Z"
+  "server_time_utc": "2026-03-07T00:59:21Z"
 }
