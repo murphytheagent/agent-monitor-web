@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-07T06:01:50Z",
+    "last_updated_utc": "2026-03-07T06:03:56Z",
     "status": "sleeping",
     "pid": 15833,
-    "loop_count": 9906,
+    "loop_count": 9927,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,61 +16,61 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
       "one": 1.62,
       "five": 1.64,
-      "fifteen": 1.56
+      "fifteen": 1.57
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 104711348224,
-    "disk_free_bytes": 140395847680,
-    "runner_log_size_bytes": 46109308,
+    "disk_used_bytes": 104712527872,
+    "disk_free_bytes": 140394668032,
+    "runner_log_size_bytes": 46109381,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-07T06:01:55Z",
+    "dashboard_started_utc": "2026-03-06T12:37:40Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-07T06:01:55Z",
+    "checked_at_utc": "2026-03-07T06:03:57Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 88330,
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 89834,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 46
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 73529,
-        "memory_total_mb": 97887,
-        "temperature_c": 43
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
-        "memory_used_mb": 76230,
         "memory_total_mb": 97887,
         "temperature_c": 44
       },
       {
+        "index": 2,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 76246,
+        "memory_total_mb": 97887,
+        "temperature_c": 46
+      },
+      {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 76962,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 44
       },
       {
         "index": 4,
@@ -86,23 +86,23 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 65305,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 44
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 98,
-        "memory_used_mb": 67990,
+        "memory_used_mb": 67978,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 45
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 98,
-        "memory_used_mb": 68004,
+        "memory_used_mb": 67988,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 44
       }
     ]
   },
@@ -110,22 +110,6 @@
     "queued": {},
     "active": {},
     "incomplete": {
-      "1772567818.880349": {
-        "mention_ts": "1772567818.880349",
-        "thread_ts": "1772567818.880349",
-        "status": "waiting_human",
-        "task_description": "Small swe train project, PR 18-21 should aim to merge to main instead of a task branch.",
-        "summary": "Processed explicit !stop, posted one in-thread pause acknowledgement, and left the small-swe merged-stack E2E path paused after the node-level DRAIN blocker (w…",
-        "summary_preview": "Processed explicit !stop, posted one in-thread pause acknowledgement, and left the small-swe merged-stack E2E path paused after the node-level DRAIN blocker (w…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772567818.880349",
-        "last_update_ts": "1772604128.574919",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-03T19:56:58Z"
-        }
-      },
       "1772648456.008729": {
         "mention_ts": "1772648456.008729",
         "thread_ts": "1772648456.008729",
@@ -972,5 +956,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-07T06:01:56Z"
+  "server_time_utc": "2026-03-07T06:03:58Z"
 }
