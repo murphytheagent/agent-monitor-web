@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-08T00:07:29Z",
+    "last_updated_utc": "2026-03-08T00:09:30Z",
     "status": "sleeping",
     "pid": 15833,
-    "loop_count": 6708,
+    "loop_count": 6728,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,27 +16,27 @@
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.8,
-      "five": 1.72,
-      "fifteen": 1.65
+      "one": 2.38,
+      "five": 1.89,
+      "fifteen": 1.72
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 104251072512,
-    "disk_free_bytes": 140856123392,
-    "runner_log_size_bytes": 46110822,
+    "disk_used_bytes": 104252039168,
+    "disk_free_bytes": 140855156736,
+    "runner_log_size_bytes": 46110895,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-08T00:07:32Z",
+    "dashboard_started_utc": "2026-03-07T12:47:46Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-08T00:07:32Z",
+    "checked_at_utc": "2026-03-08T00:09:33Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -44,9 +44,9 @@
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 93007,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 30
       },
       {
         "index": 1,
@@ -75,7 +75,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 47,
+        "utilization_gpu_pct": 48,
         "memory_used_mb": 4469,
         "memory_total_mb": 97887,
         "temperature_c": 37
@@ -83,26 +83,26 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 62,
+        "utilization_gpu_pct": 65,
         "memory_used_mb": 9011,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 45
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 47,
         "memory_used_mb": 4649,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 38
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 35,
-        "memory_used_mb": 11586,
+        "utilization_gpu_pct": 74,
+        "memory_used_mb": 11568,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 41
       }
     ]
   },
@@ -110,22 +110,6 @@
     "queued": {},
     "active": {},
     "incomplete": {
-      "1772648456.008729": {
-        "mention_ts": "1772648456.008729",
-        "thread_ts": "1772648456.008729",
-        "status": "waiting_human",
-        "task_description": "For training LLMs, standard RL training aims to maximize the expected reward.",
-        "summary": "Re-checked SDFT/SDPO/OPSD objectives from source TeX, delivered refined KL-bridge/no-KL analysis, and attached rl_kl_bridge_note_v3.pdf in-thread.",
-        "summary_preview": "Re-checked SDFT/SDPO/OPSD objectives from source TeX, delivered refined KL-bridge/no-KL analysis, and attached rl_kl_bridge_note_v3.pdf in-thread.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772648456.008729",
-        "last_update_ts": "1772669342.390885",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-04T23:57:18Z"
-        }
-      },
       "1772685247.978359": {
         "mention_ts": "1772685247.978359",
         "thread_ts": "1772685247.978359",
@@ -956,5 +940,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-08T00:07:33Z"
+  "server_time_utc": "2026-03-08T00:09:33Z"
 }
