@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-08T12:05:41Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-08T12:06:53Z",
+    "status": "running_session",
     "pid": 15833,
-    "loop_count": 13825,
+    "loop_count": 13837,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
     "max_workers": 2
   },
@@ -19,24 +19,24 @@
     "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.67,
-      "five": 1.77,
-      "fifteen": 1.65
+      "one": 1.65,
+      "five": 1.7,
+      "fifteen": 1.63
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 104276799488,
-    "disk_free_bytes": 140830396416,
-    "runner_log_size_bytes": 46111805,
+    "disk_used_bytes": 104276664320,
+    "disk_free_bytes": 140830531584,
+    "runner_log_size_bytes": 46112020,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-08T12:05:46Z",
+    "dashboard_started_utc": "2026-03-08T12:07:48Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-08T12:05:46Z",
+    "checked_at_utc": "2026-03-08T12:07:48Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -75,7 +75,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 48,
+        "utilization_gpu_pct": 47,
         "memory_used_mb": 4651,
         "memory_total_mb": 97887,
         "temperature_c": 38
@@ -83,10 +83,10 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 64,
+        "utilization_gpu_pct": 63,
         "memory_used_mb": 9211,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 45
       },
       {
         "index": 6,
@@ -94,7 +94,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 26
       },
       {
         "index": 7,
@@ -108,7 +108,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
+        "status": "in_progress",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772971613.805539",
+        "last_update_ts": "1772971613.815961",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-08T12:06:53Z"
+        }
+      }
+    },
     "incomplete": {
       "1772685247.978359": {
         "mention_ts": "1772685247.978359",
@@ -158,22 +175,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-08T00:14:25Z"
-        }
-      },
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1772885257.999589",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: fixed 3 bugs (serial sleep cap neutralizing backoff, type annotation mismatch, zombie process on stdin failure), implemented AGENT-001 (compl…",
-        "summary_preview": "Developer review: fixed 3 bugs (serial sleep cap neutralizing backoff, type annotation mismatch, zombie process on stdin failure), implemented AGENT-001 (compl…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772885212.996349",
-        "last_update_ts": "1772887665.635659",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-07T12:06:52Z"
         }
       },
       "1772834785.176989": {
@@ -927,6 +928,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-21T00:46:37Z"
         }
+      },
+      "1771443304.562299": {
+        "mention_ts": "1771443304.562299",
+        "thread_ts": "1771443304.562299",
+        "status": "done",
+        "task_description": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; user confirmed the lo…",
+        "summary": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; u…",
+        "summary_preview": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; u…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771551175.566439",
+        "last_update_ts": "1771628609.828777",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-20T01:32:55Z"
+        }
       }
     }
   },
@@ -940,5 +957,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-08T12:05:47Z"
+  "server_time_utc": "2026-03-08T12:07:48Z"
 }
