@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-08T00:27:51Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-08T00:29:52Z",
+    "status": "sleeping",
     "pid": 15833,
-    "loop_count": 6911,
+    "loop_count": 6931,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,40 +11,32 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1772840342.898069",
-        "started_at": 1772928786,
-        "elapsed_sec": 884
-      }
-    ]
+    "max_workers": 2
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.93,
-      "five": 1.85,
-      "fifteen": 1.69
+      "one": 1.68,
+      "five": 1.77,
+      "fifteen": 1.67
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 104262590464,
-    "disk_free_bytes": 140844605440,
-    "runner_log_size_bytes": 46111633,
+    "disk_used_bytes": 104260730880,
+    "disk_free_bytes": 140846465024,
+    "runner_log_size_bytes": 46111805,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-08T00:27:56Z",
+    "dashboard_started_utc": "2026-03-07T12:47:46Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-08T00:27:56Z",
+    "checked_at_utc": "2026-03-08T00:29:55Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -83,7 +75,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 48,
+        "utilization_gpu_pct": 46,
         "memory_used_mb": 4589,
         "memory_total_mb": 97887,
         "temperature_c": 37
@@ -99,7 +91,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 49,
+        "utilization_gpu_pct": 47,
         "memory_used_mb": 4649,
         "memory_total_mb": 97887,
         "temperature_c": 39
@@ -107,33 +99,16 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 46,
-        "memory_used_mb": 11582,
+        "utilization_gpu_pct": 27,
+        "memory_used_mb": 11578,
         "memory_total_mb": 97887,
-        "temperature_c": 42
+        "temperature_c": 37
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1772840342.898069": {
-        "mention_ts": "1772840342.898069",
-        "thread_ts": "1772840342.898069",
-        "status": "in_progress",
-        "task_description": "Something that fundamentally sucks for agent is waiting on tool response, scenarios could be monitoring a small training run, installing a package, or compilation.",
-        "summary": "Closed the async long-tool-response brainstorming pass with a final synthesis: durable job registry, append-only wakeup log, lease-bound CAS acknowledgement, c…",
-        "summary_preview": "Closed the async long-tool-response brainstorming pass with a final synthesis: durable job registry, append-only wakeup log, lease-bound CAS acknowledgement, c…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772840342.898069",
-        "last_update_ts": "1772928786.117788",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-08T00:12:44Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1772685247.978359": {
         "mention_ts": "1772685247.978359",
@@ -153,6 +128,22 @@
       }
     },
     "finished": {
+      "1772840342.898069": {
+        "mention_ts": "1772840342.898069",
+        "thread_ts": "1772840342.898069",
+        "status": "done",
+        "task_description": "Something that fundamentally sucks for agent is waiting on tool response, scenarios could be monitoring a small training run, installing a package, or compilation.",
+        "summary": "Delivered a final comprehensive PDF synthesizing the async tool-response design, simulator findings, and the Codex/OpenClaw control-layer recommendation.",
+        "summary_preview": "Delivered a final comprehensive PDF synthesizing the async tool-response design, simulator findings, and the Codex/OpenClaw control-layer recommendation.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772840342.898069",
+        "last_update_ts": "1772929677.800564",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-08T00:12:44Z"
+        }
+      },
       "1772885257.999589": {
         "mention_ts": "1772885257.999589",
         "thread_ts": "1772885257.999589",
@@ -936,22 +927,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-21T00:46:37Z"
         }
-      },
-      "1771443304.562299": {
-        "mention_ts": "1771443304.562299",
-        "thread_ts": "1771443304.562299",
-        "status": "done",
-        "task_description": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; user confirmed the lo…",
-        "summary": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; u…",
-        "summary_preview": "Verified the requested interactive E2E run artifacts and thread report: Enter-path failed, Down+Enter-path passed with PDF-aware summary after generous wait; u…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771551175.566439",
-        "last_update_ts": "1771628609.828777",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-20T01:32:55Z"
-        }
       }
     }
   },
@@ -965,5 +940,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-08T00:27:57Z"
+  "server_time_utc": "2026-03-08T00:29:56Z"
 }
