@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-10T20:01:52Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-10T20:03:51Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 4413,
+    "loop_count": 4433,
     "last_exit_code": 0,
     "last_failure_kind": "mention_poll_error",
     "transient_retry_attempt": 0,
@@ -11,32 +11,40 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773172970.092319",
+        "started_at": 1773172995,
+        "elapsed_sec": 36
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.7,
-      "five": 1.66,
-      "fifteen": 1.66
+      "one": 2.11,
+      "five": 1.81,
+      "fifteen": 1.71
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 104828456960,
-    "disk_free_bytes": 140278738944,
-    "runner_log_size_bytes": 46119609,
+    "disk_used_bytes": 104828981248,
+    "disk_free_bytes": 140278214656,
+    "runner_log_size_bytes": 46119745,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-10T20:01:53Z",
+    "dashboard_started_utc": "2026-03-10T12:38:50Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-10T20:01:53Z",
+    "checked_at_utc": "2026-03-10T20:03:54Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -51,23 +59,23 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 64,
+        "utilization_gpu_pct": 61,
         "memory_used_mb": 9055,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 44
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 43,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 54897,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 54
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 14413,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -75,40 +83,57 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 89,
-        "memory_used_mb": 55048,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 55050,
         "memory_total_mb": 97887,
-        "temperature_c": 60
+        "temperature_c": 54
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 83,
-        "memory_used_mb": 55096,
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 55098,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 54
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 91,
-        "memory_used_mb": 51196,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 55098,
         "memory_total_mb": 97887,
-        "temperature_c": 57
+        "temperature_c": 58
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 88,
-        "memory_used_mb": 51060,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 55116,
         "memory_total_mb": 97887,
-        "temperature_c": 58
+        "temperature_c": 56
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773172970.092319": {
+        "mention_ts": "1773172970.092319",
+        "thread_ts": "1773172970.092319",
+        "status": "in_progress",
+        "task_description": "There seems to be no formal definition of Edge of Stability.",
+        "summary": "There seems to be no formal definition of Edge of Stability.",
+        "summary_preview": "There seems to be no formal definition of Edge of Stability.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773172970.092319",
+        "last_update_ts": "1773172994.817525",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-10T20:02:50Z"
+        }
+      }
+    },
     "incomplete": {
       "1773111453.746699": {
         "mention_ts": "1773111453.746699",
@@ -940,5 +965,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-10T20:01:53Z"
+  "server_time_utc": "2026-03-10T20:03:55Z"
 }
