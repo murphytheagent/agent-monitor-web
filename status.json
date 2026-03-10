@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-10T21:49:56Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-10T21:51:50Z",
+    "status": "workers_active",
     "pid": 15833,
-    "loop_count": 536,
+    "loop_count": 555,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,32 +11,40 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 2
+    "max_workers": 2,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773172970.092319",
+        "started_at": 1773179439,
+        "elapsed_sec": 70
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.9.6",
+    "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.66,
-      "five": 1.78,
-      "fifteen": 1.74
+      "one": 1.81,
+      "five": 1.85,
+      "fifteen": 1.77
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 105783349248,
-    "disk_free_bytes": 139323846656,
-    "runner_log_size_bytes": 46121534,
+    "disk_used_bytes": 105779904512,
+    "disk_free_bytes": 139327291392,
+    "runner_log_size_bytes": 46121722,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-10T21:49:59Z",
+    "dashboard_started_utc": "2026-03-10T20:56:42Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-10T21:49:59Z",
+    "checked_at_utc": "2026-03-10T21:51:53Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -51,7 +59,7 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 63,
+        "utilization_gpu_pct": 65,
         "memory_used_mb": 9061,
         "memory_total_mb": 97887,
         "temperature_c": 44
@@ -59,15 +67,15 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 77,
+        "utilization_gpu_pct": 39,
         "memory_used_mb": 54897,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 51
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 14413,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -76,14 +84,14 @@
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 37061,
+        "memory_used_mb": 37079,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 61
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 2,
         "memory_used_mb": 14253,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773172970.092319": {
+        "mention_ts": "1773172970.092319",
+        "thread_ts": "1773172970.092319",
+        "status": "in_progress",
+        "task_description": "There seems to be no formal definition of Edge of Stability.",
+        "summary": "Delivered the corrected GD baseline sweep with metric-over-training visualizations, updated the EOS harness, and posted a follow-up PDF note in Slack.",
+        "summary_preview": "Delivered the corrected GD baseline sweep with metric-over-training visualizations, updated the EOS harness, and posted a follow-up PDF note in Slack.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773172970.092319",
+        "last_update_ts": "1773179438.746218",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-10T21:50:28Z"
+        }
+      }
+    },
     "incomplete": {
       "1773111453.746699": {
         "mention_ts": "1773111453.746699",
@@ -128,22 +153,6 @@
       }
     },
     "finished": {
-      "1773172970.092319": {
-        "mention_ts": "1773172970.092319",
-        "thread_ts": "1773172970.092319",
-        "status": "done",
-        "task_description": "There seems to be no formal definition of Edge of Stability.",
-        "summary": "Delivered the corrected GD baseline sweep with metric-over-training visualizations, updated the EOS harness, and posted a follow-up PDF note in Slack.",
-        "summary_preview": "Delivered the corrected GD baseline sweep with metric-over-training visualizations, updated the EOS harness, and posted a follow-up PDF note in Slack.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773172970.092319",
-        "last_update_ts": "1773177555.451810",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-10T20:56:56Z"
-        }
-      },
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "1773145675.183669",
@@ -927,6 +936,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-21T09:44:33Z"
         }
+      },
+      "1771579678.414229": {
+        "mention_ts": "1771579678.414229",
+        "thread_ts": "1771579678.414229",
+        "status": "done",
+        "task_description": "Implemented v1.6 interface scaffolding (types/parser/canonicalizer/adapters/masking/tests), pushed design branch, merged PR #2 to main, and posted thread closure update.",
+        "summary": "Implemented v1.6 interface scaffolding (types/parser/canonicalizer/adapters/masking/tests), pushed design branch, merged PR #2 to main, and posted thread closu…",
+        "summary_preview": "Implemented v1.6 interface scaffolding (types/parser/canonicalizer/adapters/masking/tests), pushed design branch, merged PR #2 to main, and posted thread closu…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771579678.414229",
+        "last_update_ts": "1771657082.681982",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-20T09:27:58Z"
+        }
       }
     }
   },
@@ -940,5 +965,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-10T21:49:59Z"
+  "server_time_utc": "2026-03-10T21:51:54Z"
 }
