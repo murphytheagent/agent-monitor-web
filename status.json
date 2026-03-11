@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-11T05:35:09Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-11T05:37:13Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 2889,
+    "loop_count": 2909,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 4,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773187109.552829",
-        "started_at": 1773202630,
-        "elapsed_sec": 4678
-      }
-    ]
+    "max_workers": 4
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.69,
-      "five": 1.73,
-      "fifteen": 1.75
+      "one": 1.85,
+      "five": 1.77,
+      "fifteen": 1.76
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 105335779328,
-    "disk_free_bytes": 139771416576,
-    "runner_log_size_bytes": 46130402,
+    "disk_used_bytes": 105339650048,
+    "disk_free_bytes": 139767545856,
+    "runner_log_size_bytes": 46130770,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-11T00:41:00Z",
     "local_ips": []
@@ -44,22 +36,22 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-11T05:35:13Z",
+    "checked_at_utc": "2026-03-11T05:37:16Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 63,
+        "utilization_gpu_pct": 65,
         "memory_used_mb": 9013,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 44
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 62,
+        "utilization_gpu_pct": 63,
         "memory_used_mb": 8705,
         "memory_total_mb": 97887,
         "temperature_c": 44
@@ -110,30 +102,13 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773187109.552829": {
-        "mention_ts": "1773187109.552829",
-        "thread_ts": "1773187109.552829",
-        "status": "in_progress",
-        "task_description": "Fork this repo: anthropics/original_performance_takehome, and see if you can optimize the cycles down 1487, use whatever tools and workflows that may help you, DO NOT MODIFY THE T…",
-        "summary": "Audited upstream PRs, proved the current 1189-cycle fork branch is PR35-derived and slower than the live 1149 best, and checkpointed an original rewrite branch…",
-        "summary_preview": "Audited upstream PRs, proved the current 1189-cycle fork branch is PR35-derived and slower than the live 1149 best, and checkpointed an original rewrite branch…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773187109.552829",
-        "last_update_ts": "1773202630.492269",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-10T23:58:29Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -181,6 +156,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-10T22:34:06Z"
+        }
+      },
+      "1773187109.552829": {
+        "mention_ts": "1773187109.552829",
+        "thread_ts": "1773187109.552829",
+        "status": "in_progress",
+        "task_description": "Fork this repo: anthropics/original_performance_takehome, and see if you can optimize the cycles down 1487, use whatever tools and workflows that may help you, DO NOT MODIFY THE T…",
+        "summary": "Checkpointed a new original shallow-cache prototype at 2411 cycles, verified it on the submission harness plus 20 extra reference cases, and ruled out schedule…",
+        "summary_preview": "Checkpointed a new original shallow-cache prototype at 2411 cycles, verified it on the submission harness plus 20 extra reference cases, and ruled out schedule…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773187109.552829",
+        "last_update_ts": "1773207358.789663",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-10T23:58:29Z"
         }
       }
     },
@@ -997,5 +988,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-11T05:35:14Z"
+  "server_time_utc": "2026-03-11T05:37:16Z"
 }
