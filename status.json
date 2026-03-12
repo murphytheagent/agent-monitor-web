@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-12T23:09:22Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-12T23:11:29Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 473,
+    "loop_count": 493,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773356214.363949",
-        "started_at": 1773356232,
-        "elapsed_sec": 730
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.69,
-      "five": 1.72,
-      "fifteen": 1.68
+      "one": 1.31,
+      "five": 1.59,
+      "fifteen": 1.63
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 105202208768,
-    "disk_free_bytes": 139904987136,
-    "runner_log_size_bytes": 46151031,
+    "disk_used_bytes": 105201401856,
+    "disk_free_bytes": 139905794048,
+    "runner_log_size_bytes": 46151273,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-12T22:20:24Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-12T23:09:27Z",
+    "checked_at_utc": "2026-03-12T23:11:30Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +51,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 71273,
+        "utilization_gpu_pct": 34,
+        "memory_used_mb": 70951,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 42
       },
       {
         "index": 2,
@@ -70,7 +62,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 3,
@@ -78,7 +70,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 4,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773356214.363949": {
-        "mention_ts": "1773356214.363949",
-        "thread_ts": "1773356214.363949",
-        "status": "in_progress",
-        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
-        "summary": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
-        "summary_preview": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773356214.363949",
-        "last_update_ts": "1773356232.432430",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-12T22:56:54Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -213,6 +188,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-12T21:09:58Z"
+        }
+      },
+      "1773356214.363949": {
+        "mention_ts": "1773356214.363949",
+        "thread_ts": "1773356214.363949",
+        "status": "waiting_human",
+        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
+        "summary": "Initialized the new [code] project, imported the Overleaf draft as a tracked working copy, and delivered an initial manuscript scan showing that the leap-expon…",
+        "summary_preview": "Initialized the new [code] project, imported the Overleaf draft as a tracked working copy, and delivered an initial manuscript scan showing that the leap-expon…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773356214.363949",
+        "last_update_ts": "1773357082.896164",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-12T22:56:54Z"
         }
       }
     },
@@ -1029,5 +1020,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-12T23:09:28Z"
+  "server_time_utc": "2026-03-12T23:11:31Z"
 }
