@@ -1,17 +1,17 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-12T17:38:41Z",
-    "status": "restarting",
+    "last_updated_utc": "2026-03-12T17:40:42Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 2895,
+    "loop_count": 6,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 4
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.29,
-      "five": 2.02,
-      "fifteen": 1.86
+      "one": 2.16,
+      "five": 2.08,
+      "fifteen": 1.9
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106009022464,
-    "disk_free_bytes": 139098173440,
-    "runner_log_size_bytes": 46145105,
+    "disk_used_bytes": 106124759040,
+    "disk_free_bytes": 138982436864,
+    "runner_log_size_bytes": 46146329,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-12T17:38:41Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-12T17:38:41Z",
+    "checked_at_utc": "2026-03-12T17:40:44Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -51,10 +51,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 38,
-        "memory_used_mb": 72487,
+        "utilization_gpu_pct": 98,
+        "memory_used_mb": 72365,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 50
       },
       {
         "index": 2,
@@ -62,7 +62,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 41093,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 62
       },
       {
         "index": 3,
@@ -988,5 +988,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-12T17:38:42Z"
+  "server_time_utc": "2026-03-12T17:40:45Z"
 }
