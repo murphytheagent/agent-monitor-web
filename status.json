@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T06:33:04Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-13T06:35:11Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 272,
+    "loop_count": 292,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773356214.363949",
-        "started_at": 1773383009,
-        "elapsed_sec": 575
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.26,
-      "five": 1.45,
-      "fifteen": 1.55
+      "one": 1.46,
+      "five": 1.47,
+      "fifteen": 1.54
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106350809088,
-    "disk_free_bytes": 138756386816,
-    "runner_log_size_bytes": 46157208,
+    "disk_used_bytes": 106350399488,
+    "disk_free_bytes": 138756796416,
+    "runner_log_size_bytes": 46157450,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T06:04:36Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T06:33:10Z",
+    "checked_at_utc": "2026-03-13T06:35:12Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +51,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 74669,
+        "utilization_gpu_pct": 34,
+        "memory_used_mb": 74101,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 41
       },
       {
         "index": 2,
@@ -107,33 +99,16 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 63,
         "memory_used_mb": 36441,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 43
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773356214.363949": {
-        "mention_ts": "1773356214.363949",
-        "thread_ts": "1773356214.363949",
-        "status": "in_progress",
-        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
-        "summary": "Rewrote Section 2.2 into a prose-led geometric-notation subsection, pushed the refreshed PDF to Overleaf and Slack, and recorded the paper-writing conventions …",
-        "summary_preview": "Rewrote Section 2.2 into a prose-led geometric-notation subsection, pushed the refreshed PDF to Overleaf and Slack, and recorded the paper-writing conventions …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773356214.363949",
-        "last_update_ts": "1773383008.777780",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-12T22:56:54Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -213,6 +188,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-13T04:19:04Z"
+        }
+      },
+      "1773356214.363949": {
+        "mention_ts": "1773356214.363949",
+        "thread_ts": "1773356214.363949",
+        "status": "waiting_human",
+        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
+        "summary": "Recorded the collaborator's request for non-redundant manuscript-thread updates in project notes, curated memory, and developer-review plans; no manuscript tex…",
+        "summary_preview": "Recorded the collaborator's request for non-redundant manuscript-thread updates in project notes, curated memory, and developer-review plans; no manuscript tex…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773356214.363949",
+        "last_update_ts": "1773383705.080375",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-12T22:56:54Z"
         }
       }
     },
@@ -1029,5 +1020,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T06:33:11Z"
+  "server_time_utc": "2026-03-13T06:35:13Z"
 }
