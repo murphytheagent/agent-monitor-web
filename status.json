@@ -1,17 +1,37 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T06:04:36Z",
-    "status": "restarting",
+    "last_updated_utc": "2026-03-13T06:06:32Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 4073,
+    "loop_count": 19,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773349798.224369",
+        "started_at": 1773381879,
+        "elapsed_sec": 112
+      },
+      {
+        "slot": 1,
+        "task": "1773356214.363949",
+        "started_at": 1773381880,
+        "elapsed_sec": 111
+      },
+      {
+        "slot": 2,
+        "task": "1773375544.377909",
+        "started_at": 1773381880,
+        "elapsed_sec": 111
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +39,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.48,
-      "five": 1.5,
-      "fifteen": 1.61
+      "one": 1.89,
+      "five": 1.69,
+      "fifteen": 1.67
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106297319424,
-    "disk_free_bytes": 138809876480,
-    "runner_log_size_bytes": 46155699,
+    "disk_used_bytes": 106302377984,
+    "disk_free_bytes": 138804817920,
+    "runner_log_size_bytes": 46156240,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T06:04:36Z",
     "local_ips": []
@@ -36,7 +56,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T06:04:36Z",
+    "checked_at_utc": "2026-03-13T06:06:37Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -51,10 +71,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 33,
-        "memory_used_mb": 69185,
+        "utilization_gpu_pct": 70,
+        "memory_used_mb": 69345,
         "memory_total_mb": 97887,
-        "temperature_c": 42
+        "temperature_c": 49
       },
       {
         "index": 2,
@@ -99,16 +119,65 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 65,
+        "utilization_gpu_pct": 63,
         "memory_used_mb": 36371,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 42
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773349798.224369": {
+        "mention_ts": "1773349798.224369",
+        "thread_ts": "1773349798.224369",
+        "status": "in_progress",
+        "task_description": "我们在考虑给新家买扫地机器人。一共有三层楼，一楼有一个小卧室加一个厕所，卧室是地毯，然后卧室外面和厕所里都是vinyl地板。二楼客厅都是地板。三楼都是地毯，有两个卧室。我们现在已经有一个roborock S5扫地机器人了，虽然比较老，但感觉用在二楼已经够了。现在在考虑一楼和三楼买什么样的扫地机器人。最重要的是要能够清洁地毯，并且能够自清洁。你能帮我详细研究…",
+        "summary": "Answered the Xiaomi-relationship follow-up in-thread: both Dreame and Roborock are Xiaomi-ecosystem-derived but independent brands today, with Roborock's remai…",
+        "summary_preview": "Answered the Xiaomi-relationship follow-up in-thread: both Dreame and Roborock are Xiaomi-ecosystem-derived but independent brands today, with Roborock's remai…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773349798.224369",
+        "last_update_ts": "1773381879.493465",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-12T21:09:58Z"
+        }
+      },
+      "1773356214.363949": {
+        "mention_ts": "1773356214.363949",
+        "thread_ts": "1773356214.363949",
+        "status": "in_progress",
+        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
+        "summary": "Polished Section 2 into a more manuscript-ready [code] , pushed the revision to Overleaf, and posted the refreshed PDF in-thread for review.",
+        "summary_preview": "Polished Section 2 into a more manuscript-ready [code] , pushed the revision to Overleaf, and posted the refreshed PDF in-thread for review.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773356214.363949",
+        "last_update_ts": "1773381879.980811",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-12T22:56:54Z"
+        }
+      },
+      "1773375544.377909": {
+        "mention_ts": "1773375544.377909",
+        "thread_ts": "1773375544.377909",
+        "status": "in_progress",
+        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
+        "summary": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classi…",
+        "summary_preview": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classi…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773375544.377909",
+        "last_update_ts": "1773381880.448741",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-13T04:19:04Z"
+        }
+      }
+    },
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -172,54 +241,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-11T18:55:49Z"
-        }
-      },
-      "1773349798.224369": {
-        "mention_ts": "1773349798.224369",
-        "thread_ts": "1773349798.224369",
-        "status": "waiting_human",
-        "task_description": "我们在考虑给新家买扫地机器人。一共有三层楼，一楼有一个小卧室加一个厕所，卧室是地毯，然后卧室外面和厕所里都是vinyl地板。二楼客厅都是地板。三楼都是地毯，有两个卧室。我们现在已经有一个roborock S5扫地机器人了，虽然比较老，但感觉用在二楼已经够了。现在在考虑一楼和三楼买什么样的扫地机器人。最重要的是要能够清洁地毯，并且能够自清洁。你能帮我详细研究…",
-        "summary": "Answered the Xiaomi-relationship follow-up in-thread: both Dreame and Roborock are Xiaomi-ecosystem-derived but independent brands today, with Roborock's remai…",
-        "summary_preview": "Answered the Xiaomi-relationship follow-up in-thread: both Dreame and Roborock are Xiaomi-ecosystem-derived but independent brands today, with Roborock's remai…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773349798.224369",
-        "last_update_ts": "1773355813.237697",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-12T21:09:58Z"
-        }
-      },
-      "1773356214.363949": {
-        "mention_ts": "1773356214.363949",
-        "thread_ts": "1773356214.363949",
-        "status": "waiting_human",
-        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
-        "summary": "Polished Section 2 into a more manuscript-ready [code] , pushed the revision to Overleaf, and posted the refreshed PDF in-thread for review.",
-        "summary_preview": "Polished Section 2 into a more manuscript-ready [code] , pushed the revision to Overleaf, and posted the refreshed PDF in-thread for review.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773356214.363949",
-        "last_update_ts": "1773379342.580818",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-12T22:56:54Z"
-        }
-      },
-      "1773375544.377909": {
-        "mention_ts": "1773375544.377909",
-        "thread_ts": "1773375544.377909",
-        "status": "in_progress",
-        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
-        "summary": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classi…",
-        "summary_preview": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classi…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773375544.377909",
-        "last_update_ts": "1773381875.809790",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-13T04:19:04Z"
         }
       }
     },
@@ -1036,5 +1057,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T06:04:36Z"
+  "server_time_utc": "2026-03-13T06:06:38Z"
 }
