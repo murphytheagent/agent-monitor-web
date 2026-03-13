@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T04:18:10Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-13T04:20:10Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 3403,
+    "loop_count": 3422,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773375544.377909",
+        "started_at": 1773375565,
+        "elapsed_sec": 44
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.78,
-      "five": 2.0,
-      "fifteen": 1.81
+      "one": 1.37,
+      "five": 1.73,
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106265464832,
-    "disk_free_bytes": 138841731072,
-    "runner_log_size_bytes": 46153565,
+    "disk_used_bytes": 106266038272,
+    "disk_free_bytes": 138841157632,
+    "runner_log_size_bytes": 46153833,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-12T22:20:24Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T04:18:13Z",
+    "checked_at_utc": "2026-03-13T04:20:15Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -51,10 +59,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 67051,
+        "utilization_gpu_pct": 35,
+        "memory_used_mb": 67057,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 46
       },
       {
         "index": 2,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773375544.377909": {
+        "mention_ts": "1773375544.377909",
+        "thread_ts": "1773375544.377909",
+        "status": "in_progress",
+        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
+        "summary": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classi…",
+        "summary_preview": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classi…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773375544.377909",
+        "last_update_ts": "1773375565.090275",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-13T04:19:04Z"
+        }
+      }
+    },
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -1020,5 +1045,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T04:18:14Z"
+  "server_time_utc": "2026-03-13T04:20:16Z"
 }
