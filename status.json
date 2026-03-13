@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T05:19:25Z",
+    "last_updated_utc": "2026-03-13T05:21:25Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 3986,
+    "loop_count": 4005,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,13 +17,13 @@
         "slot": 0,
         "task": "1773375544.377909",
         "started_at": 1773375565,
-        "elapsed_sec": 3600
+        "elapsed_sec": 3720
       },
       {
         "slot": 1,
         "task": "1773356214.363949",
         "started_at": 1773376718,
-        "elapsed_sec": 2447
+        "elapsed_sec": 2567
       }
     ]
   },
@@ -33,14 +33,14 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.82,
-      "five": 2.04,
-      "fifteen": 2.03
+      "one": 1.79,
+      "five": 1.91,
+      "fifteen": 1.98
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106295869440,
-    "disk_free_bytes": 138811326464,
+    "disk_used_bytes": 106295566336,
+    "disk_free_bytes": 138811629568,
     "runner_log_size_bytes": 46154355,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-12T22:20:24Z",
@@ -50,7 +50,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T05:19:27Z",
+    "checked_at_utc": "2026-03-13T05:21:30Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -65,10 +65,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
-        "memory_used_mb": 72361,
+        "utilization_gpu_pct": 34,
+        "memory_used_mb": 71983,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 41
       },
       {
         "index": 2,
@@ -113,10 +113,10 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 67,
-        "memory_used_mb": 67967,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 40
       }
     ]
   },
@@ -1051,5 +1051,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T05:19:28Z"
+  "server_time_utc": "2026-03-13T05:21:31Z"
 }
