@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T11:46:19Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-13T11:48:22Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 3178,
+    "loop_count": 3197,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773375544.377909",
-        "started_at": 1773398495,
-        "elapsed_sec": 3883
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.68,
-      "five": 1.6,
-      "fifteen": 1.57
+      "one": 1.36,
+      "five": 1.5,
+      "fifteen": 1.53
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 105968992256,
-    "disk_free_bytes": 139138203648,
-    "runner_log_size_bytes": 46159109,
+    "disk_used_bytes": 105975148544,
+    "disk_free_bytes": 139132047360,
+    "runner_log_size_bytes": 46159478,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T06:04:36Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T11:46:21Z",
+    "checked_at_utc": "2026-03-13T11:48:24Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +51,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 33,
-        "memory_used_mb": 66803,
+        "utilization_gpu_pct": 91,
+        "memory_used_mb": 66919,
         "memory_total_mb": 97887,
-        "temperature_c": 41
+        "temperature_c": 49
       },
       {
         "index": 2,
@@ -70,7 +62,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 3,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773375544.377909": {
-        "mention_ts": "1773375544.377909",
-        "thread_ts": "1773375544.377909",
-        "status": "in_progress",
-        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
-        "summary": "Round 2 decomposition shows dataset size and source balancing alone do not explain the prefill drop; prompt length is the dominant current shortcut, while the …",
-        "summary_preview": "Round 2 decomposition shows dataset size and source balancing alone do not explain the prefill drop; prompt length is the dominant current shortcut, while the …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773375544.377909",
-        "last_update_ts": "1773398494.856095",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-13T08:37:22Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -213,6 +188,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-12T22:56:54Z"
+        }
+      },
+      "1773375544.377909": {
+        "mention_ts": "1773375544.377909",
+        "thread_ts": "1773375544.377909",
+        "status": "in_progress",
+        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
+        "summary": "Round 3 metadata-offset training shows residual prefill signal survives explicit metadata conditioning: the source-control additive probe beats legacy metadata…",
+        "summary_preview": "Round 3 metadata-offset training shows residual prefill signal survives explicit metadata conditioning: the source-control additive probe beats legacy metadata…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773375544.377909",
+        "last_update_ts": "1773402464.462711",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-13T08:37:22Z"
         }
       }
     },
@@ -1029,5 +1020,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T11:46:22Z"
+  "server_time_utc": "2026-03-13T11:48:25Z"
 }
