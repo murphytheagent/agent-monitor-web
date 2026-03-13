@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T00:31:11Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-13T00:33:17Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 1245,
+    "loop_count": 1265,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773356214.363949",
-        "started_at": 1773360967,
-        "elapsed_sec": 903
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.95,
-      "five": 1.9,
-      "fifteen": 1.86
+      "one": 1.6,
+      "five": 1.8,
+      "fifteen": 1.82
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 105224011776,
-    "disk_free_bytes": 139883184128,
-    "runner_log_size_bytes": 46151413,
+    "disk_used_bytes": 105226461184,
+    "disk_free_bytes": 139880734720,
+    "runner_log_size_bytes": 46151655,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-12T22:20:24Z",
     "local_ips": []
@@ -44,17 +36,17 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T00:31:16Z",
+    "checked_at_utc": "2026-03-13T00:33:19Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 91335,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 52
       },
       {
         "index": 1,
@@ -62,23 +54,23 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89655,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 53
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 89655,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 55
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 89655,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 54
       },
       {
         "index": 4,
@@ -99,10 +91,10 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 89655,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 49
       },
       {
         "index": 7,
@@ -110,30 +102,13 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89655,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 50
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773356214.363949": {
-        "mention_ts": "1773356214.363949",
-        "thread_ts": "1773356214.363949",
-        "status": "in_progress",
-        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
-        "summary": "Initialized the new [code] project, imported the Overleaf draft as a tracked working copy, and delivered an initial manuscript scan showing that the leap-expon…",
-        "summary_preview": "Initialized the new [code] project, imported the Overleaf draft as a tracked working copy, and delivered an initial manuscript scan showing that the leap-expon…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773356214.363949",
-        "last_update_ts": "1773360967.423539",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-12T22:56:54Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -213,6 +188,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-12T21:09:58Z"
+        }
+      },
+      "1773356214.363949": {
+        "mention_ts": "1773356214.363949",
+        "thread_ts": "1773356214.363949",
+        "status": "waiting_human",
+        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
+        "summary": "Integrated the two-ReLU leap theorem and appendix proof into the manuscript, pushed the updated draft to Overleaf, attached the compiled PDF in-thread, and ask…",
+        "summary_preview": "Integrated the two-ReLU leap theorem and appendix proof into the manuscript, pushed the updated draft to Overleaf, attached the compiled PDF in-thread, and ask…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773356214.363949",
+        "last_update_ts": "1773361947.513702",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-12T22:56:54Z"
         }
       }
     },
@@ -1029,5 +1020,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T00:31:17Z"
+  "server_time_utc": "2026-03-13T00:33:20Z"
 }
