@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T01:50:58Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-13T01:53:03Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 1997,
+    "loop_count": 2017,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773356214.363949",
+        "started_at": 1773366721,
+        "elapsed_sec": 61
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.85,
-      "five": 1.75,
-      "fifteen": 1.7
+      "one": 2.04,
+      "five": 1.8,
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106016092160,
-    "disk_free_bytes": 139091103744,
-    "runner_log_size_bytes": 46151655,
+    "disk_used_bytes": 106015498240,
+    "disk_free_bytes": 139091697664,
+    "runner_log_size_bytes": 46151795,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-12T22:20:24Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T01:51:04Z",
+    "checked_at_utc": "2026-03-13T01:53:06Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -44,9 +52,9 @@
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 81739,
+        "memory_used_mb": 87062,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 53
       },
       {
         "index": 1,
@@ -54,7 +62,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 81745,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 54
       },
       {
         "index": 2,
@@ -62,7 +70,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 81745,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 52
       },
       {
         "index": 3,
@@ -70,7 +78,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 81745,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 56
       },
       {
         "index": 4,
@@ -78,7 +86,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 81745,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 53
       },
       {
         "index": 5,
@@ -86,7 +94,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 81745,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 50
       },
       {
         "index": 6,
@@ -94,7 +102,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 81745,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 52
       },
       {
         "index": 7,
@@ -102,13 +110,30 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 81745,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 53
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773356214.363949": {
+        "mention_ts": "1773356214.363949",
+        "thread_ts": "1773356214.363949",
+        "status": "in_progress",
+        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
+        "summary": "Integrated the two-ReLU leap theorem and appendix proof into the manuscript, pushed the updated draft to Overleaf, attached the compiled PDF in-thread, and ask…",
+        "summary_preview": "Integrated the two-ReLU leap theorem and appendix proof into the manuscript, pushed the updated draft to Overleaf, attached the compiled PDF in-thread, and ask…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773356214.363949",
+        "last_update_ts": "1773366721.280521",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-12T22:56:54Z"
+        }
+      }
+    },
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -188,22 +213,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-12T21:09:58Z"
-        }
-      },
-      "1773356214.363949": {
-        "mention_ts": "1773356214.363949",
-        "thread_ts": "1773356214.363949",
-        "status": "waiting_human",
-        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
-        "summary": "Integrated the two-ReLU leap theorem and appendix proof into the manuscript, pushed the updated draft to Overleaf, attached the compiled PDF in-thread, and ask…",
-        "summary_preview": "Integrated the two-ReLU leap theorem and appendix proof into the manuscript, pushed the updated draft to Overleaf, attached the compiled PDF in-thread, and ask…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773356214.363949",
-        "last_update_ts": "1773361947.513702",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-12T22:56:54Z"
         }
       }
     },
@@ -1020,5 +1029,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T01:51:04Z"
+  "server_time_utc": "2026-03-13T01:53:07Z"
 }
