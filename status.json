@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T17:13:50Z",
+    "last_updated_utc": "2026-03-13T17:15:50Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 1341,
+    "loop_count": 1360,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,8 +16,8 @@
       {
         "slot": 0,
         "task": "1773375544.377909",
-        "started_at": 1773418829,
-        "elapsed_sec": 3201
+        "started_at": 1773422063,
+        "elapsed_sec": 87
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.82,
-      "five": 1.62,
-      "fifteen": 1.6
+      "one": 1.52,
+      "five": 1.59,
+      "fifteen": 1.59
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106017710080,
-    "disk_free_bytes": 139089485824,
-    "runner_log_size_bytes": 46162886,
+    "disk_used_bytes": 106014740480,
+    "disk_free_bytes": 139092455424,
+    "runner_log_size_bytes": 46163409,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T14:50:48Z",
     "local_ips": []
@@ -44,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T17:13:51Z",
+    "checked_at_utc": "2026-03-13T17:15:53Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,31 +59,31 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 5,
+        "utilization_gpu_pct": 1,
         "memory_used_mb": 82833,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 41
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 91,
+        "utilization_gpu_pct": 57,
         "memory_used_mb": 73343,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 49
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 6,
+        "utilization_gpu_pct": 96,
         "memory_used_mb": 40239,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 45
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 55,
+        "utilization_gpu_pct": 50,
         "memory_used_mb": 72395,
         "memory_total_mb": 97887,
         "temperature_c": 50
@@ -91,18 +91,18 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 42,
+        "utilization_gpu_pct": 1,
         "memory_used_mb": 53017,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 37
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 62,
-        "memory_used_mb": 71506,
+        "utilization_gpu_pct": 92,
+        "memory_used_mb": 65089,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 51
       },
       {
         "index": 7,
@@ -122,11 +122,11 @@
         "thread_ts": "1773375544.377909",
         "status": "in_progress",
         "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
-        "summary": "Round 7 showed that neither selector-only changes nor small length-robust objective tweaks beat the Round 6 prefill anchor, so the next lever should move to ta…",
-        "summary_preview": "Round 7 showed that neither selector-only changes nor small length-robust objective tweaks beat the Round 6 prefill anchor, so the next lever should move to ta…",
+        "summary": "Started Round 8 as a fixed-label order-sensitive suffix-view follow-up, fixed an extractor dispatch bug and a matched-eval split bug, and requeued the correcte…",
+        "summary_preview": "Started Round 8 as a fixed-label order-sensitive suffix-view follow-up, fixed an extractor dispatch bug and a matched-eval split bug, and requeued the correcte…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773375544.377909",
-        "last_update_ts": "1773418828.533265",
+        "last_update_ts": "1773422062.871045",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -1029,5 +1029,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T17:13:51Z"
+  "server_time_utc": "2026-03-13T17:15:53Z"
 }
