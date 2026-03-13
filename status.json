@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T11:33:59Z",
+    "last_updated_utc": "2026-03-13T11:36:01Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 3064,
+    "loop_count": 3083,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,7 @@
         "slot": 0,
         "task": "1773375544.377909",
         "started_at": 1773398495,
-        "elapsed_sec": 3144
+        "elapsed_sec": 3266
       }
     ]
   },
@@ -27,14 +27,14 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.23,
-      "five": 1.43,
-      "fifteen": 1.52
+      "one": 1.54,
+      "five": 1.51,
+      "fifteen": 1.54
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 105961799680,
-    "disk_free_bytes": 139145396224,
+    "disk_used_bytes": 105963679744,
+    "disk_free_bytes": 139143516160,
     "runner_log_size_bytes": 46159109,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T06:04:36Z",
@@ -44,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T11:34:05Z",
+    "checked_at_utc": "2026-03-13T11:36:08Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +59,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
+        "utilization_gpu_pct": 3,
+        "memory_used_mb": 10827,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 29
       },
       {
         "index": 2,
@@ -102,7 +102,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 26
       },
       {
         "index": 7,
@@ -1029,5 +1029,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T11:34:06Z"
+  "server_time_utc": "2026-03-13T11:36:09Z"
 }
