@@ -1,25 +1,17 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T13:12:06Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-13T13:13:22Z",
+    "status": "running_session",
     "pid": 82363,
-    "loop_count": 3974,
+    "loop_count": 3986,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773375544.377909",
-        "started_at": 1773402650,
-        "elapsed_sec": 4875
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.88,
-      "five": 2.12,
-      "fifteen": 1.94
+      "one": 1.63,
+      "five": 1.96,
+      "fifteen": 1.9
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 105981693952,
-    "disk_free_bytes": 139125501952,
-    "runner_log_size_bytes": 46159727,
+    "disk_used_bytes": 105982058496,
+    "disk_free_bytes": 139125137408,
+    "runner_log_size_bytes": 46160246,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T06:04:36Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T13:12:07Z",
+    "checked_at_utc": "2026-03-13T13:14:10Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -60,17 +52,17 @@
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 92,
-        "memory_used_mb": 73075,
+        "memory_used_mb": 72807,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 49
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 58,
-        "memory_used_mb": 77699,
+        "utilization_gpu_pct": 83,
+        "memory_used_mb": 77363,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 45
       },
       {
         "index": 3,
@@ -84,70 +76,53 @@
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "memory_used_mb": 35505,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 32
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "memory_used_mb": 32327,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 33
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 65407,
+        "utilization_gpu_pct": 32,
+        "memory_used_mb": 41437,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 41
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 74487,
+        "memory_used_mb": 35617,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 36
       }
     ]
   },
   "tasks": {
-    "queued": {
+    "queued": {},
+    "active": {
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "maintenance",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Run maintenance reflection checklist and summarize findings.",
         "summary": "Run maintenance reflection checklist and summarize findings.",
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773403627.067734",
-        "last_update_ts": "1773403627.067734",
+        "last_update_ts": "1773407602.434230",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-13T12:07:07Z"
-        }
-      }
-    },
-    "active": {
-      "1773375544.377909": {
-        "mention_ts": "1773375544.377909",
-        "thread_ts": "1773375544.377909",
-        "status": "in_progress",
-        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
-        "summary": "Round 3 metadata-offset training shows residual prefill signal survives explicit metadata conditioning: the source-control additive probe beats legacy metadata…",
-        "summary_preview": "Round 3 metadata-offset training shows residual prefill signal survives explicit metadata conditioning: the source-control additive probe beats legacy metadata…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773375544.377909",
-        "last_update_ts": "1773402650.475271",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-13T08:37:22Z"
         }
       }
     },
@@ -230,6 +205,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-12T22:56:54Z"
+        }
+      },
+      "1773375544.377909": {
+        "mention_ts": "1773375544.377909",
+        "thread_ts": "1773375544.377909",
+        "status": "in_progress",
+        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
+        "summary": "Round 4 showed that simple boundary-window summaries do not beat the metadata-aware last-token anchor, and Round 5 then found a modest but real improvement by …",
+        "summary_preview": "Round 4 showed that simple boundary-window summaries do not beat the metadata-aware last-token anchor, and Round 5 then found a modest but real improvement by …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773375544.377909",
+        "last_update_ts": "1773407602.041929",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-13T08:37:22Z"
         }
       }
     },
@@ -1046,5 +1037,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T13:12:08Z"
+  "server_time_utc": "2026-03-13T13:14:11Z"
 }
