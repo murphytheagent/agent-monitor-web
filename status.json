@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T06:22:57Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-13T06:24:55Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 176,
+    "loop_count": 195,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773356214.363949",
+        "started_at": 1773383009,
+        "elapsed_sec": 86
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.8,
-      "five": 1.64,
+      "one": 1.56,
+      "five": 1.65,
       "fifteen": 1.66
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106348294144,
-    "disk_free_bytes": 138758901760,
-    "runner_log_size_bytes": 46156966,
+    "disk_used_bytes": 106349912064,
+    "disk_free_bytes": 138757283840,
+    "runner_log_size_bytes": 46157208,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T06:04:36Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T06:22:57Z",
+    "checked_at_utc": "2026-03-13T06:25:00Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -51,10 +59,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 74,
-        "memory_used_mb": 75585,
+        "utilization_gpu_pct": 92,
+        "memory_used_mb": 75159,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 50
       },
       {
         "index": 2,
@@ -99,7 +107,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 64,
+        "utilization_gpu_pct": 63,
         "memory_used_mb": 36371,
         "memory_total_mb": 97887,
         "temperature_c": 41
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773356214.363949": {
+        "mention_ts": "1773356214.363949",
+        "thread_ts": "1773356214.363949",
+        "status": "in_progress",
+        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
+        "summary": "Rewrote Section 2.2 into a prose-led geometric-notation subsection, pushed the refreshed PDF to Overleaf and Slack, and recorded the paper-writing conventions …",
+        "summary_preview": "Rewrote Section 2.2 into a prose-led geometric-notation subsection, pushed the refreshed PDF to Overleaf and Slack, and recorded the paper-writing conventions …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773356214.363949",
+        "last_update_ts": "1773383008.777780",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-12T22:56:54Z"
+        }
+      }
+    },
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -188,22 +213,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-13T04:19:04Z"
-        }
-      },
-      "1773356214.363949": {
-        "mention_ts": "1773356214.363949",
-        "thread_ts": "1773356214.363949",
-        "status": "waiting_human",
-        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
-        "summary": "Rewrote Section 2.2 into a prose-led geometric-notation subsection, pushed the refreshed PDF to Overleaf and Slack, and recorded the paper-writing conventions …",
-        "summary_preview": "Rewrote Section 2.2 into a prose-led geometric-notation subsection, pushed the refreshed PDF to Overleaf and Slack, and recorded the paper-writing conventions …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773356214.363949",
-        "last_update_ts": "1773382791.181440",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-12T22:56:54Z"
         }
       }
     },
@@ -1020,5 +1029,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T06:22:58Z"
+  "server_time_utc": "2026-03-13T06:25:01Z"
 }
