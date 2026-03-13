@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T04:14:04Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-13T04:16:09Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 3364,
+    "loop_count": 3384,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773356214.363949",
-        "started_at": 1773374544,
-        "elapsed_sec": 700
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.59,
-      "five": 1.76,
-      "fifteen": 1.73
+      "one": 1.24,
+      "five": 1.58,
+      "fifteen": 1.66
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106259955712,
-    "disk_free_bytes": 138847240192,
-    "runner_log_size_bytes": 46153323,
+    "disk_used_bytes": 106260381696,
+    "disk_free_bytes": 138846814208,
+    "runner_log_size_bytes": 46153565,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-12T22:20:24Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T04:14:08Z",
+    "checked_at_utc": "2026-03-13T04:16:10Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +51,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 78,
-        "memory_used_mb": 68387,
+        "utilization_gpu_pct": 92,
+        "memory_used_mb": 68393,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 52
       },
       {
         "index": 2,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773356214.363949": {
-        "mention_ts": "1773356214.363949",
-        "thread_ts": "1773356214.363949",
-        "status": "in_progress",
-        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
-        "summary": "Changed the visible Murphy manuscript markers from blue to a darker readable teal, recompiled, rebased the color-only diff onto the current Overleaf head, push…",
-        "summary_preview": "Changed the visible Murphy manuscript markers from blue to a darker readable teal, recompiled, rebased the color-only diff onto the current Overleaf head, push…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773356214.363949",
-        "last_update_ts": "1773374543.887858",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-12T22:56:54Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -213,6 +188,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-12T21:09:58Z"
+        }
+      },
+      "1773356214.363949": {
+        "mention_ts": "1773356214.363949",
+        "thread_ts": "1773356214.363949",
+        "status": "waiting_human",
+        "task_description": "Do you remember that I asked you about the leap complexity for a two-relu target function?",
+        "summary": "Colored all Murphy-authored manuscript spans in the approved teal, recompiled, pushed the attribution-only revision to Overleaf, and posted the refreshed PDF i…",
+        "summary_preview": "Colored all Murphy-authored manuscript spans in the approved teal, recompiled, pushed the attribution-only revision to Overleaf, and posted the refreshed PDF i…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773356214.363949",
+        "last_update_ts": "1773375312.532661",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-12T22:56:54Z"
         }
       }
     },
@@ -1029,5 +1020,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T04:14:09Z"
+  "server_time_utc": "2026-03-13T04:16:11Z"
 }
