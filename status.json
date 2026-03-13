@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T21:53:59Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-13T21:55:59Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 1222,
+    "loop_count": 1241,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773375544.377909",
-        "started_at": 1773437796,
-        "elapsed_sec": 1043
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.16,
-      "five": 1.94,
-      "fifteen": 1.79
+      "one": 1.73,
+      "five": 1.84,
+      "fifteen": 1.76
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106690916352,
-    "disk_free_bytes": 138416279552,
-    "runner_log_size_bytes": 46173225,
+    "disk_used_bytes": 106694422528,
+    "disk_free_bytes": 138412773376,
+    "runner_log_size_bytes": 46173467,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T19:45:18Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T21:54:02Z",
+    "checked_at_utc": "2026-03-13T21:56:05Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -67,10 +59,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 61,
+        "utilization_gpu_pct": 37,
         "memory_used_mb": 72577,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 44
       },
       {
         "index": 3,
@@ -83,10 +75,10 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 5,
-        "memory_used_mb": 61905,
+        "utilization_gpu_pct": 92,
+        "memory_used_mb": 70299,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 49
       },
       {
         "index": 5,
@@ -99,10 +91,10 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 55,
+        "utilization_gpu_pct": 92,
         "memory_used_mb": 67535,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 52
       },
       {
         "index": 7,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773375544.377909": {
-        "mention_ts": "1773375544.377909",
-        "thread_ts": "1773375544.377909",
-        "status": "in_progress",
-        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
-        "summary": "Round 11 completed and selected the preserved late-horizon branch: [code] is the earliest viable next target ( [code] on the survival scout), Round 12 is prepa…",
-        "summary_preview": "Round 11 completed and selected the preserved late-horizon branch: [code] is the earliest viable next target ( [code] on the survival scout), Round 12 is prepa…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773375544.377909",
-        "last_update_ts": "1773437796.410950",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-13T21:36:35Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -229,6 +204,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-13T20:41:41Z"
+        }
+      },
+      "1773375544.377909": {
+        "mention_ts": "1773375544.377909",
+        "thread_ts": "1773375544.377909",
+        "status": "waiting_human",
+        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
+        "summary": "Delivered a detailed PDF summary of reopened Rounds 1-12, opened upstream PR #3 for the accumulated project commits, and froze execution with Round 12 scientif…",
+        "summary_preview": "Delivered a detailed PDF summary of reopened Rounds 1-12, opened upstream PR #3 for the accumulated project commits, and froze execution with Round 12 scientif…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773375544.377909",
+        "last_update_ts": "1773438890.140326",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-13T21:36:35Z"
         }
       }
     },
@@ -1045,5 +1036,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T21:54:03Z"
+  "server_time_utc": "2026-03-13T21:56:06Z"
 }
