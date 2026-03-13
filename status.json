@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T09:39:02Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-13T09:41:05Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 1999,
+    "loop_count": 2018,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773375544.377909",
+        "started_at": 1773394776,
+        "elapsed_sec": 89
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.65,
-      "five": 1.61,
-      "fifteen": 1.63
+      "one": 1.82,
+      "five": 1.72,
+      "fifteen": 1.67
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106000121856,
-    "disk_free_bytes": 139107074048,
-    "runner_log_size_bytes": 46158574,
+    "disk_used_bytes": 105999601664,
+    "disk_free_bytes": 139107594240,
+    "runner_log_size_bytes": 46158657,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T06:04:36Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T09:39:09Z",
+    "checked_at_utc": "2026-03-13T09:41:11Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -51,10 +59,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
+        "utilization_gpu_pct": 35,
         "memory_used_mb": 64869,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 44
       },
       {
         "index": 2,
@@ -99,16 +107,33 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 86,
+        "utilization_gpu_pct": 79,
         "memory_used_mb": 80391,
         "memory_total_mb": 97887,
-        "temperature_c": 57
+        "temperature_c": 56
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773375544.377909": {
+        "mention_ts": "1773375544.377909",
+        "thread_ts": "1773375544.377909",
+        "status": "in_progress",
+        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
+        "summary": "Completed a composition-controlled prefill follow-up: math-only training largely preserved the Round G prompt-only result, while source/length matching reduced…",
+        "summary_preview": "Completed a composition-controlled prefill follow-up: math-only training largely preserved the Round G prompt-only result, while source/length matching reduced…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773375544.377909",
+        "last_update_ts": "1773394775.764228",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-13T08:37:22Z"
+        }
+      }
+    },
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -188,22 +213,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-12T22:56:54Z"
-        }
-      },
-      "1773375544.377909": {
-        "mention_ts": "1773375544.377909",
-        "thread_ts": "1773375544.377909",
-        "status": "in_progress",
-        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
-        "summary": "Completed a composition-controlled prefill follow-up: math-only training largely preserved the Round G prompt-only result, while source/length matching reduced…",
-        "summary_preview": "Completed a composition-controlled prefill follow-up: math-only training largely preserved the Round G prompt-only result, while source/length matching reduced…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773375544.377909",
-        "last_update_ts": "1773394595.335894",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-13T08:37:22Z"
         }
       }
     },
@@ -1020,5 +1029,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T09:39:10Z"
+  "server_time_utc": "2026-03-13T09:41:12Z"
 }
