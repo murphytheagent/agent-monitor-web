@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T23:40:17Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-13T23:42:20Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 2231,
+    "loop_count": 2251,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,21 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773434501.513789",
-        "started_at": 1773444789,
-        "elapsed_sec": 427
-      },
-      {
-        "slot": 4,
-        "task": "1773426243.258589",
-        "started_at": 1773444883,
-        "elapsed_sec": 333
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -33,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.95,
-      "five": 1.8,
-      "fifteen": 1.64
+      "one": 1.71,
+      "five": 1.78,
+      "fifteen": 1.66
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106758848512,
-    "disk_free_bytes": 138348347392,
-    "runner_log_size_bytes": 46174651,
+    "disk_used_bytes": 106747396096,
+    "disk_free_bytes": 138359799808,
+    "runner_log_size_bytes": 46175065,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T19:45:18Z",
     "local_ips": []
@@ -50,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T23:40:24Z",
+    "checked_at_utc": "2026-03-13T23:42:27Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -73,10 +59,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 71863,
+        "utilization_gpu_pct": 91,
+        "memory_used_mb": 71801,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 49
       },
       {
         "index": 3,
@@ -92,7 +78,7 @@
         "utilization_gpu_pct": 54,
         "memory_used_mb": 77631,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 50
       },
       {
         "index": 5,
@@ -105,10 +91,10 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 90,
+        "utilization_gpu_pct": 92,
         "memory_used_mb": 74631,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 52
       },
       {
         "index": 7,
@@ -122,40 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773434501.513789": {
-        "mention_ts": "1773434501.513789",
-        "thread_ts": "1773434501.513789",
-        "status": "in_progress",
-        "task_description": "Please rewrite the current Section 1.1.",
-        "summary": "Rewrote Section 1.1 of the two-ReLU manuscript, moved section-specific Murphy review notes into the sections they annotate, synced the placement-only fix to Ov…",
-        "summary_preview": "Rewrote Section 1.1 of the two-ReLU manuscript, moved section-specific Murphy review notes into the sections they annotate, synced the placement-only fix to Ov…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773434501.513789",
-        "last_update_ts": "1773444789.118626",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-13T20:41:41Z"
-        }
-      },
-      "1773426243.258589": {
-        "mention_ts": "1773426243.258589",
-        "thread_ts": "1773426243.258589",
-        "status": "in_progress",
-        "task_description": "In your comments in the paper about gd dynamics for two relu neurons, you always duplicate your names at the beginning.",
-        "summary": "Verified the recent Murphy-label cleanup had not reached Overleaf, pushed the current manuscript state to the real Overleaf remote, and recorded the stronger s…",
-        "summary_preview": "Verified the recent Murphy-label cleanup had not reached Overleaf, pushed the current manuscript state to the real Overleaf remote, and recorded the stronger s…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773426243.258589",
-        "last_update_ts": "1773444883.199389",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-13T18:24:03Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -239,6 +192,38 @@
       }
     },
     "finished": {
+      "1773426243.258589": {
+        "mention_ts": "1773426243.258589",
+        "thread_ts": "1773426243.258589",
+        "status": "done",
+        "task_description": "In your comments in the paper about gd dynamics for two relu neurons, you always duplicate your names at the beginning.",
+        "summary": "Closed the two-ReLU manuscript Murphy-label / Overleaf-sync follow-up after recording the accepted handoff state in the task and project records.",
+        "summary_preview": "Closed the two-ReLU manuscript Murphy-label / Overleaf-sync follow-up after recording the accepted handoff state in the task and project records.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773426243.258589",
+        "last_update_ts": "1773445242.640096",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-13T18:24:03Z"
+        }
+      },
+      "1773434501.513789": {
+        "mention_ts": "1773434501.513789",
+        "thread_ts": "1773434501.513789",
+        "status": "done",
+        "task_description": "Please rewrite the current Section 1.1.",
+        "summary": "Closed the approved two-ReLU Section 1.1 manuscript thread, recorded the accepted handoff state in the project/task memory, and logged the shared-.agent worktr…",
+        "summary_preview": "Closed the approved two-ReLU Section 1.1 manuscript thread, recorded the accepted handoff state in the project/task memory, and logged the shared-.agent worktr…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773434501.513789",
+        "last_update_ts": "1773445224.741114",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-13T20:41:41Z"
+        }
+      },
       "1773434859.579799": {
         "mention_ts": "1773434859.579799",
         "thread_ts": "1773434859.579799",
@@ -1006,38 +991,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T08:43:41Z"
         }
-      },
-      "1771749231.663359": {
-        "mention_ts": "1771749231.663359",
-        "thread_ts": "1771749231.663359",
-        "status": "done",
-        "task_description": "Based on recent tasks and workflows from me and tianhao wang, what can be improved in your design and our way of using you?",
-        "summary": "Answered follow-up on skill auto-discovery/reload behavior in-thread, updated report/memory, and finalized task artifacts.",
-        "summary_preview": "Answered follow-up on skill auto-discovery/reload behavior in-thread, updated report/memory, and finalized task artifacts.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771749231.663359",
-        "last_update_ts": "1771757382.883335",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T08:33:51Z"
-        }
-      },
-      "1771748878.174109": {
-        "mention_ts": "1771748878.174109",
-        "thread_ts": "1771748878.174109",
-        "status": "done",
-        "task_description": "Can you send me files or pictures from slack?",
-        "summary": "Delivered PDF upload in-thread, ran additional PDF/image upload tests successfully, and marked the feature done by Zhi in ROADMAP.md.",
-        "summary_preview": "Delivered PDF upload in-thread, ran additional PDF/image upload tests successfully, and marked the feature done by Zhi in ROADMAP.md.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771748878.174109",
-        "last_update_ts": "1771754195.520603",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T08:27:58Z"
-        }
       }
     }
   },
@@ -1051,5 +1004,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T23:40:25Z"
+  "server_time_utc": "2026-03-13T23:42:28Z"
 }
