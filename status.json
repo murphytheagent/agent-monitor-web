@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-13T16:16:32Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-13T16:18:34Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 801,
+    "loop_count": 820,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773375544.377909",
-        "started_at": 1773413451,
-        "elapsed_sec": 5141
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.66,
-      "five": 1.84,
-      "fifteen": 1.81
+      "one": 1.06,
+      "five": 1.6,
+      "fifteen": 1.72
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106007326720,
-    "disk_free_bytes": 139099869184,
-    "runner_log_size_bytes": 46162333,
+    "disk_used_bytes": 106012766208,
+    "disk_free_bytes": 139094429696,
+    "runner_log_size_bytes": 46162701,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T14:50:48Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-13T16:16:36Z",
+    "checked_at_utc": "2026-03-13T16:18:39Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,18 +51,18 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 35,
+        "utilization_gpu_pct": 44,
         "memory_used_mb": 82833,
         "memory_total_mb": 97887,
-        "temperature_c": 42
+        "temperature_c": 43
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 75,
         "memory_used_mb": 65023,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 52
       },
       {
         "index": 3,
@@ -78,36 +70,36 @@
         "utilization_gpu_pct": 46,
         "memory_used_mb": 40239,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 41
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 71661,
+        "utilization_gpu_pct": 32,
+        "memory_used_mb": 69839,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 37
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 62,
+        "utilization_gpu_pct": 59,
         "memory_used_mb": 79436,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 44
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 41,
+        "utilization_gpu_pct": 46,
         "memory_used_mb": 24351,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 39
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 37,
+        "utilization_gpu_pct": 41,
         "memory_used_mb": 22793,
         "memory_total_mb": 97887,
         "temperature_c": 38
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773375544.377909": {
-        "mention_ts": "1773375544.377909",
-        "thread_ts": "1773375544.377909",
-        "status": "in_progress",
-        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
-        "summary": "Round 6 showed that the Round 5 [code] gain does not survive a train-side holdout selector: the anchor is best again on matched PR-AUC, while a low-rank bottle…",
-        "summary_preview": "Round 6 showed that the Round 5 [code] gain does not survive a train-side holdout selector: the anchor is best again on matched PR-AUC, while a low-rank bottle…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773375544.377909",
-        "last_update_ts": "1773413450.913975",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-13T08:37:22Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773172970.092319": {
         "mention_ts": "1773172970.092319",
@@ -213,6 +188,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-12T22:56:54Z"
+        }
+      },
+      "1773375544.377909": {
+        "mention_ts": "1773375544.377909",
+        "thread_ts": "1773375544.377909",
+        "status": "in_progress",
+        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
+        "summary": "Round 7 showed that neither selector-only changes nor small length-robust objective tweaks beat the Round 6 prefill anchor, so the next lever should move to ta…",
+        "summary_preview": "Round 7 showed that neither selector-only changes nor small length-robust objective tweaks beat the Round 6 prefill anchor, so the next lever should move to ta…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773375544.377909",
+        "last_update_ts": "1773418644.176374",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-13T08:37:22Z"
         }
       }
     },
@@ -1029,5 +1020,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-13T16:16:37Z"
+  "server_time_utc": "2026-03-13T16:18:40Z"
 }
