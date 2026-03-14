@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-14T19:47:36Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-14T19:49:42Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 2020,
+    "loop_count": 2040,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773451376.077949",
-        "started_at": 1773513042,
-        "elapsed_sec": 4613
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.51,
-      "five": 1.53,
-      "fifteen": 1.6
+      "one": 1.5,
+      "five": 1.49,
+      "fifteen": 1.57
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106935730176,
-    "disk_free_bytes": 138171465728,
-    "runner_log_size_bytes": 46202445,
+    "disk_used_bytes": 106943029248,
+    "disk_free_bytes": 138164166656,
+    "runner_log_size_bytes": 46202687,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-14T16:17:33Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-14T19:47:41Z",
+    "checked_at_utc": "2026-03-14T19:49:44Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -86,7 +78,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 26
+        "temperature_c": 27
       },
       {
         "index": 5,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "in_progress",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Completed the full math->GPQA->MMLU-Pro->LiveCodeBench rollout-stat sweep, posted the final LiveCodeBench stats in Slack, cleaned the remote task worktrees, an…",
-        "summary_preview": "Completed the full math->GPQA->MMLU-Pro->LiveCodeBench rollout-stat sweep, posted the final LiveCodeBench stats in Slack, cleaned the remote task worktrees, an…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773513042.348054",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773187109.552829": {
         "mention_ts": "1773187109.552829",
@@ -197,6 +172,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:03:17Z"
+        }
+      },
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "waiting_human",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Reran MATH-500 and AIME under the refreshed overlap-logging contract, regenerated the full five-dataset summary/figure/PDF bundle, uploaded the report in-threa…",
+        "summary_preview": "Reran MATH-500 and AIME under the refreshed overlap-logging contract, regenerated the full five-dataset summary/figure/PDF bundle, uploaded the report in-threa…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773517668.862892",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -1013,5 +1004,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-14T19:47:42Z"
+  "server_time_utc": "2026-03-14T19:49:45Z"
 }
