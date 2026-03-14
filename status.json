@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-14T21:56:25Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-14T21:58:24Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 3240,
+    "loop_count": 3259,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 1,
+        "task": "1773451376.077949",
+        "started_at": 1773525405,
+        "elapsed_sec": 98
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -21,13 +29,13 @@
     "load_avg": {
       "one": 1.45,
       "five": 1.44,
-      "fifteen": 1.48
+      "fifteen": 1.47
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106947395584,
-    "disk_free_bytes": 138159800320,
-    "runner_log_size_bytes": 46202687,
+    "disk_used_bytes": 106937982976,
+    "disk_free_bytes": 138169212928,
+    "runner_log_size_bytes": 46203136,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-14T16:17:33Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-14T21:56:27Z",
+    "checked_at_utc": "2026-03-14T21:58:29Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "in_progress",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Reran MATH-500 and AIME under the refreshed overlap-logging contract, regenerated the full five-dataset summary/figure/PDF bundle, uploaded the report in-threa…",
+        "summary_preview": "Reran MATH-500 and AIME under the refreshed overlap-logging contract, regenerated the full five-dataset summary/figure/PDF bundle, uploaded the report in-threa…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773525405.176428",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
+        }
+      }
+    },
     "incomplete": {
       "1773187109.552829": {
         "mention_ts": "1773187109.552829",
@@ -172,22 +197,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:03:17Z"
-        }
-      },
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "waiting_human",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Reran MATH-500 and AIME under the refreshed overlap-logging contract, regenerated the full five-dataset summary/figure/PDF bundle, uploaded the report in-threa…",
-        "summary_preview": "Reran MATH-500 and AIME under the refreshed overlap-logging contract, regenerated the full five-dataset summary/figure/PDF bundle, uploaded the report in-threa…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773517668.862892",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -1004,5 +1013,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-14T21:56:28Z"
+  "server_time_utc": "2026-03-14T21:58:30Z"
 }
