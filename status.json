@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-14T06:18:18Z",
+    "last_updated_utc": "2026-03-14T06:20:23Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 6090,
+    "loop_count": 6110,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -14,16 +14,10 @@
     "max_workers": 8,
     "active_workers": [
       {
-        "slot": 5,
-        "task": "1773451376.077949",
-        "started_at": 1773468466,
-        "elapsed_sec": 632
-      },
-      {
         "slot": 6,
         "task": "1773450197.462419",
         "started_at": 1773469006,
-        "elapsed_sec": 92
+        "elapsed_sec": 216
       }
     ]
   },
@@ -33,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.44,
-      "five": 1.75,
-      "fifteen": 1.7
+      "one": 2.06,
+      "five": 1.91,
+      "fifteen": 1.77
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106740432896,
-    "disk_free_bytes": 138366763008,
-    "runner_log_size_bytes": 46191656,
+    "disk_used_bytes": 106738491392,
+    "disk_free_bytes": 138368704512,
+    "runner_log_size_bytes": 46192025,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T19:45:18Z",
     "local_ips": []
@@ -50,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-14T06:18:22Z",
+    "checked_at_utc": "2026-03-14T06:20:24Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -60,23 +54,23 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87881,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 53
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 97,
-        "memory_used_mb": 86059,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 28
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 81695,
+        "utilization_gpu_pct": 87,
+        "memory_used_mb": 81703,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 49
       },
       {
         "index": 3,
@@ -97,7 +91,7 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 34,
+        "utilization_gpu_pct": 41,
         "memory_used_mb": 79737,
         "memory_total_mb": 97887,
         "temperature_c": 44
@@ -105,15 +99,15 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 48,
+        "utilization_gpu_pct": 46,
         "memory_used_mb": 40239,
         "memory_total_mb": 97887,
-        "temperature_c": 42
+        "temperature_c": 40
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 43,
+        "utilization_gpu_pct": 4,
         "memory_used_mb": 52649,
         "memory_total_mb": 97887,
         "temperature_c": 39
@@ -123,22 +117,6 @@
   "tasks": {
     "queued": {},
     "active": {
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "in_progress",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Reported completed GPQA overlap stats to Slack ( [code] correct, [code] looped, [code] max-length hits) and verified the capped MMLU-Pro handoff is healthy at …",
-        "summary_preview": "Reported completed GPQA overlap stats to Slack ( [code] correct, [code] looped, [code] max-length hits) and verified the capped MMLU-Pro handoff is healthy at …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773468465.660322",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
-        }
-      },
       "1773450197.462419": {
         "mention_ts": "1773450197.462419",
         "thread_ts": "1773450197.462419",
@@ -203,6 +181,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T04:48:27Z"
+        }
+      },
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "in_progress",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "MMLU-Pro stayed healthy on the capped overlap-logging rollout and advanced to 144/2000 with LiveCodeBench still queued behind it; this iteration also cleaned s…",
+        "summary_preview": "MMLU-Pro stayed healthy on the capped overlap-logging rollout and advanced to 144/2000 with LiveCodeBench still queued behind it; this iteration also cleaned s…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773469223.380259",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -1019,5 +1013,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-14T06:18:23Z"
+  "server_time_utc": "2026-03-14T06:20:25Z"
 }
