@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-14T02:27:46Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-14T02:29:50Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 3869,
+    "loop_count": 3889,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773451376.077949",
+        "started_at": 1773455345,
+        "elapsed_sec": 44
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.66,
-      "five": 1.57,
-      "fifteen": 1.64
+      "one": 1.53,
+      "five": 1.54,
+      "fifteen": 1.61
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106821681152,
-    "disk_free_bytes": 138285514752,
-    "runner_log_size_bytes": 46177156,
+    "disk_used_bytes": 106821087232,
+    "disk_free_bytes": 138286108672,
+    "runner_log_size_bytes": 46177239,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T19:45:18Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-14T02:27:50Z",
+    "checked_at_utc": "2026-03-14T02:29:53Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87839,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 54
       },
       {
         "index": 1,
@@ -91,10 +99,10 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 56,
-        "memory_used_mb": 72905,
+        "utilization_gpu_pct": 32,
+        "memory_used_mb": 72667,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 41
       },
       {
         "index": 7,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "in_progress",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Queued the full math -> GPQA -> MMLU-Pro -> LiveCodeBench rollout chain, fixed the LiveCodeBench loader/import regressions, and left the first math block runni…",
+        "summary_preview": "Queued the full math -> GPQA -> MMLU-Pro -> LiveCodeBench rollout chain, fixed the LiveCodeBench loader/import regressions, and left the first math block runni…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773455345.376466",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
+        }
+      }
+    },
     "incomplete": {
       "1773182046.432339": {
         "mention_ts": "1773182046.432339",
@@ -172,22 +197,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:03:17Z"
-        }
-      },
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "in_progress",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Queued the full math -> GPQA -> MMLU-Pro -> LiveCodeBench rollout chain, fixed the LiveCodeBench loader/import regressions, and left the first math block runni…",
-        "summary_preview": "Queued the full math -> GPQA -> MMLU-Pro -> LiveCodeBench rollout chain, fixed the LiveCodeBench loader/import regressions, and left the first math block runni…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773455159.538217",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -1004,5 +1013,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-14T02:27:51Z"
+  "server_time_utc": "2026-03-14T02:29:54Z"
 }
