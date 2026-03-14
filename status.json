@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-14T06:50:53Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-14T06:53:00Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 6399,
+    "loop_count": 6419,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 5,
+        "task": "1773451376.077949",
+        "started_at": 1773471135,
+        "elapsed_sec": 45
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.13,
-      "five": 1.5,
+      "one": 1.49,
+      "five": 1.55,
       "fifteen": 1.64
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106762776576,
-    "disk_free_bytes": 138344419328,
-    "runner_log_size_bytes": 46195241,
+    "disk_used_bytes": 106764115968,
+    "disk_free_bytes": 138343079936,
+    "runner_log_size_bytes": 46196359,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T19:45:18Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-14T06:50:58Z",
+    "checked_at_utc": "2026-03-14T06:53:01Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,23 +54,23 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 19793,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 53
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 97,
-        "memory_used_mb": 86165,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 27
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 41,
+        "utilization_gpu_pct": 92,
         "memory_used_mb": 80771,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 48
       },
       {
         "index": 3,
@@ -83,18 +91,18 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 97,
+        "utilization_gpu_pct": 23,
         "memory_used_mb": 79737,
         "memory_total_mb": 97887,
-        "temperature_c": 42
+        "temperature_c": 35
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
-        "memory_used_mb": 60412,
+        "memory_used_mb": 60450,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 48
       },
       {
         "index": 7,
@@ -102,13 +110,30 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 72856,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 54
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "in_progress",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Rebuilt the slow [code] tail from the 1-GPU [code] chain onto a validated conservative 3-GPU path ( [code] ); [code] is now actively processing [code] shards u…",
+        "summary_preview": "Rebuilt the slow [code] tail from the 1-GPU [code] chain onto a validated conservative 3-GPU path ( [code] ); [code] is now actively processing [code] shards u…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773471134.932684",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
+        }
+      }
+    },
     "incomplete": {
       "1773187109.552829": {
         "mention_ts": "1773187109.552829",
@@ -172,22 +197,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:03:17Z"
-        }
-      },
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "in_progress",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Rebuilt the slow [code] tail from the 1-GPU [code] chain onto a validated conservative 3-GPU path ( [code] ); [code] is now actively processing [code] shards u…",
-        "summary_preview": "Rebuilt the slow [code] tail from the 1-GPU [code] chain onto a validated conservative 3-GPU path ( [code] ); [code] is now actively processing [code] shards u…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773470949.229651",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -1004,5 +1013,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-14T06:50:59Z"
+  "server_time_utc": "2026-03-14T06:53:02Z"
 }
