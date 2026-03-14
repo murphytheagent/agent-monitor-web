@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-14T04:40:21Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-14T04:42:27Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 5151,
+    "loop_count": 5171,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 5,
+        "task": "1773451376.077949",
+        "started_at": 1773463285,
+        "elapsed_sec": 62
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.6,
-      "five": 1.57,
+      "one": 1.5,
+      "five": 1.6,
       "fifteen": 1.61
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106705018880,
-    "disk_free_bytes": 138402177024,
-    "runner_log_size_bytes": 46182142,
+    "disk_used_bytes": 106705649664,
+    "disk_free_bytes": 138401546240,
+    "runner_log_size_bytes": 46183260,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T19:45:18Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-14T04:40:26Z",
+    "checked_at_utc": "2026-03-14T04:42:29Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87951,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 54
       },
       {
         "index": 1,
@@ -59,10 +67,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 90,
-        "memory_used_mb": 63159,
+        "utilization_gpu_pct": 44,
+        "memory_used_mb": 64923,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 42
       },
       {
         "index": 3,
@@ -83,24 +91,24 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 45,
-        "memory_used_mb": 79767,
+        "utilization_gpu_pct": 43,
+        "memory_used_mb": 79769,
         "memory_total_mb": 97887,
         "temperature_c": 43
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 43,
-        "memory_used_mb": 40269,
+        "utilization_gpu_pct": 39,
+        "memory_used_mb": 40271,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 38
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 40,
-        "memory_used_mb": 52675,
+        "utilization_gpu_pct": 29,
+        "memory_used_mb": 52681,
         "memory_total_mb": 97887,
         "temperature_c": 38
       }
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "in_progress",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Collector outputs now log the requested loop/max-length overlap statistics; draft PR #4 is open, and the restarted GPQA job 1274 has cleared its first batch on…",
+        "summary_preview": "Collector outputs now log the requested loop/max-length overlap statistics; draft PR #4 is open, and the restarted GPQA job 1274 has cleared its first batch on…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773463284.612022",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
+        }
+      }
+    },
     "incomplete": {
       "1773187109.552829": {
         "mention_ts": "1773187109.552829",
@@ -156,22 +181,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:03:17Z"
-        }
-      },
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "in_progress",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Collector outputs now log the requested loop/max-length overlap statistics; draft PR #4 is open, and the restarted GPQA job 1274 has cleared its first batch on…",
-        "summary_preview": "Collector outputs now log the requested loop/max-length overlap statistics; draft PR #4 is open, and the restarted GPQA job 1274 has cleared its first batch on…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773463102.922961",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -988,5 +997,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-14T04:40:27Z"
+  "server_time_utc": "2026-03-14T04:42:29Z"
 }
