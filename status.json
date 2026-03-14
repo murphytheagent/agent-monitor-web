@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-14T04:50:37Z",
+    "last_updated_utc": "2026-03-14T04:52:34Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 5250,
+    "loop_count": 5269,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -14,16 +14,10 @@
     "max_workers": 8,
     "active_workers": [
       {
-        "slot": 5,
-        "task": "1773451376.077949",
-        "started_at": 1773463285,
-        "elapsed_sec": 552
-      },
-      {
         "slot": 6,
         "task": "1773463707.278659",
         "started_at": 1773463726,
-        "elapsed_sec": 110
+        "elapsed_sec": 228
       }
     ]
   },
@@ -33,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.22,
-      "five": 1.46,
-      "fifteen": 1.54
+      "one": 1.75,
+      "five": 1.55,
+      "fifteen": 1.57
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106706296832,
-    "disk_free_bytes": 138400899072,
-    "runner_log_size_bytes": 46184431,
+    "disk_used_bytes": 106703478784,
+    "disk_free_bytes": 138403717120,
+    "runner_log_size_bytes": 46184800,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T19:45:18Z",
     "local_ips": []
@@ -50,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-14T04:50:37Z",
+    "checked_at_utc": "2026-03-14T04:52:39Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -60,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 87951,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 54
       },
       {
         "index": 1,
@@ -73,10 +67,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 55,
-        "memory_used_mb": 74665,
+        "utilization_gpu_pct": 92,
+        "memory_used_mb": 74133,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 47
       },
       {
         "index": 3,
@@ -84,7 +78,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 4,
@@ -97,23 +91,23 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 31,
-        "memory_used_mb": 79769,
+        "utilization_gpu_pct": 39,
+        "memory_used_mb": 79773,
         "memory_total_mb": 97887,
         "temperature_c": 43
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 34,
-        "memory_used_mb": 40271,
+        "utilization_gpu_pct": 42,
+        "memory_used_mb": 40277,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 40
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 34,
+        "utilization_gpu_pct": 37,
         "memory_used_mb": 52681,
         "memory_total_mb": 97887,
         "temperature_c": 38
@@ -123,22 +117,6 @@
   "tasks": {
     "queued": {},
     "active": {
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "in_progress",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Collector outputs now log the requested loop/max-length overlap statistics; draft PR #4 is open, and the restarted GPQA job 1274 has cleared its first batch on…",
-        "summary_preview": "Collector outputs now log the requested loop/max-length overlap statistics; draft PR #4 is open, and the restarted GPQA job 1274 has cleared its first batch on…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773463284.612022",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
-        }
-      },
       "1773463707.278659": {
         "mention_ts": "1773463707.278659",
         "thread_ts": "1773463707.278659",
@@ -203,6 +181,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:03:17Z"
+        }
+      },
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "in_progress",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Kept GPQA job 1274 running on the patched overlap schema, rebuilt the pending tail as 1278 -> 1279 with MAX_SAMPLES=2000, and checkpointed the long-decode diag…",
+        "summary_preview": "Kept GPQA job 1274 running on the patched overlap schema, rebuilt the pending tail as 1278 -> 1279 with MAX_SAMPLES=2000, and checkpointed the long-decode diag…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773463942.416318",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -1019,5 +1013,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-14T04:50:37Z"
+  "server_time_utc": "2026-03-14T04:52:39Z"
 }
