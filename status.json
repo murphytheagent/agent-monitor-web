@@ -1,25 +1,17 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-14T15:33:10Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-14T15:35:09Z",
+    "status": "running_session",
     "pid": 82363,
-    "loop_count": 11369,
+    "loop_count": 11389,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 5,
-        "task": "1773451376.077949",
-        "started_at": 1773480902,
-        "elapsed_sec": 21488
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.65,
-      "five": 1.62,
-      "fifteen": 1.58
+      "one": 1.52,
+      "five": 1.58,
+      "fifteen": 1.57
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106753708032,
-    "disk_free_bytes": 138353487872,
-    "runner_log_size_bytes": 46199364,
+    "disk_used_bytes": 106696175616,
+    "disk_free_bytes": 138411020288,
+    "runner_log_size_bytes": 46200080,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T19:45:18Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-14T15:33:14Z",
+    "checked_at_utc": "2026-03-14T15:35:17Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,31 +46,31 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 20413,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 49
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 24,
+        "utilization_gpu_pct": 63,
         "memory_used_mb": 57460,
         "memory_total_mb": 97887,
-        "temperature_c": 41
+        "temperature_c": 44
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 75,
+        "utilization_gpu_pct": 58,
         "memory_used_mb": 51220,
         "memory_total_mb": 97887,
-        "temperature_c": 42
+        "temperature_c": 43
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 69,
+        "utilization_gpu_pct": 43,
         "memory_used_mb": 48024,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 41
       },
       {
         "index": 4,
@@ -86,15 +78,15 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 20573,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 50
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 41,
-        "memory_used_mb": 80275,
+        "memory_used_mb": 80279,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 44
       },
       {
         "index": 6,
@@ -102,7 +94,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 20521,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 49
       },
       {
         "index": 7,
@@ -110,44 +102,44 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 20571,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 52
       }
     ]
   },
   "tasks": {
     "queued": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "maintenance",
-        "status": "queued",
-        "task_description": "Run maintenance reflection checklist and summarize findings.",
-        "summary": "Run maintenance reflection checklist and summarize findings.",
-        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773490027.428431",
-        "last_update_ts": "1773490027.428431",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T12:07:07Z"
-        }
-      }
-    },
-    "active": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
         "thread_ts": "1773451376.077949",
-        "status": "in_progress",
+        "status": "queued",
         "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
         "summary": "LiveCodeBench remains the final active leg. At 2026-03-14 09:30 UTC, the capped 3-GPU run was 112/1055 complete with no traceback, and I kept it in place becau…",
         "summary_preview": "LiveCodeBench remains the final active leg. At 2026-03-14 09:30 UTC, the capped 3-GPU run was 112/1055 complete with no traceback, and I kept it in place becau…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773451376.077949",
-        "last_update_ts": "1773480902.207213",
+        "last_update_ts": "1773502509.434333",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:22:56Z"
+        }
+      }
+    },
+    "active": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
+        "status": "in_progress",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773490027.428431",
+        "last_update_ts": "1773502509.442163",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T12:07:07Z"
         }
       }
     },
@@ -1030,5 +1022,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-14T15:33:15Z"
+  "server_time_utc": "2026-03-14T15:35:18Z"
 }
