@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-14T01:02:03Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-14T01:04:05Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 3037,
+    "loop_count": 3057,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773450197.462419",
+        "started_at": 1773450221,
+        "elapsed_sec": 23
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.54,
-      "five": 1.59,
-      "fifteen": 1.63
+      "one": 2.03,
+      "five": 1.74,
+      "fifteen": 1.68
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106766319616,
-    "disk_free_bytes": 138340876288,
-    "runner_log_size_bytes": 46175520,
+    "disk_used_bytes": 106761801728,
+    "disk_free_bytes": 138345394176,
+    "runner_log_size_bytes": 46175656,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-13T19:45:18Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-14T01:02:08Z",
+    "checked_at_utc": "2026-03-14T01:04:11Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +67,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 71701,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 63269,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 39
       },
       {
         "index": 3,
@@ -75,10 +83,10 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 34,
         "memory_used_mb": 67905,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 37
       },
       {
         "index": 5,
@@ -91,10 +99,10 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 87,
         "memory_used_mb": 73573,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 54
       },
       {
         "index": 7,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773450197.462419": {
+        "mention_ts": "1773450197.462419",
+        "thread_ts": "1773450197.462419",
+        "status": "in_progress",
+        "task_description": "For the paper on gd for two relu neurons, let's go over Section 3, and let's first work on Section 3.1.",
+        "summary": "For the paper on gd for two relu neurons, let's go over Section 3, and let's first work on Section 3.1.",
+        "summary_preview": "For the paper on gd for two relu neurons, let's go over Section 3, and let's first work on Section 3.1.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773450197.462419",
+        "last_update_ts": "1773450221.536596",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:03:17Z"
+        }
+      }
+    },
     "incomplete": {
       "1773182046.432339": {
         "mention_ts": "1773182046.432339",
@@ -972,5 +997,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-14T01:02:09Z"
+  "server_time_utc": "2026-03-14T01:04:12Z"
 }
