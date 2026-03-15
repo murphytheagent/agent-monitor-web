@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-15T04:10:15Z",
+    "last_updated_utc": "2026-03-15T04:12:15Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 6813,
+    "loop_count": 6832,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,8 +16,8 @@
       {
         "slot": 1,
         "task": "1773451376.077949",
-        "started_at": 1773541900,
-        "elapsed_sec": 5915
+        "started_at": 1773547910,
+        "elapsed_sec": 25
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.18,
-      "five": 1.45,
-      "fifteen": 1.52
+      "one": 1.84,
+      "five": 1.59,
+      "fifteen": 1.56
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106970234880,
-    "disk_free_bytes": 138136961024,
-    "runner_log_size_bytes": 46205154,
+    "disk_used_bytes": 106960617472,
+    "disk_free_bytes": 138146578432,
+    "runner_log_size_bytes": 46205789,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-14T16:17:33Z",
     "local_ips": []
@@ -44,44 +44,36 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-15T04:10:18Z",
+    "checked_at_utc": "2026-03-15T04:12:21Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 34717,
-        "memory_total_mb": 97887,
-        "temperature_c": 50
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
-        "memory_used_mb": 34719,
         "memory_total_mb": 97887,
         "temperature_c": 49
       },
       {
-        "index": 2,
+        "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 34719,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 50
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 34719,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
       },
       {
         "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
-        "memory_used_mb": 34719,
-        "memory_total_mb": 97887,
-        "temperature_c": 48
-      },
-      {
-        "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 99,
         "memory_used_mb": 34719,
@@ -89,12 +81,20 @@
         "temperature_c": 47
       },
       {
+        "index": 4,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 34719,
+        "memory_total_mb": 97887,
+        "temperature_c": 48
+      },
+      {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 92,
         "memory_used_mb": 75497,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 45
       },
       {
         "index": 6,
@@ -107,10 +107,10 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 97,
         "memory_used_mb": 34719,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 49
       }
     ]
   },
@@ -122,11 +122,11 @@
         "thread_ts": "1773451376.077949",
         "status": "in_progress",
         "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Scratch-backed repaired-contract rerun chain 1309 -> 1313 is live on wth-gpu-01; MATH-500 is in a final straggler tail at 486/500 prompts, so no dataset bounda…",
-        "summary_preview": "Scratch-backed repaired-contract rerun chain 1309 -> 1313 is live on wth-gpu-01; MATH-500 is in a final straggler tail at 486/500 prompts, so no dataset bounda…",
+        "summary": "MATH-500 and AIME finished under the repaired v2 rollout contract; after fixing a GPQA token-name mismatch and rebuilding around an external GPU-5 occupant plu…",
+        "summary_preview": "MATH-500 and AIME finished under the repaired v2 rollout contract; after fixing a GPQA token-name mismatch and rebuilding around an external GPU-5 occupant plu…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773451376.077949",
-        "last_update_ts": "1773541899.756005",
+        "last_update_ts": "1773547909.725574",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -1013,5 +1013,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-15T04:10:19Z"
+  "server_time_utc": "2026-03-15T04:12:21Z"
 }
