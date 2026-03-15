@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-15T12:41:33Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-15T13:02:47Z",
+    "status": "restarting",
     "pid": 82363,
     "loop_count": 11436,
     "last_exit_code": 0,
@@ -19,24 +19,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.55,
-      "five": 2.05,
-      "fifteen": 1.9
+      "one": 2.24,
+      "five": 2.02,
+      "fifteen": 1.89
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106988179456,
-    "disk_free_bytes": 138119016448,
-    "runner_log_size_bytes": 46213213,
+    "disk_used_bytes": 106986844160,
+    "disk_free_bytes": 138120351744,
+    "runner_log_size_bytes": 46213888,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-14T16:17:33Z",
+    "dashboard_started_utc": "2026-03-15T13:02:47Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-15T13:02:26Z",
+    "checked_at_utc": "2026-03-15T13:02:47Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 34969,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 52
       },
       {
         "index": 1,
@@ -125,24 +125,7 @@
         }
       }
     },
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1773576722.121259",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Maintenance reflection complete; memory/docs were refreshed, the live cot-loop rerun was rechecked, and developer-review follow-ups were logged.",
-        "summary_preview": "Maintenance reflection complete; memory/docs were refreshed, the live cot-loop rerun was rechecked, and developer-review follow-ups were logged.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773576427.274565",
-        "last_update_ts": "1773578493.366156",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-15T12:07:07Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773375544.377909": {
         "mention_ts": "1773375544.377909",
@@ -194,6 +177,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1773576722.121259",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review complete: fixed worktree git status failures (skip-worktree on symlinked submodule entries), implemented plan 31 phase 1 (durable job store wi…",
+        "summary_preview": "Developer review complete: fixed worktree git status failures (skip-worktree on symlinked submodule entries), implemented plan 31 phase 1 (durable job store wi…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773576427.274565",
+        "last_update_ts": "1773579766.718080",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-15T12:07:07Z"
+        }
+      },
       "1773111453.746699": {
         "mention_ts": "1773111453.746699",
         "thread_ts": "1773111453.746699",
@@ -977,22 +976,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T20:24:42Z"
         }
-      },
-      "1771749821.471009": {
-        "mention_ts": "1771749821.471009",
-        "thread_ts": "1771749821.471009",
-        "status": "done",
-        "task_description": "There should be some sort of monitor of your health and task list, a frontend project in process, I would like for people to be able to just go to a website and see your frontend,…",
-        "summary": "Removed Task Queue section, restored requester display names in public snapshot, republished GitHub Pages, merged agent-monitor-web PR #1, and posted thread co…",
-        "summary_preview": "Removed Task Queue section, restored requester display names in public snapshot, republished GitHub Pages, merged agent-monitor-web PR #1, and posted thread co…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771749821.471009",
-        "last_update_ts": "1771795329.776592",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T08:43:41Z"
-        }
       }
     }
   },
@@ -1006,5 +989,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-15T13:02:27Z"
+  "server_time_utc": "2026-03-15T13:02:47Z"
 }
