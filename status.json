@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-15T12:05:15Z",
+    "last_updated_utc": "2026-03-15T12:07:19Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 11372,
+    "loop_count": 11392,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,7 @@
         "slot": 1,
         "task": "1773451376.077949",
         "started_at": 1773570441,
-        "elapsed_sec": 5873
+        "elapsed_sec": 5997
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.48,
-      "five": 1.55,
-      "fifteen": 1.52
+      "one": 1.58,
+      "five": 1.53,
+      "fifteen": 1.51
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106978914304,
-    "disk_free_bytes": 138128281600,
-    "runner_log_size_bytes": 46212212,
+    "disk_used_bytes": 106982141952,
+    "disk_free_bytes": 138125053952,
+    "runner_log_size_bytes": 46212276,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-14T16:17:33Z",
     "local_ips": []
@@ -44,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-15T12:05:18Z",
+    "checked_at_utc": "2026-03-15T12:07:20Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +59,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 97,
         "memory_used_mb": 34959,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 49
       },
       {
         "index": 2,
@@ -70,39 +70,39 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 34743,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 52
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
-        "memory_used_mb": 66844,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 66846,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 51
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 61512,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 49
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 26069,
+        "utilization_gpu_pct": 11,
+        "memory_used_mb": 26075,
         "memory_total_mb": 97887,
         "temperature_c": 34
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 34957,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 51
       },
       {
         "index": 7,
@@ -110,12 +110,29 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 34743,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 51
       }
     ]
   },
   "tasks": {
-    "queued": {},
+    "queued": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
+        "status": "queued",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773576427.274565",
+        "last_update_ts": "1773576427.274565",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-15T12:07:07Z"
+        }
+      }
+    },
     "active": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -185,22 +202,6 @@
       }
     },
     "finished": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1773502534.306209",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: fixed duplicate @staticmethod bug in runtime.py, removed mcp/ worktree symlinks that broke git status, triaged 6→2 issues and 7→3 plans, audi…",
-        "summary_preview": "Developer review: fixed duplicate @staticmethod bug in runtime.py, removed mcp/ worktree symlinks that broke git status, triaged 6→2 issues and 7→3 plans, audi…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773490027.428431",
-        "last_update_ts": "1773505052.903675",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T12:07:07Z"
-        }
-      },
       "1773111453.746699": {
         "mention_ts": "1773111453.746699",
         "thread_ts": "1773111453.746699",
@@ -984,6 +985,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T20:24:42Z"
         }
+      },
+      "1771749821.471009": {
+        "mention_ts": "1771749821.471009",
+        "thread_ts": "1771749821.471009",
+        "status": "done",
+        "task_description": "There should be some sort of monitor of your health and task list, a frontend project in process, I would like for people to be able to just go to a website and see your frontend,…",
+        "summary": "Removed Task Queue section, restored requester display names in public snapshot, republished GitHub Pages, merged agent-monitor-web PR #1, and posted thread co…",
+        "summary_preview": "Removed Task Queue section, restored requester display names in public snapshot, republished GitHub Pages, merged agent-monitor-web PR #1, and posted thread co…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771749821.471009",
+        "last_update_ts": "1771795329.776592",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T08:43:41Z"
+        }
       }
     }
   },
@@ -997,5 +1014,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-15T12:05:19Z"
+  "server_time_utc": "2026-03-15T12:07:21Z"
 }
