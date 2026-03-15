@@ -1,25 +1,17 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-15T12:11:21Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-15T12:11:40Z",
+    "status": "running_session",
     "pid": 82363,
-    "loop_count": 11431,
+    "loop_count": 11435,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773451376.077949",
-        "started_at": 1773570441,
-        "elapsed_sec": 6239
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.63,
-      "five": 1.57,
-      "fifteen": 1.52
+      "one": 1.64,
+      "five": 1.62,
+      "fifteen": 1.55
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106980814848,
-    "disk_free_bytes": 138126381056,
-    "runner_log_size_bytes": 46212276,
+    "disk_used_bytes": 106972475392,
+    "disk_free_bytes": 138134720512,
+    "runner_log_size_bytes": 46212988,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-14T16:17:33Z",
     "local_ips": []
@@ -44,14 +36,14 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-15T12:11:25Z",
+    "checked_at_utc": "2026-03-15T12:13:28Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 34969,
         "memory_total_mb": 97887,
         "temperature_c": 52
@@ -59,26 +51,26 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 34959,
-        "memory_total_mb": 97887,
-        "temperature_c": 50
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 97,
-        "memory_used_mb": 34743,
         "memory_total_mb": 97887,
         "temperature_c": 49
       },
       {
+        "index": 2,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 34743,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
+      },
+      {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 97,
         "memory_used_mb": 66846,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 48
       },
       {
         "index": 4,
@@ -86,15 +78,15 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 61512,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 46
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 16,
         "memory_used_mb": 26075,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       },
       {
         "index": 6,
@@ -110,44 +102,44 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 34743,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 53
       }
     ]
   },
   "tasks": {
     "queued": {
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "queued",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Capped LiveCodeBench remains healthy on the pinned seven-GPU path ( [code] by 2026-03-15 12:02 UTC); the authoritative scratch stats dir still has no LiveCodeB…",
+        "summary_preview": "Capped LiveCodeBench remains healthy on the pinned seven-GPU path ( [code] by 2026-03-15 12:02 UTC); the authoritative scratch stats dir still has no LiveCodeB…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773576700.685150",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
+        }
+      }
+    },
+    "active": {
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "maintenance",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Run maintenance reflection checklist and summarize findings.",
         "summary": "Run maintenance reflection checklist and summarize findings.",
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773576427.274565",
-        "last_update_ts": "1773576427.274565",
+        "last_update_ts": "1773576700.693122",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-15T12:07:07Z"
-        }
-      }
-    },
-    "active": {
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "in_progress",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Capped LiveCodeBench remains healthy on the pinned seven-GPU path ( [code] by 2026-03-15 10:26 UTC). The only canonical stats JSON is still the stale uncapped …",
-        "summary_preview": "Capped LiveCodeBench remains healthy on the pinned seven-GPU path ( [code] by 2026-03-15 10:26 UTC). The only canonical stats JSON is still the stale uncapped …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773570441.147616",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -1014,5 +1006,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-15T12:11:26Z"
+  "server_time_utc": "2026-03-15T12:13:29Z"
 }
