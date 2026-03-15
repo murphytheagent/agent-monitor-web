@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-15T17:03:41Z",
+    "last_updated_utc": "2026-03-15T17:05:44Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 2332,
+    "loop_count": 2352,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,8 +16,8 @@
       {
         "slot": 1,
         "task": "1773451376.077949",
-        "started_at": 1773582192,
-        "elapsed_sec": 12029
+        "started_at": 1773594241,
+        "elapsed_sec": 103
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.38,
-      "five": 1.45,
-      "fifteen": 1.51
+      "one": 1.32,
+      "five": 1.42,
+      "fifteen": 1.49
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106941603840,
-    "disk_free_bytes": 138165592064,
-    "runner_log_size_bytes": 46217305,
+    "disk_used_bytes": 106946711552,
+    "disk_free_bytes": 138160484352,
+    "runner_log_size_bytes": 46217940,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-15T13:02:47Z",
     "local_ips": []
@@ -44,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-15T17:03:43Z",
+    "checked_at_utc": "2026-03-15T17:05:46Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,15 +59,15 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 38,
+        "utilization_gpu_pct": 30,
         "memory_used_mb": 83943,
         "memory_total_mb": 97887,
-        "temperature_c": 41
+        "temperature_c": 42
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 17,
+        "utilization_gpu_pct": 22,
         "memory_used_mb": 40611,
         "memory_total_mb": 97887,
         "temperature_c": 40
@@ -75,15 +75,15 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 90,
-        "memory_used_mb": 75081,
+        "utilization_gpu_pct": 92,
+        "memory_used_mb": 74767,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 48
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 38,
+        "utilization_gpu_pct": 36,
         "memory_used_mb": 53261,
         "memory_total_mb": 97887,
         "temperature_c": 37
@@ -91,10 +91,10 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 61,
-        "memory_used_mb": 70625,
+        "utilization_gpu_pct": 33,
+        "memory_used_mb": 70247,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 42
       },
       {
         "index": 6,
@@ -122,11 +122,11 @@
         "thread_ts": "1773451376.077949",
         "status": "in_progress",
         "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "The capped LiveCodeBench leg stayed healthy on the pinned seven-GPU path and reached 534/800 prompts by 2026-03-15 13:38 UTC, but the authoritative scratch sta…",
-        "summary_preview": "The capped LiveCodeBench leg stayed healthy on the pinned seven-GPU path and reached 534/800 prompts by 2026-03-15 13:38 UTC, but the authoritative scratch sta…",
+        "summary": "LiveCodeBench generation finished and the paired __lcb_records checkpoint landed, but job 1330 is still RUNNING in the native grading phase; the latest parsed …",
+        "summary_preview": "LiveCodeBench generation finished and the paired __lcb_records checkpoint landed, but job 1330 is still RUNNING in the native grading phase; the latest parsed …",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773451376.077949",
-        "last_update_ts": "1773582191.818055",
+        "last_update_ts": "1773594240.879382",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -997,5 +997,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-15T17:03:44Z"
+  "server_time_utc": "2026-03-15T17:05:46Z"
 }
