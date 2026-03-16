@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T16:37:11Z",
-    "status": "draining_queue",
+    "last_updated_utc": "2026-03-16T16:39:13Z",
+    "status": "running_session",
     "pid": 82363,
-    "loop_count": 16775,
+    "loop_count": 16818,
     "last_exit_code": 0,
     "last_failure_kind": "nonzero_exit",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.48,
-      "five": 2.51,
-      "fifteen": 2.48
+      "one": 2.31,
+      "five": 2.44,
+      "fifteen": 2.46
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106987520000,
-    "disk_free_bytes": 138119675904,
-    "runner_log_size_bytes": 47244674,
+    "disk_used_bytes": 106993074176,
+    "disk_free_bytes": 138114121728,
+    "runner_log_size_bytes": 47265825,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-15T13:02:47Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T16:37:12Z",
+    "checked_at_utc": "2026-03-16T16:39:14Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +54,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 26
+        "temperature_c": 27
       },
       {
         "index": 2,
@@ -67,18 +67,18 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
-        "memory_used_mb": 80531,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 80533,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 47
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 91,
+        "utilization_gpu_pct": 28,
         "memory_used_mb": 47615,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 43
       },
       {
         "index": 5,
@@ -108,7 +108,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1773671592.966079",
+        "status": "in_progress",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
+        "summary_preview": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773662831.267013",
+        "last_update_ts": "1773679153.388778",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T12:07:11Z"
+        }
+      }
+    },
     "incomplete": {
       "1773375544.377909": {
         "mention_ts": "1773375544.377909",
@@ -172,22 +189,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:22:56Z"
-        }
-      },
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1773671592.966079",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
-        "summary_preview": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773662831.267013",
-        "last_update_ts": "1773679031.775390",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T12:07:11Z"
         }
       }
     },
@@ -1004,5 +1005,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T16:37:12Z"
+  "server_time_utc": "2026-03-16T16:39:15Z"
 }
