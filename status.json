@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T22:35:13Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-16T22:37:18Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 2781,
+    "loop_count": 2801,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773451376.077949",
-        "started_at": 1773699977,
-        "elapsed_sec": 536
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.61,
-      "five": 1.74,
-      "fifteen": 1.7
+      "one": 1.94,
+      "five": 1.78,
+      "fifteen": 1.71
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106910572544,
-    "disk_free_bytes": 138196623360,
-    "runner_log_size_bytes": 46224639,
+    "disk_used_bytes": 106911260672,
+    "disk_free_bytes": 138195935232,
+    "runner_log_size_bytes": 46224881,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-16T17:44:46Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T22:35:18Z",
+    "checked_at_utc": "2026-03-16T22:37:21Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -75,10 +67,10 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 79619,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 51
       },
       {
         "index": 4,
@@ -86,7 +78,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 26
+        "temperature_c": 27
       },
       {
         "index": 5,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "in_progress",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Refreshed the shared-policy rollout bundle by rerunning the stale GPQA and MMLU-Pro MC rows under the repaired JSON-answer contract, regenerating/uploading the…",
-        "summary_preview": "Refreshed the shared-policy rollout bundle by rerunning the stale GPQA and MMLU-Pro MC rows under the repaired JSON-answer contract, regenerating/uploading the…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773699976.944312",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773463707.278659": {
         "mention_ts": "1773463707.278659",
@@ -165,6 +140,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:03:17Z"
+        }
+      },
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "waiting_human",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Corrected the shared-policy cross-dataset report presentation by switching the length panel to average wrong-generation length, removing the visible PDF author…",
+        "summary_preview": "Corrected the shared-policy cross-dataset report presentation by switching the length panel to average wrong-generation length, removing the visible PDF author…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773700612.509715",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -981,5 +972,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T22:35:19Z"
+  "server_time_utc": "2026-03-16T22:37:22Z"
 }
