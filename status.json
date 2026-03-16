@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T23:52:59Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-16T23:55:01Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 3531,
+    "loop_count": 3550,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773701002.020259",
-        "started_at": 1773704402,
-        "elapsed_sec": 777
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.76,
-      "five": 1.78,
-      "fifteen": 1.81
+      "one": 1.61,
+      "five": 1.7,
+      "fifteen": 1.77
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107502133248,
-    "disk_free_bytes": 137605062656,
-    "runner_log_size_bytes": 46227990,
+    "disk_used_bytes": 107504361472,
+    "disk_free_bytes": 137602834432,
+    "runner_log_size_bytes": 46228232,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-16T17:44:46Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T23:53:03Z",
+    "checked_at_utc": "2026-03-16T23:55:05Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -52,7 +44,7 @@
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 28
       },
@@ -60,7 +52,7 @@
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 27
       },
@@ -68,7 +60,7 @@
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 28
       },
@@ -76,7 +68,7 @@
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 1,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 28
       },
@@ -84,7 +76,7 @@
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 1,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 27
       },
@@ -92,7 +84,7 @@
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 1,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 27
       },
@@ -100,7 +92,7 @@
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 1,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 27
       },
@@ -108,7 +100,7 @@
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 1,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
         "temperature_c": 27
       }
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "in_progress",
-        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Expanded the live tokenizer observatory to six public instruct-model tokenizers with model-aware metadata under the dashboard site.",
-        "summary_preview": "Expanded the live tokenizer observatory to six public instruct-model tokenizers with model-aware metadata under the dashboard site.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773701002.020259",
-        "last_update_ts": "1773704401.999974",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T22:43:22Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773463707.278659": {
         "mention_ts": "1773463707.278659",
@@ -197,6 +172,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-16T23:30:10Z"
+        }
+      },
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "waiting_human",
+        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
+        "summary": "Added a live family-to-configuration tokenizer selector under the dashboard site and merged the change to agent-monitor-web.",
+        "summary_preview": "Added a live family-to-configuration tokenizer selector under the dashboard site and merged the change to agent-monitor-web.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773701002.020259",
+        "last_update_ts": "1773705275.655246",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T22:43:22Z"
         }
       }
     },
@@ -1013,5 +1004,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T23:53:04Z"
+  "server_time_utc": "2026-03-16T23:55:06Z"
 }
