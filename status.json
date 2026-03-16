@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T23:09:59Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-16T23:12:03Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 3117,
+    "loop_count": 3137,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 1,
+        "task": "1773701002.020259",
+        "started_at": 1773702607,
+        "elapsed_sec": 116
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.76,
-      "five": 1.77,
-      "fifteen": 1.77
+      "one": 1.79,
+      "five": 1.73,
+      "fifteen": 1.75
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106958565376,
-    "disk_free_bytes": 138148630528,
-    "runner_log_size_bytes": 46225466,
+    "disk_used_bytes": 106954768384,
+    "disk_free_bytes": 138152427520,
+    "runner_log_size_bytes": 46225813,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-16T17:44:46Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T23:10:03Z",
+    "checked_at_utc": "2026-03-16T23:12:06Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "in_progress",
+        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
+        "summary": "Deployed a live Qwen3.5 tokenizer visualizer under the dashboard site at /tokenizers/ with plain-text and chat-template views, token chips, IDs, and a breakdow…",
+        "summary_preview": "Deployed a live Qwen3.5 tokenizer visualizer under the dashboard site at /tokenizers/ with plain-text and chat-template views, token chips, IDs, and a breakdow…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773701002.020259",
+        "last_update_ts": "1773702606.819648",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T22:43:22Z"
+        }
+      }
+    },
     "incomplete": {
       "1773463707.278659": {
         "mention_ts": "1773463707.278659",
@@ -156,22 +181,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:22:56Z"
-        }
-      },
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "waiting_human",
-        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Deployed a live Qwen3.5 tokenizer visualizer under the dashboard site at /tokenizers/ with plain-text and chat-template views, token chips, IDs, and a breakdow…",
-        "summary_preview": "Deployed a live Qwen3.5 tokenizer visualizer under the dashboard site at /tokenizers/ with plain-text and chat-template views, token chips, IDs, and a breakdow…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773701002.020259",
-        "last_update_ts": "1773702543.172874",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T22:43:22Z"
         }
       }
     },
@@ -988,5 +997,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T23:10:04Z"
+  "server_time_utc": "2026-03-16T23:12:07Z"
 }
