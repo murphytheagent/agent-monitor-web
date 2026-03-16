@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T15:09:19Z",
-    "status": "draining_queue",
+    "last_updated_utc": "2026-03-16T15:11:20Z",
+    "status": "running_session",
     "pid": 82363,
-    "loop_count": 15049,
+    "loop_count": 15091,
     "last_exit_code": 0,
     "last_failure_kind": "nonzero_exit",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.68,
-      "five": 2.57,
-      "fifteen": 2.5
+      "one": 2.27,
+      "five": 2.5,
+      "fifteen": 2.48
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106128904192,
-    "disk_free_bytes": 138978291712,
-    "runner_log_size_bytes": 46381742,
+    "disk_used_bytes": 106133639168,
+    "disk_free_bytes": 138973556736,
+    "runner_log_size_bytes": 46402325,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-15T13:02:47Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T15:09:19Z",
+    "checked_at_utc": "2026-03-16T15:11:22Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -62,47 +62,47 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 82,
+        "utilization_gpu_pct": 65,
         "memory_used_mb": 76169,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 56
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
+        "utilization_gpu_pct": 31,
+        "memory_used_mb": 2163,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 35
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 32,
-        "memory_used_mb": 94475,
+        "utilization_gpu_pct": 36,
+        "memory_used_mb": 94479,
         "memory_total_mb": 97887,
         "temperature_c": 37
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 36,
-        "memory_used_mb": 42265,
+        "utilization_gpu_pct": 23,
+        "memory_used_mb": 42267,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 37
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 26,
-        "memory_used_mb": 62767,
+        "utilization_gpu_pct": 22,
+        "memory_used_mb": 62771,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 38
       }
     ]
   },
@@ -118,7 +118,7 @@
         "summary_preview": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773662831.267013",
-        "last_update_ts": "1773673759.615359",
+        "last_update_ts": "1773673880.441532",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
@@ -1005,5 +1005,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T15:09:20Z"
+  "server_time_utc": "2026-03-16T15:11:23Z"
 }
