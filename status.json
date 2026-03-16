@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T15:23:37Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-16T15:25:40Z",
+    "status": "draining_queue",
     "pid": 82363,
-    "loop_count": 15338,
+    "loop_count": 15376,
     "last_exit_code": 0,
     "last_failure_kind": "nonzero_exit",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.47,
-      "five": 2.52,
-      "fifteen": 2.5
+      "one": 3.01,
+      "five": 2.63,
+      "fifteen": 2.54
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106151530496,
-    "disk_free_bytes": 138955665408,
-    "runner_log_size_bytes": 46525825,
+    "disk_used_bytes": 106154844160,
+    "disk_free_bytes": 138952351744,
+    "runner_log_size_bytes": 46545174,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-15T13:02:47Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T15:23:37Z",
+    "checked_at_utc": "2026-03-16T15:25:40Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -67,23 +67,23 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 92,
         "memory_used_mb": 75665,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 54
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 6,
-        "memory_used_mb": 2635,
+        "utilization_gpu_pct": 97,
+        "memory_used_mb": 67557,
         "memory_total_mb": 97887,
-        "temperature_c": 31
+        "temperature_c": 46
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 43,
+        "utilization_gpu_pct": 34,
         "memory_used_mb": 94483,
         "memory_total_mb": 97887,
         "temperature_c": 38
@@ -91,7 +91,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 44,
+        "utilization_gpu_pct": 40,
         "memory_used_mb": 42269,
         "memory_total_mb": 97887,
         "temperature_c": 38
@@ -99,33 +99,16 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 34,
+        "utilization_gpu_pct": 24,
         "memory_used_mb": 62773,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 39
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1773671592.966079",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
-        "summary_preview": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773662831.267013",
-        "last_update_ts": "1773674616.718269",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T12:07:11Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773375544.377909": {
         "mention_ts": "1773375544.377909",
@@ -189,6 +172,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:22:56Z"
+        }
+      },
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1773671592.966079",
+        "status": "in_progress",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
+        "summary_preview": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773662831.267013",
+        "last_update_ts": "1773674740.159055",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T12:07:11Z"
         }
       }
     },
@@ -1005,5 +1004,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T15:23:38Z"
+  "server_time_utc": "2026-03-16T15:25:41Z"
 }
