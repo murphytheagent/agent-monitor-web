@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T22:25:02Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-16T22:27:05Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 2681,
+    "loop_count": 2701,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 1,
+        "task": "1773451376.077949",
+        "started_at": 1773699977,
+        "elapsed_sec": 48
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.98,
-      "five": 1.82,
+      "one": 1.91,
+      "five": 1.8,
       "fifteen": 1.69
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106910994432,
-    "disk_free_bytes": 138196201472,
-    "runner_log_size_bytes": 46224189,
+    "disk_used_bytes": 106905518080,
+    "disk_free_bytes": 138201677824,
+    "runner_log_size_bytes": 46224639,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-16T17:44:46Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T22:25:04Z",
+    "checked_at_utc": "2026-03-16T22:27:07Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -67,10 +75,10 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 57,
+        "utilization_gpu_pct": 80,
         "memory_used_mb": 79593,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 55
       },
       {
         "index": 4,
@@ -78,7 +86,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 26
+        "temperature_c": 27
       },
       {
         "index": 5,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "in_progress",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Refreshed the shared-policy rollout bundle by rerunning the stale GPQA and MMLU-Pro MC rows under the repaired JSON-answer contract, regenerating/uploading the…",
+        "summary_preview": "Refreshed the shared-policy rollout bundle by rerunning the stale GPQA and MMLU-Pro MC rows under the repaired JSON-answer contract, regenerating/uploading the…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773699976.944312",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
+        }
+      }
+    },
     "incomplete": {
       "1773463707.278659": {
         "mention_ts": "1773463707.278659",
@@ -140,22 +165,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:03:17Z"
-        }
-      },
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "waiting_human",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Refreshed the shared-policy rollout bundle by rerunning the stale GPQA and MMLU-Pro MC rows under the repaired JSON-answer contract, regenerating/uploading the…",
-        "summary_preview": "Refreshed the shared-policy rollout bundle by rerunning the stale GPQA and MMLU-Pro MC rows under the repaired JSON-answer contract, regenerating/uploading the…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773671572.341905",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -972,5 +981,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T22:25:05Z"
+  "server_time_utc": "2026-03-16T22:27:08Z"
 }
