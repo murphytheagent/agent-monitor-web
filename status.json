@@ -1,11 +1,11 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T17:36:02Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-16T17:44:46Z",
+    "status": "restarting",
     "pid": 82363,
     "loop_count": 17935,
     "last_exit_code": 0,
-    "last_failure_kind": "nonzero_exit",
+    "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
@@ -25,18 +25,18 @@
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107033600000,
-    "disk_free_bytes": 138073595904,
-    "runner_log_size_bytes": 47824325,
+    "disk_used_bytes": 107033645056,
+    "disk_free_bytes": 138073550848,
+    "runner_log_size_bytes": 47825000,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-15T13:02:47Z",
+    "dashboard_started_utc": "2026-03-16T17:44:46Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T17:44:40Z",
+    "checked_at_utc": "2026-03-16T17:44:46Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -67,10 +67,10 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 69,
+        "utilization_gpu_pct": 93,
         "memory_used_mb": 80047,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 53
       },
       {
         "index": 4,
@@ -108,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1773671592.966079",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
-        "summary_preview": "Maintenance reflection refreshed memory, goals, and project reports, and re-audited the active PR surfaces; cot-loop, frontiertrace, small-swe, LEQ, and the pa…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773662831.267013",
-        "last_update_ts": "1773682562.709599",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T12:07:11Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773375544.377909": {
         "mention_ts": "1773375544.377909",
@@ -193,6 +176,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1773671592.966079",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: added --timeout to review_project.sh (fixes recurring codex review hang), fixed gh-address-comments skill quality, triaged 3→1 issues, audite…",
+        "summary_preview": "Developer review: added --timeout to review_project.sh (fixes recurring codex review hang), fixed gh-address-comments skill quality, triaged 3→1 issues, audite…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773662831.267013",
+        "last_update_ts": "1773683086.352750",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T12:07:11Z"
+        }
+      },
       "1773111453.746699": {
         "mention_ts": "1773111453.746699",
         "thread_ts": "1773111453.746699",
@@ -976,22 +975,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T20:24:42Z"
         }
-      },
-      "1771749821.471009": {
-        "mention_ts": "1771749821.471009",
-        "thread_ts": "1771749821.471009",
-        "status": "done",
-        "task_description": "There should be some sort of monitor of your health and task list, a frontend project in process, I would like for people to be able to just go to a website and see your frontend,…",
-        "summary": "Removed Task Queue section, restored requester display names in public snapshot, republished GitHub Pages, merged agent-monitor-web PR #1, and posted thread co…",
-        "summary_preview": "Removed Task Queue section, restored requester display names in public snapshot, republished GitHub Pages, merged agent-monitor-web PR #1, and posted thread co…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771749821.471009",
-        "last_update_ts": "1771795329.776592",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T08:43:41Z"
-        }
       }
     }
   },
@@ -1005,5 +988,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T17:44:41Z"
+  "server_time_utc": "2026-03-16T17:44:47Z"
 }
