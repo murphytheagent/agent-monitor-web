@@ -1,25 +1,17 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T14:32:27Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-16T14:32:53Z",
+    "status": "running_session",
     "pid": 82363,
-    "loop_count": 14727,
+    "loop_count": 14731,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773451376.077949",
-        "started_at": 1773651238,
-        "elapsed_sec": 20309
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.45,
-      "five": 1.54,
-      "fifteen": 1.57
+      "one": 1.91,
+      "five": 1.72,
+      "fifteen": 1.63
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 105893224448,
-    "disk_free_bytes": 139213971456,
-    "runner_log_size_bytes": 46222207,
+    "disk_used_bytes": 105893945344,
+    "disk_free_bytes": 139213250560,
+    "runner_log_size_bytes": 46222600,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-15T13:02:47Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T14:32:31Z",
+    "checked_at_utc": "2026-03-16T14:34:34Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 1,
@@ -75,10 +67,10 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 36,
         "memory_used_mb": 72841,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 46
       },
       {
         "index": 4,
@@ -86,7 +78,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 26
       },
       {
         "index": 5,
@@ -94,7 +86,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 30051,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 31
       },
       {
         "index": 6,
@@ -102,7 +94,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 28247,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 31
       },
       {
         "index": 7,
@@ -110,44 +102,27 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 27307,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       }
     ]
   },
   "tasks": {
-    "queued": {
+    "queued": {},
+    "active": {
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "maintenance",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Run maintenance reflection checklist and summarize findings.",
         "summary": "Run maintenance reflection checklist and summarize findings.",
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773662831.267013",
-        "last_update_ts": "1773662831.267013",
+        "last_update_ts": "1773671573.162833",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-16T12:07:11Z"
-        }
-      }
-    },
-    "active": {
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "in_progress",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Resolved the GPQA calibration question by separating the earlier 4096-token pilot from the shipped rollout path, then reran full GPQA under the repaired JSON-a…",
-        "summary_preview": "Resolved the GPQA calibration question by separating the earlier 4096-token pilot from the shipped rollout path, then reran full GPQA under the repaired JSON-a…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773651237.513796",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -198,6 +173,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:03:17Z"
+        }
+      },
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "waiting_human",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Refreshed the shared-policy rollout bundle by rerunning the stale GPQA and MMLU-Pro MC rows under the repaired JSON-answer contract, regenerating/uploading the…",
+        "summary_preview": "Refreshed the shared-policy rollout bundle by rerunning the stale GPQA and MMLU-Pro MC rows under the repaired JSON-answer contract, regenerating/uploading the…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773671572.341905",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -1014,5 +1005,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T14:32:32Z"
+  "server_time_utc": "2026-03-16T14:34:35Z"
 }
