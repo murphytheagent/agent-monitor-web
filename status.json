@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T21:54:20Z",
+    "last_updated_utc": "2026-03-16T21:56:24Z",
     "status": "sleeping",
     "pid": 82363,
-    "loop_count": 2384,
+    "loop_count": 2404,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.48,
-      "five": 1.46,
+      "one": 1.51,
+      "five": 1.48,
       "fifteen": 1.5
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106899472384,
-    "disk_free_bytes": 138207723520,
-    "runner_log_size_bytes": 46224116,
+    "disk_used_bytes": 106899759104,
+    "disk_free_bytes": 138207436800,
+    "runner_log_size_bytes": 46224189,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-16T17:44:46Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T21:54:22Z",
+    "checked_at_utc": "2026-03-16T21:56:25Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -67,10 +67,10 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
-        "memory_used_mb": 79603,
+        "utilization_gpu_pct": 34,
+        "memory_used_mb": 79483,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 42
       },
       {
         "index": 4,
@@ -110,22 +110,6 @@
     "queued": {},
     "active": {},
     "incomplete": {
-      "1773375544.377909": {
-        "mention_ts": "1773375544.377909",
-        "thread_ts": "1773375544.377909",
-        "status": "waiting_human",
-        "task_description": "Our recent experiments with CoT loop detector are not promising, we ultimately care about prefill stage classification, but a 50% recall + 50% precision classifier is basically a …",
-        "summary": "Delivered a detailed PDF summary of reopened Rounds 1-12, opened upstream PR #3 for the accumulated project commits, and froze execution with Round 12 scientif…",
-        "summary_preview": "Delivered a detailed PDF summary of reopened Rounds 1-12, opened upstream PR #3 for the accumulated project commits, and froze execution with Round 12 scientif…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773375544.377909",
-        "last_update_ts": "1773438890.140326",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-13T21:36:35Z"
-        }
-      },
       "1773463707.278659": {
         "mention_ts": "1773463707.278659",
         "thread_ts": "1773463707.278659",
@@ -988,5 +972,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T21:54:23Z"
+  "server_time_utc": "2026-03-16T21:56:26Z"
 }
