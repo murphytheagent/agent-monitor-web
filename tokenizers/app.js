@@ -3,18 +3,68 @@ import { AutoTokenizer, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/tr
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
-const MODELS = {
-  'qwen3.5-4b': {
+const MODELS = [
+  {
     id: 'qwen3.5-4b',
     label: 'Qwen3.5-4B',
     repo: 'Qwen/Qwen3.5-4B',
-    releaseDate: '2026-01-01',
+    family: 'Qwen',
+    template: 'Qwen instruct',
+    summary: 'Official Qwen3.5 tokenizer with a long-context chat template and Qwen special tokens visible in prompt mode.',
+    caption: 'Public Qwen tokenizer files with the current Qwen3.5 instruct template.',
   },
-};
+  {
+    id: 'qwen2.5-7b-instruct',
+    label: 'Qwen2.5-7B-Instruct',
+    repo: 'Qwen/Qwen2.5-7B-Instruct',
+    family: 'Qwen',
+    template: 'Qwen 2.5 instruct',
+    summary: 'The previous Qwen instruct generation, useful for checking how Qwen prompt scaffolding shifted before the 3.5 release.',
+    caption: 'Public Qwen2.5 instruct tokenizer and chat template from Hugging Face.',
+  },
+  {
+    id: 'deepseek-r1-distill-qwen-7b',
+    label: 'DeepSeek-R1-Distill-Qwen-7B',
+    repo: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+    family: 'DeepSeek',
+    template: 'DeepSeek reasoning',
+    summary: 'DeepSeek\'s R1 distilled Qwen variant layers its own reasoning-oriented chat template on top of a Qwen-style tokenizer.',
+    caption: 'Public DeepSeek instruct tokenizer files; useful for comparing against the base Qwen family.',
+  },
+  {
+    id: 'mistral-7b-instruct-v0.3',
+    label: 'Mistral-7B-Instruct-v0.3',
+    repo: 'mistralai/Mistral-7B-Instruct-v0.3',
+    family: 'Mistral',
+    template: 'Mistral instruct',
+    summary: 'Official Mistral instruct tokenizer with the Llama-style vocabulary and Mistral\'s own serialized dialogue wrapper.',
+    caption: 'Public Mistral tokenizer files with the v0.3 instruct template.',
+  },
+  {
+    id: 'phi-3-mini-4k-instruct',
+    label: 'Phi-3-mini-4k-instruct',
+    repo: 'microsoft/Phi-3-mini-4k-instruct',
+    family: 'Phi',
+    template: 'Phi instruct',
+    summary: 'Microsoft\'s compact Phi instruct model uses its own chat markers, which makes prompt serialization visibly different from Qwen and Mistral.',
+    caption: 'Public Phi-3 tokenizer files with the 4k instruct prompt format.',
+  },
+  {
+    id: 'tinyllama-1.1b-chat-v1.0',
+    label: 'TinyLlama-1.1B-Chat-v1.0',
+    repo: 'TinyLlama/TinyLlama-1.1B-Chat-v1.0',
+    family: 'TinyLlama',
+    template: 'TinyLlama chat',
+    summary: 'A lightweight Llama-style chat tokenizer that is easy to compare against larger instruct families while keeping the page fully public.',
+    caption: 'Public TinyLlama chat tokenizer files; a compact Llama-style reference point.',
+  },
+];
+
+const MODEL_MAP = Object.fromEntries(MODELS.map((model) => [model.id, model]));
 
 const EXAMPLES = {
   english: 'Tokenizers decide how models see text.\nWatch how punctuation, apostrophes, and repeated stems get segmented.',
-  mixed: 'Qwen3.5 handles English, 中文, 日本語, and emoji 😄 in one prompt. How uneven is the token split?',
+  mixed: 'This prompt mixes English, 中文, 日本語, and emoji 😄 in one request. How uneven is the token split across model families?',
   code: 'def tokenize_report(text):\n    pieces = text.split()\n    return {"chars": len(text), "words": len(pieces)}\n',
   emoji: '### Prompt draft\n- Ship the tokenizer lab tonight 🚀\n- Keep whitespace visible\n- Compare plain text vs chat mode ✨',
 };
@@ -22,6 +72,8 @@ const EXAMPLES = {
 const state = {
   tokenizer: null,
   tokenizerKey: null,
+  tokenizerCache: new Map(),
+  specialTokenIdCache: new Map(),
   specialTokenIds: new Set(),
   mode: 'plain',
   generationPrompt: true,
@@ -33,6 +85,9 @@ const refs = {};
 
 document.addEventListener('DOMContentLoaded', () => {
   captureRefs();
+  populateModelOptions();
+  renderModelMeta();
+  renderModelLineup();
   bindEvents();
   retokenize();
 });
@@ -51,6 +106,18 @@ function captureRefs() {
   refs.inputSummary = document.getElementById('input-summary');
   refs.retokenizeButton = document.getElementById('retokenize-button');
   refs.copyIdsButton = document.getElementById('copy-ids-button');
+  refs.heroModelName = document.getElementById('hero-model-name');
+  refs.repoChip = document.getElementById('repo-chip');
+  refs.repoLabel = document.getElementById('repo-label');
+  refs.familyLabel = document.getElementById('family-label');
+  refs.templateLabel = document.getElementById('template-label');
+  refs.modelSummary = document.getElementById('model-summary');
+  refs.modelCaption = document.getElementById('model-caption');
+  refs.modelMetaRepo = document.getElementById('model-meta-repo');
+  refs.modelMetaFamily = document.getElementById('model-meta-family');
+  refs.modelMetaTemplate = document.getElementById('model-meta-template');
+  refs.modelMetaSummary = document.getElementById('model-meta-summary');
+  refs.modelLineup = document.getElementById('model-lineup');
   refs.statTotal = document.getElementById('stat-total');
   refs.statSpecial = document.getElementById('stat-special');
   refs.statUnique = document.getElementById('stat-unique');
@@ -65,7 +132,11 @@ function captureRefs() {
 }
 
 function bindEvents() {
-  refs.modelSelect.addEventListener('change', () => retokenize(true));
+  refs.modelSelect.addEventListener('change', () => {
+    renderModelMeta();
+    renderModelLineup();
+    retokenize(false);
+  });
   refs.inputText.addEventListener('input', scheduleRetokenize);
   refs.systemText.addEventListener('input', scheduleRetokenize);
   refs.assistantPrefix.addEventListener('change', () => {
@@ -88,6 +159,48 @@ function bindEvents() {
       scheduleRetokenize();
     });
   }
+}
+
+function populateModelOptions() {
+  refs.modelSelect.innerHTML = '';
+  MODELS.forEach((model) => {
+    const option = document.createElement('option');
+    option.value = model.id;
+    option.textContent = model.label;
+    refs.modelSelect.append(option);
+  });
+  refs.modelSelect.value = MODELS[0].id;
+}
+
+function renderModelMeta() {
+  const model = currentModel();
+  document.title = `Tokenizer Observatory | ${model.label}`;
+  refs.heroModelName.textContent = `${model.label}'s chat template`;
+  refs.repoChip.href = `https://huggingface.co/${model.repo}`;
+  refs.repoLabel.textContent = model.repo;
+  refs.familyLabel.textContent = model.family;
+  refs.templateLabel.textContent = model.template;
+  refs.modelSummary.textContent = model.summary;
+  refs.modelCaption.textContent = `${model.caption} Gated repos such as Llama and Gemma are excluded from this static build.`;
+  refs.modelMetaRepo.href = `https://huggingface.co/${model.repo}`;
+  refs.modelMetaRepo.textContent = model.repo;
+  refs.modelMetaFamily.textContent = model.family;
+  refs.modelMetaTemplate.textContent = model.template;
+  refs.modelMetaSummary.textContent = model.summary;
+}
+
+function renderModelLineup() {
+  refs.modelLineup.innerHTML = '';
+  const selected = currentModel().id;
+  const fragment = document.createDocumentFragment();
+  MODELS.forEach((model) => {
+    const li = document.createElement('li');
+    li.textContent = model.id === selected
+      ? `${model.label} (selected)`
+      : model.label;
+    fragment.append(li);
+  });
+  refs.modelLineup.append(fragment);
 }
 
 let debounceTimer = null;
@@ -137,15 +250,21 @@ async function retokenize(forceReload = false) {
 
 async function ensureTokenizer(forceReload = false) {
   const model = currentModel();
-  if (!forceReload && state.tokenizer && state.tokenizerKey === model.id) {
+  if (!forceReload && state.tokenizerCache.has(model.id)) {
+    state.tokenizer = state.tokenizerCache.get(model.id);
+    state.tokenizerKey = model.id;
+    state.specialTokenIds = state.specialTokenIdCache.get(model.id) || new Set();
     return state.tokenizer;
   }
 
   setStatus(`Loading · ${model.label}`, `Downloading tokenizer assets for ${model.repo}.`, 'warn');
   const tokenizer = await AutoTokenizer.from_pretrained(model.repo);
+  state.tokenizerCache.set(model.id, tokenizer);
+  const specialIds = collectSpecialTokenIds(tokenizer);
+  state.specialTokenIdCache.set(model.id, specialIds);
   state.tokenizer = tokenizer;
   state.tokenizerKey = model.id;
-  state.specialTokenIds = collectSpecialTokenIds(tokenizer);
+  state.specialTokenIds = specialIds;
   return tokenizer;
 }
 
@@ -158,6 +277,10 @@ async function buildPayload(tokenizer) {
   let tokenIds = [];
 
   if (isChat) {
+    if (typeof tokenizer.apply_chat_template !== 'function') {
+      throw new Error(`${currentModel().label} does not expose a chat template in this browser runtime.`);
+    }
+
     const messages = [];
     if (systemInput.trim()) {
       messages.push({ role: 'system', content: systemInput.trim() });
@@ -181,7 +304,7 @@ async function buildPayload(tokenizer) {
     tokenIds = normalizeIds(encoded.input_ids);
   }
 
-  const rawTokens = tokenizer.model.convert_ids_to_tokens(tokenIds);
+  const rawTokens = convertIdsToTokens(tokenizer, tokenIds);
   const decodedPieces = await Promise.all(
     tokenIds.map((id) => tokenizer.decode([id], { skip_special_tokens: false })),
   );
@@ -325,6 +448,7 @@ function renderError(error) {
 }
 
 function setBusyUi(isBusy) {
+  refs.modelSelect.disabled = isBusy;
   refs.retokenizeButton.disabled = isBusy;
   refs.copyIdsButton.disabled = isBusy;
 }
@@ -341,7 +465,7 @@ function setStatus(title, note, tone) {
 }
 
 function currentModel() {
-  return MODELS[refs.modelSelect.value];
+  return MODEL_MAP[refs.modelSelect.value] || MODELS[0];
 }
 
 function normalizeIds(value) {
@@ -388,6 +512,16 @@ function collectSpecialTokenIds(tokenizer) {
     }
   });
   return ids;
+}
+
+function convertIdsToTokens(tokenizer, tokenIds) {
+  if (typeof tokenizer.model?.convert_ids_to_tokens === 'function') {
+    return tokenizer.model.convert_ids_to_tokens(tokenIds);
+  }
+  if (typeof tokenizer.convert_ids_to_tokens === 'function') {
+    return tokenIds.map((id) => tokenizer.convert_ids_to_tokens(id));
+  }
+  return tokenIds.map(() => '');
 }
 
 function flattenSpecialValues(value) {

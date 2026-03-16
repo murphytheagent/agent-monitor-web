@@ -12,4 +12,4 @@ python3 -m src.loop.monitor.dashboard --once --export-static-dir projects/agent-
 
 Additional hosted tool:
 
-- `tokenizers/` — interactive tokenizer visualizer page for the official `Qwen/Qwen3.5-4B` tokenizer, designed to coexist with the continuously refreshed dashboard snapshot files.
+- `tokenizers/` — interactive tokenizer visualizer page for a curated set of public open-source instruct tokenizers (`Qwen3.5`, `Qwen2.5`, `DeepSeek-R1-Distill-Qwen`, `Mistral 7B Instruct`, `Phi-3 mini instruct`, and `TinyLlama Chat`), designed to coexist with the continuously refreshed dashboard snapshot files.
