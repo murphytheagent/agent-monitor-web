@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T23:08:00Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-16T23:09:59Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 3098,
+    "loop_count": 3117,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773701002.020259",
-        "started_at": 1773701022,
-        "elapsed_sec": 1457
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.63,
-      "five": 1.76,
+      "one": 1.76,
+      "five": 1.77,
       "fifteen": 1.77
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106953805824,
-    "disk_free_bytes": 138153390080,
-    "runner_log_size_bytes": 46225224,
+    "disk_used_bytes": 106958565376,
+    "disk_free_bytes": 138148630528,
+    "runner_log_size_bytes": 46225466,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-16T17:44:46Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T23:08:00Z",
+    "checked_at_utc": "2026-03-16T23:10:03Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "in_progress",
-        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary_preview": "Could you make a website for visualizing tokenizers for LLMs?",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773701002.020259",
-        "last_update_ts": "1773701022.452138",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T22:43:22Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773463707.278659": {
         "mention_ts": "1773463707.278659",
@@ -181,6 +156,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:22:56Z"
+        }
+      },
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "waiting_human",
+        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
+        "summary": "Deployed a live Qwen3.5 tokenizer visualizer under the dashboard site at /tokenizers/ with plain-text and chat-template views, token chips, IDs, and a breakdow…",
+        "summary_preview": "Deployed a live Qwen3.5 tokenizer visualizer under the dashboard site at /tokenizers/ with plain-text and chat-template views, token chips, IDs, and a breakdow…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773701002.020259",
+        "last_update_ts": "1773702543.172874",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T22:43:22Z"
         }
       }
     },
@@ -997,5 +988,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T23:08:01Z"
+  "server_time_utc": "2026-03-16T23:10:04Z"
 }
