@@ -375,7 +375,7 @@
 
     .model-meta-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
     }
 
@@ -816,6 +816,10 @@
                 <b id="family-label">Qwen</b>
               </div>
               <div class="chip">
+                <span>Configuration</span>
+                <b id="configuration-label">Qwen 3.5 · 4B</b>
+              </div>
+              <div class="chip">
                 <span>Runtime</span>
                 <b>Browser + Transformers.js</b>
               </div>
@@ -843,7 +847,7 @@
               <p>This static route only includes tokenizer repos that can be fetched directly from a public browser session. Gated families such as Meta Llama and Google Gemma need authenticated access or a backend proxy, so they are not wired into this build yet.</p>
             </div>
             <div class="note-panel">
-              <h2>Live Lineup</h2>
+              <h2>Family Catalog</h2>
               <ul id="model-lineup"></ul>
             </div>
           </div>
@@ -861,18 +865,24 @@
           <div class="card-body control-stack">
             <div class="control-row">
               <label class="field">
-                <span class="field-label">Tokenizer</span>
+                <span class="field-label">Model family</span>
+                <select id="family-select"></select>
+                <span class="field-caption" id="family-caption">Choose a family first, then narrow to one public configuration below.</span>
+              </label>
+              <label class="field">
+                <span class="field-label">Configuration</span>
                 <select id="model-select"></select>
                 <span class="field-caption" id="model-caption">Pinned to public Hugging Face tokenizer files so the page can stay fully static.</span>
               </label>
-              <div class="field">
-                <span class="field-label">View</span>
-                <div class="mode-switch" role="tablist" aria-label="Tokenization mode">
-                  <button id="mode-plain" class="active" type="button" data-mode="plain" aria-selected="true">Plain text</button>
-                  <button id="mode-chat" type="button" data-mode="chat" aria-selected="false">Chat prompt</button>
-                </div>
-                <span class="field-caption">Plain text shows raw segmentation. Chat prompt injects the selected model’s instruct template around the same content.</span>
+            </div>
+
+            <div class="field">
+              <span class="field-label">View</span>
+              <div class="mode-switch" role="tablist" aria-label="Tokenization mode">
+                <button id="mode-plain" class="active" type="button" data-mode="plain" aria-selected="true">Plain text</button>
+                <button id="mode-chat" type="button" data-mode="chat" aria-selected="false">Chat prompt</button>
               </div>
+              <span class="field-caption">Plain text shows raw segmentation. Chat prompt injects the selected model’s instruct template around the same content.</span>
             </div>
 
             <div class="model-meta">
@@ -884,6 +894,10 @@
                 <div class="model-meta-item">
                   <span>Family</span>
                   <b id="model-meta-family">Qwen</b>
+                </div>
+                <div class="model-meta-item">
+                  <span>Configuration</span>
+                  <b id="model-meta-config">Qwen 3.5 · 4B</b>
                 </div>
                 <div class="model-meta-item">
                   <span>Template style</span>

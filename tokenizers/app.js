@@ -8,7 +8,9 @@ const MODELS = [
     id: 'qwen3.5-4b',
     label: 'Qwen3.5-4B',
     repo: 'Qwen/Qwen3.5-4B',
+    familyId: 'qwen',
     family: 'Qwen',
+    configuration: 'Qwen 3.5 · 4B',
     template: 'Qwen instruct',
     summary: 'Official Qwen3.5 tokenizer with a long-context chat template and Qwen special tokens visible in prompt mode.',
     caption: 'Public Qwen tokenizer files with the current Qwen3.5 instruct template.',
@@ -17,7 +19,9 @@ const MODELS = [
     id: 'qwen2.5-7b-instruct',
     label: 'Qwen2.5-7B-Instruct',
     repo: 'Qwen/Qwen2.5-7B-Instruct',
+    familyId: 'qwen',
     family: 'Qwen',
+    configuration: 'Qwen 2.5 · 7B Instruct',
     template: 'Qwen 2.5 instruct',
     summary: 'The previous Qwen instruct generation, useful for checking how Qwen prompt scaffolding shifted before the 3.5 release.',
     caption: 'Public Qwen2.5 instruct tokenizer and chat template from Hugging Face.',
@@ -26,7 +30,9 @@ const MODELS = [
     id: 'deepseek-r1-distill-qwen-7b',
     label: 'DeepSeek-R1-Distill-Qwen-7B',
     repo: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+    familyId: 'deepseek',
     family: 'DeepSeek',
+    configuration: 'R1 Distill · Qwen 7B',
     template: 'DeepSeek reasoning',
     summary: 'DeepSeek\'s R1 distilled Qwen variant layers its own reasoning-oriented chat template on top of a Qwen-style tokenizer.',
     caption: 'Public DeepSeek instruct tokenizer files; useful for comparing against the base Qwen family.',
@@ -35,7 +41,9 @@ const MODELS = [
     id: 'mistral-7b-instruct-v0.3',
     label: 'Mistral-7B-Instruct-v0.3',
     repo: 'mistralai/Mistral-7B-Instruct-v0.3',
+    familyId: 'mistral',
     family: 'Mistral',
+    configuration: '7B Instruct · v0.3',
     template: 'Mistral instruct',
     summary: 'Official Mistral instruct tokenizer with the Llama-style vocabulary and Mistral\'s own serialized dialogue wrapper.',
     caption: 'Public Mistral tokenizer files with the v0.3 instruct template.',
@@ -44,7 +52,9 @@ const MODELS = [
     id: 'phi-3-mini-4k-instruct',
     label: 'Phi-3-mini-4k-instruct',
     repo: 'microsoft/Phi-3-mini-4k-instruct',
+    familyId: 'phi',
     family: 'Phi',
+    configuration: 'Phi-3 Mini · 4k Instruct',
     template: 'Phi instruct',
     summary: 'Microsoft\'s compact Phi instruct model uses its own chat markers, which makes prompt serialization visibly different from Qwen and Mistral.',
     caption: 'Public Phi-3 tokenizer files with the 4k instruct prompt format.',
@@ -53,7 +63,9 @@ const MODELS = [
     id: 'tinyllama-1.1b-chat-v1.0',
     label: 'TinyLlama-1.1B-Chat-v1.0',
     repo: 'TinyLlama/TinyLlama-1.1B-Chat-v1.0',
+    familyId: 'tinyllama',
     family: 'TinyLlama',
+    configuration: '1.1B Chat · v1.0',
     template: 'TinyLlama chat',
     summary: 'A lightweight Llama-style chat tokenizer that is easy to compare against larger instruct families while keeping the page fully public.',
     caption: 'Public TinyLlama chat tokenizer files; a compact Llama-style reference point.',
@@ -61,6 +73,8 @@ const MODELS = [
 ];
 
 const MODEL_MAP = Object.fromEntries(MODELS.map((model) => [model.id, model]));
+const FAMILY_MAP = buildFamilyMap(MODELS);
+const FAMILIES = Object.values(FAMILY_MAP);
 
 const EXAMPLES = {
   english: 'Tokenizers decide how models see text.\nWatch how punctuation, apostrophes, and repeated stems get segmented.',
@@ -85,6 +99,7 @@ const refs = {};
 
 document.addEventListener('DOMContentLoaded', () => {
   captureRefs();
+  populateFamilyOptions();
   populateModelOptions();
   renderModelMeta();
   renderModelLineup();
@@ -93,6 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function captureRefs() {
+  refs.familySelect = document.getElementById('family-select');
+  refs.familyCaption = document.getElementById('family-caption');
   refs.modelSelect = document.getElementById('model-select');
   refs.modePlain = document.getElementById('mode-plain');
   refs.modeChat = document.getElementById('mode-chat');
@@ -110,11 +127,13 @@ function captureRefs() {
   refs.repoChip = document.getElementById('repo-chip');
   refs.repoLabel = document.getElementById('repo-label');
   refs.familyLabel = document.getElementById('family-label');
+  refs.configurationLabel = document.getElementById('configuration-label');
   refs.templateLabel = document.getElementById('template-label');
   refs.modelSummary = document.getElementById('model-summary');
   refs.modelCaption = document.getElementById('model-caption');
   refs.modelMetaRepo = document.getElementById('model-meta-repo');
   refs.modelMetaFamily = document.getElementById('model-meta-family');
+  refs.modelMetaConfig = document.getElementById('model-meta-config');
   refs.modelMetaTemplate = document.getElementById('model-meta-template');
   refs.modelMetaSummary = document.getElementById('model-meta-summary');
   refs.modelLineup = document.getElementById('model-lineup');
@@ -132,7 +151,14 @@ function captureRefs() {
 }
 
 function bindEvents() {
+  refs.familySelect.addEventListener('change', () => {
+    populateModelOptions(false);
+    renderModelMeta();
+    renderModelLineup();
+    retokenize(false);
+  });
   refs.modelSelect.addEventListener('change', () => {
+    syncFamilySelectionToModel();
     renderModelMeta();
     renderModelLineup();
     retokenize(false);
@@ -161,30 +187,55 @@ function bindEvents() {
   }
 }
 
-function populateModelOptions() {
+function populateFamilyOptions() {
+  refs.familySelect.innerHTML = '';
+  FAMILIES.forEach((family) => {
+    const option = document.createElement('option');
+    option.value = family.id;
+    option.textContent = `${family.label} (${family.models.length})`;
+    refs.familySelect.append(option);
+  });
+  refs.familySelect.value = FAMILIES[0]?.id || '';
+}
+
+function populateModelOptions(preserveCurrent = true) {
+  const previousValue = refs.modelSelect.value;
+  const familyModels = modelsForFamily(refs.familySelect.value);
   refs.modelSelect.innerHTML = '';
-  MODELS.forEach((model) => {
+  familyModels.forEach((model) => {
     const option = document.createElement('option');
     option.value = model.id;
     option.textContent = model.label;
     refs.modelSelect.append(option);
   });
-  refs.modelSelect.value = MODELS[0].id;
+
+  if (preserveCurrent && familyModels.some((model) => model.id === previousValue)) {
+    refs.modelSelect.value = previousValue;
+  } else {
+    refs.modelSelect.value = familyModels[0]?.id || '';
+  }
 }
 
 function renderModelMeta() {
   const model = currentModel();
+  const family = currentFamily();
+  const configurationCount = family.models.length;
+  const configurationLabel = configurationCount === 1 ? 'configuration' : 'configurations';
+
   document.title = `Tokenizer Observatory | ${model.label}`;
   refs.heroModelName.textContent = `${model.label}'s chat template`;
   refs.repoChip.href = `https://huggingface.co/${model.repo}`;
   refs.repoLabel.textContent = model.repo;
   refs.familyLabel.textContent = model.family;
+  refs.configurationLabel.textContent = model.configuration;
   refs.templateLabel.textContent = model.template;
   refs.modelSummary.textContent = model.summary;
+  refs.familyCaption.textContent = `${family.label} currently exposes ${configurationCount} public ${configurationLabel} in this browser-only build.`;
   refs.modelCaption.textContent = `${model.caption} Gated repos such as Llama and Gemma are excluded from this static build.`;
   refs.modelMetaRepo.href = `https://huggingface.co/${model.repo}`;
   refs.modelMetaRepo.textContent = model.repo;
   refs.modelMetaFamily.textContent = model.family;
+  refs.modelMetaConfig.textContent = model.configuration;
   refs.modelMetaTemplate.textContent = model.template;
   refs.modelMetaSummary.textContent = model.summary;
 }
@@ -193,11 +244,13 @@ function renderModelLineup() {
   refs.modelLineup.innerHTML = '';
   const selected = currentModel().id;
   const fragment = document.createDocumentFragment();
-  MODELS.forEach((model) => {
+  FAMILIES.forEach((family) => {
     const li = document.createElement('li');
-    li.textContent = model.id === selected
-      ? `${model.label} (selected)`
-      : model.label;
+    const familyModels = family.models.map((model) => (
+      model.id === selected ? `${model.configuration} (selected)` : model.configuration
+    ));
+    const label = family.models.length === 1 ? 'config' : 'configs';
+    li.textContent = `${family.label} · ${family.models.length} ${label} — ${familyModels.join(', ')}`;
     fragment.append(li);
   });
   refs.modelLineup.append(fragment);
@@ -465,7 +518,27 @@ function setStatus(title, note, tone) {
 }
 
 function currentModel() {
-  return MODEL_MAP[refs.modelSelect.value] || MODELS[0];
+  const familyModels = modelsForFamily(refs.familySelect.value);
+  return MODEL_MAP[refs.modelSelect.value] || familyModels[0] || MODELS[0];
+}
+
+function currentFamily() {
+  return FAMILY_MAP[refs.familySelect.value] || FAMILIES[0];
+}
+
+function modelsForFamily(familyId) {
+  return currentFamilyList(familyId);
+}
+
+function currentFamilyList(familyId) {
+  return FAMILY_MAP[familyId]?.models || MODELS;
+}
+
+function syncFamilySelectionToModel() {
+  const model = MODEL_MAP[refs.modelSelect.value];
+  if (model && refs.familySelect.value !== model.familyId) {
+    refs.familySelect.value = model.familyId;
+  }
 }
 
 function normalizeIds(value) {
@@ -615,4 +688,18 @@ function escapeHtml(text) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;');
+}
+
+function buildFamilyMap(models) {
+  return models.reduce((families, model) => {
+    if (!families[model.familyId]) {
+      families[model.familyId] = {
+        id: model.familyId,
+        label: model.family,
+        models: [],
+      };
+    }
+    families[model.familyId].models.push(model);
+    return families;
+  }, {});
 }
