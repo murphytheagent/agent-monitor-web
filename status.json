@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-16T00:28:14Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-16T00:30:18Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 6636,
+    "loop_count": 6656,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 1,
+        "task": "1773451376.077949",
+        "started_at": 1773620908,
+        "elapsed_sec": 110
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.65,
-      "five": 2.07,
-      "fifteen": 1.8
+      "one": 1.89,
+      "five": 1.89,
+      "fifteen": 1.76
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107322028032,
-    "disk_free_bytes": 137785167872,
-    "runner_log_size_bytes": 46219617,
+    "disk_used_bytes": 107154292736,
+    "disk_free_bytes": 137952903168,
+    "runner_log_size_bytes": 46220067,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-15T13:02:47Z",
     "local_ips": []
@@ -36,38 +44,38 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-16T00:28:18Z",
+    "checked_at_utc": "2026-03-16T00:30:21Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 80406,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 32
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 79849,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 32
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 79777,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 32
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
+        "utilization_gpu_pct": 57,
         "memory_used_mb": 73287,
         "memory_total_mb": 97887,
         "temperature_c": 51
@@ -75,10 +83,10 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 79777,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 31
       },
       {
         "index": 5,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773451376.077949": {
+        "mention_ts": "1773451376.077949",
+        "thread_ts": "1773451376.077949",
+        "status": "in_progress",
+        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
+        "summary": "Delivered the repaired rollout-stat v2 PDF in Slack, pushed project commit 398316b on draft PR #5, and checkpointed the root coordination state in commit d2cea…",
+        "summary_preview": "Delivered the repaired rollout-stat v2 PDF in Slack, pushed project commit 398316b on draft PR #5, and checkpointed the root coordination state in commit d2cea…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773451376.077949",
+        "last_update_ts": "1773620907.860765",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-14T01:22:56Z"
+        }
+      }
+    },
     "incomplete": {
       "1773375544.377909": {
         "mention_ts": "1773375544.377909",
@@ -156,22 +181,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-14T01:03:17Z"
-        }
-      },
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "waiting_human",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Delivered the repaired rollout-stat v2 PDF in Slack, pushed project commit 398316b on draft PR #5, and checkpointed the root coordination state in commit d2cea…",
-        "summary_preview": "Delivered the repaired rollout-stat v2 PDF in Slack, pushed project commit 398316b on draft PR #5, and checkpointed the root coordination state in commit d2cea…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773619228.875241",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
         }
       }
     },
@@ -988,5 +997,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-16T00:28:19Z"
+  "server_time_utc": "2026-03-16T00:30:22Z"
 }
