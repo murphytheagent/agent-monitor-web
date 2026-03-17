@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T00:40:05Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-17T00:42:05Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 3979,
+    "loop_count": 3998,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773701002.020259",
-        "started_at": 1773706685,
-        "elapsed_sec": 1319
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.45,
-      "five": 1.64,
-      "fifteen": 1.66
+      "one": 1.32,
+      "five": 1.55,
+      "fifteen": 1.62
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107525099520,
-    "disk_free_bytes": 137582096384,
-    "runner_log_size_bytes": 46228579,
+    "disk_used_bytes": 107523715072,
+    "disk_free_bytes": 137583480832,
+    "runner_log_size_bytes": 46228821,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-16T17:44:46Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T00:40:05Z",
+    "checked_at_utc": "2026-03-17T00:42:08Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 81531,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 49
       },
       {
         "index": 1,
@@ -62,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 79851,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 49
       },
       {
         "index": 2,
@@ -110,30 +102,13 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 79851,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 51
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "in_progress",
-        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Added a live family-to-configuration tokenizer selector under the dashboard site and merged the change to agent-monitor-web.",
-        "summary_preview": "Added a live family-to-configuration tokenizer selector under the dashboard site and merged the change to agent-monitor-web.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773701002.020259",
-        "last_update_ts": "1773706685.322181",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T22:43:22Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773463707.278659": {
         "mention_ts": "1773463707.278659",
@@ -197,6 +172,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-16T23:30:10Z"
+        }
+      },
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "waiting_human",
+        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
+        "summary": "Expanded the dashboard tokenizer page into broader public model families and added live vocabulary-sharing annotations for family/configuration selection.",
+        "summary_preview": "Expanded the dashboard tokenizer page into broader public model families and added live vocabulary-sharing annotations for family/configuration selection.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773701002.020259",
+        "last_update_ts": "1773708067.550747",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T22:43:22Z"
         }
       }
     },
@@ -1013,5 +1004,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T00:40:06Z"
+  "server_time_utc": "2026-03-17T00:42:09Z"
 }
