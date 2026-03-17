@@ -893,20 +893,20 @@ function setMode(mode) {
 
 function updateModeCopy(payload = state.lastPayload) {
   const isChat = state.mode === 'chat';
-  refs.surfaceTitle.textContent = isChat ? 'Model prompt with token colors' : 'Token-colored input surface';
+  refs.surfaceTitle.textContent = isChat ? 'Inline prompt tokens' : 'Inline tokens';
 
   if (isChat) {
-    refs.surfaceNote.textContent = 'This is the exact chat-template prompt the model sees. Template-added control tokens stay inline as chips so the final serialization is obvious.';
-    refs.serializedTitle.textContent = 'Exact serialized prompt';
-    refs.serializedNote.textContent = 'This is the string emitted by apply_chat_template before the final token IDs are read.';
+    refs.surfaceNote.textContent = 'Template-added control tokens stay inline so the final prompt serialization is visible at a glance.';
+    refs.serializedTitle.textContent = 'Serialized prompt';
+    refs.serializedNote.textContent = 'Exact output from apply_chat_template before token IDs are read.';
     return;
   }
 
-  refs.serializedTitle.textContent = 'Exact tokenized string';
-  refs.serializedNote.textContent = 'For plain text mode, this is the exact string consumed by the tokenizer.';
+  refs.serializedTitle.textContent = 'Serialized text';
+  refs.serializedNote.textContent = 'Exact string consumed by the tokenizer in the current mode.';
   refs.surfaceNote.textContent = payload?.surfaceMismatch
-    ? 'This preview is still driven by live token boundaries, but the tokenizer-decoded surface differs slightly from the raw textarea text.'
-    : 'This mirrors the text you typed, but grouped and colored by live token boundaries.';
+    ? 'Token boundaries stay accurate here even when the decoded surface differs slightly from the raw textarea text.'
+    : 'The surface mirrors the input, grouped by live token boundaries.';
 }
 
 async function retokenize(forceReload = false) {
@@ -922,7 +922,7 @@ async function retokenize(forceReload = false) {
     const tokenizer = await ensureTokenizer(forceReload);
     const payload = await buildPayload(tokenizer);
     renderPayload(payload);
-    setStatus(`Ready · ${currentModel().label}`, 'Tokenizer cached in the browser for fast follow-up edits and model switches.', 'ok');
+    setStatus(`Ready · ${currentModel().label}`, '', 'ok');
   } catch (error) {
     console.error(error);
     renderError(error);
@@ -1329,6 +1329,7 @@ function setStatus(title, note, tone) {
     refs.modelStatus.classList.add('error');
   }
   refs.statusNote.textContent = note;
+  refs.statusNote.classList.toggle('hidden', !note || tone === 'ok');
 }
 
 function setHoveredToken(index) {
