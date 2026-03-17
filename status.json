@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T00:46:12Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-17T00:48:14Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 4037,
+    "loop_count": 4056,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 1,
+        "task": "1773701002.020259",
+        "started_at": 1773708444,
+        "elapsed_sec": 50
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.88,
-      "five": 1.71,
-      "fifteen": 1.67
+      "one": 2.05,
+      "five": 1.83,
+      "fifteen": 1.72
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107526275072,
-    "disk_free_bytes": 137580920832,
-    "runner_log_size_bytes": 46228821,
+    "disk_used_bytes": 107504574464,
+    "disk_free_bytes": 137602621440,
+    "runner_log_size_bytes": 46229168,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-16T17:44:46Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T00:46:14Z",
+    "checked_at_utc": "2026-03-17T00:48:17Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 81531,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 49
       },
       {
         "index": 1,
@@ -54,23 +62,23 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 79851,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 49
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 79851,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 50
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 79851,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 49
       },
       {
         "index": 4,
@@ -78,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 79935,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 47
       },
       {
         "index": 5,
@@ -91,10 +99,10 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 79851,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 49
       },
       {
         "index": 7,
@@ -102,13 +110,30 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 79851,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 50
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "in_progress",
+        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
+        "summary": "Expanded the dashboard tokenizer page into broader public model families and added live vocabulary-sharing annotations for family/configuration selection.",
+        "summary_preview": "Expanded the dashboard tokenizer page into broader public model families and added live vocabulary-sharing annotations for family/configuration selection.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773701002.020259",
+        "last_update_ts": "1773708443.937356",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T22:43:22Z"
+        }
+      }
+    },
     "incomplete": {
       "1773463707.278659": {
         "mention_ts": "1773463707.278659",
@@ -172,22 +197,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-16T23:30:10Z"
-        }
-      },
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "waiting_human",
-        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Expanded the dashboard tokenizer page into broader public model families and added live vocabulary-sharing annotations for family/configuration selection.",
-        "summary_preview": "Expanded the dashboard tokenizer page into broader public model families and added live vocabulary-sharing annotations for family/configuration selection.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773701002.020259",
-        "last_update_ts": "1773708067.550747",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T22:43:22Z"
         }
       }
     },
@@ -1004,5 +1013,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T00:46:15Z"
+  "server_time_utc": "2026-03-17T00:48:19Z"
 }
