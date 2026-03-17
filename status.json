@@ -1,11 +1,11 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T21:20:51Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-17T21:37:34Z",
+    "status": "restarting",
     "pid": 82363,
     "loop_count": 1650,
     "last_exit_code": 0,
-    "last_failure_kind": "nonzero_exit",
+    "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
@@ -19,24 +19,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.26,
-      "five": 2.02,
-      "fifteen": 1.8
+      "one": 1.96,
+      "five": 1.97,
+      "fifteen": 1.78
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106791866368,
-    "disk_free_bytes": 138315329536,
-    "runner_log_size_bytes": 178778,
+    "disk_used_bytes": 106791800832,
+    "disk_free_bytes": 138315395072,
+    "runner_log_size_bytes": 179453,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-17T17:41:35Z",
+    "dashboard_started_utc": "2026-03-17T21:37:35Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T21:37:17Z",
+    "checked_at_utc": "2026-03-17T21:37:35Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 1,
@@ -54,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 37
       },
       {
         "index": 2,
@@ -62,7 +62,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 36
       },
       {
         "index": 3,
@@ -70,7 +70,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 4,
@@ -78,7 +78,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 35
       },
       {
         "index": 5,
@@ -86,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 6,
@@ -94,7 +94,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 7,
@@ -102,30 +102,13 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1773779842.810189",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Maintenance reflection refreshed memory/goals/docs, re-audited live PRs, merged stale no-op Project_LEQ PR #5, and flagged the remaining review/tooling issues …",
-        "summary_preview": "Maintenance reflection refreshed memory/goals/docs, re-audited live PRs, merged stale no-op Project_LEQ PR #5, and flagged the remaining review/tooling issues …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773779822.335235",
-        "last_update_ts": "1773782451.084020",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-17T20:37:02Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -209,6 +192,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1773779842.810189",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: shell adapter Phase 3 (11 tests), worker_slot timeout fix, job_store import fix, issue triage (closed publisher guard, 2 monitoring items rem…",
+        "summary_preview": "Developer review: shell adapter Phase 3 (11 tests), worker_slot timeout fix, job_store import fix, issue triage (closed publisher guard, 2 monitoring items rem…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773779822.335235",
+        "last_update_ts": "1773783454.639064",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-17T20:37:02Z"
+        }
+      },
       "1773111453.746699": {
         "mention_ts": "1773111453.746699",
         "thread_ts": "1773111453.746699",
@@ -992,22 +991,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T20:24:42Z"
         }
-      },
-      "1771749821.471009": {
-        "mention_ts": "1771749821.471009",
-        "thread_ts": "1771749821.471009",
-        "status": "done",
-        "task_description": "There should be some sort of monitor of your health and task list, a frontend project in process, I would like for people to be able to just go to a website and see your frontend,…",
-        "summary": "Removed Task Queue section, restored requester display names in public snapshot, republished GitHub Pages, merged agent-monitor-web PR #1, and posted thread co…",
-        "summary_preview": "Removed Task Queue section, restored requester display names in public snapshot, republished GitHub Pages, merged agent-monitor-web PR #1, and posted thread co…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771749821.471009",
-        "last_update_ts": "1771795329.776592",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T08:43:41Z"
-        }
       }
     }
   },
@@ -1021,5 +1004,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T21:37:18Z"
+  "server_time_utc": "2026-03-17T21:37:35Z"
 }
