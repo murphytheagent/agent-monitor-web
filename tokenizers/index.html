@@ -780,7 +780,7 @@
     }
 
     .text-input-field textarea {
-      min-height: 300px;
+      min-height: clamp(236px, 33vh, 300px);
       padding: 14px 16px;
       border-color: rgba(255, 52, 178, 0.4);
       background: rgba(3, 8, 22, 0.96);
@@ -1257,6 +1257,7 @@
     .field-caption,
     .input-panel-copy .summary-kicker,
     .input-panel-note,
+    .text-input-field .field-label,
     .surface-copy .summary-kicker,
     .surface-note,
     .utility-body .reference-copy,
