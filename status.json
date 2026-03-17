@@ -1,11 +1,11 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T20:59:49Z",
+    "last_updated_utc": "2026-03-17T21:02:54Z",
     "status": "running_session",
     "pid": 82363,
-    "loop_count": 1641,
+    "loop_count": 1642,
     "last_exit_code": 0,
-    "last_failure_kind": "none",
+    "last_failure_kind": "nonzero_exit",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.71,
-      "five": 2.03,
-      "fifteen": 2.03
+      "one": 1.35,
+      "five": 1.8,
+      "fifteen": 1.94
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106781900800,
-    "disk_free_bytes": 138325295104,
-    "runner_log_size_bytes": 175125,
+    "disk_used_bytes": 106780966912,
+    "disk_free_bytes": 138326228992,
+    "runner_log_size_bytes": 175562,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-17T17:41:35Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T21:02:28Z",
+    "checked_at_utc": "2026-03-17T21:04:31Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 1,
@@ -62,7 +62,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 37
       },
       {
         "index": 3,
@@ -78,7 +78,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 35
       },
       {
         "index": 5,
@@ -86,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 37
       },
       {
         "index": 6,
@@ -94,7 +94,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 7,
@@ -102,7 +102,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       }
     ]
   },
@@ -118,7 +118,7 @@
         "summary_preview": "Maintenance reflection refreshed memory/goals/docs, re-audited live PRs, merged stale no-op Project_LEQ PR #5, and flagged the remaining review/tooling issues …",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773779822.335235",
-        "last_update_ts": "1773781189.292725",
+        "last_update_ts": "1773781374.482422",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
@@ -1021,5 +1021,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T21:02:29Z"
+  "server_time_utc": "2026-03-17T21:04:32Z"
 }
