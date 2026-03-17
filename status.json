@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T19:52:47Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-17T19:54:47Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 1224,
+    "loop_count": 1243,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 1,
+        "task": "1773701002.020259",
+        "started_at": 1773777207,
+        "elapsed_sec": 79
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.38,
-      "five": 1.59,
-      "fifteen": 1.58
+      "one": 1.75,
+      "five": 1.63,
+      "fifteen": 1.6
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106739552256,
-    "disk_free_bytes": 138367643648,
-    "runner_log_size_bytes": 171825,
+    "disk_used_bytes": 106737901568,
+    "disk_free_bytes": 138369294336,
+    "runner_log_size_bytes": 172275,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-17T17:41:35Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T19:52:50Z",
+    "checked_at_utc": "2026-03-17T19:54:53Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 38
       },
       {
         "index": 1,
@@ -54,7 +62,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 40
       },
       {
         "index": 2,
@@ -70,7 +78,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 38
       },
       {
         "index": 4,
@@ -78,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 37
       },
       {
         "index": 5,
@@ -102,13 +110,30 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 38
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "in_progress",
+        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
+        "summary": "Added a durable [code] route featuring the tokenizer workbench, documented the dashboard-root publishing boundary, and landed the project repo change on the li…",
+        "summary_preview": "Added a durable [code] route featuring the tokenizer workbench, documented the dashboard-root publishing boundary, and landed the project repo change on the li…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773701002.020259",
+        "last_update_ts": "1773777207.311208",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T22:43:22Z"
+        }
+      }
+    },
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -172,22 +197,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-17T18:13:23Z"
-        }
-      },
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "waiting_human",
-        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Added a durable [code] route featuring the tokenizer workbench, documented the dashboard-root publishing boundary, and landed the project repo change on the li…",
-        "summary_preview": "Added a durable [code] route featuring the tokenizer workbench, documented the dashboard-root publishing boundary, and landed the project repo change on the li…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773701002.020259",
-        "last_update_ts": "1773777079.419091",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T22:43:22Z"
         }
       }
     },
@@ -1004,5 +1013,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T19:52:51Z"
+  "server_time_utc": "2026-03-17T19:54:54Z"
 }
