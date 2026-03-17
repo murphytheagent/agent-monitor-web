@@ -482,16 +482,25 @@ const EXAMPLES = {
   emoji: '### Prompt draft\n- Ship the tokenizer lab tonight 🚀\n- Keep whitespace visible\n- Compare plain text vs chat mode ✨',
 };
 
+const MAX_TOKENIZER_CACHE = 4;
+const EMPTY_INSPECTOR_TEXT = 'Hover or click a token to inspect it.';
+
 const state = {
   tokenizer: null,
   tokenizerKey: null,
   tokenizerCache: new Map(),
+  tokenizerOrder: [],
   specialTokenIdCache: new Map(),
   specialTokenIds: new Set(),
   mode: 'plain',
   generationPrompt: true,
   busy: false,
   queued: false,
+  showInvisibles: false,
+  hoveredToken: null,
+  selectedToken: null,
+  focusedToken: null,
+  lastPayload: null,
 };
 
 const refs = {};
@@ -504,6 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderModelMeta();
   renderUnsupportedLineup();
   renderModelLineup();
+  updateModeCopy();
   bindEvents();
   retokenize();
 });
@@ -526,7 +536,10 @@ function captureRefs() {
   refs.inputSummary = document.getElementById('input-summary');
   refs.retokenizeButton = document.getElementById('retokenize-button');
   refs.copyIdsButton = document.getElementById('copy-ids-button');
-  refs.heroModelName = document.getElementById('hero-model-name');
+  refs.showInvisibles = document.getElementById('show-invisibles');
+  refs.surfaceTitle = document.getElementById('surface-title');
+  refs.surfaceNote = document.getElementById('surface-note');
+  refs.surfacePreview = document.getElementById('surface-preview');
   refs.repoChip = document.getElementById('repo-chip');
   refs.repoLabel = document.getElementById('repo-label');
   refs.lineLabel = document.getElementById('line-label');
@@ -537,9 +550,9 @@ function captureRefs() {
   refs.templateLabel = document.getElementById('template-label');
   refs.lineSummary = document.getElementById('line-summary');
   refs.modelSummary = document.getElementById('model-summary');
-  refs.familyVocabPanel = document.getElementById('family-vocab-panel');
   refs.familyVocabTitle = document.getElementById('family-vocab-title');
   refs.familyVocabSummary = document.getElementById('family-vocab-summary');
+  refs.familyVocabSummaryDetail = document.getElementById('family-vocab-summary-detail');
   refs.modelCaption = document.getElementById('model-caption');
   refs.modelMetaRepo = document.getElementById('model-meta-repo');
   refs.modelMetaLine = document.getElementById('model-meta-line');
@@ -548,6 +561,7 @@ function captureRefs() {
   refs.modelMetaVocab = document.getElementById('model-meta-vocab');
   refs.modelMetaTemplate = document.getElementById('model-meta-template');
   refs.modelMetaSummary = document.getElementById('model-meta-summary');
+  refs.contextDetails = document.getElementById('context-details');
   refs.unsupportedLineup = document.getElementById('unsupported-lineup');
   refs.modelLineup = document.getElementById('model-lineup');
   refs.statTotal = document.getElementById('stat-total');
@@ -557,7 +571,14 @@ function captureRefs() {
   refs.statDensityNote = document.getElementById('stat-density-note');
   refs.statPrompt = document.getElementById('stat-prompt');
   refs.statMode = document.getElementById('stat-mode');
+  refs.inspectorPiece = document.getElementById('inspector-piece');
+  refs.inspectorIndex = document.getElementById('inspector-index');
+  refs.inspectorId = document.getElementById('inspector-id');
+  refs.inspectorFlag = document.getElementById('inspector-flag');
+  refs.inspectorRaw = document.getElementById('inspector-raw');
   refs.tokenStream = document.getElementById('token-stream');
+  refs.serializedTitle = document.getElementById('serialized-title');
+  refs.serializedNote = document.getElementById('serialized-note');
   refs.serializedPrompt = document.getElementById('serialized-prompt');
   refs.tokenIds = document.getElementById('token-ids');
   refs.tokenTable = document.getElementById('token-table');
@@ -571,6 +592,7 @@ function bindEvents() {
     renderModelLineup();
     retokenize(false);
   });
+
   refs.familySelect.addEventListener('change', () => {
     syncLineSelectionToFamily();
     populateModelOptions(false);
@@ -578,20 +600,28 @@ function bindEvents() {
     renderModelLineup();
     retokenize(false);
   });
+
   refs.modelSelect.addEventListener('change', () => {
     syncSelectionToModel();
     renderModelMeta();
     renderModelLineup();
     retokenize(false);
   });
+
   refs.inputText.addEventListener('input', scheduleRetokenize);
   refs.systemText.addEventListener('input', scheduleRetokenize);
   refs.assistantPrefix.addEventListener('change', () => {
     state.generationPrompt = refs.assistantPrefix.checked;
     scheduleRetokenize();
   });
+
   refs.retokenizeButton.addEventListener('click', () => retokenize(true));
   refs.copyIdsButton.addEventListener('click', copyTokenIds);
+  refs.showInvisibles.addEventListener('change', () => {
+    state.showInvisibles = refs.showInvisibles.checked;
+    renderSurface();
+    renderInspector(state.focusedToken);
+  });
 
   for (const button of [refs.modePlain, refs.modeChat]) {
     button.addEventListener('click', () => {
@@ -606,6 +636,41 @@ function bindEvents() {
       scheduleRetokenize();
     });
   }
+
+  bindTokenInteractions(refs.surfacePreview);
+  bindTokenInteractions(refs.tokenStream);
+  bindTokenInteractions(refs.tokenTable);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && state.selectedToken != null) {
+      state.selectedToken = null;
+      refreshFocusState(false);
+    }
+  });
+}
+
+function bindTokenInteractions(container) {
+  container.addEventListener('mouseover', (event) => {
+    const tokenIndex = readTokenIndex(event.target);
+    if (tokenIndex == null) {
+      return;
+    }
+    setHoveredToken(tokenIndex);
+  });
+
+  container.addEventListener('mouseleave', () => {
+    setHoveredToken(null);
+  });
+
+  container.addEventListener('click', (event) => {
+    const tokenIndex = readTokenIndex(event.target);
+    if (tokenIndex == null) {
+      return;
+    }
+    event.preventDefault();
+    const nextSelection = state.selectedToken === tokenIndex ? null : tokenIndex;
+    setSelectedToken(nextSelection, nextSelection != null);
+  });
 }
 
 function populateLineOptions() {
@@ -665,7 +730,6 @@ function renderModelMeta() {
   const configurationLabel = configurationCount === 1 ? 'configuration' : 'configurations';
 
   document.title = `Tokenizer Observatory | ${model.label}`;
-  refs.heroModelName.textContent = `${model.label}'s chat template`;
   refs.repoChip.href = `https://huggingface.co/${model.repo}`;
   refs.repoLabel.textContent = model.repo;
   refs.lineLabel.textContent = model.line;
@@ -677,9 +741,10 @@ function renderModelMeta() {
   refs.modelSummary.textContent = model.summary;
   refs.familyVocabTitle.textContent = family.vocabBadge;
   refs.familyVocabSummary.textContent = family.vocabSummary;
-  refs.lineCaption.textContent = `${line.label} currently exposes ${familyCount} public ${familyLabel} in this browser-only build. ${line.lineCaption}`;
-  refs.familyCaption.textContent = `${family.label} currently exposes ${configurationCount} public ${configurationLabel} in this browser-only build. ${family.vocabCaption}`;
-  refs.modelCaption.textContent = `${model.caption} ${family.vocabCaption} Browser-only gaps such as Kimi K2, GLM 4, and InternLM 3 still need custom tokenizer support.`;
+  refs.familyVocabSummaryDetail.textContent = family.vocabSummary;
+  refs.lineCaption.textContent = `${line.label} exposes ${familyCount} public ${familyLabel} in this browser build. ${line.lineCaption}`;
+  refs.familyCaption.textContent = `${family.label} exposes ${configurationCount} public ${configurationLabel} here. ${family.vocabCaption}`;
+  refs.modelCaption.textContent = `${model.caption} ${family.vocabCaption}`;
   refs.modelMetaRepo.href = `https://huggingface.co/${model.repo}`;
   refs.modelMetaRepo.textContent = model.repo;
   refs.modelMetaLine.textContent = model.line;
@@ -689,7 +754,7 @@ function renderModelMeta() {
   refs.modelMetaTemplate.textContent = model.template;
   refs.modelMetaSummary.textContent = model.summary;
   applyVocabularyTone(refs.vocabChip, family.vocabStatus);
-  applyVocabularyTone(refs.familyVocabPanel, family.vocabStatus);
+  applyVocabularyTone(refs.contextDetails, family.vocabStatus);
 }
 
 function renderUnsupportedLineup() {
@@ -698,10 +763,13 @@ function renderUnsupportedLineup() {
   UNSUPPORTED_BROWSER_LINES.forEach((entry) => {
     const li = document.createElement('li');
     li.className = 'unsupported-item';
+
     const title = document.createElement('h3');
     title.textContent = entry.label;
+
     const reason = document.createElement('p');
     reason.textContent = entry.reason;
+
     li.append(title, reason);
     fragment.append(li);
   });
@@ -712,6 +780,7 @@ function renderModelLineup() {
   refs.modelLineup.innerHTML = '';
   const selectedFamily = currentFamily().id;
   const fragment = document.createDocumentFragment();
+
   LINES.forEach((line) => {
     const li = document.createElement('li');
     li.className = 'catalog-card';
@@ -754,6 +823,7 @@ function renderModelLineup() {
     li.append(head, summary, familyList);
     fragment.append(li);
   });
+
   refs.modelLineup.append(fragment);
 }
 
@@ -781,7 +851,7 @@ function applyVocabularyTone(element, tone) {
 let debounceTimer = null;
 function scheduleRetokenize() {
   clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(() => retokenize(false), 160);
+  debounceTimer = setTimeout(() => retokenize(false), 140);
 }
 
 function setMode(mode) {
@@ -793,6 +863,25 @@ function setMode(mode) {
   refs.modeChat.setAttribute('aria-selected', String(!plain));
   refs.systemField.classList.toggle('hidden', plain);
   refs.generationToggle.classList.toggle('hidden', plain);
+  updateModeCopy();
+}
+
+function updateModeCopy(payload = state.lastPayload) {
+  const isChat = state.mode === 'chat';
+  refs.surfaceTitle.textContent = isChat ? 'Model prompt with token colors' : 'Token-colored input surface';
+
+  if (isChat) {
+    refs.surfaceNote.textContent = 'This is the exact chat-template prompt the model sees. Template-added control tokens stay inline as chips so the final serialization is obvious.';
+    refs.serializedTitle.textContent = 'Exact serialized prompt';
+    refs.serializedNote.textContent = 'This is the string emitted by apply_chat_template before the final token IDs are read.';
+    return;
+  }
+
+  refs.serializedTitle.textContent = 'Exact tokenized string';
+  refs.serializedNote.textContent = 'For plain text mode, this is the exact string consumed by the tokenizer.';
+  refs.surfaceNote.textContent = payload?.surfaceMismatch
+    ? 'This preview is still driven by live token boundaries, but the tokenizer-decoded surface differs slightly from the raw textarea text.'
+    : 'This mirrors the text you typed, but grouped and colored by live token boundaries.';
 }
 
 async function retokenize(forceReload = false) {
@@ -808,7 +897,7 @@ async function retokenize(forceReload = false) {
     const tokenizer = await ensureTokenizer(forceReload);
     const payload = await buildPayload(tokenizer);
     renderPayload(payload);
-    setStatus(`Ready · ${currentModel().label}`, 'Tokenizer cached in the browser for faster follow-up edits.', 'ok');
+    setStatus(`Ready · ${currentModel().label}`, 'Tokenizer cached in the browser for fast follow-up edits and model switches.', 'ok');
   } catch (error) {
     console.error(error);
     renderError(error);
@@ -825,7 +914,9 @@ async function retokenize(forceReload = false) {
 
 async function ensureTokenizer(forceReload = false) {
   const model = currentModel();
+
   if (!forceReload && state.tokenizerCache.has(model.id)) {
+    touchTokenizer(model.id);
     state.tokenizer = state.tokenizerCache.get(model.id);
     state.tokenizerKey = model.id;
     state.specialTokenIds = state.specialTokenIdCache.get(model.id) || new Set();
@@ -834,13 +925,29 @@ async function ensureTokenizer(forceReload = false) {
 
   setStatus(`Loading · ${model.label}`, `Downloading tokenizer assets for ${model.repo}.`, 'warn');
   const tokenizer = await AutoTokenizer.from_pretrained(model.repo);
-  state.tokenizerCache.set(model.id, tokenizer);
   const specialIds = collectSpecialTokenIds(tokenizer);
-  state.specialTokenIdCache.set(model.id, specialIds);
+  rememberTokenizer(model.id, tokenizer, specialIds);
   state.tokenizer = tokenizer;
   state.tokenizerKey = model.id;
   state.specialTokenIds = specialIds;
   return tokenizer;
+}
+
+function rememberTokenizer(modelId, tokenizer, specialIds) {
+  state.tokenizerCache.set(modelId, tokenizer);
+  state.specialTokenIdCache.set(modelId, specialIds);
+  touchTokenizer(modelId);
+
+  while (state.tokenizerOrder.length > MAX_TOKENIZER_CACHE) {
+    const evicted = state.tokenizerOrder.shift();
+    state.tokenizerCache.delete(evicted);
+    state.specialTokenIdCache.delete(evicted);
+  }
+}
+
+function touchTokenizer(modelId) {
+  state.tokenizerOrder = state.tokenizerOrder.filter((id) => id !== modelId);
+  state.tokenizerOrder.push(modelId);
 }
 
 async function buildPayload(tokenizer) {
@@ -882,20 +989,28 @@ async function buildPayload(tokenizer) {
 
   const rawTokens = convertIdsToTokens(tokenizer, tokenIds);
   const decodedPieces = await Promise.all(
-    tokenIds.map((id) => tokenizer.decode([id], { skip_special_tokens: false })),
+    tokenIds.map((id) => tokenizer.decode([id], {
+      skip_special_tokens: false,
+      clean_up_tokenization_spaces: false,
+    })),
   );
+
+  const targetText = isChat ? serializedPrompt : rawInput;
+  const surfacePieces = await deriveSurfacePieces(tokenizer, tokenIds, targetText, rawTokens, decodedPieces);
 
   const rows = tokenIds.map((id, index) => {
     const special = state.specialTokenIds.has(Number(id));
     const rawToken = rawTokens[index] ?? '';
     const decoded = decodedPieces[index] ?? '';
-    const display = chooseDisplayPiece(decoded, rawToken, special);
+    const surface = special
+      ? (surfacePieces[index] || rawToken || decoded || '')
+      : (surfacePieces[index] ?? chooseDisplayPiece(decoded, rawToken, special));
     return {
       index,
       id: Number(id),
       rawToken,
       decoded,
-      display,
+      surface,
       special,
     };
   });
@@ -904,10 +1019,13 @@ async function buildPayload(tokenizer) {
   const uniqueCount = new Set(rows.map((row) => row.id)).size;
   const promptLength = serializedPrompt.length;
   const density = rows.length ? promptLength / rows.length : 0;
+  const renderedText = rows.map((row) => row.surface).join('');
 
   return {
     rawInput,
     serializedPrompt,
+    renderedText,
+    surfaceMismatch: !isChat && renderedText !== rawInput,
     rows,
     summary: {
       total: rows.length,
@@ -920,6 +1038,49 @@ async function buildPayload(tokenizer) {
   };
 }
 
+async function deriveSurfacePieces(tokenizer, tokenIds, targetText, rawTokens, decodedPieces) {
+  const surfaces = Array(tokenIds.length).fill('');
+  let cursor = 0;
+  let index = 0;
+
+  while (index < tokenIds.length) {
+    let matched = false;
+    const maxGroupEnd = Math.min(tokenIds.length, index + 8);
+
+    for (let end = index; end < maxGroupEnd; end += 1) {
+      const candidate = await tokenizer.decode(tokenIds.slice(index, end + 1), {
+        skip_special_tokens: false,
+        clean_up_tokenization_spaces: false,
+      });
+
+      if (!candidate || candidate.includes('\ufffd')) {
+        continue;
+      }
+
+      if (targetText.startsWith(candidate, cursor)) {
+        surfaces[end] = candidate;
+        cursor += candidate.length;
+        index = end + 1;
+        matched = true;
+        break;
+      }
+    }
+
+    if (matched) {
+      continue;
+    }
+
+    const fallback = chooseDisplayPiece(decodedPieces[index] ?? '', rawTokens[index] ?? '', false);
+    surfaces[index] = fallback;
+    if (fallback && targetText.startsWith(fallback, cursor)) {
+      cursor += fallback.length;
+    }
+    index += 1;
+  }
+
+  return surfaces;
+}
+
 function formatChatContent(text, model) {
   if (model.chatContentFormat === 'array-text') {
     return [{ type: 'text', text }];
@@ -928,24 +1089,65 @@ function formatChatContent(text, model) {
 }
 
 function renderPayload(payload) {
-  refs.inputSummary.textContent = `${payload.rawInput.length} input chars → ${payload.summary.total} tokens`;
+  state.lastPayload = payload;
+
+  if (state.selectedToken != null && !payload.rows[state.selectedToken]) {
+    state.selectedToken = null;
+  }
+  if (state.hoveredToken != null && !payload.rows[state.hoveredToken]) {
+    state.hoveredToken = null;
+  }
+
+  updateModeCopy(payload);
+  refs.inputSummary.textContent = `${formatInteger(payload.rawInput.length)} input chars -> ${formatInteger(payload.summary.total)} tokens`;
   refs.statTotal.textContent = formatInteger(payload.summary.total);
   refs.statSpecial.textContent = `${formatInteger(payload.summary.specialCount)} special tokens`;
   refs.statUnique.textContent = formatInteger(payload.summary.uniqueCount);
   refs.statDensity.textContent = payload.summary.total ? payload.summary.density.toFixed(2) : '0.00';
   refs.statDensityNote.textContent = state.mode === 'chat'
-    ? 'Serialized chat prompt length divided by resulting token count.'
+    ? 'Serialized prompt length divided by resulting token count.'
     : 'Input length divided by resulting token count.';
   refs.statPrompt.textContent = formatInteger(payload.summary.promptLength);
   refs.statMode.textContent = payload.summary.modeLabel;
-
   refs.serializedPrompt.textContent = payload.serializedPrompt || '(empty prompt)';
   refs.tokenIds.textContent = payload.rows.length
     ? payload.rows.map((row) => row.id).join(', ')
     : '(no tokens)';
 
+  renderSurface();
   renderTokenStream(payload.rows);
   renderTable(payload.rows);
+  refreshFocusState(false);
+}
+
+function renderSurface() {
+  refs.surfacePreview.innerHTML = '';
+  const rows = state.lastPayload?.rows || [];
+
+  if (!rows.length) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-state';
+    empty.textContent = 'No token surface yet. Start typing above.';
+    refs.surfacePreview.append(empty);
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  rows.forEach((row, index) => {
+    const token = document.createElement('span');
+    token.className = `inline-token${row.special ? ' special' : ''}`;
+    token.dataset.tokenIndex = String(row.index);
+    token.style.setProperty('--token-rgb', tokenColor(index));
+
+    const content = surfacePieceForDisplay(row);
+    if (!content || content === '\u200b') {
+      token.classList.add('empty');
+    }
+    token.textContent = content || '\u200b';
+    fragment.append(token);
+  });
+
+  refs.surfacePreview.append(fragment);
 }
 
 function renderTokenStream(rows) {
@@ -963,21 +1165,27 @@ function renderTokenStream(rows) {
   rows.forEach((row, index) => {
     const token = document.createElement('article');
     token.className = `token-pill${row.special ? ' special' : ''}`;
+    token.dataset.tokenIndex = String(row.index);
     token.style.setProperty('--token-rgb', tokenColor(index));
+
+    const head = document.createElement('div');
+    head.className = 'token-pill-head';
 
     const position = document.createElement('div');
     position.className = 'token-pos';
     position.textContent = `#${row.index}`;
 
-    const piece = document.createElement('div');
-    piece.className = 'token-piece';
-    piece.textContent = visualTokenPiece(row.display);
-
     const id = document.createElement('div');
     id.className = 'token-id';
     id.textContent = `${row.id}${row.special ? ' · special' : ''}`;
 
-    token.append(position, piece, id);
+    head.append(position, id);
+
+    const piece = document.createElement('div');
+    piece.className = 'token-piece';
+    piece.textContent = streamTokenLabel(row);
+
+    token.append(head, piece);
     fragment.append(token);
   });
 
@@ -1001,39 +1209,88 @@ function renderTable(rows) {
   const fragment = document.createDocumentFragment();
   rows.forEach((row) => {
     const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td class="mono">${row.index}</td>
-      <td class="mono">${row.id}</td>
-      <td><span class="code-chip">${escapeHtml(visualTokenPiece(row.display))}</span></td>
-      <td><span class="code-chip">${escapeHtml(visualTokenPiece(row.rawToken || ''))}</span></td>
-      <td>${row.special ? 'special' : 'regular'}</td>
-    `;
+    tr.dataset.tokenIndex = String(row.index);
+
+    const indexCell = document.createElement('td');
+    indexCell.className = 'mono';
+    indexCell.textContent = String(row.index);
+
+    const idCell = document.createElement('td');
+    idCell.className = 'mono';
+    idCell.textContent = String(row.id);
+
+    const decodedCell = document.createElement('td');
+    decodedCell.append(createCodeChip(streamTokenLabel(row)));
+
+    const rawCell = document.createElement('td');
+    rawCell.append(createCodeChip(visualTokenPiece(row.rawToken || '')));
+
+    const flagCell = document.createElement('td');
+    flagCell.textContent = row.special ? 'special' : 'regular';
+
+    tr.append(indexCell, idCell, decodedCell, rawCell, flagCell);
     fragment.append(tr);
   });
+
   refs.tokenTable.append(fragment);
 }
 
+function createCodeChip(text) {
+  const chip = document.createElement('span');
+  chip.className = 'code-chip';
+  chip.textContent = text;
+  return chip;
+}
+
+function renderInspector(index) {
+  const row = index == null ? null : state.lastPayload?.rows?.[index];
+
+  if (!row) {
+    refs.inspectorPiece.textContent = EMPTY_INSPECTOR_TEXT;
+    refs.inspectorIndex.textContent = 'Index: --';
+    refs.inspectorId.textContent = 'ID: --';
+    refs.inspectorFlag.textContent = 'regular token';
+    refs.inspectorRaw.textContent = 'Vocabulary token: --';
+    return;
+  }
+
+  refs.inspectorPiece.textContent = streamTokenLabel(row);
+  refs.inspectorIndex.textContent = `Index: ${row.index}`;
+  refs.inspectorId.textContent = `ID: ${row.id}`;
+  refs.inspectorFlag.textContent = row.special ? 'special token' : 'regular token';
+  refs.inspectorRaw.textContent = `Vocabulary token: ${visualTokenPiece(row.rawToken || '')}`;
+}
+
 function renderError(error) {
+  state.lastPayload = null;
+  state.hoveredToken = null;
+  state.selectedToken = null;
+  state.focusedToken = null;
+  updateModeCopy();
   refs.inputSummary.textContent = 'Tokenizer failed to load.';
   refs.statTotal.textContent = '0';
   refs.statSpecial.textContent = '0 special tokens';
   refs.statUnique.textContent = '0';
   refs.statDensity.textContent = '0.00';
   refs.statDensityNote.textContent = state.mode === 'chat'
-    ? 'Serialized chat prompt length divided by resulting token count.'
+    ? 'Serialized prompt length divided by resulting token count.'
     : 'Input length divided by resulting token count.';
   refs.statPrompt.textContent = '0';
   refs.statMode.textContent = state.mode === 'chat' ? 'Chat template mode' : 'Plain text mode';
   refs.serializedPrompt.textContent = error.message || String(error);
   refs.tokenIds.textContent = '(unavailable)';
+  refs.surfacePreview.innerHTML = '<p class="empty-state">The token-colored surface is unavailable because the tokenizer failed to load.</p>';
   refs.tokenStream.innerHTML = '<p class="empty-state">The tokenizer did not load. Open the browser console for the precise stack trace.</p>';
   refs.tokenTable.innerHTML = '';
+  renderInspector(null);
 }
 
 function setBusyUi(isBusy) {
   refs.lineSelect.disabled = isBusy;
   refs.familySelect.disabled = isBusy;
   refs.modelSelect.disabled = isBusy;
+  refs.modePlain.disabled = isBusy;
+  refs.modeChat.disabled = isBusy;
   refs.retokenizeButton.disabled = isBusy;
   refs.copyIdsButton.disabled = isBusy;
 }
@@ -1047,6 +1304,79 @@ function setStatus(title, note, tone) {
     refs.modelStatus.classList.add('error');
   }
   refs.statusNote.textContent = note;
+}
+
+function setHoveredToken(index) {
+  state.hoveredToken = index;
+  refreshFocusState(false);
+}
+
+function setSelectedToken(index, reveal = false) {
+  state.selectedToken = index;
+  refreshFocusState(reveal);
+}
+
+function refreshFocusState(reveal = false) {
+  const nextFocus = state.selectedToken ?? state.hoveredToken;
+
+  if (state.focusedToken !== nextFocus) {
+    markTokenFocus(state.focusedToken, false);
+    markTokenFocus(nextFocus, true);
+    state.focusedToken = nextFocus;
+  }
+
+  renderInspector(nextFocus);
+
+  if (reveal && nextFocus != null) {
+    revealToken(nextFocus);
+  }
+}
+
+function markTokenFocus(index, active) {
+  if (index == null) {
+    return;
+  }
+  document.querySelectorAll(`[data-token-index="${index}"]`).forEach((node) => {
+    node.classList.toggle('is-focus', active);
+  });
+}
+
+function revealToken(index) {
+  refs.tokenStream.querySelector(`[data-token-index="${index}"]`)?.scrollIntoView({ block: 'nearest' });
+}
+
+function readTokenIndex(target) {
+  const node = target?.closest?.('[data-token-index]');
+  if (!node) {
+    return null;
+  }
+  const value = Number(node.dataset.tokenIndex);
+  return Number.isFinite(value) ? value : null;
+}
+
+function surfacePieceForDisplay(row) {
+  if (row.special) {
+    return row.rawToken || row.surface || '<special>';
+  }
+  if (!row.surface) {
+    return state.showInvisibles ? '∅' : '\u200b';
+  }
+  if (state.showInvisibles) {
+    return visualTokenPiece(row.surface);
+  }
+  return row.surface
+    .replace(/\n/g, '↵\n')
+    .replace(/\r/g, '␍');
+}
+
+function streamTokenLabel(row) {
+  if (row.special) {
+    return row.rawToken || row.surface || '<special>';
+  }
+  if (row.surface) {
+    return visualTokenPiece(row.surface);
+  }
+  return `[${visualTokenPiece(row.rawToken || '')}]`;
 }
 
 function currentModel() {
@@ -1067,10 +1397,6 @@ function familiesForLine(lineId) {
 }
 
 function modelsForFamily(familyId) {
-  return currentFamilyList(familyId);
-}
-
-function currentFamilyList(familyId) {
   return FAMILY_MAP[familyId]?.models || MODELS;
 }
 
@@ -1164,9 +1490,9 @@ function flattenSpecialValues(value) {
 }
 
 function tokenColor(index) {
-  const hue = (index * 37) % 360;
-  const saturation = 68;
-  const lightness = index % 3 === 0 ? 62 : 56;
+  const hue = (index * 43) % 360;
+  const saturation = 78;
+  const lightness = index % 3 === 0 ? 66 : 58;
   const [r, g, b] = hslToRgb(hue, saturation, lightness);
   return `${r}, ${g}, ${b}`;
 }
@@ -1232,13 +1558,4 @@ async function copyTokenIds() {
 
 function formatInteger(value) {
   return new Intl.NumberFormat('en-US').format(value);
-}
-
-function escapeHtml(text) {
-  return text
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
 }

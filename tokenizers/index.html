@@ -6,29 +6,29 @@
   <title>Tokenizer Observatory | Open-Source LLMs</title>
   <link rel="icon" href="data:,">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
     :root {
-      --bg-base: #05030c;
-      --bg-surface: rgba(12, 10, 30, 0.88);
-      --bg-surface-2: rgba(20, 16, 46, 0.9);
-      --bg-surface-3: rgba(10, 18, 40, 0.88);
-      --border: rgba(74, 239, 255, 0.26);
-      --border-strong: rgba(255, 47, 179, 0.34);
-      --text-main: #eaffff;
-      --text-muted: #a4b5e1;
-      --text-dim: #7181b3;
-      --brand: #38f0ff;
-      --brand-alt: #ff2fb3;
-      --warm: #ffd76a;
-      --good: #4dffb4;
-      --warn: #ffcc70;
-      --bad: #ff6689;
-      --shadow: 0 20px 46px rgba(1, 4, 20, 0.5);
-      --radius-xl: 20px;
-      --radius-lg: 16px;
-      --radius-md: 12px;
-      --radius-sm: 10px;
+      --bg-base: #07111d;
+      --bg-panel: rgba(13, 24, 40, 0.94);
+      --bg-panel-2: rgba(17, 31, 50, 0.94);
+      --bg-panel-3: rgba(10, 19, 31, 0.92);
+      --bg-token: rgba(9, 18, 30, 0.94);
+      --border: rgba(95, 133, 168, 0.34);
+      --border-strong: rgba(93, 215, 255, 0.42);
+      --text-main: #f5fbff;
+      --text-muted: #a6b9cc;
+      --text-dim: #7f93a7;
+      --accent: #5dd7ff;
+      --accent-2: #ffd166;
+      --good: #78efc2;
+      --warn: #ffd98a;
+      --bad: #ff8797;
+      --shadow: 0 24px 60px rgba(3, 7, 16, 0.45);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 12px;
     }
 
     * {
@@ -42,82 +42,62 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
       color: var(--text-main);
+      font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 12% 8%, rgba(56, 240, 255, 0.16) 0%, transparent 32%),
-        radial-gradient(circle at 88% 0%, rgba(255, 47, 179, 0.16) 0%, transparent 32%),
-        radial-gradient(circle at 72% 100%, rgba(88, 116, 255, 0.18) 0%, transparent 36%),
-        linear-gradient(150deg, #05030c 0%, #090318 46%, #120720 100%);
+        radial-gradient(circle at top left, rgba(93, 215, 255, 0.13) 0%, transparent 32%),
+        radial-gradient(circle at 92% 8%, rgba(255, 209, 102, 0.1) 0%, transparent 28%),
+        linear-gradient(160deg, #07111d 0%, #091421 38%, #0d1624 100%);
       overflow-x: hidden;
       position: relative;
     }
 
-    body::before,
-    body::after {
+    body::before {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 0;
-    }
-
-    body::before {
       background:
-        repeating-linear-gradient(
-          to right,
-          rgba(56, 240, 255, 0.045) 0,
-          rgba(56, 240, 255, 0.045) 1px,
-          transparent 1px,
-          transparent 56px
-        ),
-        repeating-linear-gradient(
-          to bottom,
-          rgba(114, 129, 179, 0.045) 0,
-          rgba(114, 129, 179, 0.045) 1px,
-          transparent 1px,
-          transparent 52px
-        );
-      opacity: 0.3;
-    }
-
-    body::after {
-      inset: auto;
-      width: 620px;
-      height: 620px;
-      right: -180px;
-      top: -240px;
-      background: radial-gradient(circle, rgba(255, 47, 179, 0.34) 0%, rgba(255, 47, 179, 0) 70%);
-      filter: blur(36px);
-      opacity: 0.58;
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: 0.32;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.58), transparent 100%);
     }
 
     a {
       color: inherit;
     }
 
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
     .page-shell {
       position: relative;
       z-index: 1;
-      width: min(1440px, calc(100vw - 28px));
+      width: min(1500px, calc(100vw - 28px));
       margin: 0 auto;
       padding: 18px 0 48px;
     }
 
     .page-header {
+      position: sticky;
+      top: 12px;
+      z-index: 12;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 18px;
+      gap: 20px;
       padding: 18px 20px;
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
-      background: linear-gradient(140deg, rgba(10, 10, 30, 0.92) 0%, rgba(11, 27, 52, 0.88) 100%);
+      background: linear-gradient(145deg, rgba(10, 20, 34, 0.94) 0%, rgba(13, 28, 46, 0.94) 100%);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 12px;
-      z-index: 10;
+      backdrop-filter: blur(16px);
     }
 
     .header-copy {
@@ -131,45 +111,41 @@
       margin-bottom: 14px;
       padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(56, 240, 255, 0.28);
-      background: rgba(9, 15, 34, 0.9);
+      border: 1px solid rgba(93, 215, 255, 0.26);
+      background: rgba(9, 17, 29, 0.92);
       color: var(--text-muted);
       text-decoration: none;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.04em;
     }
 
     .nav-link:hover {
+      border-color: rgba(93, 215, 255, 0.52);
       color: var(--text-main);
-      border-color: rgba(56, 240, 255, 0.52);
     }
 
     .eyebrow {
-      margin: 0 0 6px;
-      color: var(--warm);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.16em;
+      margin: 0 0 8px;
+      color: var(--accent-2);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     h1 {
       margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: clamp(28px, 4vw, 42px);
       line-height: 1.02;
-      letter-spacing: 0.04em;
-      text-shadow: 0 0 10px rgba(56, 240, 255, 0.32);
+      letter-spacing: -0.03em;
     }
 
     .subtitle {
       margin: 12px 0 0;
-      max-width: 780px;
+      max-width: 760px;
       color: var(--text-muted);
       font-size: 18px;
-      line-height: 1.35;
+      line-height: 1.42;
     }
 
     .header-status {
@@ -185,12 +161,11 @@
       gap: 10px;
       padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(56, 240, 255, 0.34);
-      background: rgba(9, 17, 34, 0.94);
-      color: var(--text-main);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
+      border: 1px solid rgba(93, 215, 255, 0.28);
+      background: rgba(8, 16, 27, 0.96);
       font-size: 12px;
-      letter-spacing: 0.06em;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -200,25 +175,25 @@
       width: 10px;
       height: 10px;
       border-radius: 999px;
-      background: var(--brand);
-      box-shadow: 0 0 12px rgba(56, 240, 255, 0.72);
+      background: var(--good);
+      box-shadow: 0 0 16px rgba(120, 239, 194, 0.9);
     }
 
     .status-pill.warn::before {
       background: var(--warn);
-      box-shadow: 0 0 12px rgba(255, 204, 112, 0.72);
+      box-shadow: 0 0 16px rgba(255, 217, 138, 0.84);
     }
 
     .status-pill.error::before {
       background: var(--bad);
-      box-shadow: 0 0 12px rgba(255, 102, 137, 0.72);
+      box-shadow: 0 0 16px rgba(255, 135, 151, 0.9);
     }
 
     .status-note {
       margin: 0;
       color: var(--text-dim);
       font-size: 14px;
-      line-height: 1.4;
+      line-height: 1.45;
       text-align: right;
     }
 
@@ -228,243 +203,375 @@
       margin-top: 18px;
     }
 
-    .workspace-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.9fr);
-      gap: 18px;
-      align-items: start;
-    }
-
-    .summary-stack {
-      display: grid;
-      gap: 18px;
-      align-content: start;
-      position: sticky;
-      top: 116px;
-    }
-
-    .card {
+    .card,
+    .detail-card {
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
-      background: linear-gradient(140deg, rgba(10, 10, 30, 0.92) 0%, rgba(12, 18, 44, 0.88) 100%);
+      background: linear-gradient(145deg, var(--bg-panel) 0%, var(--bg-panel-2) 100%);
       box-shadow: var(--shadow);
       overflow: hidden;
-      backdrop-filter: blur(10px);
     }
 
     .card-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      gap: 12px;
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(90deg, rgba(23, 14, 50, 0.94) 0%, rgba(11, 37, 68, 0.88) 100%);
+      gap: 14px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(95, 133, 168, 0.16);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .card-head-copy {
-      display: grid;
-      gap: 4px;
+      min-width: 0;
     }
 
     .card-title {
       margin: 0;
-      color: #dffcff;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 22px;
+      letter-spacing: -0.02em;
     }
 
     .card-subtitle {
-      margin: 0;
-      color: var(--text-dim);
-      font-size: 13px;
-      line-height: 1.35;
+      margin: 6px 0 0;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.45;
     }
 
     .card-body {
       padding: 18px;
     }
 
-    .workspace-body,
-    .summary-body,
-    .output-body,
-    .reference-section {
-      display: grid;
-      gap: 16px;
+    .ghost-button {
+      flex-shrink: 0;
+      padding: 10px 14px;
+      border: 1px solid rgba(93, 215, 255, 0.24);
+      border-radius: 12px;
+      background: rgba(9, 17, 28, 0.9);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: transform 120ms ease, border-color 120ms ease;
     }
 
-    .step-grid {
+    .ghost-button:hover:not(:disabled) {
+      border-color: rgba(93, 215, 255, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .ghost-button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .control-card {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.15fr) auto;
       gap: 14px;
+      padding: 18px 18px 0;
     }
 
     .field {
       display: grid;
       gap: 8px;
-    }
-
-    .step-card {
-      padding: 14px;
-      border-radius: var(--radius-lg);
-      background: rgba(8, 16, 36, 0.84);
-      border: 1px solid rgba(56, 240, 255, 0.14);
-    }
-
-    .field-step,
-    .summary-kicker,
-    .section-kicker {
-      color: var(--warm);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      min-width: 0;
     }
 
     .field-label {
-      color: var(--text-dim);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.08em;
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
-    .field-caption,
-    .selection-footnote,
-    .reference-copy,
-    .section-note {
+    .field-step {
+      color: var(--accent-2);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .field-caption {
       color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.45;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .step-card,
+    .mode-panel,
+    .action-panel {
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(95, 133, 168, 0.18);
+      background: rgba(8, 17, 29, 0.72);
     }
 
     select,
-    textarea,
-    input[type="text"] {
+    textarea {
       width: 100%;
-      padding: 14px 14px 13px;
-      border: 1px solid rgba(56, 240, 255, 0.18);
-      border-radius: var(--radius-md);
-      background: rgba(6, 12, 28, 0.96);
+      border: 1px solid rgba(95, 133, 168, 0.3);
+      border-radius: 14px;
+      background: rgba(7, 13, 23, 0.92);
       color: var(--text-main);
-      font: inherit;
-      outline: none;
-      transition: border-color 140ms ease, box-shadow 140ms ease;
+      padding: 12px 14px;
+      transition: border-color 120ms ease, box-shadow 120ms ease;
     }
 
     select:focus,
     textarea:focus,
-    input[type="text"]:focus {
-      border-color: rgba(56, 240, 255, 0.46);
-      box-shadow: 0 0 0 4px rgba(56, 240, 255, 0.08);
+    input[type="checkbox"]:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: none;
+      border-color: rgba(93, 215, 255, 0.62);
+      box-shadow: 0 0 0 3px rgba(93, 215, 255, 0.16);
     }
 
     textarea {
-      min-height: 188px;
+      min-height: 180px;
       resize: vertical;
-      line-height: 1.45;
+      line-height: 1.55;
     }
 
     .textarea-compact {
-      min-height: 104px;
+      min-height: 112px;
     }
 
-    .mode-row {
+    .mode-panel {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 16px;
-      align-items: end;
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      background: rgba(10, 18, 40, 0.82);
-      border: 1px solid rgba(255, 47, 179, 0.1);
+      gap: 10px;
+      align-content: start;
     }
 
     .mode-switch {
       display: inline-grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 4px;
       padding: 4px;
       border-radius: 14px;
-      border: 1px solid rgba(56, 240, 255, 0.18);
-      background: rgba(6, 12, 28, 0.96);
-    }
-
-    .mode-switch button,
-    .ghost-button {
-      appearance: none;
-      border: none;
-      cursor: pointer;
-      font: inherit;
+      border: 1px solid rgba(95, 133, 168, 0.22);
+      background: rgba(7, 13, 23, 0.94);
     }
 
     .mode-switch button {
-      padding: 11px 14px;
+      padding: 10px 12px;
+      border: 0;
       border-radius: 10px;
       background: transparent;
       color: var(--text-dim);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
     }
 
     .mode-switch button.active {
-      background: linear-gradient(120deg, rgba(56, 240, 255, 0.18) 0%, rgba(255, 47, 179, 0.14) 100%);
+      background: rgba(93, 215, 255, 0.16);
       color: var(--text-main);
-      box-shadow: inset 0 0 0 1px rgba(56, 240, 255, 0.14);
     }
 
-    .ghost-button {
-      padding: 11px 14px;
-      border-radius: 999px;
-      background: rgba(8, 14, 31, 0.96);
-      border: 1px solid rgba(56, 240, 255, 0.18);
+    .action-panel {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+      min-width: 200px;
+    }
+
+    .action-note {
+      margin: 0;
       color: var(--text-muted);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .selection-band {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 18px;
+      padding: 0 18px 18px;
+    }
+
+    .selection-panel,
+    .selection-side {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(95, 133, 168, 0.18);
+      background: rgba(8, 16, 28, 0.72);
+    }
+
+    .selection-panel {
+      display: grid;
+      gap: 12px;
+    }
+
+    .selection-title {
+      display: grid;
+      gap: 6px;
+    }
+
+    .selection-title h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 32px);
+      letter-spacing: -0.03em;
+    }
+
+    .selection-title p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .selection-copy,
+    .selection-footnote,
+    .callout-copy,
+    .reference-copy,
+    .detail-summary {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .repo-link {
+      display: grid;
+      gap: 4px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(93, 215, 255, 0.18);
+      background: rgba(7, 13, 22, 0.82);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .repo-link span,
+    .summary-chip span,
+    .detail-item span,
+    .inspector-kicker,
+    .metric-label,
+    .summary-kicker {
+      color: var(--text-dim);
       font-size: 12px;
-      letter-spacing: 0.08em;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      transition: transform 120ms ease, border-color 120ms ease;
     }
 
-    .ghost-button:hover {
-      transform: translateY(-1px);
-      border-color: rgba(56, 240, 255, 0.34);
+    .repo-link b,
+    .summary-chip b,
+    .detail-item b {
+      font-size: 15px;
+      font-weight: 600;
+      word-break: break-word;
     }
 
-    .toggle-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
+    .selection-side {
+      display: grid;
       gap: 14px;
+      align-content: start;
     }
 
-    .toggle {
+    .summary-chip-row {
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-chip {
+      display: grid;
+      gap: 4px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(95, 133, 168, 0.18);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .summary-chip.vocab-exact b,
+    .detail-card.vocab-exact .detail-summary strong,
+    .catalog-badge.vocab-exact {
+      color: var(--good);
+    }
+
+    .summary-chip.vocab-base b,
+    .detail-card.vocab-base .detail-summary strong,
+    .catalog-badge.vocab-base {
+      color: var(--accent);
+    }
+
+    .summary-chip.vocab-mixed b,
+    .detail-card.vocab-mixed .detail-summary strong,
+    .catalog-badge.vocab-mixed {
+      color: var(--warn);
+    }
+
+    .summary-chip.vocab-single b,
+    .detail-card.vocab-single .detail-summary strong,
+    .catalog-badge.vocab-single {
+      color: var(--accent-2);
+    }
+
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.9fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .composer-card,
+    .stream-card {
+      min-width: 0;
+    }
+
+    .composer-body {
+      display: grid;
+      gap: 18px;
+    }
+
+    .editor-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .toggle-row,
+    .surface-toolbar,
+    .result-grid {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .toggle,
+    .mini-toggle {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 12px;
+      padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(56, 240, 255, 0.16);
-      background: rgba(8, 14, 31, 0.94);
+      border: 1px solid rgba(95, 133, 168, 0.24);
+      background: rgba(7, 13, 23, 0.88);
       color: var(--text-muted);
-      font-size: 14px;
+      cursor: pointer;
     }
 
-    .toggle input {
-      accent-color: var(--brand);
+    .toggle input,
+    .mini-toggle input {
+      margin: 0;
+      accent-color: var(--accent);
     }
 
     .example-block {
       display: grid;
       gap: 10px;
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      background: rgba(8, 16, 36, 0.78);
-      border: 1px solid rgba(56, 240, 255, 0.12);
     }
 
     .example-list {
@@ -474,451 +581,491 @@
     }
 
     .example-list button {
-      padding: 9px 12px;
+      padding: 10px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 215, 106, 0.18);
-      background: rgba(14, 21, 44, 0.9);
-      color: var(--text-muted);
+      border: 1px solid rgba(95, 133, 168, 0.2);
+      background: rgba(7, 13, 23, 0.88);
+      color: var(--text-main);
       cursor: pointer;
-      font: inherit;
     }
 
     .example-list button:hover {
-      color: var(--text-main);
-      border-color: rgba(255, 215, 106, 0.34);
+      border-color: rgba(93, 215, 255, 0.45);
     }
 
-    .selection-title {
+    .surface-section {
       display: grid;
-      gap: 4px;
-    }
-
-    .selection-title h2 {
-      margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: clamp(26px, 4vw, 34px);
-      line-height: 1;
-    }
-
-    .selection-title p,
-    .selection-copy,
-    .callout-copy {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 16px;
-      line-height: 1.45;
-    }
-
-    .repo-link {
-      display: grid;
-      gap: 4px;
-      padding: 14px;
+      gap: 14px;
+      padding: 18px;
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(56, 240, 255, 0.16);
-      background: rgba(6, 12, 28, 0.94);
-      text-decoration: none;
+      border: 1px solid rgba(95, 133, 168, 0.18);
+      background: linear-gradient(145deg, rgba(7, 15, 26, 0.92) 0%, rgba(10, 19, 31, 0.92) 100%);
     }
 
-    .repo-link span,
-    .summary-chip span,
-    .detail-item span {
-      color: var(--text-dim);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .repo-link b,
-    .summary-chip b,
-    .detail-item b,
-    .detail-item a {
-      color: var(--text-main);
-      font-size: 15px;
-      text-decoration: none;
-      word-break: break-word;
-    }
-
-    .repo-link:hover b,
-    .detail-item a:hover {
-      color: var(--brand);
-    }
-
-    .summary-chip-row {
+    .surface-copy {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 6px;
     }
 
-    .summary-chip,
-    .detail-item,
-    .stat-card,
-    .catalog-card,
-    .unsupported-item {
-      padding: 14px;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(56, 240, 255, 0.14);
-      background: rgba(8, 16, 36, 0.82);
-    }
-
-    .callout-title {
+    .surface-title {
       margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 18px;
-      letter-spacing: 0.04em;
-      color: var(--brand);
+      font-size: 24px;
+      letter-spacing: -0.03em;
     }
 
-    .detail-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .stat-card {
-      min-height: 112px;
-      background: linear-gradient(160deg, rgba(8, 14, 31, 0.96) 0%, rgba(13, 25, 52, 0.84) 100%);
-    }
-
-    .stat-card h3 {
-      margin: 0 0 8px;
-      color: var(--text-dim);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .stat-value {
+    .surface-note,
+    .section-note {
       margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: clamp(24px, 4vw, 34px);
-      color: var(--text-main);
-    }
-
-    .stat-footnote {
-      margin: 8px 0 0;
       color: var(--text-muted);
       font-size: 14px;
-      line-height: 1.35;
+      line-height: 1.5;
     }
 
-    .stream-shell {
-      display: grid;
-      gap: 12px;
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(255, 47, 179, 0.1);
-      background: rgba(8, 14, 31, 0.88);
-    }
-
-    .token-stream {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      min-height: 72px;
-      align-content: flex-start;
-    }
-
-    .token-pill {
-      position: relative;
-      display: inline-grid;
-      gap: 4px;
-      min-width: 96px;
-      max-width: min(100%, 240px);
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(var(--token-rgb, 56, 240, 255), 0.32);
-      background: linear-gradient(
-        155deg,
-        rgba(var(--token-rgb, 56, 240, 255), 0.18) 0%,
-        rgba(7, 15, 32, 0.94) 82%
-      );
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    }
-
-    .token-pill.special {
-      border-style: dashed;
-    }
-
-    .token-pos,
-    .token-piece,
-    .token-id,
-    .prompt-box,
-    .ids-box,
-    code,
-    .mono,
-    .code-chip {
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-    }
-
-    .token-pos {
-      color: rgba(255, 255, 255, 0.56);
-      font-size: 11px;
-    }
-
-    .token-piece {
+    .surface-preview {
+      min-height: 260px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(95, 133, 168, 0.18);
+      background:
+        linear-gradient(135deg, rgba(6, 12, 20, 0.96) 0%, rgba(8, 16, 28, 0.96) 100%);
       color: var(--text-main);
-      font-size: 13px;
-      line-height: 1.35;
-      word-break: break-word;
-    }
-
-    .token-id {
-      color: var(--text-muted);
-      font-size: 12px;
-    }
-
-    .result-grid,
-    .reference-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .prompt-box,
-    .ids-box {
-      min-height: 220px;
-      max-height: 340px;
-      overflow: auto;
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(56, 240, 255, 0.14);
-      background: rgba(6, 12, 28, 0.94);
-      color: #dcefff;
-      font-size: 13px;
-      line-height: 1.55;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 16px;
+      line-height: 1.75;
       white-space: pre-wrap;
       word-break: break-word;
     }
 
+    .inline-token {
+      position: relative;
+      display: inline;
+      padding: 0.08em 0.14em;
+      margin: 0 0.01em;
+      border-radius: 8px;
+      background: rgba(var(--token-rgb, 93, 215, 255), 0.16);
+      box-shadow: inset 0 0 0 1px rgba(var(--token-rgb, 93, 215, 255), 0.28);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+      cursor: pointer;
+    }
+
+    .inline-token.special {
+      display: inline-flex;
+      align-items: center;
+      margin: 0.12em 0.18em 0.12em 0;
+      padding: 0.18em 0.48em;
+      border-radius: 999px;
+      background: rgba(var(--token-rgb, 93, 215, 255), 0.18);
+      font-size: 0.78em;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .inline-token.empty {
+      min-width: 0.4em;
+    }
+
+    .stream-card {
+      position: sticky;
+      top: 116px;
+    }
+
+    .stream-body {
+      display: grid;
+      gap: 16px;
+    }
+
+    .inspector-card {
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(95, 133, 168, 0.18);
+      background: rgba(8, 15, 26, 0.88);
+    }
+
+    .inspector-piece {
+      margin: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 20px;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+
+    .inspector-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .metric-chip {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(95, 133, 168, 0.18);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 13px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric-card {
+      display: grid;
+      gap: 4px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(95, 133, 168, 0.18);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .metric-value {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .metric-note {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .token-stream {
+      display: grid;
+      gap: 10px;
+      max-height: min(58vh, 760px);
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .token-pill {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(var(--token-rgb, 93, 215, 255), 0.24);
+      background: linear-gradient(
+        135deg,
+        rgba(var(--token-rgb, 93, 215, 255), 0.12) 0%,
+        rgba(7, 13, 23, 0.92) 100%
+      );
+      cursor: pointer;
+      transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+    }
+
+    .token-pill:hover {
+      transform: translateY(-1px);
+    }
+
+    .token-pill-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .token-pos,
+    .token-id {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .token-piece {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 16px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .token-pill.special .token-piece {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .inline-token.is-focus,
+    .token-pill.is-focus,
+    tr.is-focus {
+      background: rgba(var(--token-rgb, 93, 215, 255), 0.24);
+      box-shadow: inset 0 0 0 1px rgba(var(--token-rgb, 93, 215, 255), 0.72), 0 0 0 2px rgba(var(--token-rgb, 93, 215, 255), 0.12);
+    }
+
+    .token-pill.is-focus {
+      transform: translateY(-1px);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .prompt-box,
+    .ids-box {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(95, 133, 168, 0.18);
+      background: rgba(7, 13, 23, 0.9);
+      color: var(--text-main);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 14px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .detail-card {
+      background: linear-gradient(145deg, var(--bg-panel-3) 0%, rgba(13, 24, 40, 0.96) 100%);
+    }
+
+    .detail-card summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      list-style: none;
+      padding: 16px 18px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .detail-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .detail-card summary::after {
+      content: "▾";
+      color: var(--text-dim);
+      transition: transform 120ms ease;
+    }
+
+    .detail-card[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .detail-body {
+      display: grid;
+      gap: 18px;
+      padding: 0 18px 18px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 18px;
+    }
+
+    .detail-panel {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(95, 133, 168, 0.18);
+      background: rgba(7, 13, 23, 0.82);
+    }
+
+    .detail-panel h3 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .detail-item {
+      display: grid;
+      gap: 4px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(95, 133, 168, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
     .catalog-list,
     .unsupported-list {
-      list-style: none;
       margin: 0;
       padding: 0;
+      list-style: none;
       display: grid;
       gap: 12px;
     }
 
-    .catalog-card {
+    .catalog-card,
+    .unsupported-item {
       display: grid;
-      gap: 12px;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(95, 133, 168, 0.16);
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .catalog-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .catalog-title {
+    .catalog-title,
+    .unsupported-item h3 {
       margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text-main);
+      font-size: 17px;
     }
 
     .catalog-count {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(56, 240, 255, 0.16);
-      background: rgba(6, 12, 28, 0.88);
-      color: var(--text-muted);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
-    .catalog-summary {
+    .catalog-summary,
+    .unsupported-item p {
       margin: 0;
       color: var(--text-muted);
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.45;
     }
 
     .catalog-family-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
     }
 
     .catalog-family {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(56, 240, 255, 0.14);
-      background: rgba(6, 12, 28, 0.9);
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(95, 133, 168, 0.14);
+      background: rgba(7, 13, 23, 0.78);
       color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.2;
+      font-size: 13px;
     }
 
     .catalog-family.active {
+      border-color: rgba(93, 215, 255, 0.44);
+      background: rgba(93, 215, 255, 0.08);
       color: var(--text-main);
-      border-color: rgba(56, 240, 255, 0.3);
-      box-shadow: inset 0 0 0 1px rgba(56, 240, 255, 0.12);
     }
 
     .catalog-badge {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.07em;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-    }
-
-    .unsupported-item h3 {
-      margin: 0 0 6px;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--warm);
-    }
-
-    .unsupported-item p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 15px;
-      line-height: 1.45;
     }
 
     .table-wrap {
       overflow: auto;
-      max-height: 620px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 14px;
+      min-width: 760px;
     }
 
     th,
     td {
       padding: 12px 14px;
+      border-bottom: 1px solid rgba(95, 133, 168, 0.12);
       text-align: left;
       vertical-align: top;
-      border-bottom: 1px solid rgba(56, 240, 255, 0.08);
     }
 
     th {
       position: sticky;
       top: 0;
-      z-index: 1;
-      background: rgba(10, 16, 36, 0.98);
-      color: var(--text-dim);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 11px;
+      background: rgba(10, 19, 31, 0.98);
+      font-size: 12px;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: var(--text-dim);
     }
 
-    tbody tr:hover td {
-      background: rgba(11, 25, 52, 0.66);
+    tbody tr {
+      transition: background 120ms ease;
+      cursor: pointer;
+    }
+
+    .mono,
+    .code-chip {
+      font-family: "IBM Plex Mono", monospace;
     }
 
     .code-chip {
-      display: inline-block;
-      padding: 3px 6px;
-      border-radius: 8px;
-      background: rgba(6, 12, 28, 0.9);
-      border: 1px solid rgba(56, 240, 255, 0.16);
-      color: var(--text-main);
+      display: inline-flex;
+      max-width: 100%;
+      padding: 6px 8px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      white-space: pre-wrap;
       word-break: break-word;
     }
 
     .empty-state {
-      margin: 0;
       color: var(--text-dim);
-      font-size: 15px;
-      line-height: 1.45;
+      font-style: italic;
     }
 
-    .hidden {
-      display: none;
-    }
-
-    .summary-chip.vocab-exact b,
-    .card.vocab-exact .callout-title,
-    .catalog-badge.vocab-exact {
-      color: var(--good);
-    }
-
-    .summary-chip.vocab-base b,
-    .card.vocab-base .callout-title,
-    .catalog-badge.vocab-base {
-      color: var(--warm);
-    }
-
-    .summary-chip.vocab-mixed b,
-    .card.vocab-mixed .callout-title,
-    .catalog-badge.vocab-mixed {
-      color: var(--bad);
-    }
-
-    .summary-chip.vocab-single b,
-    .card.vocab-single .callout-title,
-    .catalog-badge.vocab-single {
-      color: var(--brand);
-    }
-
-    @media (max-width: 1180px) {
-      .workspace-grid,
-      .result-grid,
-      .reference-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .summary-stack {
-        position: static;
-      }
-
-      .stats-grid {
+    @media (max-width: 1240px) {
+      .control-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-    }
 
-    @media (max-width: 900px) {
-      .step-grid,
+      .selection-band,
+      .workspace-grid,
       .detail-grid,
-      .summary-chip-row {
+      .result-grid {
         grid-template-columns: 1fr;
       }
 
-      .mode-row {
-        grid-template-columns: 1fr;
+      .stream-card {
+        position: static;
       }
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 820px) {
       .page-shell {
-        width: min(100vw - 20px, 1440px);
-        padding-top: 12px;
-      }
-
-      .page-header {
-        padding: 16px;
-        position: static;
+        width: min(100vw - 16px, 100%);
       }
 
       .page-header,
+      .card-header,
+      .card-body,
+      .detail-card summary,
+      .detail-body,
+      .control-grid,
+      .selection-band {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .page-header {
+        position: static;
+        flex-direction: column;
+      }
+
       .header-status {
         justify-items: start;
       }
@@ -927,18 +1074,29 @@
         text-align: left;
       }
 
-      .subtitle,
-      .selection-copy,
-      .callout-copy {
-        font-size: 16px;
-      }
-
-      .stats-grid {
+      .control-grid {
         grid-template-columns: 1fr;
       }
 
-      .card-body {
-        padding: 16px;
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .subtitle,
+      .selection-copy,
+      .callout-copy,
+      .reference-copy,
+      .detail-summary {
+        font-size: 15px;
+      }
+
+      .surface-preview {
+        min-height: 220px;
+        font-size: 15px;
       }
     }
   </style>
@@ -950,7 +1108,7 @@
         <a class="nav-link" href="../">&larr; Monitor</a>
         <p class="eyebrow">Dashboard Tool</p>
         <h1>Tokenizer Observatory</h1>
-        <p class="subtitle">Explore how public LLM tokenizers slice the same text. Pick a model line, narrow to a family or generation, then inspect raw tokens or the full chat-template prompt that the model actually sees.</p>
+        <p class="subtitle">Pick a public tokenizer, type into the composer, and watch the model-facing token boundaries appear immediately. The token stream stays visible beside the text so you can move between surface form and token IDs without hunting for another panel.</p>
       </div>
       <div class="header-status">
         <div class="status-pill" id="model-status">Loading tokenizer</div>
@@ -959,60 +1117,97 @@
     </header>
 
     <main class="page-grid">
+      <section class="card control-card">
+        <div class="control-grid">
+          <label class="field step-card">
+            <span class="field-step">Step 1</span>
+            <span class="field-label">Model line</span>
+            <select id="line-select"></select>
+            <span class="field-caption" id="line-caption">Choose the broad model line first.</span>
+          </label>
+
+          <label class="field step-card">
+            <span class="field-step">Step 2</span>
+            <span class="field-label">Family / generation</span>
+            <select id="family-select"></select>
+            <span class="field-caption" id="family-caption">Choose the generation or family inside that line.</span>
+          </label>
+
+          <label class="field step-card">
+            <span class="field-step">Step 3</span>
+            <span class="field-label">Configuration</span>
+            <select id="model-select"></select>
+            <span class="field-caption" id="model-caption">Pinned to browser-loadable public tokenizer assets.</span>
+          </label>
+
+          <div class="mode-panel">
+            <span class="field-label">View</span>
+            <div class="mode-switch" role="tablist" aria-label="Tokenization mode">
+              <button id="mode-plain" class="active" type="button" data-mode="plain" aria-selected="true">Plain text</button>
+              <button id="mode-chat" type="button" data-mode="chat" aria-selected="false">Chat prompt</button>
+            </div>
+            <span class="field-caption">Plain text shows raw segmentation. Chat mode shows the model-formatted prompt and its control tokens.</span>
+          </div>
+
+          <div class="action-panel">
+            <button class="ghost-button" id="retokenize-button" type="button">Reload tokenizer</button>
+            <p class="action-note" id="input-summary">Ready.</p>
+          </div>
+        </div>
+
+        <div class="selection-band">
+          <section class="selection-panel">
+            <span class="summary-kicker">Active tokenizer</span>
+            <div class="selection-title">
+              <h2><span id="family-label">Qwen 3.5</span> · <span id="configuration-label">4B</span></h2>
+              <p><span id="line-label">Qwen</span> line</p>
+            </div>
+            <p class="selection-copy" id="model-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
+            <p class="selection-footnote" id="family-vocab-summary">Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.</p>
+          </section>
+
+          <aside class="selection-side">
+            <a class="repo-link" id="repo-chip" href="https://huggingface.co/Qwen/Qwen3.5-4B" target="_blank" rel="noreferrer">
+              <span>Resolved Hugging Face repo</span>
+              <b id="repo-label">Qwen/Qwen3.5-4B</b>
+            </a>
+
+            <div class="summary-chip-row">
+              <div class="summary-chip vocab-single" id="vocab-chip">
+                <span>Family vocabulary relationship</span>
+                <b id="vocab-label">Single public configuration</b>
+              </div>
+              <div class="summary-chip">
+                <span>Template style</span>
+                <b id="template-label">Qwen 3.5 instruct</b>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
       <section class="workspace-grid">
-        <section class="card">
+        <section class="card composer-card">
           <div class="card-header">
             <div class="card-head-copy">
-              <h2 class="card-title">Tokenizer Workspace</h2>
-              <p class="card-subtitle">Choose a browser-loadable public checkpoint, paste text, and switch between raw text and chat prompt views.</p>
+              <h2 class="card-title">Compose And Inspect</h2>
+              <p class="card-subtitle">Edit the source text here. The surface below mirrors token boundaries immediately, and clicking any colored segment pins it in the stream on the right.</p>
             </div>
-            <button class="ghost-button" id="retokenize-button" type="button">Retokenize</button>
           </div>
-          <div class="card-body workspace-body">
-            <div class="step-grid">
-              <label class="field step-card">
-                <span class="field-step">Step 1</span>
-                <span class="field-label">Model line</span>
-                <select id="line-select"></select>
-                <span class="field-caption" id="line-caption">Choose a broad model line first, then narrow to a specific family or generation below.</span>
-              </label>
-              <label class="field step-card">
-                <span class="field-step">Step 2</span>
-                <span class="field-label">Family / generation</span>
-                <select id="family-select"></select>
-                <span class="field-caption" id="family-caption">Choose a family or generation inside the selected model line.</span>
-              </label>
-              <label class="field step-card">
-                <span class="field-step">Step 3</span>
-                <span class="field-label">Configuration</span>
-                <select id="model-select"></select>
-                <span class="field-caption" id="model-caption">Pinned to public Hugging Face tokenizer files so the page can stay fully static.</span>
-              </label>
-            </div>
-
-            <div class="mode-row">
-              <div class="field">
-                <span class="field-label">View</span>
-                <div class="mode-switch" role="tablist" aria-label="Tokenization mode">
-                  <button id="mode-plain" class="active" type="button" data-mode="plain" aria-selected="true">Plain text</button>
-                  <button id="mode-chat" type="button" data-mode="chat" aria-selected="false">Chat prompt</button>
-                </div>
-                <span class="field-caption">Plain text shows raw segmentation. Chat mode shows how <span id="hero-model-name">the selected model's chat template</span> wraps the same content.</span>
-              </div>
-              <p class="section-note" id="input-summary">Ready.</p>
-            </div>
-
-            <label class="field">
-              <span class="field-label">Input text</span>
-              <textarea id="input-text">Tokenizers decide how models see text.
+          <div class="card-body composer-body">
+            <div class="editor-grid">
+              <label class="field">
+                <span class="field-label">Input text</span>
+                <textarea id="input-text">Tokenizers decide how models see text.
 
 Try English, 中文, emojis 🚀, or a code snippet and watch how each model slices it into subword pieces.</textarea>
-            </label>
+              </label>
 
-            <label class="field hidden" id="system-field">
-              <span class="field-label">System message</span>
-              <textarea class="textarea-compact" id="system-text" placeholder="Optional. Leave empty for a user-only chat prompt.">You are a careful assistant who explains tokenization choices.</textarea>
-            </label>
+              <label class="field hidden" id="system-field">
+                <span class="field-label">System message</span>
+                <textarea class="textarea-compact" id="system-text" placeholder="Optional. Leave empty for a user-only chat prompt.">You are a careful assistant who explains tokenization choices.</textarea>
+              </label>
+            </div>
 
             <div class="toggle-row">
               <label class="toggle hidden" id="generation-toggle">
@@ -1030,66 +1225,112 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
                 <button type="button" data-example="emoji">Emojis + markdown</button>
               </div>
             </div>
+
+            <section class="surface-section">
+              <div class="surface-toolbar">
+                <div class="surface-copy">
+                  <span class="summary-kicker">Main result</span>
+                  <h3 class="surface-title" id="surface-title">Token-colored input surface</h3>
+                  <p class="surface-note" id="surface-note">This mirrors the text you typed, but grouped and colored by live token boundaries.</p>
+                </div>
+                <label class="mini-toggle">
+                  <input id="show-invisibles" type="checkbox">
+                  <span>Show invisibles</span>
+                </label>
+              </div>
+              <div class="surface-preview" id="surface-preview" aria-live="polite"></div>
+            </section>
           </div>
         </section>
 
-        <aside class="summary-stack">
-          <section class="card">
-            <div class="card-header">
-              <div class="card-head-copy">
-                <h2 class="card-title">Selected Tokenizer</h2>
-                <p class="card-subtitle">The active model choice and the metadata that matters most while browsing.</p>
-              </div>
+        <aside class="card stream-card">
+          <div class="card-header">
+            <div class="card-head-copy">
+              <h2 class="card-title">Token Stream</h2>
+              <p class="card-subtitle">Hover any segment or token row to lock onto the exact token ID, decoded piece, and vocabulary form.</p>
             </div>
-            <div class="card-body summary-body">
-              <span class="summary-kicker">Current configuration</span>
-              <div class="selection-title">
-                <h2 id="configuration-label">4B</h2>
-                <p><span id="family-label">Qwen 3.5</span> inside <span id="line-label">Qwen</span></p>
+          </div>
+          <div class="card-body stream-body">
+            <section class="inspector-card">
+              <span class="inspector-kicker">Focused token</span>
+              <h3 class="inspector-piece" id="inspector-piece">Hover or click a token to inspect it.</h3>
+              <div class="inspector-meta">
+                <span class="metric-chip" id="inspector-index">Index: --</span>
+                <span class="metric-chip" id="inspector-id">ID: --</span>
+                <span class="metric-chip" id="inspector-flag">regular token</span>
               </div>
-              <a class="repo-link" id="repo-chip" href="https://huggingface.co/Qwen/Qwen3.5-4B" target="_blank" rel="noreferrer">
-                <span>Hugging Face repo</span>
-                <b id="repo-label">Qwen/Qwen3.5-4B</b>
-              </a>
-              <div class="summary-chip-row">
-                <div class="summary-chip vocab-single" id="vocab-chip">
-                  <span>Vocabulary relation</span>
-                  <b id="vocab-label">Single public configuration</b>
-                </div>
-                <div class="summary-chip">
-                  <span>Template style</span>
-                  <b id="template-label">Qwen 3.5 instruct</b>
-                </div>
-              </div>
-              <p class="selection-copy" id="model-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
-              <p class="selection-footnote" id="model-caption">Public Qwen 3.5 tokenizer files and chat template.</p>
-            </div>
-          </section>
+              <p class="selection-footnote" id="inspector-raw">Vocabulary token: --</p>
+            </section>
 
-          <section class="card vocab-single" id="family-vocab-panel">
-            <div class="card-header">
-              <div class="card-head-copy">
-                <h2 class="card-title">Vocabulary Relationship</h2>
-                <p class="card-subtitle">How tokenizer sharing works inside the selected family or generation.</p>
-              </div>
+            <div class="metrics-grid">
+              <article class="metric-card">
+                <span class="metric-label">Total tokens</span>
+                <strong class="metric-value" id="stat-total">0</strong>
+                <p class="metric-note" id="stat-special">0 special tokens</p>
+              </article>
+              <article class="metric-card">
+                <span class="metric-label">Unique IDs</span>
+                <strong class="metric-value" id="stat-unique">0</strong>
+                <p class="metric-note">A quick proxy for repetition versus variety.</p>
+              </article>
+              <article class="metric-card">
+                <span class="metric-label">Chars per token</span>
+                <strong class="metric-value" id="stat-density">0.00</strong>
+                <p class="metric-note" id="stat-density-note">Input length divided by token count.</p>
+              </article>
+              <article class="metric-card">
+                <span class="metric-label">Rendered chars</span>
+                <strong class="metric-value" id="stat-prompt">0</strong>
+                <p class="metric-note" id="stat-mode">Plain text mode</p>
+              </article>
             </div>
-            <div class="card-body summary-body">
+
+            <div class="token-stream" id="token-stream" aria-live="polite"></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="result-grid">
+        <section class="card">
+          <div class="card-header">
+            <div class="card-head-copy">
+              <h2 class="card-title" id="serialized-title">Exact tokenized string</h2>
+              <p class="card-subtitle" id="serialized-note">This is the exact string the tokenizer consumed for the current mode.</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="prompt-box" id="serialized-prompt"></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <div class="card-head-copy">
+              <h2 class="card-title">Token IDs</h2>
+              <p class="card-subtitle">Flat ID list for quick copy/paste into debugging or evaluation workflows.</p>
+            </div>
+            <button class="ghost-button" id="copy-ids-button" type="button">Copy IDs</button>
+          </div>
+          <div class="card-body">
+            <div class="ids-box" id="token-ids"></div>
+          </div>
+        </section>
+      </section>
+
+      <details class="detail-card vocab-single" id="context-details">
+        <summary>Tokenizer context and vocabulary notes</summary>
+        <div class="detail-body">
+          <div class="detail-grid">
+            <section class="detail-panel">
               <span class="summary-kicker">Inside the selected family</span>
-              <h3 class="callout-title" id="family-vocab-title">Single public configuration</h3>
-              <p class="callout-copy" id="family-vocab-summary">Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.</p>
-            </div>
-          </section>
+              <h3 id="family-vocab-title">Single public configuration</h3>
+              <p class="detail-summary"><strong>Vocabulary relationship:</strong> <span id="family-vocab-summary-detail">Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.</span></p>
+              <p class="callout-copy" id="line-summary">Qwen 2.5, Qwen 3, and Qwen 3.5 are grouped here as successive generations of one model line. Vocabulary badges apply within the selected family, not across the whole line.</p>
+            </section>
 
-          <section class="card">
-            <div class="card-header">
-              <div class="card-head-copy">
-                <h2 class="card-title">Line Context</h2>
-                <p class="card-subtitle">Where this family sits in the broader catalog and the concrete repo metadata behind it.</p>
-              </div>
-            </div>
-            <div class="card-body summary-body">
-              <p class="callout-copy" id="line-summary">Qwen 2.5, Qwen 3, and Qwen 3.5 are grouped here as successive generations of one model line. Vocabulary badges below apply within the selected family, not across the whole Qwen umbrella.</p>
-              <div class="detail-grid">
+            <section class="detail-panel">
+              <span class="summary-kicker">Resolved metadata</span>
+              <div class="detail-list">
                 <div class="detail-item">
                   <span>Repository</span>
                   <a id="model-meta-repo" href="https://huggingface.co/Qwen/Qwen3.5-4B" target="_blank" rel="noreferrer">Qwen/Qwen3.5-4B</a>
@@ -1107,7 +1348,7 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
                   <b id="model-meta-config">4B</b>
                 </div>
                 <div class="detail-item">
-                  <span>Vocabulary relation</span>
+                  <span>Vocabulary relationship</span>
                   <b id="model-meta-vocab">Single public configuration</b>
                 </div>
                 <div class="detail-item">
@@ -1115,107 +1356,36 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
                   <b id="model-meta-template">Qwen 3.5 instruct</b>
                 </div>
               </div>
-              <p class="selection-footnote" id="model-meta-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
-            </div>
-          </section>
-        </aside>
-      </section>
-
-      <section class="card">
-        <div class="card-header">
-          <div class="card-head-copy">
-            <h2 class="card-title">Token Output</h2>
-            <p class="card-subtitle">The live token stream plus a few quick metrics for the currently rendered prompt.</p>
+              <p class="callout-copy" id="model-meta-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
+            </section>
           </div>
         </div>
-        <div class="card-body output-body">
-          <div class="stats-grid">
-            <article class="stat-card">
-              <h3>Total tokens</h3>
-              <p class="stat-value" id="stat-total">0</p>
-              <p class="stat-footnote" id="stat-special">0 special tokens</p>
-            </article>
-            <article class="stat-card">
-              <h3>Unique token IDs</h3>
-              <p class="stat-value" id="stat-unique">0</p>
-              <p class="stat-footnote">A quick proxy for repetition versus variety.</p>
-            </article>
-            <article class="stat-card">
-              <h3>Characters per token</h3>
-              <p class="stat-value" id="stat-density">0.00</p>
-              <p class="stat-footnote" id="stat-density-note">Serialized prompt length divided by resulting token count.</p>
-            </article>
-            <article class="stat-card">
-              <h3>Rendered prompt chars</h3>
-              <p class="stat-value" id="stat-prompt">0</p>
-              <p class="stat-footnote" id="stat-mode">Plain text mode</p>
-            </article>
-          </div>
+      </details>
 
-          <div class="stream-shell">
-            <div class="card-head-copy">
-              <span class="section-kicker">Token stream</span>
-              <p class="section-note">Each tile shows token position, the decoded piece, and the token ID that produced it.</p>
-            </div>
-            <div class="token-stream" id="token-stream" aria-live="polite"></div>
+      <details class="detail-card" id="catalog-details">
+        <summary>Browser catalog and static runtime gaps</summary>
+        <div class="detail-body">
+          <div class="detail-grid">
+            <section class="detail-panel">
+              <span class="summary-kicker">Browser-ready catalog</span>
+              <p class="reference-copy">Use this as the structural map behind the selectors. The active family is highlighted in the line it belongs to.</p>
+              <ul class="catalog-list" id="model-lineup"></ul>
+            </section>
+
+            <section class="detail-panel">
+              <span class="summary-kicker">Static runtime gaps</span>
+              <p class="reference-copy">These families are public, but the browser-only build still lacks the custom tokenizer runtime hooks they need.</p>
+              <ul class="unsupported-list" id="unsupported-lineup"></ul>
+            </section>
           </div>
         </div>
-      </section>
-
-      <section class="result-grid">
-        <section class="card">
-          <div class="card-header">
-            <div class="card-head-copy">
-              <h2 class="card-title">Serialized Prompt</h2>
-              <p class="card-subtitle">The exact string that gets tokenized after optional chat-template wrapping.</p>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="prompt-box" id="serialized-prompt"></div>
-          </div>
-        </section>
-
-        <section class="card">
-          <div class="card-header">
-            <div class="card-head-copy">
-              <h2 class="card-title">Token IDs</h2>
-              <p class="card-subtitle">Flat ID list for quick copy/paste into external debugging or experiments.</p>
-            </div>
-            <button class="ghost-button" id="copy-ids-button" type="button">Copy IDs</button>
-          </div>
-          <div class="card-body">
-            <div class="ids-box" id="token-ids"></div>
-          </div>
-        </section>
-      </section>
-
-      <section class="card">
-        <div class="card-header">
-          <div class="card-head-copy">
-            <h2 class="card-title">Catalog And Runtime Notes</h2>
-            <p class="card-subtitle">The selector map and the public families that still need custom browser-side tokenizer support.</p>
-          </div>
-        </div>
-        <div class="card-body reference-grid">
-          <section class="reference-section">
-            <span class="summary-kicker">Browser-ready catalog</span>
-            <p class="reference-copy">Use this as the structural overview behind the selectors. The active family is highlighted in the line it belongs to.</p>
-            <ul class="catalog-list" id="model-lineup"></ul>
-          </section>
-
-          <section class="reference-section">
-            <span class="summary-kicker">Static runtime gaps</span>
-            <p class="reference-copy">These families are public, but the current static browser deployment still lacks the tokenizer runtime hooks they need.</p>
-            <ul class="unsupported-list" id="unsupported-lineup"></ul>
-          </section>
-        </div>
-      </section>
+      </details>
 
       <section class="card">
         <div class="card-header">
           <div class="card-head-copy">
             <h2 class="card-title">Per-Token Breakdown</h2>
-            <p class="card-subtitle">Decoded piece, raw vocabulary token, and the special-token flag for every output position.</p>
+            <p class="card-subtitle">Decoded surface, raw vocabulary token, and special-token flag for each output position.</p>
           </div>
         </div>
         <div class="table-wrap">
@@ -1224,7 +1394,7 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
               <tr>
                 <th>#</th>
                 <th>ID</th>
-                <th>Decoded piece</th>
+                <th>Decoded surface</th>
                 <th>Vocabulary token</th>
                 <th>Flags</th>
               </tr>
