@@ -697,7 +697,12 @@ function renderUnsupportedLineup() {
   const fragment = document.createDocumentFragment();
   UNSUPPORTED_BROWSER_LINES.forEach((entry) => {
     const li = document.createElement('li');
-    li.textContent = `${entry.label} — ${entry.reason}`;
+    li.className = 'unsupported-item';
+    const title = document.createElement('h3');
+    title.textContent = entry.label;
+    const reason = document.createElement('p');
+    reason.textContent = entry.reason;
+    li.append(title, reason);
     fragment.append(li);
   });
   refs.unsupportedLineup.append(fragment);
@@ -709,12 +714,44 @@ function renderModelLineup() {
   const fragment = document.createDocumentFragment();
   LINES.forEach((line) => {
     const li = document.createElement('li');
-    const familySnapshots = line.families.map((family) => {
-      const configLabel = family.models.length === 1 ? 'config' : 'configs';
-      const activeLabel = family.id === selectedFamily ? ' (selected)' : '';
-      return `${family.label}${activeLabel} · ${family.models.length} ${configLabel} · ${familySelectorBadge(family)}`;
+    li.className = 'catalog-card';
+
+    const head = document.createElement('div');
+    head.className = 'catalog-head';
+
+    const title = document.createElement('h3');
+    title.className = 'catalog-title';
+    title.textContent = line.label;
+
+    const count = document.createElement('span');
+    count.className = 'catalog-count';
+    count.textContent = `${line.families.length} ${line.families.length === 1 ? 'family' : 'families'}`;
+
+    head.append(title, count);
+
+    const summary = document.createElement('p');
+    summary.className = 'catalog-summary';
+    summary.textContent = line.lineCaption;
+
+    const familyList = document.createElement('div');
+    familyList.className = 'catalog-family-list';
+
+    line.families.forEach((family) => {
+      const familyCard = document.createElement('div');
+      familyCard.className = `catalog-family${family.id === selectedFamily ? ' active' : ''}`;
+
+      const name = document.createElement('span');
+      name.textContent = `${family.label} (${family.models.length})`;
+
+      const badge = document.createElement('span');
+      badge.className = `catalog-badge vocab-${family.vocabStatus}`;
+      badge.textContent = familySelectorBadge(family);
+
+      familyCard.append(name, badge);
+      familyList.append(familyCard);
     });
-    li.textContent = `${line.label} · ${line.families.length} ${line.families.length === 1 ? 'family' : 'families'} — ${familySnapshots.join(' | ')}`;
+
+    li.append(head, summary, familyList);
     fragment.append(li);
   });
   refs.modelLineup.append(fragment);

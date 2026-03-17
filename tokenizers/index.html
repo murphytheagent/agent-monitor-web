@@ -9,22 +9,23 @@
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
     :root {
-      --bg-base: #07111b;
-      --bg-surface: rgba(11, 20, 31, 0.9);
-      --bg-surface-strong: rgba(14, 30, 44, 0.94);
-      --bg-panel: rgba(10, 25, 38, 0.82);
-      --line: rgba(122, 239, 255, 0.24);
-      --line-strong: rgba(255, 193, 90, 0.42);
-      --text-main: #f4fcff;
-      --text-muted: #9fc0cd;
-      --text-dim: #6c8b98;
-      --brand: #67f0ff;
-      --brand-2: #ffd16a;
-      --good: #69ffbd;
-      --warn: #ffb347;
-      --bad: #ff7d93;
-      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-      --radius-xl: 22px;
+      --bg-base: #05030c;
+      --bg-surface: rgba(12, 10, 30, 0.88);
+      --bg-surface-2: rgba(20, 16, 46, 0.9);
+      --bg-surface-3: rgba(10, 18, 40, 0.88);
+      --border: rgba(74, 239, 255, 0.26);
+      --border-strong: rgba(255, 47, 179, 0.34);
+      --text-main: #eaffff;
+      --text-muted: #a4b5e1;
+      --text-dim: #7181b3;
+      --brand: #38f0ff;
+      --brand-alt: #ff2fb3;
+      --warm: #ffd76a;
+      --good: #4dffb4;
+      --warn: #ffcc70;
+      --bad: #ff6689;
+      --shadow: 0 20px 46px rgba(1, 4, 20, 0.5);
+      --radius-xl: 20px;
       --radius-lg: 16px;
       --radius-md: 12px;
       --radius-sm: 10px;
@@ -41,37 +42,54 @@
     body {
       margin: 0;
       min-height: 100vh;
-      color: var(--text-main);
       font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text-main);
       background:
-        radial-gradient(circle at 12% 12%, rgba(103, 240, 255, 0.18), transparent 32%),
-        radial-gradient(circle at 88% 0%, rgba(255, 209, 106, 0.16), transparent 26%),
-        radial-gradient(circle at 72% 110%, rgba(99, 154, 255, 0.18), transparent 34%),
-        linear-gradient(160deg, #07111b 0%, #081723 48%, #0b1220 100%);
+        radial-gradient(circle at 12% 8%, rgba(56, 240, 255, 0.16) 0%, transparent 32%),
+        radial-gradient(circle at 88% 0%, rgba(255, 47, 179, 0.16) 0%, transparent 32%),
+        radial-gradient(circle at 72% 100%, rgba(88, 116, 255, 0.18) 0%, transparent 36%),
+        linear-gradient(150deg, #05030c 0%, #090318 46%, #120720 100%);
       overflow-x: hidden;
+      position: relative;
     }
 
-    body::before {
+    body::before,
+    body::after {
       content: "";
       position: fixed;
       inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
       background:
         repeating-linear-gradient(
           to right,
-          rgba(103, 240, 255, 0.04) 0,
-          rgba(103, 240, 255, 0.04) 1px,
+          rgba(56, 240, 255, 0.045) 0,
+          rgba(56, 240, 255, 0.045) 1px,
           transparent 1px,
-          transparent 72px
+          transparent 56px
         ),
         repeating-linear-gradient(
           to bottom,
-          rgba(255, 209, 106, 0.025) 0,
-          rgba(255, 209, 106, 0.025) 1px,
+          rgba(114, 129, 179, 0.045) 0,
+          rgba(114, 129, 179, 0.045) 1px,
           transparent 1px,
-          transparent 56px
+          transparent 52px
         );
-      pointer-events: none;
-      opacity: 0.55;
+      opacity: 0.3;
+    }
+
+    body::after {
+      inset: auto;
+      width: 620px;
+      height: 620px;
+      right: -180px;
+      top: -240px;
+      background: radial-gradient(circle, rgba(255, 47, 179, 0.34) 0%, rgba(255, 47, 179, 0) 70%);
+      filter: blur(36px);
+      opacity: 0.58;
     }
 
     a {
@@ -81,31 +99,28 @@
     .page-shell {
       position: relative;
       z-index: 1;
-      width: min(1380px, calc(100vw - 28px));
+      width: min(1440px, calc(100vw - 28px));
       margin: 0 auto;
-      padding: 20px 0 48px;
+      padding: 18px 0 48px;
     }
 
-    .topbar {
+    .page-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 18px;
       padding: 18px 20px;
-      border: 1px solid var(--line);
+      border: 1px solid var(--border);
       border-radius: var(--radius-xl);
-      background: linear-gradient(135deg, rgba(8, 20, 32, 0.9) 0%, rgba(8, 25, 39, 0.84) 100%);
+      background: linear-gradient(140deg, rgba(10, 10, 30, 0.92) 0%, rgba(11, 27, 52, 0.88) 100%);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(10px);
       position: sticky;
       top: 12px;
       z-index: 10;
     }
 
-    .topbar-main {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+    .header-copy {
       min-width: 0;
     }
 
@@ -113,64 +128,65 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 14px;
+      margin-bottom: 14px;
+      padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(103, 240, 255, 0.26);
-      background: rgba(10, 20, 31, 0.76);
+      border: 1px solid rgba(56, 240, 255, 0.28);
+      background: rgba(9, 15, 34, 0.9);
       color: var(--text-muted);
       text-decoration: none;
       font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.06em;
+      font-size: 11px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     .nav-link:hover {
       color: var(--text-main);
-      border-color: var(--brand);
+      border-color: rgba(56, 240, 255, 0.52);
     }
 
     .eyebrow {
-      margin: 0 0 4px;
-      color: var(--brand-2);
+      margin: 0 0 6px;
+      color: var(--warm);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 11px;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
     h1 {
       margin: 0;
       font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: clamp(26px, 4vw, 40px);
-      line-height: 1.04;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.02;
       letter-spacing: 0.04em;
-      text-shadow: 0 0 18px rgba(103, 240, 255, 0.2);
+      text-shadow: 0 0 10px rgba(56, 240, 255, 0.32);
     }
 
     .subtitle {
-      margin: 10px 0 0;
+      margin: 12px 0 0;
+      max-width: 780px;
       color: var(--text-muted);
-      font-size: 17px;
-      max-width: 760px;
+      font-size: 18px;
       line-height: 1.35;
     }
 
-    .status-stack {
+    .header-status {
       display: grid;
       gap: 10px;
       justify-items: end;
-      max-width: 360px;
+      width: min(320px, 100%);
     }
 
     .status-pill {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 9px 14px;
+      padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(103, 240, 255, 0.3);
-      background: rgba(9, 17, 26, 0.84);
+      border: 1px solid rgba(56, 240, 255, 0.34);
+      background: rgba(9, 17, 34, 0.94);
       color: var(--text-main);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 12px;
@@ -185,40 +201,55 @@
       height: 10px;
       border-radius: 999px;
       background: var(--brand);
-      box-shadow: 0 0 14px rgba(103, 240, 255, 0.8);
+      box-shadow: 0 0 12px rgba(56, 240, 255, 0.72);
     }
 
     .status-pill.warn::before {
       background: var(--warn);
-      box-shadow: 0 0 14px rgba(255, 179, 71, 0.85);
+      box-shadow: 0 0 12px rgba(255, 204, 112, 0.72);
     }
 
     .status-pill.error::before {
       background: var(--bad);
-      box-shadow: 0 0 14px rgba(255, 125, 147, 0.85);
+      box-shadow: 0 0 12px rgba(255, 102, 137, 0.72);
     }
 
     .status-note {
       margin: 0;
       color: var(--text-dim);
       font-size: 14px;
-      text-align: right;
       line-height: 1.4;
+      text-align: right;
     }
 
-    .layout {
+    .page-grid {
       display: grid;
       gap: 18px;
       margin-top: 18px;
     }
 
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.9fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .summary-stack {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+      position: sticky;
+      top: 116px;
+    }
+
     .card {
-      border: 1px solid var(--line);
+      border: 1px solid var(--border);
       border-radius: var(--radius-xl);
-      background: linear-gradient(145deg, rgba(10, 20, 30, 0.92) 0%, rgba(9, 24, 35, 0.82) 100%);
+      background: linear-gradient(140deg, rgba(10, 10, 30, 0.92) 0%, rgba(12, 18, 44, 0.88) 100%);
       box-shadow: var(--shadow);
       overflow: hidden;
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(10px);
     }
 
     .card-header {
@@ -227,162 +258,44 @@
       justify-content: space-between;
       gap: 12px;
       padding: 14px 18px;
-      background: linear-gradient(90deg, rgba(16, 31, 46, 0.96) 0%, rgba(14, 23, 34, 0.92) 100%);
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(90deg, rgba(23, 14, 50, 0.94) 0%, rgba(11, 37, 68, 0.88) 100%);
+    }
+
+    .card-head-copy {
+      display: grid;
+      gap: 4px;
     }
 
     .card-title {
       margin: 0;
-      color: var(--brand);
+      color: #dffcff;
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 12px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+    }
+
+    .card-subtitle {
+      margin: 0;
+      color: var(--text-dim);
+      font-size: 13px;
+      line-height: 1.35;
     }
 
     .card-body {
-      padding: 20px;
+      padding: 18px;
     }
 
-    .hero-grid {
+    .workspace-body,
+    .summary-body,
+    .output-body,
+    .reference-section {
       display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.75fr);
-      gap: 18px;
-      align-items: stretch;
+      gap: 16px;
     }
 
-    .hero-copy {
-      display: grid;
-      gap: 14px;
-    }
-
-    .hero-copy p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 18px;
-      line-height: 1.45;
-    }
-
-    .hero-copy strong {
-      color: var(--text-main);
-      font-weight: 700;
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(12, 28, 42, 0.88);
-      border: 1px solid rgba(103, 240, 255, 0.18);
-      color: var(--text-muted);
-      font-size: 14px;
-      text-decoration: none;
-    }
-
-    .chip b {
-      color: var(--text-main);
-      font-weight: 700;
-    }
-
-    .chip.vocab-exact,
-    .note-panel.vocab-exact {
-      border-color: rgba(105, 255, 189, 0.28);
-      background: linear-gradient(160deg, rgba(11, 39, 34, 0.94) 0%, rgba(15, 20, 28, 0.88) 100%);
-    }
-
-    .chip.vocab-base,
-    .note-panel.vocab-base {
-      border-color: rgba(255, 209, 106, 0.3);
-      background: linear-gradient(160deg, rgba(41, 30, 10, 0.94) 0%, rgba(15, 20, 28, 0.88) 100%);
-    }
-
-    .chip.vocab-mixed,
-    .note-panel.vocab-mixed {
-      border-color: rgba(255, 125, 147, 0.28);
-      background: linear-gradient(160deg, rgba(47, 15, 22, 0.94) 0%, rgba(15, 20, 28, 0.88) 100%);
-    }
-
-    .chip.vocab-single,
-    .note-panel.vocab-single {
-      border-color: rgba(103, 240, 255, 0.26);
-    }
-
-    .chip.vocab-exact b,
-    .note-panel.vocab-exact h2 {
-      color: var(--good);
-    }
-
-    .chip.vocab-base b,
-    .note-panel.vocab-base h2 {
-      color: var(--brand-2);
-    }
-
-    .chip.vocab-mixed b,
-    .note-panel.vocab-mixed h2 {
-      color: var(--bad);
-    }
-
-    .chip.vocab-single b,
-    .note-panel.vocab-single h2 {
-      color: var(--brand);
-    }
-
-    .hero-notes {
-      display: grid;
-      gap: 12px;
-    }
-
-    .note-panel {
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(160deg, rgba(12, 31, 47, 0.94) 0%, rgba(15, 20, 28, 0.88) 100%);
-      border: 1px solid rgba(255, 209, 106, 0.18);
-    }
-
-    .note-panel h2 {
-      margin: 0 0 8px;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--brand-2);
-    }
-
-    .note-panel p,
-    .note-panel li {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 15px;
-      line-height: 1.45;
-    }
-
-    .note-panel ul {
-      margin: 0;
-      padding-left: 18px;
-      display: grid;
-      gap: 8px;
-    }
-
-    .controls-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
-      gap: 18px;
-    }
-
-    .control-stack {
-      display: grid;
-      gap: 18px;
-    }
-
-    .control-row {
+    .step-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
@@ -393,68 +306,37 @@
       gap: 8px;
     }
 
+    .step-card {
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      background: rgba(8, 16, 36, 0.84);
+      border: 1px solid rgba(56, 240, 255, 0.14);
+    }
+
+    .field-step,
+    .summary-kicker,
+    .section-kicker {
+      color: var(--warm);
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
     .field-label {
       color: var(--text-dim);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .field-caption {
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.4;
-    }
-
-    .model-meta {
-      display: grid;
-      gap: 10px;
-      padding: 14px;
-      border-radius: var(--radius-lg);
-      background: rgba(8, 17, 26, 0.9);
-      border: 1px solid rgba(103, 240, 255, 0.14);
-    }
-
-    .model-meta-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-    }
-
-    .model-meta-item {
-      display: grid;
-      gap: 4px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(11, 27, 39, 0.82);
-      border: 1px solid rgba(255, 209, 106, 0.12);
-    }
-
-    .model-meta-item span {
-      color: var(--text-dim);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 10px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .model-meta-item b,
-    .model-meta-item a {
-      color: var(--text-main);
-      font-size: 15px;
-      text-decoration: none;
-      word-break: break-word;
-    }
-
-    .model-meta-item a:hover {
-      color: var(--brand);
-    }
-
-    .model-summary {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 15px;
+    .field-caption,
+    .selection-footnote,
+    .reference-copy,
+    .section-note {
+      color: var(--text-dim);
+      font-size: 14px;
       line-height: 1.45;
     }
 
@@ -462,12 +344,12 @@
     textarea,
     input[type="text"] {
       width: 100%;
-      border: 1px solid rgba(103, 240, 255, 0.18);
+      padding: 14px 14px 13px;
+      border: 1px solid rgba(56, 240, 255, 0.18);
       border-radius: var(--radius-md);
-      background: rgba(8, 17, 26, 0.94);
+      background: rgba(6, 12, 28, 0.96);
       color: var(--text-main);
       font: inherit;
-      padding: 14px 14px 13px;
       outline: none;
       transition: border-color 140ms ease, box-shadow 140ms ease;
     }
@@ -475,33 +357,43 @@
     select:focus,
     textarea:focus,
     input[type="text"]:focus {
-      border-color: rgba(103, 240, 255, 0.48);
-      box-shadow: 0 0 0 4px rgba(103, 240, 255, 0.08);
+      border-color: rgba(56, 240, 255, 0.46);
+      box-shadow: 0 0 0 4px rgba(56, 240, 255, 0.08);
     }
 
     textarea {
-      min-height: 184px;
+      min-height: 188px;
       resize: vertical;
       line-height: 1.45;
     }
 
     .textarea-compact {
-      min-height: 100px;
+      min-height: 104px;
+    }
+
+    .mode-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: end;
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      background: rgba(10, 18, 40, 0.82);
+      border: 1px solid rgba(255, 47, 179, 0.1);
     }
 
     .mode-switch {
       display: inline-grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      padding: 4px;
       gap: 4px;
-      border-radius: 16px;
-      background: rgba(8, 17, 26, 0.94);
-      border: 1px solid rgba(103, 240, 255, 0.18);
+      padding: 4px;
+      border-radius: 14px;
+      border: 1px solid rgba(56, 240, 255, 0.18);
+      background: rgba(6, 12, 28, 0.96);
     }
 
     .mode-switch button,
-    .ghost-button,
-    .primary-button {
+    .ghost-button {
       appearance: none;
       border: none;
       cursor: pointer;
@@ -509,8 +401,8 @@
     }
 
     .mode-switch button {
-      padding: 12px 14px;
-      border-radius: 12px;
+      padding: 11px 14px;
+      border-radius: 10px;
       background: transparent;
       color: var(--text-dim);
       font-family: "Orbitron", "Rajdhani", sans-serif;
@@ -520,52 +412,34 @@
     }
 
     .mode-switch button.active {
-      background: linear-gradient(120deg, rgba(103, 240, 255, 0.2) 0%, rgba(255, 209, 106, 0.14) 100%);
+      background: linear-gradient(120deg, rgba(56, 240, 255, 0.18) 0%, rgba(255, 47, 179, 0.14) 100%);
       color: var(--text-main);
-      box-shadow: inset 0 0 0 1px rgba(103, 240, 255, 0.18);
+      box-shadow: inset 0 0 0 1px rgba(56, 240, 255, 0.14);
     }
 
-    .inline-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .ghost-button,
-    .primary-button {
+    .ghost-button {
       padding: 11px 14px;
       border-radius: 999px;
+      background: rgba(8, 14, 31, 0.96);
+      border: 1px solid rgba(56, 240, 255, 0.18);
+      color: var(--text-muted);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 12px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+      transition: transform 120ms ease, border-color 120ms ease;
     }
 
-    .primary-button {
-      background: linear-gradient(120deg, rgba(103, 240, 255, 0.28) 0%, rgba(255, 209, 106, 0.24) 100%);
-      color: var(--text-main);
-      border: 1px solid rgba(103, 240, 255, 0.36);
-      box-shadow: 0 0 18px rgba(103, 240, 255, 0.12);
-    }
-
-    .ghost-button {
-      background: rgba(9, 17, 26, 0.94);
-      color: var(--text-muted);
-      border: 1px solid rgba(103, 240, 255, 0.16);
-    }
-
-    .primary-button:hover,
     .ghost-button:hover {
       transform: translateY(-1px);
+      border-color: rgba(56, 240, 255, 0.34);
     }
 
     .toggle-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
       align-items: center;
+      gap: 14px;
     }
 
     .toggle {
@@ -574,14 +448,23 @@
       gap: 10px;
       padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(9, 17, 26, 0.92);
-      border: 1px solid rgba(103, 240, 255, 0.16);
+      border: 1px solid rgba(56, 240, 255, 0.16);
+      background: rgba(8, 14, 31, 0.94);
       color: var(--text-muted);
       font-size: 14px;
     }
 
     .toggle input {
       accent-color: var(--brand);
+    }
+
+    .example-block {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      background: rgba(8, 16, 36, 0.78);
+      border: 1px solid rgba(56, 240, 255, 0.12);
     }
 
     .example-list {
@@ -591,32 +474,116 @@
     }
 
     .example-list button {
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(11, 27, 39, 0.82);
-      border: 1px solid rgba(255, 209, 106, 0.16);
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 215, 106, 0.18);
+      background: rgba(14, 21, 44, 0.9);
       color: var(--text-muted);
       cursor: pointer;
       font: inherit;
     }
 
     .example-list button:hover {
-      border-color: rgba(255, 209, 106, 0.34);
       color: var(--text-main);
+      border-color: rgba(255, 215, 106, 0.34);
+    }
+
+    .selection-title {
+      display: grid;
+      gap: 4px;
+    }
+
+    .selection-title h2 {
+      margin: 0;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: clamp(26px, 4vw, 34px);
+      line-height: 1;
+    }
+
+    .selection-title p,
+    .selection-copy,
+    .callout-copy {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .repo-link {
+      display: grid;
+      gap: 4px;
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(56, 240, 255, 0.16);
+      background: rgba(6, 12, 28, 0.94);
+      text-decoration: none;
+    }
+
+    .repo-link span,
+    .summary-chip span,
+    .detail-item span {
+      color: var(--text-dim);
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .repo-link b,
+    .summary-chip b,
+    .detail-item b,
+    .detail-item a {
+      color: var(--text-main);
+      font-size: 15px;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .repo-link:hover b,
+    .detail-item a:hover {
+      color: var(--brand);
+    }
+
+    .summary-chip-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .summary-chip,
+    .detail-item,
+    .stat-card,
+    .catalog-card,
+    .unsupported-item {
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(56, 240, 255, 0.14);
+      background: rgba(8, 16, 36, 0.82);
+    }
+
+    .callout-title {
+      margin: 0;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+      color: var(--brand);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
     }
 
     .stat-card {
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(165deg, rgba(10, 20, 30, 0.98) 0%, rgba(11, 28, 41, 0.88) 100%);
-      border: 1px solid rgba(103, 240, 255, 0.16);
       min-height: 112px;
+      background: linear-gradient(160deg, rgba(8, 14, 31, 0.96) 0%, rgba(13, 25, 52, 0.84) 100%);
     }
 
     .stat-card h3 {
@@ -624,7 +591,7 @@
       color: var(--text-dim);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 11px;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
@@ -642,28 +609,20 @@
       line-height: 1.35;
     }
 
-    .prompt-box,
-    .ids-box {
-      min-height: 180px;
-      max-height: 300px;
-      overflow: auto;
+    .stream-shell {
+      display: grid;
+      gap: 12px;
       padding: 16px;
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(103, 240, 255, 0.14);
-      background: rgba(7, 15, 23, 0.92);
-      color: #dcefff;
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 13px;
-      line-height: 1.55;
-      white-space: pre-wrap;
-      word-break: break-word;
+      border: 1px solid rgba(255, 47, 179, 0.1);
+      background: rgba(8, 14, 31, 0.88);
     }
 
     .token-stream {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      min-height: 64px;
+      min-height: 72px;
       align-content: flex-start;
     }
 
@@ -675,11 +634,11 @@
       max-width: min(100%, 240px);
       padding: 12px 14px;
       border-radius: 14px;
-      border: 1px solid rgba(var(--token-rgb, 103, 240, 255), 0.32);
+      border: 1px solid rgba(var(--token-rgb, 56, 240, 255), 0.32);
       background: linear-gradient(
         155deg,
-        rgba(var(--token-rgb, 103, 240, 255), 0.18) 0%,
-        rgba(8, 17, 26, 0.94) 82%
+        rgba(var(--token-rgb, 56, 240, 255), 0.18) 0%,
+        rgba(7, 15, 32, 0.94) 82%
       );
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
@@ -688,15 +647,24 @@
       border-style: dashed;
     }
 
+    .token-pos,
+    .token-piece,
+    .token-id,
+    .prompt-box,
+    .ids-box,
+    code,
+    .mono,
+    .code-chip {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+    }
+
     .token-pos {
       color: rgba(255, 255, 255, 0.56);
-      font-family: "JetBrains Mono", ui-monospace, monospace;
       font-size: 11px;
     }
 
     .token-piece {
       color: var(--text-main);
-      font-family: "JetBrains Mono", ui-monospace, monospace;
       font-size: 13px;
       line-height: 1.35;
       word-break: break-word;
@@ -704,19 +672,136 @@
 
     .token-id {
       color: var(--text-muted);
-      font-family: "JetBrains Mono", ui-monospace, monospace;
       font-size: 12px;
     }
 
-    .split-grid {
+    .result-grid,
+    .reference-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
+    }
+
+    .prompt-box,
+    .ids-box {
+      min-height: 220px;
+      max-height: 340px;
+      overflow: auto;
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(56, 240, 255, 0.14);
+      background: rgba(6, 12, 28, 0.94);
+      color: #dcefff;
+      font-size: 13px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .catalog-list,
+    .unsupported-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .catalog-card {
+      display: grid;
+      gap: 12px;
+    }
+
+    .catalog-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .catalog-title {
+      margin: 0;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    .catalog-count {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 240, 255, 0.16);
+      background: rgba(6, 12, 28, 0.88);
+      color: var(--text-muted);
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .catalog-summary {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .catalog-family-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .catalog-family {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 240, 255, 0.14);
+      background: rgba(6, 12, 28, 0.9);
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .catalog-family.active {
+      color: var(--text-main);
+      border-color: rgba(56, 240, 255, 0.3);
+      box-shadow: inset 0 0 0 1px rgba(56, 240, 255, 0.12);
+    }
+
+    .catalog-badge {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .unsupported-item h3 {
+      margin: 0 0 6px;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--warm);
+    }
+
+    .unsupported-item p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.45;
     }
 
     .table-wrap {
       overflow: auto;
-      max-height: 560px;
+      max-height: 620px;
     }
 
     table {
@@ -730,14 +815,14 @@
       padding: 12px 14px;
       text-align: left;
       vertical-align: top;
-      border-bottom: 1px solid rgba(103, 240, 255, 0.08);
+      border-bottom: 1px solid rgba(56, 240, 255, 0.08);
     }
 
     th {
       position: sticky;
       top: 0;
       z-index: 1;
-      background: rgba(11, 21, 32, 0.98);
+      background: rgba(10, 16, 36, 0.98);
       color: var(--text-dim);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 11px;
@@ -746,20 +831,15 @@
     }
 
     tbody tr:hover td {
-      background: rgba(11, 28, 41, 0.72);
-    }
-
-    code,
-    .mono {
-      font-family: "JetBrains Mono", ui-monospace, monospace;
+      background: rgba(11, 25, 52, 0.66);
     }
 
     .code-chip {
       display: inline-block;
       padding: 3px 6px;
       border-radius: 8px;
-      background: rgba(7, 15, 23, 0.88);
-      border: 1px solid rgba(103, 240, 255, 0.16);
+      background: rgba(6, 12, 28, 0.9);
+      border: 1px solid rgba(56, 240, 255, 0.16);
       color: var(--text-main);
       word-break: break-word;
     }
@@ -775,47 +855,84 @@
       display: none;
     }
 
-    @media (max-width: 1080px) {
-      .hero-grid,
-      .controls-grid,
-      .split-grid {
+    .summary-chip.vocab-exact b,
+    .card.vocab-exact .callout-title,
+    .catalog-badge.vocab-exact {
+      color: var(--good);
+    }
+
+    .summary-chip.vocab-base b,
+    .card.vocab-base .callout-title,
+    .catalog-badge.vocab-base {
+      color: var(--warm);
+    }
+
+    .summary-chip.vocab-mixed b,
+    .card.vocab-mixed .callout-title,
+    .catalog-badge.vocab-mixed {
+      color: var(--bad);
+    }
+
+    .summary-chip.vocab-single b,
+    .card.vocab-single .callout-title,
+    .catalog-badge.vocab-single {
+      color: var(--brand);
+    }
+
+    @media (max-width: 1180px) {
+      .workspace-grid,
+      .result-grid,
+      .reference-grid {
         grid-template-columns: 1fr;
       }
 
-      .status-stack {
-        justify-items: start;
-        max-width: none;
+      .summary-stack {
+        position: static;
       }
 
-      .status-note {
-        text-align: left;
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .step-grid,
+      .detail-grid,
+      .summary-chip-row {
+        grid-template-columns: 1fr;
+      }
+
+      .mode-row {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 760px) {
       .page-shell {
-        width: min(100vw - 20px, 1380px);
+        width: min(100vw - 20px, 1440px);
         padding-top: 12px;
       }
 
-      .topbar {
+      .page-header {
         padding: 16px;
         position: static;
       }
 
-      .topbar,
-      .topbar-main {
-        flex-direction: column;
-        align-items: flex-start;
+      .page-header,
+      .header-status {
+        justify-items: start;
+      }
+
+      .status-note {
+        text-align: left;
       }
 
       .subtitle,
-      .hero-copy p {
+      .selection-copy,
+      .callout-copy {
         font-size: 16px;
       }
 
-      .control-row,
-      .model-meta-grid,
       .stats-grid {
         grid-template-columns: 1fr;
       }
@@ -828,157 +945,61 @@
 </head>
 <body>
   <div class="page-shell">
-    <header class="topbar">
-      <div class="topbar-main">
-        <a class="nav-link" href="../">← Monitor</a>
-        <div>
-          <p class="eyebrow">Dashboard Tool</p>
-          <h1>Tokenizer Observatory</h1>
-          <p class="subtitle">An interactive, client-side tokenizer view for mainstream open-source LLM prompts. Switch between model lines, family generations, and public configurations, then inspect raw versus chat-template serialization and vocabulary reuse.</p>
-        </div>
+    <header class="page-header">
+      <div class="header-copy">
+        <a class="nav-link" href="../">&larr; Monitor</a>
+        <p class="eyebrow">Dashboard Tool</p>
+        <h1>Tokenizer Observatory</h1>
+        <p class="subtitle">Explore how public LLM tokenizers slice the same text. Pick a model line, narrow to a family or generation, then inspect raw tokens or the full chat-template prompt that the model actually sees.</p>
       </div>
-      <div class="status-stack">
+      <div class="header-status">
         <div class="status-pill" id="model-status">Loading tokenizer</div>
         <p class="status-note" id="status-note">First load pulls tokenizer assets from Hugging Face, then the browser cache takes over.</p>
       </div>
     </header>
 
-    <main class="layout">
-      <section class="card">
-        <div class="card-body hero-grid">
-          <div class="hero-copy">
-            <p><strong>What this page does:</strong> it shows exactly how input text is chopped into token IDs, what each sub-token looks like in the underlying vocabulary, and how <span id="hero-model-name">the selected model</span> changes the final prompt before generation.</p>
-            <p><strong>Why the hosted route is separate:</strong> the main dashboard homepage is auto-regenerated by the monitor publisher, so this tokenizer lives at its own stable Pages path and won’t get overwritten by snapshot refreshes.</p>
-            <div class="chip-row">
-              <a class="chip" id="repo-chip" href="https://huggingface.co/Qwen/Qwen3.5-4B" target="_blank" rel="noreferrer">
-                <span>Model repo</span>
-                <b id="repo-label">Qwen/Qwen3.5-4B</b>
-              </a>
-              <div class="chip">
-                <span>Model line</span>
-                <b id="line-label">Qwen</b>
-              </div>
-              <div class="chip">
-                <span>Family / generation</span>
-                <b id="family-label">Qwen 3.5</b>
-              </div>
-              <div class="chip">
-                <span>Configuration</span>
-                <b id="configuration-label">4B</b>
-              </div>
-              <div class="chip vocab-single" id="vocab-chip">
-                <span>Vocabulary</span>
-                <b id="vocab-label">Single public configuration</b>
-              </div>
-              <div class="chip">
-                <span>Runtime</span>
-                <b>Browser + Transformers.js</b>
-              </div>
-              <div class="chip">
-                <span>Template</span>
-                <b id="template-label">Qwen 3.5 instruct</b>
-              </div>
-            </div>
-          </div>
-            <div class="hero-notes">
-              <div class="note-panel">
-                <h2>What to inspect</h2>
-                <ul>
-                  <li>How multilingual text, code, whitespace, and emojis fragment into token pieces.</li>
-                  <li>How many tokens each chat template spends before any generation begins.</li>
-                  <li>Which pieces are regular subwords versus model-specific special tokens.</li>
-                </ul>
-              </div>
-              <div class="note-panel">
-                <h2>Selected Line</h2>
-                <p id="line-summary">Qwen 2.5, Qwen 3, and Qwen 3.5 are grouped here as successive generations of one model line. Vocabulary badges below apply within the selected family, not across the whole Qwen umbrella.</p>
-              </div>
-              <div class="note-panel">
-                <h2>Selected Model</h2>
-                <p id="model-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
-              </div>
-              <div class="note-panel vocab-single" id="family-vocab-panel">
-                <h2 id="family-vocab-title">Single public configuration</h2>
-                <p id="family-vocab-summary">Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.</p>
-              </div>
-              <div class="note-panel">
-                <h2>Static Runtime Gaps</h2>
-                <ul id="unsupported-lineup">
-                  <li>Kimi K2 currently needs a custom TikToken runtime rather than a browser-ready tokenizer.json.</li>
-                </ul>
-              </div>
-              <div class="note-panel">
-                <h2>Line Catalog</h2>
-                <ul id="model-lineup"></ul>
-              </div>
-            </div>
-        </div>
-      </section>
-
-      <section class="controls-grid">
+    <main class="page-grid">
+      <section class="workspace-grid">
         <section class="card">
           <div class="card-header">
-            <h2 class="card-title">Prompt Controls</h2>
-            <div class="inline-actions">
-              <button class="ghost-button" id="retokenize-button" type="button">Retokenize</button>
+            <div class="card-head-copy">
+              <h2 class="card-title">Tokenizer Workspace</h2>
+              <p class="card-subtitle">Choose a browser-loadable public checkpoint, paste text, and switch between raw text and chat prompt views.</p>
             </div>
+            <button class="ghost-button" id="retokenize-button" type="button">Retokenize</button>
           </div>
-          <div class="card-body control-stack">
-            <div class="control-row">
-              <label class="field">
+          <div class="card-body workspace-body">
+            <div class="step-grid">
+              <label class="field step-card">
+                <span class="field-step">Step 1</span>
                 <span class="field-label">Model line</span>
                 <select id="line-select"></select>
                 <span class="field-caption" id="line-caption">Choose a broad model line first, then narrow to a specific family or generation below.</span>
               </label>
-              <label class="field">
+              <label class="field step-card">
+                <span class="field-step">Step 2</span>
                 <span class="field-label">Family / generation</span>
                 <select id="family-select"></select>
                 <span class="field-caption" id="family-caption">Choose a family or generation inside the selected model line.</span>
               </label>
-              <label class="field">
+              <label class="field step-card">
+                <span class="field-step">Step 3</span>
                 <span class="field-label">Configuration</span>
                 <select id="model-select"></select>
                 <span class="field-caption" id="model-caption">Pinned to public Hugging Face tokenizer files so the page can stay fully static.</span>
               </label>
             </div>
 
-            <div class="field">
-              <span class="field-label">View</span>
-              <div class="mode-switch" role="tablist" aria-label="Tokenization mode">
-                <button id="mode-plain" class="active" type="button" data-mode="plain" aria-selected="true">Plain text</button>
-                <button id="mode-chat" type="button" data-mode="chat" aria-selected="false">Chat prompt</button>
+            <div class="mode-row">
+              <div class="field">
+                <span class="field-label">View</span>
+                <div class="mode-switch" role="tablist" aria-label="Tokenization mode">
+                  <button id="mode-plain" class="active" type="button" data-mode="plain" aria-selected="true">Plain text</button>
+                  <button id="mode-chat" type="button" data-mode="chat" aria-selected="false">Chat prompt</button>
+                </div>
+                <span class="field-caption">Plain text shows raw segmentation. Chat mode shows how <span id="hero-model-name">the selected model's chat template</span> wraps the same content.</span>
               </div>
-              <span class="field-caption">Plain text shows raw segmentation. Chat prompt injects the selected model’s instruct template around the same content.</span>
-            </div>
-
-            <div class="model-meta">
-              <div class="model-meta-grid">
-                <div class="model-meta-item">
-                  <span>Repository</span>
-                  <a id="model-meta-repo" href="https://huggingface.co/Qwen/Qwen3.5-4B" target="_blank" rel="noreferrer">Qwen/Qwen3.5-4B</a>
-                </div>
-                <div class="model-meta-item">
-                  <span>Model line</span>
-                  <b id="model-meta-line">Qwen</b>
-                </div>
-                <div class="model-meta-item">
-                  <span>Family / generation</span>
-                  <b id="model-meta-family">Qwen 3.5</b>
-                </div>
-                <div class="model-meta-item">
-                  <span>Configuration</span>
-                  <b id="model-meta-config">4B</b>
-                </div>
-                <div class="model-meta-item">
-                  <span>Vocabulary relation</span>
-                  <b id="model-meta-vocab">Single public configuration</b>
-                </div>
-                <div class="model-meta-item">
-                  <span>Template style</span>
-                  <b id="model-meta-template">Qwen 3.5 instruct</b>
-                </div>
-              </div>
-              <p class="model-summary" id="model-meta-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
+              <p class="section-note" id="input-summary">Ready.</p>
             </div>
 
             <label class="field">
@@ -998,10 +1019,9 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
                 <input id="assistant-prefix" type="checkbox" checked>
                 <span>Add generation prompt in chat mode</span>
               </label>
-              <span class="field-caption" id="input-summary">Ready.</span>
             </div>
 
-            <div class="field">
+            <div class="example-block">
               <span class="field-label">Quick examples</span>
               <div class="example-list">
                 <button type="button" data-example="english">English prose</button>
@@ -1013,11 +1033,103 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
           </div>
         </section>
 
-        <section class="card">
-          <div class="card-header">
-            <h2 class="card-title">Quick Stats</h2>
+        <aside class="summary-stack">
+          <section class="card">
+            <div class="card-header">
+              <div class="card-head-copy">
+                <h2 class="card-title">Selected Tokenizer</h2>
+                <p class="card-subtitle">The active model choice and the metadata that matters most while browsing.</p>
+              </div>
+            </div>
+            <div class="card-body summary-body">
+              <span class="summary-kicker">Current configuration</span>
+              <div class="selection-title">
+                <h2 id="configuration-label">4B</h2>
+                <p><span id="family-label">Qwen 3.5</span> inside <span id="line-label">Qwen</span></p>
+              </div>
+              <a class="repo-link" id="repo-chip" href="https://huggingface.co/Qwen/Qwen3.5-4B" target="_blank" rel="noreferrer">
+                <span>Hugging Face repo</span>
+                <b id="repo-label">Qwen/Qwen3.5-4B</b>
+              </a>
+              <div class="summary-chip-row">
+                <div class="summary-chip vocab-single" id="vocab-chip">
+                  <span>Vocabulary relation</span>
+                  <b id="vocab-label">Single public configuration</b>
+                </div>
+                <div class="summary-chip">
+                  <span>Template style</span>
+                  <b id="template-label">Qwen 3.5 instruct</b>
+                </div>
+              </div>
+              <p class="selection-copy" id="model-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
+              <p class="selection-footnote" id="model-caption">Public Qwen 3.5 tokenizer files and chat template.</p>
+            </div>
+          </section>
+
+          <section class="card vocab-single" id="family-vocab-panel">
+            <div class="card-header">
+              <div class="card-head-copy">
+                <h2 class="card-title">Vocabulary Relationship</h2>
+                <p class="card-subtitle">How tokenizer sharing works inside the selected family or generation.</p>
+              </div>
+            </div>
+            <div class="card-body summary-body">
+              <span class="summary-kicker">Inside the selected family</span>
+              <h3 class="callout-title" id="family-vocab-title">Single public configuration</h3>
+              <p class="callout-copy" id="family-vocab-summary">Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.</p>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-header">
+              <div class="card-head-copy">
+                <h2 class="card-title">Line Context</h2>
+                <p class="card-subtitle">Where this family sits in the broader catalog and the concrete repo metadata behind it.</p>
+              </div>
+            </div>
+            <div class="card-body summary-body">
+              <p class="callout-copy" id="line-summary">Qwen 2.5, Qwen 3, and Qwen 3.5 are grouped here as successive generations of one model line. Vocabulary badges below apply within the selected family, not across the whole Qwen umbrella.</p>
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <span>Repository</span>
+                  <a id="model-meta-repo" href="https://huggingface.co/Qwen/Qwen3.5-4B" target="_blank" rel="noreferrer">Qwen/Qwen3.5-4B</a>
+                </div>
+                <div class="detail-item">
+                  <span>Model line</span>
+                  <b id="model-meta-line">Qwen</b>
+                </div>
+                <div class="detail-item">
+                  <span>Family / generation</span>
+                  <b id="model-meta-family">Qwen 3.5</b>
+                </div>
+                <div class="detail-item">
+                  <span>Configuration</span>
+                  <b id="model-meta-config">4B</b>
+                </div>
+                <div class="detail-item">
+                  <span>Vocabulary relation</span>
+                  <b id="model-meta-vocab">Single public configuration</b>
+                </div>
+                <div class="detail-item">
+                  <span>Template style</span>
+                  <b id="model-meta-template">Qwen 3.5 instruct</b>
+                </div>
+              </div>
+              <p class="selection-footnote" id="model-meta-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
+            </div>
+          </section>
+        </aside>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div class="card-head-copy">
+            <h2 class="card-title">Token Output</h2>
+            <p class="card-subtitle">The live token stream plus a few quick metrics for the currently rendered prompt.</p>
           </div>
-          <div class="card-body stats-grid">
+        </div>
+        <div class="card-body output-body">
+          <div class="stats-grid">
             <article class="stat-card">
               <h3>Total tokens</h3>
               <p class="stat-value" id="stat-total">0</p>
@@ -1039,22 +1151,24 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
               <p class="stat-footnote" id="stat-mode">Plain text mode</p>
             </article>
           </div>
-        </section>
+
+          <div class="stream-shell">
+            <div class="card-head-copy">
+              <span class="section-kicker">Token stream</span>
+              <p class="section-note">Each tile shows token position, the decoded piece, and the token ID that produced it.</p>
+            </div>
+            <div class="token-stream" id="token-stream" aria-live="polite"></div>
+          </div>
+        </div>
       </section>
 
-      <section class="card">
-        <div class="card-header">
-          <h2 class="card-title">Token Stream</h2>
-        </div>
-        <div class="card-body">
-          <div class="token-stream" id="token-stream" aria-live="polite"></div>
-        </div>
-      </section>
-
-      <section class="split-grid">
+      <section class="result-grid">
         <section class="card">
           <div class="card-header">
-            <h2 class="card-title">Serialized Prompt</h2>
+            <div class="card-head-copy">
+              <h2 class="card-title">Serialized Prompt</h2>
+              <p class="card-subtitle">The exact string that gets tokenized after optional chat-template wrapping.</p>
+            </div>
           </div>
           <div class="card-body">
             <div class="prompt-box" id="serialized-prompt"></div>
@@ -1063,7 +1177,10 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
 
         <section class="card">
           <div class="card-header">
-            <h2 class="card-title">Token IDs</h2>
+            <div class="card-head-copy">
+              <h2 class="card-title">Token IDs</h2>
+              <p class="card-subtitle">Flat ID list for quick copy/paste into external debugging or experiments.</p>
+            </div>
             <button class="ghost-button" id="copy-ids-button" type="button">Copy IDs</button>
           </div>
           <div class="card-body">
@@ -1074,7 +1191,32 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
 
       <section class="card">
         <div class="card-header">
-          <h2 class="card-title">Breakdown</h2>
+          <div class="card-head-copy">
+            <h2 class="card-title">Catalog And Runtime Notes</h2>
+            <p class="card-subtitle">The selector map and the public families that still need custom browser-side tokenizer support.</p>
+          </div>
+        </div>
+        <div class="card-body reference-grid">
+          <section class="reference-section">
+            <span class="summary-kicker">Browser-ready catalog</span>
+            <p class="reference-copy">Use this as the structural overview behind the selectors. The active family is highlighted in the line it belongs to.</p>
+            <ul class="catalog-list" id="model-lineup"></ul>
+          </section>
+
+          <section class="reference-section">
+            <span class="summary-kicker">Static runtime gaps</span>
+            <p class="reference-copy">These families are public, but the current static browser deployment still lacks the tokenizer runtime hooks they need.</p>
+            <ul class="unsupported-list" id="unsupported-lineup"></ul>
+          </section>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div class="card-head-copy">
+            <h2 class="card-title">Per-Token Breakdown</h2>
+            <p class="card-subtitle">Decoded piece, raw vocabulary token, and the special-token flag for every output position.</p>
+          </div>
         </div>
         <div class="table-wrap">
           <table>
