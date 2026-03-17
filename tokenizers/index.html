@@ -833,7 +833,7 @@
     }
 
     .example-block {
-      display: block;
+      display: inline-flex;
     }
 
     .example-drawer {
@@ -841,6 +841,7 @@
       border-radius: var(--radius-md);
       background: rgba(7, 13, 23, 0.88);
       padding: 8px 10px;
+      width: fit-content;
     }
 
     .example-drawer summary {
@@ -898,6 +899,13 @@
       color: var(--text-dim);
       font-size: 11px;
       line-height: 1.2;
+    }
+
+    .input-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .surface-section {
@@ -1595,19 +1603,21 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
                     </label>
                   </div>
 
-                  <div class="example-block">
-                    <details class="example-drawer">
-                      <summary>Examples</summary>
-                      <div class="example-list">
-                        <button type="button" data-example="english">English prose</button>
-                        <button type="button" data-example="mixed">English + 中文</button>
-                        <button type="button" data-example="code">Python code</button>
-                        <button type="button" data-example="emoji">Emojis + markdown</button>
-                      </div>
-                    </details>
-                  </div>
+                  <div class="input-footer">
+                    <div class="example-block">
+                      <details class="example-drawer">
+                        <summary>Examples</summary>
+                        <div class="example-list">
+                          <button type="button" data-example="english">English prose</button>
+                          <button type="button" data-example="mixed">English + 中文</button>
+                          <button type="button" data-example="code">Python code</button>
+                          <button type="button" data-example="emoji">Emojis + markdown</button>
+                        </div>
+                      </details>
+                    </div>
 
-                  <p class="interaction-note">Hover previews, click pins, <code class="code-chip">Esc</code> clears.</p>
+                    <p class="interaction-note">Hover previews, click pins, <code class="code-chip">Esc</code> clears.</p>
+                  </div>
                 </section>
               </div>
 
