@@ -3,78 +3,298 @@ import { AutoTokenizer, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/tr
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
-const MODELS = [
+const FAMILY_CATALOG = [
   {
-    id: 'qwen3.5-4b',
-    label: 'Qwen3.5-4B',
-    repo: 'Qwen/Qwen3.5-4B',
-    familyId: 'qwen',
-    family: 'Qwen',
-    configuration: 'Qwen 3.5 · 4B',
-    template: 'Qwen instruct',
-    summary: 'Official Qwen3.5 tokenizer with a long-context chat template and Qwen special tokens visible in prompt mode.',
-    caption: 'Public Qwen tokenizer files with the current Qwen3.5 instruct template.',
+    id: 'qwen35',
+    label: 'Qwen 3.5',
+    vocabStatus: 'single',
+    vocabBadge: 'Single public configuration',
+    vocabSummary: 'Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.',
+    vocabCaption: 'Qwen 3.5 is represented by a single public configuration in this static build.',
+    models: [
+      {
+        id: 'qwen3.5-4b',
+        label: 'Qwen3.5-4B',
+        repo: 'Qwen/Qwen3.5-4B',
+        configuration: '4B',
+        template: 'Qwen 3.5 instruct',
+        summary: 'The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.',
+        caption: 'Public Qwen 3.5 tokenizer files and chat template.',
+      },
+    ],
   },
   {
-    id: 'qwen2.5-7b-instruct',
-    label: 'Qwen2.5-7B-Instruct',
-    repo: 'Qwen/Qwen2.5-7B-Instruct',
-    familyId: 'qwen',
-    family: 'Qwen',
-    configuration: 'Qwen 2.5 · 7B Instruct',
-    template: 'Qwen 2.5 instruct',
-    summary: 'The previous Qwen instruct generation, useful for checking how Qwen prompt scaffolding shifted before the 3.5 release.',
-    caption: 'Public Qwen2.5 instruct tokenizer and chat template from Hugging Face.',
+    id: 'qwen3',
+    label: 'Qwen 3',
+    vocabStatus: 'exact',
+    vocabBadge: 'Exact shared vocabulary',
+    vocabSummary: 'The listed Qwen 3 checkpoints resolve to the same public tokenizer.json, so changing model size here does not change the vocabulary or token IDs.',
+    vocabCaption: 'All listed Qwen 3 configurations point to the same tokenizer.json.',
+    models: [
+      {
+        id: 'qwen3-0.6b',
+        label: 'Qwen3-0.6B',
+        repo: 'Qwen/Qwen3-0.6B',
+        configuration: '0.6B',
+        template: 'Qwen 3 instruct',
+        summary: 'Smallest public Qwen 3 checkpoint in the catalog, useful for seeing the shared Qwen 3 vocabulary at the lightest scale.',
+        caption: 'Public Qwen 3 tokenizer files for the 0.6B checkpoint.',
+      },
+      {
+        id: 'qwen3-4b',
+        label: 'Qwen3-4B',
+        repo: 'Qwen/Qwen3-4B',
+        configuration: '4B',
+        template: 'Qwen 3 instruct',
+        summary: 'Mid-sized Qwen 3 checkpoint that keeps the same tokenizer surface as the other listed Qwen 3 sizes.',
+        caption: 'Public Qwen 3 tokenizer files for the 4B checkpoint.',
+      },
+      {
+        id: 'qwen3-8b',
+        label: 'Qwen3-8B',
+        repo: 'Qwen/Qwen3-8B',
+        configuration: '8B',
+        template: 'Qwen 3 instruct',
+        summary: 'Larger Qwen 3 checkpoint that shares token IDs with the smaller Qwen 3 sizes in this catalog.',
+        caption: 'Public Qwen 3 tokenizer files for the 8B checkpoint.',
+      },
+    ],
   },
   {
-    id: 'deepseek-r1-distill-qwen-7b',
-    label: 'DeepSeek-R1-Distill-Qwen-7B',
-    repo: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
-    familyId: 'deepseek',
-    family: 'DeepSeek',
-    configuration: 'R1 Distill · Qwen 7B',
-    template: 'DeepSeek reasoning',
-    summary: 'DeepSeek\'s R1 distilled Qwen variant layers its own reasoning-oriented chat template on top of a Qwen-style tokenizer.',
-    caption: 'Public DeepSeek instruct tokenizer files; useful for comparing against the base Qwen family.',
+    id: 'qwen25',
+    label: 'Qwen 2.5',
+    vocabStatus: 'exact',
+    vocabBadge: 'Exact shared vocabulary',
+    vocabSummary: 'The listed Qwen 2.5 instruct checkpoints resolve to the same public tokenizer.json, so token IDs stay aligned across the 1.5B, 7B, and 14B releases.',
+    vocabCaption: 'All listed Qwen 2.5 configurations point to the same tokenizer.json.',
+    models: [
+      {
+        id: 'qwen2.5-1.5b-instruct',
+        label: 'Qwen2.5-1.5B-Instruct',
+        repo: 'Qwen/Qwen2.5-1.5B-Instruct',
+        configuration: '1.5B Instruct',
+        template: 'Qwen 2.5 instruct',
+        summary: 'Compact Qwen 2.5 instruct checkpoint with the same vocabulary as the larger listed Qwen 2.5 models.',
+        caption: 'Public Qwen 2.5 instruct tokenizer files for the 1.5B model.',
+      },
+      {
+        id: 'qwen2.5-7b-instruct',
+        label: 'Qwen2.5-7B-Instruct',
+        repo: 'Qwen/Qwen2.5-7B-Instruct',
+        configuration: '7B Instruct',
+        template: 'Qwen 2.5 instruct',
+        summary: 'A widely used Qwen 2.5 instruct checkpoint that keeps token IDs aligned with the smaller and larger Qwen 2.5 sizes.',
+        caption: 'Public Qwen 2.5 instruct tokenizer files for the 7B model.',
+      },
+      {
+        id: 'qwen2.5-14b-instruct',
+        label: 'Qwen2.5-14B-Instruct',
+        repo: 'Qwen/Qwen2.5-14B-Instruct',
+        configuration: '14B Instruct',
+        template: 'Qwen 2.5 instruct',
+        summary: 'Larger Qwen 2.5 instruct checkpoint that still uses the same tokenizer surface as the smaller listed Qwen 2.5 variants.',
+        caption: 'Public Qwen 2.5 instruct tokenizer files for the 14B model.',
+      },
+    ],
   },
   {
-    id: 'mistral-7b-instruct-v0.3',
-    label: 'Mistral-7B-Instruct-v0.3',
-    repo: 'mistralai/Mistral-7B-Instruct-v0.3',
-    familyId: 'mistral',
-    family: 'Mistral',
-    configuration: '7B Instruct · v0.3',
-    template: 'Mistral instruct',
-    summary: 'Official Mistral instruct tokenizer with the Llama-style vocabulary and Mistral\'s own serialized dialogue wrapper.',
-    caption: 'Public Mistral tokenizer files with the v0.3 instruct template.',
+    id: 'deepseek-r1-qwen',
+    label: 'DeepSeek R1 Distill (Qwen)',
+    vocabStatus: 'exact',
+    vocabBadge: 'Exact shared vocabulary',
+    vocabSummary: 'The listed DeepSeek R1 Distill Qwen checkpoints share the same public tokenizer.json, so their vocabulary stays aligned while the distilled model size changes.',
+    vocabCaption: 'All listed DeepSeek R1 Distill Qwen configurations point to the same tokenizer.json.',
+    models: [
+      {
+        id: 'deepseek-r1-distill-qwen-1.5b',
+        label: 'DeepSeek-R1-Distill-Qwen-1.5B',
+        repo: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B',
+        configuration: '1.5B',
+        template: 'DeepSeek reasoning',
+        summary: 'The smallest public Qwen-sized R1 distill checkpoint, useful for comparing DeepSeek prompt serialization without changing the shared vocabulary.',
+        caption: 'Public DeepSeek R1 Distill Qwen tokenizer files for the 1.5B release.',
+      },
+      {
+        id: 'deepseek-r1-distill-qwen-7b',
+        label: 'DeepSeek-R1-Distill-Qwen-7B',
+        repo: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+        configuration: '7B',
+        template: 'DeepSeek reasoning',
+        summary: 'The 7B R1 distill checkpoint keeps the same tokenizer surface as the smaller and larger Qwen-based DeepSeek distills.',
+        caption: 'Public DeepSeek R1 Distill Qwen tokenizer files for the 7B release.',
+      },
+      {
+        id: 'deepseek-r1-distill-qwen-14b',
+        label: 'DeepSeek-R1-Distill-Qwen-14B',
+        repo: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-14B',
+        configuration: '14B',
+        template: 'DeepSeek reasoning',
+        summary: 'Largest listed Qwen-based R1 distill checkpoint, still aligned to the same tokenizer.json as the other listed DeepSeek distills.',
+        caption: 'Public DeepSeek R1 Distill Qwen tokenizer files for the 14B release.',
+      },
+    ],
   },
   {
-    id: 'phi-3-mini-4k-instruct',
-    label: 'Phi-3-mini-4k-instruct',
-    repo: 'microsoft/Phi-3-mini-4k-instruct',
-    familyId: 'phi',
-    family: 'Phi',
-    configuration: 'Phi-3 Mini · 4k Instruct',
-    template: 'Phi instruct',
-    summary: 'Microsoft\'s compact Phi instruct model uses its own chat markers, which makes prompt serialization visibly different from Qwen and Mistral.',
-    caption: 'Public Phi-3 tokenizer files with the 4k instruct prompt format.',
+    id: 'mistral',
+    label: 'Mistral',
+    vocabStatus: 'mixed',
+    vocabBadge: 'Different tokenizer files',
+    vocabSummary: 'The listed Mistral-family checkpoints stay in one ecosystem, but their public tokenizer files are not identical, so token boundaries can diverge meaningfully across configurations.',
+    vocabCaption: 'These Mistral-family configurations ship different public tokenizer files.',
+    models: [
+      {
+        id: 'mistral-7b-instruct-v0.3',
+        label: 'Mistral-7B-Instruct-v0.3',
+        repo: 'mistralai/Mistral-7B-Instruct-v0.3',
+        configuration: '7B Instruct v0.3',
+        template: 'Mistral instruct',
+        summary: 'Canonical Mistral instruct checkpoint in the public browser-friendly lineup.',
+        caption: 'Public Mistral tokenizer files for the v0.3 instruct release.',
+      },
+      {
+        id: 'mixtral-8x7b-instruct-v0.1',
+        label: 'Mixtral-8x7B-Instruct-v0.1',
+        repo: 'mistralai/Mixtral-8x7B-Instruct-v0.1',
+        configuration: '8x7B Instruct v0.1',
+        template: 'Mixtral instruct',
+        summary: 'Sparse Mixture-of-Experts checkpoint in the Mistral family, useful for comparing a separate tokenizer surface within the same ecosystem.',
+        caption: 'Public Mixtral tokenizer files for the instruct release.',
+      },
+      {
+        id: 'ministral-8b-instruct-2410',
+        label: 'Ministral-8B-Instruct-2410',
+        repo: 'mistralai/Ministral-8B-Instruct-2410',
+        configuration: '8B Instruct 2410',
+        template: 'Ministral instruct',
+        summary: 'Later compact Mistral-family release with its own tokenizer surface in the public repos.',
+        caption: 'Public Ministral tokenizer files for the 8B instruct release.',
+      },
+    ],
   },
   {
-    id: 'tinyllama-1.1b-chat-v1.0',
-    label: 'TinyLlama-1.1B-Chat-v1.0',
-    repo: 'TinyLlama/TinyLlama-1.1B-Chat-v1.0',
-    familyId: 'tinyllama',
-    family: 'TinyLlama',
-    configuration: '1.1B Chat · v1.0',
-    template: 'TinyLlama chat',
-    summary: 'A lightweight Llama-style chat tokenizer that is easy to compare against larger instruct families while keeping the page fully public.',
-    caption: 'Public TinyLlama chat tokenizer files; a compact Llama-style reference point.',
+    id: 'phi',
+    label: 'Phi',
+    vocabStatus: 'base',
+    vocabBadge: 'Shared base vocabulary',
+    vocabSummary: 'These Phi configs reuse the same public tokenizer.model but ship different tokenizer.json wrappers. The base SentencePiece vocabulary matches even though per-config metadata can differ.',
+    vocabCaption: 'The base SentencePiece vocabulary is shared, while tokenizer.json wrappers differ by configuration.',
+    models: [
+      {
+        id: 'phi-3-mini-4k-instruct',
+        label: 'Phi-3-mini-4k-instruct',
+        repo: 'microsoft/Phi-3-mini-4k-instruct',
+        configuration: '3 Mini 4k',
+        template: 'Phi instruct',
+        summary: 'Compact Phi 3 instruct checkpoint with the shared Phi SentencePiece base vocabulary.',
+        caption: 'Public Phi tokenizer files for the 3 Mini 4k instruct release.',
+      },
+      {
+        id: 'phi-3-medium-4k-instruct',
+        label: 'Phi-3-medium-4k-instruct',
+        repo: 'microsoft/Phi-3-medium-4k-instruct',
+        configuration: '3 Medium 4k',
+        template: 'Phi instruct',
+        summary: 'Mid-sized Phi 3 instruct checkpoint that keeps the same base SentencePiece vocabulary as the other listed Phi releases.',
+        caption: 'Public Phi tokenizer files for the 3 Medium 4k instruct release.',
+      },
+      {
+        id: 'phi-3.5-mini-instruct',
+        label: 'Phi-3.5-mini-instruct',
+        repo: 'microsoft/Phi-3.5-mini-instruct',
+        configuration: '3.5 Mini',
+        template: 'Phi instruct',
+        summary: 'Newer Phi 3.5 instruct checkpoint that still reuses the same base tokenizer model as the listed Phi 3 variants.',
+        caption: 'Public Phi tokenizer files for the 3.5 Mini instruct release.',
+      },
+    ],
+  },
+  {
+    id: 'smollm2',
+    label: 'SmolLM 2',
+    vocabStatus: 'exact',
+    vocabBadge: 'Exact shared vocabulary',
+    vocabSummary: 'The listed SmolLM 2 instruct checkpoints resolve to the same public tokenizer.json, so token IDs stay aligned from the 135M model up through the 1.7B release.',
+    vocabCaption: 'All listed SmolLM 2 configurations point to the same tokenizer.json.',
+    models: [
+      {
+        id: 'smollm2-135m-instruct',
+        label: 'SmolLM2-135M-Instruct',
+        repo: 'HuggingFaceTB/SmolLM2-135M-Instruct',
+        configuration: '135M',
+        template: 'SmolLM 2 instruct',
+        summary: 'The smallest public SmolLM 2 instruct checkpoint, useful for seeing the exact shared SmolLM 2 vocabulary at tiny scale.',
+        caption: 'Public SmolLM 2 tokenizer files for the 135M instruct release.',
+      },
+      {
+        id: 'smollm2-360m-instruct',
+        label: 'SmolLM2-360M-Instruct',
+        repo: 'HuggingFaceTB/SmolLM2-360M-Instruct',
+        configuration: '360M',
+        template: 'SmolLM 2 instruct',
+        summary: 'Mid-sized SmolLM 2 instruct checkpoint that keeps the same tokenizer surface as the smaller and larger listed SmolLM 2 models.',
+        caption: 'Public SmolLM 2 tokenizer files for the 360M instruct release.',
+      },
+      {
+        id: 'smollm2-1.7b-instruct',
+        label: 'SmolLM2-1.7B-Instruct',
+        repo: 'HuggingFaceTB/SmolLM2-1.7B-Instruct',
+        configuration: '1.7B',
+        template: 'SmolLM 2 instruct',
+        summary: 'Largest listed SmolLM 2 checkpoint, still aligned to the same tokenizer.json as the smaller SmolLM 2 variants.',
+        caption: 'Public SmolLM 2 tokenizer files for the 1.7B instruct release.',
+      },
+    ],
+  },
+  {
+    id: 'falcon3',
+    label: 'Falcon 3',
+    vocabStatus: 'exact',
+    vocabBadge: 'Exact shared vocabulary',
+    vocabSummary: 'The listed Falcon 3 instruct checkpoints share the same public tokenizer.json, so vocabulary and token IDs stay consistent as you move across the 1B, 3B, and 7B sizes.',
+    vocabCaption: 'All listed Falcon 3 configurations point to the same tokenizer.json.',
+    models: [
+      {
+        id: 'falcon3-1b-instruct',
+        label: 'Falcon3-1B-Instruct',
+        repo: 'tiiuae/Falcon3-1B-Instruct',
+        configuration: '1B',
+        template: 'Falcon 3 instruct',
+        summary: 'Smallest listed Falcon 3 instruct checkpoint with the exact shared Falcon 3 tokenizer surface.',
+        caption: 'Public Falcon 3 tokenizer files for the 1B instruct release.',
+      },
+      {
+        id: 'falcon3-3b-instruct',
+        label: 'Falcon3-3B-Instruct',
+        repo: 'tiiuae/Falcon3-3B-Instruct',
+        configuration: '3B',
+        template: 'Falcon 3 instruct',
+        summary: 'Mid-sized Falcon 3 instruct checkpoint that keeps the same tokenizer surface as the other listed Falcon 3 sizes.',
+        caption: 'Public Falcon 3 tokenizer files for the 3B instruct release.',
+      },
+      {
+        id: 'falcon3-7b-instruct',
+        label: 'Falcon3-7B-Instruct',
+        repo: 'tiiuae/Falcon3-7B-Instruct',
+        configuration: '7B',
+        template: 'Falcon 3 instruct',
+        summary: 'Largest listed Falcon 3 instruct checkpoint, still aligned to the same tokenizer.json as the smaller Falcon 3 variants.',
+        caption: 'Public Falcon 3 tokenizer files for the 7B instruct release.',
+      },
+    ],
   },
 ];
 
+const FAMILIES = FAMILY_CATALOG.map((family) => ({
+  ...family,
+  models: family.models.map((model) => ({
+    ...model,
+    familyId: family.id,
+    family: family.label,
+  })),
+}));
+const FAMILY_MAP = Object.fromEntries(FAMILIES.map((family) => [family.id, family]));
+const MODELS = FAMILIES.flatMap((family) => family.models);
 const MODEL_MAP = Object.fromEntries(MODELS.map((model) => [model.id, model]));
-const FAMILY_MAP = buildFamilyMap(MODELS);
-const FAMILIES = Object.values(FAMILY_MAP);
 
 const EXAMPLES = {
   english: 'Tokenizers decide how models see text.\nWatch how punctuation, apostrophes, and repeated stems get segmented.',
@@ -128,12 +348,18 @@ function captureRefs() {
   refs.repoLabel = document.getElementById('repo-label');
   refs.familyLabel = document.getElementById('family-label');
   refs.configurationLabel = document.getElementById('configuration-label');
+  refs.vocabChip = document.getElementById('vocab-chip');
+  refs.vocabLabel = document.getElementById('vocab-label');
   refs.templateLabel = document.getElementById('template-label');
   refs.modelSummary = document.getElementById('model-summary');
+  refs.familyVocabPanel = document.getElementById('family-vocab-panel');
+  refs.familyVocabTitle = document.getElementById('family-vocab-title');
+  refs.familyVocabSummary = document.getElementById('family-vocab-summary');
   refs.modelCaption = document.getElementById('model-caption');
   refs.modelMetaRepo = document.getElementById('model-meta-repo');
   refs.modelMetaFamily = document.getElementById('model-meta-family');
   refs.modelMetaConfig = document.getElementById('model-meta-config');
+  refs.modelMetaVocab = document.getElementById('model-meta-vocab');
   refs.modelMetaTemplate = document.getElementById('model-meta-template');
   refs.modelMetaSummary = document.getElementById('model-meta-summary');
   refs.modelLineup = document.getElementById('model-lineup');
@@ -192,7 +418,7 @@ function populateFamilyOptions() {
   FAMILIES.forEach((family) => {
     const option = document.createElement('option');
     option.value = family.id;
-    option.textContent = `${family.label} (${family.models.length})`;
+    option.textContent = `${family.label} (${family.models.length} · ${familySelectorBadge(family)})`;
     refs.familySelect.append(option);
   });
   refs.familySelect.value = FAMILIES[0]?.id || '';
@@ -228,16 +454,22 @@ function renderModelMeta() {
   refs.repoLabel.textContent = model.repo;
   refs.familyLabel.textContent = model.family;
   refs.configurationLabel.textContent = model.configuration;
+  refs.vocabLabel.textContent = family.vocabBadge;
   refs.templateLabel.textContent = model.template;
   refs.modelSummary.textContent = model.summary;
-  refs.familyCaption.textContent = `${family.label} currently exposes ${configurationCount} public ${configurationLabel} in this browser-only build.`;
-  refs.modelCaption.textContent = `${model.caption} Gated repos such as Llama and Gemma are excluded from this static build.`;
+  refs.familyVocabTitle.textContent = family.vocabBadge;
+  refs.familyVocabSummary.textContent = family.vocabSummary;
+  refs.familyCaption.textContent = `${family.label} currently exposes ${configurationCount} public ${configurationLabel} in this browser-only build. ${family.vocabCaption}`;
+  refs.modelCaption.textContent = `${model.caption} ${family.vocabCaption} Gated repos such as Llama and Gemma are excluded from this static build.`;
   refs.modelMetaRepo.href = `https://huggingface.co/${model.repo}`;
   refs.modelMetaRepo.textContent = model.repo;
   refs.modelMetaFamily.textContent = model.family;
   refs.modelMetaConfig.textContent = model.configuration;
+  refs.modelMetaVocab.textContent = family.vocabBadge;
   refs.modelMetaTemplate.textContent = model.template;
   refs.modelMetaSummary.textContent = model.summary;
+  applyVocabularyTone(refs.vocabChip, family.vocabStatus);
+  applyVocabularyTone(refs.familyVocabPanel, family.vocabStatus);
 }
 
 function renderModelLineup() {
@@ -250,10 +482,31 @@ function renderModelLineup() {
       model.id === selected ? `${model.configuration} (selected)` : model.configuration
     ));
     const label = family.models.length === 1 ? 'config' : 'configs';
-    li.textContent = `${family.label} · ${family.models.length} ${label} — ${familyModels.join(', ')}`;
+    li.textContent = `${family.label} · ${family.vocabBadge} · ${family.models.length} ${label} — ${familyModels.join(', ')}`;
     fragment.append(li);
   });
   refs.modelLineup.append(fragment);
+}
+
+function familySelectorBadge(family) {
+  switch (family.vocabStatus) {
+    case 'exact':
+      return 'same vocab';
+    case 'base':
+      return 'same base vocab';
+    case 'mixed':
+      return 'mixed vocab';
+    default:
+      return 'single config';
+  }
+}
+
+function applyVocabularyTone(element, tone) {
+  if (!element) {
+    return;
+  }
+  element.classList.remove('vocab-exact', 'vocab-base', 'vocab-mixed', 'vocab-single');
+  element.classList.add(`vocab-${tone}`);
 }
 
 let debounceTimer = null;
@@ -501,6 +754,7 @@ function renderError(error) {
 }
 
 function setBusyUi(isBusy) {
+  refs.familySelect.disabled = isBusy;
   refs.modelSelect.disabled = isBusy;
   refs.retokenizeButton.disabled = isBusy;
   refs.copyIdsButton.disabled = isBusy;
@@ -688,18 +942,4 @@ function escapeHtml(text) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;');
-}
-
-function buildFamilyMap(models) {
-  return models.reduce((families, model) => {
-    if (!families[model.familyId]) {
-      families[model.familyId] = {
-        id: model.familyId,
-        label: model.family,
-        models: [],
-      };
-    }
-    families[model.familyId].models.push(model);
-    return families;
-  }, {});
 }

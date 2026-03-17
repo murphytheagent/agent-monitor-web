@@ -292,6 +292,49 @@
       font-weight: 700;
     }
 
+    .chip.vocab-exact,
+    .note-panel.vocab-exact {
+      border-color: rgba(105, 255, 189, 0.28);
+      background: linear-gradient(160deg, rgba(11, 39, 34, 0.94) 0%, rgba(15, 20, 28, 0.88) 100%);
+    }
+
+    .chip.vocab-base,
+    .note-panel.vocab-base {
+      border-color: rgba(255, 209, 106, 0.3);
+      background: linear-gradient(160deg, rgba(41, 30, 10, 0.94) 0%, rgba(15, 20, 28, 0.88) 100%);
+    }
+
+    .chip.vocab-mixed,
+    .note-panel.vocab-mixed {
+      border-color: rgba(255, 125, 147, 0.28);
+      background: linear-gradient(160deg, rgba(47, 15, 22, 0.94) 0%, rgba(15, 20, 28, 0.88) 100%);
+    }
+
+    .chip.vocab-single,
+    .note-panel.vocab-single {
+      border-color: rgba(103, 240, 255, 0.26);
+    }
+
+    .chip.vocab-exact b,
+    .note-panel.vocab-exact h2 {
+      color: var(--good);
+    }
+
+    .chip.vocab-base b,
+    .note-panel.vocab-base h2 {
+      color: var(--brand-2);
+    }
+
+    .chip.vocab-mixed b,
+    .note-panel.vocab-mixed h2 {
+      color: var(--bad);
+    }
+
+    .chip.vocab-single b,
+    .note-panel.vocab-single h2 {
+      color: var(--brand);
+    }
+
     .hero-notes {
       display: grid;
       gap: 12px;
@@ -375,7 +418,7 @@
 
     .model-meta-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 10px;
     }
 
@@ -791,7 +834,7 @@
         <div>
           <p class="eyebrow">Dashboard Tool</p>
           <h1>Tokenizer Observatory</h1>
-          <p class="subtitle">An interactive, client-side tokenizer view for mainstream open-source LLM prompts. Switch between public instruct tokenizers and inspect both raw text and chat-template serialization in the browser.</p>
+          <p class="subtitle">An interactive, client-side tokenizer view for mainstream open-source LLM prompts. Switch between public families, inspect raw versus chat-template serialization, and see when sibling checkpoints reuse the same vocabulary.</p>
         </div>
       </div>
       <div class="status-stack">
@@ -813,11 +856,15 @@
               </a>
               <div class="chip">
                 <span>Family</span>
-                <b id="family-label">Qwen</b>
+                <b id="family-label">Qwen 3.5</b>
               </div>
               <div class="chip">
                 <span>Configuration</span>
-                <b id="configuration-label">Qwen 3.5 · 4B</b>
+                <b id="configuration-label">4B</b>
+              </div>
+              <div class="chip vocab-single" id="vocab-chip">
+                <span>Vocabulary</span>
+                <b id="vocab-label">Single public configuration</b>
               </div>
               <div class="chip">
                 <span>Runtime</span>
@@ -825,7 +872,7 @@
               </div>
               <div class="chip">
                 <span>Template</span>
-                <b id="template-label">Qwen instruct</b>
+                <b id="template-label">Qwen 3.5 instruct</b>
               </div>
             </div>
           </div>
@@ -840,7 +887,11 @@
             </div>
             <div class="note-panel">
               <h2>Selected Model</h2>
-              <p id="model-summary">Official Qwen3.5 tokenizer files loaded straight from Hugging Face.</p>
+              <p id="model-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
+            </div>
+            <div class="note-panel vocab-single" id="family-vocab-panel">
+              <h2 id="family-vocab-title">Single public configuration</h2>
+              <p id="family-vocab-summary">Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.</p>
             </div>
             <div class="note-panel">
               <h2>Hosted Constraint</h2>
@@ -893,18 +944,22 @@
                 </div>
                 <div class="model-meta-item">
                   <span>Family</span>
-                  <b id="model-meta-family">Qwen</b>
+                  <b id="model-meta-family">Qwen 3.5</b>
                 </div>
                 <div class="model-meta-item">
                   <span>Configuration</span>
-                  <b id="model-meta-config">Qwen 3.5 · 4B</b>
+                  <b id="model-meta-config">4B</b>
+                </div>
+                <div class="model-meta-item">
+                  <span>Vocabulary relation</span>
+                  <b id="model-meta-vocab">Single public configuration</b>
                 </div>
                 <div class="model-meta-item">
                   <span>Template style</span>
-                  <b id="model-meta-template">Qwen instruct</b>
+                  <b id="model-meta-template">Qwen 3.5 instruct</b>
                 </div>
               </div>
-              <p class="model-summary" id="model-meta-summary">Official Qwen3.5 tokenizer files loaded straight from Hugging Face.</p>
+              <p class="model-summary" id="model-meta-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
             </div>
 
             <label class="field">
