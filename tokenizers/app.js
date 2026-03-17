@@ -1124,7 +1124,7 @@ function renderPayload(payload) {
   }
 
   updateModeCopy(payload);
-  refs.inputSummary.textContent = `${formatInteger(payload.rawInput.length)} input chars -> ${formatInteger(payload.summary.total)} tokens`;
+  refs.inputSummary.textContent = `${formatInteger(payload.summary.total)} tokens · ${formatInteger(payload.rawInput.length)} chars`;
   refs.statTotal.textContent = formatInteger(payload.summary.total);
   refs.statSpecial.textContent = `${formatInteger(payload.summary.specialCount)} special tokens`;
   refs.statUnique.textContent = formatInteger(payload.summary.uniqueCount);
@@ -1292,7 +1292,7 @@ function renderError(error) {
   state.selectedToken = null;
   state.focusedToken = null;
   updateModeCopy();
-  refs.inputSummary.textContent = 'Tokenizer failed to load.';
+  refs.inputSummary.textContent = 'Tokenizer unavailable';
   refs.statTotal.textContent = '0';
   refs.statSpecial.textContent = '0 special tokens';
   refs.statUnique.textContent = '0';
