@@ -384,7 +384,7 @@
 
     .control-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
 
@@ -834,7 +834,7 @@
         <div>
           <p class="eyebrow">Dashboard Tool</p>
           <h1>Tokenizer Observatory</h1>
-          <p class="subtitle">An interactive, client-side tokenizer view for mainstream open-source LLM prompts. Switch between public families, inspect raw versus chat-template serialization, and see when sibling checkpoints reuse the same vocabulary.</p>
+          <p class="subtitle">An interactive, client-side tokenizer view for mainstream open-source LLM prompts. Switch between model lines, family generations, and public configurations, then inspect raw versus chat-template serialization and vocabulary reuse.</p>
         </div>
       </div>
       <div class="status-stack">
@@ -855,7 +855,11 @@
                 <b id="repo-label">Qwen/Qwen3.5-4B</b>
               </a>
               <div class="chip">
-                <span>Family</span>
+                <span>Model line</span>
+                <b id="line-label">Qwen</b>
+              </div>
+              <div class="chip">
+                <span>Family / generation</span>
                 <b id="family-label">Qwen 3.5</b>
               </div>
               <div class="chip">
@@ -876,32 +880,38 @@
               </div>
             </div>
           </div>
-          <div class="hero-notes">
-            <div class="note-panel">
-              <h2>What to inspect</h2>
-              <ul>
-                <li>How multilingual text, code, whitespace, and emojis fragment into token pieces.</li>
-                <li>How many tokens each chat template spends before any generation begins.</li>
-                <li>Which pieces are regular subwords versus model-specific special tokens.</li>
-              </ul>
+            <div class="hero-notes">
+              <div class="note-panel">
+                <h2>What to inspect</h2>
+                <ul>
+                  <li>How multilingual text, code, whitespace, and emojis fragment into token pieces.</li>
+                  <li>How many tokens each chat template spends before any generation begins.</li>
+                  <li>Which pieces are regular subwords versus model-specific special tokens.</li>
+                </ul>
+              </div>
+              <div class="note-panel">
+                <h2>Selected Line</h2>
+                <p id="line-summary">Qwen 2.5, Qwen 3, and Qwen 3.5 are grouped here as successive generations of one model line. Vocabulary badges below apply within the selected family, not across the whole Qwen umbrella.</p>
+              </div>
+              <div class="note-panel">
+                <h2>Selected Model</h2>
+                <p id="model-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
+              </div>
+              <div class="note-panel vocab-single" id="family-vocab-panel">
+                <h2 id="family-vocab-title">Single public configuration</h2>
+                <p id="family-vocab-summary">Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.</p>
+              </div>
+              <div class="note-panel">
+                <h2>Static Runtime Gaps</h2>
+                <ul id="unsupported-lineup">
+                  <li>Kimi K2 currently needs a custom TikToken runtime rather than a browser-ready tokenizer.json.</li>
+                </ul>
+              </div>
+              <div class="note-panel">
+                <h2>Line Catalog</h2>
+                <ul id="model-lineup"></ul>
+              </div>
             </div>
-            <div class="note-panel">
-              <h2>Selected Model</h2>
-              <p id="model-summary">The original anchor for this page: a public Qwen 3.5 checkpoint with the newer Qwen instruct serialization.</p>
-            </div>
-            <div class="note-panel vocab-single" id="family-vocab-panel">
-              <h2 id="family-vocab-title">Single public configuration</h2>
-              <p id="family-vocab-summary">Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.</p>
-            </div>
-            <div class="note-panel">
-              <h2>Hosted Constraint</h2>
-              <p>This static route only includes tokenizer repos that can be fetched directly from a public browser session. Gated families such as Meta Llama and Google Gemma need authenticated access or a backend proxy, so they are not wired into this build yet.</p>
-            </div>
-            <div class="note-panel">
-              <h2>Family Catalog</h2>
-              <ul id="model-lineup"></ul>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -916,9 +926,14 @@
           <div class="card-body control-stack">
             <div class="control-row">
               <label class="field">
-                <span class="field-label">Model family</span>
+                <span class="field-label">Model line</span>
+                <select id="line-select"></select>
+                <span class="field-caption" id="line-caption">Choose a broad model line first, then narrow to a specific family or generation below.</span>
+              </label>
+              <label class="field">
+                <span class="field-label">Family / generation</span>
                 <select id="family-select"></select>
-                <span class="field-caption" id="family-caption">Choose a family first, then narrow to one public configuration below.</span>
+                <span class="field-caption" id="family-caption">Choose a family or generation inside the selected model line.</span>
               </label>
               <label class="field">
                 <span class="field-label">Configuration</span>
@@ -943,7 +958,11 @@
                   <a id="model-meta-repo" href="https://huggingface.co/Qwen/Qwen3.5-4B" target="_blank" rel="noreferrer">Qwen/Qwen3.5-4B</a>
                 </div>
                 <div class="model-meta-item">
-                  <span>Family</span>
+                  <span>Model line</span>
+                  <b id="model-meta-line">Qwen</b>
+                </div>
+                <div class="model-meta-item">
+                  <span>Family / generation</span>
                   <b id="model-meta-family">Qwen 3.5</b>
                 </div>
                 <div class="model-meta-item">
