@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T05:40:57Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-17T05:42:58Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 6822,
+    "loop_count": 6841,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773701002.020259",
-        "started_at": 1773724563,
-        "elapsed_sec": 1494
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.88,
-      "five": 1.67,
-      "fifteen": 1.62
+      "one": 1.33,
+      "five": 1.49,
+      "fifteen": 1.55
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107533594624,
-    "disk_free_bytes": 137573601280,
-    "runner_log_size_bytes": 46229830,
+    "disk_used_bytes": 107536191488,
+    "disk_free_bytes": 137571004416,
+    "runner_log_size_bytes": 46230072,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-16T17:44:46Z",
     "local_ips": []
@@ -44,96 +36,79 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T05:40:59Z",
+    "checked_at_utc": "2026-03-17T05:43:02Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 81531,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 36
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 79851,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 37
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 79851,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 37
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 79851,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 37
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 79851,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 34
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 79851,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 35
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 79851,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 35
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 79851,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 36
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "in_progress",
-        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Expanded the tokenizer dashboard into model-line -> family/generation -> configuration selection, added browser-compatible Chinese families (MiniMax and Yi), d…",
-        "summary_preview": "Expanded the tokenizer dashboard into model-line -> family/generation -> configuration selection, added browser-compatible Chinese families (MiniMax and Yi), d…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773701002.020259",
-        "last_update_ts": "1773724562.909417",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T22:43:22Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773450197.462419": {
         "mention_ts": "1773450197.462419",
@@ -181,6 +156,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-16T23:30:10Z"
+        }
+      },
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "waiting_human",
+        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
+        "summary": "Reorganized the live tokenizer dashboard into a cleaner workspace/summary/results flow, kept the selector hierarchy intact, and verified the updated Pages site…",
+        "summary_preview": "Reorganized the live tokenizer dashboard into a cleaner workspace/summary/results flow, kept the selector hierarchy intact, and verified the updated Pages site…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773701002.020259",
+        "last_update_ts": "1773726160.106419",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T22:43:22Z"
         }
       }
     },
@@ -997,5 +988,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T05:41:01Z"
+  "server_time_utc": "2026-03-17T05:43:03Z"
 }
