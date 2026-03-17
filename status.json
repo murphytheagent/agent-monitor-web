@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T20:35:46Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-17T20:37:02Z",
+    "status": "running_session",
     "pid": 82363,
-    "loop_count": 1628,
+    "loop_count": 1640,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
     "max_workers": 8
   },
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.76,
-      "five": 1.68,
-      "fifteen": 1.66
+      "one": 1.57,
+      "five": 1.63,
+      "fifteen": 1.64
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106749071360,
-    "disk_free_bytes": 138358124544,
-    "runner_log_size_bytes": 174593,
+    "disk_used_bytes": 106750558208,
+    "disk_free_bytes": 138356637696,
+    "runner_log_size_bytes": 174901,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-17T17:41:35Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T20:35:51Z",
+    "checked_at_utc": "2026-03-17T20:37:54Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -62,7 +62,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 38
       },
       {
         "index": 3,
@@ -86,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 38
       },
       {
         "index": 6,
@@ -108,7 +108,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
+        "status": "in_progress",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773779822.335235",
+        "last_update_ts": "1773779822.345552",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-17T20:37:02Z"
+        }
+      }
+    },
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -192,22 +209,6 @@
       }
     },
     "finished": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1773750043.115739",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: fixed review_project.sh (commit+prompt validation, PATH sanitization, portable timeout), wired job store Phase 2 into supervisor (wakeup scan…",
-        "summary_preview": "Developer review: fixed review_project.sh (commit+prompt validation, PATH sanitization, portable timeout), wired job store Phase 2 into supervisor (wakeup scan…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773749239.566812",
-        "last_update_ts": "1773766003.292657",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-17T12:07:19Z"
-        }
-      },
       "1773111453.746699": {
         "mention_ts": "1773111453.746699",
         "thread_ts": "1773111453.746699",
@@ -991,6 +992,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T20:24:42Z"
         }
+      },
+      "1771749821.471009": {
+        "mention_ts": "1771749821.471009",
+        "thread_ts": "1771749821.471009",
+        "status": "done",
+        "task_description": "There should be some sort of monitor of your health and task list, a frontend project in process, I would like for people to be able to just go to a website and see your frontend,…",
+        "summary": "Removed Task Queue section, restored requester display names in public snapshot, republished GitHub Pages, merged agent-monitor-web PR #1, and posted thread co…",
+        "summary_preview": "Removed Task Queue section, restored requester display names in public snapshot, republished GitHub Pages, merged agent-monitor-web PR #1, and posted thread co…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771749821.471009",
+        "last_update_ts": "1771795329.776592",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T08:43:41Z"
+        }
       }
     }
   },
@@ -1004,5 +1021,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T20:35:53Z"
+  "server_time_utc": "2026-03-17T20:37:55Z"
 }
