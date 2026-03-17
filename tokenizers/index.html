@@ -131,6 +131,13 @@
       min-width: 0;
     }
 
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     .header-copy {
       display: grid;
       gap: 4px;
@@ -1546,7 +1553,10 @@
   <div class="page-shell">
     <header class="page-header">
       <div class="page-meta">
-        <a class="nav-link" href="../">&larr; Monitor</a>
+        <div class="nav-links">
+          <a class="nav-link" href="../">&larr; Monitor</a>
+          <a class="nav-link" href="../showcase/">Showcase</a>
+        </div>
         <div class="header-copy">
           <h1>Tokenizer Workbench</h1>
           <p class="subtitle">Paste text to inspect token boundaries and IDs.</p>
