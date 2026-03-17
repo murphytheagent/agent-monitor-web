@@ -553,6 +553,10 @@ function captureRefs() {
   refs.familyVocabTitle = document.getElementById('family-vocab-title');
   refs.familyVocabSummary = document.getElementById('family-vocab-summary');
   refs.familyVocabSummaryDetail = document.getElementById('family-vocab-summary-detail');
+  refs.modelDetailsVocabNote = document.getElementById('model-details-vocab-note');
+  refs.modelDetailsCoverageNote = document.getElementById('model-details-coverage-note');
+  refs.modelDetailsLineNote = document.getElementById('model-details-line-note');
+  refs.modelDetailsRuntimeNote = document.getElementById('model-details-runtime-note');
   refs.modelCaption = document.getElementById('model-caption');
   refs.modelMetaRepo = document.getElementById('model-meta-repo');
   refs.modelMetaLine = document.getElementById('model-meta-line');
@@ -753,6 +757,8 @@ function renderModelMeta() {
   const familyLabel = familyCount === 1 ? 'family' : 'families';
   const configurationCount = family.models.length;
   const configurationLabel = configurationCount === 1 ? 'configuration' : 'configurations';
+  const listedConfigurations = family.models.map((entry) => entry.configuration).join(' · ');
+  const runtimeNote = `This workbench loads ${model.repo} directly in the browser from public tokenizer assets, so the live token view is computed client-side without a server hop.`;
 
   document.title = `Tokenizer Workbench | ${model.label}`;
   refs.repoChip.href = `https://huggingface.co/${model.repo}`;
@@ -765,8 +771,14 @@ function renderModelMeta() {
   refs.lineSummary.textContent = line.lineSummary;
   refs.modelSummary.textContent = model.summary;
   refs.familyVocabTitle.textContent = family.vocabBadge;
-  refs.familyVocabSummary.textContent = family.vocabSummary;
+  if (refs.familyVocabSummary) {
+    refs.familyVocabSummary.textContent = family.vocabSummary;
+  }
   refs.familyVocabSummaryDetail.textContent = family.vocabSummary;
+  refs.modelDetailsVocabNote.textContent = `${family.vocabBadge}. ${family.vocabSummary}`;
+  refs.modelDetailsCoverageNote.textContent = `${family.label} exposes ${configurationCount} public ${configurationLabel} here: ${listedConfigurations}.`;
+  refs.modelDetailsLineNote.textContent = line.lineSummary;
+  refs.modelDetailsRuntimeNote.textContent = `${runtimeNote} ${family.vocabCaption}`;
   refs.lineCaption.textContent = `${line.label} exposes ${familyCount} public ${familyLabel} in this browser build. ${line.lineCaption}`;
   refs.familyCaption.textContent = `${family.label} exposes ${configurationCount} public ${configurationLabel} here. ${family.vocabCaption}`;
   refs.modelCaption.textContent = `${model.caption} ${family.vocabCaption}`;

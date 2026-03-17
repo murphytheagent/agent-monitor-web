@@ -701,27 +701,44 @@
     }
 
     .workspace-grid {
+      --workbench-height: clamp(460px, calc(100vh - 260px), 640px);
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.82fr);
       gap: 12px;
-      align-items: start;
+      align-items: stretch;
     }
 
     .composer-card,
     .stream-card {
       min-width: 0;
+      height: var(--workbench-height);
+    }
+
+    .composer-card {
+      display: flex;
+      flex-direction: column;
     }
 
     .composer-body {
-      display: grid;
-      gap: 10px;
+      display: flex;
+      flex: 1 1 auto;
+      min-height: 0;
     }
 
-    .editor-layout,
+    .editor-layout {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 10px;
+      flex: 1 1 auto;
+      min-height: 0;
+      width: 100%;
+    }
+
     .composer-side,
     .composer-stack {
       display: grid;
       gap: 10px;
+      min-height: 0;
     }
 
     .input-panel {
@@ -909,7 +926,10 @@
     }
 
     .surface-section {
-      display: grid;
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-height: 0;
       gap: 10px;
       padding: 12px;
       border-radius: var(--radius-md);
@@ -932,8 +952,8 @@
     }
 
     .surface-preview {
-      min-height: 180px;
-      max-height: 300px;
+      flex: 1 1 auto;
+      min-height: 220px;
       overflow: auto;
       padding: 14px;
       border-radius: var(--radius-md);
@@ -982,11 +1002,16 @@
     .stream-card {
       position: sticky;
       top: 78px;
+      display: flex;
+      flex-direction: column;
     }
 
     .stream-body {
-      display: grid;
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
       gap: 10px;
+      min-height: 0;
     }
 
     .inspector-card {
@@ -1054,10 +1079,42 @@
 
     .token-stream {
       display: grid;
+      flex: 1 1 auto;
       gap: 8px;
-      max-height: min(54vh, 620px);
+      min-height: 0;
       overflow: auto;
       padding-right: 4px;
+    }
+
+    .model-details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .model-details-note {
+      display: grid;
+      gap: 6px;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(74, 239, 255, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .model-details-note h3 {
+      margin: 0;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #b8f4ff;
+    }
+
+    .model-details-note p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.35;
     }
 
     .token-pill {
@@ -1390,6 +1447,19 @@
 
       .stream-card {
         position: static;
+        height: auto;
+      }
+
+      .composer-card {
+        height: auto;
+      }
+
+      .token-stream {
+        max-height: min(54vh, 620px);
+      }
+
+      .model-details-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -1430,7 +1500,8 @@
       }
 
       .summary-strip,
-      .metrics-grid {
+      .metrics-grid,
+      .model-details-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1557,7 +1628,24 @@
                 <b id="repo-label">Qwen/Qwen3.5-4B</b>
               </a>
             </div>
-            <p class="micro-note hidden" id="family-vocab-summary">Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.</p>
+            <div class="model-details-grid">
+              <article class="model-details-note">
+                <h3>Vocabulary Scope</h3>
+                <p id="model-details-vocab-note">Qwen 3.5 currently contributes one browser-fetchable public checkpoint here, so there is no sibling tokenizer comparison inside the family yet.</p>
+              </article>
+              <article class="model-details-note">
+                <h3>Available Here</h3>
+                <p id="model-details-coverage-note">Qwen 3.5 exposes one public configuration in this browser build: 4B.</p>
+              </article>
+              <article class="model-details-note">
+                <h3>Line Context</h3>
+                <p id="model-details-line-note">Qwen 2.5, Qwen 3, and Qwen 3.5 are grouped here as successive generations of one Chinese model line.</p>
+              </article>
+              <article class="model-details-note">
+                <h3>Browser Runtime</h3>
+                <p id="model-details-runtime-note">This view loads Qwen/Qwen3.5-4B directly in the browser from public tokenizer assets, so the token stream is computed client-side without a server hop.</p>
+              </article>
+            </div>
           </div>
         </details>
       </section>
