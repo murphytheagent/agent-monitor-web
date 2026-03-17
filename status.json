@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T20:25:34Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-17T20:27:36Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 1533,
+    "loop_count": 1551,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773701002.020259",
-        "started_at": 1773778759,
-        "elapsed_sec": 374
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.37,
-      "five": 1.45,
-      "fifteen": 1.59
+      "one": 2.05,
+      "five": 1.69,
+      "fifteen": 1.66
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106748178432,
-    "disk_free_bytes": 138359017472,
-    "runner_log_size_bytes": 174351,
+    "disk_used_bytes": 106750353408,
+    "disk_free_bytes": 138356842496,
+    "runner_log_size_bytes": 174593,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-17T17:41:35Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T20:25:36Z",
+    "checked_at_utc": "2026-03-17T20:27:40Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "in_progress",
-        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Traced the dashboard homepage rewrite chain to the root exporter and explained the permanent modification path for a durable Showcase button.",
-        "summary_preview": "Traced the dashboard homepage rewrite chain to the root exporter and explained the permanent modification path for a durable Showcase button.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773701002.020259",
-        "last_update_ts": "1773778759.385287",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T22:43:22Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -197,6 +172,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-17T18:13:23Z"
+        }
+      },
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "waiting_human",
+        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
+        "summary": "Documented the permanent root-dashboard Showcase CTA request and added a UI brief so developer review can implement it in the exporter/template.",
+        "summary_preview": "Documented the permanent root-dashboard Showcase CTA request and added a UI brief so developer review can implement it in the exporter/template.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773701002.020259",
+        "last_update_ts": "1773779166.046215",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T22:43:22Z"
         }
       }
     },
@@ -1013,5 +1004,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T20:25:38Z"
+  "server_time_utc": "2026-03-17T20:27:41Z"
 }
