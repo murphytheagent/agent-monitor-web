@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T16:47:37Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-17T17:41:35Z",
+    "status": "restarting",
     "pid": 82363,
     "loop_count": 9,
     "last_exit_code": 0,
@@ -9,23 +9,9 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773701002.020259",
-        "started_at": 1773766006,
-        "elapsed_sec": 51
-      },
-      {
-        "slot": 3,
-        "task": "1773739092.072639",
-        "started_at": 1773766006,
-        "elapsed_sec": 50
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -33,24 +19,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.49,
-      "five": 1.64,
-      "fifteen": 1.7
+      "one": 2.4,
+      "five": 1.9,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106776268800,
-    "disk_free_bytes": 138330927104,
-    "runner_log_size_bytes": 168172,
+    "disk_used_bytes": 106766127104,
+    "disk_free_bytes": 138341068800,
+    "runner_log_size_bytes": 169232,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-17T16:46:43Z",
+    "dashboard_started_utc": "2026-03-17T17:41:35Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T17:40:00Z",
+    "checked_at_utc": "2026-03-17T17:41:35Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -60,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 38
       },
       {
         "index": 1,
@@ -68,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 40
       },
       {
         "index": 2,
@@ -76,7 +62,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 39
       },
       {
         "index": 3,
@@ -84,7 +70,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 38
       },
       {
         "index": 4,
@@ -100,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 39
       },
       {
         "index": 6,
@@ -108,7 +94,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 39
       },
       {
         "index": 7,
@@ -122,40 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "in_progress",
-        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Reworked the tokenizer page into an input-first workbench with a larger highlighted text panel, collapsed model details, and a review PR for the next dashboard…",
-        "summary_preview": "Reworked the tokenizer page into an input-first workbench with a larger highlighted text panel, collapsed model details, and a review PR for the next dashboard…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773701002.020259",
-        "last_update_ts": "1773766005.851245",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T22:43:22Z"
-        }
-      },
-      "1773739092.072639": {
-        "mention_ts": "1773739092.072639",
-        "thread_ts": "1773739092.072639",
-        "status": "in_progress",
-        "task_description": "I pushed new commits to small swe train, there are two plans: 1.",
-        "summary": "PR #26 now points at 95d4edf with the last remote-review-found direct-mode shared-parquet ambiguity fixed, the focused direct-mode pytest slice green again, an…",
-        "summary_preview": "PR #26 now points at 95d4edf with the last remote-review-found direct-mode shared-parquet ambiguity fixed, the focused direct-mode pytest slice green again, an…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773739092.072639",
-        "last_update_ts": "1773766006.334113",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-17T09:18:12Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -187,6 +140,38 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-16T23:30:10Z"
+        }
+      },
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "waiting_human",
+        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
+        "summary": "Compressed the live tokenizer workbench so the first screen is cleaner and the inline token surface starts on-screen again; the shared publisher carried the ch…",
+        "summary_preview": "Compressed the live tokenizer workbench so the first screen is cleaner and the inline token surface starts on-screen again; the shared publisher carried the ch…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773701002.020259",
+        "last_update_ts": "1773769294.329502",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T22:43:22Z"
+        }
+      },
+      "1773739092.072639": {
+        "mention_ts": "1773739092.072639",
+        "thread_ts": "1773739092.072639",
+        "status": "waiting_human",
+        "task_description": "I pushed new commits to small swe train, there are two plans: 1.",
+        "summary": "PR #26 now points at 0066a01 with the final direct-mode empty-held-out eval fallback fixed, the focused and broader RFT pytest bundles green again, the lingeri…",
+        "summary_preview": "PR #26 now points at 0066a01 with the final direct-mode empty-held-out eval fallback fixed, the focused and broader RFT pytest bundles green again, the lingeri…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773739092.072639",
+        "last_update_ts": "1773769294.781101",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-17T09:18:12Z"
         }
       }
     },
@@ -1003,5 +988,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T17:40:01Z"
+  "server_time_utc": "2026-03-17T17:41:36Z"
 }
