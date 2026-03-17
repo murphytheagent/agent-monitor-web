@@ -645,6 +645,31 @@ function bindEvents() {
     if (event.key === 'Escape' && state.selectedToken != null) {
       state.selectedToken = null;
       refreshFocusState(false);
+      return;
+    }
+
+    const isTypingTarget = event.target instanceof HTMLElement && event.target.closest('textarea, select, input, button');
+    if (isTypingTarget) {
+      return;
+    }
+
+    const rows = state.lastPayload?.rows || [];
+    if (!rows.length) {
+      return;
+    }
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      event.preventDefault();
+      const current = state.selectedToken ?? state.focusedToken ?? -1;
+      const next = Math.min(current + 1, rows.length - 1);
+      setSelectedToken(next, true);
+    }
+
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      const current = state.selectedToken ?? state.focusedToken ?? rows.length;
+      const next = Math.max(current - 1, 0);
+      setSelectedToken(next, true);
     }
   });
 }
@@ -729,7 +754,7 @@ function renderModelMeta() {
   const configurationCount = family.models.length;
   const configurationLabel = configurationCount === 1 ? 'configuration' : 'configurations';
 
-  document.title = `Tokenizer Observatory | ${model.label}`;
+  document.title = `Tokenizer Workbench | ${model.label}`;
   refs.repoChip.href = `https://huggingface.co/${model.repo}`;
   refs.repoLabel.textContent = model.repo;
   refs.lineLabel.textContent = model.line;
