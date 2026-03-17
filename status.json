@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T08:40:44Z",
+    "last_updated_utc": "2026-03-17T16:47:37Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 8525,
+    "loop_count": 9,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,8 +16,14 @@
       {
         "slot": 1,
         "task": "1773701002.020259",
-        "started_at": 1773733849,
-        "elapsed_sec": 2995
+        "started_at": 1773766006,
+        "elapsed_sec": 51
+      },
+      {
+        "slot": 3,
+        "task": "1773739092.072639",
+        "started_at": 1773766006,
+        "elapsed_sec": 50
       }
     ]
   },
@@ -27,88 +33,88 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.91,
-      "five": 1.89,
-      "fifteen": 1.84
+      "one": 1.44,
+      "five": 1.73,
+      "fifteen": 1.75
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107383369728,
-    "disk_free_bytes": 137723826176,
-    "runner_log_size_bytes": 46231976,
+    "disk_used_bytes": 106771156992,
+    "disk_free_bytes": 138336038912,
+    "runner_log_size_bytes": 168172,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-16T17:44:46Z",
+    "dashboard_started_utc": "2026-03-17T16:46:43Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T08:40:47Z",
+    "checked_at_utc": "2026-03-17T17:27:42Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 9667,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 38
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 12345,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 31
+        "temperature_c": 40
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 12313,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 38
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 71,
-        "memory_used_mb": 85160,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 38
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 10807,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 31
+        "temperature_c": 37
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
-        "memory_used_mb": 91226,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 43
+        "temperature_c": 39
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 43,
-        "memory_used_mb": 51828,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 85559,
         "memory_total_mb": 97887,
         "temperature_c": 39
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 41,
-        "memory_used_mb": 53702,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 85559,
         "memory_total_mb": 97887,
         "temperature_c": 38
       }
@@ -122,15 +128,31 @@
         "thread_ts": "1773701002.020259",
         "status": "in_progress",
         "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Compressed the tokenizer site into a dashboard-style workbench so the selector, input, token surface, and stream rail share the first screen, then merged the l…",
-        "summary_preview": "Compressed the tokenizer site into a dashboard-style workbench so the selector, input, token surface, and stream rail share the first screen, then merged the l…",
+        "summary": "Reworked the tokenizer page into an input-first workbench with a larger highlighted text panel, collapsed model details, and a review PR for the next dashboard…",
+        "summary_preview": "Reworked the tokenizer page into an input-first workbench with a larger highlighted text panel, collapsed model details, and a review PR for the next dashboard…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773701002.020259",
-        "last_update_ts": "1773733849.325729",
+        "last_update_ts": "1773766005.851245",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-16T22:43:22Z"
+        }
+      },
+      "1773739092.072639": {
+        "mention_ts": "1773739092.072639",
+        "thread_ts": "1773739092.072639",
+        "status": "in_progress",
+        "task_description": "I pushed new commits to small swe train, there are two plans: 1.",
+        "summary": "PR #26 now points at 95d4edf with the last remote-review-found direct-mode shared-parquet ambiguity fixed, the focused direct-mode pytest slice green again, an…",
+        "summary_preview": "PR #26 now points at 95d4edf with the last remote-review-found direct-mode shared-parquet ambiguity fixed, the focused direct-mode pytest slice green again, an…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773739092.072639",
+        "last_update_ts": "1773766006.334113",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-17T09:18:12Z"
         }
       }
     },
@@ -171,18 +193,18 @@
     "finished": {
       "maintenance": {
         "mention_ts": "maintenance",
-        "thread_ts": "1773671592.966079",
+        "thread_ts": "1773750043.115739",
         "status": "done",
         "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: added --timeout to review_project.sh (fixes recurring codex review hang), fixed gh-address-comments skill quality, triaged 3→1 issues, audite…",
-        "summary_preview": "Developer review: added --timeout to review_project.sh (fixes recurring codex review hang), fixed gh-address-comments skill quality, triaged 3→1 issues, audite…",
+        "summary": "Developer review: fixed review_project.sh (commit+prompt validation, PATH sanitization, portable timeout), wired job store Phase 2 into supervisor (wakeup scan…",
+        "summary_preview": "Developer review: fixed review_project.sh (commit+prompt validation, PATH sanitization, portable timeout), wired job store Phase 2 into supervisor (wakeup scan…",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773662831.267013",
-        "last_update_ts": "1773683086.352750",
+        "created_ts": "1773749239.566812",
+        "last_update_ts": "1773766003.292657",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-16T12:07:11Z"
+          "time_iso": "2026-03-17T12:07:19Z"
         }
       },
       "1773111453.746699": {
@@ -981,5 +1003,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T08:40:48Z"
+  "server_time_utc": "2026-03-17T17:27:43Z"
 }
