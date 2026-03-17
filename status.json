@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-17T17:59:59Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-17T18:02:05Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 174,
+    "loop_count": 193,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773701002.020259",
-        "started_at": 1773769298,
-        "elapsed_sec": 1101
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.86,
-      "five": 1.65,
-      "fifteen": 1.66
+      "one": 1.48,
+      "five": 1.59,
+      "fifteen": 1.64
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106753282048,
-    "disk_free_bytes": 138353913856,
-    "runner_log_size_bytes": 170306,
+    "disk_used_bytes": 106760962048,
+    "disk_free_bytes": 138346233856,
+    "runner_log_size_bytes": 170548,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-17T17:41:35Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-17T18:00:02Z",
+    "checked_at_utc": "2026-03-17T18:02:06Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 38
       },
       {
         "index": 1,
@@ -62,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 40
       },
       {
         "index": 2,
@@ -78,7 +70,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 38
       },
       {
         "index": 4,
@@ -86,7 +78,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 37
       },
       {
         "index": 5,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "in_progress",
-        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
-        "summary": "Compressed the live tokenizer workbench so the first screen is cleaner and the inline token surface starts on-screen again; the shared publisher carried the ch…",
-        "summary_preview": "Compressed the live tokenizer workbench so the first screen is cleaner and the inline token surface starts on-screen again; the shared publisher carried the ch…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773701002.020259",
-        "last_update_ts": "1773769298.043145",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T22:43:22Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -181,6 +156,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-17T09:18:12Z"
+        }
+      },
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "waiting_human",
+        "task_description": "Could you make a website for visualizing tokenizers for LLMs?",
+        "summary": "Aligned the tokenizer workbench columns, expanded Model Details with vocabulary/runtime notes, and confirmed the pass landed on main while Pages briefly lagged…",
+        "summary_preview": "Aligned the tokenizer workbench columns, expanded Model Details with vocabulary/runtime notes, and confirmed the pass landed on main while Pages briefly lagged…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773701002.020259",
+        "last_update_ts": "1773770469.364373",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-16T22:43:22Z"
         }
       }
     },
@@ -997,5 +988,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-17T18:00:03Z"
+  "server_time_utc": "2026-03-17T18:02:08Z"
 }
