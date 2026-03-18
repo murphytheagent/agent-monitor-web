@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-18T02:59:09Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-18T03:01:11Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 2986,
+    "loop_count": 3005,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 1,
+        "task": "1773739092.072639",
+        "started_at": 1773802808,
+        "elapsed_sec": 63
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.43,
+      "one": 1.56,
       "five": 1.49,
-      "fifteen": 1.51
+      "fifteen": 1.5
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106765643776,
-    "disk_free_bytes": 138341552128,
-    "runner_log_size_bytes": 180077,
+    "disk_used_bytes": 106755375104,
+    "disk_free_bytes": 138351820800,
+    "runner_log_size_bytes": 180526,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-17T21:37:35Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-18T02:59:12Z",
+    "checked_at_utc": "2026-03-18T03:01:15Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 37
       },
       {
         "index": 1,
@@ -54,7 +62,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 39
       },
       {
         "index": 2,
@@ -62,7 +70,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 38
       },
       {
         "index": 3,
@@ -70,7 +78,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 37
       },
       {
         "index": 4,
@@ -78,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 5,
@@ -86,7 +94,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 38
       },
       {
         "index": 6,
@@ -102,13 +110,30 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85559,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 37
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773739092.072639": {
+        "mention_ts": "1773739092.072639",
+        "thread_ts": "1773739092.072639",
+        "status": "in_progress",
+        "task_description": "I pushed new commits to small swe train, there are two plans: 1.",
+        "summary": "PR #26 now points at 0066a01 with the final direct-mode empty-held-out eval fallback fixed, the focused and broader RFT pytest bundles green again, the lingeri…",
+        "summary_preview": "PR #26 now points at 0066a01 with the final direct-mode empty-held-out eval fallback fixed, the focused and broader RFT pytest bundles green again, the lingeri…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773739092.072639",
+        "last_update_ts": "1773802807.727578",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-17T09:18:12Z"
+        }
+      }
+    },
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -140,22 +165,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-16T23:30:10Z"
-        }
-      },
-      "1773739092.072639": {
-        "mention_ts": "1773739092.072639",
-        "thread_ts": "1773739092.072639",
-        "status": "waiting_human",
-        "task_description": "I pushed new commits to small swe train, there are two plans: 1.",
-        "summary": "PR #26 now points at 0066a01 with the final direct-mode empty-held-out eval fallback fixed, the focused and broader RFT pytest bundles green again, the lingeri…",
-        "summary_preview": "PR #26 now points at 0066a01 with the final direct-mode empty-held-out eval fallback fixed, the focused and broader RFT pytest bundles green again, the lingeri…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773739092.072639",
-        "last_update_ts": "1773769294.781101",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-17T09:18:12Z"
         }
       },
       "1773771203.022709": {
@@ -1004,5 +1013,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-18T02:59:13Z"
+  "server_time_utc": "2026-03-18T03:01:16Z"
 }
