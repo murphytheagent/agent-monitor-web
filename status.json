@@ -1,25 +1,17 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-19T22:10:55Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-19T22:11:22Z",
+    "status": "running_session",
     "pid": 82363,
-    "loop_count": 348,
+    "loop_count": 352,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773942694.197309",
-        "started_at": 1773955967,
-        "elapsed_sec": 2287
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -28,14 +20,14 @@
     "cpu_count": 10,
     "load_avg": {
       "one": 1.44,
-      "five": 1.62,
-      "fifteen": 1.71
+      "five": 1.59,
+      "fifteen": 1.68
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106995036160,
-    "disk_free_bytes": 138112159744,
-    "runner_log_size_bytes": 199049,
+    "disk_used_bytes": 106991976448,
+    "disk_free_bytes": 138115219456,
+    "runner_log_size_bytes": 199440,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-19T21:32:42Z",
     "local_ips": []
@@ -44,73 +36,73 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-19T22:10:59Z",
+    "checked_at_utc": "2026-03-19T22:13:01Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 57
+        "temperature_c": 49
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 46
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 46
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 49
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 45
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 88,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 46
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 88,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 58
+        "temperature_c": 52
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 89,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 46
       }
     ]
   },
@@ -163,39 +155,23 @@
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T21:53:24Z"
         }
-      },
+      }
+    },
+    "active": {
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "maintenance",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Run maintenance reflection checklist and summarize findings.",
         "summary": "Run maintenance reflection checklist and summarize findings.",
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773955964.190748",
-        "last_update_ts": "1773956300.199115",
+        "last_update_ts": "1773958282.238560",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T21:32:44Z"
-        }
-      }
-    },
-    "active": {
-      "1773942694.197309": {
-        "mention_ts": "1773942694.197309",
-        "thread_ts": "1773942694.197309",
-        "status": "in_progress",
-        "task_description": "Let's work on something fun.",
-        "summary": "Delivered a PDF feasibility report on AI-driven Terraria narrative via mods, recommending a server-authoritative broker-NPC plus quest-journal architecture wit…",
-        "summary_preview": "Delivered a PDF feasibility report on AI-driven Terraria narrative via mods, recommending a server-authoritative broker-NPC plus quest-journal architecture wit…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773942694.197309",
-        "last_update_ts": "1773955967.364615",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T17:51:34Z"
         }
       }
     },
@@ -310,6 +286,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T22:03:38Z"
+        }
+      },
+      "1773942694.197309": {
+        "mention_ts": "1773942694.197309",
+        "thread_ts": "1773942694.197309",
+        "status": "waiting_human",
+        "task_description": "Let's work on something fun.",
+        "summary": "Updated the Terraria AI narrative report with prior-art research across Terraria mods, RPG AI-mod lineages, studio prototypes, and AI-native narrative games, t…",
+        "summary_preview": "Updated the Terraria AI narrative report with prior-art research across Terraria mods, RPG AI-mod lineages, studio prototypes, and AI-native narrative games, t…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773942694.197309",
+        "last_update_ts": "1773958281.950624",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T17:51:34Z"
         }
       }
     },
@@ -1126,5 +1118,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-19T22:10:59Z"
+  "server_time_utc": "2026-03-19T22:13:02Z"
 }
