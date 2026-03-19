@@ -270,42 +270,6 @@
   .visibility-list li { color: #c8d8ff; font-size: 12px; line-height: 1.5; }
   .visibility-list strong { color: #7cf2ff; font-weight: 600; }
 
-  .launchpad {
-    display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;
-    padding: 10px 20px;
-    background: rgba(6, 6, 22, 0.78);
-    border-bottom: 1px solid var(--bg-border);
-    backdrop-filter: blur(6px);
-    position: relative; z-index: 1;
-  }
-  .launchpad-link {
-    display: inline-flex; align-items: center;
-    padding: 6px 18px; border-radius: 8px;
-    border: 1px solid var(--bg-border);
-    background: linear-gradient(90deg, rgba(19, 35, 73, 0.72) 0%, rgba(56, 20, 77, 0.68) 100%);
-    font-family: "Orbitron", "Rajdhani", sans-serif;
-    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-    color: #d9f6ff; text-decoration: none;
-    text-shadow: 0 0 6px rgba(56, 240, 255, 0.3);
-    box-shadow: inset 0 0 8px rgba(56, 240, 255, 0.15);
-    transition: all 0.2s ease;
-  }
-  .launchpad-link:hover {
-    border-color: var(--bg-border-strong);
-    box-shadow: inset 0 0 14px rgba(255, 52, 178, 0.26), 0 0 14px rgba(56, 240, 255, 0.2);
-    color: #ffffff;
-    transform: scale(1.04);
-    text-shadow: 0 0 10px rgba(56, 240, 255, 0.5);
-  }
-  .launchpad-link:focus-visible {
-    outline: 2px solid var(--brand); outline-offset: 2px;
-    box-shadow: inset 0 0 14px rgba(255, 52, 178, 0.26), 0 0 14px rgba(56, 240, 255, 0.2);
-  }
-  .launchpad-link:active {
-    transform: scale(0.97);
-    box-shadow: inset 0 0 18px rgba(255, 52, 178, 0.35);
-  }
-
   @keyframes riseIn {
     from { opacity: 0; transform: translateY(5px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -315,8 +279,6 @@
     .stack-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 760px) {
-    .launchpad { padding: 8px 14px; gap: 8px; }
-    .launchpad-link { padding: 5px 14px; font-size: 11px; }
     main { padding: 14px; gap: 12px; }
     .hb-grid { gap: 12px; }
     .stack-grid { grid-template-columns: 1fr; }
@@ -332,10 +294,6 @@
   <button id="refresh-btn">↻ Refresh</button>
   <span id="last-updated"></span>
 </header>
-
-<nav class="launchpad" aria-label="Launchpad">
-  <a class="launchpad-link" href="showcase/" title="Browser tools and demos">Showcase</a>
-</nav>
 
 <main>
   <div class="card">
