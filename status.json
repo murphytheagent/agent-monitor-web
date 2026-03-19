@@ -1,17 +1,37 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-19T22:44:47Z",
-    "status": "restarting",
+    "last_updated_utc": "2026-03-19T22:46:49Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 353,
+    "loop_count": 19,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 1,
+        "task": "1773897786.579989",
+        "started_at": 1773960292,
+        "elapsed_sec": 117
+      },
+      {
+        "slot": 3,
+        "task": "1773953858.111269",
+        "started_at": 1773960292,
+        "elapsed_sec": 117
+      },
+      {
+        "slot": 5,
+        "task": "1773870804.162569",
+        "started_at": 1773960293,
+        "elapsed_sec": 116
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +39,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.93,
-      "five": 1.75,
-      "fifteen": 1.69
+      "one": 1.49,
+      "five": 1.67,
+      "fifteen": 1.66
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107206705152,
-    "disk_free_bytes": 137900490752,
-    "runner_log_size_bytes": 200338,
+    "disk_used_bytes": 107192987648,
+    "disk_free_bytes": 137914208256,
+    "runner_log_size_bytes": 201969,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-19T22:44:48Z",
     "local_ips": []
@@ -36,17 +56,17 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-19T22:44:48Z",
+    "checked_at_utc": "2026-03-19T22:46:51Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 91,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 55
       },
       {
         "index": 1,
@@ -54,15 +74,15 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 48
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 55
       },
       {
         "index": 3,
@@ -70,7 +90,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 48
       },
       {
         "index": 4,
@@ -78,15 +98,15 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 48
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 81,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 53
       },
       {
         "index": 6,
@@ -94,62 +114,63 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 54
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 78,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 50
       }
     ]
   },
   "tasks": {
-    "queued": {
-      "1773953858.111269": {
-        "mention_ts": "1773953858.111269",
-        "thread_ts": "1773953858.111269",
-        "status": "queued",
-        "task_description": "What's the result of actually training the new objective in cot loop?",
-        "summary": "What's the result of actually training the new objective in cot loop?",
-        "summary_preview": "What's the result of actually training the new objective in cot loop?",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773953858.111269",
-        "last_update_ts": "1773953858.111269",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T20:57:38Z"
-        }
-      },
+    "queued": {},
+    "active": {
       "1773897786.579989": {
         "mention_ts": "1773897786.579989",
         "thread_ts": "1773897786.579989",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
         "summary": "Quantified that the raw GPQA max-length split is largely prompt-level on the repeated-prompt pilot (90.6% prompt-majority vs 75.6% overall), and recommended a …",
         "summary_preview": "Quantified that the raw GPQA max-length split is largely prompt-level on the repeated-prompt pilot (90.6% prompt-majority vs 75.6% overall), and recommended a …",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773897786.579989",
-        "last_update_ts": "1773955967.363388",
+        "last_update_ts": "1773960291.638611",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T05:23:06Z"
         }
       },
+      "1773953858.111269": {
+        "mention_ts": "1773953858.111269",
+        "thread_ts": "1773953858.111269",
+        "status": "in_progress",
+        "task_description": "What's the result of actually training the new objective in cot loop?",
+        "summary": "What's the result of actually training the new objective in cot loop?",
+        "summary_preview": "What's the result of actually training the new objective in cot loop?",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773953858.111269",
+        "last_update_ts": "1773960292.190780",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T20:57:38Z"
+        }
+      },
       "1773870804.162569": {
         "mention_ts": "1773870804.162569",
         "thread_ts": "1773870804.162569",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
         "summary": "PR #7 now carries the first GPQA [code] prompt-profile probe path with repeated-rollout probability targets, per-layer or voted views, and temp-0.2 / n=10 Slur…",
         "summary_preview": "PR #7 now carries the first GPQA [code] prompt-profile probe path with repeated-rollout probability targets, per-layer or voted views, and temp-0.2 / n=10 Slur…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773870804.162569",
-        "last_update_ts": "1773956300.195464",
+        "last_update_ts": "1773960292.636717",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -157,24 +178,7 @@
         }
       }
     },
-    "active": {},
     "incomplete": {
-      "1773451376.077949": {
-        "mention_ts": "1773451376.077949",
-        "thread_ts": "1773451376.077949",
-        "status": "waiting_human",
-        "task_description": "I pushed new changes to cot loop, go and run the dataset rollout stat collection in this order: math ones -> GPQA -> MMLU-pro -> LiveCodeBench, fix bugs as you go and only report …",
-        "summary": "Corrected the shared-policy cross-dataset report presentation by switching the length panel to average wrong-generation length, removing the visible PDF author…",
-        "summary_preview": "Corrected the shared-policy cross-dataset report presentation by switching the length panel to average wrong-generation length, removing the visible PDF author…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773451376.077949",
-        "last_update_ts": "1773700612.509715",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-14T01:22:56Z"
-        }
-      },
       "1773671592.966079": {
         "mention_ts": "1773671592.966079",
         "thread_ts": "1773671592.966079",
@@ -1101,5 +1105,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-19T22:44:49Z"
+  "server_time_utc": "2026-03-19T22:46:52Z"
 }
