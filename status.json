@@ -39,128 +39,31 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.33,
+      "one": 2.02,
       "five": 1.93,
-      "fifteen": 1.79
+      "fifteen": 1.81
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107636551680,
-    "disk_free_bytes": 137470644224,
-    "runner_log_size_bytes": 195981,
+    "disk_used_bytes": 107641409536,
+    "disk_free_bytes": 137465786368,
+    "runner_log_size_bytes": 196483,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-19T06:59:51Z",
+    "dashboard_started_utc": "2026-03-19T19:37:13Z",
     "local_ips": []
   },
   "gpu": {
-    "enabled": true,
+    "enabled": false,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-03-19T19:35:27Z",
-    "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 47
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 47
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 47
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 47
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 46
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 91,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 47
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 48
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 48
-      }
-    ]
+    "status": "disabled",
+    "checked_at_utc": null,
+    "cache_age_sec": null,
+    "note": "GPU monitor disabled for this run.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
     "active": {
-      "1773871418.194959": {
-        "mention_ts": "1773871418.194959",
-        "thread_ts": "1773871418.194959",
-        "status": "in_progress",
-        "task_description": "Fork <[link] Your goal: minimize held-out loss on a fixed FineWeb dataset while staying within a strict 16 MB artifact limit (weights + training code combined) and a 10-minute tra…",
-        "summary": "Delivered a PDF research plan for parameter-golf that re-centers the project around test-time adaptation, shared-depth parameter tying, and exporter-aware GQA/…",
-        "summary_preview": "Delivered a PDF research plan for parameter-golf that re-centers the project around test-time adaptation, shared-depth parameter tying, and exporter-aware GQA/…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773871418.194959",
-        "last_update_ts": "1773946181.164823",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-18T22:03:38Z"
-        }
-      },
-      "1773870804.162569": {
-        "mention_ts": "1773870804.162569",
-        "thread_ts": "1773870804.162569",
-        "status": "in_progress",
-        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
-        "summary": "Athena returned a clean target-ranking answer: keep the prompt-level tail-profile direction, but if only one head ships first use s_0.9 rather than mu_log_rel;…",
-        "summary_preview": "Athena returned a clean target-ranking answer: keep the prompt-level tail-profile direction, but if only one head ships first use s_0.9 rather than mu_log_rel;…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773870804.162569",
-        "last_update_ts": "1773946807.447120",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-18T21:53:24Z"
-        }
-      },
       "1773897786.579989": {
         "mention_ts": "1773897786.579989",
         "thread_ts": "1773897786.579989",
@@ -289,6 +192,38 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T17:51:34Z"
+        }
+      },
+      "1773870804.162569": {
+        "mention_ts": "1773870804.162569",
+        "thread_ts": "1773870804.162569",
+        "status": "waiting_human",
+        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
+        "summary": "PR #7 now carries the first GPQA [code] prompt-profile probe path with repeated-rollout probability targets, per-layer or voted views, and temp-0.2 / n=10 Slur…",
+        "summary_preview": "PR #7 now carries the first GPQA [code] prompt-profile probe path with repeated-rollout probability targets, per-layer or voted views, and temp-0.2 / n=10 Slur…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773870804.162569",
+        "last_update_ts": "1773949028.586506",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-18T21:53:24Z"
+        }
+      },
+      "1773871418.194959": {
+        "mention_ts": "1773871418.194959",
+        "thread_ts": "1773871418.194959",
+        "status": "waiting_human",
+        "task_description": "Fork <[link] Your goal: minimize held-out loss on a fixed FineWeb dataset while staying within a strict 16 MB artifact limit (weights + training code combined) and a 10-minute tra…",
+        "summary": "Athena finally returned on the full-context retry; the revised parameter-golf plan now ranks shared-depth recurrence first, bounded test-time adaptation second…",
+        "summary_preview": "Athena finally returned on the full-context retry; the revised parameter-golf plan now ranks shared-depth recurrence first, bounded test-time adaptation second…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773871418.194959",
+        "last_update_ts": "1773949028.999111",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-18T22:03:38Z"
         }
       }
     },
@@ -1105,5 +1040,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-19T19:35:28Z"
+  "server_time_utc": "2026-03-19T19:37:13Z"
 }
