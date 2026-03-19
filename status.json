@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-19T23:42:00Z",
+    "last_updated_utc": "2026-03-19T23:44:03Z",
     "status": "sleeping",
     "pid": 82363,
-    "loop_count": 516,
+    "loop_count": 535,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.95,
-      "five": 1.85,
-      "fifteen": 1.82
+      "one": 1.7,
+      "five": 1.74,
+      "fifteen": 1.77
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107973890048,
-    "disk_free_bytes": 137133305856,
-    "runner_log_size_bytes": 204333,
+    "disk_used_bytes": 107222466560,
+    "disk_free_bytes": 137884729344,
+    "runner_log_size_bytes": 204406,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-19T22:44:48Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-19T23:42:05Z",
+    "checked_at_utc": "2026-03-19T23:44:08Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 2,
@@ -70,7 +70,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 48
       },
       {
         "index": 4,
@@ -110,22 +110,6 @@
     "queued": {},
     "active": {},
     "incomplete": {
-      "1773671592.966079": {
-        "mention_ts": "1773671592.966079",
-        "thread_ts": "1773671592.966079",
-        "status": "waiting_human",
-        "task_description": "The project review script is a wrapper around codex review, which is supposed to take upwards 20 minutes, so setting a short timeout on codex review is nonsensical, if the previou…",
-        "summary": "Reconstructed the earlier review \"hangs\" as 300-second maintenance-bound expirations on larger diffs, logged that the timeout change closed the wrong problem, …",
-        "summary_preview": "Reconstructed the earlier review \"hangs\" as 300-second maintenance-bound expirations on larger diffs, logged that the timeout change closed the wrong problem, …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773703810.083329",
-        "last_update_ts": "1773704540.111149",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-16T23:30:10Z"
-        }
-      },
       "1773771203.022709": {
         "mention_ts": "1773771203.022709",
         "thread_ts": "1773771203.022709",
@@ -1084,5 +1068,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-19T23:42:06Z"
+  "server_time_utc": "2026-03-19T23:44:09Z"
 }
