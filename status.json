@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-19T06:11:47Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-19T06:59:51Z",
+    "status": "restarting",
     "pid": 82363,
     "loop_count": 5040,
     "last_exit_code": 0,
@@ -9,23 +9,9 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773897786.579989",
-        "started_at": 1773899283,
-        "elapsed_sec": 1423
-      },
-      {
-        "slot": 3,
-        "task": "1773871418.194959",
-        "started_at": 1773883698,
-        "elapsed_sec": 17008
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -33,42 +19,42 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.63,
-      "five": 1.65,
-      "fifteen": 1.62
+      "one": 1.91,
+      "five": 1.7,
+      "fifteen": 1.63
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 108550348800,
-    "disk_free_bytes": 136556847104,
-    "runner_log_size_bytes": 188627,
+    "disk_used_bytes": 108554366976,
+    "disk_free_bytes": 136552828928,
+    "runner_log_size_bytes": 189471,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-18T21:08:28Z",
+    "dashboard_started_utc": "2026-03-19T06:59:51Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-19T06:59:10Z",
+    "checked_at_utc": "2026-03-19T06:59:51Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 45
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 46
       },
       {
         "index": 2,
@@ -76,39 +62,39 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 47
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 96,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 47
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 47
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 96,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 46
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 47
       },
       {
         "index": 7,
@@ -116,30 +102,13 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 47
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773871418.194959": {
-        "mention_ts": "1773871418.194959",
-        "thread_ts": "1773871418.194959",
-        "status": "in_progress",
-        "task_description": "Fork <[link] Your goal: minimize held-out loss on a fixed FineWeb dataset while staying within a strict 16 MB artifact limit (weights + training code combined) and a 10-minute tra…",
-        "summary": "Forked parameter-golf, added a latent-KV attention search scaffold plus project docs, but the requested RTX Pro 6000 node is blocked by another user's 8-GPU Sl…",
-        "summary_preview": "Forked parameter-golf, added a latent-KV attention search scaffold plus project docs, but the requested RTX Pro 6000 node is blocked by another user's 8-GPU Sl…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773871418.194959",
-        "last_update_ts": "1773883698.474382",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-18T22:03:38Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -267,6 +236,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T05:23:06Z"
+        }
+      },
+      "1773871418.194959": {
+        "mention_ts": "1773871418.194959",
+        "thread_ts": "1773871418.194959",
+        "status": "waiting_human",
+        "task_description": "Fork <[link] Your goal: minimize held-out loss on a fixed FineWeb dataset while staying within a strict 16 MB artifact limit (weights + training code combined) and a 10-minute tra…",
+        "summary": "Delivered a PDF research plan for parameter-golf that re-centers the project around test-time adaptation, shared-depth parameter tying, and exporter-aware GQA/…",
+        "summary_preview": "Delivered a PDF research plan for parameter-golf that re-centers the project around test-time adaptation, shared-depth parameter tying, and exporter-aware GQA/…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773871418.194959",
+        "last_update_ts": "1773903590.911284",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-18T22:03:38Z"
         }
       }
     },
@@ -1083,5 +1068,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-19T06:59:11Z"
+  "server_time_utc": "2026-03-19T06:59:51Z"
 }
