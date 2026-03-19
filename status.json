@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-19T19:14:42Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-19T21:32:42Z",
+    "status": "restarting",
     "pid": 82363,
     "loop_count": 6479,
     "last_exit_code": 0,
@@ -9,29 +9,9 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773870804.162569",
-        "started_at": 1773946807,
-        "elapsed_sec": 874
-      },
-      {
-        "slot": 5,
-        "task": "1773871418.194959",
-        "started_at": 1773946181,
-        "elapsed_sec": 1501
-      },
-      {
-        "slot": 6,
-        "task": "1773897786.579989",
-        "started_at": 1773946874,
-        "elapsed_sec": 807
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -39,113 +19,96 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.72,
-      "five": 2.26,
-      "fifteen": 1.89
+      "one": 2.97,
+      "five": 2.35,
+      "fifteen": 1.93
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107002310656,
-    "disk_free_bytes": 138104885248,
-    "runner_log_size_bytes": 196483,
+    "disk_used_bytes": 106999943168,
+    "disk_free_bytes": 138107252736,
+    "runner_log_size_bytes": 197327,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-19T06:59:51Z",
+    "dashboard_started_utc": "2026-03-19T21:32:42Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-19T21:32:16Z",
+    "checked_at_utc": "2026-03-19T21:32:42Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 47
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 47
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 88,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 47
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 47
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 46
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 46
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 47
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 48
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773897786.579989": {
-        "mention_ts": "1773897786.579989",
-        "thread_ts": "1773897786.579989",
-        "status": "in_progress",
-        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
-        "summary": "Quantified that the raw GPQA max-length split is largely prompt-level on the repeated-prompt pilot (90.6% prompt-majority vs 75.6% overall), and recommended a …",
-        "summary_preview": "Quantified that the raw GPQA max-length split is largely prompt-level on the repeated-prompt pilot (90.6% prompt-majority vs 75.6% overall), and recommended a …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773897786.579989",
-        "last_update_ts": "1773946874.343370",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T05:23:06Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -289,6 +252,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T22:03:38Z"
+        }
+      },
+      "1773897786.579989": {
+        "mention_ts": "1773897786.579989",
+        "thread_ts": "1773897786.579989",
+        "status": "in_progress",
+        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
+        "summary": "Quantified that the raw GPQA max-length split is largely prompt-level on the repeated-prompt pilot (90.6% prompt-majority vs 75.6% overall), and recommended a …",
+        "summary_preview": "Quantified that the raw GPQA max-length split is largely prompt-level on the repeated-prompt pilot (90.6% prompt-majority vs 75.6% overall), and recommended a …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773897786.579989",
+        "last_update_ts": "1773955962.537018",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T05:23:06Z"
         }
       }
     },
@@ -1105,5 +1084,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-19T21:32:17Z"
+  "server_time_utc": "2026-03-19T21:32:43Z"
 }
