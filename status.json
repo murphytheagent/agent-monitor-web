@@ -1,17 +1,25 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-19T21:32:42Z",
-    "status": "restarting",
+    "last_updated_utc": "2026-03-19T21:34:44Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 6479,
+    "loop_count": 19,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 1,
+        "task": "1773942694.197309",
+        "started_at": 1773955967,
+        "elapsed_sec": 116
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.97,
-      "five": 2.35,
+      "one": 2.16,
+      "five": 2.22,
       "fifteen": 1.93
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 106999943168,
-    "disk_free_bytes": 138107252736,
-    "runner_log_size_bytes": 197327,
+    "disk_used_bytes": 106974478336,
+    "disk_free_bytes": 138132717568,
+    "runner_log_size_bytes": 198673,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-19T21:32:42Z",
     "local_ips": []
@@ -36,25 +44,25 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-19T21:32:42Z",
+    "checked_at_utc": "2026-03-19T21:34:44Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 51
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 53
       },
       {
         "index": 2,
@@ -62,15 +70,15 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 55
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 53
       },
       {
         "index": 4,
@@ -78,37 +86,103 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 53
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 53
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 56
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 55
       }
     ]
   },
   "tasks": {
-    "queued": {},
-    "active": {},
+    "queued": {
+      "1773953858.111269": {
+        "mention_ts": "1773953858.111269",
+        "thread_ts": "1773953858.111269",
+        "status": "queued",
+        "task_description": "What's the result of actually training the new objective in cot loop?",
+        "summary": "What's the result of actually training the new objective in cot loop?",
+        "summary_preview": "What's the result of actually training the new objective in cot loop?",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773953858.111269",
+        "last_update_ts": "1773953858.111269",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T20:57:38Z"
+        }
+      },
+      "1773897786.579989": {
+        "mention_ts": "1773897786.579989",
+        "thread_ts": "1773897786.579989",
+        "status": "queued",
+        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
+        "summary": "Quantified that the raw GPQA max-length split is largely prompt-level on the repeated-prompt pilot (90.6% prompt-majority vs 75.6% overall), and recommended a …",
+        "summary_preview": "Quantified that the raw GPQA max-length split is largely prompt-level on the repeated-prompt pilot (90.6% prompt-majority vs 75.6% overall), and recommended a …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773897786.579989",
+        "last_update_ts": "1773955967.363388",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T05:23:06Z"
+        }
+      },
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
+        "status": "queued",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773955964.190748",
+        "last_update_ts": "1773955967.715820",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T21:32:44Z"
+        }
+      }
+    },
+    "active": {
+      "1773942694.197309": {
+        "mention_ts": "1773942694.197309",
+        "thread_ts": "1773942694.197309",
+        "status": "in_progress",
+        "task_description": "Let's work on something fun.",
+        "summary": "Delivered a PDF feasibility report on AI-driven Terraria narrative via mods, recommending a server-authoritative broker-NPC plus quest-journal architecture wit…",
+        "summary_preview": "Delivered a PDF feasibility report on AI-driven Terraria narrative via mods, recommending a server-authoritative broker-NPC plus quest-journal architecture wit…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773942694.197309",
+        "last_update_ts": "1773955967.364615",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T17:51:34Z"
+        }
+      }
+    },
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -206,22 +280,6 @@
           "time_iso": "2026-03-19T05:56:16Z"
         }
       },
-      "1773942694.197309": {
-        "mention_ts": "1773942694.197309",
-        "thread_ts": "1773942694.197309",
-        "status": "waiting_human",
-        "task_description": "Let's work on something fun.",
-        "summary": "Delivered a PDF feasibility report on AI-driven Terraria narrative via mods, recommending a server-authoritative broker-NPC plus quest-journal architecture wit…",
-        "summary_preview": "Delivered a PDF feasibility report on AI-driven Terraria narrative via mods, recommending a server-authoritative broker-NPC plus quest-journal architecture wit…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773942694.197309",
-        "last_update_ts": "1773944602.773349",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T17:51:34Z"
-        }
-      },
       "1773870804.162569": {
         "mention_ts": "1773870804.162569",
         "thread_ts": "1773870804.162569",
@@ -253,22 +311,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T22:03:38Z"
         }
-      },
-      "1773897786.579989": {
-        "mention_ts": "1773897786.579989",
-        "thread_ts": "1773897786.579989",
-        "status": "in_progress",
-        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
-        "summary": "Quantified that the raw GPQA max-length split is largely prompt-level on the repeated-prompt pilot (90.6% prompt-majority vs 75.6% overall), and recommended a …",
-        "summary_preview": "Quantified that the raw GPQA max-length split is largely prompt-level on the repeated-prompt pilot (90.6% prompt-majority vs 75.6% overall), and recommended a …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773897786.579989",
-        "last_update_ts": "1773955962.537018",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T05:23:06Z"
-        }
       }
     },
     "finished": {
@@ -286,22 +328,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T16:27:38Z"
-        }
-      },
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1773866244.828199",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: Plan 31 Phase 4 complete (ShellAdapter wired into supervisor loop with poll, startup recovery, structured logs, 5 integration tests). Consoli…",
-        "summary_preview": "Developer review: Plan 31 Phase 4 complete (ShellAdapter wired into supervisor loop with poll, startup recovery, structured logs, 5 integration tests). Consoli…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773866227.524752",
-        "last_update_ts": "1773868107.837749",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-18T20:37:07Z"
         }
       },
       "1773111453.746699": {
@@ -1071,6 +1097,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T21:29:35Z"
         }
+      },
+      "1771791882.440369": {
+        "mention_ts": "1771791882.440369",
+        "thread_ts": "1771791882.440369",
+        "status": "done",
+        "task_description": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the murphy channel abou…",
+        "summary": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
+        "summary_preview": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771791882.440369",
+        "last_update_ts": "1771798209.363401",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T20:24:42Z"
+        }
       }
     }
   },
@@ -1084,5 +1126,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-19T21:32:43Z"
+  "server_time_utc": "2026-03-19T21:34:45Z"
 }
