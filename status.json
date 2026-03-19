@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-19T16:30:58Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-19T16:33:02Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 5008,
+    "loop_count": 5026,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773937658.648909",
-        "started_at": 1773937675,
-        "elapsed_sec": 182
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.52,
-      "five": 1.47,
-      "fifteen": 1.54
+      "one": 1.57,
+      "five": 1.49,
+      "fifteen": 1.53
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107795693568,
-    "disk_free_bytes": 137311502336,
-    "runner_log_size_bytes": 191979,
+    "disk_used_bytes": 107794030592,
+    "disk_free_bytes": 137313165312,
+    "runner_log_size_bytes": 192221,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-19T06:59:51Z",
     "local_ips": []
@@ -44,96 +36,79 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-19T16:31:06Z",
+    "checked_at_utc": "2026-03-19T16:33:08Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 2,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 57
+        "temperature_c": 38
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 39
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 57
+        "temperature_c": 39
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 39
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 39
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 39
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 39
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 40
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773937658.648909": {
-        "mention_ts": "1773937658.648909",
-        "thread_ts": "1773937658.648909",
-        "status": "in_progress",
-        "task_description": "Please check if you can talk to Athena normally.",
-        "summary": "Please check if you can talk to Athena normally.",
-        "summary_preview": "Please check if you can talk to Athena normally.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773937658.648909",
-        "last_update_ts": "1773937675.596288",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T16:27:38Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -281,6 +256,22 @@
       }
     },
     "finished": {
+      "1773937658.648909": {
+        "mention_ts": "1773937658.648909",
+        "thread_ts": "1773937658.648909",
+        "status": "done",
+        "task_description": "Please check if you can talk to Athena normally.",
+        "summary": "Athena responded normally to a minimal connectivity prompt.",
+        "summary_preview": "Athena responded normally to a minimal connectivity prompt.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773937658.648909",
+        "last_update_ts": "1773937948.679326",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T16:27:38Z"
+        }
+      },
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "1773866244.828199",
@@ -1064,22 +1055,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T21:29:35Z"
         }
-      },
-      "1771791882.440369": {
-        "mention_ts": "1771791882.440369",
-        "thread_ts": "1771791882.440369",
-        "status": "done",
-        "task_description": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the murphy channel abou…",
-        "summary": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
-        "summary_preview": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771791882.440369",
-        "last_update_ts": "1771798209.363401",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T20:24:42Z"
-        }
       }
     }
   },
@@ -1093,5 +1068,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-19T16:31:07Z"
+  "server_time_utc": "2026-03-19T16:33:09Z"
 }
