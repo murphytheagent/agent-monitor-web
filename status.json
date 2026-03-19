@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-19T22:31:18Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-19T22:44:47Z",
+    "status": "restarting",
     "pid": 82363,
     "loop_count": 353,
     "last_exit_code": 0,
@@ -19,34 +19,34 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.7,
-      "five": 1.68,
-      "fifteen": 1.66
+      "one": 1.93,
+      "five": 1.75,
+      "fifteen": 1.69
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107207118848,
-    "disk_free_bytes": 137900077056,
-    "runner_log_size_bytes": 199663,
+    "disk_used_bytes": 107206705152,
+    "disk_free_bytes": 137900490752,
+    "runner_log_size_bytes": 200338,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-19T21:32:42Z",
+    "dashboard_started_utc": "2026-03-19T22:44:48Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-19T22:43:41Z",
+    "checked_at_utc": "2026-03-19T22:44:48Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 91,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 54
       },
       {
         "index": 1,
@@ -59,10 +59,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 96,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 54
       },
       {
         "index": 3,
@@ -70,7 +70,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 51
       },
       {
         "index": 4,
@@ -78,15 +78,15 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 81,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 48
       },
       {
         "index": 6,
@@ -99,7 +99,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 78,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 47
@@ -157,24 +157,7 @@
         }
       }
     },
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1773958297.306549",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Maintenance reflection completed: coordination artifacts and stale project docs were refreshed, active PR surfaces were re-audited, and a new parameter-golf su…",
-        "summary_preview": "Maintenance reflection completed: coordination artifacts and stale project docs were refreshed, active PR surfaces were re-audited, and a new parameter-golf su…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773955964.190748",
-        "last_update_ts": "1773959478.255531",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T21:32:44Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773451376.077949": {
         "mention_ts": "1773451376.077949",
@@ -306,6 +289,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1773958297.306549",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: implemented AGENT-028 worker hang detection (session log staleness watchdog, reduced collect timeout), committed AGENT-027 in chatgpt-mcp-chr…",
+        "summary_preview": "Developer review: implemented AGENT-028 worker hang detection (session log staleness watchdog, reduced collect timeout), committed AGENT-027 in chatgpt-mcp-chr…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773955964.190748",
+        "last_update_ts": "1773960287.583608",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T21:32:44Z"
+        }
+      },
       "1773937658.648909": {
         "mention_ts": "1773937658.648909",
         "thread_ts": "1773937658.648909",
@@ -1089,22 +1088,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T21:29:35Z"
         }
-      },
-      "1771791882.440369": {
-        "mention_ts": "1771791882.440369",
-        "thread_ts": "1771791882.440369",
-        "status": "done",
-        "task_description": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the murphy channel abou…",
-        "summary": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
-        "summary_preview": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771791882.440369",
-        "last_update_ts": "1771798209.363401",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T20:24:42Z"
-        }
       }
     }
   },
@@ -1118,5 +1101,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-19T22:43:42Z"
+  "server_time_utc": "2026-03-19T22:44:49Z"
 }
