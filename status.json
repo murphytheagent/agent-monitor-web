@@ -1,17 +1,31 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T20:02:10Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-20T20:18:23Z",
+    "status": "workers_active",
     "pid": 27338,
-    "loop_count": 1,
+    "loop_count": 11,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773984772.225789",
+        "started_at": 1774037845,
+        "elapsed_sec": 57
+      },
+      {
+        "slot": 1,
+        "task": "1774037786.521379",
+        "started_at": 1774037846,
+        "elapsed_sec": 57
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.18,
-      "five": 2.14,
-      "fifteen": 2.02
+      "one": 1.95,
+      "five": 2.05,
+      "fifteen": 2.0
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 109495934976,
-    "disk_free_bytes": 135611260928,
-    "runner_log_size_bytes": 223774,
+    "disk_used_bytes": 109482668032,
+    "disk_free_bytes": 135624527872,
+    "runner_log_size_bytes": 224095,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T20:02:05Z",
     "local_ips": []
@@ -36,79 +50,112 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T20:16:27Z",
+    "checked_at_utc": "2026-03-20T20:18:30Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 88,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 55
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 55
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 90,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 54
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 54
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 54
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 52
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 54
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 54
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773984772.225789": {
+        "mention_ts": "1773984772.225789",
+        "thread_ts": "1773984772.225789",
+        "status": "in_progress",
+        "task_description": "Can you access and edit: <[link] <[link].",
+        "summary": "Murphy confirmed both shared Overleaf projects are editable from the Murphy account, verified that the Murphy-owned Git token now supports local clone/push/liv…",
+        "summary_preview": "Murphy confirmed both shared Overleaf projects are editable from the Murphy account, verified that the Murphy-owned Git token now supports local clone/push/liv…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773984772.225789",
+        "last_update_ts": "1774037845.452978",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T06:00:38Z"
+        }
+      },
+      "1774037786.521379": {
+        "mention_ts": "1774037786.521379",
+        "thread_ts": "1774037786.521379",
+        "status": "in_progress",
+        "task_description": "I've just installed Google drive on your mac.",
+        "summary": "I've just installed Google drive on your mac.",
+        "summary_preview": "I've just installed Google drive on your mac.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774037786.521379",
+        "last_update_ts": "1774037845.976254",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T20:16:26Z"
+        }
+      }
+    },
     "incomplete": {
       "1773701002.020259": {
         "mention_ts": "1773701002.020259",
@@ -284,22 +331,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T17:23:10Z"
-        }
-      },
-      "1773984772.225789": {
-        "mention_ts": "1773984772.225789",
-        "thread_ts": "1773984772.225789",
-        "status": "in_progress",
-        "task_description": "Can you access and edit: <[link] <[link].",
-        "summary": "Murphy confirmed both shared Overleaf projects are editable from the Murphy account, verified that the Murphy-owned Git token now supports local clone/push/liv…",
-        "summary_preview": "Murphy confirmed both shared Overleaf projects are editable from the Murphy account, verified that the Murphy-owned Git token now supports local clone/push/liv…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773984772.225789",
-        "last_update_ts": "1774036930.907473",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T06:00:38Z"
         }
       }
     },
@@ -1116,5 +1147,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T20:16:29Z"
+  "server_time_utc": "2026-03-20T20:18:31Z"
 }
