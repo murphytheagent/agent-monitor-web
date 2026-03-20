@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T03:54:33Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-20T03:56:38Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 114,
+    "loop_count": 133,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773942694.197309",
-        "started_at": 1773978146,
-        "elapsed_sec": 727
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.4,
-      "five": 1.95,
-      "fifteen": 1.94
+      "one": 1.84,
+      "five": 1.91,
+      "fifteen": 1.92
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 108910354432,
-    "disk_free_bytes": 136196841472,
-    "runner_log_size_bytes": 209119,
+    "disk_used_bytes": 108916690944,
+    "disk_free_bytes": 136190504960,
+    "runner_log_size_bytes": 209361,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T03:42:21Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T03:54:37Z",
+    "checked_at_utc": "2026-03-20T03:56:39Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 46
       },
       {
         "index": 1,
@@ -62,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 46
       },
       {
         "index": 2,
@@ -86,7 +78,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 5,
@@ -94,7 +86,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 6,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773942694.197309": {
-        "mention_ts": "1773942694.197309",
-        "thread_ts": "1773942694.197309",
-        "status": "in_progress",
-        "task_description": "Let's work on something fun.",
-        "summary": "Bundled the Windows loading guide into the WorldBody source-mod zip, synced the project docs/report, and reuploaded the source drop; the remaining validation i…",
-        "summary_preview": "Bundled the Windows loading guide into the WorldBody source-mod zip, synced the project docs/report, and reuploaded the source drop; the remaining validation i…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773942694.197309",
-        "last_update_ts": "1773978145.896826",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T17:51:34Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773771203.022709": {
         "mention_ts": "1773771203.022709",
@@ -261,6 +236,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T21:53:24Z"
+        }
+      },
+      "1773942694.197309": {
+        "mention_ts": "1773942694.197309",
+        "thread_ts": "1773942694.197309",
+        "status": "waiting_human",
+        "task_description": "Let's work on something fun.",
+        "summary": "Added Simplified Chinese Windows loading guides to the Terraria WorldBody repo and bundled source zip, reuploaded the updated modsource archive, and left the b…",
+        "summary_preview": "Added Simplified Chinese Windows loading guides to the Terraria WorldBody repo and bundled source zip, reuploaded the updated modsource archive, and left the b…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773942694.197309",
+        "last_update_ts": "1773978911.124188",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T17:51:34Z"
         }
       }
     },
@@ -1077,5 +1068,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T03:54:38Z"
+  "server_time_utc": "2026-03-20T03:56:40Z"
 }
