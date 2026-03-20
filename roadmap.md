@@ -4,7 +4,7 @@
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
-- The tokenizer workbench is the first featured showcase tool.
+- The showcase route now behaves like a curated gallery page rather than a route explainer, with the tokenizer workbench carrying the page as the first featured exhibit.
 - A persistent tokenizer link on the root dashboard is still blocked because the exporter has no showcase-extension hook yet.
 
 ## Milestone 1 - Stable Hosted Surfaces
@@ -23,7 +23,7 @@ Success criteria:
 - At least one featured tool is presented as a project artifact, not just a raw utility route.
 
 Status:
-- In place. `/showcase/` now features the tokenizer workbench and links back to the live monitor.
+- In place. `/showcase/` now presents the tokenizer workbench as a gallery-style featured exhibit and keeps the page focused on browseable project surfaces instead of internal site structure.
 
 ## Milestone 3 - Root Dashboard Extensibility
 
