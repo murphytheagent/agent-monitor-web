@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T06:25:36Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-20T06:27:36Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 646,
+    "loop_count": 664,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773984772.225789",
-        "started_at": 1773986896,
-        "elapsed_sec": 1039
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.62,
-      "five": 2.05,
-      "fifteen": 1.9
+      "one": 1.66,
+      "five": 1.85,
+      "fifteen": 1.83
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 109015707648,
-    "disk_free_bytes": 136091488256,
-    "runner_log_size_bytes": 214387,
+    "disk_used_bytes": 109015408640,
+    "disk_free_bytes": 136091787264,
+    "runner_log_size_bytes": 214629,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T05:14:08Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T06:25:36Z",
+    "checked_at_utc": "2026-03-20T06:27:39Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 47
       },
       {
         "index": 1,
@@ -70,7 +62,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 47
       },
       {
         "index": 3,
@@ -102,7 +94,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 47
       },
       {
         "index": 7,
@@ -110,30 +102,13 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 47
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773984772.225789": {
-        "mention_ts": "1773984772.225789",
-        "thread_ts": "1773984772.225789",
-        "status": "in_progress",
-        "task_description": "Can you access and edit: <[link] <[link].",
-        "summary": "Rechecked the Overleaf links after the Gmail-invite follow-up; both still require fresh Overleaf/Google login, and I logged the missing done-marker regression …",
-        "summary_preview": "Rechecked the Overleaf links after the Gmail-invite follow-up; both still require fresh Overleaf/Google login, and I logged the missing done-marker regression …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773984772.225789",
-        "last_update_ts": "1773986896.296629",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T06:00:38Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773771203.022709": {
         "mention_ts": "1773771203.022709",
@@ -293,6 +268,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T20:57:38Z"
+        }
+      },
+      "1773984772.225789": {
+        "mention_ts": "1773984772.225789",
+        "thread_ts": "1773984772.225789",
+        "status": "waiting_human",
+        "task_description": "Can you access and edit: <[link] <[link].",
+        "summary": "Recovered the Murphy Gmail/Overleaf path, joined both shared Overleaf projects, verified reversible write access in each editor, and logged the missing done-ma…",
+        "summary_preview": "Recovered the Murphy Gmail/Overleaf path, joined both shared Overleaf projects, verified reversible write access in each editor, and logged the missing done-ma…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773984772.225789",
+        "last_update_ts": "1773988022.506266",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T06:00:38Z"
         }
       }
     },
@@ -1109,5 +1100,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T06:25:37Z"
+  "server_time_utc": "2026-03-20T06:27:40Z"
 }
