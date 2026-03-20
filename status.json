@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T17:40:59Z",
+    "last_updated_utc": "2026-03-20T17:43:02Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 6607,
+    "loop_count": 6625,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,14 +16,14 @@
       {
         "slot": 0,
         "task": "1774027184.232059",
-        "started_at": 1774027804,
-        "elapsed_sec": 655
+        "started_at": 1774028543,
+        "elapsed_sec": 39
       },
       {
         "slot": 1,
         "task": "1774027390.110939",
         "started_at": 1774027418,
-        "elapsed_sec": 1041
+        "elapsed_sec": 1164
       }
     ]
   },
@@ -33,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.03,
-      "five": 1.81,
-      "fifteen": 1.71
+      "one": 1.47,
+      "five": 1.7,
+      "fifteen": 1.68
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 108960428032,
-    "disk_free_bytes": 136146767872,
-    "runner_log_size_bytes": 216569,
+    "disk_used_bytes": 108960796672,
+    "disk_free_bytes": 136146399232,
+    "runner_log_size_bytes": 216951,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T05:14:08Z",
     "local_ips": []
@@ -50,33 +50,33 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T17:41:02Z",
+    "checked_at_utc": "2026-03-20T17:43:05Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 46
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 89,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 46
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 79,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 46
       },
       {
         "index": 3,
@@ -84,39 +84,39 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 46
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 45
+      },
+      {
+        "index": 5,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 45
+      },
+      {
+        "index": 6,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 46
       },
       {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 52
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 89,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 47
-      },
-      {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 46
       }
     ]
   },
@@ -144,11 +144,11 @@
         "thread_ts": "1774027184.232059",
         "status": "in_progress",
         "task_description": "I have a spare windows pc that you can use it to do tests.",
-        "summary": "Researched and replied with a Windows remote-access plan: use Tailscale plus native RDP on Windows Pro/Enterprise/Education, or Tailscale plus RustDesk on Wind…",
-        "summary_preview": "Researched and replied with a Windows remote-access plan: use Tailscale plus native RDP on Windows Pro/Enterprise/Education, or Tailscale plus RustDesk on Wind…",
+        "summary": "Revised the Windows testing plan for the office-LAN setup: recommended Parsec as the primary path for Terraria+tModLoader smoke tests, kept native RDP only as …",
+        "summary_preview": "Revised the Windows testing plan for the office-LAN setup: recommended Parsec as the primary path for Terraria+tModLoader smoke tests, kept native RDP only as …",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774027184.232059",
-        "last_update_ts": "1774027803.935386",
+        "last_update_ts": "1774028543.142073",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -1147,5 +1147,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T17:41:03Z"
+  "server_time_utc": "2026-03-20T17:43:06Z"
 }
