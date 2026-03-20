@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T17:00:00Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-20T17:02:01Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 6239,
+    "loop_count": 6257,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773984772.225789",
-        "started_at": 1774024423,
-        "elapsed_sec": 1576
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.54,
-      "five": 1.95,
-      "fifteen": 1.7
+      "one": 1.25,
+      "five": 1.67,
+      "fifteen": 1.62
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 109031211008,
-    "disk_free_bytes": 136075984896,
-    "runner_log_size_bytes": 215673,
+    "disk_used_bytes": 109020983296,
+    "disk_free_bytes": 136086212608,
+    "runner_log_size_bytes": 215915,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T05:14:08Z",
     "local_ips": []
@@ -44,44 +36,12 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T17:00:04Z",
+    "checked_at_utc": "2026-03-20T17:02:07Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 57
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 57
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 56
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 54
-      },
-      {
-        "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
@@ -89,7 +49,7 @@
         "temperature_c": 56
       },
       {
-        "index": 5,
+        "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 94,
         "memory_used_mb": 65479,
@@ -97,17 +57,49 @@
         "temperature_c": 54
       },
       {
-        "index": 6,
+        "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 88,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 58
+        "temperature_c": 55
+      },
+      {
+        "index": 3,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 94,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 55
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 98,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 53
+      },
+      {
+        "index": 5,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 98,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 55
+      },
+      {
+        "index": 6,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 79,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 55
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 57
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773984772.225789": {
-        "mention_ts": "1773984772.225789",
-        "thread_ts": "1773984772.225789",
-        "status": "in_progress",
-        "task_description": "Can you access and edit: <[link] <[link].",
-        "summary": "Explained and live-verified the Murphy-owned Overleaf Git token path; the thread now waits on whether to mint/store the token and switch both projects to the l…",
-        "summary_preview": "Explained and live-verified the Murphy-owned Overleaf Git token path; the thread now waits on whether to mint/store the token and switch both projects to the l…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773984772.225789",
-        "last_update_ts": "1774024422.861183",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T06:00:38Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773771203.022709": {
         "mention_ts": "1773771203.022709",
@@ -293,6 +268,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T20:57:38Z"
+        }
+      },
+      "1773984772.225789": {
+        "mention_ts": "1773984772.225789",
+        "thread_ts": "1773984772.225789",
+        "status": "waiting_human",
+        "task_description": "Can you access and edit: <[link] <[link].",
+        "summary": "Murphy now has a single Murphy-owned Overleaf Git token stored locally with explicit Keychain provenance, but both shared Overleaf projects still reject Git ac…",
+        "summary_preview": "Murphy now has a single Murphy-owned Overleaf Git token stored locally with explicit Keychain provenance, but both shared Overleaf projects still reject Git ac…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773984772.225789",
+        "last_update_ts": "1774026047.253172",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T06:00:38Z"
         }
       }
     },
@@ -1109,5 +1100,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T17:00:05Z"
+  "server_time_utc": "2026-03-20T17:02:08Z"
 }
