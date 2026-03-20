@@ -3,25 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Showcase Gallery | Agent Monitor</title>
+  <title>Demos | Agent Monitor</title>
   <link rel="icon" href="data:,">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
     :root {
-      --bg: #000000;
-      --panel: #04070f;
-      --panel-2: #070b16;
-      --panel-3: #0b1020;
-      --border: rgba(56, 240, 255, 0.5);
-      --border-strong: rgba(255, 47, 179, 0.72);
+      --bg: #04050d;
+      --surface: rgba(9, 12, 24, 0.9);
+      --surface-2: rgba(10, 15, 30, 0.94);
+      --surface-3: rgba(15, 22, 42, 0.96);
+      --border: rgba(93, 236, 255, 0.24);
+      --border-strong: rgba(255, 77, 177, 0.4);
       --text-main: #f5fbff;
       --text-muted: #9fb4d9;
-      --text-dim: #6e7da3;
-      --accent: #38f0ff;
-      --accent-2: #ff2fb3;
-      --good: #4dffb4;
-      --shadow: 4px 4px 0 rgba(255, 47, 179, 0.28), -2px -2px 0 rgba(56, 240, 255, 0.18);
+      --text-dim: #6d7a9f;
+      --accent: #46ecff;
+      --accent-2: #ff57bf;
+      --accent-3: #8fffcb;
+      --shadow: 0 28px 70px rgba(1, 5, 17, 0.5);
+      --radius-xl: 30px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --page-width: min(1360px, calc(100vw - 28px));
     }
 
     * {
@@ -38,12 +43,12 @@
       color: var(--text-main);
       font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
       background:
-        linear-gradient(90deg, rgba(56, 240, 255, 0.08) 0 1px, transparent 1px 80px),
-        linear-gradient(rgba(56, 240, 255, 0.06) 0 1px, transparent 1px 80px),
-        radial-gradient(circle at 18% 12%, rgba(56, 240, 255, 0.16) 0%, transparent 28%),
-        radial-gradient(circle at 88% 2%, rgba(255, 47, 179, 0.18) 0%, transparent 26%),
-        var(--bg);
+        radial-gradient(circle at 10% 12%, rgba(70, 236, 255, 0.18) 0%, transparent 26%),
+        radial-gradient(circle at 86% 4%, rgba(255, 87, 191, 0.18) 0%, transparent 28%),
+        radial-gradient(circle at 52% 100%, rgba(73, 110, 255, 0.16) 0%, transparent 36%),
+        linear-gradient(155deg, #04050d 0%, #070a17 38%, #0f1124 100%);
       overflow-x: hidden;
+      position: relative;
     }
 
     body::before {
@@ -51,8 +56,36 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 12%, transparent 88%, rgba(255, 255, 255, 0.02) 100%);
-      opacity: 0.8;
+      background:
+        repeating-linear-gradient(
+          to right,
+          rgba(70, 236, 255, 0.04) 0,
+          rgba(70, 236, 255, 0.04) 1px,
+          transparent 1px,
+          transparent 88px
+        ),
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.02) 0,
+          rgba(255, 255, 255, 0.02) 1px,
+          transparent 1px,
+          transparent 6px
+        );
+      opacity: 0.42;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      left: 50%;
+      top: -240px;
+      width: 920px;
+      height: 920px;
+      transform: translateX(-50%);
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 66%);
+      filter: blur(16px);
+      opacity: 0.9;
     }
 
     a {
@@ -60,32 +93,39 @@
       text-decoration: none;
     }
 
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
     .page-shell {
       position: relative;
-      width: min(1320px, calc(100vw - 28px));
-      margin: 0 auto;
-      padding: 18px 0 42px;
       z-index: 1;
+      width: var(--page-width);
+      margin: 0 auto;
+      padding: 18px 0 48px;
     }
 
     .topbar,
     .hero,
-    .feature-card {
-      border: 2px solid var(--border);
-      background: linear-gradient(180deg, rgba(4, 7, 15, 0.96) 0%, rgba(7, 11, 22, 0.94) 100%);
+    .detail-section,
+    .explore-section {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(7, 10, 20, 0.94) 0%, rgba(10, 15, 30, 0.92) 100%);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
     }
 
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding: 12px 16px;
-      margin-bottom: 16px;
+      gap: 16px;
+      padding: 14px 18px;
     }
 
-    .topbar-copy {
+    .brand {
       display: grid;
       gap: 2px;
       min-width: 0;
@@ -93,7 +133,8 @@
 
     .eyebrow,
     .section-label,
-    .mini-label {
+    .mini-label,
+    .prompt-kicker {
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 11px;
       font-weight: 700;
@@ -106,17 +147,16 @@
       color: var(--accent);
     }
 
-    .topbar-title {
+    .brand h1 {
       margin: 0;
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 18px;
       line-height: 1;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      text-shadow: 2px 0 0 rgba(255, 47, 179, 0.65), -2px 0 0 rgba(56, 240, 255, 0.65);
     }
 
-    .topbar-subtitle {
+    .brand p {
       margin: 0;
       color: var(--text-dim);
       font-size: 13px;
@@ -129,196 +169,89 @@
       justify-content: flex-end;
     }
 
-    .nav-pill {
+    .nav-link,
+    .action-link,
+    .prompt-card {
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .nav-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-height: 40px;
       padding: 0 14px;
-      border: 2px solid var(--border);
+      border: 1px solid rgba(93, 236, 255, 0.2);
       border-radius: 999px;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(10, 15, 30, 0.8);
       color: var(--text-muted);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: transform 120ms ease, border-color 120ms ease, color 120ms ease;
     }
 
-    .nav-pill:hover,
-    .action-link:hover {
+    .nav-link:hover,
+    .action-link:hover,
+    .prompt-card:hover {
       border-color: var(--border-strong);
-      color: var(--text-main);
-      transform: translate(-2px, -2px);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 30px rgba(4, 10, 24, 0.36);
+    }
+
+    main {
+      display: grid;
+      gap: 22px;
+      margin-top: 22px;
     }
 
     .hero {
       display: grid;
-      gap: 22px;
-      padding: 24px;
+      grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1.22fr);
+      gap: 24px;
+      padding: clamp(20px, 3vw, 34px);
+      overflow: hidden;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.95fr);
-      gap: 20px;
-      align-items: stretch;
+    .hero-copy,
+    .hero-media,
+    .detail-section,
+    .explore-section {
+      animation: rise-in 520ms ease both;
     }
 
     .hero-copy {
       display: grid;
-      gap: 16px;
+      gap: 18px;
       align-content: start;
     }
 
-    h1,
-    h2,
-    h3 {
-      margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+    .section-label {
+      color: #f0a9dd;
     }
 
-    h1 {
-      font-size: clamp(34px, 6vw, 72px);
+    .hero-copy h2 {
+      margin: 0;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: clamp(40px, 6vw, 76px);
       line-height: 0.94;
-      text-shadow: 3px 0 0 rgba(255, 47, 179, 0.62), -3px 0 0 rgba(56, 240, 255, 0.6);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-shadow: 0 0 14px rgba(70, 236, 255, 0.14);
     }
 
     .hero-copy p {
       margin: 0;
-      max-width: 720px;
+      max-width: 560px;
       color: var(--text-muted);
-      font-size: clamp(18px, 2.2vw, 22px);
-      line-height: 1.3;
-    }
-
-    .hero-note {
-      width: fit-content;
-      padding: 10px 14px;
-      border: 2px solid rgba(77, 255, 180, 0.5);
-      background: rgba(5, 18, 15, 0.92);
-      color: #dfffea;
-      font-size: 15px;
-      line-height: 1.35;
-      box-shadow: 4px 4px 0 rgba(77, 255, 180, 0.12);
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 14px;
-      align-content: start;
-    }
-
-    .hero-panel {
-      border: 2px solid var(--border-strong);
-      background: linear-gradient(180deg, rgba(9, 10, 20, 0.98) 0%, rgba(11, 13, 27, 0.95) 100%);
-      padding: 18px;
-      box-shadow: 4px 4px 0 rgba(255, 47, 179, 0.24);
-    }
-
-    .hero-panel p {
-      margin: 10px 0 0;
-      color: var(--text-muted);
-      font-size: 15px;
-      line-height: 1.35;
-    }
-
-    .hero-panel .feature-name {
-      margin-top: 6px;
-      font-size: 26px;
-      color: var(--text-main);
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .stat-card {
-      min-height: 100%;
-      padding: 14px 12px;
-      border: 2px solid rgba(56, 240, 255, 0.28);
-      background: rgba(3, 7, 16, 0.95);
-    }
-
-    .stat-value {
-      display: block;
-      color: var(--accent);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: clamp(24px, 3vw, 34px);
-      line-height: 1;
-    }
-
-    .stat-label {
-      display: block;
-      margin-top: 8px;
-      color: var(--text-dim);
-      font-size: 12px;
-      line-height: 1.3;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .section-label {
-      color: #f2b3e4;
-    }
-
-    .gallery {
-      display: grid;
-      gap: 18px;
-      margin-top: 18px;
-    }
-
-    .feature-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
-      overflow: hidden;
-    }
-
-    .feature-main,
-    .feature-preview {
-      padding: 22px;
-    }
-
-    .feature-main {
-      display: grid;
-      gap: 18px;
-      align-content: start;
-    }
-
-    .feature-summary {
-      max-width: 700px;
-      color: var(--text-muted);
-      font-size: 19px;
-      line-height: 1.35;
-    }
-
-    .highlight-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .highlight-item {
-      padding: 12px 14px;
-      border-left: 4px solid var(--accent);
-      background: rgba(5, 12, 26, 0.9);
-      color: var(--text-muted);
-      font-size: 16px;
-      line-height: 1.35;
-    }
-
-    .highlight-item strong {
-      color: var(--text-main);
+      font-size: clamp(19px, 2.2vw, 24px);
+      line-height: 1.28;
     }
 
     .action-row {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
@@ -326,173 +259,493 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
+      min-height: 48px;
       padding: 0 18px;
-      border: 2px solid var(--border);
-      background: rgba(0, 0, 0, 0.9);
-      color: var(--text-main);
+      border: 1px solid rgba(93, 236, 255, 0.24);
+      border-radius: 999px;
+      background: rgba(10, 15, 30, 0.82);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: transform 120ms ease, border-color 120ms ease;
     }
 
     .action-link.primary {
-      background: linear-gradient(90deg, rgba(7, 28, 35, 0.96) 0%, rgba(33, 9, 34, 0.96) 100%);
+      border-color: rgba(255, 87, 191, 0.36);
+      background: linear-gradient(90deg, rgba(15, 41, 49, 0.96) 0%, rgba(47, 12, 52, 0.96) 100%);
+      color: var(--text-main);
     }
 
-    .feature-preview {
-      border-left: 2px solid var(--border);
-      display: grid;
-      align-content: start;
-      gap: 14px;
-      background:
-        linear-gradient(180deg, rgba(56, 240, 255, 0.04) 0%, transparent 20%, transparent 100%),
-        rgba(2, 5, 12, 0.98);
-    }
-
-    .preview-window {
-      border: 2px solid var(--border);
-      background: #000000;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .preview-topbar {
+    .meta-row {
       display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .meta-pill,
+    .caption-chip,
+    .family-chip {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 10px 12px;
-      border-bottom: 2px solid var(--border);
-      background: rgba(56, 240, 255, 0.06);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 12px;
+      justify-content: center;
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid rgba(93, 236, 255, 0.18);
+      border-radius: 999px;
+      background: rgba(10, 15, 30, 0.72);
       color: var(--text-muted);
-    }
-
-    .preview-topbar span:last-child {
-      color: var(--accent);
-    }
-
-    .preview-body {
-      display: grid;
-      gap: 14px;
-      padding: 14px;
-    }
-
-    .preview-block {
-      display: grid;
-      gap: 8px;
-    }
-
-    .preview-label {
-      color: var(--text-dim);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 11px;
-      letter-spacing: 0.1em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .preview-text {
-      padding: 12px;
-      border: 2px solid rgba(56, 240, 255, 0.18);
-      background: rgba(5, 8, 18, 0.94);
-      color: var(--text-main);
+    .hero-note {
+      max-width: 520px;
+      color: var(--text-dim);
       font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .hero-media {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+      animation-delay: 80ms;
+    }
+
+    .media-frame {
+      position: relative;
+      padding: 14px;
+      border: 1px solid rgba(93, 236, 255, 0.16);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(70, 236, 255, 0.05) 0%, transparent 18%, transparent 100%),
+        rgba(3, 7, 18, 0.96);
+      overflow: hidden;
+    }
+
+    .media-frame::before {
+      content: "";
+      position: absolute;
+      inset: -18% 12% 72% 12%;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 87, 191, 0.28) 0%, rgba(255, 87, 191, 0) 72%);
+      filter: blur(14px);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .media-window {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(93, 236, 255, 0.2);
+      background: #02050f;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .media-window img {
+      width: 100%;
+      height: auto;
+    }
+
+    .figure-pin {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid rgba(93, 236, 255, 0.22);
+      border-radius: 999px;
+      background: rgba(7, 12, 24, 0.84);
+      color: var(--text-main);
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 14px 24px rgba(2, 6, 18, 0.36);
+      backdrop-filter: blur(10px);
+    }
+
+    .figure-pin::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(70, 236, 255, 0.72);
+    }
+
+    .pin-input {
+      left: 28px;
+      top: 22px;
+    }
+
+    .pin-tokens {
+      left: 24px;
+      bottom: 26px;
+    }
+
+    .pin-stream {
+      right: 26px;
+      top: 210px;
+    }
+
+    .caption-row {
+      display: none;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .detail-section,
+    .explore-section {
+      padding: 24px;
+    }
+
+    .detail-section {
+      display: grid;
+      gap: 18px;
+      animation-delay: 140ms;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 6px;
+      max-width: 720px;
+    }
+
+    .section-head h3 {
+      margin: 0;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: clamp(24px, 3vw, 34px);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 18px;
       line-height: 1.35;
     }
 
-    .token-row,
-    .catalog-row {
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .insight-card {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid rgba(93, 236, 255, 0.14);
+      border-radius: var(--radius-lg);
+      background: rgba(7, 11, 22, 0.82);
+      min-height: 100%;
+    }
+
+    .insight-card h4 {
+      margin: 0;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .insight-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .mini-visual {
+      display: grid;
+      gap: 8px;
+      min-height: 108px;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(180deg, rgba(70, 236, 255, 0.06) 0%, transparent 18%, transparent 100%),
+        rgba(9, 15, 28, 0.96);
+      border: 1px solid rgba(93, 236, 255, 0.12);
+      align-content: center;
+    }
+
+    .token-strip,
+    .wrapper-strip,
+    .family-cloud {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
     }
 
     .token-chip,
-    .catalog-chip {
+    .wrapper-chip {
       display: inline-flex;
       align-items: center;
-      min-height: 32px;
+      min-height: 28px;
       padding: 0 10px;
-      border: 1px solid rgba(56, 240, 255, 0.26);
-      background: rgba(6, 13, 28, 0.96);
-      color: var(--accent);
+      border-radius: 999px;
       font-family: "JetBrains Mono", monospace;
-      font-size: 12px;
+      font-size: 11px;
+      font-weight: 500;
     }
 
-    .catalog-chip {
-      color: #ffd4f0;
-      border-color: rgba(255, 47, 179, 0.3);
+    .token-strip:first-child .token-chip {
+      border: 1px solid rgba(143, 255, 203, 0.2);
+      background: rgba(143, 255, 203, 0.12);
+      color: #dffdf2;
     }
 
-    .preview-note {
+    .token-strip.alt .token-chip {
+      border: 1px solid rgba(255, 87, 191, 0.22);
+      background: rgba(255, 87, 191, 0.12);
+      color: #ffe5f5;
+    }
+
+    .wrapper-chip {
+      border: 1px solid rgba(93, 236, 255, 0.16);
+      background: rgba(93, 236, 255, 0.08);
+      color: var(--accent);
+    }
+
+    .wrapper-chip.alt {
+      border-color: rgba(255, 87, 191, 0.24);
+      background: rgba(255, 87, 191, 0.12);
+      color: #ffd5ef;
+    }
+
+    .compare-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .compare-line {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .compare-line span {
+      color: var(--text-dim);
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .compare-bar {
+      position: relative;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .compare-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      border-radius: 999px;
+    }
+
+    .compare-fill.qwen {
+      width: 82%;
+      background: linear-gradient(90deg, rgba(70, 236, 255, 0.9) 0%, rgba(70, 236, 255, 0.32) 100%);
+    }
+
+    .compare-fill.deepseek {
+      width: 68%;
+      background: linear-gradient(90deg, rgba(255, 87, 191, 0.88) 0%, rgba(255, 87, 191, 0.28) 100%);
+    }
+
+    .compare-fill.mistral {
+      width: 52%;
+      background: linear-gradient(90deg, rgba(143, 255, 203, 0.88) 0%, rgba(143, 255, 203, 0.28) 100%);
+    }
+
+    .explore-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(260px, 0.88fr);
+      gap: 18px;
+      align-items: start;
+      animation-delay: 200ms;
+    }
+
+    .prompt-area,
+    .catalog-panel {
+      display: grid;
+      gap: 14px;
+    }
+
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .prompt-card {
+      display: grid;
+      gap: 10px;
+      min-height: 100%;
+      padding: 18px;
+      border: 1px solid rgba(93, 236, 255, 0.16);
+      border-radius: var(--radius-lg);
+      background: rgba(7, 11, 22, 0.82);
+    }
+
+    .prompt-kicker {
+      color: var(--accent-3);
+    }
+
+    .prompt-card p {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 17px;
+      line-height: 1.32;
+    }
+
+    .prompt-card span:last-child {
+      color: var(--text-dim);
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .catalog-panel {
+      padding: 18px;
+      border: 1px solid rgba(93, 236, 255, 0.14);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(255, 87, 191, 0.05) 0%, transparent 18%, transparent 100%),
+        rgba(7, 11, 22, 0.82);
+    }
+
+    .catalog-panel p {
+      margin: 0;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.35;
     }
 
-    @media (max-width: 1024px) {
-      .hero-grid,
-      .feature-card {
+    .family-chip {
+      color: var(--text-main);
+      min-height: 34px;
+    }
+
+    .footer-copy {
+      margin: 0;
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .explore-section,
+      .prompt-grid,
+      .insight-grid {
         grid-template-columns: 1fr;
       }
 
-      .feature-preview {
-        border-left: 0;
-        border-top: 2px solid var(--border);
+      .hero-copy {
+        order: 2;
+      }
+
+      .hero-media {
+        order: 1;
+      }
+
+      .pin-stream {
+        right: 18px;
+        top: 160px;
       }
     }
 
     @media (max-width: 760px) {
-      .page-shell {
-        width: min(100vw - 16px, 100%);
+      :root {
+        --page-width: min(100vw - 16px, 100%);
       }
 
-      .topbar {
-        flex-direction: column;
+      .page-shell {
+        padding-top: 10px;
       }
 
       .topbar,
       .hero,
-      .feature-main,
-      .feature-preview {
-        padding-left: 14px;
-        padding-right: 14px;
+      .detail-section,
+      .explore-section {
+        border-radius: 22px;
       }
 
-      .stat-grid {
-        grid-template-columns: 1fr;
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
       }
 
-      .topbar-links {
+      .topbar-links,
+      .action-row {
         width: 100%;
-        justify-content: flex-start;
       }
 
-      .nav-pill,
+      .nav-link,
       .action-link {
         width: 100%;
       }
 
-      h1 {
-        font-size: 42px;
-        line-height: 0.92;
+      .hero,
+      .detail-section,
+      .explore-section {
+        padding: 18px;
       }
 
-      .hero-note {
-        width: 100%;
-        font-size: 14px;
+      .hero-copy h2 {
+        font-size: 38px;
       }
 
       .hero-copy p,
-      .feature-summary,
-      .preview-note {
-        font-size: 16px;
+      .section-head p {
+        font-size: 17px;
+      }
+
+      .hero-note,
+      .catalog-panel p,
+      .insight-card p,
+      .prompt-card p {
+        font-size: 15px;
+      }
+
+      .figure-pin {
+        display: none;
+      }
+
+      .caption-row {
+        display: flex;
+      }
+
+      .compare-line {
+        grid-template-columns: 62px 1fr;
       }
     }
   </style>
@@ -500,97 +753,164 @@
 <body>
   <div class="page-shell">
     <header class="topbar">
-      <div class="topbar-copy">
-        <div class="eyebrow">Agent Monitor Web</div>
-        <p class="topbar-title">Showcase Gallery</p>
-        <p class="topbar-subtitle">A viewer-first gallery for the browser work worth opening.</p>
+      <div class="brand">
+        <div class="eyebrow">Murphy</div>
+        <h1>Demos</h1>
+        <p>Interactive browser exhibits worth opening.</p>
       </div>
       <nav class="topbar-links" aria-label="Showcase navigation">
-        <a class="nav-pill" href="../">&larr; Live monitor</a>
-        <a class="nav-pill" href="../tokenizers/">Open workbench</a>
+        <a class="nav-link" href="../">&larr; Live monitor</a>
+        <a class="nav-link" href="../tokenizers/">Tokenizer demo</a>
       </nav>
     </header>
 
-    <main class="gallery">
+    <main>
       <section class="hero">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <div class="section-label">Now showing</div>
-            <h1>One prompt. Multiple model views.</h1>
-            <p>Compare how public instruct models split the same text and wrap the same conversation. Open the tokenizer workbench, paste a prompt, and inspect the differences directly in the browser.</p>
-            <div class="hero-note">Start with one short sentence, then swap between Qwen, DeepSeek, and Mistral to see where the preprocessing stops agreeing.</div>
-            <div class="action-row">
-              <a class="action-link primary" href="../tokenizers/">Open the workbench</a>
+        <div class="hero-copy">
+          <div class="section-label">Tokenizer Workbench</div>
+          <h2>See how different LLMs break up the same prompt.</h2>
+          <p>Paste text, switch models, compare token splits and chat wrappers right in the browser.</p>
+          <div class="action-row">
+            <a class="action-link primary" href="../tokenizers/">Open tokenizer demo</a>
+            <a class="action-link" href="../">Back to live monitor</a>
+          </div>
+          <div class="meta-row" aria-label="Tokenizer highlights">
+            <span class="meta-pill">28 checkpoints</span>
+            <span class="meta-pill">Text + chat views</span>
+            <span class="meta-pill">Runs in browser</span>
+          </div>
+          <p class="hero-note">Start with one sentence. Qwen, DeepSeek, and Mistral diverge fast.</p>
+        </div>
+
+        <div class="hero-media">
+          <div class="media-frame">
+            <div class="media-window">
+              <img
+                src="./tokenizer-workbench-preview.png"
+                alt="Screenshot of the tokenizer workbench showing a prompt input, colored token chips, and a token inspection panel."
+              >
+              <div class="figure-pin pin-input">Paste any prompt</div>
+              <div class="figure-pin pin-stream">Inspect token IDs</div>
+              <div class="figure-pin pin-tokens">Watch split points move</div>
             </div>
           </div>
-          <aside class="hero-side">
-            <div class="hero-panel">
-              <div class="mini-label">Featured exhibit</div>
-              <h2 class="feature-name">Tokenizer Workbench</h2>
-              <p>A hands-on viewer for token splits, special tokens, and chat wrappers across public instruct checkpoints.</p>
-            </div>
-            <div class="stat-grid">
-              <div class="stat-card">
-                <span class="stat-value">28</span>
-                <span class="stat-label">Public checkpoints to compare</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-value">Text + chat</span>
-                <span class="stat-label">See token splits and message wrappers</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-value">Your prompt</span>
-                <span class="stat-label">Paste custom text and watch the output change</span>
-              </div>
-            </div>
-          </aside>
+          <div class="caption-row" aria-label="Screenshot callouts">
+            <span class="caption-chip">Paste any prompt</span>
+            <span class="caption-chip">Watch split points move</span>
+            <span class="caption-chip">Inspect token IDs</span>
+          </div>
         </div>
       </section>
 
-      <section class="feature-card" aria-labelledby="tokenizer-workbench-title">
-        <div class="feature-main">
-          <div class="section-label">What you can do</div>
-          <h2 id="tokenizer-workbench-title">Tokenizer Workbench</h2>
-          <p class="feature-summary">See where open-source instruct models really match and where they quietly diverge before generation even starts.</p>
-          <div class="highlight-list" aria-label="Reasons to open the tokenizer">
-            <div class="highlight-item"><strong>Compare the same prompt across families.</strong> Switch models without changing the text and watch token boundaries move.</div>
-            <div class="highlight-item"><strong>Inspect chat formatting directly.</strong> The tool exposes how each model wraps the same conversation with templates and special tokens.</div>
-            <div class="highlight-item"><strong>Separate shared vocabularies from look-alikes.</strong> Exact matches stay grouped, so model-size changes do not masquerade as tokenizer changes.</div>
-          </div>
+      <section class="detail-section">
+        <div class="section-head">
+          <div class="section-label">What to notice</div>
+          <h3>The same sentence changes shape before generation even starts.</h3>
+          <p>Keep the prompt fixed and the differences jump out immediately.</p>
         </div>
-        <div class="feature-preview">
-          <div class="section-label">Try this first</div>
-          <div class="preview-window" aria-hidden="true">
-            <div class="preview-topbar">
-              <span>TOKENIZER WORKBENCH</span>
-              <span>SAME PROMPT, DIFFERENT MODELS</span>
-            </div>
-            <div class="preview-body">
-              <div class="preview-block">
-                <div class="preview-label">Prompt</div>
-                <div class="preview-text">Summarize transformers in three bullet points.</div>
+
+        <div class="insight-grid">
+          <article class="insight-card">
+            <div class="mini-visual" aria-hidden="true">
+              <div class="token-strip">
+                <span class="token-chip">Token</span>
+                <span class="token-chip">izers</span>
+                <span class="token-chip">decide</span>
+                <span class="token-chip">how</span>
               </div>
-              <div class="preview-block">
-                <div class="preview-label">Switch models</div>
-                <div class="catalog-row">
-                  <span class="catalog-chip">Qwen 3</span>
-                  <span class="catalog-chip">DeepSeek R1</span>
-                  <span class="catalog-chip">Mistral</span>
-                  <span class="catalog-chip">Phi</span>
-                </div>
-              </div>
-              <div class="preview-block">
-                <div class="preview-label">Watch for</div>
-                <div class="token-row">
-                  <span class="token-chip">Token boundaries</span>
-                  <span class="token-chip">BOS/EOS markers</span>
-                  <span class="token-chip">Chat wrapper changes</span>
-                </div>
+              <div class="token-strip alt">
+                <span class="token-chip">Tokenizers</span>
+                <span class="token-chip">de</span>
+                <span class="token-chip">cide</span>
+                <span class="token-chip">how</span>
               </div>
             </div>
-          </div>
-          <p class="preview-note">The interesting part is not just the token list. It is seeing where models stop agreeing before any generation begins.</p>
+            <h4>Token boundaries shift</h4>
+            <p>One phrase can split into different subword pieces as you swap models.</p>
+          </article>
+
+          <article class="insight-card">
+            <div class="mini-visual" aria-hidden="true">
+              <div class="wrapper-strip">
+                <span class="wrapper-chip">&lt;bos&gt;</span>
+                <span class="wrapper-chip">&lt;user&gt;</span>
+                <span class="wrapper-chip">&lt;assistant&gt;</span>
+              </div>
+              <div class="wrapper-strip">
+                <span class="wrapper-chip alt">&lt;system&gt;</span>
+                <span class="wrapper-chip alt">&lt;think&gt;</span>
+                <span class="wrapper-chip alt">&lt;eos&gt;</span>
+              </div>
+            </div>
+            <h4>Wrappers differ</h4>
+            <p>Chat mode exposes the hidden scaffolding each model adds around the same conversation.</p>
+          </article>
+
+          <article class="insight-card">
+            <div class="mini-visual" aria-hidden="true">
+              <div class="compare-row">
+                <div class="compare-line">
+                  <span>Qwen</span>
+                  <div class="compare-bar"><div class="compare-fill qwen"></div></div>
+                </div>
+                <div class="compare-line">
+                  <span>DeepSeek</span>
+                  <div class="compare-bar"><div class="compare-fill deepseek"></div></div>
+                </div>
+                <div class="compare-line">
+                  <span>Mistral</span>
+                  <div class="compare-bar"><div class="compare-fill mistral"></div></div>
+                </div>
+              </div>
+            </div>
+            <h4>Patterns stay visible</h4>
+            <p>Family-level differences show up fast when you keep the prompt fixed and compare multiple lines side by side.</p>
+          </article>
         </div>
+      </section>
+
+      <section class="explore-section">
+        <div class="prompt-area">
+          <div class="section-head">
+            <div class="section-label">Try these first</div>
+            <h3>Short prompts make the differences easiest to spot.</h3>
+            <p>Start simple, then move to code, emoji, or multilingual text.</p>
+          </div>
+
+          <div class="prompt-grid">
+            <a class="prompt-card" href="../tokenizers/">
+              <span class="prompt-kicker">Prompt 01</span>
+              <p>Summarize transformers in 3 bullet points.</p>
+              <span>Open in demo</span>
+            </a>
+            <a class="prompt-card" href="../tokenizers/">
+              <span class="prompt-kicker">Prompt 02</span>
+              <p>Translate this sentence to Spanish and keep the tone polite.</p>
+              <span>Open in demo</span>
+            </a>
+            <a class="prompt-card" href="../tokenizers/">
+              <span class="prompt-kicker">Prompt 03</span>
+              <p>Write a short support reply about a delayed shipment.</p>
+              <span>Open in demo</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="catalog-panel">
+          <div class="section-label">On the wall now</div>
+          <div class="family-cloud" aria-label="Tokenizer families in the catalog">
+            <span class="family-chip">Qwen</span>
+            <span class="family-chip">DeepSeek</span>
+            <span class="family-chip">Mistral</span>
+            <span class="family-chip">Phi</span>
+            <span class="family-chip">MiniMax</span>
+            <span class="family-chip">Yi</span>
+            <span class="family-chip">SmolLM</span>
+            <span class="family-chip">Falcon</span>
+          </div>
+          <p>Eight public model lines are in the browser today, with both plain-text tokenization and chat-format views.</p>
+          <p class="footer-copy">More exhibits can land here later. For now, the page points straight at the strongest live demo.</p>
+        </aside>
       </section>
     </main>
   </div>

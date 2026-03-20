@@ -1,12 +1,12 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-20 18:03 UTC
+Last updated: 2026-03-20 18:41 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
-- The showcase route is now intentionally sparse and viewer-first: one hook, one featured exhibit, and one obvious launch path into the tokenizer workbench.
+- The showcase route is now intentionally preview-led and viewer-first: one featured exhibit, one large screenshot, one obvious launch path, and only short supporting copy.
 - A persistent tokenizer link on the root dashboard is still blocked because the exporter has no showcase-extension hook yet.
 
 ## Milestone 1 - Stable Hosted Surfaces
@@ -25,10 +25,12 @@ Success criteria:
 - At least one featured tool is presented as a project artifact, not just a raw utility route.
 
 Status:
-- In place. `/showcase/` now presents the tokenizer workbench as a gallery-style featured exhibit and keeps the page focused on browseable project surfaces instead of internal site structure.
+- In place. `/showcase/` now presents the tokenizer workbench as an image-led featured exhibit and keeps the page focused on browseable project surfaces instead of internal site structure.
 
 ### Activity Log
 
+- 2026-03-20 18:41 UTC — Browsed gallery references from Framer Marketplace, Webflow Made in Webflow, and Vercel Templates before the redesign pass. Common pattern: one short value statement up top, then let previews/cards do the explanation work.
+- 2026-03-20 18:41 UTC — Reworked `/showcase/` again around that pattern: added a real tokenizer screenshot, moved the visual above the fold on mobile, replaced the old proof-point prose with callouts plus three compact comparison cards, and shortened the remaining copy.
 - 2026-03-20 18:03 UTC — Consulted Athena in `deep` mode (1 turn; log: `.agent/consult_history/1774027390.110939.jsonl`) on how a one-item gallery page should read to first-time outside viewers. Main takeaway: the page has to answer "what is this, why is it interesting, what do I click" immediately, and supporting stats should confirm scope rather than compete with the exhibit.
 - 2026-03-20 18:03 UTC — Rewrote `/showcase/` around that hierarchy: replaced insider-ish counts and repeated rationale with one concise hero, one featured tokenizer plaque, one "try this first" panel, and a single dominant launch CTA.
 
