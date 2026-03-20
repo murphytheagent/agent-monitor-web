@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T21:36:27Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-20T21:38:33Z",
+    "status": "sleeping",
     "pid": 27338,
-    "loop_count": 724,
+    "loop_count": 743,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1774037786.521379",
-        "started_at": 1774041477,
-        "elapsed_sec": 1109
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 3.03,
-      "five": 2.99,
-      "fifteen": 2.99
+      "one": 2.24,
+      "five": 2.73,
+      "fifteen": 2.89
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 115780177920,
-    "disk_free_bytes": 129327017984,
-    "runner_log_size_bytes": 227383,
+    "disk_used_bytes": 115785428992,
+    "disk_free_bytes": 129321766912,
+    "runner_log_size_bytes": 227625,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T20:02:05Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T21:36:33Z",
+    "checked_at_utc": "2026-03-20T21:38:36Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,23 +46,23 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 46
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 46
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 46
       },
       {
         "index": 3,
@@ -78,23 +70,23 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 46
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 45
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 45
       },
       {
         "index": 6,
@@ -102,38 +94,21 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 46
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 57
+        "temperature_c": 47
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1774037786.521379": {
-        "mention_ts": "1774037786.521379",
-        "thread_ts": "1774037786.521379",
-        "status": "in_progress",
-        "task_description": "I've just installed Google drive on your mac.",
-        "summary": "Shared the Google Drive backup folders .claude, .codex, and Research to 0920wth@gmail.com with Viewer access.",
-        "summary_preview": "Shared the Google Drive backup folders .claude, .codex, and Research to 0920wth@gmail.com with Viewer access.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774037786.521379",
-        "last_update_ts": "1774041477.510853",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T21:17:27Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773739092.072639": {
         "mention_ts": "1773739092.072639",
@@ -313,6 +288,22 @@
       }
     },
     "finished": {
+      "1774037786.521379": {
+        "mention_ts": "1774037786.521379",
+        "thread_ts": "1774037786.521379",
+        "status": "done",
+        "task_description": "I've just installed Google drive on your mac.",
+        "summary": "Google Drive is signed into Murphy Gmail with [code] , [code] , and [code] backed up/shared, and Gemini CLI is signed into the collaborator-approved account 09…",
+        "summary_preview": "Google Drive is signed into Murphy Gmail with [code] , [code] , and [code] backed up/shared, and Gemini CLI is signed into the collaborator-approved account 09…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774037786.521379",
+        "last_update_ts": "1774042707.487740",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T21:17:27Z"
+        }
+      },
       "1773937658.648909": {
         "mention_ts": "1773937658.648909",
         "thread_ts": "1773937658.648909",
@@ -1096,22 +1087,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T21:29:35Z"
         }
-      },
-      "1771791882.440369": {
-        "mention_ts": "1771791882.440369",
-        "thread_ts": "1771791882.440369",
-        "status": "done",
-        "task_description": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the murphy channel abou…",
-        "summary": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
-        "summary_preview": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771791882.440369",
-        "last_update_ts": "1771798209.363401",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T20:24:42Z"
-        }
       }
     }
   },
@@ -1125,5 +1100,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T21:36:34Z"
+  "server_time_utc": "2026-03-20T21:38:37Z"
 }
