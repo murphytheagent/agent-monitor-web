@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T03:20:36Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-20T03:22:41Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 2525,
+    "loop_count": 2544,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773942694.197309",
-        "started_at": 1773976315,
-        "elapsed_sec": 521
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.93,
-      "five": 1.87,
-      "fifteen": 1.88
+      "one": 2.48,
+      "five": 2.01,
+      "fifteen": 1.92
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 108146184192,
-    "disk_free_bytes": 136961011712,
-    "runner_log_size_bytes": 206520,
+    "disk_used_bytes": 108144685056,
+    "disk_free_bytes": 136962510848,
+    "runner_log_size_bytes": 206762,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-19T22:44:48Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T03:20:42Z",
+    "checked_at_utc": "2026-03-20T03:22:44Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -62,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 46
       },
       {
         "index": 2,
@@ -70,15 +62,15 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 46
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 46
       },
       {
         "index": 4,
@@ -91,10 +83,10 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 6,
@@ -102,38 +94,21 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 46
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 46
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773942694.197309": {
-        "mention_ts": "1773942694.197309",
-        "thread_ts": "1773942694.197309",
-        "status": "in_progress",
-        "task_description": "Let's work on something fun.",
-        "summary": "WorldBody now has a locally tested narrative core and a refreshed Windows source zip; the remaining validation is a real Windows+tModLoader smoke test.",
-        "summary_preview": "WorldBody now has a locally tested narrative core and a refreshed Windows source zip; the remaining validation is a real Windows+tModLoader smoke test.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773942694.197309",
-        "last_update_ts": "1773976314.948861",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T17:51:34Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773771203.022709": {
         "mention_ts": "1773771203.022709",
@@ -261,6 +236,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T21:53:24Z"
+        }
+      },
+      "1773942694.197309": {
+        "mention_ts": "1773942694.197309",
+        "thread_ts": "1773942694.197309",
+        "status": "waiting_human",
+        "task_description": "Let's work on something fun.",
+        "summary": "Added a Windows 11 loading guide for the WorldBody source mod, synced the Terraria project docs/report, and posted the load+smoke-test steps in Slack; the rema…",
+        "summary_preview": "Added a Windows 11 loading guide for the WorldBody source mod, synced the Terraria project docs/report, and posted the load+smoke-test steps in Slack; the rema…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773942694.197309",
+        "last_update_ts": "1773976880.684645",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T17:51:34Z"
         }
       }
     },
@@ -1077,5 +1068,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T03:20:43Z"
+  "server_time_utc": "2026-03-20T03:22:45Z"
 }
