@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T01:22:09Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-20T01:24:14Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 1430,
+    "loop_count": 1449,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1773942694.197309",
-        "started_at": 1773968457,
-        "elapsed_sec": 1272
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -28,14 +20,14 @@
     "cpu_count": 10,
     "load_avg": {
       "one": 1.74,
-      "five": 1.77,
-      "fifteen": 1.81
+      "five": 1.75,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107252871168,
-    "disk_free_bytes": 137854324736,
-    "runner_log_size_bytes": 204753,
+    "disk_used_bytes": 107242881024,
+    "disk_free_bytes": 137864314880,
+    "runner_log_size_bytes": 204995,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-19T22:44:48Z",
     "local_ips": []
@@ -44,96 +36,79 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T01:22:14Z",
+    "checked_at_utc": "2026-03-20T01:24:16Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 46
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 89,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 46
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 57
+        "temperature_c": 54
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 97,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 49
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
+        "utilization_gpu_pct": 89,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 45
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 54
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 91,
+        "utilization_gpu_pct": 90,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 53
       },
       {
-        "index": 7,
+        "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 81,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 46
+      },
+      {
+        "index": 7,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 100,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 46
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773942694.197309": {
-        "mention_ts": "1773942694.197309",
-        "thread_ts": "1773942694.197309",
-        "status": "in_progress",
-        "task_description": "Let's work on something fun.",
-        "summary": "Reframed the Terraria AI narrative report around personalized storytelling, added creative prototype directions, compiled a revised PDF, and delivered it in Sl…",
-        "summary_preview": "Reframed the Terraria AI narrative report around personalized storytelling, added creative prototype directions, compiled a revised PDF, and delivered it in Sl…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773942694.197309",
-        "last_update_ts": "1773968457.265910",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T17:51:34Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773771203.022709": {
         "mention_ts": "1773771203.022709",
@@ -261,6 +236,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T21:53:24Z"
+        }
+      },
+      "1773942694.197309": {
+        "mention_ts": "1773942694.197309",
+        "thread_ts": "1773942694.197309",
+        "status": "waiting_human",
+        "task_description": "Let's work on something fun.",
+        "summary": "Delivered a cosmology-first Terraria AI narrative report revision, added personalized world-lore frameworks and arc seeds, and uploaded the new PDF in Slack.",
+        "summary_preview": "Delivered a cosmology-first Terraria AI narrative report revision, added personalized world-lore frameworks and arc seeds, and uploaded the new PDF in Slack.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773942694.197309",
+        "last_update_ts": "1773969789.115202",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T17:51:34Z"
         }
       }
     },
@@ -1077,5 +1068,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T01:22:15Z"
+  "server_time_utc": "2026-03-20T01:24:17Z"
 }
