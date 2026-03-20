@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T06:01:04Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-20T06:03:07Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 426,
+    "loop_count": 445,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773984772.225789",
+        "started_at": 1773986470,
+        "elapsed_sec": 116
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.0,
-      "five": 1.87,
-      "fifteen": 1.83
+      "one": 1.34,
+      "five": 1.67,
+      "fifteen": 1.75
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 108987744256,
-    "disk_free_bytes": 136119451648,
-    "runner_log_size_bytes": 213817,
+    "disk_used_bytes": 108985593856,
+    "disk_free_bytes": 136121602048,
+    "runner_log_size_bytes": 214005,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T05:14:08Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T06:01:06Z",
+    "checked_at_utc": "2026-03-20T06:03:08Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 46
       },
       {
         "index": 1,
@@ -54,7 +62,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 46
       },
       {
         "index": 2,
@@ -62,7 +70,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 46
       },
       {
         "index": 3,
@@ -70,12 +78,12 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 46
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 45
@@ -94,7 +102,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 46
       },
       {
         "index": 7,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773984772.225789": {
+        "mention_ts": "1773984772.225789",
+        "thread_ts": "1773984772.225789",
+        "status": "in_progress",
+        "task_description": "Can you access and edit: <[link] <[link].",
+        "summary": "Checked both Overleaf links and confirmed they are auth-gated; I cannot access or edit them from this machine without login.",
+        "summary_preview": "Checked both Overleaf links and confirmed they are auth-gated; I cannot access or edit them from this machine without login.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773984772.225789",
+        "last_update_ts": "1773986470.514650",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T06:00:38Z"
+        }
+      }
+    },
     "incomplete": {
       "1773771203.022709": {
         "mention_ts": "1773771203.022709",
@@ -272,22 +297,6 @@
       }
     },
     "finished": {
-      "1773984772.225789": {
-        "mention_ts": "1773984772.225789",
-        "thread_ts": "1773984772.225789",
-        "status": "done",
-        "task_description": "Can you access and edit: <[link] <[link].",
-        "summary": "Checked both Overleaf links and confirmed they are auth-gated; I cannot access or edit them from this machine without login.",
-        "summary_preview": "Checked both Overleaf links and confirmed they are auth-gated; I cannot access or edit them from this machine without login.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773984772.225789",
-        "last_update_ts": "1773985261.822163",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T05:32:52Z"
-        }
-      },
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "1773958297.306549",
@@ -1071,6 +1080,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T22:11:21Z"
         }
+      },
+      "1771795620.656239": {
+        "mention_ts": "1771795620.656239",
+        "thread_ts": "1771795620.656239",
+        "status": "done",
+        "task_description": "Can you check if codex can still review your PRs if you make projects private.",
+        "summary": "Posted ACK and answered in-thread that Codex can review PRs in private repos when GitHub app/repo access is granted and per-repo Code review is enabled, with c…",
+        "summary_preview": "Posted ACK and answered in-thread that Codex can review PRs in private repos when GitHub app/repo access is granted and per-repo Code review is enabled, with c…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771795775.859239",
+        "last_update_ts": "1771799118.966628",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T21:29:35Z"
+        }
       }
     }
   },
@@ -1084,5 +1109,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T06:01:07Z"
+  "server_time_utc": "2026-03-20T06:03:09Z"
 }
