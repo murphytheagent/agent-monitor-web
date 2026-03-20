@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T17:59:20Z",
+    "last_updated_utc": "2026-03-20T18:01:23Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 6773,
+    "loop_count": 6791,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -14,16 +14,10 @@
     "max_workers": 8,
     "active_workers": [
       {
-        "slot": 0,
-        "task": "1774027184.232059",
-        "started_at": 1774028543,
-        "elapsed_sec": 1016
-      },
-      {
         "slot": 1,
         "task": "1774027390.110939",
         "started_at": 1774028710,
-        "elapsed_sec": 849
+        "elapsed_sec": 972
       }
     ]
   },
@@ -33,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.63,
-      "five": 1.84,
-      "fifteen": 1.86
+      "one": 1.65,
+      "five": 1.79,
+      "fifteen": 1.84
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 108791566336,
-    "disk_free_bytes": 136315629568,
-    "runner_log_size_bytes": 217403,
+    "disk_used_bytes": 108792664064,
+    "disk_free_bytes": 136314531840,
+    "runner_log_size_bytes": 217575,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T05:14:08Z",
     "local_ips": []
@@ -50,22 +44,22 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T17:59:25Z",
+    "checked_at_utc": "2026-03-20T18:01:28Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 56
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 54
@@ -76,36 +70,36 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 57
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 97,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 55
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 55
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 93,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 55
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 55
@@ -113,32 +107,16 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 56
       }
     ]
   },
   "tasks": {
     "queued": {},
     "active": {
-      "1774027184.232059": {
-        "mention_ts": "1774027184.232059",
-        "thread_ts": "1774027184.232059",
-        "status": "in_progress",
-        "task_description": "I have a spare windows pc that you can use it to do tests.",
-        "summary": "Revised the Windows testing plan for the office-LAN setup: recommended Parsec as the primary path for Terraria+tModLoader smoke tests, kept native RDP only as …",
-        "summary_preview": "Revised the Windows testing plan for the office-LAN setup: recommended Parsec as the primary path for Terraria+tModLoader smoke tests, kept native RDP only as …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774027184.232059",
-        "last_update_ts": "1774028543.142073",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T17:19:44Z"
-        }
-      },
       "1774027390.110939": {
         "mention_ts": "1774027390.110939",
         "thread_ts": "1774027390.110939",
@@ -331,6 +309,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T06:00:38Z"
+        }
+      },
+      "1774027184.232059": {
+        "mention_ts": "1774027184.232059",
+        "thread_ts": "1774027184.232059",
+        "status": "waiting_human",
+        "task_description": "I have a spare windows pc that you can use it to do tests.",
+        "summary": "Researched the Windows access plan for the Terraria smoke test, switched the same-LAN default to Sunshine+Moonlight, documented the hardened setup plus the Mic…",
+        "summary_preview": "Researched the Windows access plan for the Terraria smoke test, switched the same-LAN default to Sunshine+Moonlight, documented the hardened setup plus the Mic…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774027184.232059",
+        "last_update_ts": "1774029569.821117",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T17:19:44Z"
         }
       }
     },
@@ -1147,5 +1141,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T17:59:26Z"
+  "server_time_utc": "2026-03-20T18:01:28Z"
 }
