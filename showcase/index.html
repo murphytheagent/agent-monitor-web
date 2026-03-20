@@ -3,33 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Showcase | Agent Monitor</title>
+  <title>Showcase Gallery | Agent Monitor</title>
   <link rel="icon" href="data:,">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
     :root {
-      --bg-base: #05030c;
-      --bg-panel: rgba(10, 10, 30, 0.9);
-      --bg-panel-2: rgba(12, 9, 34, 0.86);
-      --bg-panel-3: rgba(8, 9, 27, 0.92);
-      --border: rgba(74, 239, 255, 0.34);
-      --border-strong: rgba(255, 52, 178, 0.54);
-      --text-main: #eaffff;
-      --text-muted: #9aa8da;
-      --text-dim: #6f7caf;
+      --bg: #000000;
+      --panel: #04070f;
+      --panel-2: #070b16;
+      --panel-3: #0b1020;
+      --border: rgba(56, 240, 255, 0.5);
+      --border-strong: rgba(255, 47, 179, 0.72);
+      --text-main: #f5fbff;
+      --text-muted: #9fb4d9;
+      --text-dim: #6e7da3;
       --accent: #38f0ff;
       --accent-2: #ff2fb3;
       --good: #4dffb4;
-      --shadow: 0 20px 44px rgba(2, 5, 22, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      --radius-xl: 18px;
-      --radius-lg: 14px;
-      --radius-md: 10px;
-      --radius-sm: 8px;
+      --shadow: 4px 4px 0 rgba(255, 47, 179, 0.28), -2px -2px 0 rgba(56, 240, 255, 0.18);
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -38,12 +38,12 @@
       color: var(--text-main);
       font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 12% 10%, rgba(0, 255, 225, 0.2) 0%, transparent 32%),
-        radial-gradient(circle at 88% 4%, rgba(255, 41, 163, 0.22) 0%, transparent 34%),
-        radial-gradient(circle at 62% 110%, rgba(56, 120, 255, 0.2) 0%, transparent 42%),
-        linear-gradient(150deg, #05030c 0%, #090318 46%, #120720 100%);
+        linear-gradient(90deg, rgba(56, 240, 255, 0.08) 0 1px, transparent 1px 80px),
+        linear-gradient(rgba(56, 240, 255, 0.06) 0 1px, transparent 1px 80px),
+        radial-gradient(circle at 18% 12%, rgba(56, 240, 255, 0.16) 0%, transparent 28%),
+        radial-gradient(circle at 88% 2%, rgba(255, 47, 179, 0.18) 0%, transparent 26%),
+        var(--bg);
       overflow-x: hidden;
-      position: relative;
     }
 
     body::before {
@@ -51,35 +51,8 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          rgba(96, 128, 255, 0.08) 0,
-          rgba(96, 128, 255, 0.08) 1px,
-          transparent 1px,
-          transparent 4px
-        ),
-        repeating-linear-gradient(
-          to right,
-          rgba(56, 240, 255, 0.045) 0,
-          rgba(56, 240, 255, 0.045) 1px,
-          transparent 1px,
-          transparent 56px
-        );
-      opacity: 0.34;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      right: -180px;
-      top: -220px;
-      width: 640px;
-      height: 640px;
-      pointer-events: none;
-      background: radial-gradient(circle, rgba(255, 47, 179, 0.42) 0%, rgba(255, 47, 179, 0) 70%);
-      filter: blur(36px);
-      opacity: 0.62;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 12%, transparent 88%, rgba(255, 255, 255, 0.02) 100%);
+      opacity: 0.8;
     }
 
     a {
@@ -89,88 +62,117 @@
 
     .page-shell {
       position: relative;
-      z-index: 1;
       width: min(1320px, calc(100vw - 28px));
       margin: 0 auto;
-      padding: 12px 0 40px;
+      padding: 18px 0 42px;
+      z-index: 1;
     }
 
-    .page-header,
-    .card {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(140deg, var(--bg-panel) 0%, var(--bg-panel-2) 100%);
+    .topbar,
+    .hero,
+    .feature-card,
+    .why-section,
+    .closing-note {
+      border: 2px solid var(--border);
+      background: linear-gradient(180deg, rgba(4, 7, 15, 0.96) 0%, rgba(7, 11, 22, 0.94) 100%);
       box-shadow: var(--shadow);
     }
 
-    .page-header {
-      display: grid;
-      gap: 18px;
-      padding: 20px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .page-header::after {
-      content: "";
-      position: absolute;
-      inset: auto -80px -90px auto;
-      width: 280px;
-      height: 280px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(56, 240, 255, 0.18) 0%, rgba(56, 240, 255, 0) 72%);
-      pointer-events: none;
-    }
-
-    .nav-row {
+    .topbar {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .nav-link,
-    .tag {
-      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(74, 239, 255, 0.26);
-      background: rgba(10, 18, 43, 0.92);
-      color: var(--text-muted);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
     }
 
-    .nav-link:hover,
-    .primary-link:hover,
-    .secondary-link:hover {
-      border-color: var(--border-strong);
-      color: var(--text-main);
-    }
-
-    .header-grid {
+    .topbar-copy {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
-      gap: 18px;
-      align-items: start;
+      gap: 2px;
+      min-width: 0;
     }
 
     .eyebrow,
-    .card-header {
+    .section-label,
+    .mini-label {
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow,
+    .mini-label {
+      color: var(--accent);
+    }
+
+    .topbar-title {
+      margin: 0;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-shadow: 2px 0 0 rgba(255, 47, 179, 0.65), -2px 0 0 rgba(56, 240, 255, 0.65);
+    }
+
+    .topbar-subtitle {
+      margin: 0;
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+
+    .topbar-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 2px solid var(--border);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.92);
+      color: var(--text-muted);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #b8f4ff;
+      transition: transform 120ms ease, border-color 120ms ease, color 120ms ease;
     }
 
-    .eyebrow {
-      margin: 0 0 10px;
+    .nav-pill:hover,
+    .action-link:hover {
+      border-color: var(--border-strong);
+      color: var(--text-main);
+      transform: translate(-2px, -2px);
+    }
+
+    .hero {
+      display: grid;
+      gap: 22px;
+      padding: 24px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.95fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 16px;
+      align-content: start;
     }
 
     h1,
@@ -178,59 +180,160 @@
     h3 {
       margin: 0;
       font-family: "Orbitron", "Rajdhani", sans-serif;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
     h1 {
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: 0.98;
-      text-shadow: 0 0 8px rgba(56, 240, 255, 0.56), 0 0 12px rgba(255, 47, 179, 0.42);
+      font-size: clamp(34px, 6vw, 72px);
+      line-height: 0.94;
+      text-shadow: 3px 0 0 rgba(255, 47, 179, 0.62), -3px 0 0 rgba(56, 240, 255, 0.6);
     }
 
-    .subtitle {
-      margin: 14px 0 0;
-      max-width: 760px;
+    .hero-copy p {
+      margin: 0;
+      max-width: 720px;
       color: var(--text-muted);
-      font-size: clamp(17px, 2vw, 21px);
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.3;
+    }
+
+    .hero-note {
+      width: fit-content;
+      padding: 10px 14px;
+      border: 2px solid rgba(77, 255, 180, 0.5);
+      background: rgba(5, 18, 15, 0.92);
+      color: #dfffea;
+      font-size: 15px;
+      line-height: 1.35;
+      box-shadow: 4px 4px 0 rgba(77, 255, 180, 0.12);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .hero-panel {
+      border: 2px solid var(--border-strong);
+      background: linear-gradient(180deg, rgba(9, 10, 20, 0.98) 0%, rgba(11, 13, 27, 0.95) 100%);
+      padding: 18px;
+      box-shadow: 4px 4px 0 rgba(255, 47, 179, 0.24);
+    }
+
+    .hero-panel p {
+      margin: 10px 0 0;
+      color: var(--text-muted);
+      font-size: 15px;
       line-height: 1.35;
     }
 
-    .header-note {
+    .hero-panel .feature-name {
+      margin-top: 6px;
+      font-size: 26px;
+      color: var(--text-main);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .stat-card {
+      min-height: 100%;
+      padding: 14px 12px;
+      border: 2px solid rgba(56, 240, 255, 0.28);
+      background: rgba(3, 7, 16, 0.95);
+    }
+
+    .stat-value {
+      display: block;
+      color: var(--accent);
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1;
+    }
+
+    .stat-label {
+      display: block;
+      margin-top: 8px;
+      color: var(--text-dim);
+      font-size: 12px;
+      line-height: 1.3;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .section-label {
+      color: #f2b3e4;
+    }
+
+    .gallery {
+      display: grid;
+      gap: 18px;
       margin-top: 18px;
+    }
+
+    .feature-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+      overflow: hidden;
+    }
+
+    .feature-main,
+    .feature-preview {
+      padding: 22px;
+    }
+
+    .feature-main {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .feature-summary {
+      max-width: 700px;
+      color: var(--text-muted);
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .highlight-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .highlight-item {
+      padding: 12px 14px;
+      border-left: 4px solid var(--accent);
+      background: rgba(5, 12, 26, 0.9);
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .highlight-item strong {
+      color: var(--text-main);
+    }
+
+    .tag-row,
+    .action-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(77, 255, 180, 0.3);
-      background: rgba(12, 30, 32, 0.72);
-      color: #dfffee;
-      font-size: 14px;
-      line-height: 1.4;
-    }
-
-    .header-note strong {
-      color: var(--good);
-      font-weight: 700;
-    }
-
-    .status-panel {
-      display: grid;
-      gap: 12px;
-      padding: 16px;
-      border: 1px solid rgba(255, 52, 178, 0.28);
-      border-radius: var(--radius-md);
-      background: linear-gradient(145deg, rgba(16, 11, 38, 0.94) 0%, rgba(16, 25, 58, 0.88) 100%);
-    }
-
-    .status-chip {
-      width: fit-content;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(77, 255, 180, 0.4);
-      background: rgba(18, 61, 48, 0.42);
-      color: var(--good);
+      gap: 8px;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 2px solid rgba(56, 240, 255, 0.24);
+      background: rgba(0, 0, 0, 0.85);
+      color: #d9f5ff;
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 11px;
       font-weight: 700;
@@ -238,182 +341,213 @@
       text-transform: uppercase;
     }
 
-    .status-panel p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .page-grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .card {
-      overflow: hidden;
-    }
-
-    .card-header {
-      padding: 11px 16px;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(90deg, rgba(24, 15, 52, 0.94) 0%, rgba(11, 37, 68, 0.88) 100%);
-    }
-
-    .card-body {
-      padding: 18px 16px;
-    }
-
-    .feature-body {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .feature-copy p,
-    .route-card p,
-    .slot-card p {
-      margin: 12px 0 0;
-      color: var(--text-muted);
-      font-size: 16px;
-      line-height: 1.45;
-    }
-
-    .tag-row,
-    .action-row,
-    .route-grid,
-    .slot-grid {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .tag-row {
-      margin-top: 18px;
-    }
-
-    .tag {
-      color: #d8f7ff;
-    }
-
-    .action-row {
-      margin-top: 18px;
-    }
-
-    .primary-link,
-    .secondary-link {
+    .action-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      min-height: 44px;
-      padding: 0 16px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
+      min-height: 46px;
+      padding: 0 18px;
+      border: 2px solid var(--border);
+      background: rgba(0, 0, 0, 0.9);
+      color: var(--text-main);
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      transition: transform 120ms ease, border-color 120ms ease;
     }
 
-    .primary-link {
-      background: linear-gradient(90deg, rgba(16, 70, 83, 0.92) 0%, rgba(83, 19, 79, 0.86) 100%);
-      color: #f0fdff;
+    .action-link.primary {
+      background: linear-gradient(90deg, rgba(7, 28, 35, 0.96) 0%, rgba(33, 9, 34, 0.96) 100%);
     }
 
-    .secondary-link {
-      background: rgba(10, 18, 43, 0.92);
+    .feature-preview {
+      border-left: 2px solid var(--border);
+      display: grid;
+      align-content: start;
+      gap: 14px;
+      background:
+        linear-gradient(180deg, rgba(56, 240, 255, 0.04) 0%, transparent 20%, transparent 100%),
+        rgba(2, 5, 12, 0.98);
+    }
+
+    .preview-window {
+      border: 2px solid var(--border);
+      background: #000000;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .preview-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--border);
+      background: rgba(56, 240, 255, 0.06);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
       color: var(--text-muted);
     }
 
-    .focus-panel {
-      display: grid;
-      gap: 12px;
-      padding: 16px;
-      border: 1px solid rgba(74, 239, 255, 0.24);
-      border-radius: var(--radius-md);
-      background: rgba(9, 16, 39, 0.9);
+    .preview-topbar span:last-child {
+      color: var(--accent);
     }
 
-    .focus-step {
+    .preview-body {
       display: grid;
-      gap: 4px;
-      padding: 12px;
-      border-radius: var(--radius-sm);
-      background: rgba(17, 24, 51, 0.86);
-      border: 1px solid rgba(74, 239, 255, 0.18);
+      gap: 14px;
+      padding: 14px;
     }
 
-    .focus-step span {
+    .preview-block {
+      display: grid;
+      gap: 8px;
+    }
+
+    .preview-label {
       color: var(--text-dim);
-      font-size: 12px;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
     }
 
-    .focus-step strong {
-      font-size: 16px;
+    .preview-text {
+      padding: 12px;
+      border: 2px solid rgba(56, 240, 255, 0.18);
+      background: rgba(5, 8, 18, 0.94);
       color: var(--text-main);
-      font-weight: 700;
+      font-size: 15px;
+      line-height: 1.35;
     }
 
-    .route-grid,
-    .slot-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+    .token-row,
+    .catalog-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .route-card,
-    .slot-card {
-      min-height: 100%;
-      padding: 16px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(74, 239, 255, 0.2);
-      background: rgba(9, 16, 39, 0.84);
-    }
-
-    .route-card code {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: rgba(10, 18, 43, 0.92);
+    .token-chip,
+    .catalog-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 10px;
+      border: 1px solid rgba(56, 240, 255, 0.26);
+      background: rgba(6, 13, 28, 0.96);
       color: var(--accent);
       font-family: "JetBrains Mono", monospace;
       font-size: 12px;
     }
 
-    .slot-card strong {
-      display: block;
-      color: #f5fbff;
-      font-size: 18px;
+    .catalog-chip {
+      color: #ffd4f0;
+      border-color: rgba(255, 47, 179, 0.3);
     }
 
-    @media (max-width: 980px) {
-      .header-grid,
-      .feature-body,
-      .route-grid,
-      .slot-grid {
+    .preview-note {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .why-section {
+      padding: 20px 22px 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .why-header p,
+    .closing-note p {
+      margin: 10px 0 0;
+      color: var(--text-muted);
+      font-size: 17px;
+      line-height: 1.35;
+      max-width: 860px;
+    }
+
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .reason-card {
+      min-height: 100%;
+      padding: 16px;
+      border: 2px solid rgba(56, 240, 255, 0.24);
+      background: rgba(4, 8, 18, 0.95);
+    }
+
+    .reason-card h3 {
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .reason-card p {
+      margin: 12px 0 0;
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .closing-note {
+      margin-top: 18px;
+      padding: 18px 22px;
+    }
+
+    .closing-note strong {
+      color: var(--good);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .feature-card,
+      .reason-grid {
         grid-template-columns: 1fr;
+      }
+
+      .feature-preview {
+        border-left: 0;
+        border-top: 2px solid var(--border);
       }
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 760px) {
       .page-shell {
         width: min(100vw - 16px, 100%);
       }
 
-      .page-header,
-      .card-body {
+      .topbar,
+      .hero,
+      .feature-main,
+      .feature-preview,
+      .why-section,
+      .closing-note {
         padding-left: 14px;
         padding-right: 14px;
       }
 
-      .subtitle {
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .topbar-links {
+        justify-content: flex-start;
+      }
+
+      .hero-copy p,
+      .feature-summary,
+      .why-header p,
+      .closing-note p {
         font-size: 16px;
       }
     }
@@ -421,102 +555,137 @@
 </head>
 <body>
   <div class="page-shell">
-    <header class="page-header">
-      <div class="nav-row">
-        <a class="nav-link" href="../">&larr; Monitor</a>
-        <a class="nav-link" href="../tokenizers/">Tokenizer Workbench</a>
+    <header class="topbar">
+      <div class="topbar-copy">
+        <div class="eyebrow">Agent Monitor Web</div>
+        <p class="topbar-title">Showcase Gallery</p>
+        <p class="topbar-subtitle">A tighter front door for the browser pieces that are actually worth opening.</p>
       </div>
-      <div class="header-grid">
-        <div>
-          <p class="eyebrow">Agent Monitor Web</p>
-          <h1>Project Showcase</h1>
-          <p class="subtitle">Hands-on browser tools that sit beside the live dashboard without being overwritten by the snapshot publisher.</p>
-          <div class="header-note"><strong>Current rule:</strong> the generated monitor root stays operational, while durable tools and demos live on their own subroutes.</div>
-        </div>
-        <div class="status-panel">
-          <div class="status-chip">Live now</div>
-          <h2>Tokenizer Workbench</h2>
-          <p>Qwen-first interactive tokenizer explorer with family switching, chat serialization, shared-vocabulary notes, and token-by-token inspection.</p>
-          <div class="action-row">
-            <a class="primary-link" href="../tokenizers/">Open tool</a>
-            <a class="secondary-link" href="../">Open monitor</a>
-          </div>
-        </div>
-      </div>
+      <nav class="topbar-links" aria-label="Showcase navigation">
+        <a class="nav-pill" href="../">&larr; Live monitor</a>
+        <a class="nav-pill" href="../tokenizers/">Open tokenizer</a>
+      </nav>
     </header>
 
-    <main class="page-grid">
-      <section class="card">
-        <div class="card-header">Featured Tool</div>
-        <div class="card-body feature-body">
-          <div class="feature-copy">
-            <h2>Tokenizer Workbench</h2>
-            <p>Paste text, switch model lines and configurations, and inspect token boundaries, token IDs, prompt serialization, and vocabulary reuse across public instruct checkpoints.</p>
-            <div class="tag-row">
-              <span class="tag">Qwen 3.5 start point</span>
-              <span class="tag">Browser-side tokenization</span>
-              <span class="tag">Pinned token inspection</span>
-              <span class="tag">Shared vocabulary notes</span>
-            </div>
-            <div class="action-row">
-              <a class="primary-link" href="../tokenizers/">Launch tokenizer</a>
-              <a class="secondary-link" href="../">View live dashboard</a>
-            </div>
+    <main class="gallery">
+      <section class="hero">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="section-label">Curated browser work</div>
+            <h1>Interesting work. No site plumbing.</h1>
+            <p>This page is a gallery for project surfaces that have a real browsing payoff. Right now that means one strong piece: a tokenizer workbench for comparing public open-source LLM tokenizers in the browser.</p>
+            <div class="hero-note">One polished exhibit beats a page full of scaffolding. The gallery stays small until another project is genuinely ready to browse.</div>
           </div>
-          <div class="focus-panel">
-            <div class="focus-step">
-              <span>Start with</span>
-              <strong>Paste text into the editor and watch token boundaries appear inline.</strong>
+          <aside class="hero-side">
+            <div class="hero-panel">
+              <div class="mini-label">Featured now</div>
+              <h2 class="feature-name">Tokenizer Workbench</h2>
+              <p>Compare tokenizer families, inspect prompt serialization, and drill into token IDs without leaving the page or installing anything locally.</p>
             </div>
-            <div class="focus-step">
-              <span>Then explore</span>
-              <strong>Switch model line, family, or configuration to see which checkpoints really share a tokenizer.</strong>
+            <div class="stat-grid">
+              <div class="stat-card">
+                <span class="stat-value">8</span>
+                <span class="stat-label">Model lines in the current catalog</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value">11</span>
+                <span class="stat-label">Tokenizer families split out for comparison</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value">28</span>
+                <span class="stat-label">Public checkpoints you can inspect</span>
+              </div>
             </div>
-            <div class="focus-step">
-              <span>Inspect deeply</span>
-              <strong>Pin tokens to trace IDs, raw vocabulary entries, and special-token behavior.</strong>
-            </div>
-          </div>
+          </aside>
         </div>
       </section>
 
-      <section class="card">
-        <div class="card-header">Site Routes</div>
-        <div class="card-body route-grid">
-          <div class="route-card">
-            <h3>Monitor Root</h3>
-            <p>The continuously refreshed dashboard snapshot for tasks, supervisor state, and system telemetry.</p>
-            <code>/</code>
+      <section class="feature-card" aria-labelledby="tokenizer-workbench-title">
+        <div class="feature-main">
+          <div class="section-label">Featured showcase</div>
+          <h2 id="tokenizer-workbench-title">Tokenizer Workbench</h2>
+          <p class="feature-summary">A browser-side tokenizer explorer built for the questions that matter in practice: which checkpoints really share a vocabulary, how their chat templates serialize prompts, and what each token boundary looks like when you inspect it closely.</p>
+          <div class="tag-row" aria-label="Tokenizer highlights">
+            <span class="tag">Browser-side tokenization</span>
+            <span class="tag">Cross-family comparison</span>
+            <span class="tag">Prompt serialization</span>
+            <span class="tag">Token-by-token drilldown</span>
           </div>
-          <div class="route-card">
-            <h3>Showcase</h3>
-            <p>The stable gallery for hand-maintained browser tools that should survive snapshot publishing cycles.</p>
-            <code>/showcase/</code>
+          <div class="highlight-list" aria-label="Reasons to open the tokenizer">
+            <div class="highlight-item"><strong>Compare the catalog, not just one model.</strong> Jump across Qwen, DeepSeek, MiniMax, Yi, Mistral, Phi, SmolLM, and Falcon without losing the thread of what changed.</div>
+            <div class="highlight-item"><strong>See where vocabularies really match.</strong> The page separates exact shared-tokenizer families from look-alikes, so model-size changes do not masquerade as tokenizer changes.</div>
+            <div class="highlight-item"><strong>Inspect the mechanics directly.</strong> Pin tokens to inspect IDs, raw vocabulary entries, special tokens, and chat-template formatting side by side.</div>
           </div>
-          <div class="route-card">
-            <h3>Tokenizer Workbench</h3>
-            <p>The first interactive project surface in the showcase layer.</p>
-            <code>/tokenizers/</code>
+          <div class="action-row">
+            <a class="action-link primary" href="../tokenizers/">Launch tokenizer workbench</a>
+            <a class="action-link" href="../">Back to live monitor</a>
           </div>
+        </div>
+        <div class="feature-preview">
+          <div class="section-label">Gallery preview</div>
+          <div class="preview-window" aria-hidden="true">
+            <div class="preview-topbar">
+              <span>TOKENIZER WORKBENCH</span>
+              <span>LIVE BROWSER VIEW</span>
+            </div>
+            <div class="preview-body">
+              <div class="preview-block">
+                <div class="preview-label">Prompt</div>
+                <div class="preview-text">Compare how public instruct checkpoints split this sentence into tokens, then inspect the raw IDs and special-token behavior.</div>
+              </div>
+              <div class="preview-block">
+                <div class="preview-label">Token slice</div>
+                <div class="token-row">
+                  <span class="token-chip">Compare</span>
+                  <span class="token-chip">how</span>
+                  <span class="token-chip">public</span>
+                  <span class="token-chip">instruct</span>
+                  <span class="token-chip">checkpoints</span>
+                  <span class="token-chip">split</span>
+                  <span class="token-chip">text</span>
+                </div>
+              </div>
+              <div class="preview-block">
+                <div class="preview-label">Catalog slice</div>
+                <div class="catalog-row">
+                  <span class="catalog-chip">Qwen</span>
+                  <span class="catalog-chip">DeepSeek</span>
+                  <span class="catalog-chip">MiniMax</span>
+                  <span class="catalog-chip">Mistral</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="preview-note">The live tool lets you change model lines and families, paste your own text, and inspect the resulting token stream in detail. This preview is just the invitation, not the whole experience.</p>
         </div>
       </section>
 
-      <section class="card">
-        <div class="card-header">Expansion Slots</div>
-        <div class="card-body slot-grid">
-          <div class="slot-card">
-            <strong>Future tools</strong>
-            <p>New browser artifacts can land here immediately without waiting on a monitor-root redesign.</p>
-          </div>
-          <div class="slot-card">
-            <strong>Root-link blocker</strong>
-            <p>The live dashboard homepage still needs an exporter-side extension hook before it can hold permanent showcase cards.</p>
-          </div>
-          <div class="slot-card">
-            <strong>Design rule</strong>
-            <p>Keep the same cyan-magenta dashboard language so showcase pages feel native to the monitor site rather than detached microsites.</p>
-          </div>
+      <section class="why-section" aria-labelledby="why-title">
+        <div class="why-header">
+          <div class="section-label">Why it belongs here</div>
+          <h2 id="why-title">Three reasons this is worth browsing</h2>
+          <p>The gallery is for project surfaces that make an idea clearer by being interactive. The tokenizer page earns that spot because it turns a fuzzy model-comparison question into something you can inspect immediately.</p>
         </div>
+        <div class="reason-grid">
+          <article class="reason-card">
+            <h3>It answers a real model-selection question</h3>
+            <p>If two checkpoints share the same tokenizer, the vocabulary is not the variable. The workbench makes that visible instead of leaving it as repo folklore.</p>
+          </article>
+          <article class="reason-card">
+            <h3>It surfaces prompt-format differences</h3>
+            <p>Chat templates and special tokens often matter as much as vocabulary boundaries. The tool lets you inspect those formatting choices directly.</p>
+          </article>
+          <article class="reason-card">
+            <h3>It invites useful poking around</h3>
+            <p>This is the kind of page where you can paste a sentence, switch families, and immediately learn something from the result. That is the bar for the rest of the gallery too.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="closing-note">
+        <div class="section-label">Gallery note</div>
+        <h2>Selective by design</h2>
+        <p><strong>More showcases will land here later</strong>, but only when they are polished enough to be interesting on their own. Until then, the tokenizer workbench carries the page and gets the space to do it well.</p>
       </section>
     </main>
   </div>
