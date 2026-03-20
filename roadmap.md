@@ -1,10 +1,12 @@
 # agent-monitor-web Roadmap
 
+Last updated: 2026-03-20 18:03 UTC
+
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
-- The showcase route now behaves like a curated gallery page rather than a route explainer, with the tokenizer workbench carrying the page as the first featured exhibit.
+- The showcase route is now intentionally sparse and viewer-first: one hook, one featured exhibit, and one obvious launch path into the tokenizer workbench.
 - A persistent tokenizer link on the root dashboard is still blocked because the exporter has no showcase-extension hook yet.
 
 ## Milestone 1 - Stable Hosted Surfaces
@@ -24,6 +26,11 @@ Success criteria:
 
 Status:
 - In place. `/showcase/` now presents the tokenizer workbench as a gallery-style featured exhibit and keeps the page focused on browseable project surfaces instead of internal site structure.
+
+### Activity Log
+
+- 2026-03-20 18:03 UTC — Consulted Athena in `deep` mode (1 turn; log: `.agent/consult_history/1774027390.110939.jsonl`) on how a one-item gallery page should read to first-time outside viewers. Main takeaway: the page has to answer "what is this, why is it interesting, what do I click" immediately, and supporting stats should confirm scope rather than compete with the exhibit.
+- 2026-03-20 18:03 UTC — Rewrote `/showcase/` around that hierarchy: replaced insider-ish counts and repeated rationale with one concise hero, one featured tokenizer plaque, one "try this first" panel, and a single dominant launch CTA.
 
 ## Milestone 3 - Root Dashboard Extensibility
 
