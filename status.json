@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T02:45:57Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-20T02:47:56Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 2199,
+    "loop_count": 2218,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 1,
+        "task": "1773942694.197309",
+        "started_at": 1773974790,
+        "elapsed_sec": 86
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.31,
-      "five": 2.0,
-      "fifteen": 1.8
+      "one": 1.9,
+      "five": 1.95,
+      "fifteen": 1.81
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107264225280,
-    "disk_free_bytes": 137842970624,
-    "runner_log_size_bytes": 205584,
+    "disk_used_bytes": 107273052160,
+    "disk_free_bytes": 137834143744,
+    "runner_log_size_bytes": 205931,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-19T22:44:48Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T02:45:59Z",
+    "checked_at_utc": "2026-03-20T02:48:02Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 48
       },
       {
         "index": 1,
@@ -54,7 +62,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 47
       },
       {
         "index": 2,
@@ -62,7 +70,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 47
       },
       {
         "index": 3,
@@ -78,7 +86,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 46
       },
       {
         "index": 5,
@@ -86,7 +94,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 46
       },
       {
         "index": 6,
@@ -94,7 +102,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 47
       },
       {
         "index": 7,
@@ -102,13 +110,30 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 47
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773942694.197309": {
+        "mention_ts": "1773942694.197309",
+        "thread_ts": "1773942694.197309",
+        "status": "in_progress",
+        "task_description": "Let's work on something fun.",
+        "summary": "Initialized the terraria-worldbody project, built a first playable tModLoader source-mod prototype for memory-driven World-Body beats, and uploaded the source …",
+        "summary_preview": "Initialized the terraria-worldbody project, built a first playable tModLoader source-mod prototype for memory-driven World-Body beats, and uploaded the source …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773942694.197309",
+        "last_update_ts": "1773974789.694340",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T17:51:34Z"
+        }
+      }
+    },
     "incomplete": {
       "1773771203.022709": {
         "mention_ts": "1773771203.022709",
@@ -236,22 +261,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T21:53:24Z"
-        }
-      },
-      "1773942694.197309": {
-        "mention_ts": "1773942694.197309",
-        "thread_ts": "1773942694.197309",
-        "status": "waiting_human",
-        "task_description": "Let's work on something fun.",
-        "summary": "Initialized the terraria-worldbody project, built a first playable tModLoader source-mod prototype for memory-driven World-Body beats, and uploaded the source …",
-        "summary_preview": "Initialized the terraria-worldbody project, built a first playable tModLoader source-mod prototype for memory-driven World-Body beats, and uploaded the source …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773942694.197309",
-        "last_update_ts": "1773971316.739330",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T17:51:34Z"
         }
       }
     },
@@ -1068,5 +1077,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T02:46:00Z"
+  "server_time_utc": "2026-03-20T02:48:03Z"
 }
