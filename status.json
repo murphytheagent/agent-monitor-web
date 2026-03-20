@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T16:33:27Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-20T16:35:28Z",
+    "status": "workers_active",
     "pid": 82363,
-    "loop_count": 5997,
+    "loop_count": 6015,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773984772.225789",
+        "started_at": 1774024423,
+        "elapsed_sec": 105
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.5,
-      "five": 1.49,
-      "fifteen": 1.57
+      "one": 1.78,
+      "five": 1.6,
+      "fifteen": 1.6
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 108781625344,
-    "disk_free_bytes": 136325570560,
-    "runner_log_size_bytes": 215533,
+    "disk_used_bytes": 108780060672,
+    "disk_free_bytes": 136327135232,
+    "runner_log_size_bytes": 215673,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T05:14:08Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T16:33:30Z",
+    "checked_at_utc": "2026-03-20T16:35:33Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +62,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 45
       },
       {
         "index": 2,
@@ -62,7 +70,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 46
       },
       {
         "index": 3,
@@ -70,7 +78,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 45
       },
       {
         "index": 4,
@@ -78,7 +86,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 5,
@@ -86,7 +94,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 6,
@@ -94,21 +102,38 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 91,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 46
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773984772.225789": {
+        "mention_ts": "1773984772.225789",
+        "thread_ts": "1773984772.225789",
+        "status": "in_progress",
+        "task_description": "Can you access and edit: <[link] <[link].",
+        "summary": "Explained and live-verified the Murphy-owned Overleaf Git token path; the thread now waits on whether to mint/store the token and switch both projects to the l…",
+        "summary_preview": "Explained and live-verified the Murphy-owned Overleaf Git token path; the thread now waits on whether to mint/store the token and switch both projects to the l…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773984772.225789",
+        "last_update_ts": "1774024422.861183",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T06:00:38Z"
+        }
+      }
+    },
     "incomplete": {
       "1773771203.022709": {
         "mention_ts": "1773771203.022709",
@@ -268,22 +293,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T20:57:38Z"
-        }
-      },
-      "1773984772.225789": {
-        "mention_ts": "1773984772.225789",
-        "thread_ts": "1773984772.225789",
-        "status": "waiting_human",
-        "task_description": "Can you access and edit: <[link] <[link].",
-        "summary": "Explained and live-verified the Murphy-owned Overleaf Git token path; the thread now waits on whether to mint/store the token and switch both projects to the l…",
-        "summary_preview": "Explained and live-verified the Murphy-owned Overleaf Git token path; the thread now waits on whether to mint/store the token and switch both projects to the l…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773984772.225789",
-        "last_update_ts": "1773989515.981519",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T06:00:38Z"
         }
       }
     },
@@ -1100,5 +1109,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T16:33:31Z"
+  "server_time_utc": "2026-03-20T16:35:33Z"
 }
