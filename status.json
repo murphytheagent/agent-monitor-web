@@ -1,25 +1,17 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T18:03:25Z",
-    "status": "workers_active",
-    "pid": 82363,
-    "loop_count": 6809,
+    "last_updated_utc": "2026-03-20T19:39:06Z",
+    "status": "running_session",
+    "pid": 88641,
+    "loop_count": 90,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1774027390.110939",
-        "started_at": 1774028710,
-        "elapsed_sec": 1094
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,24 +19,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.21,
-      "five": 1.98,
-      "fifteen": 1.91
+      "one": 1.98,
+      "five": 1.9,
+      "fifteen": 1.89
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 108807970816,
-    "disk_free_bytes": 136299225088,
-    "runner_log_size_bytes": 217575,
+    "disk_used_bytes": 107646410752,
+    "disk_free_bytes": 137460785152,
+    "runner_log_size_bytes": 222817,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-20T05:14:08Z",
+    "dashboard_started_utc": "2026-03-20T19:29:07Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T18:03:30Z",
+    "checked_at_utc": "2026-03-20T19:51:18Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,15 +46,15 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 48
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 47
       },
       {
         "index": 2,
@@ -78,7 +70,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 4,
@@ -86,12 +78,12 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 47
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 46
@@ -99,7 +91,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 46
@@ -110,47 +102,31 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 48
       }
     ]
   },
   "tasks": {
     "queued": {},
     "active": {
-      "1774027390.110939": {
-        "mention_ts": "1774027390.110939",
-        "thread_ts": "1774027390.110939",
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
         "status": "in_progress",
-        "task_description": "The current showcase website seems to contain many redundant information.",
-        "summary": "Redesigned the live showcase page into a tokenizer-centered gallery and removed the public route/expansion-slot scaffolding.",
-        "summary_preview": "Redesigned the live showcase page into a tokenizer-centered gallery and removed the public route/expansion-slot scaffolding.",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774027390.110939",
-        "last_update_ts": "1774028710.515209",
-        "task_type": "slack_mention",
+        "created_ts": "1774034135.049729",
+        "last_update_ts": "1774035546.155779",
+        "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-20T17:23:10Z"
+          "time_iso": "2026-03-20T19:15:35Z"
         }
       }
     },
     "incomplete": {
-      "1773771203.022709": {
-        "mention_ts": "1773771203.022709",
-        "thread_ts": "1773771203.022709",
-        "status": "waiting_human",
-        "task_description": "Survey recent works on generalizations of Bourgain's projection theorem.",
-        "summary": "Delivered a PDF survey mapping the main recent generalizations of Bourgain's projection theorem and highlighted the core versus adjacent papers.",
-        "summary_preview": "Delivered a PDF survey mapping the main recent generalizations of Bourgain's projection theorem and highlighted the core versus adjacent papers.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773771203.022709",
-        "last_update_ts": "1773775338.792200",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-17T18:13:23Z"
-        }
-      },
       "1773701002.020259": {
         "mention_ts": "1773701002.020259",
         "thread_ts": "1773701002.020259",
@@ -295,22 +271,6 @@
           "time_iso": "2026-03-19T20:57:38Z"
         }
       },
-      "1773984772.225789": {
-        "mention_ts": "1773984772.225789",
-        "thread_ts": "1773984772.225789",
-        "status": "waiting_human",
-        "task_description": "Can you access and edit: <[link] <[link].",
-        "summary": "Murphy now has a single Murphy-owned Overleaf Git token stored locally with explicit Keychain provenance, but both shared Overleaf projects still reject Git ac…",
-        "summary_preview": "Murphy now has a single Murphy-owned Overleaf Git token stored locally with explicit Keychain provenance, but both shared Overleaf projects still reject Git ac…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773984772.225789",
-        "last_update_ts": "1774026047.253172",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T06:00:38Z"
-        }
-      },
       "1774027184.232059": {
         "mention_ts": "1774027184.232059",
         "thread_ts": "1774027184.232059",
@@ -326,25 +286,41 @@
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T17:19:44Z"
         }
+      },
+      "1774027390.110939": {
+        "mention_ts": "1774027390.110939",
+        "thread_ts": "1774027390.110939",
+        "status": "waiting_human",
+        "task_description": "The current showcase website seems to contain many redundant information.",
+        "summary": "Rebuilt the showcase into a screenshot-led tokenizer gallery with much lighter copy and published it live on GitHub Pages.",
+        "summary_preview": "Rebuilt the showcase into a screenshot-led tokenizer gallery with much lighter copy and published it live on GitHub Pages.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774027390.110939",
+        "last_update_ts": "1774032703.558169",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T17:23:10Z"
+        }
+      },
+      "1773984772.225789": {
+        "mention_ts": "1773984772.225789",
+        "thread_ts": "1773984772.225789",
+        "status": "waiting_human",
+        "task_description": "Can you access and edit: <[link] <[link].",
+        "summary": "Murphy confirmed both shared Overleaf projects are editable from the Murphy account, verified that the Murphy-owned Git token now supports local clone/push/liv…",
+        "summary_preview": "Murphy confirmed both shared Overleaf projects are editable from the Murphy account, verified that the Murphy-owned Git token now supports local clone/push/liv…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773984772.225789",
+        "last_update_ts": "1774035545.785859",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T06:00:38Z"
+        }
       }
     },
     "finished": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1773958297.306549",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: implemented AGENT-028 worker hang detection (session log staleness watchdog, reduced collect timeout), committed AGENT-027 in chatgpt-mcp-chr…",
-        "summary_preview": "Developer review: implemented AGENT-028 worker hang detection (session log staleness watchdog, reduced collect timeout), committed AGENT-027 in chatgpt-mcp-chr…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773955964.190748",
-        "last_update_ts": "1773960287.583608",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T21:32:44Z"
-        }
-      },
       "1773937658.648909": {
         "mention_ts": "1773937658.648909",
         "thread_ts": "1773937658.648909",
@@ -1128,6 +1104,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T21:29:35Z"
         }
+      },
+      "1771791882.440369": {
+        "mention_ts": "1771791882.440369",
+        "thread_ts": "1771791882.440369",
+        "status": "done",
+        "task_description": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the murphy channel abou…",
+        "summary": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
+        "summary_preview": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771791882.440369",
+        "last_update_ts": "1771798209.363401",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T20:24:42Z"
+        }
       }
     }
   },
@@ -1141,5 +1133,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T18:03:31Z"
+  "server_time_utc": "2026-03-20T19:51:19Z"
 }
