@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T17:45:00Z",
+    "last_updated_utc": "2026-03-20T17:47:07Z",
     "status": "workers_active",
     "pid": 82363,
-    "loop_count": 6643,
+    "loop_count": 6662,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,13 @@
         "slot": 0,
         "task": "1774027184.232059",
         "started_at": 1774028543,
-        "elapsed_sec": 156
+        "elapsed_sec": 283
+      },
+      {
+        "slot": 1,
+        "task": "1774027390.110939",
+        "started_at": 1774028710,
+        "elapsed_sec": 116
       }
     ]
   },
@@ -27,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.56,
-      "five": 2.06,
-      "fifteen": 1.82
+      "one": 2.52,
+      "five": 2.18,
+      "fifteen": 1.9
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 108946960384,
-    "disk_free_bytes": 136160235520,
-    "runner_log_size_bytes": 217193,
+    "disk_used_bytes": 108953096192,
+    "disk_free_bytes": 136154099712,
+    "runner_log_size_bytes": 217333,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T05:14:08Z",
     "local_ips": []
@@ -44,73 +50,73 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T17:45:07Z",
+    "checked_at_utc": "2026-03-20T17:47:10Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 87958,
+        "utilization_gpu_pct": 90,
+        "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 53
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 48
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 49
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 48
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 47
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 46
       },
       {
-        "index": 6,
+        "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 47
       },
       {
-        "index": 7,
+        "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 47
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 89,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 45
+      },
+      {
+        "index": 5,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 89,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
+      },
+      {
+        "index": 6,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 95,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 48
+      },
+      {
+        "index": 7,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 89,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 55
       }
     ]
   },
@@ -131,6 +137,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T17:19:44Z"
+        }
+      },
+      "1774027390.110939": {
+        "mention_ts": "1774027390.110939",
+        "thread_ts": "1774027390.110939",
+        "status": "in_progress",
+        "task_description": "The current showcase website seems to contain many redundant information.",
+        "summary": "Redesigned the live showcase page into a tokenizer-centered gallery and removed the public route/expansion-slot scaffolding.",
+        "summary_preview": "Redesigned the live showcase page into a tokenizer-centered gallery and removed the public route/expansion-slot scaffolding.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774027390.110939",
+        "last_update_ts": "1774028710.515209",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T17:23:10Z"
         }
       }
     },
@@ -309,22 +331,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T06:00:38Z"
-        }
-      },
-      "1774027390.110939": {
-        "mention_ts": "1774027390.110939",
-        "thread_ts": "1774027390.110939",
-        "status": "waiting_human",
-        "task_description": "The current showcase website seems to contain many redundant information.",
-        "summary": "Redesigned the live showcase page into a tokenizer-centered gallery and removed the public route/expansion-slot scaffolding.",
-        "summary_preview": "Redesigned the live showcase page into a tokenizer-centered gallery and removed the public route/expansion-slot scaffolding.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774027390.110939",
-        "last_update_ts": "1774028675.691846",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T17:23:10Z"
         }
       }
     },
@@ -1141,5 +1147,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T17:45:08Z"
+  "server_time_utc": "2026-03-20T17:47:10Z"
 }
