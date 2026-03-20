@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T06:05:08Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-20T06:07:08Z",
+    "status": "sleeping",
     "pid": 82363,
-    "loop_count": 463,
+    "loop_count": 481,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773984772.225789",
-        "started_at": 1773986470,
-        "elapsed_sec": 237
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.59,
-      "five": 1.7,
-      "fifteen": 1.75
+      "one": 2.15,
+      "five": 1.87,
+      "fifteen": 1.81
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 109001723904,
-    "disk_free_bytes": 136105472000,
-    "runner_log_size_bytes": 214005,
+    "disk_used_bytes": 109004746752,
+    "disk_free_bytes": 136102449152,
+    "runner_log_size_bytes": 214247,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T05:14:08Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T06:05:10Z",
+    "checked_at_utc": "2026-03-20T06:07:13Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,18 +46,10 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 53
       },
       {
         "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 47
-      },
-      {
-        "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
@@ -73,12 +57,20 @@
         "temperature_c": 48
       },
       {
-        "index": 3,
+        "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 46
+      },
+      {
+        "index": 3,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 88,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
       },
       {
         "index": 4,
@@ -86,7 +78,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 49
       },
       {
         "index": 5,
@@ -94,7 +86,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 51
       },
       {
         "index": 6,
@@ -102,7 +94,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 52
       },
       {
         "index": 7,
@@ -110,30 +102,13 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 53
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773984772.225789": {
-        "mention_ts": "1773984772.225789",
-        "thread_ts": "1773984772.225789",
-        "status": "in_progress",
-        "task_description": "Can you access and edit: <[link] <[link].",
-        "summary": "Checked both Overleaf links and confirmed they are auth-gated; I cannot access or edit them from this machine without login.",
-        "summary_preview": "Checked both Overleaf links and confirmed they are auth-gated; I cannot access or edit them from this machine without login.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773984772.225789",
-        "last_update_ts": "1773986470.514650",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T06:00:38Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773771203.022709": {
         "mention_ts": "1773771203.022709",
@@ -293,6 +268,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T20:57:38Z"
+        }
+      },
+      "1773984772.225789": {
+        "mention_ts": "1773984772.225789",
+        "thread_ts": "1773984772.225789",
+        "status": "waiting_human",
+        "task_description": "Can you access and edit: <[link] <[link].",
+        "summary": "Rechecked the Overleaf links after the Gmail-invite follow-up; both still require fresh Overleaf/Google login, and I logged the missing done-marker regression …",
+        "summary_preview": "Rechecked the Overleaf links after the Gmail-invite follow-up; both still require fresh Overleaf/Google login, and I logged the missing done-marker regression …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773984772.225789",
+        "last_update_ts": "1773986828.332436",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T06:00:38Z"
         }
       }
     },
@@ -1109,5 +1100,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T06:05:11Z"
+  "server_time_utc": "2026-03-20T06:07:14Z"
 }
