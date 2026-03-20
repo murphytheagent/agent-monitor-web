@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T20:34:46Z",
+    "last_updated_utc": "2026-03-20T20:36:51Z",
     "status": "workers_active",
     "pid": 27338,
-    "loop_count": 161,
+    "loop_count": 180,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,12 +17,12 @@
         "slot": 0,
         "task": "1773984772.225789",
         "started_at": 1774037845,
-        "elapsed_sec": 1040
+        "elapsed_sec": 1165
       },
       {
         "slot": 1,
         "task": "1774037786.521379",
-        "started_at": 1774038836,
+        "started_at": 1774038960,
         "elapsed_sec": 50
       }
     ]
@@ -33,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.03,
-      "five": 2.04,
-      "fifteen": 2.03
+      "one": 1.47,
+      "five": 1.91,
+      "fifteen": 1.98
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 109433704448,
-    "disk_free_bytes": 135673491456,
-    "runner_log_size_bytes": 224598,
+    "disk_used_bytes": 109432496128,
+    "disk_free_bytes": 135674699776,
+    "runner_log_size_bytes": 224923,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T20:02:05Z",
     "local_ips": []
@@ -50,41 +50,41 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T20:34:52Z",
+    "checked_at_utc": "2026-03-20T20:36:55Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 45
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 90,
+        "utilization_gpu_pct": 88,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 51
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 89,
+        "utilization_gpu_pct": 96,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 53
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 91,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 52
       },
       {
         "index": 4,
@@ -92,31 +92,31 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 51
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 89,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 50
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 89,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 53
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 90,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 54
       }
     ]
   },
@@ -148,7 +148,7 @@
         "summary_preview": "Signed Google Drive into murphytheagent@gmail.com on the Mac.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774037786.521379",
-        "last_update_ts": "1774038835.832305",
+        "last_update_ts": "1774038960.629881",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -1131,5 +1131,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T20:34:53Z"
+  "server_time_utc": "2026-03-20T20:36:55Z"
 }
