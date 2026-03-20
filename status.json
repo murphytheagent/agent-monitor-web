@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T19:39:06Z",
+    "last_updated_utc": "2026-03-20T20:02:10Z",
     "status": "running_session",
-    "pid": 88641,
-    "loop_count": 90,
+    "pid": 27338,
+    "loop_count": 1,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.03,
-      "five": 1.92,
-      "fifteen": 1.84
+      "one": 1.88,
+      "five": 1.93,
+      "fifteen": 1.85
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 107643428864,
-    "disk_free_bytes": 137463767040,
-    "runner_log_size_bytes": 223358,
+    "disk_used_bytes": 107637198848,
+    "disk_free_bytes": 137469997056,
+    "runner_log_size_bytes": 223774,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T20:02:05Z",
     "local_ips": []
@@ -36,46 +36,46 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T20:02:05Z",
+    "checked_at_utc": "2026-03-20T20:04:08Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 90,
+        "utilization_gpu_pct": 88,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 55
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 94,
+        "memory_used_mb": 65479,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 56
       },
       {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 54
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
-        "memory_used_mb": 65479,
-        "memory_total_mb": 97887,
-        "temperature_c": 57
-      },
-      {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 89,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 55
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 88,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
         "temperature_c": 54
@@ -83,18 +83,18 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 94,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 54
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 89,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 55
       },
       {
         "index": 7,
@@ -102,30 +102,13 @@
         "utilization_gpu_pct": 95,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 56
+        "temperature_c": 57
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "maintenance",
-        "status": "in_progress",
-        "task_description": "Run maintenance reflection checklist and summarize findings.",
-        "summary": "Run maintenance reflection checklist and summarize findings.",
-        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774034135.049729",
-        "last_update_ts": "1774035546.155779",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T19:15:35Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773701002.020259": {
         "mention_ts": "1773701002.020259",
@@ -306,13 +289,13 @@
       "1773984772.225789": {
         "mention_ts": "1773984772.225789",
         "thread_ts": "1773984772.225789",
-        "status": "waiting_human",
+        "status": "in_progress",
         "task_description": "Can you access and edit: <[link] <[link].",
         "summary": "Murphy confirmed both shared Overleaf projects are editable from the Murphy account, verified that the Murphy-owned Git token now supports local clone/push/liv…",
         "summary_preview": "Murphy confirmed both shared Overleaf projects are editable from the Murphy account, verified that the Murphy-owned Git token now supports local clone/push/liv…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1773984772.225789",
-        "last_update_ts": "1774035545.785859",
+        "last_update_ts": "1774036930.907473",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -1133,5 +1116,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T20:02:06Z"
+  "server_time_utc": "2026-03-20T20:04:09Z"
 }
