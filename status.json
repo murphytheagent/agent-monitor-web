@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-20T21:50:48Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-20T21:52:48Z",
+    "status": "workers_active",
     "pid": 27338,
-    "loop_count": 856,
+    "loop_count": 874,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1774037786.521379",
+        "started_at": 1774043523,
+        "elapsed_sec": 44
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.16,
-      "five": 2.09,
-      "fifteen": 2.37
+      "one": 2.68,
+      "five": 2.34,
+      "fifteen": 2.43
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 115855695872,
-    "disk_free_bytes": 129251500032,
-    "runner_log_size_bytes": 227625,
+    "disk_used_bytes": 115838312448,
+    "disk_free_bytes": 129268883456,
+    "runner_log_size_bytes": 227813,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-20T20:02:05Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-20T21:50:51Z",
+    "checked_at_utc": "2026-03-20T21:52:53Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 65479,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 46
       },
       {
         "index": 1,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1774037786.521379": {
+        "mention_ts": "1774037786.521379",
+        "thread_ts": "1774037786.521379",
+        "status": "in_progress",
+        "task_description": "I've just installed Google drive on your mac.",
+        "summary": "Google Drive is signed into Murphy Gmail with [code] , [code] , and [code] backed up/shared, and Gemini CLI is signed into the collaborator-approved account 09…",
+        "summary_preview": "Google Drive is signed into Murphy Gmail with [code] , [code] , and [code] backed up/shared, and Gemini CLI is signed into the collaborator-approved account 09…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774037786.521379",
+        "last_update_ts": "1774043523.543575",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T21:51:56Z"
+        }
+      }
+    },
     "incomplete": {
       "1773739092.072639": {
         "mention_ts": "1773739092.072639",
@@ -288,22 +313,6 @@
       }
     },
     "finished": {
-      "1774037786.521379": {
-        "mention_ts": "1774037786.521379",
-        "thread_ts": "1774037786.521379",
-        "status": "done",
-        "task_description": "I've just installed Google drive on your mac.",
-        "summary": "Google Drive is signed into Murphy Gmail with [code] , [code] , and [code] backed up/shared, and Gemini CLI is signed into the collaborator-approved account 09…",
-        "summary_preview": "Google Drive is signed into Murphy Gmail with [code] , [code] , and [code] backed up/shared, and Gemini CLI is signed into the collaborator-approved account 09…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774037786.521379",
-        "last_update_ts": "1774042707.487740",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T21:17:27Z"
-        }
-      },
       "1773937658.648909": {
         "mention_ts": "1773937658.648909",
         "thread_ts": "1773937658.648909",
@@ -1087,6 +1096,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T21:29:35Z"
         }
+      },
+      "1771791882.440369": {
+        "mention_ts": "1771791882.440369",
+        "thread_ts": "1771791882.440369",
+        "status": "done",
+        "task_description": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the murphy channel abou…",
+        "summary": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
+        "summary_preview": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771791882.440369",
+        "last_update_ts": "1771798209.363401",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T20:24:42Z"
+        }
       }
     }
   },
@@ -1100,5 +1125,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-20T21:50:52Z"
+  "server_time_utc": "2026-03-20T21:52:54Z"
 }
