@@ -70,9 +70,7 @@
 
     .topbar,
     .hero,
-    .feature-card,
-    .why-section,
-    .closing-note {
+    .feature-card {
       border: 2px solid var(--border);
       background: linear-gradient(180deg, rgba(4, 7, 15, 0.96) 0%, rgba(7, 11, 22, 0.94) 100%);
       box-shadow: var(--shadow);
@@ -318,27 +316,10 @@
       color: var(--text-main);
     }
 
-    .tag-row,
     .action-row {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 34px;
-      padding: 0 12px;
-      border: 2px solid rgba(56, 240, 255, 0.24);
-      background: rgba(0, 0, 0, 0.85);
-      color: #d9f5ff;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
     }
 
     .action-link {
@@ -455,59 +436,9 @@
       line-height: 1.35;
     }
 
-    .why-section {
-      padding: 20px 22px 22px;
-      display: grid;
-      gap: 16px;
-    }
-
-    .why-header p,
-    .closing-note p {
-      margin: 10px 0 0;
-      color: var(--text-muted);
-      font-size: 17px;
-      line-height: 1.35;
-      max-width: 860px;
-    }
-
-    .reason-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .reason-card {
-      min-height: 100%;
-      padding: 16px;
-      border: 2px solid rgba(56, 240, 255, 0.24);
-      background: rgba(4, 8, 18, 0.95);
-    }
-
-    .reason-card h3 {
-      font-size: 18px;
-      line-height: 1.15;
-    }
-
-    .reason-card p {
-      margin: 12px 0 0;
-      color: var(--text-muted);
-      font-size: 16px;
-      line-height: 1.35;
-    }
-
-    .closing-note {
-      margin-top: 18px;
-      padding: 18px 22px;
-    }
-
-    .closing-note strong {
-      color: var(--good);
-    }
-
     @media (max-width: 1024px) {
       .hero-grid,
-      .feature-card,
-      .reason-grid {
+      .feature-card {
         grid-template-columns: 1fr;
       }
 
@@ -522,12 +453,14 @@
         width: min(100vw - 16px, 100%);
       }
 
+      .topbar {
+        flex-direction: column;
+      }
+
       .topbar,
       .hero,
       .feature-main,
-      .feature-preview,
-      .why-section,
-      .closing-note {
+      .feature-preview {
         padding-left: 14px;
         padding-right: 14px;
       }
@@ -536,18 +469,29 @@
         grid-template-columns: 1fr;
       }
 
-      .topbar {
-        align-items: flex-start;
+      .topbar-links {
+        width: 100%;
+        justify-content: flex-start;
       }
 
-      .topbar-links {
-        justify-content: flex-start;
+      .nav-pill,
+      .action-link {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 42px;
+        line-height: 0.92;
+      }
+
+      .hero-note {
+        width: 100%;
+        font-size: 14px;
       }
 
       .hero-copy p,
       .feature-summary,
-      .why-header p,
-      .closing-note p {
+      .preview-note {
         font-size: 16px;
       }
     }
@@ -559,11 +503,11 @@
       <div class="topbar-copy">
         <div class="eyebrow">Agent Monitor Web</div>
         <p class="topbar-title">Showcase Gallery</p>
-        <p class="topbar-subtitle">A tighter front door for the browser pieces that are actually worth opening.</p>
+        <p class="topbar-subtitle">A viewer-first gallery for the browser work worth opening.</p>
       </div>
       <nav class="topbar-links" aria-label="Showcase navigation">
         <a class="nav-pill" href="../">&larr; Live monitor</a>
-        <a class="nav-pill" href="../tokenizers/">Open tokenizer</a>
+        <a class="nav-pill" href="../tokenizers/">Open workbench</a>
       </nav>
     </header>
 
@@ -571,29 +515,32 @@
       <section class="hero">
         <div class="hero-grid">
           <div class="hero-copy">
-            <div class="section-label">Curated browser work</div>
-            <h1>Interesting work. No site plumbing.</h1>
-            <p>This page is a gallery for project surfaces that have a real browsing payoff. Right now that means one strong piece: a tokenizer workbench for comparing public open-source LLM tokenizers in the browser.</p>
-            <div class="hero-note">One polished exhibit beats a page full of scaffolding. The gallery stays small until another project is genuinely ready to browse.</div>
+            <div class="section-label">Now showing</div>
+            <h1>One prompt. Multiple model views.</h1>
+            <p>Compare how public instruct models split the same text and wrap the same conversation. Open the tokenizer workbench, paste a prompt, and inspect the differences directly in the browser.</p>
+            <div class="hero-note">Start with one short sentence, then swap between Qwen, DeepSeek, and Mistral to see where the preprocessing stops agreeing.</div>
+            <div class="action-row">
+              <a class="action-link primary" href="../tokenizers/">Open the workbench</a>
+            </div>
           </div>
           <aside class="hero-side">
             <div class="hero-panel">
-              <div class="mini-label">Featured now</div>
+              <div class="mini-label">Featured exhibit</div>
               <h2 class="feature-name">Tokenizer Workbench</h2>
-              <p>Compare tokenizer families, inspect prompt serialization, and drill into token IDs without leaving the page or installing anything locally.</p>
+              <p>A hands-on viewer for token splits, special tokens, and chat wrappers across public instruct checkpoints.</p>
             </div>
             <div class="stat-grid">
               <div class="stat-card">
-                <span class="stat-value">8</span>
-                <span class="stat-label">Model lines in the current catalog</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-value">11</span>
-                <span class="stat-label">Tokenizer families split out for comparison</span>
-              </div>
-              <div class="stat-card">
                 <span class="stat-value">28</span>
-                <span class="stat-label">Public checkpoints you can inspect</span>
+                <span class="stat-label">Public checkpoints to compare</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value">Text + chat</span>
+                <span class="stat-label">See token splits and message wrappers</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value">Your prompt</span>
+                <span class="stat-label">Paste custom text and watch the output change</span>
               </div>
             </div>
           </aside>
@@ -602,90 +549,48 @@
 
       <section class="feature-card" aria-labelledby="tokenizer-workbench-title">
         <div class="feature-main">
-          <div class="section-label">Featured showcase</div>
+          <div class="section-label">What you can do</div>
           <h2 id="tokenizer-workbench-title">Tokenizer Workbench</h2>
-          <p class="feature-summary">A browser-side tokenizer explorer built for the questions that matter in practice: which checkpoints really share a vocabulary, how their chat templates serialize prompts, and what each token boundary looks like when you inspect it closely.</p>
-          <div class="tag-row" aria-label="Tokenizer highlights">
-            <span class="tag">Browser-side tokenization</span>
-            <span class="tag">Cross-family comparison</span>
-            <span class="tag">Prompt serialization</span>
-            <span class="tag">Token-by-token drilldown</span>
-          </div>
+          <p class="feature-summary">See where open-source instruct models really match and where they quietly diverge before generation even starts.</p>
           <div class="highlight-list" aria-label="Reasons to open the tokenizer">
-            <div class="highlight-item"><strong>Compare the catalog, not just one model.</strong> Jump across Qwen, DeepSeek, MiniMax, Yi, Mistral, Phi, SmolLM, and Falcon without losing the thread of what changed.</div>
-            <div class="highlight-item"><strong>See where vocabularies really match.</strong> The page separates exact shared-tokenizer families from look-alikes, so model-size changes do not masquerade as tokenizer changes.</div>
-            <div class="highlight-item"><strong>Inspect the mechanics directly.</strong> Pin tokens to inspect IDs, raw vocabulary entries, special tokens, and chat-template formatting side by side.</div>
-          </div>
-          <div class="action-row">
-            <a class="action-link primary" href="../tokenizers/">Launch tokenizer workbench</a>
-            <a class="action-link" href="../">Back to live monitor</a>
+            <div class="highlight-item"><strong>Compare the same prompt across families.</strong> Switch models without changing the text and watch token boundaries move.</div>
+            <div class="highlight-item"><strong>Inspect chat formatting directly.</strong> The tool exposes how each model wraps the same conversation with templates and special tokens.</div>
+            <div class="highlight-item"><strong>Separate shared vocabularies from look-alikes.</strong> Exact matches stay grouped, so model-size changes do not masquerade as tokenizer changes.</div>
           </div>
         </div>
         <div class="feature-preview">
-          <div class="section-label">Gallery preview</div>
+          <div class="section-label">Try this first</div>
           <div class="preview-window" aria-hidden="true">
             <div class="preview-topbar">
               <span>TOKENIZER WORKBENCH</span>
-              <span>LIVE BROWSER VIEW</span>
+              <span>SAME PROMPT, DIFFERENT MODELS</span>
             </div>
             <div class="preview-body">
               <div class="preview-block">
                 <div class="preview-label">Prompt</div>
-                <div class="preview-text">Compare how public instruct checkpoints split this sentence into tokens, then inspect the raw IDs and special-token behavior.</div>
+                <div class="preview-text">Summarize transformers in three bullet points.</div>
               </div>
               <div class="preview-block">
-                <div class="preview-label">Token slice</div>
-                <div class="token-row">
-                  <span class="token-chip">Compare</span>
-                  <span class="token-chip">how</span>
-                  <span class="token-chip">public</span>
-                  <span class="token-chip">instruct</span>
-                  <span class="token-chip">checkpoints</span>
-                  <span class="token-chip">split</span>
-                  <span class="token-chip">text</span>
+                <div class="preview-label">Switch models</div>
+                <div class="catalog-row">
+                  <span class="catalog-chip">Qwen 3</span>
+                  <span class="catalog-chip">DeepSeek R1</span>
+                  <span class="catalog-chip">Mistral</span>
+                  <span class="catalog-chip">Phi</span>
                 </div>
               </div>
               <div class="preview-block">
-                <div class="preview-label">Catalog slice</div>
-                <div class="catalog-row">
-                  <span class="catalog-chip">Qwen</span>
-                  <span class="catalog-chip">DeepSeek</span>
-                  <span class="catalog-chip">MiniMax</span>
-                  <span class="catalog-chip">Mistral</span>
+                <div class="preview-label">Watch for</div>
+                <div class="token-row">
+                  <span class="token-chip">Token boundaries</span>
+                  <span class="token-chip">BOS/EOS markers</span>
+                  <span class="token-chip">Chat wrapper changes</span>
                 </div>
               </div>
             </div>
           </div>
-          <p class="preview-note">The live tool lets you change model lines and families, paste your own text, and inspect the resulting token stream in detail. This preview is just the invitation, not the whole experience.</p>
+          <p class="preview-note">The interesting part is not just the token list. It is seeing where models stop agreeing before any generation begins.</p>
         </div>
-      </section>
-
-      <section class="why-section" aria-labelledby="why-title">
-        <div class="why-header">
-          <div class="section-label">Why it belongs here</div>
-          <h2 id="why-title">Three reasons this is worth browsing</h2>
-          <p>The gallery is for project surfaces that make an idea clearer by being interactive. The tokenizer page earns that spot because it turns a fuzzy model-comparison question into something you can inspect immediately.</p>
-        </div>
-        <div class="reason-grid">
-          <article class="reason-card">
-            <h3>It answers a real model-selection question</h3>
-            <p>If two checkpoints share the same tokenizer, the vocabulary is not the variable. The workbench makes that visible instead of leaving it as repo folklore.</p>
-          </article>
-          <article class="reason-card">
-            <h3>It surfaces prompt-format differences</h3>
-            <p>Chat templates and special tokens often matter as much as vocabulary boundaries. The tool lets you inspect those formatting choices directly.</p>
-          </article>
-          <article class="reason-card">
-            <h3>It invites useful poking around</h3>
-            <p>This is the kind of page where you can paste a sentence, switch families, and immediately learn something from the result. That is the bar for the rest of the gallery too.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="closing-note">
-        <div class="section-label">Gallery note</div>
-        <h2>Selective by design</h2>
-        <p><strong>More showcases will land here later</strong>, but only when they are polished enough to be interesting on their own. Until then, the tokenizer workbench carries the page and gets the space to do it well.</p>
       </section>
     </main>
   </div>
