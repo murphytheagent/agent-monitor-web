@@ -570,5 +570,349 @@
         "content_preview": "File created successfully at: /Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:56:07.763Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Read codebase to understand current reconciliation flow and removed _notify_task_done\", \"status\": \"completed\", \"activeForm\": \"Reading codebase to understand reconciliation flow\"}, {\"content\": \"Write implementation plan for restoring done marker\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Run iterative review on the plan\", \"status\": \"in_progress\", \"activeForm\": \"Running iterative review on plan\"}, {\"content\": \"Implement the fix\", \"st"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:56:07.764Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:56:10.449Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me run iterative review on the plan. First, let me set up the review infrastructure."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:56:11.325Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"RUNDIR=$(mktemp -d /tmp/iterative-review-XXXXXX) && echo \\\"$RUNDIR\\\"\", \"description\": \"Create temp directory for review\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:56:11.364Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/tmp/iterative-review-EBx8Le"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:56:17.355Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cp /Users/murphy/Research/.claude/commands/iterative-review-schema.json /tmp/iterative-review-EBx8Le/findings-schema.json\", \"description\": \"Copy findings schema to temp dir\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:56:17.392Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(Bash completed with no output)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:56:22.605Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me collect the baseline diff for the plan file."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:56:23.629Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"diff /dev/null docs/dev/plans/fix-008-done-marker.md\", \"description\": \"Generate synthetic diff for untracked plan file\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:56:23.668Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "0a1,92\n> # FIX-008: Restore Task Completion Visibility\n> \n> ## Problem\n> \n> AGENT-022 (2026-03-13) removed `_notify_task_done()` which posted \"This task is marked done by me.\" in Slack threads. Rationale: workers already communicate results in-thread. Side effect: humans cannot distinguish between \"worker posted a reply\" and \"supervisor has closed the task lifecycle.\" Two complaints filed (2026-03-20, 2026-03-21).\n> \n> ## Approach: Reaction Emoji on Original Message\n> \n> Add a ✅ (`white_check_mark`) reaction to the task's original Slack message when the supervisor marks the task as done.\n> \n> **Why a reaction instead of restoring the text message:**\n> - Non-intrusive: doesn't add noise to threaded conversations\n> - Visible at a glance from channel view (not just inside the thread)\n> - Unambiguous lifecycle signal — separate from worker's substantive content\n> - Simpler implementation (one API call, no message text to bikeshed)\n> \n> ## Implementation\n> \n> ### 1. Add `_mark_task_done_rea"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:56:27.627Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(diff /dev/null /Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md 2>&1 || true) && echo \\\"${#BASELINE_DIFF} chars\\\"\", \"description\": \"Store baseline diff size\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:56:27.658Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "4310 chars"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:56:30.830Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good, well under 50KB. Now let me dispatch both reviewers in parallel for Round 1."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:56:49.742Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(diff /dev/null docs/dev/plans/fix-008-done-marker.md 2>&1 || true)\\n\\nTRIBUNE_PROMPT=\\\"You are the Tribune — an independent quality reviewer. Review the following implementation plan for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\\n2. **Security issues**: Injection, auth bypass, sensitive data exposure\\n3. **Contract violations**: Does the plan violate documented interfaces, schemas, or invariants?\\n4. **Error handl"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:56:49.767Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Command running in background with ID: bs5h782q1. Output is being written to: /private/tmp/claude-501/-Users-murphy-Research/3fc7f8cb-2d3a-5ab9-9f9f-900a356023e6/tasks/bs5h782q1.output"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:00.261Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(diff /dev/null docs/dev/plans/fix-008-done-marker.md 2>&1 || true)\\n\\nMURPHY_PROMPT=\\\"You are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following implementation plan for:\\n\\n1. **Runtime failures**: Will this crash, hang, or produce wrong results in real usage?\\n2. **Edge cases**: Unusual inputs, empty collections, concurrent access, large data\\n3. **Test coverage**: Are the changes tested? "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:57:00.285Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Command running in background with ID: bgx3zisxu. Output is being written to: /private/tmp/claude-501/-Users-murphy-Research/3fc7f8cb-2d3a-5ab9-9f9f-900a356023e6/tasks/bgx3zisxu.output"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:03.148Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Both reviewers dispatched for plan review Round 1. Waiting for results..."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:04.167Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-EBx8Le/tribune-R1-stderr.txt 2>/dev/null; echo \\\"---STDERR END---\\\"\", \"description\": \"Check Tribune stderr\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:57:04.202Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Keychain initialization encountered an error: Cannot find module '../build/Release/keytar.node'\nRequire stack:\n- /opt/homebrew/Cellar/gemini-cli/0.34.0/libexec/lib/node_modules/@google/gemini-cli/node_modules/keytar/lib/keytar.js\nUsing FileKeychain fallback for secure storage.\nLoaded cached credentials.\n[MCP error] Error during discovery for MCP server 'slack': MCP error -32000: Connection closed McpError: MCP error -32000: Connection closed\n    at McpError.fromError (file:///opt/homebrew/Cellar/gemini-cli/0.34.0/libexec/lib/node_modules/@google/gemini-cli/node_modules/@modelcontextprotocol/sdk/dist/esm/types.js:2035:16)\n    at Client._onclose (file:///opt/homebrew/Cellar/gemini-cli/0.34.0/libexec/lib/node_modules/@google/gemini-cli/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js:259:32)\n    at _transport.onclose (file:///opt/homebrew/Cellar/gemini-cli/0.34.0/libexec/lib/node_modules/@google/gemini-cli/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.j"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:04.806Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-EBx8Le/murphy-R1.json 2>/dev/null || echo \\\"Not yet available\\\"\", \"description\": \"Check Murphy output file\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:57:04.844Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Not yet available"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:08.275Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Both reviewers are still running. The Tribune stderr shows an MCP error for Slack (non-critical - it's in plan approval mode), and Murphy hasn't produced output yet. Let me wait for both background tasks to complete. I'll be notified when they finish."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:08.693Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Both reviewers still running. I'll be notified when they complete."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:11.920Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /private/tmp/claude-501/-Users-murphy-Research/3fc7f8cb-2d3a-5ab9-9f9f-900a356023e6/tasks/bs5h782q1.output 2>/dev/null | tail -20\", \"description\": \"Check Tribune background task output\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:57:11.956Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "MCP issues detected. Run /mcp list for status."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:12.755Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /private/tmp/claude-501/-Users-murphy-Research/3fc7f8cb-2d3a-5ab9-9f9f-900a356023e6/tasks/bgx3zisxu.output 2>/dev/null | tail -20\", \"description\": \"Check Murphy background task output\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:57:12.795Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(Bash completed with no output)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:16.000Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "ToolSearch",
+        "input_preview": "{\"query\": \"select:TaskOutput\", \"max_results\": 1}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:57:16.002Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": ""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:19.054Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TaskOutput",
+        "input_preview": "{\"task_id\": \"bs5h782q1\", \"block\": true, \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:57:19.200Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TaskOutput",
+        "input_preview": "{\"task_id\": \"bgx3zisxu\", \"block\": true, \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:57:24.275Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>bs5h782q1</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\nMCP issues detected. Run /mcp list for status.```json\n{\n  \"verdict\": \"approve\",\n  \"findings\": [],\n  \"summary\": \"No issues found.\"\n}\n```\n</output>"
+      }
+    ]
   }
 ]
