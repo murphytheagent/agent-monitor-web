@@ -924,5 +924,275 @@
         "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>bgx3zisxu</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\n{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-1-1\",\"severity\":\"high\",\"category\":\"integration\",\"file\":\"docs/dev/plans/fix-008-done-marker.md\",\"line\":44,\"scope\":null,\"title\":\"Reaction target is the thread root, not necessarily the tasking message\",\"description\":\"The plan assumes `thread_ts` is the original mention timestamp, but this supervisor keys tasks by thread root. In real Slack threads, an `@Murphy` request can arrive as a reply inside an existing thread; `reactions.add(timestamp=thread_ts)` would then mark the root post, which may be unrelated to the Murphy task. That gives the done marker to the wrong message and weakens channel-view visibility for threaded tasks.\",\"suggestion\":\"If you keep the reaction approach, persist the specific message ts to mark instead of reusing `thread_ts`. Otherwise restore an explic"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:02:30.533Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Let me parse the results:\n\n**Tribune (Gemini)**: `approve` — no findings.\n\n**Murphy (Codex)**: `findings` — 3 findings:\n1. **M-1-1 (high, integration)**: Reaction target is thread root, not the tasking message. If a task is a reply in an existing thread, `thread_ts` is the root post, not the mention.\n2. **M-1-2 (high, operational)**: Slack API failures silently ignored — `slack_api_post` returns JSON but doesn't raise on `ok:false`, so the `except Exception` only catches transport errors.\n\n\n3. **M-1-3 (medium, edge_case)**: Stale checkmarks on reopened tasks — `already_reacted` means no fresh signal on second completion.\n\nM-1-1 looks legitimate. The supervisor keys tasks by `mention_ts`, which is the timestamp of the @mention message, but `thread_ts` points to the Slack thread root — these diverge when the mention is a reply in an existing thread. Let me trace through the code to confirm how this plays out.\n\nSo `key` is `mention_ts` (the task identifier), while `thread_ts` in the task data represents the thread root. When @Murphy is mentioned in a new message, they're the same, but when mentioned as a reply in an existing thread, they differ. The checkmark should go on the original @mention message since that's what triggered the task, so I need to verify the reconciler is using `key` rather than `thread_ts` as the reaction target.\n\nLet me check what `thread_ts` actually contains in the reconcile method...\n\nLooking at the code, `thread_ts` is extracted from the task data, while `key` is the `mention_ts`. For top-level mentions they're identical, but for threaded replies `key` is the mention message and `thread_ts` is the thread root. Since we want to react to the mention itself, we should use `key` with the channel ID — both are available to us, and `key` is definitely a valid Slack message timestamp.\n\nNow I need to verify whether `_slack_request` properly handles error responses from the API."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:02:31.554Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "CONVERGENCE CHECK: Tribune=approve, Murphy=findings (3), round 1 of 5 → continuing (Murphy has findings)\n\nLet me verify Murphy's findings by reading the relevant code."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:02:33.354Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"def _slack_request\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-A\": 25}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:02:33.373Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "953:    def _slack_request(self, method: str, req: Request) -> Dict[str, Any]:\n954-        \"\"\"Execute a Slack API request with retry and backoff.\n955-\n956-        Retries on transient transport errors (URLError, timeouts,\n957-        connection resets), HTTP 429 (rate-limited), and 5xx server\n958-        errors.  Permanent 4xx errors (except 429) are raised\n959-        immediately.\n960-        \"\"\"\n961-        max_retries = self.cfg.slack_api_max_retries\n962-        delay = self.cfg.slack_api_retry_initial_sec\n963-        timeout = self.cfg.slack_api_timeout_sec\n964-\n965-        for attempt in range(1 + max_retries):\n966-            try:\n967-                with urlopen(req, timeout=timeout) as resp:\n968-                    raw = resp.read().decode(\"utf-8\", errors=\"replace\")\n969-                return json.loads(raw)\n970-            except HTTPError as exc:\n971-                if exc.code == 429:\n972-                    retry_after = float(exc.headers.get(\"Retry-After\", delay))\n973-    "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:02:33.567Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2548, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:02:33.572Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2548→        with self.state_lock():\n  2549→            state = self.load_state()\n  2550→            active = state.get(\"active_tasks\") or {}\n  2551→            task = active.get(key)\n  2552→            if not isinstance(task, dict):\n  2553→                return\n  2554→            task_type = str(task.get(\"task_type\") or \"slack_mention\")\n  2555→            is_maintenance = self.maintenance.is_maintenance_task(task_type)\n  2556→\n  2557→            # Maintenance runs should always resolve to done/waiting_human on successful exits.\n  2558→            if worker_exit == 0 and is_maintenance and status == \"in_progress\":\n  2559→                status = \"waiting_human\"\n  2560→                error = (error + \"; \" if error else \"\") + \"maintenance_in_progress_disallowed\"\n  2561→\n  2562→            # Auth failures after retry exhaustion: park as waiting_human\n  2563→            # so the supervisor stops retrying until the token is refreshed.\n  2564→            if self.last_failure_kind == \"aut"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:02:36.983Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2600, \"limit\": 65}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:02:36.988Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2600→                    )\n  2601→                    remaining = int(loop_deadline - time.time())\n  2602→                    self.log_line(\n  2603→                        f\"loop_iteration_complete key={key} iteration={task['loop_iteration']} \"\n  2604→                        f\"worker_status={status} remaining_sec={remaining}\"\n  2605→                    )\n  2606→                else:\n  2607→                    # Loop expired — apply final status faithfully, clear loop fields\n  2608→                    iteration = task.get(\"loop_iteration\", 0)\n  2609→                    task.pop(\"loop_mode\", None)\n  2610→                    task.pop(\"loop_deadline\", None)\n  2611→                    task.pop(\"loop_next_dispatch_after\", None)\n  2612→                    task.pop(\"loop_iteration\", None)\n  2613→                    task.pop(\"loop_worker_status\", None)\n  2614→                    self.log_line(\n  2615→                        f\"loop_expired key={key} iteration={iteration} final_status={final_st"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:02:57.228Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Now I can analyze Murphy's findings:\n\n**M-1-1 (Reaction target)**: Let me check what `thread_ts` actually is in the reconciliation context.\n\nAt line 2658: `thread_ts = str(merged.get(\"thread_ts\") or \"\")` — this is the thread root timestamp from the task data. And `key` is the `mention_ts`.\n\nFor a top-level mention: `key == thread_ts` (same message — it's the thread root).\nFor a threaded reply mention: The task is keyed by the mention timestamp. But `thread_ts` might differ...\n\nActually, let me think about this more carefully. \n\nThe key distinction is that when Murphy gets mentioned in a new message, that message becomes the thread root, so the mention timestamp and thread root are identical. But when mentioned as a reply in an existing thread, the thread root is something earlier. Looking at how tasks are created through the supervisor's mention polling, each mention gets keyed by its timestamp, and the `thread_ts` comes from the task data itself. The crucial point is that we want to react to the actual mention message—the one identified by `key`—which is what the user directly interacted with.\n\nUsing `key` instead of `thread_ts` for the reaction timestamp fixes M-1-1. That's a valid finding.\n\nFor M-1-2, Murphy's right about the Slack error handling. The `_slack_request` function just returns the parsed JSON without checking the `ok` field, so a response like `{\"ok\": false, \"error\": \"missing_scope\"}` would pass through without raising an exception. The `except Exception` block wouldn't catch this silent failure. The fix would need to explicitly check the response status after the API call.\n\nM-1-3 is an edge case I'll defer for now—the reaction serves as a completion marker, and if the task gets reopened, the human will see new thread activity anyway. So I'll focus on addressing M-1-1 and M-1-2 in the updated plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:03:00.123Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good analysis. Let me verify the findings:\n\n**M-1-1 (valid)**: `thread_ts` at line 2658 is the thread root. For mentions that are replies in an existing thread, this would put the reaction on the wrong message. Should use `key` (mention_ts) instead.\n\n**M-1-2 (valid)**: `_slack_request` (line 969) returns `json.loads(raw)` without checking `ok:false`. The `except Exception` only catches transport/HTTP errors, not Slack application errors like `missing_scope`.\n\n**M-1-3 (valid but low severity)**: Deferrable — stale checkmarks on reopened tasks are a minor UX issue.\n\nLet me update the plan to address M-1-1 and M-1-2."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:03:00.683Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:03:00.686Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# FIX-008: Restore Task Completion Visibility\n     2→\n     3→## Problem\n     4→\n     5→AGENT-022 (2026-03-13) removed `_notify_task_done()` which posted \"This task is marked done by me.\" in Slack threads. Rationale: workers already communicate results in-thread. Side effect: humans cannot distinguish between \"worker posted a reply\" and \"supervisor has closed the task lifecycle.\" Two complaints filed (2026-03-20, 2026-03-21).\n     6→\n     7→## Approach: Reaction Emoji on Original Message\n     8→\n     9→Add a ✅ (`white_check_mark`) reaction to the task's original Slack message when the supervisor marks the task as done.\n    10→\n    11→**Why a reaction instead of restoring the text message:**\n    12→- Non-intrusive: doesn't add noise to threaded conversations\n    13→- Visible at a glance from channel view (not just inside the thread)\n    14→- Unambiguous lifecycle signal — separate from worker's substantive content\n    15→- Simpler implementation (one API call, no message text to b"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:03:12.322Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md\", \"old_string\": \"```python\\ndef _mark_task_done_reaction(self, channel_id: str, thread_ts: str) -> None:\\n    \\\"\\\"\\\"Add a ✅ reaction to the task's original message to signal completion.\\\"\\\"\\\"\\n    if not self.slack_token or not channel_id or not thread_ts:\\n        return\\n    try:\\n        self.slack_api_post(\\\"reactions.add\\\", {\\n            \\\"channel\\\": channel_id,\\n            \\\"timestamp\\\": thr"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:03:12.330Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:03:21.427Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md\", \"old_string\": \"```python\\n# Outside state lock: add ✅ reaction to the original message to signal\\n# task completion.  For maintenance, only signal on the final phase.\\nskip_done_signal = is_maintenance and not self.maintenance.is_final_phase(\\n    self.maintenance.get_phase(merged)\\n)\\nif (\\n    final_status == \\\"done\\\"\\n    and not skip_done_signal\\n    and channel_id\\n    and re.match(r\\\"^[0-9]+"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:03:21.432Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:03:31.183Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md\", \"old_string\": \"### 3. Handle `already_reacted` response\\n\\nSlack returns `{\\\"ok\\\": false, \\\"error\\\": \\\"already_reacted\\\"}` if the bot already reacted. The existing `_slack_request` helper likely raises on non-ok responses. The `except Exception` in step 1 handles this gracefully — it logs and moves on.\\n\\nCheck the `_slack_request` implementation: if it raises on `already_reacted`, the catch is fi"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:03:31.188Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:03:34.325Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me also add a note about the deferred M-1-3 finding."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:03:40.816Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md\", \"old_string\": \"## What This Does NOT Do\\n\\n- No text message in thread (less noise than the old approach)\\n- No reaction removal on task reopen (unnecessary complexity — if reopened, the new interaction makes the prior ✅ context obvious)\\n- No changes to Tribune review flow (orthogonal)\\n- No changes to delivery guard (orthogonal)\", \"new_string\": \"## What This Does NOT Do\\n\\n- No text message in t"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:03:40.825Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:03:43.764Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now dispatch Round 2 of plan review with the fixes."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:04:03.980Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(diff /dev/null /Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md 2>&1 || true)\\n\\nPRIOR_CONTEXT=\\\"## Prior Round Context (Round 1)\\n\\nTribune: APPROVED — no findings.\\n\\nMurphy: 3 findings:\\n- M-1-1 (high, integration): Reaction target was thread_ts (thread root), not the mention message. FIXED — now uses \\\\`key\\\\` (mention_ts) as the reaction target.\\n- M-1-2 (high, operational): Slack application errors silently ignored because _slack_request doesn't rai"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:04:03.999Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Command running in background with ID: bnw2gyb4w. Output is being written to: /private/tmp/claude-501/-Users-murphy-Research/3fc7f8cb-2d3a-5ab9-9f9f-900a356023e6/tasks/bnw2gyb4w.output"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:04:13.302Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(diff /dev/null /Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md 2>&1 || true)\\n\\nPRIOR_CONTEXT=\\\"## Prior Round Context (Round 1)\\n\\nTribune: APPROVED — no findings.\\n\\nMurphy: 3 findings:\\n- M-1-1 (high, integration): Reaction target was thread_ts (thread root), not the mention message. FIXED — now uses \\\\`key\\\\` (mention_ts) as the reaction target.\\n- M-1-2 (high, operational): Slack application errors silently ignored because _slack_request doesn't rai"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:04:13.321Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Command running in background with ID: bi3k4df3c. Output is being written to: /private/tmp/claude-501/-Users-murphy-Research/3fc7f8cb-2d3a-5ab9-9f9f-900a356023e6/tasks/bi3k4df3c.output"
+      }
+    ]
   }
 ]
