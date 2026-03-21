@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T00:14:51Z",
+    "last_updated_utc": "2026-03-21T00:16:25Z",
     "status": "workers_active",
     "pid": 38150,
-    "loop_count": 55,
+    "loop_count": 69,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,7 @@
         "slot": 0,
         "task": "1774037786.521379",
         "started_at": 1774051768,
-        "elapsed_sec": 322
+        "elapsed_sec": 417
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.22,
-      "five": 1.85,
-      "fifteen": 1.85
+      "one": 1.79,
+      "five": 1.78,
+      "fifteen": 1.82
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 116361396224,
-    "disk_free_bytes": 128745799680,
-    "runner_log_size_bytes": 229164,
+    "disk_used_bytes": 116360425472,
+    "disk_free_bytes": 128746770432,
+    "runner_log_size_bytes": 229383,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T00:08:48Z",
     "local_ips": []
@@ -44,14 +44,14 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T00:14:57Z",
+    "checked_at_utc": "2026-03-21T00:17:00Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 88,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
         "temperature_c": 36
@@ -59,23 +59,23 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 65,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 85621,
+        "memory_total_mb": 97887,
+        "temperature_c": 39
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
         "temperature_c": 37
       },
       {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 16,
-        "memory_used_mb": 85621,
-        "memory_total_mb": 97887,
-        "temperature_c": 36
-      },
-      {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 22,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
         "temperature_c": 36
@@ -83,57 +83,40 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 25,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 36
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 65,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 38
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 70,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 37
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 37
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1774037786.521379": {
-        "mention_ts": "1774037786.521379",
-        "thread_ts": "1774037786.521379",
-        "status": "in_progress",
-        "task_description": "I've just installed Google drive on your mac.",
-        "summary": "Removed and re-added the stuck [code] Google Drive backup root; it stopped appearing as a fully empty sync root and now has 17/18 top-level children plus about…",
-        "summary_preview": "Removed and re-added the stuck [code] Google Drive backup root; it stopped appearing as a fully empty sync root and now has 17/18 top-level children plus about…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774037786.521379",
-        "last_update_ts": "1774051768.191907",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T21:51:56Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773739092.072639": {
         "mention_ts": "1773739092.072639",
@@ -309,6 +292,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T06:00:38Z"
+        }
+      },
+      "1774037786.521379": {
+        "mention_ts": "1774037786.521379",
+        "thread_ts": "1774037786.521379",
+        "status": "waiting_human",
+        "task_description": "I've just installed Google drive on your mac.",
+        "summary": "Rechecked the Google Drive [code] backup root: it is no longer empty and now has 4,432 of 4,433 descendants published, with only one small backup file still pe…",
+        "summary_preview": "Rechecked the Google Drive [code] backup root: it is no longer empty and now has 4,432 of 4,433 descendants published, with only one small backup file still pe…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774037786.521379",
+        "last_update_ts": "1774052191.869612",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T21:51:56Z"
         }
       }
     },
@@ -1125,5 +1124,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T00:14:58Z"
+  "server_time_utc": "2026-03-21T00:17:01Z"
 }
