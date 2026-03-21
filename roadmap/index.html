@@ -257,7 +257,6 @@ function renderRoadmap() {
           '<div class="roadmap-controls">' +
             '<span class="pill ' + statusClass + '">' + esc(item.status) + '</span>' +
             '<button class="dispatch-btn" data-dispatch="' + esc(item.id) + '" ' +
-              'onclick="dispatchItem('' + esc(item.id) + '')" ' +
               (isDeferred ? 'disabled title="Deferred"' : '') +
               '>▶ Dispatch</button>' +
           '</div>' +
@@ -283,6 +282,11 @@ function renderRoadmap() {
     btn.classList.add('active');
     body.innerHTML = renderGroup(groups[idx][1]);
   };
+
+  document.querySelector('main').addEventListener('click', function(e) {
+    var btn = e.target.closest('.dispatch-btn');
+    if (btn && !btn.disabled) dispatchItem(btn.dataset.dispatch);
+  });
 }
 
 loadSettings();
