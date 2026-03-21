@@ -1,27 +1,46 @@
 import { AutoTokenizer, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1';
-import { LINE_CATALOG, UNSUPPORTED_BROWSER_LINES } from './catalog.js';
+import {
+  DEFAULT_MODEL_ID,
+  FAMILY_SORT_ORDER,
+  LINE_CATALOG,
+  LINE_SORT_ORDER,
+  MODEL_SORT_ORDER,
+  UNSUPPORTED_BROWSER_LINES,
+} from './catalog.js';
 
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
-const LINES = LINE_CATALOG.map((line) => ({
-  ...line,
-  families: line.families.map((family) => ({
-    ...family,
-    lineId: line.id,
-    line: line.label,
-    models: family.models.map((model) => ({
-      ...model,
-      tokenizerSource: model.tokenizerSource || family.tokenizerSource,
-      tokenizerCacheKey: model.tokenizerCacheKey || family.tokenizerCacheKey,
-      tokenizerSourceLabel: model.tokenizerSourceLabel || family.tokenizerSourceLabel,
-      lineId: line.id,
-      line: line.label,
-      familyId: family.id,
-      family: family.label,
-    })),
+const LINES = sortByDisplayOrder(
+  LINE_CATALOG.map((line) => ({
+    ...line,
+    families: sortByDisplayOrder(
+      line.families.map((family) => ({
+        ...family,
+        lineId: line.id,
+        line: line.label,
+        models: sortByDisplayOrder(
+          family.models.map((model) => ({
+            ...model,
+            tokenizerSource: model.tokenizerSource || family.tokenizerSource,
+            tokenizerCacheKey: model.tokenizerCacheKey || family.tokenizerCacheKey,
+            tokenizerSourceLabel: model.tokenizerSourceLabel || family.tokenizerSourceLabel,
+            lineId: line.id,
+            line: line.label,
+            familyId: family.id,
+            family: family.label,
+          })),
+          MODEL_SORT_ORDER,
+          (model) => model.id,
+        ),
+      })),
+      FAMILY_SORT_ORDER,
+      (family) => family.id,
+    ),
   })),
-}));
+  LINE_SORT_ORDER,
+  (line) => line.id,
+);
 const LINE_MAP = Object.fromEntries(LINES.map((line) => [line.id, line]));
 const FAMILIES = LINES.flatMap((line) => line.families);
 const FAMILY_MAP = Object.fromEntries(FAMILIES.map((family) => [family.id, family]));
@@ -266,6 +285,17 @@ function bindTokenInteractions(container) {
   });
 }
 
+function sortByDisplayOrder(items, orderMap, idForItem) {
+  return items
+    .map((item, index) => ({
+      item,
+      index,
+      order: orderMap[idForItem(item)] ?? 0,
+    }))
+    .sort((left, right) => right.order - left.order || left.index - right.index)
+    .map(({ item }) => item);
+}
+
 function populateLineOptions() {
   refs.lineSelect.innerHTML = '';
   LINES.forEach((line) => {
@@ -299,6 +329,19 @@ function applyInitialSelection() {
 
   if (VIEW.line && LINE_MAP[VIEW.line]) {
     refs.lineSelect.value = VIEW.line;
+    populateFamilyOptions(false);
+    populateModelOptions(false);
+    return;
+  }
+
+  if (DEFAULT_MODEL_ID && MODEL_MAP[DEFAULT_MODEL_ID]) {
+    const model = MODEL_MAP[DEFAULT_MODEL_ID];
+    refs.lineSelect.value = model.lineId;
+    populateFamilyOptions(false);
+    refs.familySelect.value = model.familyId;
+    populateModelOptions(false);
+    refs.modelSelect.value = model.id;
+    return;
   }
 
   populateFamilyOptions(false);
