@@ -148,10 +148,6 @@
         <input type="text" id="cfg-webhook" placeholder="https://hooks.slack.com/services/T.../B.../XXX" />
       </div>
       <div class="settings-row">
-        <label>Agent User ID</label>
-        <input type="text" id="cfg-userid" placeholder="Murphy's Slack user ID (U...)" />
-      </div>
-      <div class="settings-row">
         <button class="settings-btn" onclick="saveSettings()">Save</button>
       </div>
       <div class="settings-status" id="settings-status"></div>
@@ -169,37 +165,34 @@ function toggleSettings() {
   document.getElementById('settings-body').classList.toggle('open');
 }
 
+var AGENT_USER_ID = 'U0AFZHQMAHX';
+
 function loadSettings() {
   var wh = localStorage.getItem('dispatch_webhook') || '';
-  var uid = localStorage.getItem('dispatch_userid') || '';
   document.getElementById('cfg-webhook').value = wh;
-  document.getElementById('cfg-userid').value = uid;
   updateSettingsStatus();
 }
 
 function saveSettings() {
   var wh = document.getElementById('cfg-webhook').value.trim();
-  var uid = document.getElementById('cfg-userid').value.trim();
   localStorage.setItem('dispatch_webhook', wh);
-  localStorage.setItem('dispatch_userid', uid);
   updateSettingsStatus();
 }
 
 function updateSettingsStatus() {
   var el = document.getElementById('settings-status');
   var wh = localStorage.getItem('dispatch_webhook') || '';
-  var uid = localStorage.getItem('dispatch_userid') || '';
-  if (wh && uid) {
+  if (wh) {
     el.textContent = '✓ Dispatch configured';
     el.className = 'settings-status ok';
   } else {
-    el.textContent = 'Configure webhook URL and user ID to enable dispatch';
+    el.textContent = 'Configure webhook URL to enable dispatch';
     el.className = 'settings-status missing';
   }
 }
 
 function canDispatch() {
-  return !!(localStorage.getItem('dispatch_webhook') && localStorage.getItem('dispatch_userid'));
+  return !!localStorage.getItem('dispatch_webhook');
 }
 
 function dispatchItem(itemId) {
@@ -208,8 +201,7 @@ function dispatchItem(itemId) {
   var btn = document.querySelector('[data-dispatch="' + itemId + '"]');
   if (btn) { btn.textContent = '...'; btn.disabled = true; }
   var webhook = localStorage.getItem('dispatch_webhook');
-  var userId = localStorage.getItem('dispatch_userid');
-  var text = '<@' + userId + '> !developer ' + itemId;
+  var text = '<@' + AGENT_USER_ID + '> !developer ' + itemId;
   fetch(webhook, {
     method: 'POST',
     mode: 'no-cors',
