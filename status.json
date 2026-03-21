@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T01:53:16Z",
+    "last_updated_utc": "2026-03-21T01:54:42Z",
     "status": "workers_active",
     "pid": 38150,
-    "loop_count": 863,
+    "loop_count": 876,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,13 +17,13 @@
         "slot": 0,
         "task": "1774027390.110939",
         "started_at": 1774057381,
-        "elapsed_sec": 614
+        "elapsed_sec": 701
       },
       {
         "slot": 1,
         "task": "1774037786.521379",
         "started_at": 1774056074,
-        "elapsed_sec": 1922
+        "elapsed_sec": 2008
       }
     ]
   },
@@ -33,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.6,
-      "five": 1.67,
-      "fifteen": 1.8
+      "one": 1.79,
+      "five": 1.71,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 114648780800,
-    "disk_free_bytes": 130458415104,
-    "runner_log_size_bytes": 231313,
+    "disk_used_bytes": 114633252864,
+    "disk_free_bytes": 130473943040,
+    "runner_log_size_bytes": 231532,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T00:08:48Z",
     "local_ips": []
@@ -50,7 +50,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T01:53:21Z",
+    "checked_at_utc": "2026-03-21T01:55:24Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -137,22 +137,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T01:20:58Z"
-        }
-      },
-      "1774027390.110939": {
-        "mention_ts": "1774027390.110939",
-        "thread_ts": "1774027390.110939",
-        "status": "in_progress",
-        "task_description": "The current showcase website seems to contain many redundant information.",
-        "summary": "Rebuilt the showcase around a live tokenizer embed, removed the builder-facing copy, and verified the hosted page.",
-        "summary_preview": "Rebuilt the showcase around a live tokenizer embed, removed the builder-facing copy, and verified the hosted page.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774027390.110939",
-        "last_update_ts": "1774057381.083646",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T17:23:10Z"
         }
       }
     },
@@ -315,6 +299,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T06:00:38Z"
+        }
+      },
+      "1774027390.110939": {
+        "mention_ts": "1774027390.110939",
+        "thread_ts": "1774027390.110939",
+        "status": "waiting_human",
+        "task_description": "The current showcase website seems to contain many redundant information.",
+        "summary": "Restored the Res Publica architecture panel to the live showcase and re-verified the hosted page.",
+        "summary_preview": "Restored the Res Publica architecture panel to the live showcase and re-verified the hosted page.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774027390.110939",
+        "last_update_ts": "1774058088.322102",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-20T17:23:10Z"
         }
       }
     },
@@ -1131,5 +1131,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T01:53:22Z"
+  "server_time_utc": "2026-03-21T01:55:24Z"
 }
