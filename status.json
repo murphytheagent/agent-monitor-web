@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T07:38:51Z",
+    "last_updated_utc": "2026-03-21T07:40:12Z",
     "status": "workers_active",
     "pid": 38150,
-    "loop_count": 2721,
+    "loop_count": 2733,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,13 +17,13 @@
         "slot": 0,
         "task": "1773701002.020259",
         "started_at": 1774076497,
-        "elapsed_sec": 2234
+        "elapsed_sec": 2315
       },
       {
         "slot": 1,
         "task": "1774078137.264779",
         "started_at": 1774078168,
-        "elapsed_sec": 562
+        "elapsed_sec": 643
       }
     ]
   },
@@ -33,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.14,
-      "five": 2.13,
-      "fifteen": 2.31
+      "one": 2.58,
+      "five": 2.17,
+      "fifteen": 2.29
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 115250061312,
-    "disk_free_bytes": 129857134592,
-    "runner_log_size_bytes": 235004,
+    "disk_used_bytes": 115240132608,
+    "disk_free_bytes": 129867063296,
+    "runner_log_size_bytes": 235326,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T02:45:53Z",
     "local_ips": []
@@ -50,7 +50,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T07:38:54Z",
+    "checked_at_utc": "2026-03-21T07:40:57Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -60,7 +60,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 38
       },
       {
         "index": 1,
@@ -68,7 +68,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 41
       },
       {
         "index": 2,
@@ -76,7 +76,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 39
       },
       {
         "index": 3,
@@ -84,7 +84,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 38
       },
       {
         "index": 4,
@@ -92,7 +92,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 38
       },
       {
         "index": 5,
@@ -100,7 +100,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 39
       },
       {
         "index": 6,
@@ -108,7 +108,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 39
       },
       {
         "index": 7,
@@ -116,29 +116,13 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 39
       }
     ]
   },
   "tasks": {
     "queued": {},
     "active": {
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "in_progress",
-        "task_description": "Resolve the objective requested in this task thread.",
-        "summary": "Resolve the objective requested in this task thread.",
-        "summary_preview": "Resolve the objective requested in this task thread.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774076482.886199",
-        "last_update_ts": "1774076496.641101",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T07:01:22Z"
-        }
-      },
       "1774078137.264779": {
         "mention_ts": "1774078137.264779",
         "thread_ts": "1774078137.264779",
@@ -299,6 +283,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T06:00:38Z"
+        }
+      },
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "waiting_human",
+        "task_description": "Resolve the objective requested in this task thread.",
+        "summary": "Expanded the tokenizer workbench with broader family coverage and working Kimi support, then verified the live browser route.",
+        "summary_preview": "Expanded the tokenizer workbench with broader family coverage and working Kimi support, then verified the live browser route.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774076482.886199",
+        "last_update_ts": "1774078818.550142",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T07:01:22Z"
         }
       }
     },
@@ -1115,5 +1115,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T07:38:56Z"
+  "server_time_utc": "2026-03-21T07:40:58Z"
 }
