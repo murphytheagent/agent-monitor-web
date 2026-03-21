@@ -1,11 +1,12 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-21 07:33 UTC
+Last updated: 2026-03-21 08:07 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
+- The tokenizer workbench selectors now run newest-to-oldest across lines, families, and configurations instead of inheriting the raw catalog insertion order.
 - The showcase route now separates the tokenizer and `Res Publica` into two explicit exhibit lanes: a single-model live tokenizer study first, then the architecture piece as its own card and CTA.
 - A persistent tokenizer link on the root dashboard is still blocked because the exporter has no showcase-extension hook yet.
 
@@ -29,6 +30,8 @@ Status:
 
 ### Activity Log
 
+- 2026-03-21 08:07 UTC — Reordered the `/tokenizers/` selector stack so the browser UI now walks from newer releases toward older ones at every level instead of surfacing the smallest or earliest-added checkpoint first.
+- 2026-03-21 08:07 UTC — Pinned the default tokenizer route to `Kimi K2.5`, while keeping the showcase embed on its explicit `Qwen 3.5 4B` query so the gallery preview remains stable.
 - 2026-03-21 07:33 UTC — Expanded `/tokenizers/` from a representative sampler into much broader family coverage: the page now carries the full public text ladders for `Qwen 2.5`, `Qwen 3`, `Qwen 3.5`, `DeepSeek R1 Distill (Qwen)`, and `Falcon 3`, plus a larger `Mistral` / `Phi` catalog.
 - 2026-03-21 07:33 UTC — Added working `Kimi` support to `/tokenizers/` by converting MoonshotAI public `tiktoken.model` files into browser-hosted assets, patching the converted regex into a Chrome-compatible form, and restoring per-model chat templates for `Kimi K2`, `Kimi Linear`, and `Kimi K2.5`.
 - 2026-03-21 02:25 UTC — Rebuilt `/showcase/` again after feedback that the two examples felt tangled together. The gallery now presents the tokenizer and `Res Publica` as separate exhibit lanes instead of mixing the architecture preview into the tokenizer hero.
