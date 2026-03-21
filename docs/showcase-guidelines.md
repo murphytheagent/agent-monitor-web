@@ -1,6 +1,6 @@
 # Showcase Guidelines
 
-Last updated: 2026-03-20 18:41 UTC
+Last updated: 2026-03-21 00:53 UTC
 
 Use these rules for `/showcase/` and any future hosted exhibit pages.
 
@@ -12,17 +12,33 @@ Write for a technically curious outside visitor who has never seen the repo. The
 - Why is it interesting?
 - What do I click next?
 
+## Surface split
+
+Treat the gallery and the exhibit pages differently.
+
+- `/showcase/` is the gallery overview. It should orient fast and let the cards carry the detail.
+- `showcase/<exhibit>/` pages can be more atmospheric, but they still need a clear payoff above the fold.
+
 ## Copy hierarchy
 
-For a one-item gallery page, keep the structure tight:
+For the gallery overview:
+
+1. Small section label
+2. One short headline
+3. One-sentence gallery description
+4. One or two exhibit CTAs
+5. Compact exhibit cards with real previews
+6. One short closing note about what belongs here
+
+For an individual exhibit page, keep the structure tight:
 
 1. Small exhibit label
 2. Payoff-first headline
 3. One-sentence subhead
-4. One dominant CTA
+4. One or two focused CTAs
 5. Large real preview image or figure
 6. Short metadata strip
-7. Two or three small visual cue cards
+7. Two or three small cue cards or principle cards
 
 If a block repeats the hero in different words, cut it.
 
@@ -33,6 +49,7 @@ The gallery should be image-led, not paragraph-led.
 - Put the tool screenshot or figure above the fold.
 - Use callouts, chips, or tiny comparison cards to explain where to look.
 - Prefer one real screenshot over multiple abstract panels.
+- If the page is architecture-led rather than tool-led, the figure still needs to feel like a real artifact, not a placeholder diagram.
 - Keep supporting copy short enough that the visual still dominates on mobile.
 
 ## What to avoid
@@ -42,6 +59,7 @@ The gallery should be image-led, not paragraph-led.
 - Dense noun stacks that read like release notes
 - Stats that explain plumbing instead of experience
 - Multiple labels that all restate the page name before the viewer sees the artifact
+- Public pages that read like an internal design memo
 
 ## Jargon rule
 
@@ -73,3 +91,4 @@ Bad:
 - One sentence should be enough for the hero description.
 - Keep metadata items to a few words each.
 - If you need a paragraph to explain what the screenshot shows, replace the paragraph with a better figure or callout.
+- Gallery cards should feel skimmable in under five seconds.

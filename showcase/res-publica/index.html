@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Res Publica | Three-Role Architecture</title>
+  <link rel="icon" href="data:,">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --bg: #07111a;
+      --bg-deep: #02060a;
+      --panel: rgba(9, 17, 25, 0.88);
+      --panel-strong: rgba(11, 22, 32, 0.94);
+      --panel-soft: rgba(12, 26, 36, 0.72);
+      --line: rgba(114, 228, 208, 0.18);
+      --line-strong: rgba(240, 197, 109, 0.32);
+      --text: #f3f0e7;
+      --muted: #c3c8c8;
+      --dim: #7a8f98;
+      --worker: #d86d4f;
+      --developer: #f0c56d;
+      --tribune: #6fe1d1;
+      --shadow: 0 34px 90px rgba(0, 0, 0, 0.34);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --page-width: min(1400px, calc(100vw - 28px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(111, 225, 209, 0.12) 0%, transparent 28%),
+        radial-gradient(circle at 84% 10%, rgba(216, 109, 79, 0.14) 0%, transparent 32%),
+        radial-gradient(circle at 52% 100%, rgba(240, 197, 109, 0.12) 0%, transparent 40%),
+        linear-gradient(160deg, #02070b 0%, #071019 42%, #101a23 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0.03) 0,
+          rgba(255, 255, 255, 0.03) 1px,
+          transparent 1px,
+          transparent 110px
+        ),
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.02) 0,
+          rgba(255, 255, 255, 0.02) 1px,
+          transparent 1px,
+          transparent 10px
+        );
+      opacity: 0.22;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      left: 50%;
+      top: -180px;
+      width: 980px;
+      height: 980px;
+      transform: translateX(-50%);
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 66%);
+      filter: blur(18px);
+      opacity: 0.72;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+      width: var(--page-width);
+      margin: 0 auto;
+      padding: 18px 0 56px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 20%, transparent 100%),
+        linear-gradient(180deg, rgba(6, 15, 22, 0.95) 0%, rgba(10, 19, 28, 0.92) 100%);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 15px 18px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .eyebrow,
+    .role-tag,
+    .section-label,
+    .meta-pill,
+    .lane,
+    .flow-chip {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow,
+    .section-label,
+    .lane {
+      color: var(--tribune);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-family: "Cinzel", serif;
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--dim);
+      font-size: 13px;
+    }
+
+    .topbar-links,
+    .hero-actions,
+    .meta-row,
+    .flow-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link,
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 15px;
+      border: 1px solid rgba(111, 225, 209, 0.18);
+      border-radius: 999px;
+      background: rgba(7, 15, 22, 0.78);
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .nav-link:hover,
+    .action-link:hover,
+    .principle-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(240, 197, 109, 0.34);
+      box-shadow: 0 18px 30px rgba(0, 0, 0, 0.24);
+    }
+
+    .action-link.primary {
+      border-color: rgba(240, 197, 109, 0.34);
+      background: linear-gradient(120deg, rgba(23, 44, 50, 0.96) 0%, rgba(46, 23, 16, 0.94) 100%);
+      color: var(--text);
+    }
+
+    main {
+      display: grid;
+      gap: 24px;
+      margin-top: 22px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
+      gap: 24px;
+      padding: clamp(22px, 3vw, 34px);
+      overflow: hidden;
+    }
+
+    .hero-copy,
+    .stage-wrap,
+    .principles,
+    .rhythm {
+      animation: rise-in 560ms ease both;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .hero-copy h2,
+    .principle-card h3,
+    .section-head h3 {
+      margin: 0;
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy h2 {
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: 0.92;
+    }
+
+    .hero-copy p,
+    .section-head p,
+    .principle-card p,
+    .rhythm-copy p,
+    .footer-note {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .hero-copy p {
+      max-width: 560px;
+      font-size: clamp(18px, 2.1vw, 23px);
+    }
+
+    .meta-pill {
+      align-items: center;
+      display: inline-flex;
+      min-height: 38px;
+      padding: 0 12px;
+      border: 1px solid rgba(111, 225, 209, 0.18);
+      border-radius: 999px;
+      background: rgba(10, 22, 32, 0.76);
+      color: var(--muted);
+    }
+
+    .stage-wrap {
+      display: grid;
+      gap: 14px;
+      animation-delay: 90ms;
+    }
+
+    .stage {
+      position: relative;
+      min-height: 720px;
+      border: 1px solid rgba(111, 225, 209, 0.14);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 50% 46%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 34%),
+        linear-gradient(180deg, rgba(111, 225, 209, 0.04) 0%, transparent 18%, transparent 100%),
+        rgba(4, 10, 16, 0.92);
+      overflow: hidden;
+    }
+
+    .stage::before,
+    .stage::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(26px);
+      pointer-events: none;
+    }
+
+    .stage::before {
+      left: 10%;
+      top: 10%;
+      width: 220px;
+      height: 220px;
+      background: rgba(216, 109, 79, 0.18);
+    }
+
+    .stage::after {
+      right: 12%;
+      bottom: 12%;
+      width: 260px;
+      height: 260px;
+      background: rgba(111, 225, 209, 0.14);
+    }
+
+    .constellation {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .beam {
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      opacity: 0.72;
+    }
+
+    .beam.worker-dev {
+      stroke: url(#worker-dev);
+      stroke-dasharray: 10 14;
+      animation: dash-slow 24s linear infinite;
+    }
+
+    .beam.worker-tribune {
+      stroke: url(#worker-tribune);
+      stroke-dasharray: 10 14;
+      animation: dash-slow 18s linear infinite reverse;
+    }
+
+    .beam.dev-tribune {
+      stroke: url(#dev-tribune);
+      stroke-dasharray: 14 18;
+      animation: dash-slow 22s linear infinite;
+    }
+
+    .forum-ring {
+      fill: none;
+      stroke: rgba(240, 197, 109, 0.18);
+      stroke-width: 2;
+    }
+
+    .forum-ring.inner {
+      stroke: rgba(111, 225, 209, 0.28);
+    }
+
+    .role {
+      position: absolute;
+      width: 250px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 26%, transparent 100%),
+        rgba(9, 18, 27, 0.86);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    .role h3 {
+      margin: 8px 0 10px;
+      font-family: "Cinzel", serif;
+      font-size: 28px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .role p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .role-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .role-worker {
+      top: 54px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-color: rgba(216, 109, 79, 0.24);
+    }
+
+    .role-worker .role-tag,
+    .role-worker h3 {
+      color: var(--worker);
+    }
+
+    .role-developer {
+      left: 48px;
+      bottom: 52px;
+      border-color: rgba(240, 197, 109, 0.24);
+    }
+
+    .role-developer .role-tag,
+    .role-developer h3 {
+      color: var(--developer);
+    }
+
+    .role-tribune {
+      right: 48px;
+      bottom: 52px;
+      border-color: rgba(111, 225, 209, 0.24);
+    }
+
+    .role-tribune .role-tag,
+    .role-tribune h3 {
+      color: var(--tribune);
+    }
+
+    .forum-core {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      width: 280px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(10, 21, 31, 0.84);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(12px);
+    }
+
+    .forum-core strong {
+      display: block;
+      margin: 8px 0 6px;
+      font-family: "Cinzel", serif;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .forum-core p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .lane {
+      position: absolute;
+      min-height: 30px;
+      padding: 0 10px;
+      border: 1px solid rgba(111, 225, 209, 0.14);
+      border-radius: 999px;
+      background: rgba(7, 15, 22, 0.84);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      box-shadow: 0 14px 24px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(10px);
+    }
+
+    .lane-1 {
+      left: 165px;
+      top: 312px;
+      color: var(--worker);
+    }
+
+    .lane-2 {
+      right: 170px;
+      top: 316px;
+      color: var(--tribune);
+    }
+
+    .lane-3 {
+      left: 50%;
+      bottom: 128px;
+      transform: translateX(-50%);
+      color: var(--developer);
+    }
+
+    .stage-note {
+      padding: 0 10px;
+      color: var(--dim);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .principles {
+      display: grid;
+      gap: 18px;
+      padding: 24px;
+      animation-delay: 160ms;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 6px;
+      max-width: 760px;
+    }
+
+    .section-head h3 {
+      font-size: clamp(24px, 3vw, 36px);
+    }
+
+    .section-head p {
+      font-size: 18px;
+    }
+
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .principle-card {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid rgba(111, 225, 209, 0.14);
+      border-radius: var(--radius-lg);
+      background: rgba(7, 15, 23, 0.78);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .principle-card h3 {
+      font-size: 23px;
+      line-height: 1.08;
+    }
+
+    .principle-card p {
+      font-size: 15px;
+    }
+
+    .mini-arc {
+      position: relative;
+      min-height: 110px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      background: rgba(11, 22, 31, 0.84);
+      overflow: hidden;
+    }
+
+    .mini-arc::before,
+    .mini-arc::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      inset: 18px 24px;
+    }
+
+    .mini-arc::after {
+      inset: 34px 54px;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .mini-arc.worker::before {
+      border-color: rgba(216, 109, 79, 0.26);
+    }
+
+    .mini-arc.developer::before {
+      border-color: rgba(240, 197, 109, 0.26);
+    }
+
+    .mini-arc.tribune::before {
+      border-color: rgba(111, 225, 209, 0.26);
+    }
+
+    .mini-arc span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .mini-arc.worker span {
+      color: var(--worker);
+    }
+
+    .mini-arc.developer span {
+      color: var(--developer);
+    }
+
+    .mini-arc.tribune span {
+      color: var(--tribune);
+    }
+
+    .rhythm {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+      gap: 18px;
+      padding: 24px;
+      animation-delay: 240ms;
+    }
+
+    .rhythm-copy {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .flow-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 0 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(10, 21, 31, 0.8);
+    }
+
+    .flow-chip.worker {
+      color: var(--worker);
+    }
+
+    .flow-chip.developer {
+      color: var(--developer);
+    }
+
+    .flow-chip.tribune {
+      color: var(--tribune);
+    }
+
+    .flow-chip.neutral {
+      color: var(--muted);
+    }
+
+    .flow-board {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid rgba(111, 225, 209, 0.14);
+      border-radius: var(--radius-lg);
+      background: rgba(7, 15, 23, 0.76);
+    }
+
+    .flow-label {
+      color: var(--dim);
+      font-size: 13px;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes dash-slow {
+      from {
+        stroke-dashoffset: 0;
+      }
+
+      to {
+        stroke-dashoffset: 480;
+      }
+    }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .rhythm,
+      .principle-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stage {
+        min-height: 760px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100vw - 20px, var(--page-width));
+        padding-top: 12px;
+      }
+
+      .topbar {
+        padding: 14px;
+      }
+
+      .hero,
+      .principles,
+      .rhythm {
+        padding: 20px;
+      }
+
+      .hero-copy h2 {
+        font-size: clamp(34px, 15vw, 56px);
+      }
+
+      .hero-copy p,
+      .section-head p {
+        font-size: 17px;
+      }
+
+      .stage {
+        min-height: 900px;
+      }
+
+      .role {
+        width: min(240px, calc(100% - 44px));
+      }
+
+      .role-worker {
+        top: 26px;
+      }
+
+      .role-developer {
+        left: 22px;
+        bottom: 90px;
+      }
+
+      .role-tribune {
+        right: 22px;
+        bottom: 90px;
+      }
+
+      .forum-core {
+        width: min(260px, calc(100% - 64px));
+        top: 50%;
+      }
+
+      .lane {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .stage {
+        min-height: 1160px;
+      }
+
+      .role-worker,
+      .role-developer,
+      .role-tribune {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+      }
+
+      .role-worker {
+        top: 30px;
+      }
+
+      .role-developer {
+        top: 650px;
+        bottom: auto;
+      }
+
+      .role-tribune {
+        top: 900px;
+        bottom: auto;
+      }
+
+      .forum-core {
+        top: 48%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar panel">
+      <div class="brand">
+        <span class="eyebrow">Showcase Exhibit 02</span>
+        <h1>Res Publica</h1>
+        <p>A public sketch of the three-role split.</p>
+      </div>
+      <nav class="topbar-links" aria-label="Primary">
+        <a class="nav-link" href="../">Back to showcase</a>
+        <a class="nav-link" href="../../">Live monitor</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero panel">
+        <div class="hero-copy">
+          <span class="eyebrow">Three-role architecture</span>
+          <h2>Three powers, one public answer.</h2>
+          <p>The system stays legible by separating action, system change, and judgment. The page keeps the split visible while leaving the private wiring out of frame.</p>
+          <div class="hero-actions">
+            <a class="action-link primary" href="../">See the gallery</a>
+            <a class="action-link" href="../../">Open live monitor</a>
+          </div>
+          <div class="meta-row">
+            <span class="meta-pill">worker</span>
+            <span class="meta-pill">developer</span>
+            <span class="meta-pill">tribune</span>
+          </div>
+        </div>
+
+        <div class="stage-wrap">
+          <div class="stage">
+            <svg class="constellation" viewBox="0 0 980 760" aria-hidden="true" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="worker-dev" x1="0%" x2="100%" y1="0%" y2="100%">
+                  <stop offset="0%" stop-color="#d86d4f"/>
+                  <stop offset="100%" stop-color="#f0c56d"/>
+                </linearGradient>
+                <linearGradient id="worker-tribune" x1="100%" x2="0%" y1="0%" y2="100%">
+                  <stop offset="0%" stop-color="#6fe1d1"/>
+                  <stop offset="100%" stop-color="#d86d4f"/>
+                </linearGradient>
+                <linearGradient id="dev-tribune" x1="0%" x2="100%" y1="0%" y2="0%">
+                  <stop offset="0%" stop-color="#f0c56d"/>
+                  <stop offset="100%" stop-color="#6fe1d1"/>
+                </linearGradient>
+                <radialGradient id="forum-glow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="rgba(240,197,109,0.30)"/>
+                  <stop offset="100%" stop-color="rgba(240,197,109,0)"/>
+                </radialGradient>
+              </defs>
+
+              <circle cx="490" cy="362" r="128" fill="url(#forum-glow)" opacity="0.8"/>
+              <path class="beam worker-dev" d="M490 126 L190 614"/>
+              <path class="beam worker-tribune" d="M490 126 L790 614"/>
+              <path class="beam dev-tribune" d="M190 614 L790 614"/>
+              <circle class="forum-ring" cx="490" cy="362" r="106"/>
+              <circle class="forum-ring inner" cx="490" cy="362" r="72"/>
+
+              <circle r="7" fill="#d86d4f" opacity="0.85">
+                <animateMotion dur="9s" repeatCount="indefinite" path="M490 126 L190 614"/>
+              </circle>
+              <circle r="6" fill="#f0c56d" opacity="0.8">
+                <animateMotion dur="12s" repeatCount="indefinite" path="M190 614 L790 614"/>
+              </circle>
+              <circle r="6" fill="#6fe1d1" opacity="0.85">
+                <animateMotion dur="10s" repeatCount="indefinite" path="M790 614 L490 126"/>
+              </circle>
+            </svg>
+
+            <div class="role role-worker">
+              <span class="role-tag">Acts on the thread</span>
+              <h3>Worker</h3>
+              <p>Takes the incoming request and turns it into text, code, experiments, or visuals. Fast hands, but not the final stamp.</p>
+            </div>
+
+            <div class="role role-developer">
+              <span class="role-tag">Touches the machinery</span>
+              <h3>Developer</h3>
+              <p>Changes the system itself when the structure needs repair. It does not stand in for the worker's day-to-day execution.</p>
+            </div>
+
+            <div class="role role-tribune">
+              <span class="role-tag">Challenges the answer</span>
+              <h3>Tribune</h3>
+              <p>Reviews quality before the public answer lands. Its job is friction: enough counterweight that polish never becomes self-certification.</p>
+            </div>
+
+            <div class="forum-core">
+              <span class="section-label">Shared line</span>
+              <strong>One thread, many voices</strong>
+              <p>The collaborator sees a single public answer. Inside, the powers stay separated so no one role gets to build, rewrite, and bless the same thing.</p>
+            </div>
+
+            <div class="lane lane-1">execution</div>
+            <div class="lane lane-2">review</div>
+            <div class="lane lane-3">repair</div>
+          </div>
+
+          <div class="stage-note">A public abstraction, not a wiring diagram. The point is the separation of powers.</div>
+        </div>
+      </section>
+
+      <section class="principles panel">
+        <div class="section-head">
+          <span class="section-label">Why split it this way</span>
+          <h3>The architecture argues with itself on purpose.</h3>
+          <p>Each role owns a different kind of authority. The structure is there to keep speed, repair, and judgment from collapsing into one voice.</p>
+        </div>
+
+        <div class="principle-grid">
+          <article class="principle-card">
+            <div class="mini-arc worker"><span>Action</span></div>
+            <h3>Execution stays hot.</h3>
+            <p>The worker is optimized for motion: read the thread, make the thing, keep the exchange alive.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="mini-arc developer"><span>Repair</span></div>
+            <h3>System change stays explicit.</h3>
+            <p>Developer work appears when the machine itself needs attention, not as a hidden second job inside every task.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="mini-arc tribune"><span>Judgment</span></div>
+            <h3>Review keeps its own seat.</h3>
+            <p>The tribune exists so a result can be challenged before it becomes official, even when the work already looks polished.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="rhythm panel">
+        <div class="rhythm-copy">
+          <span class="section-label">Rhythm</span>
+          <div class="section-head">
+            <h3>The public cycle stays clean.</h3>
+            <p>Most requests move through execution and review. Developer intervention is rarer and more structural: it shows up when the platform itself needs work.</p>
+          </div>
+        </div>
+
+        <div class="flow-board">
+          <span class="flow-label">Normal path</span>
+          <div class="flow-row" aria-label="Normal path">
+            <span class="flow-chip neutral">incoming thread</span>
+            <span class="flow-chip worker">worker builds</span>
+            <span class="flow-chip tribune">tribune checks</span>
+            <span class="flow-chip neutral">public answer</span>
+          </div>
+          <span class="flow-label">Structural path</span>
+          <div class="flow-row" aria-label="Structural path">
+            <span class="flow-chip neutral">drift or breakage</span>
+            <span class="flow-chip developer">developer repairs</span>
+            <span class="flow-chip tribune">tribune audits</span>
+            <span class="flow-chip neutral">cycle tightens again</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <p class="footer-note">Res Publica is meant to show the constitutional shape of the system, not the private machinery underneath it.</p>
+  </div>
+</body>
+</html>

@@ -1,12 +1,12 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-20 18:41 UTC
+Last updated: 2026-03-21 00:53 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
-- The showcase route is now intentionally preview-led and viewer-first: one featured exhibit, one large screenshot, one obvious launch path, and only short supporting copy.
+- The showcase route is now a two-exhibit gallery: `Res Publica` gives the system a public architecture piece, and the tokenizer workbench remains the live interactive tool.
 - A persistent tokenizer link on the root dashboard is still blocked because the exporter has no showcase-extension hook yet.
 
 ## Milestone 1 - Stable Hosted Surfaces
@@ -25,10 +25,12 @@ Success criteria:
 - At least one featured tool is presented as a project artifact, not just a raw utility route.
 
 Status:
-- In place. `/showcase/` now presents the tokenizer workbench as an image-led featured exhibit and keeps the page focused on browseable project surfaces instead of internal site structure.
+- In place. `/showcase/` now behaves like a real gallery: one architecture exhibit, one interactive tool, real preview images, and no route-inventory scaffolding.
 
 ### Activity Log
 
+- 2026-03-21 00:53 UTC — Added a second showcase exhibit, `Res Publica`, under `/showcase/res-publica/`: a public-facing architecture page for the Worker / Developer / Tribune split with an animated triangle stage, minimal copy, and a real browser-captured preview image.
+- 2026-03-21 00:53 UTC — Rebuilt `/showcase/` into a two-card gallery so the architecture piece and tokenizer workbench sit side by side instead of forcing the entire route to explain one exhibit.
 - 2026-03-20 18:41 UTC — Browsed gallery references from Framer Marketplace, Webflow Made in Webflow, and Vercel Templates before the redesign pass. Common pattern: one short value statement up top, then let previews/cards do the explanation work.
 - 2026-03-20 18:41 UTC — Reworked `/showcase/` again around that pattern: added a real tokenizer screenshot, moved the visual above the fold on mobile, replaced the old proof-point prose with callouts plus three compact comparison cards, and shortened the remaining copy.
 - 2026-03-20 18:03 UTC — Consulted Athena in `deep` mode (1 turn; log: `.agent/consult_history/1774027390.110939.jsonl`) on how a one-item gallery page should read to first-time outside viewers. Main takeaway: the page has to answer "what is this, why is it interesting, what do I click" immediately, and supporting stats should confirm scope rather than compete with the exhibit.
@@ -50,4 +52,4 @@ Success criteria:
 - Each tool has project docs and a clear navigation path from the showcase.
 
 Status:
-- Not started beyond the tokenizer workbench.
+- Started. The showcase now has a second public exhibit (`Res Publica`), but only one interactive browser tool still exists, so this milestone is not complete yet.

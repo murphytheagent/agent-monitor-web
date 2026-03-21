@@ -3,30 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Demos | Agent Monitor</title>
+  <title>Showcase | Agent Monitor</title>
   <link rel="icon" href="data:,">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600;700&display=swap');
 
     :root {
-      --bg: #04050d;
-      --surface: rgba(9, 12, 24, 0.9);
-      --surface-2: rgba(10, 15, 30, 0.94);
-      --surface-3: rgba(15, 22, 42, 0.96);
-      --border: rgba(93, 236, 255, 0.24);
-      --border-strong: rgba(255, 77, 177, 0.4);
-      --text-main: #f5fbff;
-      --text-muted: #9fb4d9;
-      --text-dim: #6d7a9f;
-      --accent: #46ecff;
-      --accent-2: #ff57bf;
-      --accent-3: #8fffcb;
-      --shadow: 0 28px 70px rgba(1, 5, 17, 0.5);
-      --radius-xl: 30px;
-      --radius-lg: 24px;
+      --bg: #051119;
+      --bg-deep: #02070c;
+      --panel: rgba(8, 18, 27, 0.84);
+      --panel-strong: rgba(10, 24, 35, 0.92);
+      --panel-soft: rgba(14, 31, 43, 0.72);
+      --line: rgba(98, 225, 201, 0.2);
+      --line-strong: rgba(242, 198, 109, 0.28);
+      --text: #f4f2eb;
+      --muted: #b5c2c7;
+      --dim: #748892;
+      --teal: #62e1c9;
+      --gold: #f2c66d;
+      --copper: #d6684b;
+      --shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
       --radius-md: 18px;
-      --radius-sm: 14px;
-      --page-width: min(1360px, calc(100vw - 28px));
+      --page-width: min(1340px, calc(100vw - 28px));
     }
 
     * {
@@ -40,15 +40,14 @@
     body {
       margin: 0;
       min-height: 100vh;
-      color: var(--text-main);
-      font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text);
+      font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 10% 12%, rgba(70, 236, 255, 0.18) 0%, transparent 26%),
-        radial-gradient(circle at 86% 4%, rgba(255, 87, 191, 0.18) 0%, transparent 28%),
-        radial-gradient(circle at 52% 100%, rgba(73, 110, 255, 0.16) 0%, transparent 36%),
-        linear-gradient(155deg, #04050d 0%, #070a17 38%, #0f1124 100%);
+        radial-gradient(circle at 12% 16%, rgba(98, 225, 201, 0.18) 0%, transparent 28%),
+        radial-gradient(circle at 88% 8%, rgba(214, 104, 75, 0.16) 0%, transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(242, 198, 109, 0.12) 0%, transparent 38%),
+        linear-gradient(160deg, #030910 0%, #071019 38%, #0c1823 100%);
       overflow-x: hidden;
-      position: relative;
     }
 
     body::before {
@@ -59,33 +58,19 @@
       background:
         repeating-linear-gradient(
           to right,
-          rgba(70, 236, 255, 0.04) 0,
-          rgba(70, 236, 255, 0.04) 1px,
+          rgba(255, 255, 255, 0.03) 0,
+          rgba(255, 255, 255, 0.03) 1px,
           transparent 1px,
-          transparent 88px
+          transparent 96px
         ),
         repeating-linear-gradient(
           to bottom,
           rgba(255, 255, 255, 0.02) 0,
           rgba(255, 255, 255, 0.02) 1px,
           transparent 1px,
-          transparent 6px
+          transparent 10px
         );
-      opacity: 0.42;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      left: 50%;
-      top: -240px;
-      width: 920px;
-      height: 920px;
-      transform: translateX(-50%);
-      pointer-events: none;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 66%);
-      filter: blur(16px);
-      opacity: 0.9;
+      opacity: 0.26;
     }
 
     a {
@@ -103,18 +88,17 @@
       z-index: 1;
       width: var(--page-width);
       margin: 0 auto;
-      padding: 18px 0 48px;
+      padding: 18px 0 56px;
     }
 
-    .topbar,
-    .hero,
-    .detail-section,
-    .explore-section {
-      border: 1px solid var(--border);
+    .panel {
+      border: 1px solid var(--line);
       border-radius: var(--radius-xl);
-      background: linear-gradient(180deg, rgba(7, 10, 20, 0.94) 0%, rgba(10, 15, 30, 0.92) 100%);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 18%, transparent 100%),
+        linear-gradient(180deg, rgba(6, 16, 24, 0.92) 0%, rgba(10, 21, 31, 0.9) 100%);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(18px);
     }
 
     .topbar {
@@ -122,102 +106,106 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 14px 18px;
+      padding: 15px 18px;
     }
 
     .brand {
       display: grid;
-      gap: 2px;
+      gap: 4px;
       min-width: 0;
     }
 
     .eyebrow,
-    .section-label,
-    .mini-label,
-    .prompt-kicker {
-      font-family: "Orbitron", "Rajdhani", sans-serif;
+    .card-label,
+    .meta-pill,
+    .note-label {
+      font-family: "IBM Plex Mono", monospace;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     .eyebrow,
-    .mini-label {
-      color: var(--accent);
+    .note-label {
+      color: var(--teal);
     }
 
     .brand h1 {
       margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-family: "Cinzel", serif;
       font-size: 18px;
       line-height: 1;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .brand p {
       margin: 0;
-      color: var(--text-dim);
+      color: var(--dim);
       font-size: 13px;
     }
 
-    .topbar-links {
+    .topbar-links,
+    .hero-actions,
+    .card-actions,
+    .meta-row {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      justify-content: flex-end;
     }
 
     .nav-link,
-    .action-link,
-    .prompt-card {
-      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
-    }
-
-    .nav-link {
+    .action-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 40px;
-      padding: 0 14px;
-      border: 1px solid rgba(93, 236, 255, 0.2);
+      min-height: 42px;
+      padding: 0 15px;
+      border: 1px solid rgba(98, 225, 201, 0.2);
       border-radius: 999px;
-      background: rgba(10, 15, 30, 0.8);
-      color: var(--text-muted);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
+      background: rgba(7, 15, 23, 0.78);
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
     }
 
     .nav-link:hover,
     .action-link:hover,
-    .prompt-card:hover {
-      border-color: var(--border-strong);
+    .exhibit-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 30px rgba(4, 10, 24, 0.36);
+      border-color: rgba(242, 198, 109, 0.32);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    .action-link.primary {
+      border-color: rgba(242, 198, 109, 0.32);
+      background: linear-gradient(120deg, rgba(19, 41, 47, 0.96) 0%, rgba(47, 25, 17, 0.94) 100%);
+      color: var(--text);
     }
 
     main {
       display: grid;
-      gap: 22px;
+      gap: 24px;
       margin-top: 22px;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1.22fr);
+      grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
       gap: 24px;
-      padding: clamp(20px, 3vw, 34px);
+      padding: clamp(22px, 3vw, 34px);
       overflow: hidden;
     }
 
     .hero-copy,
-    .hero-media,
-    .detail-section,
-    .explore-section {
+    .hero-side,
+    .gallery-grid,
+    .bottom-note {
       animation: rise-in 520ms ease both;
     }
 
@@ -227,426 +215,203 @@
       align-content: start;
     }
 
-    .section-label {
-      color: #f0a9dd;
+    .hero-copy h2,
+    .card-copy h3 {
+      margin: 0;
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .hero-copy h2 {
-      margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: clamp(40px, 6vw, 76px);
-      line-height: 0.94;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      text-shadow: 0 0 14px rgba(70, 236, 255, 0.14);
+      font-size: clamp(42px, 5.8vw, 74px);
+      line-height: 0.92;
     }
 
     .hero-copy p {
       margin: 0;
       max-width: 560px;
-      color: var(--text-muted);
-      font-size: clamp(19px, 2.2vw, 24px);
-      line-height: 1.28;
+      color: var(--muted);
+      font-size: clamp(18px, 2.2vw, 23px);
+      line-height: 1.34;
     }
 
-    .action-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .action-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 18px;
-      border: 1px solid rgba(93, 236, 255, 0.24);
-      border-radius: 999px;
-      background: rgba(10, 15, 30, 0.82);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .action-link.primary {
-      border-color: rgba(255, 87, 191, 0.36);
-      background: linear-gradient(90deg, rgba(15, 41, 49, 0.96) 0%, rgba(47, 12, 52, 0.96) 100%);
-      color: var(--text-main);
-    }
-
-    .meta-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .meta-pill,
-    .caption-chip,
-    .family-chip {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 36px;
-      padding: 0 12px;
-      border: 1px solid rgba(93, 236, 255, 0.18);
-      border-radius: 999px;
-      background: rgba(10, 15, 30, 0.72);
-      color: var(--text-muted);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .hero-note {
-      max-width: 520px;
-      color: var(--text-dim);
-      font-size: 15px;
-      line-height: 1.4;
-    }
-
-    .hero-media {
+    .hero-side {
       display: grid;
-      gap: 14px;
-      align-content: start;
+      gap: 16px;
       animation-delay: 80ms;
     }
 
-    .media-frame {
-      position: relative;
-      padding: 14px;
-      border: 1px solid rgba(93, 236, 255, 0.16);
-      border-radius: 28px;
-      background:
-        linear-gradient(180deg, rgba(70, 236, 255, 0.05) 0%, transparent 18%, transparent 100%),
-        rgba(3, 7, 18, 0.96);
-      overflow: hidden;
+    .note-panel,
+    .mini-card,
+    .exhibit-card {
+      border: 1px solid rgba(98, 225, 201, 0.14);
+      border-radius: var(--radius-lg);
+      background: rgba(8, 17, 26, 0.72);
     }
 
-    .media-frame::before {
-      content: "";
-      position: absolute;
-      inset: -18% 12% 72% 12%;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(255, 87, 191, 0.28) 0%, rgba(255, 87, 191, 0) 72%);
-      filter: blur(14px);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .media-window {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(93, 236, 255, 0.2);
-      background: #02050f;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    }
-
-    .media-window img {
-      width: 100%;
-      height: auto;
-    }
-
-    .figure-pin {
-      position: absolute;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 32px;
-      padding: 0 12px;
-      border: 1px solid rgba(93, 236, 255, 0.22);
-      border-radius: 999px;
-      background: rgba(7, 12, 24, 0.84);
-      color: var(--text-main);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      box-shadow: 0 14px 24px rgba(2, 6, 18, 0.36);
-      backdrop-filter: blur(10px);
-    }
-
-    .figure-pin::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 14px rgba(70, 236, 255, 0.72);
-    }
-
-    .pin-input {
-      left: 28px;
-      top: 22px;
-    }
-
-    .pin-tokens {
-      left: 24px;
-      bottom: 26px;
-    }
-
-    .pin-stream {
-      right: 26px;
-      top: 210px;
-    }
-
-    .caption-row {
-      display: none;
+    .note-panel {
+      display: grid;
       gap: 10px;
-      flex-wrap: wrap;
+      padding: 20px;
+      min-height: 180px;
+      background:
+        radial-gradient(circle at top right, rgba(242, 198, 109, 0.16) 0%, transparent 38%),
+        rgba(8, 17, 26, 0.76);
     }
 
-    .detail-section,
-    .explore-section {
-      padding: 24px;
-    }
-
-    .detail-section {
-      display: grid;
-      gap: 18px;
-      animation-delay: 140ms;
-    }
-
-    .section-head {
-      display: grid;
-      gap: 6px;
-      max-width: 720px;
-    }
-
-    .section-head h3 {
-      margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: clamp(24px, 3vw, 34px);
+    .note-panel strong {
+      font-family: "Cinzel", serif;
+      font-size: 30px;
+      line-height: 1;
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
-    .section-head p {
+    .note-panel p,
+    .mini-card p,
+    .card-copy p,
+    .bottom-note p {
       margin: 0;
-      color: var(--text-muted);
-      font-size: 18px;
-      line-height: 1.35;
+      color: var(--muted);
+      line-height: 1.48;
     }
 
-    .insight-grid {
+    .hero-mini-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .insight-card {
+    .mini-card {
       display: grid;
-      gap: 14px;
+      gap: 10px;
       padding: 18px;
-      border: 1px solid rgba(93, 236, 255, 0.14);
-      border-radius: var(--radius-lg);
-      background: rgba(7, 11, 22, 0.82);
       min-height: 100%;
     }
 
-    .insight-card h4 {
-      margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 18px;
-      letter-spacing: 0.04em;
+    .mini-card strong {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
+      color: var(--gold);
     }
 
-    .insight-card p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 16px;
-      line-height: 1.35;
+    .meta-pill {
+      align-items: center;
+      display: inline-flex;
+      min-height: 38px;
+      padding: 0 12px;
+      border: 1px solid rgba(98, 225, 201, 0.18);
+      border-radius: 999px;
+      background: rgba(10, 22, 32, 0.76);
+      color: var(--muted);
     }
 
-    .mini-visual {
+    .gallery-grid {
       display: grid;
-      gap: 8px;
-      min-height: 108px;
-      padding: 14px;
-      border-radius: var(--radius-md);
-      background:
-        linear-gradient(180deg, rgba(70, 236, 255, 0.06) 0%, transparent 18%, transparent 100%),
-        rgba(9, 15, 28, 0.96);
-      border: 1px solid rgba(93, 236, 255, 0.12);
-      align-content: center;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      animation-delay: 140ms;
     }
 
-    .token-strip,
-    .wrapper-strip,
-    .family-cloud {
+    .exhibit-card {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .card-visual {
+      position: relative;
+      min-height: 320px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 24%, transparent 100%),
+        rgba(3, 10, 16, 0.92);
+    }
+
+    .card-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 8, 12, 0) 40%, rgba(2, 8, 12, 0.28) 100%);
+      pointer-events: none;
+    }
+
+    .card-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.01);
+    }
+
+    .featured .card-visual {
+      min-height: 360px;
+    }
+
+    .card-copy {
+      display: grid;
+      gap: 16px;
+      padding: 22px;
+    }
+
+    .card-label {
+      color: var(--teal);
+    }
+
+    .card-copy h3 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 0.96;
+    }
+
+    .card-copy p {
+      font-size: 16px;
+    }
+
+    .chip-row {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
-    .token-chip,
-    .wrapper-chip {
+    .chip {
       display: inline-flex;
       align-items: center;
-      min-height: 28px;
-      padding: 0 10px;
+      min-height: 34px;
+      padding: 0 11px;
+      border: 1px solid rgba(242, 198, 109, 0.18);
       border-radius: 999px;
-      font-family: "JetBrains Mono", monospace;
+      background: rgba(14, 29, 41, 0.74);
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
       font-size: 11px;
       font-weight: 500;
-    }
-
-    .token-strip:first-child .token-chip {
-      border: 1px solid rgba(143, 255, 203, 0.2);
-      background: rgba(143, 255, 203, 0.12);
-      color: #dffdf2;
-    }
-
-    .token-strip.alt .token-chip {
-      border: 1px solid rgba(255, 87, 191, 0.22);
-      background: rgba(255, 87, 191, 0.12);
-      color: #ffe5f5;
-    }
-
-    .wrapper-chip {
-      border: 1px solid rgba(93, 236, 255, 0.16);
-      background: rgba(93, 236, 255, 0.08);
-      color: var(--accent);
-    }
-
-    .wrapper-chip.alt {
-      border-color: rgba(255, 87, 191, 0.24);
-      background: rgba(255, 87, 191, 0.12);
-      color: #ffd5ef;
-    }
-
-    .compare-row {
-      display: grid;
-      gap: 10px;
-    }
-
-    .compare-line {
-      display: grid;
-      grid-template-columns: 74px 1fr;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .compare-line span {
-      color: var(--text-dim);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
-    .compare-bar {
-      position: relative;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      overflow: hidden;
+    .bottom-note {
+      padding: 24px;
+      animation-delay: 220ms;
     }
 
-    .compare-fill {
-      position: absolute;
-      inset: 0 auto 0 0;
-      border-radius: 999px;
-    }
-
-    .compare-fill.qwen {
-      width: 82%;
-      background: linear-gradient(90deg, rgba(70, 236, 255, 0.9) 0%, rgba(70, 236, 255, 0.32) 100%);
-    }
-
-    .compare-fill.deepseek {
-      width: 68%;
-      background: linear-gradient(90deg, rgba(255, 87, 191, 0.88) 0%, rgba(255, 87, 191, 0.28) 100%);
-    }
-
-    .compare-fill.mistral {
-      width: 52%;
-      background: linear-gradient(90deg, rgba(143, 255, 203, 0.88) 0%, rgba(143, 255, 203, 0.28) 100%);
-    }
-
-    .explore-section {
-      display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(260px, 0.88fr);
-      gap: 18px;
-      align-items: start;
-      animation-delay: 200ms;
-    }
-
-    .prompt-area,
-    .catalog-panel {
-      display: grid;
-      gap: 14px;
-    }
-
-    .prompt-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .prompt-card {
-      display: grid;
-      gap: 10px;
-      min-height: 100%;
-      padding: 18px;
-      border: 1px solid rgba(93, 236, 255, 0.16);
-      border-radius: var(--radius-lg);
-      background: rgba(7, 11, 22, 0.82);
-    }
-
-    .prompt-kicker {
-      color: var(--accent-3);
-    }
-
-    .prompt-card p {
-      margin: 0;
-      color: var(--text-main);
-      font-size: 17px;
-      line-height: 1.32;
-    }
-
-    .prompt-card span:last-child {
-      color: var(--text-dim);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+    .bottom-note strong {
+      display: block;
+      margin-bottom: 8px;
+      font-family: "Cinzel", serif;
+      font-size: 24px;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
-    .catalog-panel {
-      padding: 18px;
-      border: 1px solid rgba(93, 236, 255, 0.14);
-      border-radius: var(--radius-lg);
-      background:
-        linear-gradient(180deg, rgba(255, 87, 191, 0.05) 0%, transparent 18%, transparent 100%),
-        rgba(7, 11, 22, 0.82);
-    }
-
-    .catalog-panel p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 16px;
-      line-height: 1.35;
-    }
-
-    .family-chip {
-      color: var(--text-main);
-      min-height: 34px;
-    }
-
-    .footer-copy {
-      margin: 0;
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.4;
+    footer {
+      margin-top: 18px;
+      color: var(--dim);
+      font-size: 13px;
+      text-align: center;
     }
 
     @keyframes rise-in {
@@ -661,258 +426,167 @@
       }
     }
 
-    @media (max-width: 1120px) {
+    @media (max-width: 980px) {
       .hero,
-      .explore-section,
-      .prompt-grid,
-      .insight-grid {
+      .gallery-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-copy {
-        order: 2;
-      }
-
-      .hero-media {
-        order: 1;
-      }
-
-      .pin-stream {
-        right: 18px;
-        top: 160px;
+      .featured .card-visual {
+        min-height: 320px;
       }
     }
 
-    @media (max-width: 760px) {
-      :root {
-        --page-width: min(100vw - 16px, 100%);
-      }
-
+    @media (max-width: 680px) {
       .page-shell {
-        padding-top: 10px;
-      }
-
-      .topbar,
-      .hero,
-      .detail-section,
-      .explore-section {
-        border-radius: 22px;
+        width: min(100vw - 20px, var(--page-width));
+        padding-top: 12px;
       }
 
       .topbar {
-        flex-direction: column;
-        align-items: stretch;
+        padding: 14px;
       }
 
-      .topbar-links,
-      .action-row {
-        width: 100%;
-      }
-
-      .nav-link,
-      .action-link {
-        width: 100%;
-      }
-
-      .hero,
-      .detail-section,
-      .explore-section {
-        padding: 18px;
+      .hero {
+        padding: 20px;
       }
 
       .hero-copy h2 {
-        font-size: 38px;
+        font-size: clamp(34px, 14vw, 52px);
       }
 
-      .hero-copy p,
-      .section-head p {
+      .hero-copy p {
         font-size: 17px;
       }
 
-      .hero-note,
-      .catalog-panel p,
-      .insight-card p,
-      .prompt-card p {
-        font-size: 15px;
+      .hero-mini-grid {
+        grid-template-columns: 1fr;
       }
 
-      .figure-pin {
-        display: none;
+      .card-visual,
+      .featured .card-visual {
+        min-height: 250px;
       }
 
-      .caption-row {
-        display: flex;
+      .card-copy {
+        padding: 18px;
       }
 
-      .compare-line {
-        grid-template-columns: 62px 1fr;
+      .card-copy h3 {
+        font-size: 28px;
       }
     }
   </style>
 </head>
 <body>
   <div class="page-shell">
-    <header class="topbar">
+    <header class="topbar panel">
       <div class="brand">
-        <div class="eyebrow">Murphy</div>
-        <h1>Demos</h1>
-        <p>Interactive browser exhibits worth opening.</p>
+        <span class="eyebrow">Agent Monitor</span>
+        <h1>Showcase</h1>
+        <p>Public-facing artifacts, not internal diagrams.</p>
       </div>
-      <nav class="topbar-links" aria-label="Showcase navigation">
-        <a class="nav-link" href="../">&larr; Live monitor</a>
-        <a class="nav-link" href="../tokenizers/">Tokenizer demo</a>
+      <nav class="topbar-links" aria-label="Primary">
+        <a class="nav-link" href="../">Live monitor</a>
+        <a class="nav-link" href="../tokenizers/">Tokenizer workbench</a>
       </nav>
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero panel">
         <div class="hero-copy">
-          <div class="section-label">Tokenizer Workbench</div>
-          <h2>See how different LLMs break up the same prompt.</h2>
-          <p>Paste text, switch models, compare token splits and chat wrappers right in the browser.</p>
-          <div class="action-row">
-            <a class="action-link primary" href="../tokenizers/">Open tokenizer demo</a>
-            <a class="action-link" href="../">Back to live monitor</a>
+          <span class="eyebrow">Browser Exhibits</span>
+          <h2>Two public surfaces, one system.</h2>
+          <p>The gallery is small on purpose: one exhibit explains the architecture in public, the other lets you touch one of the live browser tools.</p>
+          <div class="hero-actions">
+            <a class="action-link primary" href="./res-publica/">Open Res Publica</a>
+            <a class="action-link" href="../tokenizers/">Open tokenizer workbench</a>
           </div>
-          <div class="meta-row" aria-label="Tokenizer highlights">
-            <span class="meta-pill">28 checkpoints</span>
-            <span class="meta-pill">Text + chat views</span>
-            <span class="meta-pill">Runs in browser</span>
+          <div class="meta-row">
+            <span class="meta-pill">2 exhibits</span>
+            <span class="meta-pill">art piece + tool</span>
+            <span class="meta-pill">browser-native</span>
           </div>
-          <p class="hero-note">Start with one sentence. Qwen, DeepSeek, and Mistral diverge fast.</p>
         </div>
 
-        <div class="hero-media">
-          <div class="media-frame">
-            <div class="media-window">
-              <img
-                src="./tokenizer-workbench-preview.png"
-                alt="Screenshot of the tokenizer workbench showing a prompt input, colored token chips, and a token inspection panel."
-              >
-              <div class="figure-pin pin-input">Paste any prompt</div>
-              <div class="figure-pin pin-stream">Inspect token IDs</div>
-              <div class="figure-pin pin-tokens">Watch split points move</div>
-            </div>
+        <div class="hero-side">
+          <div class="note-panel">
+            <span class="note-label">Showcase rule</span>
+            <strong>Lead with what people can see.</strong>
+            <p>The exhibit page sketches the three-role split without opening the whole machine. The workbench page stays practical: paste text, compare tokenization, move on.</p>
           </div>
-          <div class="caption-row" aria-label="Screenshot callouts">
-            <span class="caption-chip">Paste any prompt</span>
-            <span class="caption-chip">Watch split points move</span>
-            <span class="caption-chip">Inspect token IDs</span>
+
+          <div class="hero-mini-grid">
+            <div class="mini-card">
+              <span class="note-label">New exhibit</span>
+              <strong>Res Publica</strong>
+              <p>A public sketch of Worker, Developer, and Tribune as distinct powers inside one system.</p>
+            </div>
+            <div class="mini-card">
+              <span class="note-label">Live tool</span>
+              <strong>Tokenizer workbench</strong>
+              <p>Compare how open checkpoints split text and wrap chat prompts before you leave the browser.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="detail-section">
-        <div class="section-head">
-          <div class="section-label">What to notice</div>
-          <h3>The same sentence changes shape before generation even starts.</h3>
-          <p>Keep the prompt fixed and the differences jump out immediately.</p>
-        </div>
-
-        <div class="insight-grid">
-          <article class="insight-card">
-            <div class="mini-visual" aria-hidden="true">
-              <div class="token-strip">
-                <span class="token-chip">Token</span>
-                <span class="token-chip">izers</span>
-                <span class="token-chip">decide</span>
-                <span class="token-chip">how</span>
-              </div>
-              <div class="token-strip alt">
-                <span class="token-chip">Tokenizers</span>
-                <span class="token-chip">de</span>
-                <span class="token-chip">cide</span>
-                <span class="token-chip">how</span>
-              </div>
+      <section class="gallery-grid" aria-label="Exhibits">
+        <article class="exhibit-card featured">
+          <a href="./res-publica/" aria-label="Open Res Publica architecture exhibit">
+            <div class="card-visual">
+              <img src="./res-publica-preview.png" alt="Preview of the Res Publica three-role architecture exhibit">
             </div>
-            <h4>Token boundaries shift</h4>
-            <p>One phrase can split into different subword pieces as you swap models.</p>
-          </article>
-
-          <article class="insight-card">
-            <div class="mini-visual" aria-hidden="true">
-              <div class="wrapper-strip">
-                <span class="wrapper-chip">&lt;bos&gt;</span>
-                <span class="wrapper-chip">&lt;user&gt;</span>
-                <span class="wrapper-chip">&lt;assistant&gt;</span>
-              </div>
-              <div class="wrapper-strip">
-                <span class="wrapper-chip alt">&lt;system&gt;</span>
-                <span class="wrapper-chip alt">&lt;think&gt;</span>
-                <span class="wrapper-chip alt">&lt;eos&gt;</span>
-              </div>
+          </a>
+          <div class="card-copy">
+            <span class="card-label">Exhibit 02</span>
+            <h3>Res Publica</h3>
+            <p>An architecture page treated like an art piece: the three-role split becomes a public triangle of action, repair, and judgment instead of a raw internal schematic.</p>
+            <div class="chip-row" aria-label="Res Publica details">
+              <span class="chip">three roles</span>
+              <span class="chip">public abstraction</span>
+              <span class="chip">motion-led</span>
             </div>
-            <h4>Wrappers differ</h4>
-            <p>Chat mode exposes the hidden scaffolding each model adds around the same conversation.</p>
-          </article>
-
-          <article class="insight-card">
-            <div class="mini-visual" aria-hidden="true">
-              <div class="compare-row">
-                <div class="compare-line">
-                  <span>Qwen</span>
-                  <div class="compare-bar"><div class="compare-fill qwen"></div></div>
-                </div>
-                <div class="compare-line">
-                  <span>DeepSeek</span>
-                  <div class="compare-bar"><div class="compare-fill deepseek"></div></div>
-                </div>
-                <div class="compare-line">
-                  <span>Mistral</span>
-                  <div class="compare-bar"><div class="compare-fill mistral"></div></div>
-                </div>
-              </div>
+            <div class="card-actions">
+              <a class="action-link primary" href="./res-publica/">Open exhibit</a>
+              <a class="action-link" href="../">Back to monitor</a>
             </div>
-            <h4>Patterns stay visible</h4>
-            <p>Family-level differences show up fast when you keep the prompt fixed and compare multiple lines side by side.</p>
-          </article>
-        </div>
+          </div>
+        </article>
+
+        <article class="exhibit-card">
+          <a href="../tokenizers/" aria-label="Open tokenizer workbench">
+            <div class="card-visual">
+              <img src="./tokenizer-workbench-preview.png" alt="Preview of the tokenizer workbench">
+            </div>
+          </a>
+          <div class="card-copy">
+            <span class="card-label">Exhibit 01</span>
+            <h3>Tokenizer Workbench</h3>
+            <p>A hands-on browser tool for comparing token splits, chat wrappers, and checkpoint families across a curated public set of open-source instruct models.</p>
+            <div class="chip-row" aria-label="Tokenizer details">
+              <span class="chip">28 checkpoints</span>
+              <span class="chip">paste your own prompt</span>
+              <span class="chip">text + chat</span>
+            </div>
+            <div class="card-actions">
+              <a class="action-link primary" href="../tokenizers/">Open workbench</a>
+              <a class="action-link" href="./">Stay in showcase</a>
+            </div>
+          </div>
+        </article>
       </section>
 
-      <section class="explore-section">
-        <div class="prompt-area">
-          <div class="section-head">
-            <div class="section-label">Try these first</div>
-            <h3>Short prompts make the differences easiest to spot.</h3>
-            <p>Start simple, then move to code, emoji, or multilingual text.</p>
-          </div>
-
-          <div class="prompt-grid">
-            <a class="prompt-card" href="../tokenizers/">
-              <span class="prompt-kicker">Prompt 01</span>
-              <p>Summarize transformers in 3 bullet points.</p>
-              <span>Open in demo</span>
-            </a>
-            <a class="prompt-card" href="../tokenizers/">
-              <span class="prompt-kicker">Prompt 02</span>
-              <p>Translate this sentence to Spanish and keep the tone polite.</p>
-              <span>Open in demo</span>
-            </a>
-            <a class="prompt-card" href="../tokenizers/">
-              <span class="prompt-kicker">Prompt 03</span>
-              <p>Write a short support reply about a delayed shipment.</p>
-              <span>Open in demo</span>
-            </a>
-          </div>
-        </div>
-
-        <aside class="catalog-panel">
-          <div class="section-label">On the wall now</div>
-          <div class="family-cloud" aria-label="Tokenizer families in the catalog">
-            <span class="family-chip">Qwen</span>
-            <span class="family-chip">DeepSeek</span>
-            <span class="family-chip">Mistral</span>
-            <span class="family-chip">Phi</span>
-            <span class="family-chip">MiniMax</span>
-            <span class="family-chip">Yi</span>
-            <span class="family-chip">SmolLM</span>
-            <span class="family-chip">Falcon</span>
-          </div>
-          <p>Eight public model lines are in the browser today, with both plain-text tokenization and chat-format views.</p>
-          <p class="footer-copy">More exhibits can land here later. For now, the page points straight at the strongest live demo.</p>
-        </aside>
+      <section class="bottom-note panel">
+        <span class="note-label">Public line</span>
+        <strong>The gallery stays selective.</strong>
+        <p>Each page needs a visible payoff. If a route only makes sense after an internal explanation, it does not belong here yet.</p>
       </section>
     </main>
+
+    <footer>
+      Built as a hand-maintained layer on top of the continuously refreshed monitor root.
+    </footer>
   </div>
 </body>
 </html>

@@ -13,7 +13,8 @@ python3 -m src.loop.monitor.dashboard --once --export-static-dir projects/agent-
 Hosted routes:
 
 - `/` - live agent monitor snapshot. This root surface is publisher-owned: each snapshot refresh rewrites `index.html` and `status.json`.
-- `/showcase/` - viewer-first gallery for polished browser tools, now led by a large live preview, short cue cards, and a direct launch path instead of route inventory or internal site explanation.
+- `/showcase/` - viewer-first gallery for polished browser surfaces. It now presents two exhibits: `Res Publica`, a public three-role architecture piece, and the tokenizer workbench.
+- `/showcase/res-publica/` - architecture exhibit for the Worker / Developer / Tribune split, presented as a public-facing art page rather than an internal system diagram.
 - `/tokenizers/` - interactive tokenizer visualizer page for a curated set of public open-source instruct tokenizers.
 
 If you want a permanent custom page or navigation outside the live monitor cards, add it under a subroute such as `showcase/` or `tokenizers/`; a manual root-homepage patch will be overwritten by the next snapshot export.
@@ -23,4 +24,4 @@ Additional hosted tool details:
 - `tokenizers/` — interactive tokenizer visualizer page for a curated set of public open-source instruct tokenizers, now grouped into mainstream families such as `Qwen 3.5`, `Qwen 3`, `Qwen 2.5`, `DeepSeek R1 Distill (Qwen)`, `Mistral`, `Phi`, `SmolLM 2`, and `Falcon 3`.
   The page now uses a three-level `model line -> family / generation -> configuration` picker, with browser-compatible Chinese lines such as `MiniMax` and `Yi` added alongside `Qwen` and `DeepSeek`.
   It explicitly labels whether the listed sibling checkpoints share an exact vocabulary, only share a base tokenizer model, or use different tokenizer files, and it calls out public-but-not-browser-ready tokenizer families such as `Kimi K2`, `GLM 4`, and `InternLM 3`.
-- `showcase/` — curated gallery for hosted project surfaces. It now leads with a preview-first tokenizer exhibit, one clear launch CTA, and only the cues an outside visitor needs to decide whether to click.
+- `showcase/` — curated gallery for hosted project surfaces. It now works as a two-exhibit front door instead of a one-item plaque: `Res Publica` frames the system publicly, while the tokenizer workbench stays the hands-on utility page.
