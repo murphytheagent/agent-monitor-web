@@ -988,8 +988,9 @@
     html.embed-showcase .page-header {
       position: static;
       top: auto;
-      margin-top: 10px;
-      padding: 10px 12px;
+      margin-top: 0;
+      padding: 8px 12px;
+      min-height: 0;
     }
 
     html.embed-showcase .nav-links,
@@ -1011,7 +1012,13 @@
 
     html.embed-showcase .page-grid {
       gap: 10px;
-      margin-top: 10px;
+      margin-top: 8px;
+    }
+
+    html.embed-showcase .control-card,
+    html.embed-showcase .input-footer,
+    html.embed-showcase .mini-toggle {
+      display: none !important;
     }
 
     html.embed-showcase .card-header {
@@ -1033,7 +1040,7 @@
 
     html.embed-showcase .workspace-grid {
       --workbench-height: auto;
-      grid-template-columns: minmax(0, 1.16fr) minmax(280px, 0.84fr);
+      grid-template-columns: minmax(0, 1.16fr) minmax(250px, 0.84fr);
       gap: 10px;
     }
 
@@ -1056,7 +1063,7 @@
     }
 
     html.embed-showcase .text-input-field textarea {
-      min-height: 160px;
+      min-height: 140px;
       font-size: 15px;
     }
 
@@ -1066,8 +1073,8 @@
     }
 
     html.embed-showcase .surface-preview {
-      min-height: 190px;
-      max-height: 320px;
+      min-height: 170px;
+      max-height: 300px;
       padding: 12px;
       font-size: 14px;
     }
@@ -1083,7 +1090,7 @@
     }
 
     html.embed-showcase .token-stream {
-      max-height: 420px;
+      max-height: 360px;
     }
 
     html.embed-showcase .token-pill {
@@ -1668,6 +1675,33 @@
 
       .text-input-field textarea {
         min-height: 220px;
+      }
+
+      html.embed-showcase .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      html.embed-showcase .header-status,
+      html.embed-showcase .page-meta {
+        width: 100%;
+      }
+
+      html.embed-showcase .header-status {
+        justify-content: flex-start;
+      }
+
+      html.embed-showcase .workspace-grid,
+      html.embed-showcase .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      html.embed-showcase .surface-preview {
+        max-height: none;
+      }
+
+      html.embed-showcase .token-stream {
+        max-height: none;
       }
     }
   </style>
