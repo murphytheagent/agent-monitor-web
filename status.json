@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T17:12:13Z",
+    "last_updated_utc": "2026-03-21T17:14:14Z",
     "status": "workers_active",
     "pid": 38150,
-    "loop_count": 2936,
+    "loop_count": 2947,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,13 +17,7 @@
         "slot": 0,
         "task": "1773870804.162569",
         "started_at": 1774111880,
-        "elapsed_sec": 1252
-      },
-      {
-        "slot": 1,
-        "task": "1774103566.709609",
-        "started_at": 1774112928,
-        "elapsed_sec": 205
+        "elapsed_sec": 1373
       }
     ]
   },
@@ -33,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.71,
-      "five": 1.84,
-      "fifteen": 1.82
+      "one": 2.41,
+      "five": 1.98,
+      "fifteen": 1.87
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112188219392,
-    "disk_free_bytes": 132918976512,
-    "runner_log_size_bytes": 242648,
+    "disk_used_bytes": 112192565248,
+    "disk_free_bytes": 132914630656,
+    "runner_log_size_bytes": 243218,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T11:35:20Z",
     "local_ips": []
@@ -50,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T17:12:20Z",
+    "checked_at_utc": "2026-03-21T17:14:22Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -68,13 +62,13 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 3,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 34043,
+        "utilization_gpu_pct": 9,
+        "memory_used_mb": 34047,
         "memory_total_mb": 97887,
         "temperature_c": 33
       },
@@ -84,28 +78,28 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 34999,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 50
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 7,
-        "memory_used_mb": 33825,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 33827,
         "memory_total_mb": 97887,
         "temperature_c": 32
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 83,
-        "memory_used_mb": 79031,
+        "utilization_gpu_pct": 97,
+        "memory_used_mb": 79035,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 52
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 12,
+        "utilization_gpu_pct": 1,
         "memory_used_mb": 34043,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -113,7 +107,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
+        "utilization_gpu_pct": 9,
         "memory_used_mb": 33825,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -137,22 +131,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T21:53:24Z"
-        }
-      },
-      "1774103566.709609": {
-        "mention_ts": "1774103566.709609",
-        "thread_ts": "1774103566.709609",
-        "status": "in_progress",
-        "task_description": "How's your tribune implemented?",
-        "summary": "Answered how Tribune is invoked, documented the gemini-3.1-pro default request, and logged a separate Slack-token exposure issue.",
-        "summary_preview": "Answered how Tribune is invoked, documented the gemini-3.1-pro default request, and logged a separate Slack-token exposure issue.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774103566.709609",
-        "last_update_ts": "1774112927.577075",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T17:08:21Z"
         }
       }
     },
@@ -315,6 +293,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T07:28:57Z"
+        }
+      },
+      "1774103566.709609": {
+        "mention_ts": "1774103566.709609",
+        "thread_ts": "1774103566.709609",
+        "status": "waiting_human",
+        "task_description": "How's your tribune implemented?",
+        "summary": "Answered that Tribune only reviews final drafts, not in-progress Slack updates, and logged the removed supervisor done-marker as a highest-priority maintenance…",
+        "summary_preview": "Answered that Tribune only reviews final drafts, not in-progress Slack updates, and logged the removed supervisor done-marker as a highest-priority maintenance…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774103566.709609",
+        "last_update_ts": "1774113209.203435",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T17:08:21Z"
         }
       }
     },
@@ -1131,5 +1125,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T17:12:21Z"
+  "server_time_utc": "2026-03-21T17:14:22Z"
 }
