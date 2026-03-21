@@ -332,5 +332,243 @@
         "input_preview": "{\"description\": \"Research reconciliation flow\", \"subagent_type\": \"Explore\", \"prompt\": \"I need to understand the task completion/reconciliation flow in the supervisor to fix FIX-008 (done marker regression). \\n\\nSpecifically, I need to find:\\n\\n1. In `src/loop/supervisor/runtime.py`: the `reconcile_task_after_run` method and any related completion handling. Look for where tasks transition to `finished_tasks` and what happens after. Also look for any remnant of `_notify_task_done` or any Slack not"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:54:27.821Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Perfect! Now I have all the information I need. Let me create a comprehensive summary document:\n\n## Summary: Task Completion/Reconciliation Flow & Done Marker Regression (FIX-008)\n\nBased on my thorough analysis of the supervisor code, commit history, and issue tracking, here's the complete picture:\n\n### **The Flow: Worker Completion → Reconciliation → Task Lifecycle**\n\n#### 1. **Worker Completes and Reports Outcome**\n   - Worker exits with code 0 and writes an outcome JSON to:\n     - **Per-task location**: `.agent/runtime/outcomes/<mention_ts>.json` (preferred)\n     - **Fallback**: `.agent/runtime/dispatch/outcome.json` (legacy)\n   - Outcome schema includes: `mention_ts`, `thread_ts`, `status` (done|waiting_human|in_progress|failed), `summary`, `completion_confidence`, `requires_human_feedback`, `project`, `error`\n\n#### 2. **Supervisor Reads Outcome in `reconcile_task_after_run()` (line 2457)**\n   The method:\n   - Loads outcome JSON and extracts status, summary, confidence, error\n   - "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:54:46.172Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Excellent! Now I have a thorough understanding of the issue. Let me now read the specific code sections I need to modify to write a good plan.\n\nKey findings:\n1. `_notify_task_done()` was deliberately removed in AGENT-022 (2026-03-13) because \"workers already communicate results in-thread per their behavioral contract\"\n2. But humans can't tell when the *supervisor* closes the lifecycle - worker posting is different from task completion\n3. The notification was non-blocking, outside the state lock, and skipped for non-final maintenance phases\n4. Current code has no completion marker at all\n\nNow I need to decide the implementation approach. Let me read the exact current code to find where to insert the restoration.\n\n\nI think the simplest approach is to restore a text notification in the Slack thread when the task completes, since that's clearest and aligns with the requirement for a visible signal. A reaction emoji would be less noisy, but the text message is more explicit about what's happening.\n\nThe core issue is that workers post their results, but supervisors make the final decision to close the task—and without a marker, humans can't distinguish between an open task awaiting follow-up and one that's actually been completed. Restoring that notification solves the visibility problem directly.\n\nI'm leaning toward either bringing back a completion message with more context like a summary, or using a simple reaction emoji on the original mention to keep things less noisy. Let me check the reconciliation code to see where exactly to implement this fix."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:54:46.183Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good, I have a thorough understanding of the issue. Let me now read the exact current code around the reconciliation point to plan the fix precisely."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:54:46.554Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2450, \"limit\": 100}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:54:46.560Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2450→                    self.transient_backoff_sec * self.cfg.transient_retry_multiplier,\n  2451→                )\n  2452→                continue\n  2453→\n  2454→            self.last_transient_retry_attempt = transient_retry_attempt\n  2455→            return session_exit\n  2456→\n  2457→    def reconcile_task_after_run(\n  2458→        self, key: str, worker_exit: int, outcome_file_override: Path | None = None\n  2459→    ) -> None:\n  2460→        now_val = now_ts()\n  2461→        status = \"in_progress\"\n  2462→        summary = \"\"\n  2463→        requires_human_feedback = \"false\"\n  2464→        confidence = \"\"\n  2465→        error = \"\"\n  2466→        outcome_thread_ts = \"\"\n  2467→        outcome_key_mismatch = False\n  2468→        new_projects: List[str] = []\n  2469→\n  2470→        # Per-task outcome file (primary), then legacy shared file (fallback)\n  2471→        per_task_outcome = self._outcome_path_for_task(key)\n  2472→        if outcome_file_override and outcome_file_override.exis"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:54:47.076Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2660, \"limit\": 150}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:54:47.080Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2660→        if mention_text_file and channel_id and re.match(r\"^[0-9]+\\.[0-9]+$\", thread_ts):\n  2661→            thread_msgs = self._fetch_thread_messages(channel_id, thread_ts)\n  2662→            self._store_thread_snapshot(mention_text_file, thread_msgs)\n  2663→\n  2664→        # Delivery guard: if task resolved to \"done\" but thread has no agent\n  2665→        # reply after the latest human message, downgrade to waiting_human.\n  2666→        # This catches cases where Slack MCP was unavailable and the worker\n  2667→        # reported done without actually delivering a response.\n  2668→        #\n  2669→        # Skip when Tribune draft mode is active: the worker intentionally\n  2670→        # writes to a draft file instead of posting to Slack, so absence of\n  2671→        # an agent message in the thread is expected.\n  2672→        tribune_draft_exists = bool(\n  2673→            self.cfg.tribune_max_review_rounds >= 1\n  2674→            and not is_maintenance\n  2675→            and "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:54:50.854Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2800, \"limit\": 50}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:54:50.858Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2800→                    self._sync_consult_to_project(key, slug)\n  2801→\n  2802→        # Maintenance: advance to next phase, or schedule hot restart after final.\n  2803→        # Only act when the phase actually succeeded (landed in finished_tasks).\n  2804→        if is_maintenance and destination == \"finished_tasks\":\n  2805→            phase = self.maintenance.get_phase(merged)\n  2806→            if not self.maintenance.is_final_phase(phase):\n  2807→                if not self.maintenance.advance_phase(key):\n  2808→                    self.log_line(f\"maintenance_advance_failed key={key} phase={phase}\")\n  2809→            else:\n  2810→                self._auto_commit_system_files()\n  2811→                self._restart_requested = True\n  2812→                self.log_line(\"hot_restart_scheduled reason=maintenance_complete\")\n  2813→\n  2814→        # Clean up per-task outcome file after reconciliation.\n  2815→        per_task_outcome = self._outcome_path_for_task(key)\n  2816→        "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:54:51.346Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 1010, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:54:51.349Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  1010→\n  1011→    def slack_api_get(self, method: str, params: Dict[str, str]) -> Dict[str, Any]:\n  1012→        query = urlencode(params)\n  1013→        url = f\"https://slack.com/api/{method}?{query}\"\n  1014→        req = Request(url, headers={\"Authorization\": f\"Bearer {self.slack_token}\"})\n  1015→        return self._slack_request(method, req)\n  1016→\n  1017→    def slack_api_post(self, method: str, payload: Dict[str, Any]) -> Dict[str, Any]:\n  1018→        url = f\"https://slack.com/api/{method}\"\n  1019→        data = json.dumps(payload).encode(\"utf-8\")\n  1020→        req = Request(\n  1021→            url,\n  1022→            data=data,\n  1023→            headers={\n  1024→                \"Authorization\": f\"Bearer {self.slack_token}\",\n  1025→                \"Content-Type\": \"application/json; charset=utf-8\",\n  1026→            },\n  1027→            method=\"POST\",\n  1028→        )\n  1029→        return self._slack_request(method, req)\n  1030→\n  1031→    def _has_agent_delivery(self, thr"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:55:21.679Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Now I have a solid understanding of the code. Let me now read the area between the delivery guard and Tribune gate (around lines 2702-2704) and after the Tribune gate (around 2784-2786) to understand where to place the done notification.\n\nThe key question is: where should the done marker go?\n\n1. **After Tribune review** — the done marker should fire after all review/posting is complete, right before project sync. This ensures:\n   - Tribune draft posting has happened (if applicable)\n   - The task is truly in its final state\n   - We don't send a \"done\" marker for tasks that get revision_requested\n   \n2. **Skip conditions** — I need to skip for non-final maintenance phases, when `final_status` isn't \"done\" (meaning the task got downgraded), and when there's no channel_id or thread_ts to send to.\n\nNow I'm thinking about what form this notification should actually take. I could restore the original text message saying the task is marked done, which directly addresses the user's complaint, though it might feel redundant if the worker already replied substantively. Alternatively, I could use a reaction emoji like a checkmark on the original mention message, which would be less intrusive.\n\nBut the user specifically complained about the text marker disappearing, so they were expecting that explicit signal. A reaction is a different pattern than what they had before, even if it's arguably cleaner. I should probably stick with the text message approach since that's what they relied on. I need to verify the supervisor bot has the right permissions—it should have `reactions:write` since it already uses `chat:write` for posting messages, and if not, the error will be caught. I'm going with the reaction emoji approach as the cleanest solution, but I should also think through what happens if a task gets reopened after being marked done—whether we need to remove the reaction or handle that case differently."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:55:21.714Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now I have a complete understanding. Let me mark the research task done and write the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:55:25.363Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Read codebase to understand current reconciliation flow and removed _notify_task_done\", \"status\": \"completed\", \"activeForm\": \"Reading codebase to understand reconciliation flow\"}, {\"content\": \"Write implementation plan for restoring done marker\", \"status\": \"in_progress\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Run iterative review on the plan\", \"status\": \"pending\", \"activeForm\": \"Running iterative review on plan\"}, {\"content\": \"Implement the fix\", \"stat"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:55:25.365Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:55:28.222Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Let me check if there are any existing tests I should reference for the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:55:29.438Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"notify_task_done|_notify_task|reactions\\\\.add|done_marker\", \"path\": \"/Users/murphy/Research/src/loop/tests\", \"output_mode\": \"content\", \"-C\": 3}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:55:29.466Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No matches found"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:55:33.216Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"reactions\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-C\": 2}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:55:33.231Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No matches found"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:55:36.217Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good — no existing reaction usage in the supervisor. Now let me write the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T22:56:02.289Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Write",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md\", \"content\": \"# FIX-008: Restore Task Completion Visibility\\n\\n## Problem\\n\\nAGENT-022 (2026-03-13) removed `_notify_task_done()` which posted \\\"This task is marked done by me.\\\" in Slack threads. Rationale: workers already communicate results in-thread. Side effect: humans cannot distinguish between \\\"worker posted a reply\\\" and \\\"supervisor has closed the task lifecycle.\\\" Two complaints filed (2026-03-20, 2026-03-21)."
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T22:56:02.318Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "File created successfully at: /Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md"
+      }
+    ]
   }
 ]
