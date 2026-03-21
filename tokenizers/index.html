@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tokenizer Workbench | Murphy</title>
+  <title>Tokenizer Lab | Murphy</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="../assets/site-shell.css">
+  <link rel="stylesheet" href="../showcase/assets/site.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
@@ -109,20 +109,21 @@
       padding: 10px 0 34px;
     }
 
-    .page-header {
+    .tokenizer-site-header {
       position: sticky;
       top: 10px;
       z-index: 12;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: 14px;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: rgba(6, 6, 22, 0.9);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+    }
+
+    .tokenizer-header-foot {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: flex-start;
+    }
+
+    .tokenizer-path-block {
+      display: grid;
+      gap: 6px;
     }
 
     .page-meta {
@@ -1015,7 +1016,7 @@
       padding: 0 0 16px;
     }
 
-    html.embed-showcase .page-header {
+    html.embed-showcase .tokenizer-site-header {
       position: static;
       top: auto;
       margin-top: 0;
@@ -1023,10 +1024,10 @@
       min-height: 0;
     }
 
-    html.embed-showcase .nav-links,
-    html.embed-showcase .murphy-signature,
-    html.embed-showcase .murphy-kicker,
-    html.embed-showcase .subtitle,
+    html.embed-showcase .site-nav-block,
+    html.embed-showcase .site-brand-kicker,
+    html.embed-showcase .site-brand-subtitle,
+    html.embed-showcase .site-header-foot,
     html.embed-showcase .status-note,
     html.embed-showcase .control-intro,
     html.embed-showcase .control-details,
@@ -1648,7 +1649,7 @@
         width: min(100vw - 16px, 100%);
       }
 
-      .page-header,
+      .tokenizer-site-header,
       .card-header,
       .card-body,
       .control-details,
@@ -1661,10 +1662,8 @@
         padding-right: 16px;
       }
 
-      .page-header {
+      .tokenizer-site-header {
         position: static;
-        flex-direction: column;
-        align-items: flex-start;
       }
 
       .header-status {
@@ -1720,13 +1719,8 @@
         min-height: 220px;
       }
 
-      html.embed-showcase .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
       html.embed-showcase .header-status,
-      html.embed-showcase .page-meta {
+      html.embed-showcase .tokenizer-path-block {
         width: 100%;
       }
 
@@ -1751,26 +1745,40 @@
 </head>
 <body>
   <div class="page-shell">
-    <header class="page-header murphy-shell">
-      <div class="page-meta">
-        <div class="murphy-brand">
-          <a class="murphy-signature" href="../" aria-label="Open Murphy's live monitor">Murphy</a>
-          <div class="header-copy murphy-context">
-            <span class="eyebrow murphy-kicker">Agent Monitor public surfaces</span>
-            <h1>Tokenizer Workbench</h1>
-            <p class="subtitle">Murphy's live browser workbench for token boundaries, ids, and serialization.</p>
-          </div>
+    <header class="site-header site-frame tokenizer-site-header">
+      <div class="site-header-main">
+        <div class="site-brand">
+          <span class="site-brand-kicker">Murphy public surface</span>
+          <h1 class="site-brand-name">Murphy</h1>
+          <p class="site-brand-subtitle">Murphy's live tokenizer lab for token boundaries, ids, and serialization across browser-loadable public checkpoints.</p>
         </div>
-        <div class="nav-links murphy-links">
-          <a class="nav-link murphy-link" href="../">Monitor</a>
-          <a class="nav-link murphy-link" href="../roadmap/">Roadmap</a>
-          <a class="nav-link murphy-link" href="../showcase/">Showcase</a>
-          <a class="nav-link murphy-link current" href="./" aria-current="page">Tokenizers</a>
+
+        <div class="site-nav-block">
+          <span class="site-nav-label">Route map</span>
+          <nav class="site-nav" aria-label="Murphy site">
+            <a class="site-link" href="../" data-slot="01">Live monitor</a>
+            <a class="site-link" href="../roadmap/" data-slot="02">Roadmap</a>
+            <a class="site-link" href="../showcase/" data-slot="03">Showcase gallery</a>
+            <a class="site-link" href="./" data-slot="04" aria-current="page">Tokenizer lab</a>
+            <a class="site-link" href="../showcase/res-publica/" data-slot="05">Res Publica</a>
+          </nav>
         </div>
       </div>
-      <div class="header-status">
-        <div class="status-pill" id="model-status">Loading tokenizer</div>
-        <p class="status-note" id="status-note">First load pulls tokenizer assets from Hugging Face, then the browser cache takes over.</p>
+
+      <div class="site-header-foot tokenizer-header-foot">
+        <div class="tokenizer-path-block">
+          <span class="site-path-label">Current surface</span>
+          <div class="site-path">
+            <a href="../">Murphy</a>
+            <span class="site-path-separator">/</span>
+            <span>Tokenizer lab</span>
+          </div>
+        </div>
+
+        <div class="header-status">
+          <div class="status-pill" id="model-status">Loading tokenizer</div>
+          <p class="status-note" id="status-note">First load pulls tokenizer assets from Hugging Face, then the browser cache takes over.</p>
+        </div>
       </div>
     </header>
 

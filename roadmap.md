@@ -1,6 +1,6 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-21 21:31 UTC
+Last updated: 2026-03-21 21:33 UTC
 
 ## Current Status
 
@@ -31,6 +31,8 @@ Status:
 
 ### Activity Log
 
+- 2026-03-21 21:33 UTC — Aligned `/showcase/` and `/showcase/res-publica/` to the same Murphy signature, kicker, and rectangular route-button shell already used by `/tokenizers/`, so the durable public pages no longer read as neighboring mini-sites.
+- 2026-03-21 21:33 UTC — Extended the shell docs with showcase-specific rules: reuse the Murphy wordmark and `Agent Monitor public surfaces` kicker, keep a compact path row on exhibit pages, and keep animation inside the artifact instead of the shared header.
 - 2026-03-21 21:31 UTC — Added a shared Murphy-branded site shell for the durable public routes: `/showcase/`, `/tokenizers/`, and `/showcase/res-publica/` now use the same wordmark, route-button system, and `Agent Monitor public surfaces` kicker so the pages read as one site instead of three unrelated headers.
 - 2026-03-21 21:31 UTC — Captured the new header contract in `docs/site-shell.md`, including the important boundary that `/` and `/roadmap/` are still exporter-owned and therefore cannot adopt the same shell without a root-template change.
 - 2026-03-21 18:01 UTC — Hardened the `/tokenizers/` inline surface after overflow feedback: the token preview now has stricter shrink/wrap rules for long token strings, and the showcase embed republishes its iframe height on resize, font-settle, and other late layout changes so the lower token card does not get clipped.
