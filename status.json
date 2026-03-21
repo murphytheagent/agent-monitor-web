@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T19:42:56Z",
+    "last_updated_utc": "2026-03-21T19:46:08Z",
     "status": "workers_active",
-    "pid": 17147,
-    "loop_count": 5,
+    "pid": 18602,
+    "loop_count": 18,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,8 +16,8 @@
       {
         "slot": 0,
         "task": "1774118740.758569",
-        "started_at": 1774122152,
-        "elapsed_sec": 23
+        "started_at": 1774122257,
+        "elapsed_sec": 111
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.94,
+      "one": 2.09,
       "five": 2.25,
-      "fifteen": 1.93
+      "fifteen": 1.98
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112858488832,
-    "disk_free_bytes": 132248707072,
-    "runner_log_size_bytes": 258665,
+    "disk_used_bytes": 112858890240,
+    "disk_free_bytes": 132248305664,
+    "runner_log_size_bytes": 259284,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T19:44:11Z",
     "local_ips": []
@@ -44,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T19:44:11Z",
+    "checked_at_utc": "2026-03-21T19:46:13Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -67,7 +67,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
+        "utilization_gpu_pct": 5,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -83,7 +83,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 7,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 33873,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,7 +99,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 8,
+        "utilization_gpu_pct": 6,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -115,7 +115,24 @@
     ]
   },
   "tasks": {
-    "queued": {},
+    "queued": {
+      "dev-review-fix-003": {
+        "mention_ts": "dev-review-fix-003",
+        "thread_ts": "dev-review-fix-003",
+        "status": "queued",
+        "task_description": "Development: FIX-003.",
+        "summary": "Development: FIX-003.",
+        "summary_preview": "Development: FIX-003.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774122252.435128",
+        "last_update_ts": "1774122257.117384",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T19:44:12Z"
+        }
+      }
+    },
     "active": {
       "1774118740.758569": {
         "mention_ts": "1774118740.758569",
@@ -126,7 +143,7 @@
         "summary_preview": "Drafted the Slack reply comparing Astro's DAG-style hosted orchestrator with this repo's Slack-thread, disk-backed control loop and updated the task report.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774118740.758569",
-        "last_update_ts": "1774122152.525996",
+        "last_update_ts": "1774122256.638695",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -1407,5 +1424,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T19:44:11Z"
+  "server_time_utc": "2026-03-21T19:46:14Z"
 }
