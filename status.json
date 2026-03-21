@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T20:13:49Z",
+    "last_updated_utc": "2026-03-21T20:15:39Z",
     "status": "sleeping",
     "pid": 30222,
-    "loop_count": 48,
+    "loop_count": 64,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,24 +19,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.91,
-      "five": 1.86,
-      "fifteen": 1.82
+      "one": 2.06,
+      "five": 1.94,
+      "fifteen": 1.85
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112876343296,
-    "disk_free_bytes": 132230852608,
-    "runner_log_size_bytes": 263966,
+    "disk_used_bytes": 112877903872,
+    "disk_free_bytes": 132229292032,
+    "runner_log_size_bytes": 264837,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-21T19:57:32Z",
+    "dashboard_started_utc": "2026-03-21T20:15:45Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T20:13:52Z",
+    "checked_at_utc": "2026-03-21T20:15:45Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +59,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 3,
@@ -75,7 +75,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 7,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -91,7 +91,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 4,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,7 +99,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 10,
+        "utilization_gpu_pct": 9,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -1346,8 +1346,8 @@
       "priority": "Medium",
       "status": "open",
       "task": "Clean up dispatch prompt: remove unnecessary metadata from thread context",
-      "context": "`_task_json_to_text()` formats each message as `[2026-03-21 07:01 UTC (1774076482.886199)",
-      "done_when": "user: U08HX3SH33R",
+      "context": "`_task_json_to_text()` formats each message as `[2026-03-21 07:01 UTC (1774076482.886199) | user: U08HX3SH33R | role: human]` — the raw Slack `ts` in parentheses and raw `user_id` are unnecessary for ",
+      "done_when": "Thread context rendered with human-readable timestamps and resolved usernames only; raw Slack `ts` and `user_id` stripped or moved to non-prompt metadata.",
       "has_plan": false,
       "has_issue": false
     },
@@ -1398,5 +1398,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T20:13:52Z"
+  "server_time_utc": "2026-03-21T20:15:46Z"
 }
