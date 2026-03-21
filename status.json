@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T02:17:54Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-21T02:19:53Z",
+    "status": "workers_active",
     "pid": 38150,
-    "loop_count": 982,
+    "loop_count": 1000,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1774053655.714169",
+        "started_at": 1774059501,
+        "elapsed_sec": 91
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.39,
-      "five": 2.13,
-      "fifteen": 2.0
+      "one": 2.54,
+      "five": 2.24,
+      "fifteen": 2.06
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 114570940416,
-    "disk_free_bytes": 130536255488,
-    "runner_log_size_bytes": 232287,
+    "disk_used_bytes": 114567446528,
+    "disk_free_bytes": 130539749376,
+    "runner_log_size_bytes": 232475,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T00:08:48Z",
     "local_ips": []
@@ -36,14 +44,14 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T02:17:56Z",
+    "checked_at_utc": "2026-03-21T02:19:58Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
         "temperature_c": 36
@@ -51,23 +59,23 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 38
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 7,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 49,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
         "temperature_c": 36
@@ -75,15 +83,15 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 53,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 35
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 35,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
         "temperature_c": 37
@@ -91,24 +99,41 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 18,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 85,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1774053655.714169": {
+        "mention_ts": "1774053655.714169",
+        "thread_ts": "1774053655.714169",
+        "status": "in_progress",
+        "task_description": "Please make a visualization webpage for our current system.",
+        "summary": "Published a new Res Publica architecture exhibit and rebuilt the showcase gallery around it.",
+        "summary_preview": "Published a new Res Publica architecture exhibit and rebuilt the showcase gallery around it.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774053655.714169",
+        "last_update_ts": "1774059501.235196",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T02:17:55Z"
+        }
+      }
+    },
     "incomplete": {
       "1773739092.072639": {
         "mention_ts": "1773739092.072639",
@@ -302,22 +327,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T17:23:10Z"
-        }
-      },
-      "1774053655.714169": {
-        "mention_ts": "1774053655.714169",
-        "thread_ts": "1774053655.714169",
-        "status": "done",
-        "task_description": "Please make a visualization webpage for our current system.",
-        "summary": "Published a new Res Publica architecture exhibit and rebuilt the showcase gallery around it.",
-        "summary_preview": "Published a new Res Publica architecture exhibit and rebuilt the showcase gallery around it.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774053655.714169",
-        "last_update_ts": "1774055239.360293",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T00:40:55Z"
         }
       },
       "1773937658.648909": {
@@ -1071,6 +1080,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T04:27:35Z"
         }
+      },
+      "1771798134.999029": {
+        "mention_ts": "1771798134.999029",
+        "thread_ts": "1771798134.999029",
+        "status": "done",
+        "task_description": "From now on can you always roadmap and memory docs directly as attachment along your system update messages?",
+        "summary": "User confirmed closure condition; uploaded ROADMAP and memory docs as direct thread attachments and posted completion note.",
+        "summary_preview": "User confirmed closure condition; uploaded ROADMAP and memory docs as direct thread attachments and posted completion note.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771798281.830669",
+        "last_update_ts": "1771802404.181108",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-22T22:11:21Z"
+        }
       }
     }
   },
@@ -1084,5 +1109,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T02:17:57Z"
+  "server_time_utc": "2026-03-21T02:19:59Z"
 }
