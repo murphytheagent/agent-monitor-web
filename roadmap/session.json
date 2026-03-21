@@ -1360,5 +1360,503 @@
         "content_preview": "MCP issues detected. Run /mcp list for status."
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:10:23.223Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TaskOutput",
+        "input_preview": "{\"task_id\": \"bnw2gyb4w\", \"block\": true, \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:10:23.225Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<tool_use_error>No task found with ID: bnw2gyb4w</tool_use_error>"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:10:26.601Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /private/tmp/claude-501/-Users-murphy-Research/3fc7f8cb-2d3a-5ab9-9f9f-900a356023e6/tasks/bnw2gyb4w.output 2>/dev/null\", \"description\": \"Read Tribune R2 output directly\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:10:26.638Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "MCP issues detected. Run /mcp list for status."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:10:30.585Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "The Tribune output seems incomplete — it only shows the MCP error message but no JSON output. Let me check the actual stdout separately from stderr."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:10:31.610Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-EBx8Le/tribune-R2-stderr.txt 2>/dev/null | head -5\", \"description\": \"Check Tribune R2 stderr\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:10:31.646Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Keychain initialization encountered an error: Cannot find module '../build/Release/keytar.node'\nRequire stack:\n- /opt/homebrew/Cellar/gemini-cli/0.34.0/libexec/lib/node_modules/@google/gemini-cli/node_modules/keytar/lib/keytar.js\nUsing FileKeychain fallback for secure storage.\nLoaded cached credentials."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:10:49.320Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "The Tribune seems to have produced an empty stdout (only the MCP warning). This might be because the output was just the MCP error line and it went into the background output without the actual JSON. Let me check if the Gemini output is after the MCP line.\n\nActually, looking at the output again: \"MCP issues detected. Run /mcp list for status.\" — that's it. The Tribune didn't produce JSON output. This is a `parse_error` state.\n\nWait, let me reconsider. The background task output file might be buffered. Let me check the full content more carefully.\n\nActually, looking at the task output file content, it says just \"MCP issues detected. Run /mcp list for status.\" — no JSON. This was likely because the Gemini CLI encountered an MCP error and exited without processing the prompt. \n\nThe task completed with exit code 0, but that doesn't mean it actually produced output. Looking back at round 1, Tribune had the same MCP error in stderr yet still generated JSON, so the error itself isn't fatal. Something else is preventing the output from being captured properly—maybe the piping is interfering with how the response gets written to the output file.\n\nLet me retry Tribune in the foreground to see if that helps. But actually, I'm wondering if I even need Tribune's approval right now since Murphy has already flagged a valid reopened finding that I need to address."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:10:56.696Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Tribune produced no JSON output (parse_error). Murphy reopened M-1-1 with M-2-1. Let me verify Murphy's claim about task keys.\n\nCONVERGENCE CHECK: Tribune=parse_error, Murphy=findings (1 reopened), round 2 of 5 → continuing\n\nMurphy claims `key` equals `thread_ts` for threaded replies. This is correct per the code at line 1213. But let me think about whether this is actually a problem:\n\nThe old `_notify_task_done` used `chat.postMessage` with `thread_ts` — posting INTO the thread. A reaction on the thread root message serves the same purpose: it signals the thread's task is done. The thread root is the visible anchor in channel view. This is correct behavior, not a bug.\n\nHowever, Murphy's point about storing the original mention timestamp separately is worth noting for future work. For now, the reaction on the thread root is equivalent to what the old text message did (posted in the thread at `thread_ts`).\n\nLet me update the plan to clarify this and then proceed to implementation. The plan has been through 2 review rounds with substantive feedback incorporated."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:02.109Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md\", \"old_string\": \"This mirrors the skip logic from the removed `_notify_task_done` call site but uses `key` (mention_ts) instead of `thread_ts` as the reaction target.\", \"new_string\": \"Note: `key` is the task's dict key in `active_tasks`. For Slack tasks, this equals `thread_ts` (the thread root) because the supervisor groups all mentions in a thread into one task (line 1213). This means the reaction"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:02.117Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/fix-008-done-marker.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:05.080Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good. The plan is solid. Let me now proceed to implementation."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:08.534Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Read codebase to understand current reconciliation flow and removed _notify_task_done\", \"status\": \"completed\", \"activeForm\": \"Reading codebase to understand reconciliation flow\"}, {\"content\": \"Write implementation plan for restoring done marker\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Run iterative review on the plan\", \"status\": \"completed\", \"activeForm\": \"Running iterative review on plan\"}, {\"content\": \"Implement the fix\", \"stat"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:08.536Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:11.953Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me implement the fix. First, add the `_mark_task_done_reaction` method."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:12.517Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 1025, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:12.521Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  1025→                \"Content-Type\": \"application/json; charset=utf-8\",\n  1026→            },\n  1027→            method=\"POST\",\n  1028→        )\n  1029→        return self._slack_request(method, req)\n  1030→\n  1031→    def _has_agent_delivery(self, thread_msgs: List[Dict[str, str]]) -> bool:\n  1032→        \"\"\"Check if thread has an agent message after the latest human message.\n  1033→\n  1034→        Returns True if the agent posted a substantive reply after the most"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:19.537Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"        return self._slack_request(method, req)\\n\\n    def _has_agent_delivery(self, thread_msgs: List[Dict[str, str]]) -> bool:\", \"new_string\": \"        return self._slack_request(method, req)\\n\\n    def _mark_task_done_reaction(self, channel_id: str, mention_ts: str) -> None:\\n        \\\"\\\"\\\"Add a check-mark reaction to the task's original message to signal completion.\\\"\\\"\\\"\\n        if n"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:19.551Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:23.116Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add the call site after the Tribune review gate."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:23.393Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2798, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:23.406Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2798→                                task_data[\"last_update_ts\"] = now_ts()\n  2799→                                state.setdefault(\"incomplete_tasks\", {})[key] = task_data\n  2800→                                self.save_state(state)\n  2801→                        final_status = \"waiting_human\"\n  2802→                        destination = \"incomplete_tasks\"\n  2803→            else:\n  2804→                # No draft file — worker posted directly (fallback to current behavior)\n  2805→                self.log_line(f\"tribune_no_draft key={key}\")\n  2806→\n  2807→        # Outside state lock: write project tag to task JSON and sync to project JSONs.\n  2808→        # Maintenance tasks review all projects but don't belong to any — skip sync.\n  2809→        all_projects = merged.get(\"project\") if isinstance(merged, dict) else []\n  2810→        if isinstance(all_projects, str):\n  2811→            all_projects = [all_projects] if all_projects else []\n  2812→        if isinstance(all_projects, l"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:30.133Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"        # Outside state lock: write project tag to task JSON and sync to project JSONs.\\n        # Maintenance tasks review all projects but don't belong to any — skip sync.\\n        all_projects = merged.get(\\\"project\\\") if isinstance(merged, dict) else []\", \"new_string\": \"        # Outside state lock: add a check-mark reaction to the original message\\n        # to signal task completion."
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:30.146Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:33.355Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add a test. Let me read the test file to find the right place and understand the test patterns."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:34.657Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"class.*Test.*reconcile|def test.*reconcile\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:34.683Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "1608:    def test_reconcile_reads_per_task_outcome(self):\n1627:    def test_reconcile_falls_back_to_legacy_outcome(self):\n1645:    def test_per_task_outcome_cleaned_up_after_reconcile(self):\n2264:    def test_reconcile_captures_thread_snapshot(self):\n3569:    def test_reconcile_slot_handles_collect_error(self):\n4537:    def test_reconcile_loop_active_overrides_done(self):\n4583:    def test_reconcile_loop_expired_applies_final_status(self):\n4628:    def test_reconcile_loop_expired_waiting_human(self):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:37.704Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 1608, \"limit\": 80}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:37.708Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  1608→    def test_reconcile_reads_per_task_outcome(self):\n  1609→        \"\"\"Outcome at outcomes/<key>.json is read by reconciler.\"\"\"\n  1610→        with tempfile.TemporaryDirectory() as td:\n  1611→            sup = self._sup(td)\n  1612→            key = \"2000.000000\"\n  1613→            self._setup_active_task(sup, key)\n  1614→            # Write outcome to per-task path (not legacy shared file)\n  1615→            outcome_path = sup._outcome_path_for_task(key)\n  1616→            outcome_path.parent.mkdir(parents=True, exist_ok=True)\n  1617→            outcome_path.write_text(json.dumps({\n  1618→                \"mention_ts\": key, \"status\": \"done\",\n  1619→                \"summary\": \"per-task done\", \"completion_confidence\": \"high\",\n  1620→                \"requires_human_feedback\": False,\n  1621→            }))\n  1622→            sup.reconcile_task_after_run(key, 0)\n  1623→            state = sup.load_state()\n  1624→            self.assertIn(key, state[\"finished_tasks\"])\n  1625→          "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:41.854Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me look at the `_setup_active_task` helper and `_sup` helper."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:43.020Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"def _setup_active_task|def _sup\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-A\": 20, \"head_limit\": 50}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:43.032Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "366:    def _sup(self, tmp):\n367-        return _make_supervisor(Path(tmp))\n368-\n369-    def test_creates_schema_when_empty(self):\n370-        with tempfile.TemporaryDirectory() as td:\n371-            sup = self._sup(td)\n372-            sup.ensure_state_schema()\n373-            state = sup.load_state()\n374-            for key in (\"watermark_ts\", \"active_tasks\", \"queued_tasks\",\n375-                         \"incomplete_tasks\", \"finished_tasks\", \"supervisor\"):\n376-                with self.subTest(key=key):\n377-                    self.assertIn(key, state)\n378-\n379-    def test_normalises_tasks_in_all_buckets(self):\n380-        with tempfile.TemporaryDirectory() as td:\n381-            sup = self._sup(td)\n382-            raw_state = _empty_state()\n383-            raw_state[\"queued_tasks\"][\"ts1\"] = {\n384-                \"mention_ts\": \"ts1\",\n385-                \"thread_ts\": \"ts1\",\n386-                \"status\": \"queued\",\n--\n454:    def _sup(self, tmp):\n455-        return _make_supervisor(Path"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:47.382Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"def _setup_active_task\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-A\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:47.397Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "1076:    def _setup_active_task(self, sup, key=\"1000.000000\"):\n1077-        state = _empty_state()\n1078-        state[\"active_tasks\"][key] = _make_task(key, \"in_progress\")\n1079-        sup.save_state(state)\n1080-\n1081-    def _write_outcome(self, sup, outcome: dict):\n1082-        sup.cfg.dispatch_outcome_file.parent.mkdir(parents=True, exist_ok=True)\n1083-        sup.cfg.dispatch_outcome_file.write_text(json.dumps(outcome))\n1084-\n1085-    # -- done with high confidence ------------------------------------------\n1086-\n1087-    def test_done_high_confidence_goes_to_finished(self):\n1088-        with tempfile.TemporaryDirectory() as td:\n1089-            sup = self._sup(td)\n1090-            key = \"1000.000000\"\n1091-            self._setup_active_task(sup, key)\n1092-            self._write_outcome(sup, {\n1093-                \"mention_ts\": key, \"status\": \"done\",\n1094-                \"summary\": \"all good\", \"completion_confidence\": \"high\",\n1095-                \"requires_human_feedback\": False,\n"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:51.145Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me look at `_make_task` and `_make_supervisor` helpers."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:52.403Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"def _make_task|def _make_supervisor\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-A\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:52.426Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "92:def _make_supervisor(tmp: Path, env_overrides: dict | None = None) -> sl.Supervisor:\n93-    \"\"\"Create a Supervisor pointed at tmp with a fresh, isolated config.\"\"\"\n94-    conf_path = _make_conf(tmp)\n95-    saved = {}\n96-    env_patch = {\n97-        \"SLACK_MCP_XOXP_TOKEN\": \"[REDACTED_SECRET]\",\n98-        \"STATE_FILE\": str(tmp / \".agent/runtime/state.json\"),\n99-        \"USER_DIRECTORY_FILE\": str(tmp / \".agent/memory/user_directory.json\"),\n100-        \"RUNNER_LOG\": str(tmp / \".agent/runtime/logs/runner.log\"),\n101-        \"HEARTBEAT_FILE\": str(tmp / \".agent/runtime/heartbeat.json\"),\n102-        \"LAST_SESSION_LOG\": str(tmp / \".agent/runtime/logs/last_session.log\"),\n103-        \"SESSION_TEMPLATE\": str(tmp / \"prompts/session.md\"),\n104-        \"REFLECT_TEMPLATE\": str(tmp / \"prompts/maintenance_reflect.md\"),\n105-        \"RUNTIME_PROMPT_FILE\": str(tmp / \".agent/runtime/dispatch/prompt.md\"),\n106-        \"DISPATCH_TASK_FILE\": str(tmp / \".agent/runtime/dispatch/task.json\"),\n107-        \"DISPATCH_O"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:56.395Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good. Now I understand the test patterns. Let me find the right test class to add the done reaction test. The reconciliation tests are in `TestReconcileOutcome`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:11:57.345Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"class TestReconcile\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:11:57.363Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "1071:class TestReconcileTaskAfterRun(unittest.TestCase):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:12:00.596Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"^class Test\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:12:00.610Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "183:class TestTsToInt(unittest.TestCase):\n207:class TestTsGt(unittest.TestCase):\n219:class TestParseBool(unittest.TestCase):\n232:class TestIsoFromTsFloor(unittest.TestCase):\n243:class TestTimestampUtc(unittest.TestCase):\n252:class TestNowTs(unittest.TestCase):\n266:class TestParseConfDefaults(unittest.TestCase):\n300:class TestConfig(unittest.TestCase):\n332:class TestAtomicWriteJson(unittest.TestCase):\n364:class TestEnsureStateSchema(unittest.TestCase):\n452:class TestNormalizeTask(unittest.TestCase):\n536:class TestSelectNextTask(unittest.TestCase):\n598:class TestClaimTaskForWorker(unittest.TestCase):\n674:class TestSelectAndClaim(unittest.TestCase):\n800:class TestUnclaimTask(unittest.TestCase):\n838:class TestPruneFinishedTasks(unittest.TestCase):\n920:class TestPruneStaleWaitingHumanTasks(unittest.TestCase):\n1021:class TestClassifyFailure(unittest.TestCase):\n1049:class TestErrorPreview(unittest.TestCase):\n1071:class TestReconcileTaskAfterRun(unittest.TestCase):\n1598:class TestPerTaskOutcom"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:12:04.938Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I'll add the test to `TestReconcileTaskAfterRun` since that's where the call site lives. Let me find the end of that class."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:12:05.993Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 1590, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:12:05.997Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  1590→            # Maintenance final phase goes to finished\n  1591→            self.assertIn(key, state[\"finished_tasks\"])\n  1592→\n  1593→\n  1594→# ===========================================================================\n  1595→# 10b. Per-task outcome files\n  1596→# ===========================================================================\n  1597→\n  1598→class TestPerTaskOutcomes(unittest.TestCase):\n  1599→\n  1600→    def _sup(self, tmp):\n  1601→        return _make_supervisor(Path(tmp))\n  1602→\n  1603→    def _setup_active_task(self, sup, key=\"1000.000000\"):\n  1604→        state = _empty_state()"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:12:09.094Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 1560, \"limit\": 35}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:12:09.100Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  1560→            })\n  1561→            # No thread messages fetched (e.g., no Slack token)\n  1562→            with patch.object(sup, \"_fetch_thread_messages\", return_value=[]), \\\n  1563→                 patch.object(sup, \"_store_thread_snapshot\"):\n  1564→                sup.reconcile_task_after_run(key, 0)\n  1565→            state = sup.load_state()\n  1566→            self.assertIn(key, state[\"finished_tasks\"])\n  1567→\n  1568→    def test_delivery_guard_skipped_for_maintenance(self):\n  1569→        \"\"\"Maintenance tasks skip delivery guard even without agent reply.\"\"\"\n  1570→        with tempfile.TemporaryDirectory() as td:\n  1571→            sup = self._sup(td)\n  1572→            key = \"1000.000000\"\n  1573→            state = _empty_state()\n  1574→            task = _make_task(key, \"in_progress\", \"maintenance\", maintenance_phase=1)\n  1575→            state[\"active_tasks\"][key] = task\n  1576→            sup.save_state(state)\n  1577→            self._write_outcome(sup, {\n  1578→       "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:12:12.360Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now I'll add the test right before the `TestPerTaskOutcomes` class."
+      }
+    ]
   }
 ]
