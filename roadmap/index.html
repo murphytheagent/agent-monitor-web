@@ -136,6 +136,38 @@
   .dispatch-btn.error { border-color: var(--bad); color: var(--bad); }
 
   .empty { color: var(--text-dim); font-size: 13px; padding: 20px 0; text-align: center; }
+
+  /* Session log viewer */
+  .session-panel {
+    display: none; margin-top: 8px; border: 1px solid rgba(56,240,255,0.2);
+    max-height: 600px; overflow-y: auto; background: #050510;
+  }
+  .session-panel.open { display: block; }
+  .session-entry { padding: 8px 12px; border-bottom: 1px solid rgba(56,240,255,0.05); }
+  .session-entry.role-assistant { border-left: 2px solid var(--brand); }
+  .session-entry.role-user { border-left: 2px solid var(--text-dim); opacity: 0.7; }
+  .session-ts { font-size: 10px; color: var(--text-dim); font-family: "JetBrains Mono", monospace; }
+  .session-block { margin: 4px 0; }
+  .session-text { font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+  .session-tool { font-size: 12px; }
+  .session-tool-name { color: var(--brand); font-weight: 600; font-family: "JetBrains Mono", monospace; }
+  .session-tool-input { color: var(--text-muted); font-size: 11px; white-space: pre-wrap; word-break: break-word;
+    max-height: 150px; overflow-y: auto; margin-top: 2px; }
+  .session-result { font-size: 11px; color: var(--text-muted); white-space: pre-wrap; word-break: break-word;
+    max-height: 200px; overflow-y: auto; border-left: 2px solid var(--text-dim); padding-left: 8px; margin: 4px 0; }
+  .session-thinking { cursor: pointer; }
+  .session-thinking-label { font-size: 11px; color: var(--brand-alt); font-style: italic; }
+  .session-thinking-body { display: none; font-size: 11px; color: var(--text-dim); white-space: pre-wrap;
+    word-break: break-word; max-height: 300px; overflow-y: auto; margin-top: 2px; }
+  .session-thinking.open .session-thinking-body { display: block; }
+  .session-toolbar { display: flex; gap: 6px; padding: 6px 12px; border-bottom: 1px solid rgba(56,240,255,0.1);
+    background: #0a0a1a; position: sticky; top: 0; z-index: 1; }
+  .view-session-btn {
+    padding: 2px 8px; border: 1px solid rgba(255,47,179,0.4); background: none;
+    color: var(--brand-alt); font-size: 10px; font-weight: 600; cursor: pointer;
+    font-family: "Rajdhani", sans-serif;
+  }
+  .view-session-btn:hover { border-color: var(--brand-alt); }
 </style>
 </head>
 <body>
@@ -277,7 +309,9 @@ function renderRoadmap() {
           '<span' + priClass + '>' + esc(item.priority) + '</span>' +
           '<span>' + esc(item.created) + '</span>' +
           badges +
+          (isActive ? '<button class="view-session-btn" data-session="' + esc(item.id) + '">View Session</button>' : '') +
         '</div>' +
+        (isActive ? '<div class="session-panel" id="session-' + esc(item.id) + '"></div>' : '') +
       '</div>';
     }).join('') + '</div>';
   }
@@ -317,6 +351,68 @@ function renderRoadmap() {
     if (btn && !btn.disabled) dispatchItem(btn.dataset.dispatch);
   });
 }
+
+function toggleSession(itemId) {
+  var panel = document.getElementById('session-' + itemId);
+  if (!panel) return;
+  if (panel.classList.contains('open')) {
+    panel.classList.remove('open');
+    return;
+  }
+  panel.innerHTML = '<div style="padding:12px;color:var(--text-muted)">Loading session...</div>';
+  panel.classList.add('open');
+  fetch('session.json?_ts=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(entries) {
+      if (!entries || !entries.length) {
+        panel.innerHTML = '<div style="padding:12px;color:var(--text-dim)">No session data</div>';
+        return;
+      }
+      var html = '<div class="session-toolbar">' +
+        '<button class="view-session-btn" data-session="' + esc(itemId) + '">↻ Refresh</button>' +
+        '<span style="color:var(--text-dim);font-size:10px">' + entries.length + ' messages</span>' +
+        '</div>';
+      html += entries.map(function(entry) {
+        var roleClass = 'role-' + entry.role;
+        var ts = entry.timestamp ? entry.timestamp.replace('T', ' ').replace(/\.\d+Z$/, 'Z') : '';
+        var blocksHtml = (entry.blocks || []).map(function(b) {
+          if (b.type === 'text') {
+            return '<div class="session-block session-text">' + esc(b.content) + '</div>';
+          } else if (b.type === 'tool_use') {
+            return '<div class="session-block session-tool">' +
+              '<span class="session-tool-name">⚙ ' + esc(b.tool) + '</span>' +
+              '<div class="session-tool-input">' + esc(b.input_preview) + '</div>' +
+            '</div>';
+          } else if (b.type === 'tool_result') {
+            return '<div class="session-block session-result">' + esc(b.content_preview) + '</div>';
+          } else if (b.type === 'thinking') {
+            var tid = 'think-' + Math.random().toString(36).substr(2, 6);
+            return '<div class="session-block session-thinking" data-toggle-thinking="1">' +
+              '<span class="session-thinking-label">▸ thinking (' + b.content.length + ' chars)</span>' +
+              '<div class="session-thinking-body">' + esc(b.content) + '</div>' +
+            '</div>';
+          }
+          return '';
+        }).join('');
+        return '<div class="session-entry ' + roleClass + '">' +
+          '<div class="session-ts">' + esc(ts) + '</div>' +
+          blocksHtml +
+        '</div>';
+      }).join('');
+      panel.innerHTML = html;
+      panel.scrollTop = panel.scrollHeight;
+    })
+    .catch(function(err) {
+      panel.innerHTML = '<div style="padding:12px;color:var(--bad)">Error loading session: ' + esc(err.message) + '</div>';
+    });
+}
+
+document.querySelector('main').addEventListener('click', function(e) {
+  var btn = e.target.closest('[data-session]');
+  if (btn) toggleSession(btn.dataset.session);
+  var thinking = e.target.closest('[data-toggle-thinking]');
+  if (thinking) thinking.classList.toggle('open');
+});
 
 loadSettings();
 renderRoadmap();

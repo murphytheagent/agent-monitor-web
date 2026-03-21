@@ -1,6 +1,6 @@
 # Shared Site Shell
 
-The durable public pages under `agent-monitor-web` now share a Murphy-branded header shell.
+The public pages under `agent-monitor-web` now share a Murphy-branded header shell.
 
 ## What stays consistent
 
@@ -14,15 +14,18 @@ The durable public pages under `agent-monitor-web` now share a Murphy-branded he
 
 The shared shell currently covers:
 
+- `/`
+- `/roadmap/`
 - `/showcase/`
 - `/tokenizers/`
 - `/showcase/res-publica/`
 
-## Important boundary
+## Ownership boundary
 
-The monitor root `/` and the roadmap page `/roadmap/` are still exporter-owned outputs generated from `src/loop/monitor/dashboard.py`. Matching those routes to the shared shell requires a root-template change, not another project-side HTML patch.
+The root dashboard `/` and the roadmap page `/roadmap/` still come from exporter-owned output in `src/loop/monitor/dashboard.py`, while the showcase/exhibit pages remain hand-maintained project files. The important rule is unchanged: durable design changes for the root surfaces must land in the exporter source, not as one-off HTML edits in the generated output.
 
 ## Implementation notes
 
-- `assets/site-shell.css` owns the Murphy signature wordmark and the shared route-button treatment used across durable public pages.
+- `assets/site-shell.css` owns the Murphy signature wordmark and the shared route-button treatment used across the hand-maintained public pages.
 - `showcase/assets/site.css` imports that shell and carries the common showcase page chrome so the gallery and exhibit pages stay aligned with `tokenizers/`.
+- `src/loop/monitor/dashboard.py` now renders the same Murphy shell for `/` and `/roadmap/`, including the shared five-route navigation map and the roadmap/dashboard visual system.

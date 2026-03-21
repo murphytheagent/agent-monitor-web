@@ -12,12 +12,13 @@ python3 -m src.loop.monitor.dashboard --once --export-static-dir projects/agent-
 
 Hosted routes:
 
-- `/` - live agent monitor snapshot. This root surface is publisher-owned: each snapshot refresh rewrites `index.html` and `status.json`.
+- `/` - live agent monitor snapshot. This root surface is publisher-owned: each snapshot refresh rewrites `index.html` and `status.json`, and the exporter now renders the same Murphy shell used by the showcase-side routes.
+- `/roadmap/` - exporter-backed planning surface with the shared Murphy shell, roadmap-specific hero/stat layout, and the same route navigation used across the rest of the site.
 - `/showcase/` - viewer-first landing page for polished browser surfaces. It now treats the tokenizer and `Res Publica` as two clearly separated exhibits inside the same Murphy-branded site shell: a minimal live tokenizer slice first, and the architecture piece in its own gallery lane with a direct exhibit CTA.
 - `/showcase/res-publica/` - architecture exhibit for the Worker / Developer / Tribune split, presented as a public-facing art page rather than an internal system diagram, while reusing the same Murphy site shell as the gallery and tokenizer workbench.
 - `/tokenizers/` - interactive tokenizer visualizer page for expanded public text-model families, including full Qwen ladders and local Kimi support.
 
-If you want a permanent custom page or navigation outside the live monitor cards, add it under a subroute such as `showcase/` or `tokenizers/`; a manual root-homepage patch will be overwritten by the next snapshot export.
+If you want a permanent custom page or navigation outside the existing exporter-backed shell, add it under a subroute such as `showcase/` or `tokenizers/`; a manual root-homepage patch will still be overwritten by the next snapshot export unless the exporter template itself changes.
 
 Additional hosted tool details:
 
