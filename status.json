@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T07:28:37Z",
+    "last_updated_utc": "2026-03-21T07:30:39Z",
     "status": "workers_active",
     "pid": 38150,
-    "loop_count": 2627,
+    "loop_count": 2646,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,13 @@
         "slot": 0,
         "task": "1773701002.020259",
         "started_at": 1774076497,
-        "elapsed_sec": 1620
+        "elapsed_sec": 1742
+      },
+      {
+        "slot": 1,
+        "task": "1774078137.264779",
+        "started_at": 1774078168,
+        "elapsed_sec": 70
       }
     ]
   },
@@ -27,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.62,
-      "five": 2.45,
-      "fifteen": 2.58
+      "one": 2.12,
+      "five": 2.29,
+      "fifteen": 2.49
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 115227267072,
-    "disk_free_bytes": 129879928832,
-    "runner_log_size_bytes": 234868,
+    "disk_used_bytes": 115227557888,
+    "disk_free_bytes": 129879638016,
+    "runner_log_size_bytes": 235004,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T02:45:53Z",
     "local_ips": []
@@ -44,7 +50,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T07:28:38Z",
+    "checked_at_utc": "2026-03-21T07:30:42Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -94,7 +100,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 39
       },
       {
         "index": 6,
@@ -131,6 +137,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T07:01:22Z"
+        }
+      },
+      "1774078137.264779": {
+        "mention_ts": "1774078137.264779",
+        "thread_ts": "1774078137.264779",
+        "status": "in_progress",
+        "task_description": "Let's work on something ambitious.",
+        "summary": "Let's work on something ambitious.",
+        "summary_preview": "Let's work on something ambitious.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774078137.264779",
+        "last_update_ts": "1774078168.469187",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T07:28:57Z"
         }
       }
     },
@@ -1093,5 +1115,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T07:28:40Z"
+  "server_time_utc": "2026-03-21T07:30:43Z"
 }
