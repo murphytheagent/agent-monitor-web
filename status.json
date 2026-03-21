@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T15:09:51Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-21T15:11:49Z",
+    "status": "workers_active",
     "pid": 38150,
-    "loop_count": 1862,
+    "loop_count": 1879,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1774103566.709609",
+        "started_at": 1774105808,
+        "elapsed_sec": 100
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.83,
-      "five": 1.8,
-      "fifteen": 1.75
+      "one": 2.04,
+      "five": 1.85,
+      "fifteen": 1.77
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112164421632,
-    "disk_free_bytes": 132942774272,
-    "runner_log_size_bytes": 240371,
+    "disk_used_bytes": 112164605952,
+    "disk_free_bytes": 132942589952,
+    "runner_log_size_bytes": 240511,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T11:35:20Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T15:09:52Z",
+    "checked_at_utc": "2026-03-21T15:11:54Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -83,8 +91,8 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 74,
-        "memory_used_mb": 80123,
+        "utilization_gpu_pct": 73,
+        "memory_used_mb": 80015,
         "memory_total_mb": 97887,
         "temperature_c": 51
       },
@@ -92,23 +100,40 @@
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 99,
-        "memory_used_mb": 89625,
+        "memory_used_mb": 91183,
         "memory_total_mb": 97887,
-        "temperature_c": 63
+        "temperature_c": 64
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 97,
-        "memory_used_mb": 86989,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 97055,
         "memory_total_mb": 97887,
-        "temperature_c": 64
+        "temperature_c": 63
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1774103566.709609": {
+        "mention_ts": "1774103566.709609",
+        "thread_ts": "1774103566.709609",
+        "status": "in_progress",
+        "task_description": "How's your tribune implemented?",
+        "summary": "Explained the Tribune review gate architecture and current behavior.",
+        "summary_preview": "Explained the Tribune review gate architecture and current behavior.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774103566.709609",
+        "last_update_ts": "1774105807.895957",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T14:32:46Z"
+        }
+      }
+    },
     "incomplete": {
       "1773899776.033029": {
         "mention_ts": "1773899776.033029",
@@ -284,22 +309,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T07:28:57Z"
-        }
-      },
-      "1774103566.709609": {
-        "mention_ts": "1774103566.709609",
-        "thread_ts": "1774103566.709609",
-        "status": "waiting_human",
-        "task_description": "How's your tribune implemented?",
-        "summary": "Explained the Tribune review gate architecture and current behavior.",
-        "summary_preview": "Explained the Tribune review gate architecture and current behavior.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774103566.709609",
-        "last_update_ts": "1774103772.606390",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T14:32:46Z"
         }
       }
     },
@@ -1116,5 +1125,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T15:09:53Z"
+  "server_time_utc": "2026-03-21T15:11:55Z"
 }
