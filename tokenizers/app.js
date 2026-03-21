@@ -504,18 +504,27 @@ const state = {
 };
 
 const refs = {};
+const VIEW = readViewConfig();
+
+if (VIEW.embed) {
+  document.documentElement.classList.add('embed-showcase');
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   captureRefs();
   populateLineOptions();
-  populateFamilyOptions();
-  populateModelOptions();
+  applyInitialSelection();
+  applyInitialInput();
   renderModelMeta();
   renderUnsupportedLineup();
   renderModelLineup();
-  updateModeCopy();
+  setMode(VIEW.mode);
   bindEvents();
   retokenize();
+  if (VIEW.embed) {
+    window.addEventListener('resize', publishEmbedHeight);
+    publishEmbedHeight();
+  }
 });
 
 function captureRefs() {
@@ -713,6 +722,40 @@ function populateLineOptions() {
   refs.lineSelect.value = LINES[0]?.id || '';
 }
 
+function applyInitialSelection() {
+  if (VIEW.model && MODEL_MAP[VIEW.model]) {
+    const model = MODEL_MAP[VIEW.model];
+    refs.lineSelect.value = model.lineId;
+    populateFamilyOptions(false);
+    refs.familySelect.value = model.familyId;
+    populateModelOptions(false);
+    refs.modelSelect.value = model.id;
+    return;
+  }
+
+  if (VIEW.family && FAMILY_MAP[VIEW.family]) {
+    const family = FAMILY_MAP[VIEW.family];
+    refs.lineSelect.value = family.lineId;
+    populateFamilyOptions(false);
+    refs.familySelect.value = family.id;
+    populateModelOptions(false);
+    return;
+  }
+
+  if (VIEW.line && LINE_MAP[VIEW.line]) {
+    refs.lineSelect.value = VIEW.line;
+  }
+
+  populateFamilyOptions(false);
+  populateModelOptions(false);
+}
+
+function applyInitialInput() {
+  if (VIEW.text) {
+    refs.inputText.value = VIEW.text;
+  }
+}
+
 function populateFamilyOptions(preserveCurrent = true) {
   const previousValue = refs.familySelect.value;
   refs.familySelect.innerHTML = '';
@@ -901,6 +944,7 @@ function setMode(mode) {
   refs.systemField.classList.toggle('hidden', plain);
   refs.generationToggle.classList.toggle('hidden', plain);
   updateModeCopy();
+  publishEmbedHeight();
 }
 
 function updateModeCopy(payload = state.lastPayload) {
@@ -1155,6 +1199,7 @@ function renderPayload(payload) {
   renderTokenStream(payload.rows);
   renderTable(payload.rows);
   refreshFocusState(false);
+  publishEmbedHeight();
 }
 
 function renderSurface() {
@@ -1320,6 +1365,7 @@ function renderError(error) {
   refs.tokenStream.innerHTML = '<p class="empty-state">The tokenizer did not load. Open the browser console for the precise stack trace.</p>';
   refs.tokenTable.innerHTML = '';
   renderInspector(null);
+  publishEmbedHeight();
 }
 
 function setBusyUi(isBusy) {
@@ -1575,6 +1621,36 @@ function visualTokenPiece(text) {
     .replace(/\n/g, '↵\n')
     .replace(/\t/g, '⇥')
     .replace(/\r/g, '␍');
+}
+
+function readViewConfig() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    embed: params.get('embed') === 'showcase',
+    line: params.get('line') || '',
+    family: params.get('family') || '',
+    model: params.get('model') || '',
+    mode: params.get('mode') === 'chat' ? 'chat' : 'plain',
+    text: params.get('text') || '',
+  };
+}
+
+function publishEmbedHeight() {
+  if (!VIEW.embed || window.parent === window) {
+    return;
+  }
+
+  window.requestAnimationFrame(() => {
+    const height = Math.max(
+      document.documentElement.scrollHeight,
+      document.body?.scrollHeight ?? 0,
+    );
+
+    window.parent.postMessage({
+      type: 'tokenizer-embed-height',
+      height,
+    }, window.location.origin);
+  });
 }
 
 async function copyTokenIds() {

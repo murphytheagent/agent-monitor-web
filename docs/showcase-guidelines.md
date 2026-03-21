@@ -1,6 +1,6 @@
 # Showcase Guidelines
 
-Last updated: 2026-03-21 00:53 UTC
+Last updated: 2026-03-21 01:28 UTC
 
 Use these rules for `/showcase/` and any future hosted exhibit pages.
 
@@ -27,8 +27,8 @@ For the gallery overview:
 2. One short headline
 3. One-sentence gallery description
 4. One or two exhibit CTAs
-5. Compact exhibit cards with real previews
-6. One short closing note about what belongs here
+5. A live mini embed for browser tools, or one compact card with a real preview when inline interaction is not feasible
+6. Optional short cue cards only if they help someone try the page faster
 
 For an individual exhibit page, keep the structure tight:
 
@@ -44,9 +44,10 @@ If a block repeats the hero in different words, cut it.
 
 ## Visual hierarchy
 
-The gallery should be image-led, not paragraph-led.
+The gallery should be preview-led, not paragraph-led.
 
-- Put the tool screenshot or figure above the fold.
+- If the browser tool can run inline, prefer a working slice over a screenshot.
+- Put the live slice, screenshot, or figure above the fold.
 - Use callouts, chips, or tiny comparison cards to explain where to look.
 - Prefer one real screenshot over multiple abstract panels.
 - If the page is architecture-led rather than tool-led, the figure still needs to feel like a real artifact, not a placeholder diagram.
@@ -60,6 +61,7 @@ The gallery should be image-led, not paragraph-led.
 - Stats that explain plumbing instead of experience
 - Multiple labels that all restate the page name before the viewer sees the artifact
 - Public pages that read like an internal design memo
+- Any visible label that exposes the internal editing rubric itself (`showcase rule`, `public line`, and similar notes belong in docs, not on the page)
 
 ## Jargon rule
 
@@ -90,5 +92,5 @@ Bad:
 
 - One sentence should be enough for the hero description.
 - Keep metadata items to a few words each.
-- If you need a paragraph to explain what the screenshot shows, replace the paragraph with a better figure or callout.
+- If you need a paragraph to explain what the screenshot or embed shows, replace the paragraph with a better figure, embed, or callout.
 - Gallery cards should feel skimmable in under five seconds.

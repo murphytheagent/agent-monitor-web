@@ -6,27 +6,22 @@
   <title>Showcase | Agent Monitor</title>
   <link rel="icon" href="data:,">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
     :root {
-      --bg: #051119;
-      --bg-deep: #02070c;
-      --panel: rgba(8, 18, 27, 0.84);
-      --panel-strong: rgba(10, 24, 35, 0.92);
-      --panel-soft: rgba(14, 31, 43, 0.72);
-      --line: rgba(98, 225, 201, 0.2);
-      --line-strong: rgba(242, 198, 109, 0.28);
-      --text: #f4f2eb;
-      --muted: #b5c2c7;
-      --dim: #748892;
-      --teal: #62e1c9;
-      --gold: #f2c66d;
-      --copper: #d6684b;
-      --shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
-      --radius-xl: 34px;
-      --radius-lg: 26px;
-      --radius-md: 18px;
-      --page-width: min(1340px, calc(100vw - 28px));
+      --bg: #04020b;
+      --bg-panel: rgba(8, 11, 28, 0.9);
+      --bg-panel-strong: rgba(10, 15, 34, 0.96);
+      --border: rgba(56, 240, 255, 0.32);
+      --border-strong: rgba(255, 47, 179, 0.54);
+      --text: #ecf9ff;
+      --muted: #97a9cf;
+      --dim: #6b79a9;
+      --accent: #38f0ff;
+      --accent-2: #ff2fb3;
+      --gold: #ffe66a;
+      --shadow: 0 24px 48px rgba(2, 5, 22, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      --page-width: min(1320px, calc(100vw - 28px));
     }
 
     * {
@@ -41,13 +36,14 @@
       margin: 0;
       min-height: 100vh;
       color: var(--text);
-      font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+      font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 12% 16%, rgba(98, 225, 201, 0.18) 0%, transparent 28%),
-        radial-gradient(circle at 88% 8%, rgba(214, 104, 75, 0.16) 0%, transparent 30%),
-        radial-gradient(circle at 50% 100%, rgba(242, 198, 109, 0.12) 0%, transparent 38%),
-        linear-gradient(160deg, #030910 0%, #071019 38%, #0c1823 100%);
+        radial-gradient(circle at 12% 10%, rgba(56, 240, 255, 0.18) 0%, transparent 28%),
+        radial-gradient(circle at 88% 4%, rgba(255, 47, 179, 0.18) 0%, transparent 32%),
+        radial-gradient(circle at 50% 120%, rgba(255, 230, 106, 0.12) 0%, transparent 40%),
+        linear-gradient(145deg, #04020b 0%, #09031a 46%, #12071f 100%);
       overflow-x: hidden;
+      position: relative;
     }
 
     body::before {
@@ -57,20 +53,20 @@
       pointer-events: none;
       background:
         repeating-linear-gradient(
-          to right,
-          rgba(255, 255, 255, 0.03) 0,
-          rgba(255, 255, 255, 0.03) 1px,
+          to bottom,
+          rgba(96, 128, 255, 0.08) 0,
+          rgba(96, 128, 255, 0.08) 1px,
           transparent 1px,
-          transparent 96px
+          transparent 5px
         ),
         repeating-linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0.02) 0,
-          rgba(255, 255, 255, 0.02) 1px,
+          to right,
+          rgba(56, 240, 255, 0.04) 0,
+          rgba(56, 240, 255, 0.04) 1px,
           transparent 1px,
-          transparent 10px
+          transparent 64px
         );
-      opacity: 0.26;
+      opacity: 0.3;
     }
 
     a {
@@ -78,27 +74,18 @@
       text-decoration: none;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
     .page-shell {
       position: relative;
       z-index: 1;
       width: var(--page-width);
       margin: 0 auto;
-      padding: 18px 0 56px;
+      padding: 12px 0 36px;
     }
 
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 18%, transparent 100%),
-        linear-gradient(180deg, rgba(6, 16, 24, 0.92) 0%, rgba(10, 21, 31, 0.9) 100%);
+    .frame {
+      border: 2px solid var(--border);
+      background: linear-gradient(145deg, rgba(10, 11, 31, 0.96) 0%, rgba(8, 16, 38, 0.92) 100%);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
     }
 
     .topbar {
@@ -106,38 +93,43 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 15px 18px;
+      padding: 12px 14px;
     }
 
     .brand {
       display: grid;
-      gap: 4px;
+      gap: 2px;
       min-width: 0;
     }
 
     .eyebrow,
-    .card-label,
-    .meta-pill,
-    .note-label {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 11px;
-      font-weight: 600;
+    .chip,
+    .cue-label,
+    .frame-label {
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     .eyebrow,
-    .note-label {
-      color: var(--teal);
+    .frame-label {
+      color: var(--accent);
+    }
+
+    .brand h1,
+    .hero h2 {
+      margin: 0;
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(56, 240, 255, 0.26), 0 0 10px rgba(255, 47, 179, 0.2);
     }
 
     .brand h1 {
-      margin: 0;
-      font-family: "Cinzel", serif;
-      font-size: 18px;
+      font-size: 21px;
       line-height: 1;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .brand p {
@@ -148,8 +140,8 @@
 
     .topbar-links,
     .hero-actions,
-    .card-actions,
-    .meta-row {
+    .hero-meta,
+    .cue-grid {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
@@ -160,433 +152,305 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 42px;
-      padding: 0 15px;
-      border: 1px solid rgba(98, 225, 201, 0.2);
-      border-radius: 999px;
-      background: rgba(7, 15, 23, 0.78);
-      color: var(--muted);
-      font-family: "IBM Plex Mono", monospace;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      background: rgba(6, 12, 28, 0.92);
+      color: var(--text);
+      font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
     }
 
     .nav-link:hover,
-    .action-link:hover,
-    .exhibit-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(242, 198, 109, 0.32);
-      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.22);
+    .action-link:hover {
+      transform: translate(-2px, -2px);
+      border-color: var(--border-strong);
+      box-shadow: 6px 6px 0 rgba(255, 47, 179, 0.18);
     }
 
     .action-link.primary {
-      border-color: rgba(242, 198, 109, 0.32);
-      background: linear-gradient(120deg, rgba(19, 41, 47, 0.96) 0%, rgba(47, 25, 17, 0.94) 100%);
-      color: var(--text);
+      background: linear-gradient(90deg, rgba(16, 37, 70, 0.96) 0%, rgba(61, 17, 70, 0.9) 100%);
     }
 
     main {
       display: grid;
-      gap: 24px;
-      margin-top: 22px;
+      gap: 14px;
+      margin-top: 14px;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
-      gap: 24px;
-      padding: clamp(22px, 3vw, 34px);
-      overflow: hidden;
-    }
-
-    .hero-copy,
-    .hero-side,
-    .gallery-grid,
-    .bottom-note {
-      animation: rise-in 520ms ease both;
+      grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+      gap: 18px;
+      padding: 18px;
+      align-items: start;
     }
 
     .hero-copy {
       display: grid;
-      gap: 18px;
-      align-content: start;
+      gap: 14px;
+      max-width: 760px;
     }
 
-    .hero-copy h2,
-    .card-copy h3 {
-      margin: 0;
-      font-family: "Cinzel", serif;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .hero-copy h2 {
-      font-size: clamp(42px, 5.8vw, 74px);
-      line-height: 0.92;
-    }
-
-    .hero-copy p {
-      margin: 0;
-      max-width: 560px;
-      color: var(--muted);
-      font-size: clamp(18px, 2.2vw, 23px);
-      line-height: 1.34;
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 16px;
-      animation-delay: 80ms;
-    }
-
-    .note-panel,
-    .mini-card,
-    .exhibit-card {
-      border: 1px solid rgba(98, 225, 201, 0.14);
-      border-radius: var(--radius-lg);
-      background: rgba(8, 17, 26, 0.72);
-    }
-
-    .note-panel {
-      display: grid;
-      gap: 10px;
-      padding: 20px;
-      min-height: 180px;
-      background:
-        radial-gradient(circle at top right, rgba(242, 198, 109, 0.16) 0%, transparent 38%),
-        rgba(8, 17, 26, 0.76);
-    }
-
-    .note-panel strong {
-      font-family: "Cinzel", serif;
-      font-size: 30px;
-      line-height: 1;
+    .hero h2 {
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 0.9;
       letter-spacing: 0.05em;
-      text-transform: uppercase;
     }
 
-    .note-panel p,
-    .mini-card p,
-    .card-copy p,
-    .bottom-note p {
+    .hero p {
       margin: 0;
+      max-width: 620px;
       color: var(--muted);
-      line-height: 1.48;
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height: 1.22;
     }
 
-    .hero-mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .mini-card {
-      display: grid;
-      gap: 10px;
-      padding: 18px;
-      min-height: 100%;
-    }
-
-    .mini-card strong {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    .meta-pill {
-      align-items: center;
-      display: inline-flex;
-      min-height: 38px;
-      padding: 0 12px;
-      border: 1px solid rgba(98, 225, 201, 0.18);
-      border-radius: 999px;
-      background: rgba(10, 22, 32, 0.76);
-      color: var(--muted);
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-      animation-delay: 140ms;
-    }
-
-    .exhibit-card {
-      display: grid;
-      grid-template-rows: auto 1fr;
-      overflow: hidden;
-      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-    }
-
-    .card-visual {
-      position: relative;
-      min-height: 320px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 24%, transparent 100%),
-        rgba(3, 10, 16, 0.92);
-    }
-
-    .card-visual::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(2, 8, 12, 0) 40%, rgba(2, 8, 12, 0.28) 100%);
-      pointer-events: none;
-    }
-
-    .card-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.01);
-    }
-
-    .featured .card-visual {
-      min-height: 360px;
-    }
-
-    .card-copy {
-      display: grid;
-      gap: 16px;
-      padding: 22px;
-    }
-
-    .card-label {
-      color: var(--teal);
-    }
-
-    .card-copy h3 {
-      font-size: clamp(28px, 4vw, 42px);
-      line-height: 0.96;
-    }
-
-    .card-copy p {
-      font-size: 16px;
-    }
-
-    .chip-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    .hero-meta {
+      gap: 8px;
     }
 
     .chip {
       display: inline-flex;
       align-items: center;
       min-height: 34px;
-      padding: 0 11px;
-      border: 1px solid rgba(242, 198, 109, 0.18);
-      border-radius: 999px;
-      background: rgba(14, 29, 41, 0.74);
+      padding: 0 10px;
+      border: 1px solid rgba(56, 240, 255, 0.22);
+      background: rgba(7, 13, 23, 0.88);
+      color: var(--text);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 10px;
+    }
+
+    .cue-card {
+      display: grid;
+      gap: 4px;
+      padding: 14px;
+      border: 1px solid rgba(56, 240, 255, 0.2);
+      background: rgba(6, 11, 24, 0.9);
+      min-height: 0;
+    }
+
+    .cue-label {
+      color: var(--accent);
+    }
+
+    .cue-card strong {
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .cue-card p {
+      margin: 0;
       color: var(--muted);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 11px;
-      font-weight: 500;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .embed-card {
+      display: grid;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .embed-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--border);
+      background: linear-gradient(90deg, rgba(16, 21, 48, 0.98) 0%, rgba(8, 26, 48, 0.92) 100%);
+    }
+
+    .embed-title {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .embed-title strong {
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
-    .bottom-note {
-      padding: 24px;
-      animation-delay: 220ms;
-    }
-
-    .bottom-note strong {
-      display: block;
-      margin-bottom: 8px;
-      font-family: "Cinzel", serif;
-      font-size: 24px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    footer {
-      margin-top: 18px;
-      color: var(--dim);
+    .embed-title p {
+      margin: 0;
+      color: var(--muted);
       font-size: 13px;
-      text-align: center;
     }
 
-    @keyframes rise-in {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
+    .embed-shell {
+      padding: 12px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 12%, transparent 100%),
+        rgba(5, 9, 20, 0.96);
+    }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    iframe {
+      display: block;
+      width: 100%;
+      min-height: 720px;
+      height: 720px;
+      border: 0;
+      background: transparent;
     }
 
     @media (max-width: 980px) {
-      .hero,
-      .gallery-grid {
+      .hero {
         grid-template-columns: 1fr;
-      }
-
-      .featured .card-visual {
-        min-height: 320px;
       }
     }
 
-    @media (max-width: 680px) {
+    @media (max-width: 720px) {
       .page-shell {
-        width: min(100vw - 20px, var(--page-width));
-        padding-top: 12px;
+        width: min(100vw - 16px, var(--page-width));
+        padding-top: 8px;
+      }
+
+      .topbar,
+      .hero,
+      .embed-shell {
+        padding: 12px;
       }
 
       .topbar {
-        padding: 14px;
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .hero {
-        padding: 20px;
+      .topbar-links {
+        width: 100%;
       }
 
-      .hero-copy h2 {
-        font-size: clamp(34px, 14vw, 52px);
+      .hero h2 {
+        font-size: clamp(28px, 14vw, 44px);
       }
 
-      .hero-copy p {
+      .hero p {
         font-size: 17px;
       }
 
-      .hero-mini-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .card-visual,
-      .featured .card-visual {
-        min-height: 250px;
-      }
-
-      .card-copy {
-        padding: 18px;
-      }
-
-      .card-copy h3 {
-        font-size: 28px;
+      iframe {
+        min-height: 940px;
+        height: 940px;
       }
     }
   </style>
 </head>
 <body>
   <div class="page-shell">
-    <header class="topbar panel">
+    <header class="topbar frame">
       <div class="brand">
         <span class="eyebrow">Agent Monitor</span>
         <h1>Showcase</h1>
-        <p>Public-facing artifacts, not internal diagrams.</p>
+        <p>One browser tool worth trying right now.</p>
       </div>
       <nav class="topbar-links" aria-label="Primary">
         <a class="nav-link" href="../">Live monitor</a>
-        <a class="nav-link" href="../tokenizers/">Tokenizer workbench</a>
+        <a class="nav-link" href="../tokenizers/">Full workbench</a>
       </nav>
     </header>
 
     <main>
-      <section class="hero panel">
+      <section class="hero frame">
         <div class="hero-copy">
-          <span class="eyebrow">Browser Exhibits</span>
-          <h2>Two public surfaces, one system.</h2>
-          <p>The gallery is small on purpose: one exhibit explains the architecture in public, the other lets you touch one of the live browser tools.</p>
+          <span class="eyebrow">Featured browser tool</span>
+          <h2>Paste text. Watch the split change.</h2>
+          <p>A working slice of the tokenizer lab lives below. Swap checkpoints, flip to chat mode, or paste your own text and the token boundaries update live in the browser.</p>
+          <div class="hero-meta" aria-label="Tokenizer highlights">
+            <span class="chip">28 public checkpoints</span>
+            <span class="chip">plain + chat</span>
+            <span class="chip">client-side</span>
+          </div>
           <div class="hero-actions">
-            <a class="action-link primary" href="./res-publica/">Open Res Publica</a>
-            <a class="action-link" href="../tokenizers/">Open tokenizer workbench</a>
-          </div>
-          <div class="meta-row">
-            <span class="meta-pill">2 exhibits</span>
-            <span class="meta-pill">art piece + tool</span>
-            <span class="meta-pill">browser-native</span>
+            <a class="action-link primary" href="../tokenizers/">Open full workbench</a>
+            <a class="action-link" href="../">Back to monitor</a>
           </div>
         </div>
 
-        <div class="hero-side">
-          <div class="note-panel">
-            <span class="note-label">Showcase rule</span>
-            <strong>Lead with what people can see.</strong>
-            <p>The exhibit page sketches the three-role split without opening the whole machine. The workbench page stays practical: paste text, compare tokenization, move on.</p>
+        <div class="hero-side" aria-label="Quick prompts">
+          <div class="cue-card">
+            <span class="cue-label">Try first</span>
+            <strong>English + 中文 + emoji</strong>
+            <p>The mixed sample is loaded so the boundary changes are obvious right away.</p>
           </div>
-
-          <div class="hero-mini-grid">
-            <div class="mini-card">
-              <span class="note-label">New exhibit</span>
-              <strong>Res Publica</strong>
-              <p>A public sketch of Worker, Developer, and Tribune as distinct powers inside one system.</p>
-            </div>
-            <div class="mini-card">
-              <span class="note-label">Live tool</span>
-              <strong>Tokenizer workbench</strong>
-              <p>Compare how open checkpoints split text and wrap chat prompts before you leave the browser.</p>
-            </div>
+          <div class="cue-card">
+            <span class="cue-label">Then</span>
+            <strong>Switch checkpoints</strong>
+            <p>Keep the same prompt and compare how different public models carve it up.</p>
+          </div>
+          <div class="cue-card">
+            <span class="cue-label">Also</span>
+            <strong>Flip to chat mode</strong>
+            <p>See the extra wrapper tokens a model adds before it ever starts answering.</p>
           </div>
         </div>
       </section>
 
-      <section class="gallery-grid" aria-label="Exhibits">
-        <article class="exhibit-card featured">
-          <a href="./res-publica/" aria-label="Open Res Publica architecture exhibit">
-            <div class="card-visual">
-              <img src="./res-publica-preview.png" alt="Preview of the Res Publica three-role architecture exhibit">
-            </div>
-          </a>
-          <div class="card-copy">
-            <span class="card-label">Exhibit 02</span>
-            <h3>Res Publica</h3>
-            <p>An architecture page treated like an art piece: the three-role split becomes a public triangle of action, repair, and judgment instead of a raw internal schematic.</p>
-            <div class="chip-row" aria-label="Res Publica details">
-              <span class="chip">three roles</span>
-              <span class="chip">public abstraction</span>
-              <span class="chip">motion-led</span>
-            </div>
-            <div class="card-actions">
-              <a class="action-link primary" href="./res-publica/">Open exhibit</a>
-              <a class="action-link" href="../">Back to monitor</a>
-            </div>
+      <section class="embed-card frame">
+        <div class="embed-head">
+          <div class="embed-title">
+            <span class="frame-label">Live preview</span>
+            <strong>Tokenizer workbench</strong>
+            <p>The same browser engine as the full route, trimmed down for the showcase page.</p>
           </div>
-        </article>
+          <a class="action-link" href="../tokenizers/">Open full route</a>
+        </div>
 
-        <article class="exhibit-card">
-          <a href="../tokenizers/" aria-label="Open tokenizer workbench">
-            <div class="card-visual">
-              <img src="./tokenizer-workbench-preview.png" alt="Preview of the tokenizer workbench">
-            </div>
-          </a>
-          <div class="card-copy">
-            <span class="card-label">Exhibit 01</span>
-            <h3>Tokenizer Workbench</h3>
-            <p>A hands-on browser tool for comparing token splits, chat wrappers, and checkpoint families across a curated public set of open-source instruct models.</p>
-            <div class="chip-row" aria-label="Tokenizer details">
-              <span class="chip">28 checkpoints</span>
-              <span class="chip">paste your own prompt</span>
-              <span class="chip">text + chat</span>
-            </div>
-            <div class="card-actions">
-              <a class="action-link primary" href="../tokenizers/">Open workbench</a>
-              <a class="action-link" href="./">Stay in showcase</a>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <section class="bottom-note panel">
-        <span class="note-label">Public line</span>
-        <strong>The gallery stays selective.</strong>
-        <p>Each page needs a visible payoff. If a route only makes sense after an internal explanation, it does not belong here yet.</p>
+        <div class="embed-shell">
+          <iframe
+            id="tokenizer-embed"
+            title="Live tokenizer workbench preview"
+            src="../tokenizers/?embed=showcase&amp;model=qwen3.5-4b&amp;text=English%2C%20%E4%B8%AD%E6%96%87%2C%20and%20emoji%20%F0%9F%9A%80%20all%20in%20one%20prompt."
+            allow="clipboard-write"
+            loading="eager"></iframe>
+        </div>
       </section>
     </main>
-
-    <footer>
-      Built as a hand-maintained layer on top of the continuously refreshed monitor root.
-    </footer>
   </div>
+
+  <script>
+    const frame = document.getElementById('tokenizer-embed');
+
+    function applyFrameHeight(height) {
+      if (!height) {
+        return;
+      }
+      frame.style.height = `${Math.max(620, Math.ceil(height))}px`;
+    }
+
+    window.addEventListener('message', (event) => {
+      if (event.origin !== window.location.origin) {
+        return;
+      }
+      if (!event.data || event.data.type !== 'tokenizer-embed-height') {
+        return;
+      }
+      applyFrameHeight(event.data.height);
+    });
+
+    frame.addEventListener('load', () => {
+      try {
+        const height = frame.contentDocument?.documentElement?.scrollHeight;
+        applyFrameHeight(height);
+      } catch (error) {
+        console.error('Unable to size tokenizer embed', error);
+      }
+    });
+  </script>
 </body>
 </html>

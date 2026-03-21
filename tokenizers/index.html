@@ -975,6 +975,129 @@
       word-break: break-word;
     }
 
+    html.embed-showcase body::before,
+    html.embed-showcase body::after {
+      opacity: 0.18;
+    }
+
+    html.embed-showcase .page-shell {
+      width: min(100vw - 24px, 1240px);
+      padding: 0 0 16px;
+    }
+
+    html.embed-showcase .page-header {
+      position: static;
+      top: auto;
+      margin-top: 10px;
+      padding: 10px 12px;
+    }
+
+    html.embed-showcase .nav-links,
+    html.embed-showcase .subtitle,
+    html.embed-showcase .status-note,
+    html.embed-showcase .control-intro,
+    html.embed-showcase .control-details,
+    html.embed-showcase #line-field,
+    html.embed-showcase #family-field,
+    html.embed-showcase #system-field,
+    html.embed-showcase #generation-toggle,
+    html.embed-showcase .interaction-note,
+    html.embed-showcase .input-panel-note,
+    html.embed-showcase .stream-card .card-subtitle,
+    html.embed-showcase .inspector-card,
+    html.embed-showcase .utility-drawer {
+      display: none !important;
+    }
+
+    html.embed-showcase .page-grid {
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    html.embed-showcase .card-header {
+      padding: 8px 12px;
+    }
+
+    html.embed-showcase .card-body {
+      padding: 10px 12px;
+    }
+
+    html.embed-showcase .control-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(210px, 0.78fr);
+      padding: 12px 14px 16px;
+    }
+
+    html.embed-showcase .field-caption {
+      display: none;
+    }
+
+    html.embed-showcase .workspace-grid {
+      --workbench-height: auto;
+      grid-template-columns: minmax(0, 1.16fr) minmax(280px, 0.84fr);
+      gap: 10px;
+    }
+
+    html.embed-showcase .composer-card,
+    html.embed-showcase .stream-card {
+      height: auto;
+    }
+
+    html.embed-showcase .composer-body {
+      padding: 12px;
+    }
+
+    html.embed-showcase .input-panel {
+      padding: 12px;
+      gap: 8px;
+    }
+
+    html.embed-showcase .input-panel-head {
+      gap: 10px;
+    }
+
+    html.embed-showcase .text-input-field textarea {
+      min-height: 160px;
+      font-size: 15px;
+    }
+
+    html.embed-showcase .surface-section {
+      gap: 8px;
+      padding: 10px;
+    }
+
+    html.embed-showcase .surface-preview {
+      min-height: 190px;
+      max-height: 320px;
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    html.embed-showcase .metrics-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    html.embed-showcase .metric-card {
+      min-height: 0;
+      padding: 12px;
+    }
+
+    html.embed-showcase .token-stream {
+      max-height: 420px;
+    }
+
+    html.embed-showcase .token-pill {
+      padding: 8px 10px;
+    }
+
+    html.embed-showcase .example-drawer {
+      padding: 7px 9px;
+    }
+
+    html.embed-showcase .example-list {
+      gap: 6px;
+    }
+
     .inline-token {
       position: relative;
       display: inline;
@@ -1587,21 +1710,21 @@
         </div>
 
         <div class="control-grid">
-          <label class="field step-card">
+          <label class="field step-card" id="line-field">
             <span class="field-step">Step 1</span>
             <span class="field-label">Model line</span>
             <select id="line-select"></select>
             <span class="field-caption" id="line-caption">Choose the broad model line first.</span>
           </label>
 
-          <label class="field step-card">
+          <label class="field step-card" id="family-field">
             <span class="field-step">Step 2</span>
             <span class="field-label">Family / generation</span>
             <select id="family-select"></select>
             <span class="field-caption" id="family-caption">Choose the generation or family inside that line.</span>
           </label>
 
-          <label class="field step-card">
+          <label class="field step-card" id="model-field">
             <span class="field-step">Step 3</span>
             <span class="field-label">Configuration</span>
             <select id="model-select"></select>
