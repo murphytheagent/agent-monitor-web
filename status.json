@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T17:48:56Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-21T17:51:00Z",
+    "status": "workers_active",
     "pid": 38150,
-    "loop_count": 3248,
+    "loop_count": 3266,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773701002.020259",
+        "started_at": 1774115427,
+        "elapsed_sec": 33
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.49,
-      "five": 2.12,
-      "fifteen": 1.92
+      "one": 1.78,
+      "five": 1.99,
+      "fifteen": 1.89
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112192491520,
-    "disk_free_bytes": 132914704384,
-    "runner_log_size_bytes": 243891,
+    "disk_used_bytes": 112194260992,
+    "disk_free_bytes": 132912934912,
+    "runner_log_size_bytes": 244134,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T11:35:20Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T17:49:02Z",
+    "checked_at_utc": "2026-03-21T17:51:04Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +67,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 12,
+        "utilization_gpu_pct": 1,
         "memory_used_mb": 34047,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 3,
@@ -75,7 +83,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 3,
+        "utilization_gpu_pct": 8,
         "memory_used_mb": 33827,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -91,7 +99,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 34047,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,16 +107,33 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 7,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 33827,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "in_progress",
+        "task_description": "Resolve the objective requested in this task thread.",
+        "summary": "Reordered the tokenizer workbench selectors from newest to oldest, made the main route open on Kimi K2.5 by default, and merged the live site update through ag…",
+        "summary_preview": "Reordered the tokenizer workbench selectors from newest to oldest, made the main route open on Kimi K2.5 by default, and merged the live site update through ag…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774076482.886199",
+        "last_update_ts": "1774115426.673004",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T07:01:22Z"
+        }
+      }
+    },
     "incomplete": {
       "1773899776.033029": {
         "mention_ts": "1773899776.033029",
@@ -236,22 +261,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T06:00:38Z"
-        }
-      },
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "waiting_human",
-        "task_description": "Resolve the objective requested in this task thread.",
-        "summary": "Reordered the tokenizer workbench selectors from newest to oldest, made the main route open on Kimi K2.5 by default, and merged the live site update through ag…",
-        "summary_preview": "Reordered the tokenizer workbench selectors from newest to oldest, made the main route open on Kimi K2.5 by default, and merged the live site update through ag…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774076482.886199",
-        "last_update_ts": "1774080934.545803",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T07:01:22Z"
         }
       },
       "1774078137.264779": {
@@ -1116,5 +1125,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T17:49:02Z"
+  "server_time_utc": "2026-03-21T17:51:05Z"
 }
