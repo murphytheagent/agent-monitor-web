@@ -508,6 +508,7 @@ const VIEW = readViewConfig();
 
 if (VIEW.embed) {
   document.documentElement.classList.add('embed-showcase');
+  document.documentElement.dataset.embedMode = VIEW.embed;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1626,7 +1627,7 @@ function visualTokenPiece(text) {
 function readViewConfig() {
   const params = new URLSearchParams(window.location.search);
   return {
-    embed: params.get('embed') === 'showcase',
+    embed: params.get('embed') || '',
     line: params.get('line') || '',
     family: params.get('family') || '',
     model: params.get('model') || '',

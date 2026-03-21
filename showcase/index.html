@@ -9,19 +9,19 @@
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
     :root {
-      --bg: #04020b;
-      --bg-panel: rgba(8, 11, 28, 0.9);
-      --bg-panel-strong: rgba(10, 15, 34, 0.96);
-      --border: rgba(56, 240, 255, 0.32);
-      --border-strong: rgba(255, 47, 179, 0.54);
-      --text: #ecf9ff;
-      --muted: #97a9cf;
-      --dim: #6b79a9;
+      --bg: #03020a;
+      --panel: rgba(8, 12, 30, 0.94);
+      --panel-strong: rgba(10, 15, 34, 0.98);
+      --panel-soft: rgba(8, 12, 26, 0.88);
+      --line: rgba(56, 240, 255, 0.34);
+      --line-strong: rgba(255, 47, 179, 0.56);
+      --text: #eef8ff;
+      --muted: #9badd3;
+      --dim: #6679aa;
       --accent: #38f0ff;
       --accent-2: #ff2fb3;
-      --gold: #ffe66a;
-      --shadow: 0 24px 48px rgba(2, 5, 22, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.04);
-      --page-width: min(1320px, calc(100vw - 28px));
+      --shadow: 10px 10px 0 rgba(255, 47, 179, 0.16), -4px -4px 0 rgba(56, 240, 255, 0.1);
+      --page-width: min(1360px, calc(100vw - 28px));
     }
 
     * {
@@ -39,9 +39,9 @@
       font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
       background:
         radial-gradient(circle at 12% 10%, rgba(56, 240, 255, 0.18) 0%, transparent 28%),
-        radial-gradient(circle at 88% 4%, rgba(255, 47, 179, 0.18) 0%, transparent 32%),
-        radial-gradient(circle at 50% 120%, rgba(255, 230, 106, 0.12) 0%, transparent 40%),
-        linear-gradient(145deg, #04020b 0%, #09031a 46%, #12071f 100%);
+        radial-gradient(circle at 88% 6%, rgba(255, 47, 179, 0.16) 0%, transparent 32%),
+        radial-gradient(circle at 50% 120%, rgba(56, 240, 255, 0.08) 0%, transparent 40%),
+        linear-gradient(155deg, #03020a 0%, #080318 46%, #12061c 100%);
       overflow-x: hidden;
       position: relative;
     }
@@ -54,8 +54,8 @@
       background:
         repeating-linear-gradient(
           to bottom,
-          rgba(96, 128, 255, 0.08) 0,
-          rgba(96, 128, 255, 0.08) 1px,
+          rgba(90, 126, 255, 0.07) 0,
+          rgba(90, 126, 255, 0.07) 1px,
           transparent 1px,
           transparent 5px
         ),
@@ -64,9 +64,9 @@
           rgba(56, 240, 255, 0.04) 0,
           rgba(56, 240, 255, 0.04) 1px,
           transparent 1px,
-          transparent 64px
+          transparent 68px
         );
-      opacity: 0.3;
+      opacity: 0.32;
     }
 
     a {
@@ -84,13 +84,33 @@
       z-index: 1;
       width: var(--page-width);
       margin: 0 auto;
-      padding: 12px 0 36px;
+      padding: 12px 0 40px;
     }
 
     .frame {
-      border: 2px solid var(--border);
+      border: 2px solid var(--line);
       background: linear-gradient(145deg, rgba(10, 11, 31, 0.96) 0%, rgba(8, 16, 38, 0.92) 100%);
       box-shadow: var(--shadow);
+    }
+
+    .topbar,
+    .intro,
+    .exhibit {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topbar::before,
+    .intro::before,
+    .exhibit::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(56, 240, 255, 0) 0%, rgba(56, 240, 255, 0.7) 24%, rgba(255, 47, 179, 0.78) 100%);
+      pointer-events: none;
     }
 
     .topbar {
@@ -98,7 +118,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 12px 14px;
+      padding: 14px 16px;
     }
 
     .brand {
@@ -108,9 +128,10 @@
     }
 
     .eyebrow,
-    .chip,
-    .cue-label,
-    .frame-label {
+    .micro-label,
+    .legend-chip,
+    .meta-chip,
+    .role-chip {
       font-family: "Orbitron", "Rajdhani", sans-serif;
       font-size: 10px;
       font-weight: 700;
@@ -119,16 +140,18 @@
     }
 
     .eyebrow,
-    .frame-label {
+    .micro-label {
       color: var(--accent);
     }
 
     .brand h1,
-    .hero h2 {
+    .intro h2,
+    .exhibit-copy h3,
+    .artifact-copy h4 {
       margin: 0;
       font-family: "Orbitron", "Rajdhani", sans-serif;
       text-transform: uppercase;
-      text-shadow: 0 0 12px rgba(56, 240, 255, 0.26), 0 0 10px rgba(255, 47, 179, 0.2);
+      text-shadow: 0 0 12px rgba(56, 240, 255, 0.26), 0 0 10px rgba(255, 47, 179, 0.18);
     }
 
     .brand h1 {
@@ -137,16 +160,23 @@
       letter-spacing: 0.08em;
     }
 
-    .brand p {
+    .brand p,
+    .intro p,
+    .exhibit-copy p,
+    .artifact-copy p {
       margin: 0;
-      color: var(--dim);
+      color: var(--muted);
+    }
+
+    .brand p {
       font-size: 13px;
     }
 
     .topbar-links,
-    .hero-actions,
-    .hero-meta,
-    .cue-grid {
+    .intro-legend,
+    .exhibit-actions,
+    .meta-row,
+    .role-row {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
@@ -159,7 +189,7 @@
       justify-content: center;
       min-height: 40px;
       padding: 0 14px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
       background: rgba(6, 12, 28, 0.92);
       color: var(--text);
       font-family: "Orbitron", "Rajdhani", sans-serif;
@@ -173,167 +203,218 @@
     .nav-link:hover,
     .action-link:hover {
       transform: translate(-2px, -2px);
-      border-color: var(--border-strong);
+      border-color: var(--line-strong);
       box-shadow: 6px 6px 0 rgba(255, 47, 179, 0.18);
     }
 
     .action-link.primary {
-      background: linear-gradient(90deg, rgba(16, 37, 70, 0.96) 0%, rgba(61, 17, 70, 0.9) 100%);
+      background: linear-gradient(90deg, rgba(16, 38, 74, 0.94) 0%, rgba(63, 16, 70, 0.92) 100%);
     }
 
     main {
       display: grid;
-      gap: 14px;
-      margin-top: 14px;
+      gap: 18px;
+      margin-top: 16px;
     }
 
-    .hero {
+    .intro {
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+      grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
       gap: 18px;
       padding: 18px;
       align-items: start;
     }
 
-    .hero-copy {
+    .intro-copy {
       display: grid;
-      gap: 14px;
+      gap: 10px;
       max-width: 760px;
     }
 
-    .hero h2 {
-      font-size: clamp(34px, 6vw, 64px);
-      line-height: 0.9;
+    .intro h2 {
+      font-size: clamp(28px, 4.4vw, 48px);
+      line-height: 0.96;
       letter-spacing: 0.05em;
     }
 
-    .hero p {
-      margin: 0;
+    .intro p {
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.18;
       max-width: 620px;
-      color: var(--muted);
-      font-size: clamp(18px, 2.2vw, 24px);
-      line-height: 1.22;
     }
 
-    .hero-meta {
+    .intro-legend {
+      justify-content: flex-end;
+      align-content: start;
+    }
+
+    .legend-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 12px;
+      border: 1px solid rgba(56, 240, 255, 0.24);
+      background: rgba(7, 13, 26, 0.88);
+      color: var(--text);
+    }
+
+    .gallery {
+      display: grid;
+      gap: 18px;
+    }
+
+    .exhibit {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    .exhibit-head {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .exhibit-number {
+      display: grid;
+      place-items: center;
+      width: 72px;
+      min-height: 72px;
+      border: 1px solid rgba(56, 240, 255, 0.22);
+      background: rgba(5, 11, 22, 0.9);
+      color: var(--text);
+      font-family: "Orbitron", "JetBrains Mono", monospace;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .exhibit-copy {
+      display: grid;
+      gap: 8px;
+      max-width: 760px;
+    }
+
+    .exhibit-copy h3 {
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 0.94;
+      letter-spacing: 0.05em;
+    }
+
+    .exhibit-copy p {
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.18;
+      max-width: 640px;
+    }
+
+    .meta-row,
+    .role-row {
       gap: 8px;
     }
 
-    .chip {
+    .meta-chip,
+    .role-chip {
       display: inline-flex;
       align-items: center;
       min-height: 34px;
       padding: 0 10px;
       border: 1px solid rgba(56, 240, 255, 0.22);
-      background: rgba(7, 13, 23, 0.88);
+      background: rgba(7, 13, 22, 0.86);
       color: var(--text);
     }
 
-    .hero-side {
+    .role-chip {
+      border-color: rgba(255, 47, 179, 0.22);
+    }
+
+    .artifact-grid {
+      display: grid;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .artifact-grid.tool {
+      grid-template-columns: minmax(240px, 0.36fr) minmax(0, 1fr);
+    }
+
+    .artifact-grid.architecture {
+      grid-template-columns: minmax(0, 1.08fr) minmax(260px, 0.92fr);
+    }
+
+    .artifact-copy {
       display: grid;
       gap: 10px;
+      align-content: start;
+      padding: 16px;
+      border: 1px solid rgba(56, 240, 255, 0.18);
+      background: rgba(6, 11, 24, 0.86);
     }
 
-    .secondary-exhibit {
-      display: grid;
-      gap: 0;
-      border: 1px solid rgba(56, 240, 255, 0.2);
-      background: rgba(6, 11, 24, 0.9);
-      overflow: hidden;
-    }
-
-    .secondary-visual {
-      min-height: 292px;
-      border-bottom: 1px solid rgba(56, 240, 255, 0.2);
-      background: rgba(3, 8, 18, 0.96);
-    }
-
-    .secondary-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .secondary-copy {
-      display: grid;
-      gap: 8px;
-      padding: 14px;
-    }
-
-    .cue-label {
-      color: var(--accent);
-    }
-
-    .secondary-copy strong {
-      font-family: "Orbitron", "Rajdhani", sans-serif;
+    .artifact-copy h4 {
       font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      line-height: 1.02;
+      letter-spacing: 0.08em;
     }
 
-    .secondary-copy p {
-      margin: 0;
-      color: var(--muted);
+    .artifact-copy p {
       font-size: 15px;
-      line-height: 1.25;
+      line-height: 1.34;
     }
 
-    .embed-card {
-      display: grid;
-      gap: 0;
-      overflow: hidden;
-    }
-
-    .embed-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 10px 12px;
-      border-bottom: 2px solid var(--border);
-      background: linear-gradient(90deg, rgba(16, 21, 48, 0.98) 0%, rgba(8, 26, 48, 0.92) 100%);
-    }
-
-    .embed-title {
-      display: grid;
-      gap: 2px;
-      min-width: 0;
-    }
-
-    .embed-title strong {
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .embed-title p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .embed-shell {
-      padding: 12px;
+    .artifact-frame {
+      border: 1px solid rgba(56, 240, 255, 0.2);
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 12%, transparent 100%),
         rgba(5, 9, 20, 0.96);
     }
 
+    .artifact-frame.embed {
+      overflow: hidden;
+    }
+
     iframe {
       display: block;
       width: 100%;
-      min-height: 720px;
-      height: 720px;
+      min-height: 560px;
+      height: 560px;
       border: 0;
       background: transparent;
     }
 
-    @media (max-width: 980px) {
-      .hero {
+    .preview-link {
+      display: block;
+      height: 100%;
+    }
+
+    .preview-link img {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+    }
+
+    .artifact-copy .action-link {
+      width: fit-content;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 1080px) {
+      .artifact-grid.tool,
+      .artifact-grid.architecture {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 940px) {
+      .intro,
+      .exhibit-head {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-legend,
+      .exhibit-actions {
+        justify-content: flex-start;
       }
     }
 
@@ -344,8 +425,8 @@
       }
 
       .topbar,
-      .hero,
-      .embed-shell {
+      .intro,
+      .exhibit {
         padding: 12px;
       }
 
@@ -358,17 +439,19 @@
         width: 100%;
       }
 
-      .hero h2 {
-        font-size: clamp(28px, 14vw, 44px);
-      }
-
-      .hero p {
-        font-size: 17px;
+      .exhibit-number {
+        width: 60px;
+        min-height: 60px;
+        font-size: 22px;
       }
 
       iframe {
-        min-height: 940px;
-        height: 940px;
+        min-height: 760px;
+        height: 760px;
+      }
+
+      .preview-link img {
+        min-height: 300px;
       }
     }
   </style>
@@ -379,7 +462,7 @@
       <div class="brand">
         <span class="eyebrow">Agent Monitor</span>
         <h1>Showcase</h1>
-        <p>One live tool. One architecture exhibit.</p>
+        <p>One live study. One architecture exhibit.</p>
       </div>
       <nav class="topbar-links" aria-label="Primary">
         <a class="nav-link" href="../">Live monitor</a>
@@ -388,60 +471,89 @@
     </header>
 
     <main>
-      <section class="hero frame">
-        <div class="hero-copy">
-          <span class="eyebrow">Featured browser tool</span>
-          <h2>Paste text. Watch the split change.</h2>
-          <p>The tokenizer runs here. The architecture piece stays in view instead of disappearing behind a route.</p>
-          <div class="hero-meta" aria-label="Tokenizer highlights">
-            <span class="chip">28 public checkpoints</span>
-            <span class="chip">plain + chat</span>
-            <span class="chip">browser-native</span>
-          </div>
-          <div class="hero-actions">
-            <a class="action-link primary" href="../tokenizers/">Open full workbench</a>
-            <a class="action-link" href="./res-publica/">Open Res Publica</a>
-          </div>
+      <section class="intro frame">
+        <div class="intro-copy">
+          <span class="eyebrow">Public Hall</span>
+          <h2>One piece to touch. One piece to read.</h2>
+          <p>The gallery keeps the interactive tokenizer and the three-role architecture in separate frames so each one can land on its own terms.</p>
         </div>
+        <div class="intro-legend" aria-label="Exhibit legend">
+          <span class="legend-chip">01 interactive study</span>
+          <span class="legend-chip">02 architecture exhibit</span>
+        </div>
+      </section>
 
-        <aside class="hero-side" aria-label="Architecture exhibit">
-          <article class="secondary-exhibit">
-            <a href="./res-publica/" aria-label="Open the Res Publica architecture exhibit">
-              <div class="secondary-visual">
-                <img
-                  src="./res-publica-preview.png"
-                  alt="Preview of the Res Publica architecture illustration showing the Worker, Developer, and Tribune roles.">
+      <div class="gallery">
+        <section class="exhibit frame" aria-labelledby="tokenizer-title">
+          <div class="exhibit-head">
+            <div class="exhibit-number" aria-hidden="true">01</div>
+            <div class="exhibit-copy">
+              <span class="eyebrow">Interactive study</span>
+              <h3 id="tokenizer-title">Tokenizer workbench</h3>
+              <p>A single pinned model, live in the browser. Paste a line and watch it fracture into token pieces immediately.</p>
+              <div class="meta-row" aria-label="Tokenizer highlights">
+                <span class="meta-chip">Qwen 3.5 4B</span>
+                <span class="meta-chip">browser-side</span>
+                <span class="meta-chip">paste your own text</span>
               </div>
-            </a>
-            <div class="secondary-copy">
-              <span class="cue-label">Architecture exhibit</span>
-              <strong>Res Publica</strong>
-              <p>Worker, Developer, Tribune on one stage.</p>
-              <a class="action-link" href="./res-publica/">Open exhibit</a>
             </div>
-          </article>
-        </aside>
-      </section>
-
-      <section class="embed-card frame">
-        <div class="embed-head">
-          <div class="embed-title">
-            <span class="frame-label">Live preview</span>
-            <strong>Tokenizer workbench</strong>
-            <p>The real tool, trimmed for the gallery page.</p>
+            <div class="exhibit-actions">
+              <a class="action-link primary" href="../tokenizers/">Open full workbench</a>
+            </div>
           </div>
-          <a class="action-link" href="../tokenizers/">Open full route</a>
-        </div>
 
-        <div class="embed-shell">
-          <iframe
-            id="tokenizer-embed"
-            title="Live tokenizer workbench preview"
-            src="../tokenizers/?embed=showcase&amp;model=qwen3.5-4b&amp;text=English%2C%20%E4%B8%AD%E6%96%87%2C%20and%20emoji%20%F0%9F%9A%80%20all%20in%20one%20prompt."
-            allow="clipboard-write"
-            loading="eager"></iframe>
-        </div>
-      </section>
+          <div class="artifact-grid tool">
+            <div class="artifact-copy">
+              <span class="micro-label">Gallery cut</span>
+              <h4>Only the essential interaction stays.</h4>
+              <p>No model picker here, no extra route furniture. The showcase slice keeps one checkpoint and the live token surface.</p>
+            </div>
+
+            <div class="artifact-frame embed">
+              <iframe
+                id="tokenizer-embed"
+                title="Live tokenizer workbench preview"
+                src="../tokenizers/?embed=showcase&amp;model=qwen3.5-4b&amp;mode=plain&amp;text=English%2C%20%E4%B8%AD%E6%96%87%2C%20and%20emoji%20%F0%9F%9A%80%20inside%20one%20prompt."
+                allow="clipboard-write"
+                loading="eager"></iframe>
+            </div>
+          </div>
+        </section>
+
+        <section class="exhibit frame" aria-labelledby="architecture-title">
+          <div class="exhibit-head">
+            <div class="exhibit-number" aria-hidden="true">02</div>
+            <div class="exhibit-copy">
+              <span class="eyebrow">Architecture exhibit</span>
+              <h3 id="architecture-title">Res Publica</h3>
+              <p>A public-facing sketch of the three-role split: execution, change, and review kept legible without opening the machine room.</p>
+              <div class="role-row" aria-label="Architecture roles">
+                <span class="role-chip">Worker</span>
+                <span class="role-chip">Developer</span>
+                <span class="role-chip">Tribune</span>
+              </div>
+            </div>
+            <div class="exhibit-actions">
+              <a class="action-link primary" href="./res-publica/">Open exhibit</a>
+            </div>
+          </div>
+
+          <div class="artifact-grid architecture">
+            <a class="artifact-frame preview-link" href="./res-publica/" aria-label="Open the Res Publica architecture exhibit">
+              <img
+                src="./res-publica-preview.png"
+                alt="Preview of the Res Publica architecture illustration showing the Worker, Developer, and Tribune roles.">
+            </a>
+
+            <div class="artifact-copy">
+              <span class="micro-label">Why it lands</span>
+              <h4>Three roles, one visible contract.</h4>
+              <p>The figure turns an internal structure into a public composition: the worker carries action, the developer reshapes process, and the tribune checks alignment.</p>
+              <a class="action-link" href="./res-publica/">See the full page</a>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
   </div>
 
@@ -452,7 +564,7 @@
       if (!height) {
         return;
       }
-      frame.style.height = `${Math.max(620, Math.ceil(height))}px`;
+      frame.style.height = `${Math.max(520, Math.ceil(height))}px`;
     }
 
     window.addEventListener('message', (event) => {

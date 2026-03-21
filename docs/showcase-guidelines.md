@@ -18,6 +18,7 @@ Treat the gallery and the exhibit pages differently.
 
 - `/showcase/` is the gallery overview. It should orient fast and let the cards carry the detail.
 - `showcase/<exhibit>/` pages can be more atmospheric, but they still need a clear payoff above the fold.
+- Never stage one exhibit as a supporting prop inside another exhibit's hero. If two pieces are featured, each one needs its own visible frame or lane.
 
 ## Copy hierarchy
 
