@@ -1,17 +1,43 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T22:52:24Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-21T23:40:56Z",
+    "status": "workers_active",
     "pid": 68391,
-    "loop_count": 489,
+    "loop_count": 499,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773871418.194959",
+        "started_at": 1774136392,
+        "elapsed_sec": 63
+      },
+      {
+        "slot": 1,
+        "task": "1773897786.579989",
+        "started_at": 1774136393,
+        "elapsed_sec": 62
+      },
+      {
+        "slot": 2,
+        "task": "1773870804.162569",
+        "started_at": 1774136393,
+        "elapsed_sec": 62
+      },
+      {
+        "slot": 3,
+        "task": "1774134037.529099",
+        "started_at": 1774136394,
+        "elapsed_sec": 61
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +45,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.93,
-      "five": 2.1,
-      "fifteen": 2.13
+      "one": 1.79,
+      "five": 1.98,
+      "fifteen": 2.07
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113021407232,
-    "disk_free_bytes": 132085788672,
-    "runner_log_size_bytes": 291900,
+    "disk_used_bytes": 113018298368,
+    "disk_free_bytes": 132088897536,
+    "runner_log_size_bytes": 292939,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T21:51:08Z",
     "local_ips": []
@@ -36,7 +62,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T23:38:57Z",
+    "checked_at_utc": "2026-03-21T23:41:00Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,7 +85,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 8,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -75,7 +101,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 7,
+        "utilization_gpu_pct": 5,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -91,7 +117,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,30 +125,78 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 8,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       }
     ]
   },
   "tasks": {
     "queued": {},
     "active": {
-      "1774133473.190269": {
-        "mention_ts": "1774133473.190269",
-        "thread_ts": "1774133473.190269",
+      "1773871418.194959": {
+        "mention_ts": "1773871418.194959",
+        "thread_ts": "1773871418.194959",
         "status": "in_progress",
-        "task_description": "Development: FIX-008.",
-        "summary": "Development: FIX-008.",
-        "summary_preview": "Development: FIX-008.",
+        "task_description": "Fork <[link] Your goal: minimize held-out loss on a fixed FineWeb dataset while staying within a strict 16 MB artifact limit (weights + training code combined) and a 10-minute tra…",
+        "summary": "Athena finally returned on the full-context retry; the revised parameter-golf plan now ranks shared-depth recurrence first, bounded test-time adaptation second…",
+        "summary_preview": "Athena finally returned on the full-context retry; the revised parameter-golf plan now ranks shared-depth recurrence first, bounded test-time adaptation second…",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774133486.788065",
-        "last_update_ts": "1774133543.843531",
-        "task_type": "development",
+        "created_ts": "1773871418.194959",
+        "last_update_ts": "1774136392.189523",
+        "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-21T22:51:13Z"
+          "time_iso": "2026-03-18T22:03:38Z"
+        }
+      },
+      "1773897786.579989": {
+        "mention_ts": "1773897786.579989",
+        "thread_ts": "1773897786.579989",
+        "status": "in_progress",
+        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
+        "summary": "Corrected the thread on visualization design after re-reading the repo: the default object is prompt-prefill hidden state, repeated-rollout binary plots need a…",
+        "summary_preview": "Corrected the thread on visualization design after re-reading the repo: the default object is prompt-prefill hidden state, repeated-rollout binary plots need a…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773897786.579989",
+        "last_update_ts": "1774136392.608802",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T05:23:06Z"
+        }
+      },
+      "1773870804.162569": {
+        "mention_ts": "1773870804.162569",
+        "thread_ts": "1773870804.162569",
+        "status": "in_progress",
+        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
+        "summary": "Rechecked the finished GPQA pilot against the collaborator's rollout-level [code] , [code] proposal, confirmed that the label still collapses to cap-hit on the…",
+        "summary_preview": "Rechecked the finished GPQA pilot against the collaborator's rollout-level [code] , [code] proposal, confirmed that the label still collapses to cap-hit on the…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773870804.162569",
+        "last_update_ts": "1774136393.176815",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-18T21:53:24Z"
+        }
+      },
+      "1774134037.529099": {
+        "mention_ts": "1774134037.529099",
+        "thread_ts": "1774134037.529099",
+        "status": "in_progress",
+        "task_description": "Andrej Karpathy has recently shared lots of his experience with coding agents.",
+        "summary": "Andrej Karpathy has recently shared lots of his experience with coding agents.",
+        "summary_preview": "Andrej Karpathy has recently shared lots of his experience with coding agents.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774134037.529099",
+        "last_update_ts": "1774136393.711610",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T23:00:37Z"
         }
       }
     },
@@ -143,22 +217,6 @@
           "time_iso": "2026-03-19T05:56:16Z"
         }
       },
-      "1773871418.194959": {
-        "mention_ts": "1773871418.194959",
-        "thread_ts": "1773871418.194959",
-        "status": "waiting_human",
-        "task_description": "Fork <[link] Your goal: minimize held-out loss on a fixed FineWeb dataset while staying within a strict 16 MB artifact limit (weights + training code combined) and a 10-minute tra…",
-        "summary": "Athena finally returned on the full-context retry; the revised parameter-golf plan now ranks shared-depth recurrence first, bounded test-time adaptation second…",
-        "summary_preview": "Athena finally returned on the full-context retry; the revised parameter-golf plan now ranks shared-depth recurrence first, bounded test-time adaptation second…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773871418.194959",
-        "last_update_ts": "1773949028.999111",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-18T22:03:38Z"
-        }
-      },
       "1773942694.197309": {
         "mention_ts": "1773942694.197309",
         "thread_ts": "1773942694.197309",
@@ -173,22 +231,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T17:51:34Z"
-        }
-      },
-      "1773897786.579989": {
-        "mention_ts": "1773897786.579989",
-        "thread_ts": "1773897786.579989",
-        "status": "waiting_human",
-        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
-        "summary": "Corrected the thread on visualization design after re-reading the repo: the default object is prompt-prefill hidden state, repeated-rollout binary plots need a…",
-        "summary_preview": "Corrected the thread on visualization design after re-reading the repo: the default object is prompt-prefill hidden state, repeated-rollout binary plots need a…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773897786.579989",
-        "last_update_ts": "1773983467.134468",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T05:23:06Z"
         }
       },
       "1773958297.306549": {
@@ -287,22 +329,6 @@
           "time_iso": "2026-03-21T07:01:22Z"
         }
       },
-      "1773870804.162569": {
-        "mention_ts": "1773870804.162569",
-        "thread_ts": "1773870804.162569",
-        "status": "waiting_human",
-        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
-        "summary": "Rechecked the finished GPQA pilot against the collaborator's rollout-level [code] , [code] proposal, confirmed that the label still collapses to cap-hit on the…",
-        "summary_preview": "Rechecked the finished GPQA pilot against the collaborator's rollout-level [code] , [code] proposal, confirmed that the label still collapses to cap-hit on the…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773870804.162569",
-        "last_update_ts": "1774119389.199725",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-18T21:53:24Z"
-        }
-      },
       "1774118740.758569": {
         "mention_ts": "1774118740.758569",
         "thread_ts": "1774118740.758569",
@@ -369,6 +395,22 @@
       }
     },
     "finished": {
+      "1774133473.190269": {
+        "mention_ts": "1774133473.190269",
+        "thread_ts": "1774133473.190269",
+        "status": "done",
+        "task_description": "Development: FIX-008.",
+        "summary": "Development task completed (1774133473.190269)",
+        "summary_preview": "Development task completed (1774133473.190269)",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774133486.788065",
+        "last_update_ts": "1774136380.373213",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T22:51:13Z"
+        }
+      },
       "1774124745.224949": {
         "mention_ts": "1774124745.224949",
         "thread_ts": "1774124745.224949",
@@ -1152,22 +1194,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T06:58:15Z"
         }
-      },
-      "1771811175.735769": {
-        "mention_ts": "1771811175.735769",
-        "thread_ts": "1771811175.735769",
-        "status": "done",
-        "task_description": "Can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testing codex review access, reme…",
-        "summary": "Confirmed monitor repo/public URL restored, recorded default-private policy with deployment exception, posted in-thread completion, and checkpointed report/mem…",
-        "summary_preview": "Confirmed monitor repo/public URL restored, recorded default-private policy with deployment exception, posted in-thread completion, and checkpointed report/mem…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771811175.735769",
-        "last_update_ts": "1771827687.148782",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T01:46:15Z"
-        }
       }
     }
   },
@@ -1637,5 +1663,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T23:38:58Z"
+  "server_time_utc": "2026-03-21T23:41:01Z"
 }
