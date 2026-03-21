@@ -914,5 +914,15 @@
         "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>bs5h782q1</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\nMCP issues detected. Run /mcp list for status.```json\n{\n  \"verdict\": \"approve\",\n  \"findings\": [],\n  \"summary\": \"No issues found.\"\n}\n```\n</output>"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:02:04.913Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>bgx3zisxu</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\n{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-1-1\",\"severity\":\"high\",\"category\":\"integration\",\"file\":\"docs/dev/plans/fix-008-done-marker.md\",\"line\":44,\"scope\":null,\"title\":\"Reaction target is the thread root, not necessarily the tasking message\",\"description\":\"The plan assumes `thread_ts` is the original mention timestamp, but this supervisor keys tasks by thread root. In real Slack threads, an `@Murphy` request can arrive as a reply inside an existing thread; `reactions.add(timestamp=thread_ts)` would then mark the root post, which may be unrelated to the Murphy task. That gives the done marker to the wrong message and weakens channel-view visibility for threaded tasks.\",\"suggestion\":\"If you keep the reaction approach, persist the specific message ts to mark instead of reusing `thread_ts`. Otherwise restore an explic"
+      }
+    ]
   }
 ]
