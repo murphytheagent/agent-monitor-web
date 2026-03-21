@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T18:49:59Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-21T18:57:37Z",
+    "status": "restarting",
     "pid": 38150,
     "loop_count": 3768,
     "last_exit_code": 0,
@@ -9,23 +9,9 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773870804.162569",
-        "started_at": 1774118784,
-        "elapsed_sec": 214
-      },
-      {
-        "slot": 1,
-        "task": "1774118740.758569",
-        "started_at": 1774118784,
-        "elapsed_sec": 214
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -33,24 +19,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.85,
-      "five": 1.73,
-      "fifteen": 1.76
+      "one": 1.5,
+      "five": 1.66,
+      "fifteen": 1.73
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112819683328,
-    "disk_free_bytes": 132287512576,
-    "runner_log_size_bytes": 247624,
+    "disk_used_bytes": 112819474432,
+    "disk_free_bytes": 132287721472,
+    "runner_log_size_bytes": 249276,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-21T11:35:20Z",
+    "dashboard_started_utc": "2026-03-21T18:57:37Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T18:56:34Z",
+    "checked_at_utc": "2026-03-21T18:57:37Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -73,7 +59,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 12,
+        "utilization_gpu_pct": 2,
         "memory_used_mb": 34099,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -89,7 +75,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 33873,
         "memory_total_mb": 97887,
         "temperature_c": 31
@@ -105,7 +91,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 2,
         "memory_used_mb": 34099,
         "memory_total_mb": 97887,
         "temperature_c": 31
@@ -113,7 +99,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 7,
         "memory_used_mb": 33873,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -122,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1774118740.758569": {
-        "mention_ts": "1774118740.758569",
-        "thread_ts": "1774118740.758569",
-        "status": "in_progress",
-        "task_description": "How is your architecture different from <[link] and why is their setup so easy.",
-        "summary": "How is your architecture different from <[link] and why is their setup so easy.",
-        "summary_preview": "How is your architecture different from <[link] and why is their setup so easy.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774118740.758569",
-        "last_update_ts": "1774118784.578253",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T18:45:40Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773899776.033029": {
         "mention_ts": "1773899776.033029",
@@ -331,6 +300,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T21:53:24Z"
+        }
+      },
+      "1774118740.758569": {
+        "mention_ts": "1774118740.758569",
+        "thread_ts": "1774118740.758569",
+        "status": "waiting_human",
+        "task_description": "How is your architecture different from <[link] and why is their setup so easy.",
+        "summary": "Compared this repo's self-hosted control-plane architecture with astro-agent's hosted-control-plane runner model and drafted the Slack answer.",
+        "summary_preview": "Compared this repo's self-hosted control-plane architecture with astro-agent's hosted-control-plane runner model and drafted the Slack answer.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774118740.758569",
+        "last_update_ts": "1774119424.383308",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T18:45:40Z"
         }
       }
     },
@@ -1147,5 +1132,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T18:56:35Z"
+  "server_time_utc": "2026-03-21T18:57:38Z"
 }
