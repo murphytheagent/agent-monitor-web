@@ -1,12 +1,12 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-21 01:28 UTC
+Last updated: 2026-03-21 01:47 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
-- The showcase route now leads with a live tokenizer embed and stripped-down copy; `Res Publica` remains available as a separate architecture route under `/showcase/res-publica/`.
+- The showcase route now leads with a live tokenizer embed and stripped-down copy while keeping the `Res Publica` architecture preview visible on the page and linked through to `/showcase/res-publica/`.
 - A persistent tokenizer link on the root dashboard is still blocked because the exporter has no showcase-extension hook yet.
 
 ## Milestone 1 - Stable Hosted Surfaces
@@ -29,6 +29,7 @@ Status:
 
 ### Activity Log
 
+- 2026-03-21 01:47 UTC — Restored the `Res Publica` preview to `/showcase/` after follow-up feedback. The landing page now keeps the architecture illustration visible as a secondary exhibit card instead of hiding it behind the route link, while the live tokenizer embed remains the main interaction.
 - 2026-03-21 01:28 UTC — Reworked `/showcase/` again after more feedback from an outside-viewer perspective: removed the internal `Showcase rule` / selective-copy language, dropped the screenshot-led layout, and rebuilt the page around a live tokenizer embed plus short cue cards.
 - 2026-03-21 01:28 UTC — Added a showcase embed mode to `/tokenizers/` so the gallery can host a compact working slice of the tool instead of a blurry preview image, while the full route keeps the broader controls and metadata drawers.
 - 2026-03-21 00:53 UTC — Added a second showcase exhibit, `Res Publica`, under `/showcase/res-publica/`: a public-facing architecture page for the Worker / Developer / Tribune split with an animated triangle stage, minimal copy, and a real browser-captured preview image.
