@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T23:55:14Z",
+    "last_updated_utc": "2026-03-21T23:57:13Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 620,
+    "loop_count": 635,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,31 +17,25 @@
         "slot": 0,
         "task": "1773871418.194959",
         "started_at": 1774136392,
-        "elapsed_sec": 921
+        "elapsed_sec": 1040
       },
       {
         "slot": 1,
         "task": "1773897786.579989",
         "started_at": 1774136393,
-        "elapsed_sec": 921
+        "elapsed_sec": 1040
       },
       {
         "slot": 2,
         "task": "1773870804.162569",
         "started_at": 1774137074,
-        "elapsed_sec": 239
+        "elapsed_sec": 358
       },
       {
         "slot": 3,
         "task": "1774134037.529099",
         "started_at": 1774136394,
-        "elapsed_sec": 920
-      },
-      {
-        "slot": 4,
-        "task": "1774037278.773229",
-        "started_at": 1774136879,
-        "elapsed_sec": 434
+        "elapsed_sec": 1039
       }
     ]
   },
@@ -51,15 +45,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.4,
-      "five": 2.31,
-      "fifteen": 2.22
+      "one": 1.75,
+      "five": 2.3,
+      "fifteen": 2.24
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112996298752,
-    "disk_free_bytes": 132110897152,
-    "runner_log_size_bytes": 297007,
+    "disk_used_bytes": 113000288256,
+    "disk_free_bytes": 132106907648,
+    "runner_log_size_bytes": 298173,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T21:51:08Z",
     "local_ips": []
@@ -68,7 +62,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T23:55:15Z",
+    "checked_at_utc": "2026-03-21T23:57:18Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -78,7 +72,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 1,
@@ -91,7 +85,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
+        "utilization_gpu_pct": 7,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -107,7 +101,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 8,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -123,7 +117,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -131,7 +125,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 10,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -187,22 +181,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T23:00:37Z"
-        }
-      },
-      "1774037278.773229": {
-        "mention_ts": "1774037278.773229",
-        "thread_ts": "1774037278.773229",
-        "status": "in_progress",
-        "task_description": "Remove frontiertrace from long term projects, keep codebase, we will maybe come back to this later.",
-        "summary": "Remove frontiertrace from long term projects, keep codebase, we will maybe come back to this later.",
-        "summary_preview": "Remove frontiertrace from long term projects, keep codebase, we will maybe come back to this later.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774136862.892159",
-        "last_update_ts": "1774136879.342926",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T23:47:42Z"
         }
       },
       "1773870804.162569": {
@@ -413,6 +391,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T20:30:45Z"
+        }
+      },
+      "1774037278.773229": {
+        "mention_ts": "1774037278.773229",
+        "thread_ts": "1774037278.773229",
+        "status": "waiting_human",
+        "task_description": "Remove frontiertrace from long term projects, keep codebase, we will maybe come back to this later.",
+        "summary": "Removed FrontierTrace from active long-term goals and marked it as parked while leaving the repo/code untouched.",
+        "summary_preview": "Removed FrontierTrace from active long-term goals and marked it as parked while leaving the repo/code untouched.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774136862.892159",
+        "last_update_ts": "1774137365.937170",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T23:47:42Z"
         }
       }
     },
@@ -1685,5 +1679,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T23:55:16Z"
+  "server_time_utc": "2026-03-21T23:57:19Z"
 }
