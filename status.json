@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T11:35:20Z",
-    "status": "restarting",
+    "last_updated_utc": "2026-03-21T11:37:16Z",
+    "status": "sleeping",
     "pid": 38150,
-    "loop_count": 4432,
+    "loop_count": 17,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
     "max_workers": 8
   },
@@ -20,14 +20,14 @@
     "cpu_count": 10,
     "load_avg": {
       "one": 2.19,
-      "five": 1.82,
-      "fifteen": 1.74
+      "five": 1.93,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112161865728,
-    "disk_free_bytes": 132945330176,
-    "runner_log_size_bytes": 239479,
+    "disk_used_bytes": 112162615296,
+    "disk_free_bytes": 132944580608,
+    "runner_log_size_bytes": 239525,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T11:35:20Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T11:35:20Z",
+    "checked_at_utc": "2026-03-21T11:37:22Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 37
       },
       {
         "index": 2,
@@ -86,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 6,
@@ -1100,5 +1100,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T11:35:20Z"
+  "server_time_utc": "2026-03-21T11:37:23Z"
 }
