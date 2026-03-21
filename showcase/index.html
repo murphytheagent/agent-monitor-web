@@ -74,6 +74,11 @@
       text-decoration: none;
     }
 
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
     .page-shell {
       position: relative;
       z-index: 1;
@@ -229,28 +234,45 @@
       gap: 10px;
     }
 
-    .cue-card {
+    .secondary-exhibit {
       display: grid;
-      gap: 4px;
-      padding: 14px;
+      gap: 0;
       border: 1px solid rgba(56, 240, 255, 0.2);
       background: rgba(6, 11, 24, 0.9);
-      min-height: 0;
+      overflow: hidden;
+    }
+
+    .secondary-visual {
+      min-height: 292px;
+      border-bottom: 1px solid rgba(56, 240, 255, 0.2);
+      background: rgba(3, 8, 18, 0.96);
+    }
+
+    .secondary-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .secondary-copy {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
     }
 
     .cue-label {
       color: var(--accent);
     }
 
-    .cue-card strong {
+    .secondary-copy strong {
       font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 14px;
+      font-size: 18px;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
-    .cue-card p {
+    .secondary-copy p {
       margin: 0;
       color: var(--muted);
       font-size: 15px;
@@ -357,7 +379,7 @@
       <div class="brand">
         <span class="eyebrow">Agent Monitor</span>
         <h1>Showcase</h1>
-        <p>One browser tool worth trying right now.</p>
+        <p>One live tool. One architecture exhibit.</p>
       </div>
       <nav class="topbar-links" aria-label="Primary">
         <a class="nav-link" href="../">Live monitor</a>
@@ -370,35 +392,35 @@
         <div class="hero-copy">
           <span class="eyebrow">Featured browser tool</span>
           <h2>Paste text. Watch the split change.</h2>
-          <p>A working slice of the tokenizer lab lives below. Swap checkpoints, flip to chat mode, or paste your own text and the token boundaries update live in the browser.</p>
+          <p>The tokenizer runs here. The architecture piece stays in view instead of disappearing behind a route.</p>
           <div class="hero-meta" aria-label="Tokenizer highlights">
             <span class="chip">28 public checkpoints</span>
             <span class="chip">plain + chat</span>
-            <span class="chip">client-side</span>
+            <span class="chip">browser-native</span>
           </div>
           <div class="hero-actions">
             <a class="action-link primary" href="../tokenizers/">Open full workbench</a>
-            <a class="action-link" href="../">Back to monitor</a>
+            <a class="action-link" href="./res-publica/">Open Res Publica</a>
           </div>
         </div>
 
-        <div class="hero-side" aria-label="Quick prompts">
-          <div class="cue-card">
-            <span class="cue-label">Try first</span>
-            <strong>English + 中文 + emoji</strong>
-            <p>The mixed sample is loaded so the boundary changes are obvious right away.</p>
-          </div>
-          <div class="cue-card">
-            <span class="cue-label">Then</span>
-            <strong>Switch checkpoints</strong>
-            <p>Keep the same prompt and compare how different public models carve it up.</p>
-          </div>
-          <div class="cue-card">
-            <span class="cue-label">Also</span>
-            <strong>Flip to chat mode</strong>
-            <p>See the extra wrapper tokens a model adds before it ever starts answering.</p>
-          </div>
-        </div>
+        <aside class="hero-side" aria-label="Architecture exhibit">
+          <article class="secondary-exhibit">
+            <a href="./res-publica/" aria-label="Open the Res Publica architecture exhibit">
+              <div class="secondary-visual">
+                <img
+                  src="./res-publica-preview.png"
+                  alt="Preview of the Res Publica architecture illustration showing the Worker, Developer, and Tribune roles.">
+              </div>
+            </a>
+            <div class="secondary-copy">
+              <span class="cue-label">Architecture exhibit</span>
+              <strong>Res Publica</strong>
+              <p>Worker, Developer, Tribune on one stage.</p>
+              <a class="action-link" href="./res-publica/">Open exhibit</a>
+            </div>
+          </article>
+        </aside>
       </section>
 
       <section class="embed-card frame">
@@ -406,7 +428,7 @@
           <div class="embed-title">
             <span class="frame-label">Live preview</span>
             <strong>Tokenizer workbench</strong>
-            <p>The same browser engine as the full route, trimmed down for the showcase page.</p>
+            <p>The real tool, trimmed for the gallery page.</p>
           </div>
           <a class="action-link" href="../tokenizers/">Open full route</a>
         </div>

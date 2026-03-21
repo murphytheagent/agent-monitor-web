@@ -1,6 +1,6 @@
 # Showcase Guidelines
 
-Last updated: 2026-03-21 01:28 UTC
+Last updated: 2026-03-21 01:47 UTC
 
 Use these rules for `/showcase/` and any future hosted exhibit pages.
 
@@ -50,6 +50,7 @@ The gallery should be preview-led, not paragraph-led.
 - Put the live slice, screenshot, or figure above the fold.
 - Use callouts, chips, or tiny comparison cards to explain where to look.
 - Prefer one real screenshot over multiple abstract panels.
+- If the gallery already has a real architecture exhibit, keep that figure visible on the gallery page instead of trimming it away during copy cleanup.
 - If the page is architecture-led rather than tool-led, the figure still needs to feel like a real artifact, not a placeholder diagram.
 - Keep supporting copy short enough that the visual still dominates on mobile.
 
