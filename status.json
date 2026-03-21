@@ -19,14 +19,14 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.22,
-      "five": 2.25,
-      "fifteen": 2.19
+      "one": 1.93,
+      "five": 2.1,
+      "fifteen": 2.13
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113024991232,
-    "disk_free_bytes": 132082204672,
+    "disk_used_bytes": 113021407232,
+    "disk_free_bytes": 132085788672,
     "runner_log_size_bytes": 291900,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T21:51:08Z",
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T23:36:54Z",
+    "checked_at_utc": "2026-03-21T23:38:57Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,7 +59,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
+        "utilization_gpu_pct": 8,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -75,7 +75,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
+        "utilization_gpu_pct": 7,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -91,7 +91,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 3,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -102,7 +102,7 @@
         "utilization_gpu_pct": 8,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       }
     ]
   },
@@ -1198,18 +1198,6 @@
         "has_issue": false
       },
       {
-        "id": "FIX-008",
-        "queue": "fix",
-        "created": "2026-03-21",
-        "priority": "Critical",
-        "status": "open",
-        "task": "Done marker regression: task completion invisible to humans",
-        "context": "AGENT-022 removed `_notify_task_done` (redundant notification). Side effect: no visible \"task done\" marker in Slack thread — humans can't tell when tasks close. Issue, earlier report",
-        "done_when": "Task completion posts a visible signal in the Slack thread (restored marker or equivalent).",
-        "has_plan": false,
-        "has_issue": true
-      },
-      {
         "id": "FIX-009",
         "queue": "fix",
         "created": "2026-03-21",
@@ -1428,6 +1416,12 @@
     ],
     "completed": [
       {
+        "id": "FIX-008",
+        "created": "2026-03-21",
+        "completed": "2026-03-21",
+        "summary": "Restore task completion visibility: `white_check_mark` reaction on original Slack message when task completes. Replaces removed `_notify_task_done` text message. Non-blocking, idempotent, handles Slac"
+      },
+      {
         "id": "FIX-004",
         "created": "2026-03-20",
         "completed": "2026-03-21",
@@ -1643,5 +1637,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T23:36:55Z"
+  "server_time_utc": "2026-03-21T23:38:58Z"
 }

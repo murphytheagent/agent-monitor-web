@@ -2544,5 +2544,390 @@
         "content_preview": "src/loop/tests/test_supervisor_loop.py::TestAgentFileLock::test_locked_append_newline_normalization PASSED [ 98%]\nsrc/loop/tests/test_supervisor_loop.py::TestAgentFlockCLI::test_cli_append PASSED [ 98%]\nsrc/loop/tests/test_supervisor_loop.py::TestAgentFlockCLI::test_cli_append_from_stdin PASSED [ 98%]\nsrc/loop/tests/test_supervisor_loop.py::TestAgentFlockCLI::test_cli_concurrent_appends PASSED [ 98%]\nsrc/loop/tests/test_supervisor_loop.py::TestAgentFlockCLI::test_cli_usage_error PASSED [ 99%]\nsrc/loop/tests/test_supervisor_loop.py::TestAgentFlockCLI::test_cli_write PASSED [ 99%]\nsrc/loop/tests/test_supervisor_loop.py::TestAgentFlockCLI::test_cli_write_atomic PASSED [ 99%]\nsrc/loop/tests/test_supervisor_loop.py::TestFileLockReadModifyWrite::test_locked_read_modify_write_no_lost_updates PASSED [100%]\n\n=================== 393 passed, 30 subtests passed in 26.32s ==================="
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:36:58.203Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 393 tests pass. Now let me document, commit, and push."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:01.813Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Read codebase to understand current reconciliation flow and removed _notify_task_done\", \"status\": \"completed\", \"activeForm\": \"Reading codebase to understand reconciliation flow\"}, {\"content\": \"Write implementation plan for restoring done marker\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Run iterative review on the plan\", \"status\": \"completed\", \"activeForm\": \"Running iterative review on plan\"}, {\"content\": \"Implement the fix\", \"stat"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:37:01.815Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:07.017Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/CHANGELOG.md\", \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:37:07.022Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# Changelog (Agent Source Only)\n     2→\n     3→Scope: root-repo agent source changes in `src/`, `scripts/`, root launchers, and related supervisor prompts/config. Excludes project-specific code and task-only report churn.\n     4→\n     5→## 2026-03-21 21:15 UTC — Concurrent `.agent/` write coordination (FIX-004)\n     6→\n     7→Advisory file locking for shared `.agent/` files to prevent data loss when multiple workers write concurrently through symlinked worktrees.\n     8→\n     9→- **New `src/loop/supervisor/filelock.py`**: Reusable advisory lock module (`agent_file_lock` context manager + `locked_append` helper). Uses `fcntl.flock` — same mechanism as `state.json` and `memory_reflect`.\n    10→- **New `scripts/agent_flock`**: Self-contained CLI wrapper for locked file operations. Workers use this for profile observation appends instead of raw shell `>>` redirection. Supports both argv and stdin text input. Write command uses tempfile+`os.replace` for atomicity.\n    11→- **Worker p"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:07.458Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"limit\": 50}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:37:07.661Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# Roadmap (Agent Source Only)\n     2→\n     3→Last refreshed: 2026-03-21 UTC\n     4→\n     5→Scope: only agent runtime/source in this root repo (`src/`, `scripts/`, root launchers/docs). Excludes project-specific implementation under `projects/`.\n     6→\n     7→## Current Snapshot\n     8→\n     9→- `python3 -m pytest src/loop/tests/test_supervisor_loop.py -q` passes (`390 passed, 30 subtests passed`).\n    10→- All modules use `from __future__ import annotations` for Python 3.9+ compatibility.\n    11→- `MAX_CONCURRENT_WORKERS=8` (default). Parallel dispatch with git worktree isolation.\n    12→- Dashboard deployed as GitHub Pages static site at `murphytheagent.github.io/agent-monitor-web`.\n    13→- 12 open items in Active Queue (features, incl. 1 deferred). 9 open items in Fix Queue (reliability).\n    14→- 10 open issues in `docs/dev/issues/`.\n    15→- 8 surviving plans in `docs/dev/plans/` (34, 37, 40, 41, 42, 43, 44, 45).\n    16→- Daily ecosystem scouting in developer review; maint"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:12.640Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me read the Completed table to understand the format."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:13.565Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"offset\": 50, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:37:13.570Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    50→## Completed\n    51→\n    52→| ID | Created | Completed | Summary |\n    53→|---|---|---|---|\n    54→| FIX-004 | 2026-03-20 | 2026-03-21 | Concurrent `.agent/` write coordination: advisory file locking via `fcntl.flock`. New `filelock.py` module + `scripts/agent_flock` CLI. Worker prompt uses locked appends for profile logs. Supervisor migration uses locks + existence guard. 13 new tests (390 total). [Plan](plans/45-concurrent-agent-write-coordination.md) |\n    55→| FIX-003 | 2026-03-20 | 2026-03-21 | Reset worktree before fallback merge dispatch. Added `git reset --hard HEAD` + `git clean -fd` in `_fallback_merge_dispatch()`. Cleanup failure skips worker but still triggers Slack notification. 1 new test. |\n    56→| AGENT-043 | 2026-03-21 | 2026-03-21 | Roadmap page on agent website with dispatch-on-click. Separate `roadmap/index.html` linked from dashboard launchpad. ROADMAP parser, priority-colored cards, Slack webhook dispatch (`!developer` command), `development` task type wit"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:19.300Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good. Now let me get the current timestamp and update the docs."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:19.771Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"date -u \\\"+%Y-%m-%d %H:%M UTC\\\"\", \"description\": \"Get current UTC timestamp\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:37:19.805Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2026-03-21 23:37 UTC"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:35.203Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/CHANGELOG.md\", \"old_string\": \"## 2026-03-21 21:15 UTC — Concurrent `.agent/` write coordination (FIX-004)\", \"new_string\": \"## 2026-03-21 23:37 UTC — Restore task completion visibility (FIX-008)\\n\\nRestore visible completion signal in Slack threads after AGENT-022 removed `_notify_task_done`. Humans could not tell when the supervisor closed a task lifecycle.\\n\\n- **New `_mark_task_done_reaction()`** (`runtime.py`): Adds a `white"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:37:35.213Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/CHANGELOG.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:38.959Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update ROADMAP — move FIX-008 from Fix Queue to Completed."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:42.855Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"old_string\": \"| FIX-008 | 2026-03-21 | Critical | open | Done marker regression: task completion invisible to humans | AGENT-022 removed `_notify_task_done` (redundant notification). Side effect: no visible \\\"task done\\\" marker in Slack thread — humans can't tell when tasks close. [Issue](issues/2026-03-21-supervisor-done-marker-removal-breaks-task-visibility.md), [earlier report](issues/2026-03-20-missing-done-ma"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:37:42.861Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/ROADMAP.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:52.195Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"old_string\": \"| FIX-004 | 2026-03-20 | 2026-03-21 | Concurrent `.agent/` write coordination: advisory file locking via `fcntl.flock`. New `filelock.py` module + `scripts/agent_flock` CLI. Worker prompt uses locked appends for profile logs. Supervisor migration uses locks + existence guard. 13 new tests (390 total). [Plan](plans/45-concurrent-agent-write-coordination.md) |\", \"new_string\": \"| FIX-008 | 2026-03-21 | "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:37:52.201Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/ROADMAP.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:37:55.395Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update the Current Snapshot counts."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:38:02.962Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"old_string\": \"- `python3 -m pytest src/loop/tests/test_supervisor_loop.py -q` passes (`390 passed, 30 subtests passed`).\\n- All modules use `from __future__ import annotations` for Python 3.9+ compatibility.\\n- `MAX_CONCURRENT_WORKERS=8` (default). Parallel dispatch with git worktree isolation.\\n- Dashboard deployed as GitHub Pages static site at `murphytheagent.github.io/agent-monitor-web`.\\n- 12 open items in Ac"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:38:02.967Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/ROADMAP.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:38:05.890Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now commit and push."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:38:07.331Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git status -- src/loop/supervisor/runtime.py src/loop/tests/test_supervisor_loop.py docs/dev/CHANGELOG.md docs/dev/ROADMAP.md docs/dev/plans/fix-008-done-marker.md\", \"description\": \"Check status of files to commit\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:38:07.386Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "On branch main\nYour branch is ahead of 'origin/main' by 19 commits.\n  (use \"git push\" to publish your local commits)\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   docs/dev/CHANGELOG.md\n\tmodified:   docs/dev/ROADMAP.md\n\tmodified:   src/loop/supervisor/runtime.py\n\tmodified:   src/loop/tests/test_supervisor_loop.py\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tdocs/dev/plans/fix-008-done-marker.md\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:38:17.226Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git add src/loop/supervisor/runtime.py src/loop/tests/test_supervisor_loop.py docs/dev/CHANGELOG.md docs/dev/ROADMAP.md docs/dev/plans/fix-008-done-marker.md && git commit -m \\\"$(cat <<'EOF'\\n[developer] Restore task completion visibility via reaction emoji (FIX-008)\\n\\nAdd white_check_mark reaction to the task's original Slack message when\\nreconciliation marks a task as done. Replaces the removed _notify_task_done\\ntext message. Non-blocking, idempotent, handles both transport and"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:38:17.324Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "[main ef89f2e] [developer] Restore task completion visibility via reaction emoji (FIX-008)\n 5 files changed, 229 insertions(+), 3 deletions(-)\n create mode 100644 docs/dev/plans/fix-008-done-marker.md"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:38:22.744Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git push 2>&1\", \"description\": \"Push to remote\", \"timeout\": 30000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:38:24.411Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "To github.com:murphytheagent/murphy-agent.git\n   05da85f..ef89f2e  main -> main"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:38:28.826Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me clean up the temp directory and post the final Slack update."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:38:30.132Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"rm -rf /tmp/iterative-review-EBx8Le\", \"description\": \"Clean up temp review directory\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:38:30.173Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(Bash completed with no output)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:38:34.164Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "mcp__slack__conversations_add_message",
+        "input_preview": "{\"channel_id\": \"C0AFYQQ4TJ9\", \"thread_ts\": \"1774133473.190269\", \"text\": \"FIX-008 done. Task completion now adds a ✅ reaction to the original Slack message when the supervisor marks a task as done.\\n\\nChanges:\\n- New `_mark_task_done_reaction()` in `runtime.py` — non-blocking, idempotent, handles Slack errors\\n- Call site after Tribune review gate in `reconcile_task_after_run`\\n- 3 new tests (393 total pass)\\n\\nIterative review: 4 rounds (Tribune + Murphy converged). Committed and pushed.\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:38:34.879Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "MsgID,UserID,UserName,RealName,Channel,ThreadTs,Text,Time,Reactions,BotName,FileCount,AttachmentIDs,HasMedia,Cursor\n"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:38:41.143Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Read codebase to understand current reconciliation flow and removed _notify_task_done\", \"status\": \"completed\", \"activeForm\": \"Reading codebase to understand reconciliation flow\"}, {\"content\": \"Write implementation plan for restoring done marker\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Run iterative review on the plan\", \"status\": \"completed\", \"activeForm\": \"Running iterative review on plan\"}, {\"content\": \"Implement the fix\", \"stat"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:38:41.145Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
   }
 ]
