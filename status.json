@@ -19,14 +19,14 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.1,
-      "five": 1.84,
-      "fifteen": 1.82
+      "one": 1.34,
+      "five": 1.64,
+      "fifteen": 1.74
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112865337344,
-    "disk_free_bytes": 132241858560,
+    "disk_used_bytes": 112866336768,
+    "disk_free_bytes": 132240859136,
     "runner_log_size_bytes": 262107,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T19:57:32Z",
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T20:01:37Z",
+    "checked_at_utc": "2026-03-21T20:03:39Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +59,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 6,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 3,
@@ -75,7 +75,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 9,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -91,7 +91,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 10,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,10 +99,10 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 9,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       }
     ]
   },
@@ -1153,18 +1153,6 @@
       "has_issue": false
     },
     {
-      "id": "FIX-003",
-      "queue": "fix",
-      "created": "2026-03-20",
-      "priority": "Medium",
-      "status": "open",
-      "task": "Reset worktree before fallback merge dispatch",
-      "context": "`_fallback_merge_dispatch()` runs a merge worker in the slot's existing worktree without calling `setup_worktree()` first. Worktree may be in a stale state.",
-      "done_when": "Fallback merge worker starts in a clean worktree state.",
-      "has_plan": false,
-      "has_issue": false
-    },
-    {
       "id": "FIX-004",
       "queue": "fix",
       "created": "2026-03-20",
@@ -1259,6 +1247,18 @@
       "done_when": "Workers can use standard git commands on shared paths without index-level workarounds, or the workaround is fully automated.",
       "has_plan": false,
       "has_issue": true
+    },
+    {
+      "id": "FIX-014",
+      "queue": "fix",
+      "created": "2026-03-21",
+      "priority": "Low",
+      "status": "open",
+      "task": "Gemini MCP Slack error noise during iterative-review",
+      "context": "Gemini CLI tries to connect all configured MCP servers at startup regardless of `--approval-mode plan`. Slack MCP fails to connect, producing error noise in reviewer stderr. Non-fatal but noisy.",
+      "done_when": "Gemini reviewer dispatch suppresses or avoids Slack MCP connection, either via config override or `--no-mcp` flag.",
+      "has_plan": false,
+      "has_issue": false
     },
     {
       "id": "AGENT-010",
@@ -1415,5 +1415,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T20:01:38Z"
+  "server_time_utc": "2026-03-21T20:03:40Z"
 }
