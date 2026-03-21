@@ -1,7 +1,7 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T02:40:49Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-21T02:45:53Z",
+    "status": "restarting",
     "pid": 38150,
     "loop_count": 1180,
     "last_exit_code": 0,
@@ -9,17 +9,9 @@
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 1,
-        "task": "1774037786.521379",
-        "started_at": 1774060104,
-        "elapsed_sec": 744
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,24 +19,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.75,
-      "five": 2.01,
-      "fifteen": 2.05
+      "one": 1.86,
+      "five": 1.99,
+      "fifteen": 2.04
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 114638934016,
-    "disk_free_bytes": 130468261888,
-    "runner_log_size_bytes": 233281,
+    "disk_used_bytes": 114636963840,
+    "disk_free_bytes": 130470232064,
+    "runner_log_size_bytes": 234370,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-21T00:08:48Z",
+    "dashboard_started_utc": "2026-03-21T02:45:53Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T02:44:29Z",
+    "checked_at_utc": "2026-03-21T02:45:53Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 36
       },
       {
         "index": 1,
@@ -62,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 39
       },
       {
         "index": 2,
@@ -70,7 +62,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 37
       },
       {
         "index": 3,
@@ -78,7 +70,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 36
       },
       {
         "index": 4,
@@ -86,7 +78,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 5,
@@ -94,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 37
       },
       {
         "index": 6,
@@ -102,7 +94,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 37
       },
       {
         "index": 7,
@@ -110,30 +102,13 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 37
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1774037786.521379": {
-        "mention_ts": "1774037786.521379",
-        "thread_ts": "1774037786.521379",
-        "status": "in_progress",
-        "task_description": "I've just installed Google drive on your mac.",
-        "summary": "Switched Drive from the live [code] / [code] roots to the backup roots, shared [code] and [code] as Viewer, and left one human-visible caveat: the [code] sourc…",
-        "summary_preview": "Switched Drive from the live [code] / [code] roots to the backup roots, shared [code] and [code] as Viewer, and left one human-visible caveat: the [code] sourc…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774037786.521379",
-        "last_update_ts": "1774060104.298174",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T02:28:19Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773739092.072639": {
         "mention_ts": "1773739092.072639",
@@ -297,6 +272,22 @@
       }
     },
     "finished": {
+      "1774037786.521379": {
+        "mention_ts": "1774037786.521379",
+        "thread_ts": "1774037786.521379",
+        "status": "done",
+        "task_description": "I've just installed Google drive on your mac.",
+        "summary": "Drive now shows and shares [code] , [code] , and [code] ; the recycled [code] item was renamed in place and the stale old [code] cloud row was removed.",
+        "summary_preview": "Drive now shows and shares [code] , [code] , and [code] ; the recycled [code] item was renamed in place and the stale old [code] cloud row was removed.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774037786.521379",
+        "last_update_ts": "1774061153.663190",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T02:28:19Z"
+        }
+      },
       "1774053655.714169": {
         "mention_ts": "1774053655.714169",
         "thread_ts": "1774053655.714169",
@@ -1080,22 +1071,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T04:27:35Z"
         }
-      },
-      "1771798134.999029": {
-        "mention_ts": "1771798134.999029",
-        "thread_ts": "1771798134.999029",
-        "status": "done",
-        "task_description": "From now on can you always roadmap and memory docs directly as attachment along your system update messages?",
-        "summary": "User confirmed closure condition; uploaded ROADMAP and memory docs as direct thread attachments and posted completion note.",
-        "summary_preview": "User confirmed closure condition; uploaded ROADMAP and memory docs as direct thread attachments and posted completion note.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771798281.830669",
-        "last_update_ts": "1771802404.181108",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T22:11:21Z"
-        }
       }
     }
   },
@@ -1109,5 +1084,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T02:44:31Z"
+  "server_time_utc": "2026-03-21T02:45:56Z"
 }
