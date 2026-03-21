@@ -1,6 +1,6 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-21 08:07 UTC
+Last updated: 2026-03-21 18:01 UTC
 
 ## Current Status
 
@@ -30,6 +30,7 @@ Status:
 
 ### Activity Log
 
+- 2026-03-21 18:01 UTC — Hardened the `/tokenizers/` inline surface after overflow feedback: the token preview now has stricter shrink/wrap rules for long token strings, and the showcase embed republishes its iframe height on resize, font-settle, and other late layout changes so the lower token card does not get clipped.
 - 2026-03-21 08:07 UTC — Reordered the `/tokenizers/` selector stack so the browser UI now walks from newer releases toward older ones at every level instead of surfacing the smallest or earliest-added checkpoint first.
 - 2026-03-21 08:07 UTC — Pinned the default tokenizer route to `Kimi K2.5`, while keeping the showcase embed on its explicit `Qwen 3.5 4B` query so the gallery preview remains stable.
 - 2026-03-21 07:33 UTC — Expanded `/tokenizers/` from a representative sampler into much broader family coverage: the page now carries the full public text ladders for `Qwen 2.5`, `Qwen 3`, `Qwen 3.5`, `DeepSeek R1 Distill (Qwen)`, and `Falcon 3`, plus a larger `Mistral` / `Phi` catalog.

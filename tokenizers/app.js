@@ -96,12 +96,16 @@ document.addEventListener('DOMContentLoaded', () => {
   bindEvents();
   retokenize();
   if (VIEW.embed) {
+    initEmbedHeightObserver();
     window.addEventListener('resize', publishEmbedHeight);
+    window.addEventListener('load', publishEmbedHeight);
+    document.fonts?.ready?.then(() => publishEmbedHeight()).catch(() => {});
     publishEmbedHeight();
   }
 });
 
 function captureRefs() {
+  refs.pageShell = document.querySelector('.page-shell');
   refs.lineSelect = document.getElementById('line-select');
   refs.lineCaption = document.getElementById('line-caption');
   refs.familySelect = document.getElementById('family-select');
@@ -1297,16 +1301,29 @@ function publishEmbedHeight() {
   }
 
   window.requestAnimationFrame(() => {
-    const height = Math.max(
-      document.documentElement.scrollHeight,
-      document.body?.scrollHeight ?? 0,
-    );
+    window.requestAnimationFrame(() => {
+      const shellHeight = Math.ceil(refs.pageShell?.getBoundingClientRect().height ?? 0);
+      const bodyHeight = Math.ceil(document.body?.scrollHeight ?? 0);
+      const documentHeight = Math.ceil(document.documentElement.scrollHeight);
+      const height = Math.max(shellHeight, bodyHeight, documentHeight);
 
-    window.parent.postMessage({
-      type: 'tokenizer-embed-height',
-      height,
-    }, window.location.origin);
+      window.parent.postMessage({
+        type: 'tokenizer-embed-height',
+        height,
+      }, window.location.origin);
+    });
   });
+}
+
+function initEmbedHeightObserver() {
+  if (!VIEW.embed || typeof ResizeObserver === 'undefined') {
+    return;
+  }
+
+  const observer = new ResizeObserver(() => publishEmbedHeight());
+  [document.documentElement, document.body, refs.pageShell, refs.surfacePreview, refs.tokenStream]
+    .filter(Boolean)
+    .forEach((node) => observer.observe(node));
 }
 
 async function copyTokenIds() {
