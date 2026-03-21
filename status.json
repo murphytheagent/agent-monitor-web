@@ -33,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.46,
-      "five": 1.7,
-      "fifteen": 1.77
+      "one": 1.85,
+      "five": 1.73,
+      "fifteen": 1.76
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112819441664,
-    "disk_free_bytes": 132287754240,
-    "runner_log_size_bytes": 247219,
+    "disk_used_bytes": 112819683328,
+    "disk_free_bytes": 132287512576,
+    "runner_log_size_bytes": 247624,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T11:35:20Z",
     "local_ips": []
@@ -50,7 +50,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T18:54:32Z",
+    "checked_at_utc": "2026-03-21T18:56:34Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -73,7 +73,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 34099,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -89,7 +89,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 4,
+        "utilization_gpu_pct": 1,
         "memory_used_mb": 33873,
         "memory_total_mb": 97887,
         "temperature_c": 31
@@ -105,7 +105,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 34099,
         "memory_total_mb": 97887,
         "temperature_c": 31
@@ -113,7 +113,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 33873,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -123,22 +123,6 @@
   "tasks": {
     "queued": {},
     "active": {
-      "1773870804.162569": {
-        "mention_ts": "1773870804.162569",
-        "thread_ts": "1773870804.162569",
-        "status": "in_progress",
-        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
-        "summary": "Refined the cot-loop recommendation around a larger GPQA binary prompt-profile run: on the finished pilot archive [code] still collapses to cap-hit, so the nex…",
-        "summary_preview": "Refined the cot-loop recommendation around a larger GPQA binary prompt-profile run: on the finished pilot archive [code] still collapses to cap-hit, so the nex…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773870804.162569",
-        "last_update_ts": "1774118783.980505",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-18T21:53:24Z"
-        }
-      },
       "1774118740.758569": {
         "mention_ts": "1774118740.758569",
         "thread_ts": "1774118740.758569",
@@ -331,6 +315,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T07:01:22Z"
+        }
+      },
+      "1773870804.162569": {
+        "mention_ts": "1773870804.162569",
+        "thread_ts": "1773870804.162569",
+        "status": "waiting_human",
+        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
+        "summary": "Rechecked the finished GPQA pilot against the collaborator's rollout-level [code] , [code] proposal, confirmed that the label still collapses to cap-hit on the…",
+        "summary_preview": "Rechecked the finished GPQA pilot against the collaborator's rollout-level [code] , [code] proposal, confirmed that the label still collapses to cap-hit on the…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773870804.162569",
+        "last_update_ts": "1774119389.199725",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-18T21:53:24Z"
         }
       }
     },
@@ -1147,5 +1147,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T18:54:32Z"
+  "server_time_utc": "2026-03-21T18:56:35Z"
 }
