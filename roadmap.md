@@ -1,15 +1,15 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-21 22:09 UTC
+Last updated: 2026-03-21 22:42 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
-- The exporter-backed root routes `/` and `/roadmap/` now use the same Murphy shell and five-route navigation map as the hand-maintained public pages.
+- The hand-maintained public routes now use a clearer two-level Murphy nav: top-level `Monitor / Roadmap / Showcase`, then a showcase-local row for `Tokenizer Lab` and `Res Publica`.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
 - `/showcase/`, `/tokenizers/`, and `/showcase/res-publica/` still share the same Murphy-branded shell, so the whole public site now reads as one authored system instead of two styles split by route ownership.
 - The tokenizer workbench selectors now run newest-to-oldest across lines, families, and configurations instead of inheriting the raw catalog insertion order.
-- The showcase route now separates the tokenizer and `Res Publica` into two explicit exhibit lanes: a single-model live tokenizer study first, then the architecture piece as its own card and CTA.
+- The showcase route now explains the structure directly: `Showcase` is the parent gallery, and the tokenizer plus `Res Publica` are the two sibling exhibits inside it.
 - The root dashboard now has exporter-backed navigation to the public surfaces, so the old tiny roadmap utility link mismatch is gone.
 
 ## Milestone 1 - Stable Hosted Surfaces
@@ -32,6 +32,8 @@ Status:
 
 ### Activity Log
 
+- 2026-03-21 22:42 UTC — Reworked the durable public-page header after hierarchy feedback. `/showcase/`, `/tokenizers/`, and `/showcase/res-publica/` now stop the top-level nav at `Monitor`, `Roadmap`, and `Showcase`, then use a second `Inside Showcase` row for the two sibling exhibits instead of flattening all five routes into one crowded slab.
+- 2026-03-21 22:42 UTC — Rewrote the showcase hero and route explainer to state the information architecture plainly: the gallery is the parent surface, and `Tokenizer Lab` plus `Res Publica` live inside it as peers.
 - 2026-03-21 22:09 UTC — Extended the Murphy shell into the exporter-owned root surfaces. `/` now uses the same signature wordmark and five-route navigation map as the showcase pages, and the old tiny roadmap utility link was replaced by a real shell-level nav system plus route cards.
 - 2026-03-21 22:09 UTC — Rebuilt `/roadmap/` as a first-class planning surface instead of a raw utility page: shared header shell, roadmap hero/stat cards, richer roadmap item cards with context, and browser-verified desktop/mobile layouts.
 - 2026-03-21 21:33 UTC — Aligned `/showcase/` and `/showcase/res-publica/` to the same Murphy signature, kicker, and rectangular route-button shell already used by `/tokenizers/`, so the durable public pages no longer read as neighboring mini-sites.

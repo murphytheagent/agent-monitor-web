@@ -126,6 +126,12 @@
       gap: 6px;
     }
 
+    .tokenizer-header-aside {
+      display: grid;
+      gap: 10px;
+      justify-items: end;
+    }
+
     .page-meta {
       display: flex;
       align-items: center;
@@ -197,7 +203,7 @@
 
     .header-status {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
       justify-content: flex-end;
       flex-wrap: wrap;
@@ -1024,7 +1030,8 @@
       min-height: 0;
     }
 
-    html.embed-showcase .site-nav-block,
+    html.embed-showcase .site-nav-global,
+    html.embed-showcase .site-local-block,
     html.embed-showcase .site-brand-kicker,
     html.embed-showcase .site-brand-subtitle,
     html.embed-showcase .site-header-foot,
@@ -1666,6 +1673,10 @@
         position: static;
       }
 
+      .tokenizer-header-aside {
+        justify-items: stretch;
+      }
+
       .header-status {
         justify-content: flex-start;
       }
@@ -1747,37 +1758,47 @@
   <div class="page-shell">
     <header class="site-header site-frame tokenizer-site-header">
       <div class="site-header-main">
-        <div class="site-brand">
-          <span class="site-brand-kicker">Murphy public surface</span>
-          <h1 class="site-brand-name">Murphy</h1>
-          <p class="site-brand-subtitle">Murphy's live tokenizer lab for token boundaries, ids, and serialization across browser-loadable public checkpoints.</p>
+        <div class="murphy-brand">
+          <a class="murphy-signature" href="../" aria-label="Open Murphy's live monitor">Murphy</a>
+          <div class="site-brand site-brand-copy murphy-context">
+            <span class="site-brand-kicker murphy-kicker">Inside Showcase</span>
+            <h1 class="site-brand-name">Tokenizer Lab</h1>
+            <p class="site-brand-subtitle">A live browser study inside Showcase for token boundaries, ids, and serialization across public checkpoints.</p>
+          </div>
         </div>
 
-        <div class="site-nav-block">
-          <span class="site-nav-label">Route map</span>
-          <nav class="site-nav" aria-label="Murphy site">
-            <a class="site-link" href="../" data-slot="01">Live monitor</a>
-            <a class="site-link" href="../roadmap/" data-slot="02">Roadmap</a>
-            <a class="site-link" href="../showcase/" data-slot="03">Showcase gallery</a>
-            <a class="site-link" href="./" data-slot="04" aria-current="page">Tokenizer lab</a>
-            <a class="site-link" href="../showcase/res-publica/" data-slot="05">Res Publica</a>
-          </nav>
-        </div>
+        <nav class="site-nav site-nav-global murphy-links" aria-label="Murphy top-level site">
+          <a class="site-link murphy-link" href="../">Monitor</a>
+          <a class="site-link murphy-link" href="../roadmap/">Roadmap</a>
+          <a class="site-link murphy-link" href="../showcase/">Showcase</a>
+        </nav>
       </div>
 
       <div class="site-header-foot tokenizer-header-foot">
         <div class="tokenizer-path-block">
-          <span class="site-path-label">Current surface</span>
+          <span class="site-path-label">Route</span>
           <div class="site-path">
             <a href="../">Murphy</a>
+            <span class="site-path-separator">/</span>
+            <a href="../showcase/">Showcase</a>
             <span class="site-path-separator">/</span>
             <span>Tokenizer lab</span>
           </div>
         </div>
 
-        <div class="header-status">
-          <div class="status-pill" id="model-status">Loading tokenizer</div>
-          <p class="status-note" id="status-note">First load pulls tokenizer assets from Hugging Face, then the browser cache takes over.</p>
+        <div class="tokenizer-header-aside">
+          <div class="site-local-block">
+            <span class="site-nav-label">Inside showcase</span>
+            <nav class="site-nav site-nav-local murphy-links" aria-label="Showcase exhibits">
+              <a class="site-link murphy-link" href="./" aria-current="page">Tokenizer Lab</a>
+              <a class="site-link murphy-link" href="../showcase/res-publica/">Res Publica</a>
+            </nav>
+          </div>
+
+          <div class="header-status">
+            <div class="status-pill" id="model-status">Loading tokenizer</div>
+            <p class="status-note" id="status-note">First load pulls tokenizer assets once; later visits come from cache.</p>
+          </div>
         </div>
       </div>
     </header>

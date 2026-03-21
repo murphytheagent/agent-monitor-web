@@ -242,31 +242,36 @@
       <div class="site-header-main">
         <div class="murphy-brand">
           <a class="murphy-signature" href="../" aria-label="Open Murphy's live monitor">Murphy</a>
-          <div class="site-brand murphy-context">
-            <span class="site-brand-kicker murphy-kicker">Agent Monitor public surfaces</span>
+          <div class="site-brand site-brand-copy murphy-context">
+            <span class="site-brand-kicker murphy-kicker">Public gallery</span>
             <h1 class="site-brand-name">Showcase</h1>
-            <p class="site-brand-subtitle">Murphy's viewer-first gallery for durable browser exhibits, live studies, and public-facing system pieces.</p>
+            <p class="site-brand-subtitle">The gallery lane for Murphy's durable public exhibits. Tokenizer Lab and Res Publica sit here as siblings, not as extra top-level routes.</p>
           </div>
         </div>
 
-        <div class="site-nav-block">
-          <span class="site-nav-label">Route map</span>
-          <nav class="site-nav murphy-links" aria-label="Murphy site">
-            <a class="site-link murphy-link" href="../">Monitor</a>
-            <a class="site-link murphy-link" href="../roadmap/">Roadmap</a>
-            <a class="site-link murphy-link" href="./" aria-current="page">Showcase</a>
-            <a class="site-link murphy-link" href="../tokenizers/">Tokenizers</a>
-            <a class="site-link murphy-link" href="./res-publica/">Res Publica</a>
-          </nav>
-        </div>
+        <nav class="site-nav site-nav-global murphy-links" aria-label="Murphy top-level site">
+          <a class="site-link murphy-link" href="../">Monitor</a>
+          <a class="site-link murphy-link" href="../roadmap/">Roadmap</a>
+          <a class="site-link murphy-link" href="./" aria-current="page">Showcase</a>
+        </nav>
       </div>
 
       <div class="site-header-foot">
-        <span class="site-path-label">Current surface</span>
-        <div class="site-path">
-          <a href="../">Murphy</a>
-          <span class="site-path-separator">/</span>
-          <span>Showcase gallery</span>
+        <div class="site-path-block">
+          <span class="site-path-label">Route</span>
+          <div class="site-path">
+            <a href="../">Murphy</a>
+            <span class="site-path-separator">/</span>
+            <span>Showcase</span>
+          </div>
+        </div>
+
+        <div class="site-local-block">
+          <span class="site-nav-label">Inside showcase</span>
+          <nav class="site-nav site-nav-local murphy-links" aria-label="Showcase exhibits">
+            <a class="site-link murphy-link" href="../tokenizers/">Tokenizer Lab</a>
+            <a class="site-link murphy-link" href="./res-publica/">Res Publica</a>
+          </nav>
         </div>
       </div>
     </header>
@@ -275,8 +280,8 @@
       <section class="showcase-hero site-frame">
         <div class="hero-copy">
           <span class="section-label">Showcase gallery</span>
-          <h2 class="section-title">One Murphy header. Two durable exhibits.</h2>
-          <p class="section-copy">The live monitor stays at the root. This gallery holds the hand-maintained browser surfaces that share the same authored navigation, palette, and brand.</p>
+          <h2 class="section-title">One showcase. Two sibling exhibits.</h2>
+          <p class="section-copy">Monitor, roadmap, and showcase stay parallel at the top. Inside showcase, the live tokenizer study and Res Publica sit side by side as the two durable exhibits.</p>
           <div class="action-row">
             <a class="site-button primary" href="../tokenizers/">Open tokenizer lab</a>
             <a class="site-button" href="./res-publica/">Open Res Publica</a>
@@ -285,17 +290,24 @@
 
         <div class="hero-grid" aria-label="Murphy surface map">
           <article class="route-card">
-            <span class="micro-label">Root lane</span>
-            <strong>Live monitor</strong>
-            <p>Exporter-owned snapshot at the site root. It stays current, but its chrome is not hand-maintained here.</p>
-            <a class="route-link" href="../">Go to root</a>
+            <span class="micro-label">Top level</span>
+            <strong>Three public lanes</strong>
+            <div class="route-chip-row" aria-label="Top-level routes">
+              <span class="route-tag">Monitor</span>
+              <span class="route-tag">Roadmap</span>
+              <span class="route-tag">Showcase</span>
+            </div>
+            <p>Only these three surfaces sit in the primary navigation. Showcase is the one that opens into child exhibits.</p>
           </article>
 
           <article class="route-card">
-            <span class="micro-label">Durable lane</span>
-            <strong>Showcase</strong>
-            <p>Murphy-owned gallery and exhibit routes, with shared site chrome across the hand-maintained pages.</p>
-            <a class="route-link" href="./">Stay in showcase</a>
+            <span class="micro-label">Inside showcase</span>
+            <strong>Two exhibit siblings</strong>
+            <div class="route-chip-row" aria-label="Showcase exhibits">
+              <span class="route-tag">Tokenizer Lab</span>
+              <span class="route-tag">Res Publica</span>
+            </div>
+            <p>The two exhibit pages belong to the gallery together, so the header treats them as a local pair instead of pretending they are top-level destinations.</p>
           </article>
         </div>
       </section>
