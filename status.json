@@ -19,14 +19,14 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.02,
-      "five": 2.06,
-      "fifteen": 2.03
+      "one": 2.28,
+      "five": 2.17,
+      "fifteen": 2.07
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112896327680,
-    "disk_free_bytes": 132210868224,
+    "disk_used_bytes": 112899162112,
+    "disk_free_bytes": 132208033792,
     "runner_log_size_bytes": 267929,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T20:23:26Z",
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T21:14:26Z",
+    "checked_at_utc": "2026-03-21T21:16:29Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,7 +59,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 9,
+        "utilization_gpu_pct": 10,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -75,7 +75,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 6,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -91,7 +91,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
+        "utilization_gpu_pct": 8,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,7 +99,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -1154,18 +1154,6 @@
         "has_issue": false
       },
       {
-        "id": "FIX-004",
-        "queue": "fix",
-        "created": "2026-03-20",
-        "priority": "Medium",
-        "status": "open",
-        "task": "Concurrent `.agent/` write coordination",
-        "context": "Multiple workers write to `.agent/memory/memory.md` etc. through symlinks concurrently. Last-write-wins, no locking.",
-        "done_when": "Advisory locking or supervisor-mediated updates for shared `.agent/` state files.",
-        "has_plan": false,
-        "has_issue": false
-      },
-      {
         "id": "FIX-007",
         "queue": "fix",
         "created": "2026-03-21",
@@ -1408,6 +1396,12 @@
     ],
     "completed": [
       {
+        "id": "FIX-004",
+        "created": "2026-03-20",
+        "completed": "2026-03-21",
+        "summary": "Concurrent `.agent/` write coordination: advisory file locking via `fcntl.flock`. New `filelock.py` module + `scripts/agent_flock` CLI. Worker prompt uses locked appends for profile logs. Supervisor m"
+      },
+      {
         "id": "FIX-003",
         "created": "2026-03-20",
         "completed": "2026-03-21",
@@ -1617,5 +1611,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T21:14:27Z"
+  "server_time_utc": "2026-03-21T21:16:30Z"
 }
