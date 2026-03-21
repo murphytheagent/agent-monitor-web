@@ -1858,5 +1858,224 @@
         "content": "Now I'll add the test right before the `TestPerTaskOutcomes` class."
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:12:33.927Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"    def test_delivery_guard_skipped_for_maintenance(self):\\n        \\\"\\\"\\\"Maintenance tasks skip delivery guard even without agent reply.\\\"\\\"\\\"\\n        with tempfile.TemporaryDirectory() as td:\\n            sup = self._sup(td)\\n            key = \\\"1000.000000\\\"\\n            state = _empty_state()\\n            task = _make_task(key, \\\"in_progress\\\", \\\"maintenance\\\", maintenance_pha"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:12:33.939Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:12:38.378Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me run the tests to verify."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:12:39.613Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -v -k \\\"done_reaction\\\" 2>&1\", \"description\": \"Run done reaction tests\", \"timeout\": 60000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:12:40.219Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "============================= test session starts ==============================\nplatform darwin -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0 -- /opt/homebrew/opt/python@3.11/bin/python3.11\ncachedir: .pytest_cache\nrootdir: /Users/murphy/Research\nplugins: anyio-4.12.1\ncollecting ... collected 393 items / 390 deselected / 3 selected\n\nsrc/loop/tests/test_supervisor_loop.py::TestReconcileTaskAfterRun::test_done_reaction_error_does_not_propagate PASSED [ 33%]\nsrc/loop/tests/test_supervisor_loop.py::TestReconcileTaskAfterRun::test_done_reaction_posted_on_completion PASSED [ 66%]\nsrc/loop/tests/test_supervisor_loop.py::TestReconcileTaskAfterRun::test_done_reaction_skipped_for_non_done_status PASSED [100%]\n\n====================== 3 passed, 390 deselected in 0.32s ======================="
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:12:43.466Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 3 tests pass. Let me also run the full test suite to make sure nothing is broken."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:12:44.023Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -v 2>&1 | tail -30\", \"description\": \"Run full test suite\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:13:09.407Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "src/loop/tests/test_supervisor_loop.py::TestTribuneModelFallback::test_swap_model_does_not_mutate_input PASSED [ 93%]\nsrc/loop/tests/test_supervisor_loop.py::TestTribuneModelFallback::test_swap_model_inserts_when_missing PASSED [ 93%]\nsrc/loop/tests/test_supervisor_loop.py::TestTribuneModelFallback::test_swap_model_replaces_existing PASSED [ 93%]\nsrc/loop/tests/test_supervisor_loop.py::TestUserProfiling::test_char_limit_truncation PASSED [ 93%]\nsrc/loop/tests/test_supervisor_loop.py::TestUserProfiling::test_invalid_json_returns_empty PASSED [ 94%]\nsrc/loop/tests/test_supervisor_loop.py::TestUserProfiling::test_missing_profile_fallback PASSED [ 94%]\nsrc/loop/tests/test_supervisor_loop.py::TestUserProfiling::test_multiple_fields_formatted PASSED [ 94%]\nsrc/loop/tests/test_supervisor_loop.py::TestUserProfiling::test_profile_injection_parallel PASSED [ 94%]\nsrc/loop/tests/test_supervisor_loop.py::TestUserProfiling::test_profile_injection_serial PASSED [ 95%]\nsrc/loop/tests/test_supervisor_"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:13:13.633Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 393 tests pass. Now let me move to iterative review on the implementation."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:13:16.987Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Read codebase to understand current reconciliation flow and removed _notify_task_done\", \"status\": \"completed\", \"activeForm\": \"Reading codebase to understand reconciliation flow\"}, {\"content\": \"Write implementation plan for restoring done marker\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Run iterative review on the plan\", \"status\": \"completed\", \"activeForm\": \"Running iterative review on plan\"}, {\"content\": \"Implement the fix\", \"stat"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:13:16.989Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:13:21.696Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git diff HEAD -- src/loop/supervisor/runtime.py src/loop/tests/test_supervisor_loop.py 2>&1 | head -200\", \"description\": \"Get diff for implementation review\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:13:21.753Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "diff --git a/src/loop/supervisor/runtime.py b/src/loop/supervisor/runtime.py\nindex 76c598e..afd678e 100644\n--- a/src/loop/supervisor/runtime.py\n+++ b/src/loop/supervisor/runtime.py\n@@ -1028,6 +1028,27 @@ class Supervisor:\n         )\n         return self._slack_request(method, req)\n \n+    def _mark_task_done_reaction(self, channel_id: str, mention_ts: str) -> None:\n+        \"\"\"Add a check-mark reaction to the task's original message to signal completion.\"\"\"\n+        if not self.slack_token or not channel_id or not mention_ts:\n+            return\n+        try:\n+            resp = self.slack_api_post(\"reactions.add\", {\n+                \"channel\": channel_id,\n+                \"timestamp\": mention_ts,\n+                \"name\": \"white_check_mark\",\n+            })\n+            if not resp.get(\"ok\") and resp.get(\"error\") != \"already_reacted\":\n+                self.log_line(\n+                    f\"done_reaction_failed channel={channel_id} ts={mention_ts} \"\n+                    f\"slack_error={res"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:13:25.688Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good, the diff is clean. Now let me dispatch both reviewers for the implementation review."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:13:45.872Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"IMPL_DIFF=$(git diff HEAD -- src/loop/supervisor/runtime.py src/loop/tests/test_supervisor_loop.py)\\n\\nTRIBUNE_PROMPT=\\\"You are the Tribune — an independent quality reviewer. Review the following code changes for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\\n2. **Security issues**: Injection, auth bypass, sensitive data exposure\\n3. **Contract violations**: Does the code violate documented interfaces, schemas, or invariants?\\n4. **E"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:13:45.890Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Command running in background with ID: bn1sz9h9v. Output is being written to: /private/tmp/claude-501/-Users-murphy-Research/3fc7f8cb-2d3a-5ab9-9f9f-900a356023e6/tasks/bn1sz9h9v.output"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:13:55.992Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"IMPL_DIFF=$(git diff HEAD -- src/loop/supervisor/runtime.py src/loop/tests/test_supervisor_loop.py)\\n\\nMURPHY_PROMPT=\\\"You are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following code changes for:\\n\\n1. **Runtime failures**: Will this crash, hang, or produce wrong results in real usage?\\n2. **Edge cases**: Unusual inputs, empty collections, concurrent access, large data\\n3. **Test coverage**: Are the change"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:13:56.016Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Command running in background with ID: be96swl32. Output is being written to: /private/tmp/claude-501/-Users-murphy-Research/3fc7f8cb-2d3a-5ab9-9f9f-900a356023e6/tasks/be96swl32.output"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:13:59.675Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TaskOutput",
+        "input_preview": "{\"task_id\": \"bn1sz9h9v\", \"block\": true, \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-21T23:13:59.676Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<tool_use_error>No task found with ID: bn1sz9h9v</tool_use_error>"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-21T23:13:59.970Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TaskOutput",
+        "input_preview": "{\"task_id\": \"be96swl32\", \"block\": true, \"timeout\": 300000}"
+      }
+    ]
   }
 ]
