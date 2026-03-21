@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T01:54:42Z",
+    "last_updated_utc": "2026-03-21T01:57:23Z",
     "status": "workers_active",
     "pid": 38150,
-    "loop_count": 876,
+    "loop_count": 889,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -14,16 +14,10 @@
     "max_workers": 8,
     "active_workers": [
       {
-        "slot": 0,
-        "task": "1774027390.110939",
-        "started_at": 1774057381,
-        "elapsed_sec": 701
-      },
-      {
         "slot": 1,
         "task": "1774037786.521379",
         "started_at": 1774056074,
-        "elapsed_sec": 2008
+        "elapsed_sec": 2169
       }
     ]
   },
@@ -33,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.79,
-      "five": 1.71,
-      "fifteen": 1.79
+      "one": 2.22,
+      "five": 1.85,
+      "fifteen": 1.82
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 114633252864,
-    "disk_free_bytes": 130473943040,
-    "runner_log_size_bytes": 231532,
+    "disk_used_bytes": 114602676224,
+    "disk_free_bytes": 130504519680,
+    "runner_log_size_bytes": 231800,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T00:08:48Z",
     "local_ips": []
@@ -50,57 +44,57 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T01:55:24Z",
+    "checked_at_utc": "2026-03-21T01:57:26Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 13,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 35
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 36
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 51,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 35
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 40,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 35
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 43,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 34
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 22,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 36
       },
       {
         "index": 6,
@@ -108,15 +102,15 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 35
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 74,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 35
       }
     ]
   },
@@ -300,25 +294,25 @@
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T06:00:38Z"
         }
-      },
+      }
+    },
+    "finished": {
       "1774027390.110939": {
         "mention_ts": "1774027390.110939",
         "thread_ts": "1774027390.110939",
-        "status": "waiting_human",
+        "status": "done",
         "task_description": "The current showcase website seems to contain many redundant information.",
         "summary": "Restored the Res Publica architecture panel to the live showcase and re-verified the hosted page.",
         "summary_preview": "Restored the Res Publica architecture panel to the live showcase and re-verified the hosted page.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774027390.110939",
-        "last_update_ts": "1774058088.322102",
+        "last_update_ts": "1774058164.378677",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T17:23:10Z"
         }
-      }
-    },
-    "finished": {
+      },
       "1774053655.714169": {
         "mention_ts": "1774053655.714169",
         "thread_ts": "1774053655.714169",
@@ -1102,22 +1096,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T22:11:21Z"
         }
-      },
-      "1771795620.656239": {
-        "mention_ts": "1771795620.656239",
-        "thread_ts": "1771795620.656239",
-        "status": "done",
-        "task_description": "Can you check if codex can still review your PRs if you make projects private.",
-        "summary": "Posted ACK and answered in-thread that Codex can review PRs in private repos when GitHub app/repo access is granted and per-repo Code review is enabled, with c…",
-        "summary_preview": "Posted ACK and answered in-thread that Codex can review PRs in private repos when GitHub app/repo access is granted and per-repo Code review is enabled, with c…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771795775.859239",
-        "last_update_ts": "1771799118.966628",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T21:29:35Z"
-        }
       }
     }
   },
@@ -1131,5 +1109,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T01:55:24Z"
+  "server_time_utc": "2026-03-21T01:57:28Z"
 }
