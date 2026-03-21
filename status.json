@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T22:49:45Z",
+    "last_updated_utc": "2026-03-21T22:51:50Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 471,
+    "loop_count": 488,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,7 @@
         "slot": 0,
         "task": "1774125045.062829",
         "started_at": 1774132234,
-        "elapsed_sec": 1150
+        "elapsed_sec": 1275
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.96,
-      "five": 2.18,
-      "fifteen": 2.17
+      "one": 2.42,
+      "five": 2.34,
+      "fifteen": 2.23
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113077813248,
-    "disk_free_bytes": 132029382656,
-    "runner_log_size_bytes": 290041,
+    "disk_used_bytes": 113012457472,
+    "disk_free_bytes": 132094738432,
+    "runner_log_size_bytes": 290992,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T21:51:08Z",
     "local_ips": []
@@ -44,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T22:49:55Z",
+    "checked_at_utc": "2026-03-21T22:51:58Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -67,7 +67,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -78,12 +78,12 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 27
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 6,
+        "utilization_gpu_pct": 9,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,7 +99,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 8,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -107,7 +107,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 6,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -115,25 +115,25 @@
     ]
   },
   "tasks": {
-    "queued": {},
-    "active": {
-      "1774125045.062829": {
-        "mention_ts": "1774125045.062829",
-        "thread_ts": "1774125045.062829",
-        "status": "in_progress",
-        "task_description": "Let's come back to the design for the website.",
-        "summary": "PR #22 now carries the Murphy-branded dashboard and roadmap redesign; the public site will update when that project PR merges.",
-        "summary_preview": "PR #22 now carries the Murphy-branded dashboard and roadmap redesign; the public site will update when that project PR merges.",
+    "queued": {
+      "1774133473.190269": {
+        "mention_ts": "1774133473.190269",
+        "thread_ts": "1774133473.190269",
+        "status": "queued",
+        "task_description": "Development: FIX-008.",
+        "summary": "Development: FIX-008.",
+        "summary_preview": "Development: FIX-008.",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774125045.062829",
-        "last_update_ts": "1774132234.528354",
-        "task_type": "slack_mention",
+        "created_ts": "1774133486.788065",
+        "last_update_ts": "1774133486.788065",
+        "task_type": "development",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-21T20:30:45Z"
+          "time_iso": "2026-03-21T22:51:13Z"
         }
       }
     },
+    "active": {},
     "incomplete": {
       "1773899776.033029": {
         "mention_ts": "1773899776.033029",
@@ -357,6 +357,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T22:21:48Z"
+        }
+      },
+      "1774125045.062829": {
+        "mention_ts": "1774125045.062829",
+        "thread_ts": "1774125045.062829",
+        "status": "waiting_human",
+        "task_description": "Let's come back to the design for the website.",
+        "summary": "PR #23 now gives the durable site a cleaner hierarchy: [code] is the parent route, with [code] and [code] grouped beneath it under a lighter shared header.",
+        "summary_preview": "PR #23 now gives the durable site a cleaner hierarchy: [code] is the parent route, with [code] and [code] grouped beneath it under a lighter shared header.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774125045.062829",
+        "last_update_ts": "1774133516.487999",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T20:30:45Z"
         }
       }
     },
@@ -1635,5 +1651,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T22:49:56Z"
+  "server_time_utc": "2026-03-21T22:51:59Z"
 }
