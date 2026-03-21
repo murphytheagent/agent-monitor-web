@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T19:46:08Z",
+    "last_updated_utc": "2026-03-21T19:46:14Z",
     "status": "workers_active",
     "pid": 18602,
-    "loop_count": 18,
+    "loop_count": 19,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,7 @@
         "slot": 0,
         "task": "1774118740.758569",
         "started_at": 1774122257,
-        "elapsed_sec": 111
+        "elapsed_sec": 117
       }
     ]
   },
@@ -27,24 +27,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.09,
-      "five": 2.25,
-      "fifteen": 1.98
+      "one": 1.77,
+      "five": 2.14,
+      "fifteen": 1.95
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112858890240,
-    "disk_free_bytes": 132248305664,
-    "runner_log_size_bytes": 259284,
+    "disk_used_bytes": 112859308032,
+    "disk_free_bytes": 132247887872,
+    "runner_log_size_bytes": 259825,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-21T19:44:11Z",
+    "dashboard_started_utc": "2026-03-21T19:47:05Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T19:46:13Z",
+    "checked_at_utc": "2026-03-21T19:47:05Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -67,7 +67,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 5,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,7 +99,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 6,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -115,24 +115,7 @@
     ]
   },
   "tasks": {
-    "queued": {
-      "dev-review-fix-003": {
-        "mention_ts": "dev-review-fix-003",
-        "thread_ts": "dev-review-fix-003",
-        "status": "queued",
-        "task_description": "Development: FIX-003.",
-        "summary": "Development: FIX-003.",
-        "summary_preview": "Development: FIX-003.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774122252.435128",
-        "last_update_ts": "1774122257.117384",
-        "task_type": "development",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T19:44:12Z"
-        }
-      }
-    },
+    "queued": {},
     "active": {
       "1774118740.758569": {
         "mention_ts": "1774118740.758569",
@@ -1424,5 +1407,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T19:46:14Z"
+  "server_time_utc": "2026-03-21T19:47:06Z"
 }
