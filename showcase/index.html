@@ -3,259 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Showcase | Agent Monitor</title>
+  <title>Murphy Showcase</title>
   <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./assets/site.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
-    :root {
-      --bg: #03020a;
-      --panel: rgba(8, 12, 30, 0.94);
-      --panel-strong: rgba(10, 15, 34, 0.98);
-      --panel-soft: rgba(8, 12, 26, 0.88);
-      --line: rgba(56, 240, 255, 0.34);
-      --line-strong: rgba(255, 47, 179, 0.56);
-      --text: #eef8ff;
-      --muted: #9badd3;
-      --dim: #6679aa;
-      --accent: #38f0ff;
-      --accent-2: #ff2fb3;
-      --shadow: 10px 10px 0 rgba(255, 47, 179, 0.16), -4px -4px 0 rgba(56, 240, 255, 0.1);
-      --page-width: min(1360px, calc(100vw - 28px));
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 12% 10%, rgba(56, 240, 255, 0.18) 0%, transparent 28%),
-        radial-gradient(circle at 88% 6%, rgba(255, 47, 179, 0.16) 0%, transparent 32%),
-        radial-gradient(circle at 50% 120%, rgba(56, 240, 255, 0.08) 0%, transparent 40%),
-        linear-gradient(155deg, #03020a 0%, #080318 46%, #12061c 100%);
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          rgba(90, 126, 255, 0.07) 0,
-          rgba(90, 126, 255, 0.07) 1px,
-          transparent 1px,
-          transparent 5px
-        ),
-        repeating-linear-gradient(
-          to right,
-          rgba(56, 240, 255, 0.04) 0,
-          rgba(56, 240, 255, 0.04) 1px,
-          transparent 1px,
-          transparent 68px
-        );
-      opacity: 0.32;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .page-shell {
-      position: relative;
-      z-index: 1;
-      width: var(--page-width);
-      margin: 0 auto;
-      padding: 12px 0 40px;
-    }
-
-    .frame {
-      border: 2px solid var(--line);
-      background: linear-gradient(145deg, rgba(10, 11, 31, 0.96) 0%, rgba(8, 16, 38, 0.92) 100%);
-      box-shadow: var(--shadow);
-    }
-
-    .topbar,
-    .intro,
-    .exhibit {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .topbar::before,
-    .intro::before,
-    .exhibit::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(56, 240, 255, 0) 0%, rgba(56, 240, 255, 0.7) 24%, rgba(255, 47, 179, 0.78) 100%);
-      pointer-events: none;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 16px;
-    }
-
-    .brand {
-      display: grid;
-      gap: 2px;
-      min-width: 0;
-    }
-
-    .eyebrow,
-    .micro-label,
-    .legend-chip,
-    .meta-chip,
-    .role-chip {
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow,
-    .micro-label {
-      color: var(--accent);
-    }
-
-    .brand h1,
-    .intro h2,
-    .exhibit-copy h3,
-    .artifact-copy h4 {
-      margin: 0;
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      text-transform: uppercase;
-      text-shadow: 0 0 12px rgba(56, 240, 255, 0.26), 0 0 10px rgba(255, 47, 179, 0.18);
-    }
-
-    .brand h1 {
-      font-size: 21px;
-      line-height: 1;
-      letter-spacing: 0.08em;
-    }
-
-    .brand p,
-    .intro p,
-    .exhibit-copy p,
-    .artifact-copy p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .brand p {
-      font-size: 13px;
-    }
-
-    .topbar-links,
-    .intro-legend,
-    .exhibit-actions,
-    .meta-row,
-    .role-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .nav-link,
-    .action-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 0 14px;
-      border: 1px solid var(--line);
-      background: rgba(6, 12, 28, 0.92);
-      color: var(--text);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
-    }
-
-    .nav-link:hover,
-    .action-link:hover {
-      transform: translate(-2px, -2px);
-      border-color: var(--line-strong);
-      box-shadow: 6px 6px 0 rgba(255, 47, 179, 0.18);
-    }
-
-    .action-link.primary {
-      background: linear-gradient(90deg, rgba(16, 38, 74, 0.94) 0%, rgba(63, 16, 70, 0.92) 100%);
-    }
-
-    main {
-      display: grid;
-      gap: 18px;
-      margin-top: 16px;
-    }
-
-    .intro {
-      display: grid;
-      grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
-      gap: 18px;
+    .showcase-hero,
+    .exhibit-card {
       padding: 18px;
+    }
+
+    .showcase-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+      gap: 18px;
       align-items: start;
     }
 
-    .intro-copy {
+    .hero-copy,
+    .exhibit-copy-block,
+    .copy-panel {
       display: grid;
-      gap: 10px;
-      max-width: 760px;
-    }
-
-    .intro h2 {
-      font-size: clamp(28px, 4.4vw, 48px);
-      line-height: 0.96;
-      letter-spacing: 0.05em;
-    }
-
-    .intro p {
-      font-size: clamp(17px, 2vw, 22px);
-      line-height: 1.18;
-      max-width: 620px;
-    }
-
-    .intro-legend {
-      justify-content: flex-end;
+      gap: 12px;
       align-content: start;
     }
 
-    .legend-chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 42px;
-      padding: 0 12px;
-      border: 1px solid rgba(56, 240, 255, 0.24);
-      background: rgba(7, 13, 26, 0.88);
-      color: var(--text);
+    .section-title {
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 0.92;
+      letter-spacing: 0.06em;
+    }
+
+    .section-copy {
+      max-width: 660px;
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.16;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .route-card,
+    .artifact-panel {
+      border: 1px solid rgba(56, 240, 255, 0.18);
+      background: rgba(5, 10, 20, 0.84);
+    }
+
+    .route-card {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .route-card strong {
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .route-card p,
+    .copy-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.34;
     }
 
     .gallery {
@@ -263,10 +77,9 @@
       gap: 18px;
     }
 
-    .exhibit {
+    .exhibit-card {
       display: grid;
       gap: 18px;
-      padding: 18px;
     }
 
     .exhibit-head {
@@ -276,56 +89,34 @@
       align-items: start;
     }
 
-    .exhibit-number {
+    .exhibit-index {
       display: grid;
       place-items: center;
       width: 72px;
       min-height: 72px;
       border: 1px solid rgba(56, 240, 255, 0.22);
-      background: rgba(5, 11, 22, 0.9);
+      background: rgba(4, 8, 18, 0.92);
       color: var(--text);
-      font-family: "Orbitron", "JetBrains Mono", monospace;
+      font-family: "JetBrains Mono", monospace;
       font-size: 28px;
       font-weight: 700;
       letter-spacing: 0.08em;
     }
 
-    .exhibit-copy {
-      display: grid;
-      gap: 8px;
+    .exhibit-copy-block {
       max-width: 760px;
     }
 
-    .exhibit-copy h3 {
+    .card-title {
       font-size: clamp(30px, 4vw, 54px);
       line-height: 0.94;
       letter-spacing: 0.05em;
     }
 
-    .exhibit-copy p {
+    .card-copy {
+      max-width: 640px;
       font-size: clamp(17px, 2vw, 22px);
       line-height: 1.18;
-      max-width: 640px;
-    }
-
-    .meta-row,
-    .role-row {
-      gap: 8px;
-    }
-
-    .meta-chip,
-    .role-chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 0 10px;
-      border: 1px solid rgba(56, 240, 255, 0.22);
-      background: rgba(7, 13, 22, 0.86);
-      color: var(--text);
-    }
-
-    .role-chip {
-      border-color: rgba(255, 47, 179, 0.22);
     }
 
     .artifact-grid {
@@ -335,35 +126,25 @@
     }
 
     .artifact-grid.tool {
-      grid-template-columns: minmax(240px, 0.36fr) minmax(0, 1fr);
+      grid-template-columns: minmax(240px, 0.34fr) minmax(0, 1fr);
     }
 
-    .artifact-grid.architecture {
-      grid-template-columns: minmax(0, 1.08fr) minmax(260px, 0.92fr);
+    .artifact-grid.figure {
+      grid-template-columns: minmax(0, 1.06fr) minmax(260px, 0.94fr);
     }
 
-    .artifact-copy {
-      display: grid;
-      gap: 10px;
-      align-content: start;
+    .copy-panel {
       padding: 16px;
-      border: 1px solid rgba(56, 240, 255, 0.18);
-      background: rgba(6, 11, 24, 0.86);
     }
 
-    .artifact-copy h4 {
+    .artifact-title {
       font-size: 18px;
       line-height: 1.02;
       letter-spacing: 0.08em;
     }
 
-    .artifact-copy p {
-      font-size: 15px;
-      line-height: 1.34;
-    }
-
     .artifact-frame {
-      border: 1px solid rgba(56, 240, 255, 0.2);
+      border: 1px solid rgba(56, 240, 255, 0.18);
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 12%, transparent 100%),
         rgba(5, 9, 20, 0.96);
@@ -394,52 +175,51 @@
       object-fit: cover;
     }
 
-    .artifact-copy .action-link {
+    .copy-panel .site-button {
       width: fit-content;
-      margin-top: 4px;
+      min-width: 0;
+    }
+
+    .role-worker {
+      border-color: rgba(255, 47, 179, 0.26);
+      color: var(--accent-2);
+    }
+
+    .role-developer {
+      border-color: rgba(255, 230, 106, 0.28);
+      color: var(--warning);
+    }
+
+    .role-tribune {
+      border-color: rgba(77, 255, 180, 0.28);
+      color: var(--success);
     }
 
     @media (max-width: 1080px) {
       .artifact-grid.tool,
-      .artifact-grid.architecture {
+      .artifact-grid.figure {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 940px) {
-      .intro,
+      .showcase-hero,
       .exhibit-head {
         grid-template-columns: 1fr;
       }
-
-      .intro-legend,
-      .exhibit-actions {
-        justify-content: flex-start;
-      }
     }
 
-    @media (max-width: 720px) {
-      .page-shell {
-        width: min(100vw - 16px, var(--page-width));
-        padding-top: 8px;
-      }
-
-      .topbar,
-      .intro,
-      .exhibit {
+    @media (max-width: 760px) {
+      .showcase-hero,
+      .exhibit-card {
         padding: 12px;
       }
 
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
+      .hero-grid {
+        grid-template-columns: 1fr;
       }
 
-      .topbar-links {
-        width: 100%;
-      }
-
-      .exhibit-number {
+      .exhibit-index {
         width: 60px;
         min-height: 60px;
         font-size: 22px;
@@ -451,62 +231,97 @@
       }
 
       .preview-link img {
-        min-height: 300px;
+        min-height: 320px;
       }
     }
   </style>
 </head>
-<body>
+<body class="murphy-site">
   <div class="page-shell">
-    <header class="topbar frame">
-      <div class="brand">
-        <span class="eyebrow">Agent Monitor</span>
-        <h1>Showcase</h1>
-        <p>One live study. One architecture exhibit.</p>
+    <header class="site-header site-frame">
+      <div class="site-header-main">
+        <div class="site-brand">
+          <span class="site-brand-kicker">Murphy public surface</span>
+          <h1 class="site-brand-name">Murphy</h1>
+          <p class="site-brand-subtitle">The authored shell for Murphy's live monitor, the durable showcase gallery, and the browser exhibits that sit underneath it.</p>
+        </div>
+
+        <div class="site-nav-block">
+          <span class="site-nav-label">Route map</span>
+          <nav class="site-nav" aria-label="Murphy site">
+            <a class="site-link" href="../" data-slot="01">Live monitor</a>
+            <a class="site-link" href="./" data-slot="02" aria-current="page">Showcase gallery</a>
+            <a class="site-link" href="../tokenizers/" data-slot="03">Tokenizer lab</a>
+            <a class="site-link" href="./res-publica/" data-slot="04">Res Publica</a>
+          </nav>
+        </div>
       </div>
-      <nav class="topbar-links" aria-label="Primary">
-        <a class="nav-link" href="../">Live monitor</a>
-        <a class="nav-link" href="../tokenizers/">Full workbench</a>
-      </nav>
+
+      <div class="site-header-foot">
+        <span class="site-path-label">Current surface</span>
+        <div class="site-path">
+          <a href="../">Murphy</a>
+          <span class="site-path-separator">/</span>
+          <span>Showcase gallery</span>
+        </div>
+      </div>
     </header>
 
     <main>
-      <section class="intro frame">
-        <div class="intro-copy">
-          <span class="eyebrow">Public Hall</span>
-          <h2>One piece to touch. One piece to read.</h2>
-          <p>The gallery keeps the interactive tokenizer and the three-role architecture in separate frames so each one can land on its own terms.</p>
+      <section class="showcase-hero site-frame">
+        <div class="hero-copy">
+          <span class="section-label">Showcase gallery</span>
+          <h2 class="section-title">One Murphy header. Two durable exhibits.</h2>
+          <p class="section-copy">The live monitor stays at the root. This gallery holds the hand-maintained browser surfaces that share the same authored navigation, palette, and brand.</p>
+          <div class="action-row">
+            <a class="site-button primary" href="../tokenizers/">Open tokenizer lab</a>
+            <a class="site-button" href="./res-publica/">Open Res Publica</a>
+          </div>
         </div>
-        <div class="intro-legend" aria-label="Exhibit legend">
-          <span class="legend-chip">01 interactive study</span>
-          <span class="legend-chip">02 architecture exhibit</span>
+
+        <div class="hero-grid" aria-label="Murphy surface map">
+          <article class="route-card">
+            <span class="micro-label">Root lane</span>
+            <strong>Live monitor</strong>
+            <p>Exporter-owned snapshot at the site root. It stays current, but its chrome is not hand-maintained here.</p>
+            <a class="route-link" href="../">Go to root</a>
+          </article>
+
+          <article class="route-card">
+            <span class="micro-label">Durable lane</span>
+            <strong>Showcase</strong>
+            <p>Murphy-owned gallery and exhibit routes, with shared site chrome across the hand-maintained pages.</p>
+            <a class="route-link" href="./">Stay in showcase</a>
+          </article>
         </div>
       </section>
 
       <div class="gallery">
-        <section class="exhibit frame" aria-labelledby="tokenizer-title">
+        <section class="exhibit-card site-frame" aria-labelledby="tokenizer-title">
           <div class="exhibit-head">
-            <div class="exhibit-number" aria-hidden="true">01</div>
-            <div class="exhibit-copy">
-              <span class="eyebrow">Interactive study</span>
-              <h3 id="tokenizer-title">Tokenizer workbench</h3>
-              <p>A single pinned model, live in the browser. Paste a line and watch it fracture into token pieces immediately.</p>
-              <div class="meta-row" aria-label="Tokenizer highlights">
-                <span class="meta-chip">Qwen 3.5 4B</span>
-                <span class="meta-chip">browser-side</span>
-                <span class="meta-chip">paste your own text</span>
+            <div class="exhibit-index" aria-hidden="true">01</div>
+
+            <div class="exhibit-copy-block">
+              <span class="section-label">Interactive study</span>
+              <h3 class="card-title" id="tokenizer-title">Tokenizer lab</h3>
+              <p class="card-copy">A pinned live browser study that lets the visitor paste a line and watch it fracture into model tokens immediately.</p>
+              <div class="chip-row" aria-label="Tokenizer highlights">
+                <span class="chip">Qwen 3.5 4B</span>
+                <span class="chip">Browser-side</span>
+                <span class="chip">Paste your own text</span>
               </div>
             </div>
-            <div class="exhibit-actions">
-              <a class="action-link primary" href="../tokenizers/">Open full workbench</a>
+
+            <div class="action-row">
+              <a class="site-button primary" href="../tokenizers/">Open full workbench</a>
             </div>
           </div>
 
           <div class="artifact-grid tool">
-            <div class="artifact-copy">
+            <div class="artifact-panel copy-panel">
               <span class="micro-label">Gallery cut</span>
-              <h4>Only the essential interaction stays.</h4>
-              <p>No model picker here, no extra route furniture. The showcase slice keeps one checkpoint and the live token surface.</p>
+              <h4 class="artifact-title">Only the live interaction stays in frame.</h4>
+              <p>The gallery version removes route furniture and keeps one checkpoint, one text field, and the token surface.</p>
             </div>
 
             <div class="artifact-frame embed">
@@ -520,36 +335,38 @@
           </div>
         </section>
 
-        <section class="exhibit frame" aria-labelledby="architecture-title">
+        <section class="exhibit-card site-frame" aria-labelledby="res-publica-title">
           <div class="exhibit-head">
-            <div class="exhibit-number" aria-hidden="true">02</div>
-            <div class="exhibit-copy">
-              <span class="eyebrow">Architecture exhibit</span>
-              <h3 id="architecture-title">Res Publica</h3>
-              <p>A public-facing sketch of the three-role split: execution, change, and review kept legible without opening the machine room.</p>
-              <div class="role-row" aria-label="Architecture roles">
-                <span class="role-chip">Worker</span>
-                <span class="role-chip">Developer</span>
-                <span class="role-chip">Tribune</span>
+            <div class="exhibit-index" aria-hidden="true">02</div>
+
+            <div class="exhibit-copy-block">
+              <span class="section-label">Architecture exhibit</span>
+              <h3 class="card-title" id="res-publica-title">Res Publica</h3>
+              <p class="card-copy">A public-facing composition of the three-role split: execution, repair, and review held inside one clear Murphy frame.</p>
+              <div class="chip-row" aria-label="Res Publica roles">
+                <span class="chip role-worker">Worker</span>
+                <span class="chip role-developer">Developer</span>
+                <span class="chip role-tribune">Tribune</span>
               </div>
             </div>
-            <div class="exhibit-actions">
-              <a class="action-link primary" href="./res-publica/">Open exhibit</a>
+
+            <div class="action-row">
+              <a class="site-button primary" href="./res-publica/">Open exhibit</a>
             </div>
           </div>
 
-          <div class="artifact-grid architecture">
+          <div class="artifact-grid figure">
             <a class="artifact-frame preview-link" href="./res-publica/" aria-label="Open the Res Publica architecture exhibit">
               <img
                 src="./res-publica-preview.png"
                 alt="Preview of the Res Publica architecture illustration showing the Worker, Developer, and Tribune roles.">
             </a>
 
-            <div class="artifact-copy">
-              <span class="micro-label">Why it lands</span>
-              <h4>Three roles, one visible contract.</h4>
-              <p>The figure turns an internal structure into a public composition: the worker carries action, the developer reshapes process, and the tribune checks alignment.</p>
-              <a class="action-link" href="./res-publica/">See the full page</a>
+            <div class="artifact-panel copy-panel">
+              <span class="micro-label">Visible contract</span>
+              <h4 class="artifact-title">One exhibit, still in the same house style.</h4>
+              <p>The page keeps its own stage and argument, but the Murphy header, route map, and brutalist neon shell tie it back to the gallery.</p>
+              <a class="site-button" href="./res-publica/">See the full page</a>
             </div>
           </div>
         </section>
@@ -557,34 +374,6 @@
     </main>
   </div>
 
-  <script>
-    const frame = document.getElementById('tokenizer-embed');
-
-    function applyFrameHeight(height) {
-      if (!height) {
-        return;
-      }
-      frame.style.height = `${Math.max(520, Math.ceil(height))}px`;
-    }
-
-    window.addEventListener('message', (event) => {
-      if (event.origin !== window.location.origin) {
-        return;
-      }
-      if (!event.data || event.data.type !== 'tokenizer-embed-height') {
-        return;
-      }
-      applyFrameHeight(event.data.height);
-    });
-
-    frame.addEventListener('load', () => {
-      try {
-        const height = frame.contentDocument?.documentElement?.scrollHeight;
-        applyFrameHeight(height);
-      } catch (error) {
-        console.error('Unable to size tokenizer embed', error);
-      }
-    });
-  </script>
+  <script src="./assets/showcase.js"></script>
 </body>
 </html>

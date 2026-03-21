@@ -4,6 +4,7 @@ Public GitHub Pages site for Murphy's live dashboard plus durable showcase route
 
 ## Key Docs
 - `docs/dashboard-design-guide.md` - **read this first** — style requirements and design rationale for keeping pages visually consistent with the dashboard
+- `docs/site-shell.md` - shared Murphy-branded header rules for the durable public routes
 - `roadmap.md` - milestones, current status, and blocked work
 - `docs/README.md` - durable notes about routes and publishing constraints
 - `README.md` - quick route map and refresh command

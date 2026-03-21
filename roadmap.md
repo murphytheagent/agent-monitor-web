@@ -1,11 +1,12 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-21 18:01 UTC
+Last updated: 2026-03-21 21:31 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
+- `/showcase/`, `/tokenizers/`, and `/showcase/res-publica/` now share a Murphy-branded header shell instead of drifting into separate mini-sites.
 - The tokenizer workbench selectors now run newest-to-oldest across lines, families, and configurations instead of inheriting the raw catalog insertion order.
 - The showcase route now separates the tokenizer and `Res Publica` into two explicit exhibit lanes: a single-model live tokenizer study first, then the architecture piece as its own card and CTA.
 - A persistent tokenizer link on the root dashboard is still blocked because the exporter has no showcase-extension hook yet.
@@ -30,6 +31,8 @@ Status:
 
 ### Activity Log
 
+- 2026-03-21 21:31 UTC — Added a shared Murphy-branded site shell for the durable public routes: `/showcase/`, `/tokenizers/`, and `/showcase/res-publica/` now use the same wordmark, route-button system, and `Agent Monitor public surfaces` kicker so the pages read as one site instead of three unrelated headers.
+- 2026-03-21 21:31 UTC — Captured the new header contract in `docs/site-shell.md`, including the important boundary that `/` and `/roadmap/` are still exporter-owned and therefore cannot adopt the same shell without a root-template change.
 - 2026-03-21 18:01 UTC — Hardened the `/tokenizers/` inline surface after overflow feedback: the token preview now has stricter shrink/wrap rules for long token strings, and the showcase embed republishes its iframe height on resize, font-settle, and other late layout changes so the lower token card does not get clipped.
 - 2026-03-21 08:07 UTC — Reordered the `/tokenizers/` selector stack so the browser UI now walks from newer releases toward older ones at every level instead of surfacing the smallest or earliest-added checkpoint first.
 - 2026-03-21 08:07 UTC — Pinned the default tokenizer route to `Kimi K2.5`, while keeping the showcase embed on its explicit `Qwen 3.5 4B` query so the gallery preview remains stable.
@@ -55,6 +58,7 @@ Success criteria:
 
 Status:
 - Blocked on a root exporter change in `src/loop/monitor/dashboard.py`.
+- That same exporter boundary covers both `/` and `/roadmap/`, so matching those routes to the new Murphy shell still requires the root template path.
 
 ## Milestone 4 - Additional Hosted Tools
 

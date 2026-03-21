@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tokenizer Workbench | Open-Source LLMs</title>
+  <title>Tokenizer Workbench | Murphy</title>
   <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../assets/site-shell.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
@@ -142,6 +143,14 @@
       display: grid;
       gap: 4px;
       min-width: 0;
+    }
+
+    .eyebrow {
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .nav-link {
@@ -1015,6 +1024,8 @@
     }
 
     html.embed-showcase .nav-links,
+    html.embed-showcase .murphy-signature,
+    html.embed-showcase .murphy-kicker,
     html.embed-showcase .subtitle,
     html.embed-showcase .status-note,
     html.embed-showcase .control-intro,
@@ -1740,15 +1751,21 @@
 </head>
 <body>
   <div class="page-shell">
-    <header class="page-header">
+    <header class="page-header murphy-shell">
       <div class="page-meta">
-        <div class="nav-links">
-          <a class="nav-link" href="../">&larr; Monitor</a>
-          <a class="nav-link" href="../showcase/">Showcase</a>
+        <div class="murphy-brand">
+          <a class="murphy-signature" href="../" aria-label="Open Murphy's live monitor">Murphy</a>
+          <div class="header-copy murphy-context">
+            <span class="eyebrow murphy-kicker">Agent Monitor public surfaces</span>
+            <h1>Tokenizer Workbench</h1>
+            <p class="subtitle">Murphy's live browser workbench for token boundaries, ids, and serialization.</p>
+          </div>
         </div>
-        <div class="header-copy">
-          <h1>Tokenizer Workbench</h1>
-          <p class="subtitle">Paste text to inspect token boundaries and IDs.</p>
+        <div class="nav-links murphy-links">
+          <a class="nav-link murphy-link" href="../">Monitor</a>
+          <a class="nav-link murphy-link" href="../roadmap/">Roadmap</a>
+          <a class="nav-link murphy-link" href="../showcase/">Showcase</a>
+          <a class="nav-link murphy-link current" href="./" aria-current="page">Tokenizers</a>
         </div>
       </div>
       <div class="header-status">
