@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T18:11:19Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-21T18:13:24Z",
+    "status": "sleeping",
     "pid": 38150,
-    "loop_count": 3448,
+    "loop_count": 3459,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,21 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773701002.020259",
-        "started_at": 1774115427,
-        "elapsed_sec": 1252
-      },
-      {
-        "slot": 1,
-        "task": "1773870804.162569",
-        "started_at": 1774116132,
-        "elapsed_sec": 547
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -33,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.67,
-      "five": 1.75,
-      "fifteen": 1.83
+      "one": 1.41,
+      "five": 1.6,
+      "fifteen": 1.75
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112778317824,
-    "disk_free_bytes": 132328878080,
-    "runner_log_size_bytes": 244377,
+    "disk_used_bytes": 112779841536,
+    "disk_free_bytes": 132327354368,
+    "runner_log_size_bytes": 245723,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T11:35:20Z",
     "local_ips": []
@@ -50,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T18:11:27Z",
+    "checked_at_utc": "2026-03-21T18:13:30Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -73,7 +59,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 9,
         "memory_used_mb": 34095,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -89,10 +75,10 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 33873,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 31
       },
       {
         "index": 5,
@@ -113,8 +99,8 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
-        "memory_used_mb": 33871,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 33873,
         "memory_total_mb": 97887,
         "temperature_c": 32
       }
@@ -122,40 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773701002.020259": {
-        "mention_ts": "1773701002.020259",
-        "thread_ts": "1773701002.020259",
-        "status": "in_progress",
-        "task_description": "Resolve the objective requested in this task thread.",
-        "summary": "Reordered the tokenizer workbench selectors from newest to oldest, made the main route open on Kimi K2.5 by default, and merged the live site update through ag…",
-        "summary_preview": "Reordered the tokenizer workbench selectors from newest to oldest, made the main route open on Kimi K2.5 by default, and merged the live site update through ag…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774076482.886199",
-        "last_update_ts": "1774115426.673004",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T07:01:22Z"
-        }
-      },
-      "1773870804.162569": {
-        "mention_ts": "1773870804.162569",
-        "thread_ts": "1773870804.162569",
-        "status": "in_progress",
-        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
-        "summary": "Validated the 3-GPU GPQA prompt-profile runtime end to end, found that [code] collapses to cap-hit on the first real 32/16 pilot and yields near-baseline perfo…",
-        "summary_preview": "Validated the 3-GPU GPQA prompt-profile runtime end to end, found that [code] collapses to cap-hit on the first real 32/16 pilot and yields near-baseline perfo…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773870804.162569",
-        "last_update_ts": "1774116131.603924",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-18T21:53:24Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773899776.033029": {
         "mention_ts": "1773899776.033029",
@@ -315,6 +268,38 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T17:08:21Z"
+        }
+      },
+      "1773701002.020259": {
+        "mention_ts": "1773701002.020259",
+        "thread_ts": "1773701002.020259",
+        "status": "waiting_human",
+        "task_description": "Resolve the objective requested in this task thread.",
+        "summary": "Fixed the tokenizer inline-token overflow, merged the live site update, and hardened the showcase embed resizing path.",
+        "summary_preview": "Fixed the tokenizer inline-token overflow, merged the live site update, and hardened the showcase embed resizing path.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774076482.886199",
+        "last_update_ts": "1774116732.453457",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T07:01:22Z"
+        }
+      },
+      "1773870804.162569": {
+        "mention_ts": "1773870804.162569",
+        "thread_ts": "1773870804.162569",
+        "status": "waiting_human",
+        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
+        "summary": "Refined the cot-loop recommendation around a larger GPQA binary prompt-profile run: on the finished pilot archive [code] still collapses to cap-hit, so the nex…",
+        "summary_preview": "Refined the cot-loop recommendation around a larger GPQA binary prompt-profile run: on the finished pilot archive [code] still collapses to cap-hit, so the nex…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773870804.162569",
+        "last_update_ts": "1774116781.834876",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-18T21:53:24Z"
         }
       }
     },
@@ -1131,5 +1116,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T18:11:28Z"
+  "server_time_utc": "2026-03-21T18:13:30Z"
 }
