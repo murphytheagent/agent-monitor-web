@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Playfair+Display:ital,wght@1,700&display=swap");
+
+.murphy-shell {
+  --murphy-shell-accent: var(--accent, #38f0ff);
+  --murphy-shell-accent-2: var(--accent-2, #ff2fb3);
+  --murphy-shell-line: var(--line, rgba(56, 240, 255, 0.34));
+  --murphy-shell-line-strong: var(--line-strong, rgba(255, 47, 179, 0.56));
+  --murphy-shell-text: var(--text, var(--text-main, #eef8ff));
+  --murphy-shell-muted: var(--muted, var(--text-muted, #9badd3));
+  position: relative;
+}
+
+.murphy-brand {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+}
+
+.murphy-signature {
+  flex: 0 0 auto;
+  margin-top: -2px;
+  color: #f8fbff;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(30px, 3vw, 40px);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 0.9;
+  text-decoration: none;
+  text-shadow:
+    3px 0 var(--murphy-shell-accent-2),
+    -3px 0 var(--murphy-shell-accent),
+    0 0 16px color-mix(in srgb, var(--murphy-shell-accent) 28%, transparent);
+}
+
+.murphy-context {
+  min-width: 0;
+}
+
+.murphy-kicker {
+  color: var(--murphy-shell-accent);
+  font-family: "Orbitron", "Rajdhani", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.murphy-links {
+  align-items: center;
+}
+
+.murphy-link {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 !important;
+  border-color: color-mix(in srgb, var(--murphy-shell-line) 92%, transparent) !important;
+  background:
+    linear-gradient(135deg, rgba(5, 9, 24, 0.96) 0%, rgba(11, 18, 40, 0.92) 100%) !important;
+  box-shadow:
+    3px 3px 0 color-mix(in srgb, var(--murphy-shell-accent-2) 18%, transparent),
+    -1px -1px 0 color-mix(in srgb, var(--murphy-shell-accent) 14%, transparent) !important;
+  color: var(--murphy-shell-text) !important;
+  font-family: "Orbitron", "Rajdhani", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.murphy-link:hover {
+  border-color: var(--murphy-shell-line-strong) !important;
+  color: var(--murphy-shell-text) !important;
+  box-shadow:
+    5px 5px 0 color-mix(in srgb, var(--murphy-shell-accent-2) 26%, transparent),
+    -2px -2px 0 color-mix(in srgb, var(--murphy-shell-accent) 18%, transparent) !important;
+}
+
+.murphy-link.current,
+.murphy-link[aria-current="page"] {
+  color: var(--murphy-shell-text) !important;
+  border-color: color-mix(in srgb, var(--murphy-shell-accent) 70%, white 10%) !important;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--murphy-shell-accent) 18%, rgba(6, 12, 28, 0.98)) 0%,
+      color-mix(in srgb, var(--murphy-shell-accent-2) 16%, rgba(16, 12, 36, 0.96)) 100%
+    ) !important;
+}
+
+@media (max-width: 900px) {
+  .murphy-brand {
+    gap: 12px;
+  }
+
+  .murphy-signature {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .murphy-brand {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .murphy-signature {
+    font-size: 26px;
+  }
+}

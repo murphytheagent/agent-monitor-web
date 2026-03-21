@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T21:18:30Z",
+    "last_updated_utc": "2026-03-21T22:03:04Z",
     "status": "workers_active",
-    "pid": 43085,
-    "loop_count": 32,
+    "pid": 68391,
+    "loop_count": 93,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,8 +16,8 @@
       {
         "slot": 0,
         "task": "1774125045.062829",
-        "started_at": 1774127857,
-        "elapsed_sec": 52
+        "started_at": 1774129874,
+        "elapsed_sec": 709
       }
     ]
   },
@@ -27,24 +27,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.9,
-      "five": 2.0,
-      "fifteen": 2.01
+      "one": 2.99,
+      "five": 2.33,
+      "fifteen": 2.08
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112899715072,
-    "disk_free_bytes": 132207480832,
-    "runner_log_size_bytes": 268347,
+    "disk_used_bytes": 113016926208,
+    "disk_free_bytes": 132090269696,
+    "runner_log_size_bytes": 278579,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-21T20:23:26Z",
+    "dashboard_started_utc": "2026-03-21T21:51:08Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T21:18:31Z",
+    "checked_at_utc": "2026-03-21T22:03:14Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -62,12 +62,12 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 7,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -83,10 +83,10 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 8,
+        "utilization_gpu_pct": 2,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       },
       {
         "index": 5,
@@ -99,7 +99,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 9,
+        "utilization_gpu_pct": 2,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -107,7 +107,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 1,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -126,7 +126,7 @@
         "summary_preview": "Let's come back to the design for the website.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774125045.062829",
-        "last_update_ts": "1774127857.287534",
+        "last_update_ts": "1774129874.282172",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -263,22 +263,6 @@
           "time_iso": "2026-03-20T06:00:38Z"
         }
       },
-      "1774078137.264779": {
-        "mention_ts": "1774078137.264779",
-        "thread_ts": "1774078137.264779",
-        "status": "waiting_human",
-        "task_description": "Let's work on something ambitious.",
-        "summary": "Fixed the CEG rebuild PDF by replacing the print-layout export with a screen-faithful browser render, rebuilt the bundle, uploaded the improved PDF, and docume…",
-        "summary_preview": "Fixed the CEG rebuild PDF by replacing the print-layout export with a screen-faithful browser render, rebuilt the bundle, uploaded the improved PDF, and docume…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774078137.264779",
-        "last_update_ts": "1774084382.414178",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T07:28:57Z"
-        }
-      },
       "1774103566.709609": {
         "mention_ts": "1774103566.709609",
         "thread_ts": "1774103566.709609",
@@ -341,6 +325,38 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": ""
+        }
+      },
+      "1774129254.501359": {
+        "mention_ts": "1774129254.501359",
+        "thread_ts": "1774129254.501359",
+        "status": "waiting_human",
+        "task_description": "Summarize your architecture change since yesterday.",
+        "summary": "Drafted a concise Slack reply summarizing the March 20 to March 21 agent-system architecture changes.",
+        "summary_preview": "Drafted a concise Slack reply summarizing the March 20 to March 21 agent-system architecture changes.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774129254.501359",
+        "last_update_ts": "1774130201.106706",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T21:40:54Z"
+        }
+      },
+      "1774078137.264779": {
+        "mention_ts": "1774078137.264779",
+        "thread_ts": "1774078137.264779",
+        "status": "waiting_human",
+        "task_description": "Let's work on something ambitious.",
+        "summary": "Committed the refreshed CEG rebuild bundle and merged the worker branch so the checked-in renderer, report.pdf, and coordination handoff now agree.",
+        "summary_preview": "Committed the refreshed CEG rebuild bundle and merged the worker branch so the checked-in renderer, report.pdf, and coordination handoff now agree.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774078137.264779",
+        "last_update_ts": "1774130402.645170",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T07:28:57Z"
         }
       }
     },
@@ -1619,5 +1635,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T21:18:32Z"
+  "server_time_utc": "2026-03-21T22:03:15Z"
 }

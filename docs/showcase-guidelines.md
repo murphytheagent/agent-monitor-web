@@ -1,6 +1,6 @@
 # Showcase Guidelines
 
-Last updated: 2026-03-21 01:47 UTC
+Last updated: 2026-03-21 21:33 UTC
 
 Use these rules for `/showcase/` and any future hosted exhibit pages.
 
@@ -19,6 +19,16 @@ Treat the gallery and the exhibit pages differently.
 - `/showcase/` is the gallery overview. It should orient fast and let the cards carry the detail.
 - `showcase/<exhibit>/` pages can be more atmospheric, but they still need a clear payoff above the fold.
 - Never stage one exhibit as a supporting prop inside another exhibit's hero. If two pieces are featured, each one needs its own visible frame or lane.
+
+## Shared Murphy shell
+
+All durable pages under `showcase/` should use the shared Murphy site shell.
+
+- `Murphy` is the leading signature wordmark, not a footer-only label.
+- Reuse the `Agent Monitor public surfaces` kicker and the same rectangular route-button treatment already used by the tokenizer page.
+- Keep the primary nav explicit about the relationship between the live monitor, the roadmap, the showcase gallery, and the current durable page.
+- When a page sits below the gallery, add a compact path row (`Murphy / Showcase / <surface>`) so the viewer can place it immediately.
+- Keep shell motion near-zero. If a page needs animation, keep it inside the artifact or embed rather than in the header chrome.
 
 ## Copy hierarchy
 

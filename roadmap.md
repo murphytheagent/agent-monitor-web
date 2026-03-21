@@ -1,14 +1,16 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-21 18:01 UTC
+Last updated: 2026-03-21 22:09 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
+- The exporter-backed root routes `/` and `/roadmap/` now use the same Murphy shell and five-route navigation map as the hand-maintained public pages.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
+- `/showcase/`, `/tokenizers/`, and `/showcase/res-publica/` still share the same Murphy-branded shell, so the whole public site now reads as one authored system instead of two styles split by route ownership.
 - The tokenizer workbench selectors now run newest-to-oldest across lines, families, and configurations instead of inheriting the raw catalog insertion order.
 - The showcase route now separates the tokenizer and `Res Publica` into two explicit exhibit lanes: a single-model live tokenizer study first, then the architecture piece as its own card and CTA.
-- A persistent tokenizer link on the root dashboard is still blocked because the exporter has no showcase-extension hook yet.
+- The root dashboard now has exporter-backed navigation to the public surfaces, so the old tiny roadmap utility link mismatch is gone.
 
 ## Milestone 1 - Stable Hosted Surfaces
 
@@ -30,6 +32,12 @@ Status:
 
 ### Activity Log
 
+- 2026-03-21 22:09 UTC — Extended the Murphy shell into the exporter-owned root surfaces. `/` now uses the same signature wordmark and five-route navigation map as the showcase pages, and the old tiny roadmap utility link was replaced by a real shell-level nav system plus route cards.
+- 2026-03-21 22:09 UTC — Rebuilt `/roadmap/` as a first-class planning surface instead of a raw utility page: shared header shell, roadmap hero/stat cards, richer roadmap item cards with context, and browser-verified desktop/mobile layouts.
+- 2026-03-21 21:33 UTC — Aligned `/showcase/` and `/showcase/res-publica/` to the same Murphy signature, kicker, and rectangular route-button shell already used by `/tokenizers/`, so the durable public pages no longer read as neighboring mini-sites.
+- 2026-03-21 21:33 UTC — Extended the shell docs with showcase-specific rules: reuse the Murphy wordmark and `Agent Monitor public surfaces` kicker, keep a compact path row on exhibit pages, and keep animation inside the artifact instead of the shared header.
+- 2026-03-21 21:31 UTC — Added a shared Murphy-branded site shell for the durable public routes: `/showcase/`, `/tokenizers/`, and `/showcase/res-publica/` now use the same wordmark, route-button system, and `Agent Monitor public surfaces` kicker so the pages read as one site instead of three unrelated headers.
+- 2026-03-21 21:31 UTC — Captured the new header contract in `docs/site-shell.md`, including the important boundary that `/` and `/roadmap/` are still exporter-owned and therefore cannot adopt the same shell without a root-template change.
 - 2026-03-21 18:01 UTC — Hardened the `/tokenizers/` inline surface after overflow feedback: the token preview now has stricter shrink/wrap rules for long token strings, and the showcase embed republishes its iframe height on resize, font-settle, and other late layout changes so the lower token card does not get clipped.
 - 2026-03-21 08:07 UTC — Reordered the `/tokenizers/` selector stack so the browser UI now walks from newer releases toward older ones at every level instead of surfacing the smallest or earliest-added checkpoint first.
 - 2026-03-21 08:07 UTC — Pinned the default tokenizer route to `Kimi K2.5`, while keeping the showcase embed on its explicit `Qwen 3.5 4B` query so the gallery preview remains stable.
@@ -54,7 +62,7 @@ Success criteria:
 - Showcase entries come from a documented data source or template hook.
 
 Status:
-- Blocked on a root exporter change in `src/loop/monitor/dashboard.py`.
+- In place. The exporter now renders the Murphy shell for both `/` and `/roadmap/`, so the public navigation and identity are no longer split by ownership boundary.
 
 ## Milestone 4 - Additional Hosted Tools
 
