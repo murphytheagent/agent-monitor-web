@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T08:34:02Z",
+    "last_updated_utc": "2026-03-21T08:36:02Z",
     "status": "workers_active",
     "pid": 38150,
-    "loop_count": 3181,
+    "loop_count": 3199,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,7 @@
         "slot": 0,
         "task": "1774078137.264779",
         "started_at": 1774079882,
-        "elapsed_sec": 2160
+        "elapsed_sec": 2279
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.21,
-      "five": 2.01,
-      "fifteen": 2.05
+      "one": 2.11,
+      "five": 2.0,
+      "fifteen": 2.04
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 115273269248,
-    "disk_free_bytes": 129833926656,
-    "runner_log_size_bytes": 237054,
+    "disk_used_bytes": 115284049920,
+    "disk_free_bytes": 129823145984,
+    "runner_log_size_bytes": 237273,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T02:45:53Z",
     "local_ips": []
@@ -44,96 +44,79 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T08:34:09Z",
+    "checked_at_utc": "2026-03-21T08:36:11Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 37
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 39
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 37
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 37
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 36
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 38
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 37
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 37
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1774078137.264779": {
-        "mention_ts": "1774078137.264779",
-        "thread_ts": "1774078137.264779",
-        "status": "in_progress",
-        "task_description": "Let's work on something ambitious.",
-        "summary": "Reverse-engineered the attached CEG HTML report, verified that it mixes filing-inspired structure with synthesized numbers, and created a reusable trading-repo…",
-        "summary_preview": "Reverse-engineered the attached CEG HTML report, verified that it mixes filing-inspired structure with synthesized numbers, and created a reusable trading-repo…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774078137.264779",
-        "last_update_ts": "1774079882.416936",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T07:28:57Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773899776.033029": {
         "mention_ts": "1773899776.033029",
@@ -293,6 +276,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T07:01:22Z"
+        }
+      },
+      "1774078137.264779": {
+        "mention_ts": "1774078137.264779",
+        "thread_ts": "1774078137.264779",
+        "status": "waiting_human",
+        "task_description": "Let's work on something ambitious.",
+        "summary": "Rebuilt the CEG report with a QA-passing packet-first pipeline, produced HTML/PDF, and documented the key scope split between post-Calpine CEG and the latest a…",
+        "summary_preview": "Rebuilt the CEG report with a QA-passing packet-first pipeline, produced HTML/PDF, and documented the key scope split between post-Calpine CEG and the latest a…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774078137.264779",
+        "last_update_ts": "1774082168.276975",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T07:28:57Z"
         }
       }
     },
@@ -1109,5 +1108,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T08:34:10Z"
+  "server_time_utc": "2026-03-21T08:36:13Z"
 }
