@@ -712,12 +712,20 @@
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.82fr);
       gap: 12px;
-      align-items: stretch;
+      align-items: start;
     }
 
     .composer-card,
     .stream-card {
       min-width: 0;
+    }
+
+    .composer-card {
+      min-height: var(--workbench-height);
+      height: auto;
+    }
+
+    .stream-card {
       height: var(--workbench-height);
     }
 
