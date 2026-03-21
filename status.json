@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T01:06:07Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-21T01:08:14Z",
+    "status": "sleeping",
     "pid": 38150,
-    "loop_count": 453,
+    "loop_count": 466,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1774053655.714169",
-        "started_at": 1774053668,
-        "elapsed_sec": 1498
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.78,
-      "five": 2.0,
-      "fifteen": 2.01
+      "one": 1.52,
+      "five": 1.85,
+      "fifteen": 1.96
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 116620193792,
-    "disk_free_bytes": 128487002112,
-    "runner_log_size_bytes": 229927,
+    "disk_used_bytes": 117706199040,
+    "disk_free_bytes": 127400996864,
+    "runner_log_size_bytes": 230414,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T00:08:48Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T01:06:12Z",
+    "checked_at_utc": "2026-03-21T01:08:14Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -94,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 38
       },
       {
         "index": 6,
@@ -116,24 +108,7 @@
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1774053655.714169": {
-        "mention_ts": "1774053655.714169",
-        "thread_ts": "1774053655.714169",
-        "status": "in_progress",
-        "task_description": "Please make a visualization webpage for our current system.",
-        "summary": "Please make a visualization webpage for our current system.",
-        "summary_preview": "Please make a visualization webpage for our current system.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774053655.714169",
-        "last_update_ts": "1774053667.865925",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T00:40:55Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773739092.072639": {
         "mention_ts": "1773739092.072639",
@@ -313,6 +288,22 @@
       }
     },
     "finished": {
+      "1774053655.714169": {
+        "mention_ts": "1774053655.714169",
+        "thread_ts": "1774053655.714169",
+        "status": "done",
+        "task_description": "Please make a visualization webpage for our current system.",
+        "summary": "Published a new Res Publica architecture exhibit and rebuilt the showcase gallery around it.",
+        "summary_preview": "Published a new Res Publica architecture exhibit and rebuilt the showcase gallery around it.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774053655.714169",
+        "last_update_ts": "1774055239.360293",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T00:40:55Z"
+        }
+      },
       "1774037786.521379": {
         "mention_ts": "1774037786.521379",
         "thread_ts": "1774037786.521379",
@@ -1096,22 +1087,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T22:11:21Z"
         }
-      },
-      "1771795620.656239": {
-        "mention_ts": "1771795620.656239",
-        "thread_ts": "1771795620.656239",
-        "status": "done",
-        "task_description": "Can you check if codex can still review your PRs if you make projects private.",
-        "summary": "Posted ACK and answered in-thread that Codex can review PRs in private repos when GitHub app/repo access is granted and per-repo Code review is enabled, with c…",
-        "summary_preview": "Posted ACK and answered in-thread that Codex can review PRs in private repos when GitHub app/repo access is granted and per-repo Code review is enabled, with c…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771795775.859239",
-        "last_update_ts": "1771799118.966628",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T21:29:35Z"
-        }
       }
     }
   },
@@ -1125,5 +1100,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T01:06:13Z"
+  "server_time_utc": "2026-03-21T01:08:16Z"
 }
