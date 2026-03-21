@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T17:30:34Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-21T17:32:39Z",
+    "status": "sleeping",
     "pid": 38150,
-    "loop_count": 3092,
+    "loop_count": 3105,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1773870804.162569",
-        "started_at": 1774111880,
-        "elapsed_sec": 2353
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.43,
-      "five": 1.74,
-      "fifteen": 1.77
+      "one": 1.56,
+      "five": 1.72,
+      "fifteen": 1.75
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112195497984,
-    "disk_free_bytes": 132911697920,
-    "runner_log_size_bytes": 243218,
+    "disk_used_bytes": 112200704000,
+    "disk_free_bytes": 132906491904,
+    "runner_log_size_bytes": 243891,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T11:35:20Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T17:30:40Z",
+    "checked_at_utc": "2026-03-21T17:32:42Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -67,7 +59,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 13,
+        "utilization_gpu_pct": 7,
         "memory_used_mb": 34047,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -83,7 +75,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 12,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 33827,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -91,15 +83,15 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
-        "memory_used_mb": 78915,
+        "utilization_gpu_pct": 81,
+        "memory_used_mb": 78919,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 48
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 34047,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -110,30 +102,13 @@
         "utilization_gpu_pct": 3,
         "memory_used_mb": 33827,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1773870804.162569": {
-        "mention_ts": "1773870804.162569",
-        "thread_ts": "1773870804.162569",
-        "status": "in_progress",
-        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
-        "summary": "Resumed the first GPQA [code] pilot as Slurm job 1477 on GPUs 0-2 from a fresh scratch worktree at the current PR head; prefill is complete and repeated rollou…",
-        "summary_preview": "Resumed the first GPQA [code] pilot as Slurm job 1477 on GPUs 0-2 from a fresh scratch worktree at the current PR head; prefill is complete and repeated rollou…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773870804.162569",
-        "last_update_ts": "1774111880.415941",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-18T21:53:24Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773899776.033029": {
         "mention_ts": "1773899776.033029",
@@ -309,6 +284,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T17:08:21Z"
+        }
+      },
+      "1773870804.162569": {
+        "mention_ts": "1773870804.162569",
+        "thread_ts": "1773870804.162569",
+        "status": "waiting_human",
+        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
+        "summary": "Validated the 3-GPU GPQA prompt-profile runtime end to end, found that [code] collapses to cap-hit on the first real 32/16 pilot and yields near-baseline perfo…",
+        "summary_preview": "Validated the 3-GPU GPQA prompt-profile runtime end to end, found that [code] collapses to cap-hit on the first real 32/16 pilot and yields near-baseline perfo…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773870804.162569",
+        "last_update_ts": "1774114289.949051",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-18T21:53:24Z"
         }
       }
     },
@@ -1125,5 +1116,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T17:30:40Z"
+  "server_time_utc": "2026-03-21T17:32:43Z"
 }
