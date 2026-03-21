@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T00:16:25Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-21T00:25:08Z",
+    "status": "sleeping",
     "pid": 38150,
-    "loop_count": 69,
+    "loop_count": 83,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1774037786.521379",
-        "started_at": 1774051768,
-        "elapsed_sec": 417
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.3,
-      "five": 1.89,
-      "fifteen": 1.82
+      "one": 1.8,
+      "five": 1.8,
+      "fifteen": 1.8
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 116354088960,
-    "disk_free_bytes": 128753106944,
-    "runner_log_size_bytes": 229383,
+    "disk_used_bytes": 116350631936,
+    "disk_free_bytes": 128756563968,
+    "runner_log_size_bytes": 229651,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T00:08:48Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T00:23:08Z",
+    "checked_at_utc": "2026-03-21T00:25:12Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -62,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 39
       },
       {
         "index": 2,
@@ -94,7 +86,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 85621,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 38
       },
       {
         "index": 6,
@@ -293,25 +285,25 @@
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T06:00:38Z"
         }
-      },
+      }
+    },
+    "finished": {
       "1774037786.521379": {
         "mention_ts": "1774037786.521379",
         "thread_ts": "1774037786.521379",
-        "status": "waiting_human",
+        "status": "done",
         "task_description": "I've just installed Google drive on your mac.",
         "summary": "Rechecked the Google Drive [code] backup root: it is no longer empty and now has 4,432 of 4,433 descendants published, with only one small backup file still pe…",
         "summary_preview": "Rechecked the Google Drive [code] backup root: it is no longer empty and now has 4,432 of 4,433 descendants published, with only one small backup file still pe…",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774037786.521379",
-        "last_update_ts": "1774052191.869612",
+        "last_update_ts": "1774052619.435773",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-20T21:51:56Z"
         }
-      }
-    },
-    "finished": {
+      },
       "1773937658.648909": {
         "mention_ts": "1773937658.648909",
         "thread_ts": "1773937658.648909",
@@ -1095,22 +1087,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-22T21:29:35Z"
         }
-      },
-      "1771791882.440369": {
-        "mention_ts": "1771791882.440369",
-        "thread_ts": "1771791882.440369",
-        "status": "done",
-        "task_description": "You can summarize your recent system level update based on recent tasks, claim those that are done by Zhi in roadmap, keep root git up to date, and send in the murphy channel abou…",
-        "summary": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
-        "summary_preview": "Roadmap update approved by user, coordination note moved from ROADMAP into durable memory, and inline roadmap content was posted to #murphy and #phds-hdsi per …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771791882.440369",
-        "last_update_ts": "1771798209.363401",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-22T20:24:42Z"
-        }
       }
     }
   },
@@ -1124,5 +1100,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T00:23:10Z"
+  "server_time_utc": "2026-03-21T00:25:13Z"
 }
