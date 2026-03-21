@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-21T08:36:02Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-21T08:38:08Z",
+    "status": "sleeping",
     "pid": 38150,
-    "loop_count": 3199,
+    "loop_count": 3205,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1774078137.264779",
-        "started_at": 1774079882,
-        "elapsed_sec": 2279
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.11,
-      "five": 2.0,
-      "fifteen": 2.04
+      "one": 1.52,
+      "five": 1.81,
+      "fifteen": 1.95
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 115284049920,
-    "disk_free_bytes": 129823145984,
-    "runner_log_size_bytes": 237273,
+    "disk_used_bytes": 115287216128,
+    "disk_free_bytes": 129819979776,
+    "runner_log_size_bytes": 237541,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T02:45:53Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-21T08:36:11Z",
+    "checked_at_utc": "2026-03-21T08:38:14Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -1108,5 +1100,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-21T08:36:13Z"
+  "server_time_utc": "2026-03-21T08:38:15Z"
 }
