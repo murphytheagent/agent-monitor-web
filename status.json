@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T04:26:14Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-22T04:28:16Z",
+    "status": "workers_active",
     "pid": 68391,
-    "loop_count": 16,
+    "loop_count": 32,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773870804.162569",
+        "started_at": 1774153641,
+        "elapsed_sec": 55
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.08,
-      "five": 2.0,
-      "fifteen": 1.98
+      "one": 1.55,
+      "five": 1.83,
+      "fifteen": 1.91
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113201324032,
-    "disk_free_bytes": 131905871872,
-    "runner_log_size_bytes": 369963,
+    "disk_used_bytes": 113201684480,
+    "disk_free_bytes": 131905511424,
+    "runner_log_size_bytes": 370589,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T04:24:17Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T04:26:19Z",
+    "checked_at_utc": "2026-03-22T04:28:21Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 88548,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 52
       },
       {
         "index": 1,
@@ -59,7 +67,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 13,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 32671,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -91,7 +99,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 12,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 32671,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,16 +107,33 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 32533,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773870804.162569": {
+        "mention_ts": "1773870804.162569",
+        "thread_ts": "1773870804.162569",
+        "status": "in_progress",
+        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
+        "summary": "Reordered the single-GPU cot-loop queue so GPQA probe jobs 1552/1553 run immediately after the live GPQA builder 1539 instead of waiting behind the 1540-1543 v…",
+        "summary_preview": "Reordered the single-GPU cot-loop queue so GPQA probe jobs 1552/1553 run immediately after the live GPQA builder 1539 instead of waiting behind the 1540-1543 v…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773870804.162569",
+        "last_update_ts": "1774153640.624534",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T03:56:08Z"
+        }
+      }
+    },
     "incomplete": {
       "1773899776.033029": {
         "mention_ts": "1773899776.033029",
@@ -380,22 +405,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T05:23:06Z"
-        }
-      },
-      "1773870804.162569": {
-        "mention_ts": "1773870804.162569",
-        "thread_ts": "1773870804.162569",
-        "status": "in_progress",
-        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
-        "summary": "Reordered the single-GPU cot-loop queue so GPQA probe jobs 1552/1553 run immediately after the live GPQA builder 1539 instead of waiting behind the 1540-1543 v…",
-        "summary_preview": "Reordered the single-GPU cot-loop queue so GPQA probe jobs 1552/1553 run immediately after the live GPQA builder 1539 instead of waiting behind the 1540-1543 v…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773870804.162569",
-        "last_update_ts": "1774153456.342368",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-22T03:56:08Z"
         }
       }
     },
@@ -1674,5 +1683,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T04:26:20Z"
+  "server_time_utc": "2026-03-22T04:28:22Z"
 }
