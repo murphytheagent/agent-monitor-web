@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T10:59:45Z",
+    "last_updated_utc": "2026-03-22T11:01:49Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 1377,
+    "loop_count": 1392,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,7 @@
         "slot": 0,
         "task": "1774162681.090709",
         "started_at": 1774175772,
-        "elapsed_sec": 1413
+        "elapsed_sec": 1536
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.54,
-      "five": 1.95,
-      "fifteen": 1.98
+      "one": 2.5,
+      "five": 2.06,
+      "fifteen": 2.0
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113359998976,
-    "disk_free_bytes": 131747196928,
-    "runner_log_size_bytes": 450278,
+    "disk_used_bytes": 113365028864,
+    "disk_free_bytes": 131742167040,
+    "runner_log_size_bytes": 450782,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T07:45:44Z",
     "local_ips": []
@@ -44,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T10:59:49Z",
+    "checked_at_utc": "2026-03-22T11:01:52Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,23 +54,23 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89042,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 45
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 89028,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 49
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 18,
-        "memory_used_mb": 43841,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 54881,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 36
       },
       {
         "index": 3,
@@ -78,15 +78,15 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89042,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 46
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 46797,
+        "utilization_gpu_pct": 37,
+        "memory_used_mb": 57837,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 37
       },
       {
         "index": 5,
@@ -94,28 +94,45 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89104,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 51
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 63785,
+        "utilization_gpu_pct": 40,
+        "memory_used_mb": 77261,
         "memory_total_mb": 97887,
-        "temperature_c": 36
+        "temperature_c": 39
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 17,
-        "memory_used_mb": 66741,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 80217,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 36
       }
     ]
   },
   "tasks": {
-    "queued": {},
+    "queued": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "maintenance",
+        "status": "queued",
+        "task_description": "Run maintenance reflection checklist and summarize findings.",
+        "summary": "Run maintenance reflection checklist and summarize findings.",
+        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774177204.605328",
+        "last_update_ts": "1774177204.605328",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T11:00:04Z"
+        }
+      }
+    },
     "active": {
       "1774162681.090709": {
         "mention_ts": "1774162681.090709",
@@ -471,22 +488,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T19:33:46Z"
-        }
-      },
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1774090825.155309",
-        "status": "done",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Developer review: committed AGENT-023 (user profiling) + FIX-006 (Tribune model fallback), triaged 8 noise/dup issues (deleted), fixed Icon gitdir corruption w…",
-        "summary_preview": "Developer review: committed AGENT-023 (user profiling) + FIX-006 (Tribune model fallback), triaged 8 noise/dup issues (deleted), fixed Icon gitdir corruption w…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774090803.885238",
-        "last_update_ts": "1774092920.081720",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T11:00:03Z"
         }
       },
       "1774037786.521379": {
@@ -1224,6 +1225,22 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T06:58:15Z"
         }
+      },
+      "1771811175.735769": {
+        "mention_ts": "1771811175.735769",
+        "thread_ts": "1771811175.735769",
+        "status": "done",
+        "task_description": "Can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testing codex review access, reme…",
+        "summary": "Confirmed monitor repo/public URL restored, recorded default-private policy with deployment exception, posted in-thread completion, and checkpointed report/mem…",
+        "summary_preview": "Confirmed monitor repo/public URL restored, recorded default-private policy with deployment exception, posted in-thread completion, and checkpointed report/mem…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1771811175.735769",
+        "last_update_ts": "1771827687.148782",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-23T01:46:15Z"
+        }
       }
     }
   },
@@ -1699,5 +1716,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T10:59:51Z"
+  "server_time_utc": "2026-03-22T11:01:53Z"
 }
