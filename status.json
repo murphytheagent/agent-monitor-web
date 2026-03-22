@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T22:31:58Z",
+    "last_updated_utc": "2026-03-22T22:34:03Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 2703,
+    "loop_count": 2719,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,13 @@
         "slot": 0,
         "task": "1774218284.229149",
         "started_at": 1774218293,
-        "elapsed_sec": 424
+        "elapsed_sec": 549
+      },
+      {
+        "slot": 1,
+        "task": "1774078137.264779",
+        "started_at": 1774218825,
+        "elapsed_sec": 18
       }
     ]
   },
@@ -27,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.07,
-      "five": 1.97,
-      "fifteen": 1.82
+      "one": 2.11,
+      "five": 2.0,
+      "fifteen": 1.85
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113471733760,
-    "disk_free_bytes": 131635462144,
-    "runner_log_size_bytes": 546691,
+    "disk_used_bytes": 113472122880,
+    "disk_free_bytes": 131635073024,
+    "runner_log_size_bytes": 547161,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -44,7 +50,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T22:32:08Z",
+    "checked_at_utc": "2026-03-22T22:34:11Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -70,7 +76,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 83443,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 35
       },
       {
         "index": 3,
@@ -83,10 +89,10 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 24,
+        "utilization_gpu_pct": 13,
         "memory_used_mb": 69189,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 33
       },
       {
         "index": 5,
@@ -99,7 +105,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 18,
         "memory_used_mb": 57267,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -107,10 +113,10 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 18,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 95327,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 33
       }
     ]
   },
@@ -131,6 +137,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-22T22:24:44Z"
+        }
+      },
+      "1774078137.264779": {
+        "mention_ts": "1774078137.264779",
+        "thread_ts": "1774078137.264779",
+        "status": "in_progress",
+        "task_description": "Let's work on something ambitious.",
+        "summary": "Committed the refreshed CEG rebuild bundle and merged the worker branch so the checked-in renderer, report.pdf, and coordination handoff now agree.",
+        "summary_preview": "Committed the refreshed CEG rebuild bundle and merged the worker branch so the checked-in renderer, report.pdf, and coordination handoff now agree.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774078137.264779",
+        "last_update_ts": "1774218824.848647",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T07:28:57Z"
         }
       }
     },
@@ -261,22 +283,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": ""
-        }
-      },
-      "1774078137.264779": {
-        "mention_ts": "1774078137.264779",
-        "thread_ts": "1774078137.264779",
-        "status": "waiting_human",
-        "task_description": "Let's work on something ambitious.",
-        "summary": "Committed the refreshed CEG rebuild bundle and merged the worker branch so the checked-in renderer, report.pdf, and coordination handoff now agree.",
-        "summary_preview": "Committed the refreshed CEG rebuild bundle and merged the worker branch so the checked-in renderer, report.pdf, and coordination handoff now agree.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774078137.264779",
-        "last_update_ts": "1774130402.645170",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T07:28:57Z"
         }
       },
       "1774129254.501359": {
@@ -1715,5 +1721,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T22:32:09Z"
+  "server_time_utc": "2026-03-22T22:34:12Z"
 }
