@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T22:56:36Z",
+    "last_updated_utc": "2026-03-22T22:58:09Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 2852,
+    "loop_count": 2864,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,19 +17,19 @@
         "slot": 0,
         "task": "1774219656.352939",
         "started_at": 1774219677,
-        "elapsed_sec": 518
+        "elapsed_sec": 612
       },
       {
         "slot": 1,
         "task": "1774078137.264779",
         "started_at": 1774218825,
-        "elapsed_sec": 1370
+        "elapsed_sec": 1464
       },
       {
         "slot": 2,
         "task": "1774218897.107549",
         "started_at": 1774218924,
-        "elapsed_sec": 1271
+        "elapsed_sec": 1365
       }
     ]
   },
@@ -39,15 +39,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.83,
-      "five": 2.03,
-      "fifteen": 2.03
+      "one": 2.58,
+      "five": 2.23,
+      "fifteen": 2.1
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113469292544,
-    "disk_free_bytes": 131637903360,
-    "runner_log_size_bytes": 551862,
+    "disk_used_bytes": 113465081856,
+    "disk_free_bytes": 131642114048,
+    "runner_log_size_bytes": 552502,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -56,7 +56,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T22:56:40Z",
+    "checked_at_utc": "2026-03-22T22:58:42Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -98,7 +98,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 69189,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 33
       },
       {
         "index": 5,
@@ -111,15 +111,15 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 14,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 57267,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 19,
+        "utilization_gpu_pct": 3,
         "memory_used_mb": 95327,
         "memory_total_mb": 97887,
         "temperature_c": 34
@@ -143,22 +143,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T07:28:57Z"
-        }
-      },
-      "1774218897.107549": {
-        "mention_ts": "1774218897.107549",
-        "thread_ts": "1774218897.107549",
-        "status": "in_progress",
-        "task_description": "Please think about how to package our system as an open source thing that other people can reuse.",
-        "summary": "Please think about how to package our system as an open source thing that other people can reuse.",
-        "summary_preview": "Please think about how to package our system as an open source thing that other people can reuse.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774218897.107549",
-        "last_update_ts": "1774218924.034131",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-22T22:34:57Z"
         }
       },
       "1774219656.352939": {
@@ -469,6 +453,22 @@
       }
     },
     "finished": {
+      "1774218897.107549": {
+        "mention_ts": "1774218897.107549",
+        "thread_ts": "1774218897.107549",
+        "status": "done",
+        "task_description": "Please think about how to package our system as an open source thing that other people can reuse.",
+        "summary": "Drafted a concrete open-source packaging recommendation, developer-review plan, and typeset note for packaging Murphy as a reusable self-hosted supervisor prod…",
+        "summary_preview": "Drafted a concrete open-source packaging recommendation, developer-review plan, and typeset note for packaging Murphy as a reusable self-hosted supervisor prod…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774218897.107549",
+        "last_update_ts": "1774220295.986809",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T22:34:57Z"
+        }
+      },
       "1774218284.229149": {
         "mention_ts": "1774218284.229149",
         "thread_ts": "1774218284.229149",
@@ -1252,22 +1252,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T20:53:49Z"
         }
-      },
-      "1771906196.179619": {
-        "mention_ts": "1771906196.179619",
-        "thread_ts": "1771906196.179619",
-        "status": "done",
-        "task_description": "!restart.",
-        "summary": "Restart request was already processed; human confirmed Murphy restarted on its own, and task was closed with final in-thread updates and a root checkpoint comm…",
-        "summary_preview": "Restart request was already processed; human confirmed Murphy restarted on its own, and task was closed with final in-thread updates and a root checkpoint comm…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771906196.179619",
-        "last_update_ts": "1771912582.247629",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T04:09:56Z"
-        }
       }
     }
   },
@@ -1743,5 +1727,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T22:56:41Z"
+  "server_time_utc": "2026-03-22T22:58:43Z"
 }
