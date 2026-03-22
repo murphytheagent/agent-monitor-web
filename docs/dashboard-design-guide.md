@@ -63,3 +63,40 @@ The redesign therefore focused on:
 ## Durable boundary
 
 The root monitor and roadmap pages are still exporter-owned. If those routes need this shell durably, the exporter template must adopt it. Patching the generated HTML can be useful for immediate iteration, but it is not the long-term source of truth.
+
+## Exporter follow-up for root routes
+
+The remaining redesign work on `/` and `/roadmap/` is not another palette pass. It is a hierarchy pass.
+
+### `/` should behave like a Now page
+
+- Keep one compact shell header on mobile: wordmark, current-surface label, and a single overflow/menu path for the wider route list.
+- Remove route-inventory cards from the body. The page is already the monitor.
+- Merge the hero, live status, current task, and queue summary into one dominant above-the-fold surface.
+- Move refresh into a quiet meta row or overflow action instead of keeping it as a primary button in the sticky header.
+- Merge `System Snapshot` and `GPU Snapshot` into one quieter resources section.
+- Collapse `Supervisor`, `Visibility + Permissions`, and deep task-stack detail behind a details/accordion section unless something is unhealthy.
+
+### `/roadmap/` should behave like a What-ships-next page
+
+- Keep the same compact mobile shell pattern as `/`; dispatch settings should not live in the sticky header.
+- Replace the hero plus four summary cards with one overview surface containing the title, one-line framing, inline counts, and a short top-priorities list.
+- Keep the `Fixes` / `Features` / `Completed` segmentation, but place it below the overview card.
+- Render roadmap items as calmer list rows or lightly separated blocks, not a wall of equal-weight dashboard cards.
+- Move the full dispatch-settings panel into a collapsed utility section below the overview and tabs.
+- Treat completed work as supporting context; on mobile it should start as a count, not the first story.
+
+### Component rules for exporter templates
+
+- One dominant story card per page above the fold.
+- Healthy/default states should compress; problems should expand.
+- Counts belong inline unless they materially change behavior.
+- Utility controls are tertiary. If `Refresh` or `Dispatch settings` reads louder than the current story, the template is wrong.
+- Prefer internal dividers to nested framed boxes.
+- Omit empty sections entirely instead of rendering placeholder cards.
+
+### Cyberpunk restraint
+
+- Let the identity come from dark surfaces, sharp typography, and sparse cyan/magenta signals rather than lots of bordered containers.
+- Use cyan for live/system emphasis and magenta for the selected/current path, but avoid using both at full strength on the same large component.
+- Keep accents to dots, thin rules, active counts, and selected states. Do not rebuild the root pages out of glowing pills and thick borders.

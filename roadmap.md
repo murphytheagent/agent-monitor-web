@@ -1,12 +1,13 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-22 06:53 UTC
+Last updated: 2026-03-22 07:35 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
 - The hand-maintained public routes now use a restrained shared shell: dark layered surfaces, shallow navigation, cyan/magenta accents used as signal, and preview-led hierarchy instead of the older route-map-heavy chrome.
 - The generated root routes `/` and `/roadmap/` still sit behind the exporter boundary. Manual shell tweaks there can be useful for brief local iteration, but they are not stable enough to count as delivered site changes.
+- The remaining root-side problem is now specified more concretely: `/` should compress into a single Now surface and `/roadmap/` into a What-ships-next surface, with utilities demoted and diagnostics/details collapsed behind calmer secondary sections.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
 - `/showcase/`, `/tokenizers/`, `/showcase/signal-deck/`, and `/showcase/res-publica/` now share the same restrained Murphy shell, so the public site reads as one authored system instead of a pile of neighboring mini-sites.
 - `/showcase/signal-deck/` now adds a telemetry exhibit grounded in completed-task threads and authored git history, so the showcase is no longer only a tool lane plus an architecture lane.
@@ -71,6 +72,12 @@ Success criteria:
 
 Status:
 - Partially in place. The exporter can render public navigation for both `/` and `/roadmap/`, but the restrained shell from the 2026-03-22 redesign will not be durable on those routes until the exporter template adopts it.
+
+### Activity Log
+
+- 2026-03-22 07:35 UTC — Re-checked the live generated `/` and `/roadmap/` HTML plus fresh mobile captures after more snapshot refreshes. The remaining issue is no longer just "match the shell"; it is an exporter-side hierarchy problem. Both routes still open with too many equal-weight boxes and early utility controls.
+- 2026-03-22 07:35 UTC — Consulted Athena in `deep` mode (1 turn; log: `.agent/runtime/consult_history/1774155209.676849.jsonl`) specifically on the exporter-owned root routes. Main takeaway: `/` should behave like a `Now` page and `/roadmap/` like a `What ships next` page. Above the fold, each route needs one dominant composite surface, fewer repeated route cues, and collapsed diagnostics/settings on mobile.
+- 2026-03-22 07:35 UTC — Captured that exporter follow-up in `docs/dashboard-design-guide.md` and root developer plan `docs/dev/plans/47-monitor-exporter-mobile-hierarchy.md` so the next template pass has a concrete checklist instead of another vague "make it cleaner" request.
 
 ## Milestone 4 - Additional Hosted Tools
 
