@@ -1,6 +1,6 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-21 22:09 UTC
+Last updated: 2026-03-22 02:19 UTC
 
 ## Current Status
 
@@ -8,8 +8,9 @@ Last updated: 2026-03-21 22:09 UTC
 - The exporter-backed root routes `/` and `/roadmap/` now use the same Murphy shell and five-route navigation map as the hand-maintained public pages.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
 - `/showcase/`, `/tokenizers/`, and `/showcase/res-publica/` still share the same Murphy-branded shell, so the whole public site now reads as one authored system instead of two styles split by route ownership.
+- `/showcase/signal-deck/` now adds a telemetry exhibit grounded in completed-task threads and authored git history, so the showcase is no longer only a tool lane plus an architecture lane.
 - The tokenizer workbench selectors now run newest-to-oldest across lines, families, and configurations instead of inheriting the raw catalog insertion order.
-- The showcase route now separates the tokenizer and `Res Publica` into two explicit exhibit lanes: a single-model live tokenizer study first, then the architecture piece as its own card and CTA.
+- The showcase route now separates the tokenizer, `Signal Deck`, and `Res Publica` into three explicit exhibit lanes: live study, telemetry deck, then architecture exhibit.
 - The root dashboard now has exporter-backed navigation to the public surfaces, so the old tiny roadmap utility link mismatch is gone.
 
 ## Milestone 1 - Stable Hosted Surfaces
@@ -71,4 +72,10 @@ Success criteria:
 - Each tool has project docs and a clear navigation path from the showcase.
 
 Status:
-- Started. The showcase now has a second public exhibit (`Res Publica`), but only one interactive browser tool still exists, so this milestone is not complete yet.
+- In place. The showcase now has two browser tools (`Tokenizer Lab`, `Signal Deck`) plus the `Res Publica` architecture exhibit, each with a direct gallery path and project-level docs.
+
+### Activity Log
+
+- 2026-03-22 02:19 UTC — Added `/showcase/signal-deck/`, a telemetry exhibit built from the finished-task archive plus authored git history. The route now shows task completions over time, estimated thread-token mass, request mix, active-span rhythm, code churn, and a recent task cloud.
+- 2026-03-22 02:19 UTC — Consulted Athena in `standard` mode (1 turn; log: `.agent/runtime/consult_history/1774140823.432069.jsonl`) on what system statistics were worth surfacing. Main takeaway: keep it to one coherent five-part story (snapshot strip, production rhythm, token footprint, request mix, code impact) instead of a generic dashboard junk drawer.
+- 2026-03-22 02:19 UTC — Added `scripts/build_signal_deck.py` plus `docs/telemetry-showcase.md` so the telemetry bundle can be regenerated locally. Current known limit: the JSON is still manual-refresh because the root exporter has no supported hook for derived showcase telemetry artifacts yet.
