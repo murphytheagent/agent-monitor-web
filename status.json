@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T03:38:25Z",
+    "last_updated_utc": "2026-03-22T03:40:28Z",
     "status": "sleeping",
     "pid": 68391,
-    "loop_count": 32,
+    "loop_count": 48,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.3,
-      "five": 2.33,
-      "fifteen": 2.11
+      "one": 1.85,
+      "five": 2.14,
+      "fifteen": 2.06
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113103482880,
-    "disk_free_bytes": 132003713024,
-    "runner_log_size_bytes": 360256,
+    "disk_used_bytes": 113103745024,
+    "disk_free_bytes": 132003450880,
+    "runner_log_size_bytes": 360696,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T03:34:25Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T03:38:30Z",
+    "checked_at_utc": "2026-03-22T03:40:32Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 88548,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 49
       },
       {
         "index": 1,
@@ -59,7 +59,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 9,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 32671,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -1414,11 +1414,11 @@
         "created": "2026-03-21",
         "priority": "Medium",
         "status": "open",
-        "task": "Clean up dispatch prompt: remove unnecessary metadata from thread context",
-        "context": "`_task_json_to_text()` formats each message as `[2026-03-21 07:01 UTC (1774076482.886199) | user: U08HX3SH33R | role: human]` — the raw Slack `ts` in parentheses and raw `user_id` are unnecessary for ",
-        "done_when": "Thread context rendered with human-readable timestamps and resolved usernames only; raw Slack `ts` and `user_id` stripped or moved to non-prompt metadata.",
+        "task": "Clean up dispatch prompt: strip metadata noise, deduplicate content, evaluate structure",
+        "context": "Thread context leaks raw Slack `ts` and `user_id` into prompts; task content is duplicated across `task_description`, `mention_text`, and thread snapshot; prompt sections lack clear demarcation. Issue",
+        "done_when": "Thread context uses human-readable timestamps + resolved usernames; no content duplication; prompt structure evaluated and improved if beneficial.",
         "has_plan": false,
-        "has_issue": false
+        "has_issue": true
       },
       {
         "id": "AGENT-041",
@@ -1680,5 +1680,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T03:38:30Z"
+  "server_time_utc": "2026-03-22T03:40:33Z"
 }
