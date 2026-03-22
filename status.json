@@ -33,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.89,
-      "five": 2.07,
-      "fifteen": 1.99
+      "one": 1.39,
+      "five": 1.82,
+      "fifteen": 1.9
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113097351168,
-    "disk_free_bytes": 132009844736,
-    "runner_log_size_bytes": 365237,
+    "disk_used_bytes": 113139785728,
+    "disk_free_bytes": 131967410176,
+    "runner_log_size_bytes": 365650,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T03:34:25Z",
     "local_ips": []
@@ -50,7 +50,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T04:00:57Z",
+    "checked_at_utc": "2026-03-22T04:02:59Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -60,7 +60,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 88548,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 47
       },
       {
         "index": 1,
@@ -73,7 +73,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 9,
         "memory_used_mb": 32671,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -89,7 +89,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 32533,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -105,7 +105,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 9,
         "memory_used_mb": 32671,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -113,7 +113,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 12,
+        "utilization_gpu_pct": 5,
         "memory_used_mb": 32533,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -123,22 +123,6 @@
   "tasks": {
     "queued": {},
     "active": {
-      "1773897786.579989": {
-        "mention_ts": "1773897786.579989",
-        "thread_ts": "1773897786.579989",
-        "status": "in_progress",
-        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
-        "summary": "Verified the exact GPQA prompt-profile source bundle and rewrote the Slack draft accordingly; the 1-GPU all-dataset visualization chain is still running behind…",
-        "summary_preview": "Verified the exact GPQA prompt-profile source bundle and rewrote the Slack draft accordingly; the 1-GPU all-dataset visualization chain is still running behind…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773897786.579989",
-        "last_update_ts": "1774151761.190552",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T05:23:06Z"
-        }
-      },
       "1773870804.162569": {
         "mention_ts": "1773870804.162569",
         "thread_ts": "1773870804.162569",
@@ -411,6 +395,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-22T00:53:43Z"
+        }
+      },
+      "1773897786.579989": {
+        "mention_ts": "1773897786.579989",
+        "thread_ts": "1773897786.579989",
+        "status": "waiting_human",
+        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
+        "summary": "Verified from Slurm accounting that jobs 1525 and 1533 were canceled at the exact switchover to the 1-GPU chain 1539-1543, and updated the Slack draft plus coo…",
+        "summary_preview": "Verified from Slurm accounting that jobs 1525 and 1533 were canceled at the exact switchover to the 1-GPU chain 1539-1543, and updated the Slack draft plus coo…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773897786.579989",
+        "last_update_ts": "1774152108.792902",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T05:23:06Z"
         }
       }
     },
@@ -1695,5 +1695,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T04:00:57Z"
+  "server_time_utc": "2026-03-22T04:02:59Z"
 }
