@@ -1,128 +1,136 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T11:14:46Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-22T22:29:09Z",
+    "status": "workers_active",
     "pid": 68391,
-    "loop_count": 1490,
+    "loop_count": 2681,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1774218284.229149",
+        "started_at": 1774218293,
+        "elapsed_sec": 255
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
     "platform": "macOS-26.3-arm64-arm-64bit",
-    "python_version": "3.11.14",
+    "python_version": "3.9.6",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.83,
-      "five": 1.78,
-      "fifteen": 1.8
+      "one": 2.56,
+      "five": 1.94,
+      "fifteen": 1.78
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113473949696,
-    "disk_free_bytes": 131633246208,
-    "runner_log_size_bytes": 453940,
+    "disk_used_bytes": 113469714432,
+    "disk_free_bytes": 131637481472,
+    "runner_log_size_bytes": 546031,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-22T07:45:44Z",
+    "dashboard_started_utc": "2026-03-22T22:29:13Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T11:28:25Z",
+    "checked_at_utc": "2026-03-22T22:29:13Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 89042,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 28
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 89048,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 27
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 94979,
+        "utilization_gpu_pct": 1,
+        "memory_used_mb": 83443,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 34
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 89042,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 28
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 42,
-        "memory_used_mb": 95907,
+        "utilization_gpu_pct": 23,
+        "memory_used_mb": 69189,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 34
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
-        "memory_used_mb": 89104,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 27
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 82987,
+        "utilization_gpu_pct": 18,
+        "memory_used_mb": 57267,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 33
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 48,
-        "memory_used_mb": 82391,
+        "utilization_gpu_pct": 6,
+        "memory_used_mb": 95327,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 33
       }
     ]
   },
   "tasks": {
     "queued": {},
     "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "maintenance",
+      "1774218284.229149": {
+        "mention_ts": "1774218284.229149",
+        "thread_ts": "1774218284.229149",
         "status": "in_progress",
-        "task_description": "Run maintenance reflection checklist and summarize findings.",
-        "summary": "Run maintenance reflection checklist and summarize findings.",
-        "summary_preview": "Run maintenance reflection checklist and summarize findings.",
+        "task_description": "The dashboard website seems stale.",
+        "summary": "The dashboard website seems stale.",
+        "summary_preview": "The dashboard website seems stale.",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774177204.605328",
-        "last_update_ts": "1774178086.498020",
-        "task_type": "maintenance",
+        "created_ts": "1774218284.229149",
+        "last_update_ts": "1774218293.356442",
+        "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-22T11:00:04Z"
+          "time_iso": "2026-03-22T22:24:44Z"
         }
       }
     },
@@ -418,13 +426,13 @@
       "1774162681.090709": {
         "mention_ts": "1774162681.090709",
         "thread_ts": "1774162681.090709",
-        "status": "in_progress",
+        "status": "waiting_human",
         "task_description": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the gold standard for lan…",
-        "summary": "Added implementation-hypothesis sheets for all wave-1 cards, created a real multimodal supplement beyond BLT, attached a round-4 PDF memo in-thread, and logged…",
-        "summary_preview": "Added implementation-hypothesis sheets for all wave-1 cards, created a real multimodal supplement beyond BLT, attached a round-4 PDF memo in-thread, and logged…",
+        "summary": "Reattached and render-verified the round-6 pressure-test memo, updated the task record, and staged the final Slack draft around the tightened post-transformer …",
+        "summary_preview": "Reattached and render-verified the round-6 pressure-test memo, updated the task record, and staged the final Slack draft around the tightened post-transformer …",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774162681.090709",
-        "last_update_ts": "1774178085.981434",
+        "last_update_ts": "1774190546.751512",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
@@ -433,6 +441,86 @@
       }
     },
     "finished": {
+      "1774186408.924059": {
+        "mention_ts": "1774186408.924059",
+        "thread_ts": "1774186408.924059",
+        "status": "done",
+        "task_description": "Development: FIX-007.",
+        "summary": "Development task completed (1774186408.924059)",
+        "summary_preview": "Development task completed (1774186408.924059)",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774186442.643845",
+        "last_update_ts": "1774203076.670467",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T13:33:28Z"
+        }
+      },
+      "1774186554.727909": {
+        "mention_ts": "1774186554.727909",
+        "thread_ts": "1774186554.727909",
+        "status": "done",
+        "task_description": "Development: FIX-012.",
+        "summary": "Development task completed (1774186554.727909)",
+        "summary_preview": "Development task completed (1774186554.727909)",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774186577.476650",
+        "last_update_ts": "1774196285.176888",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T13:35:54Z"
+        }
+      },
+      "1774186558.985499": {
+        "mention_ts": "1774186558.985499",
+        "thread_ts": "1774186558.985499",
+        "status": "done",
+        "task_description": "Development: FIX-014.",
+        "summary": "Development task completed (1774186558.985499)",
+        "summary_preview": "Development task completed (1774186558.985499)",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774186577.475700",
+        "last_update_ts": "1774193752.731384",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T13:35:58Z"
+        }
+      },
+      "1774186513.319509": {
+        "mention_ts": "1774186513.319509",
+        "thread_ts": "1774186513.319509",
+        "status": "done",
+        "task_description": "Development: FIX-011.",
+        "summary": "Development task completed (1774186513.319509)",
+        "summary_preview": "Development task completed (1774186513.319509)",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774186519.164529",
+        "last_update_ts": "1774191117.595077",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T13:35:13Z"
+        }
+      },
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1774178100.946349",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: fixed attachment context loss, landed Plan 37 session resume foundation, registered submodule, triaged 22→15 issues and 11→6 plans, fixed cor…",
+        "summary_preview": "Developer review: fixed attachment context loss, landed Plan 37 session resume foundation, registered submodule, triaged 22→15 issues and 11→6 plans, fixed cor…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774177204.605328",
+        "last_update_ts": "1774184202.438090",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T11:00:04Z"
+        }
+      },
       "1774133473.190269": {
         "mention_ts": "1774133473.190269",
         "thread_ts": "1774133473.190269",
@@ -1152,86 +1240,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T04:42:52Z"
         }
-      },
-      "1771901577.956549": {
-        "mention_ts": "1771901577.956549",
-        "thread_ts": "1771901577.956549",
-        "status": "done",
-        "task_description": "Run project index maintenance and assemble project JSONs.",
-        "summary": "Rebuilt .agent/project_index.json for 5 projects (21 classified threads), assembled .agent/projects/*.json, verified thread counts, and posted Slack summary pl…",
-        "summary_preview": "Rebuilt .agent/project_index.json for 5 projects (21 classified threads), assembled .agent/projects/*.json, verified thread counts, and posted Slack summary pl…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771901318.895596",
-        "last_update_ts": "1771901684.657511",
-        "task_type": "maintenance_projects",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T02:48:38Z"
-        }
-      },
-      "1771841009.140679": {
-        "mention_ts": "1771841009.140679",
-        "thread_ts": "1771841009.140679",
-        "status": "done",
-        "task_description": "On PR #8 of small-swe-train: If you want all 8 GPUs active, set ON_POLICY_PROOF_NPROC_PER_NODE=8.",
-        "summary": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
-        "summary_preview": "Thread 1771841009.140679 is closed per human confirmation after successful small 8-GPU e2e run (job 473), PR #8 fix fc8e00a, and split follow-up PRs #9/#10 wit…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771841009.140679",
-        "last_update_ts": "1771879816.194354",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T10:03:29Z"
-        }
-      },
-      "1771831315.650959": {
-        "mention_ts": "1771831315.650959",
-        "thread_ts": "1771831315.650959",
-        "status": "done",
-        "task_description": "I replied to your waiting_human maintenance task but it is still in incomplete.",
-        "summary": "Confirmed user approval, manually moved maintenance task 1771660238.729239 from incomplete to finished, and posted closure updates in both threads.",
-        "summary_preview": "Confirmed user approval, manually moved maintenance task 1771660238.729239 from incomplete to finished, and posted closure updates in both threads.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771831315.650959",
-        "last_update_ts": "1771832134.462323",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T07:21:55Z"
-        }
-      },
-      "1771827474.009799": {
-        "mention_ts": "1771827474.009799",
-        "thread_ts": "1771827474.009799",
-        "status": "done",
-        "task_description": "Answer the question above.",
-        "summary": "Answered the follow-up in-thread with verified cause: monitor shows maintenance in incomplete because maintenance_reflect task 1771660238.729239 is waiting_hum…",
-        "summary_preview": "Answered the follow-up in-thread with verified cause: monitor shows maintenance in incomplete because maintenance_reflect task 1771660238.729239 is waiting_hum…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771827474.009799",
-        "last_update_ts": "1771830185.965520",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T06:58:15Z"
-        }
-      },
-      "1771811175.735769": {
-        "mention_ts": "1771811175.735769",
-        "thread_ts": "1771811175.735769",
-        "status": "done",
-        "task_description": "Can you check if codex can still review your PRs if you make projects private test with making one repo private first and wait for a while before testing codex review access, reme…",
-        "summary": "Confirmed monitor repo/public URL restored, recorded default-private policy with deployment exception, posted in-thread completion, and checkpointed report/mem…",
-        "summary_preview": "Confirmed monitor repo/public URL restored, recorded default-private policy with deployment exception, posted in-thread completion, and checkpointed report/mem…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771811175.735769",
-        "last_update_ts": "1771827687.148782",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T01:46:15Z"
-        }
       }
     }
   },
@@ -1250,14 +1258,26 @@
         "has_issue": false
       },
       {
-        "id": "FIX-007",
+        "id": "FIX-018",
         "queue": "fix",
-        "created": "2026-03-21",
-        "priority": "Medium",
+        "created": "2026-03-22",
+        "priority": "Low",
         "status": "open",
-        "task": "Iterative-review secret scanning should cover full file contents",
-        "context": "Current secret scanning only checks the diff. Reviewers have full file-read access, so secrets in unchanged hunks of reviewed files are still exposed.",
-        "done_when": "Scan full contents of all files in review scope (not just diff hunks) before each round.",
+        "task": "Iterative-review secret pattern coverage gaps",
+        "context": "Tier 1 patterns don't match JSON-quoted keys (`\"API_KEY\": \"...\"`), Tier 2 doesn't support YAML/colon/spaced assignments, no `TOKEN` keyword. Separate from FIX-007 (full-file scanning).",
+        "done_when": "Patterns match common config formats (JSON, YAML, spaced assignments) and include TOKEN keyword.",
+        "has_plan": false,
+        "has_issue": false
+      },
+      {
+        "id": "FIX-019",
+        "queue": "fix",
+        "created": "2026-03-22",
+        "priority": "Low",
+        "status": "open",
+        "task": "Iterative-review fix-round untracked files bypass Tier 2 scanning",
+        "context": "`git diff` in fix delta scanning doesn't show untracked (newly created) files. These only get Tier 1 full-file scan. Extremely unlikely edge case (orchestrator creates code fixes, not secret-bearing c",
+        "done_when": "Fix delta scanning covers untracked files via synthetic diffs or index staging.",
         "has_plan": false,
         "has_issue": false
       },
@@ -1286,30 +1306,6 @@
         "has_issue": true
       },
       {
-        "id": "FIX-011",
-        "queue": "fix",
-        "created": "2026-03-21",
-        "priority": "Medium",
-        "status": "open",
-        "task": "Slack `conversations_add_message` returns phantom `ts`",
-        "context": "Returned `ts` can't be retrieved as a real thread root via `conversations.replies`. Affects maintenance task lifecycle (first post establishes `thread_ts`). Issue",
-        "done_when": "Maintenance thread creation uses a Slack API method that returns a retrievable `ts`, or validates the returned `ts` before relying on it.",
-        "has_plan": false,
-        "has_issue": true
-      },
-      {
-        "id": "FIX-012",
-        "queue": "fix",
-        "created": "2026-03-21",
-        "priority": "Low",
-        "status": "open",
-        "task": "`_swap_model_in_cmd` doesn't handle `--model` long form",
-        "context": "Helper only recognizes `-m`, not `--model` or `--model=...`. If `TRIBUNE_CMD` uses long form, fallback inserts a duplicate flag. Found during FIX-006 iterative review (M-3-1).",
-        "done_when": "`_swap_model_in_cmd` and `_extract_model` handle `-m`, `--model`, and `--model=` forms.",
-        "has_plan": false,
-        "has_issue": false
-      },
-      {
         "id": "FIX-013",
         "queue": "fix",
         "created": "2026-03-21",
@@ -1320,18 +1316,6 @@
         "done_when": "Workers can use standard git commands on shared paths without index-level workarounds, or the workaround is fully automated.",
         "has_plan": false,
         "has_issue": true
-      },
-      {
-        "id": "FIX-014",
-        "queue": "fix",
-        "created": "2026-03-21",
-        "priority": "Low",
-        "status": "open",
-        "task": "Gemini MCP Slack error noise during iterative-review",
-        "context": "Gemini CLI tries to connect all configured MCP servers at startup regardless of `--approval-mode plan`. Slack MCP fails to connect, producing error noise in reviewer stderr. Non-fatal but noisy.",
-        "done_when": "Gemini reviewer dispatch suppresses or avoids Slack MCP connection, either via config override or `--no-mcp` flag.",
-        "has_plan": false,
-        "has_issue": false
       },
       {
         "id": "FIX-017",
@@ -1388,7 +1372,7 @@
         "priority": "High",
         "status": "open",
         "task": "Persistent thread sessions: session resume + mid-execution thread awareness. Plan",
-        "context": "Phase 0 spike completed (2026-03-21): `codex exec resume <SESSION_ID> -` works in piped subprocess mode, session IDs parseable from startup header, full context retention confirmed. Next: Phase 1 impl",
+        "context": "Phase 0 spike completed (2026-03-21). Phase 1 foundation landed (2026-03-22): `system_prompt_hash()` and `capture_codex_session_id()` in utils.py with tests. Next: wire into dispatch logic, drop `--ep",
         "done_when": "Phase 1: drop `--ephemeral`, capture session IDs, re-dispatch via `codex exec resume <ID>` with slot affinity. Phase 2: workers check `conversations_replies` at phase boundaries (behavioral contract).",
         "has_plan": false,
         "has_issue": false
@@ -1455,6 +1439,30 @@
       }
     ],
     "completed": [
+      {
+        "id": "FIX-007",
+        "created": "2026-03-21",
+        "completed": "2026-03-22",
+        "summary": "Full-file secret scanning for iterative-review: two-layer scanning (full-file Tier 1 + diff Tier 1&2 backstop), per-scope file resolution, fix delta scanning, redaction-safe warnings, root-level exclu"
+      },
+      {
+        "id": "FIX-012",
+        "created": "2026-03-21",
+        "completed": "2026-03-22",
+        "summary": "`_swap_model_in_cmd` / `_extract_model` handle `--model` and `--model=` long forms. Bare trailing flags repaired in-place. 8 new tests (420 total). [Plan](plans/fix-012-model-long-form.md)"
+      },
+      {
+        "id": "FIX-014",
+        "created": "2026-03-21",
+        "completed": "2026-03-22",
+        "summary": "Suppress Gemini MCP Slack error noise during iterative-review. Added `--allowed-mcp-server-names ''` to all Gemini dispatch templates in the skill definition. Scoped to iterative-review only (supervis"
+      },
+      {
+        "id": "FIX-011",
+        "created": "2026-03-21",
+        "completed": "2026-03-22",
+        "summary": "Closed: Slack `conversations_add_message` phantom `ts` — one-off Slack API oddity, not reproduced since. Issue file deleted."
+      },
       {
         "id": "AGENT-039",
         "created": "2026-03-21",
@@ -1707,5 +1715,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T11:28:26Z"
+  "server_time_utc": "2026-03-22T22:29:14Z"
 }
