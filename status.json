@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T09:05:22Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-22T09:07:25Z",
+    "status": "sleeping",
     "pid": 68391,
-    "loop_count": 519,
+    "loop_count": 534,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1774162681.090709",
-        "started_at": 1774165552,
-        "elapsed_sec": 4769
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.67,
-      "five": 1.72,
-      "fifteen": 1.81
+      "one": 1.94,
+      "five": 1.82,
+      "fifteen": 1.83
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113398870016,
-    "disk_free_bytes": 131708325888,
-    "runner_log_size_bytes": 425273,
+    "disk_used_bytes": 113403863040,
+    "disk_free_bytes": 131703332864,
+    "runner_log_size_bytes": 426082,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T07:45:44Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T09:05:23Z",
+    "checked_at_utc": "2026-03-22T09:07:26Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89042,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 45
       },
       {
         "index": 1,
@@ -62,15 +54,15 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89020,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 47
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 88329,
+        "utilization_gpu_pct": 24,
+        "memory_used_mb": 93025,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 36
       },
       {
         "index": 3,
@@ -78,15 +70,15 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89042,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 46
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 22,
-        "memory_used_mb": 89029,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 93725,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 33
       },
       {
         "index": 5,
@@ -94,46 +86,29 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89102,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 13,
-        "memory_used_mb": 65809,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 71289,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 33
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 21,
-        "memory_used_mb": 66509,
+        "utilization_gpu_pct": 23,
+        "memory_used_mb": 71989,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 35
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1774162681.090709": {
-        "mention_ts": "1774162681.090709",
-        "thread_ts": "1774162681.090709",
-        "status": "in_progress",
-        "task_description": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the gold standard for lan…",
-        "summary": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the g…",
-        "summary_preview": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the g…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774162681.090709",
-        "last_update_ts": "1774165552.199162",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-22T06:58:01Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773942694.197309": {
         "mention_ts": "1773942694.197309",
@@ -421,6 +396,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-22T03:56:08Z"
+        }
+      },
+      "1774162681.090709": {
+        "mention_ts": "1774162681.090709",
+        "thread_ts": "1774162681.090709",
+        "status": "in_progress",
+        "task_description": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the gold standard for lan…",
+        "summary": "Canonicalized the post-transformer architecture program into a new project with Athena-backed rankings, a literature sweep, a stage-gated verification memo, an…",
+        "summary_preview": "Canonicalized the post-transformer architecture program into a new project with Athena-backed rankings, a literature sweep, a stage-gated verification memo, an…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774162681.090709",
+        "last_update_ts": "1774170399.695440",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T06:58:01Z"
         }
       }
     },
@@ -1699,5 +1690,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T09:05:24Z"
+  "server_time_utc": "2026-03-22T09:07:27Z"
 }
