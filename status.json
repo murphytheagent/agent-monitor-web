@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T22:38:11Z",
+    "last_updated_utc": "2026-03-22T22:38:30Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 2751,
+    "loop_count": 2753,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,19 +17,19 @@
         "slot": 0,
         "task": "1774218284.229149",
         "started_at": 1774218293,
-        "elapsed_sec": 798
+        "elapsed_sec": 816
       },
       {
         "slot": 1,
         "task": "1774078137.264779",
         "started_at": 1774218825,
-        "elapsed_sec": 266
+        "elapsed_sec": 284
       },
       {
         "slot": 2,
         "task": "1774218897.107549",
         "started_at": 1774218924,
-        "elapsed_sec": 167
+        "elapsed_sec": 185
       }
     ]
   },
@@ -39,15 +39,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.88,
-      "five": 1.89,
-      "fifteen": 1.83
+      "one": 1.85,
+      "five": 1.9,
+      "fifteen": 1.84
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113469902848,
-    "disk_free_bytes": 131637293056,
-    "runner_log_size_bytes": 548177,
+    "disk_used_bytes": 113470500864,
+    "disk_free_bytes": 131636695040,
+    "runner_log_size_bytes": 548597,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -56,7 +56,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T22:38:16Z",
+    "checked_at_utc": "2026-03-22T22:40:19Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -79,10 +79,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 8,
         "memory_used_mb": 83443,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 36
       },
       {
         "index": 3,
@@ -95,10 +95,10 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 22,
+        "utilization_gpu_pct": 4,
         "memory_used_mb": 69189,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 35
       },
       {
         "index": 5,
@@ -111,7 +111,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 17,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 57267,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -119,32 +119,16 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 17,
         "memory_used_mb": 95327,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       }
     ]
   },
   "tasks": {
     "queued": {},
     "active": {
-      "1774218284.229149": {
-        "mention_ts": "1774218284.229149",
-        "thread_ts": "1774218284.229149",
-        "status": "in_progress",
-        "task_description": "The dashboard website seems stale.",
-        "summary": "The dashboard website seems stale.",
-        "summary_preview": "The dashboard website seems stale.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774218284.229149",
-        "last_update_ts": "1774218293.356442",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-22T22:24:44Z"
-        }
-      },
       "1774078137.264779": {
         "mention_ts": "1774078137.264779",
         "thread_ts": "1774078137.264779",
@@ -469,6 +453,22 @@
       }
     },
     "finished": {
+      "1774218284.229149": {
+        "mention_ts": "1774218284.229149",
+        "thread_ts": "1774218284.229149",
+        "status": "done",
+        "task_description": "The dashboard website seems stale.",
+        "summary": "Restored live dashboard publishing by moving agent-monitor-web back to main, triggering a fresh Pages deploy, and closing obsolete PR #23.",
+        "summary_preview": "Restored live dashboard publishing by moving agent-monitor-web back to main, triggering a fresh Pages deploy, and closing obsolete PR #23.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774218284.229149",
+        "last_update_ts": "1774219116.230126",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T22:24:44Z"
+        }
+      },
       "1774186408.924059": {
         "mention_ts": "1774186408.924059",
         "thread_ts": "1774186408.924059",
@@ -1252,22 +1252,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-24T04:09:56Z"
         }
-      },
-      "1771544976.149449": {
-        "mention_ts": "1771544976.149449",
-        "thread_ts": "1771544976.149449",
-        "status": "done",
-        "task_description": "Summarized arXiv 2602.02431 in-thread with theorem-level findings on sample-complexity separation between full-batch GD and one-pass SGD.",
-        "summary": "Confirmed thread closure in Slack, recorded closure checkpoints in report/daily memory, and committed task-specific coordination updates.",
-        "summary_preview": "Confirmed thread closure in Slack, recorded closure checkpoints in report/daily memory, and committed task-specific coordination updates.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771544976.149449",
-        "last_update_ts": "1771911350.085025",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T04:42:52Z"
-        }
       }
     }
   },
@@ -1743,5 +1727,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T22:38:17Z"
+  "server_time_utc": "2026-03-22T22:40:20Z"
 }
