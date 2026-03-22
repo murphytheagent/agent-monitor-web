@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T07:53:51Z",
+    "last_updated_utc": "2026-03-22T07:55:55Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 64,
+    "loop_count": 80,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,19 +17,19 @@
         "slot": 0,
         "task": "1774162681.090709",
         "started_at": 1774165552,
-        "elapsed_sec": 479
+        "elapsed_sec": 602
       },
       {
         "slot": 1,
         "task": "1774155209.676849",
         "started_at": 1774165553,
-        "elapsed_sec": 478
+        "elapsed_sec": 602
       },
       {
         "slot": 2,
         "task": "1773870804.162569",
         "started_at": 1774165553,
-        "elapsed_sec": 477
+        "elapsed_sec": 601
       }
     ]
   },
@@ -39,15 +39,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.13,
-      "five": 2.1,
-      "fifteen": 2.0
+      "one": 1.96,
+      "five": 2.16,
+      "fifteen": 2.04
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113421217792,
-    "disk_free_bytes": 131685978112,
-    "runner_log_size_bytes": 410271,
+    "disk_used_bytes": 113423458304,
+    "disk_free_bytes": 131683737600,
+    "runner_log_size_bytes": 410711,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T07:45:44Z",
     "local_ips": []
@@ -56,7 +56,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T07:53:53Z",
+    "checked_at_utc": "2026-03-22T07:55:55Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -66,7 +66,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89022,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 47
       },
       {
         "index": 1,
@@ -74,15 +74,15 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89018,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 49
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 36811,
+        "utilization_gpu_pct": 19,
+        "memory_used_mb": 38063,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       },
       {
         "index": 3,
@@ -90,28 +90,28 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89042,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 47
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 17,
-        "memory_used_mb": 36955,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 38207,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 89102,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 51
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 16,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 32681,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -119,10 +119,10 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 17,
         "memory_used_mb": 32543,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       }
     ]
   },
@@ -1711,5 +1711,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T07:53:54Z"
+  "server_time_utc": "2026-03-22T07:55:56Z"
 }
