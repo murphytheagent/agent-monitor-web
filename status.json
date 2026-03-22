@@ -1,25 +1,17 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T11:14:07Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-22T11:14:46Z",
+    "status": "running_session",
     "pid": 68391,
-    "loop_count": 1485,
+    "loop_count": 1490,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1774162681.090709",
-        "started_at": 1774175772,
-        "elapsed_sec": 2274
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.73,
+      "one": 2.0,
       "five": 1.83,
-      "fifteen": 1.87
+      "fifteen": 1.86
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113375928320,
-    "disk_free_bytes": 131731267584,
-    "runner_log_size_bytes": 453312,
+    "disk_used_bytes": 113369272320,
+    "disk_free_bytes": 131737923584,
+    "runner_log_size_bytes": 453940,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T07:45:44Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T11:14:08Z",
+    "checked_at_utc": "2026-03-22T11:16:10Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -62,15 +54,15 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89048,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 51
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 38,
-        "memory_used_mb": 64937,
+        "utilization_gpu_pct": 42,
+        "memory_used_mb": 76657,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 39
       },
       {
         "index": 3,
@@ -78,76 +70,59 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89042,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 49
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 18,
-        "memory_used_mb": 66497,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 78217,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 35
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 89104,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 47
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
-        "memory_used_mb": 95617,
+        "utilization_gpu_pct": 28,
+        "memory_used_mb": 53431,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 37
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 41,
-        "memory_used_mb": 97177,
+        "utilization_gpu_pct": 43,
+        "memory_used_mb": 54359,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 38
       }
     ]
   },
   "tasks": {
-    "queued": {
+    "queued": {},
+    "active": {
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "maintenance",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Run maintenance reflection checklist and summarize findings.",
         "summary": "Run maintenance reflection checklist and summarize findings.",
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774177204.605328",
-        "last_update_ts": "1774177204.605328",
+        "last_update_ts": "1774178086.498020",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-22T11:00:04Z"
-        }
-      }
-    },
-    "active": {
-      "1774162681.090709": {
-        "mention_ts": "1774162681.090709",
-        "thread_ts": "1774162681.090709",
-        "status": "in_progress",
-        "task_description": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the gold standard for lan…",
-        "summary": "Added the benchmark manifest, split conversion scoring from backbone scoring, extended the multimodal literature lane, and attached a round-3 memo with per-car…",
-        "summary_preview": "Added the benchmark manifest, split conversion scoring from backbone scoring, extended the multimodal literature lane, and attached a round-3 memo with per-car…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774162681.090709",
-        "last_update_ts": "1774175772.094133",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-22T06:58:01Z"
         }
       }
     },
@@ -438,6 +413,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-22T03:56:08Z"
+        }
+      },
+      "1774162681.090709": {
+        "mention_ts": "1774162681.090709",
+        "thread_ts": "1774162681.090709",
+        "status": "in_progress",
+        "task_description": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the gold standard for lan…",
+        "summary": "Added implementation-hypothesis sheets for all wave-1 cards, created a real multimodal supplement beyond BLT, attached a round-4 PDF memo in-thread, and logged…",
+        "summary_preview": "Added implementation-hypothesis sheets for all wave-1 cards, created a real multimodal supplement beyond BLT, attached a round-4 PDF memo in-thread, and logged…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774162681.090709",
+        "last_update_ts": "1774178085.981434",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T06:58:01Z"
         }
       }
     },
@@ -1716,5 +1707,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T11:14:09Z"
+  "server_time_utc": "2026-03-22T11:16:11Z"
 }
