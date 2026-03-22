@@ -3,235 +3,345 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Murphy Showcase</title>
+  <title>Murphy | Showcase</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="./assets/site.css">
   <style>
     .showcase-hero,
     .exhibit-card {
-      padding: 18px;
+      padding: clamp(20px, 3vw, 32px);
     }
 
     .showcase-hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
-      gap: 18px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+      gap: 24px;
       align-items: start;
     }
 
-    .hero-copy,
-    .exhibit-copy-block,
-    .copy-panel {
+    .hero-summary {
       display: grid;
       gap: 12px;
       align-content: start;
     }
 
-    .section-title {
-      font-size: clamp(30px, 5vw, 56px);
-      line-height: 0.92;
-      letter-spacing: 0.06em;
-    }
-
-    .section-copy {
-      max-width: 660px;
-      font-size: clamp(17px, 2vw, 22px);
-      line-height: 1.16;
-    }
-
-    .hero-grid {
+    .summary-card {
       display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--surface-muted);
     }
 
-    .route-card,
-    .artifact-panel {
-      border: 1px solid rgba(56, 240, 255, 0.18);
-      background: rgba(5, 10, 20, 0.84);
+    .summary-card strong {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
     }
 
-    .route-card {
-      display: grid;
-      gap: 10px;
-      padding: 16px;
-    }
-
-    .route-card strong {
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 18px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .route-card p,
-    .copy-panel p {
+    .summary-card p {
       margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.34;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
     }
 
-    .gallery {
+    .showcase-feed {
       display: grid;
-      gap: 18px;
+      gap: 20px;
     }
 
     .exhibit-card {
       display: grid;
-      gap: 18px;
-    }
-
-    .exhibit-head {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .exhibit-index {
-      display: grid;
-      place-items: center;
-      width: 72px;
-      min-height: 72px;
-      border: 1px solid rgba(56, 240, 255, 0.22);
-      background: rgba(4, 8, 18, 0.92);
-      color: var(--text);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      grid-template-columns: minmax(0, 0.98fr) minmax(280px, 0.82fr);
+      gap: 24px;
+      align-items: center;
     }
 
     .exhibit-copy-block {
-      max-width: 760px;
-    }
-
-    .card-title {
-      font-size: clamp(30px, 4vw, 54px);
-      line-height: 0.94;
-      letter-spacing: 0.05em;
-    }
-
-    .card-copy {
-      max-width: 640px;
-      font-size: clamp(17px, 2vw, 22px);
-      line-height: 1.18;
-    }
-
-    .artifact-grid {
       display: grid;
-      gap: 14px;
-      align-items: stretch;
-    }
-
-    .artifact-grid.tool {
-      grid-template-columns: minmax(240px, 0.34fr) minmax(0, 1fr);
-    }
-
-    .artifact-grid.figure {
-      grid-template-columns: minmax(0, 1.06fr) minmax(260px, 0.94fr);
-    }
-
-    .copy-panel {
-      padding: 16px;
-    }
-
-    .artifact-title {
-      font-size: 18px;
-      line-height: 1.02;
-      letter-spacing: 0.08em;
-    }
-
-    .artifact-frame {
-      border: 1px solid rgba(56, 240, 255, 0.18);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 12%, transparent 100%),
-        rgba(5, 9, 20, 0.96);
-    }
-
-    .artifact-frame.embed {
-      overflow: hidden;
-    }
-
-    iframe {
-      display: block;
-      width: 100%;
-      min-height: 560px;
-      height: 560px;
-      border: 0;
-      background: transparent;
-    }
-
-    .preview-link {
-      display: block;
-      height: 100%;
-    }
-
-    .preview-link img {
-      width: 100%;
-      height: 100%;
-      min-height: 420px;
-      object-fit: cover;
-    }
-
-    .copy-panel .site-button {
-      width: fit-content;
+      gap: 16px;
       min-width: 0;
     }
 
-    .role-worker {
-      border-color: rgba(255, 47, 179, 0.26);
-      color: var(--accent-2);
+    .preview-surface {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(247, 248, 252, 0.94) 100%);
+      padding: 18px;
+      min-height: 280px;
     }
 
-    .role-developer {
-      border-color: rgba(255, 230, 106, 0.28);
-      color: var(--warning);
+    .preview-surface::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(44, 99, 223, 0.12) 0%, transparent 26%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, transparent 24%);
+      pointer-events: none;
     }
 
-    .role-tribune {
-      border-color: rgba(77, 255, 180, 0.28);
-      color: var(--success);
+    .preview-window {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      height: 100%;
     }
 
-    @media (max-width: 1080px) {
-      .artifact-grid.tool,
-      .artifact-grid.figure {
-        grid-template-columns: 1fr;
-      }
+    .preview-topline,
+    .preview-toolbar,
+    .preview-kpis,
+    .preview-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    @media (max-width: 940px) {
-      .showcase-hero,
-      .exhibit-head {
-        grid-template-columns: 1fr;
-      }
+    .preview-pill,
+    .preview-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(44, 99, 223, 0.1);
+      color: var(--accent-strong);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
-    @media (max-width: 760px) {
+    .preview-topline {
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .preview-topline strong,
+    .preview-stack strong {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .preview-note {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .preview-editor {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid rgba(19, 25, 34, 0.08);
+      border-radius: 20px;
+      background: #ffffff;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .preview-textarea {
+      min-height: 84px;
+      padding: 14px;
+      border-radius: 16px;
+      background: #f8f9fc;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .token-ribbon {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .token-ribbon span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 10px;
+      border-radius: 14px;
+      background: rgba(44, 99, 223, 0.08);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .token-ribbon span:nth-child(2n) {
+      background: rgba(28, 127, 93, 0.08);
+    }
+
+    .token-ribbon span:nth-child(3n) {
+      background: rgba(160, 106, 31, 0.1);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .preview-stack,
+    .preview-graph,
+    .preview-metric {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border: 1px solid rgba(19, 25, 34, 0.08);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .preview-metric span {
+      color: var(--text-soft);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .preview-metric strong {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .preview-bars {
+      display: grid;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .preview-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(19, 25, 34, 0.08);
+      overflow: hidden;
+    }
+
+    .preview-bar::before {
+      content: "";
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #315fd0 0%, #244aad 100%);
+    }
+
+    .preview-bar:nth-child(1)::before { width: 84%; }
+    .preview-bar:nth-child(2)::before { width: 56%; }
+    .preview-bar:nth-child(3)::before { width: 72%; }
+    .preview-bar:nth-child(4)::before { width: 44%; }
+
+    .triangle-stage {
+      position: relative;
+      min-height: 238px;
+      border: 1px solid rgba(19, 25, 34, 0.08);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at center, rgba(44, 99, 223, 0.08) 0%, transparent 38%),
+        #ffffff;
+    }
+
+    .triangle-stage svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .triangle-stage svg path {
+      fill: none;
+      stroke: rgba(44, 99, 223, 0.28);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 10 10;
+    }
+
+    .triangle-node {
+      position: absolute;
+      display: grid;
+      gap: 6px;
+      width: 142px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(19, 25, 34, 0.08);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .triangle-node strong {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .triangle-node span {
+      color: var(--text-soft);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .triangle-node p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .triangle-node.worker {
+      left: 50%;
+      top: 18px;
+      transform: translateX(-50%);
+    }
+
+    .triangle-node.developer {
+      left: 16px;
+      bottom: 18px;
+    }
+
+    .triangle-node.tribune {
+      right: 16px;
+      bottom: 18px;
+    }
+
+    @media (max-width: 960px) {
       .showcase-hero,
       .exhibit-card {
-        padding: 12px;
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .showcase-hero,
+      .exhibit-card {
+        padding: 18px;
       }
 
-      .hero-grid {
+      .preview-surface {
+        min-height: 240px;
+      }
+
+      .preview-grid {
         grid-template-columns: 1fr;
       }
 
-      .exhibit-index {
-        width: 60px;
-        min-height: 60px;
-        font-size: 22px;
-      }
-
-      iframe {
-        min-height: 760px;
-        height: 760px;
-      }
-
-      .preview-link img {
+      .triangle-stage {
         min-height: 320px;
+      }
+
+      .triangle-node {
+        width: calc(50% - 18px);
+      }
+
+      .triangle-node.worker {
+        width: 164px;
       }
     }
   </style>
@@ -243,30 +353,19 @@
         <div class="murphy-brand">
           <a class="murphy-signature" href="../" aria-label="Open Murphy's live monitor">Murphy</a>
           <div class="site-brand murphy-context">
-            <span class="site-brand-kicker murphy-kicker">Agent Monitor public surfaces</span>
-            <h1 class="site-brand-name">Showcase</h1>
-            <p class="site-brand-subtitle">Murphy's viewer-first gallery for durable browser exhibits, live studies, and public-facing system pieces.</p>
+            <span class="site-brand-kicker murphy-kicker">Public monitor</span>
+            <p class="site-brand-name">Showcase gallery</p>
+            <p class="site-brand-subtitle">Durable pages for public demos, telemetry, and system explanation.</p>
           </div>
         </div>
 
         <div class="site-nav-block">
-          <span class="site-nav-label">Route map</span>
           <nav class="site-nav murphy-links" aria-label="Murphy site">
             <a class="site-link murphy-link" href="../">Monitor</a>
             <a class="site-link murphy-link" href="../roadmap/">Roadmap</a>
             <a class="site-link murphy-link" href="./" aria-current="page">Showcase</a>
-            <a class="site-link murphy-link" href="../tokenizers/">Tokenizers</a>
-            <a class="site-link murphy-link" href="./res-publica/">Res Publica</a>
           </nav>
-        </div>
-      </div>
-
-      <div class="site-header-foot">
-        <span class="site-path-label">Current surface</span>
-        <div class="site-path">
-          <a href="../">Murphy</a>
-          <span class="site-path-separator">/</span>
-          <span>Showcase gallery</span>
+          <a class="site-button" href="../tokenizers/">Tokenizer lab</a>
         </div>
       </div>
     </header>
@@ -274,150 +373,168 @@
     <main>
       <section class="showcase-hero site-frame">
         <div class="hero-copy">
-          <span class="section-label">Showcase gallery</span>
-            <h2 class="section-title">One Murphy header. Three durable exhibits.</h2>
-            <p class="section-copy">The live monitor stays at the root. This gallery now holds a live study, a telemetry deck, and an architecture exhibit inside one shared Murphy frame.</p>
-            <div class="action-row">
-              <a class="site-button primary" href="../tokenizers/">Open tokenizer lab</a>
-              <a class="site-button" href="./signal-deck/">Open Signal Deck</a>
-              <a class="site-button" href="./res-publica/">Open Res Publica</a>
-            </div>
+          <span class="section-label">Showcase</span>
+          <h1 class="section-title">Public surfaces with less noise and a clearer path in.</h1>
+          <p class="section-copy">The live monitor stays at the root. This gallery holds the durable pages that need more explanation: a tokenizer study, a telemetry deck, and a public architecture exhibit.</p>
+          <div class="action-row">
+            <a class="site-button primary" href="../tokenizers/">Open tokenizer lab</a>
+            <a class="site-button" href="./signal-deck/">Open Signal Deck</a>
+            <a class="site-button" href="./res-publica/">Open Res Publica</a>
+          </div>
         </div>
 
-        <div class="hero-grid" aria-label="Murphy surface map">
-          <article class="route-card">
-            <span class="micro-label">Root lane</span>
-            <strong>Live monitor</strong>
-            <p>Exporter-owned snapshot at the site root. It stays current, but its chrome is not hand-maintained here.</p>
-            <a class="route-link" href="../">Go to root</a>
+        <div class="hero-summary">
+          <article class="summary-card">
+            <span class="micro-label">Viewer first</span>
+            <strong>Three durable pages</strong>
+            <p>Each route now stands on its own instead of nesting live apps and route furniture inside the same screen.</p>
           </article>
-
-          <article class="route-card">
-            <span class="micro-label">Durable lane</span>
-            <strong>Showcase</strong>
-            <p>Murphy-owned gallery and exhibit routes, with shared site chrome across the hand-maintained pages.</p>
-            <a class="route-link" href="./">Stay in showcase</a>
+          <article class="summary-card">
+            <span class="micro-label">Shared shell</span>
+            <strong>One quieter system</strong>
+            <p>Top-level navigation stays shallow. Child destinations live inside Showcase, not in every header.</p>
+          </article>
+          <article class="summary-card">
+            <span class="micro-label">Mobile intent</span>
+            <strong>Single-column first</strong>
+            <p>Each preview reads in a simple top-to-bottom order before any dense technical detail appears.</p>
           </article>
         </div>
       </section>
 
-      <div class="gallery">
-        <section class="exhibit-card site-frame" aria-labelledby="tokenizer-title">
-          <div class="exhibit-head">
-            <div class="exhibit-index" aria-hidden="true">01</div>
-
-            <div class="exhibit-copy-block">
-              <span class="section-label">Interactive study</span>
-              <h3 class="card-title" id="tokenizer-title">Tokenizer lab</h3>
-              <p class="card-copy">A pinned live browser study that lets the visitor paste a line and watch it fracture into model tokens immediately.</p>
-              <div class="chip-row" aria-label="Tokenizer highlights">
-                <span class="chip">Qwen 3.5 4B</span>
-                <span class="chip">Browser-side</span>
-                <span class="chip">Paste your own text</span>
-              </div>
+      <section class="showcase-feed" aria-label="Exhibits">
+        <article class="exhibit-card site-frame" aria-labelledby="tokenizer-title">
+          <div class="exhibit-copy-block">
+            <span class="section-label">Interactive study</span>
+            <h2 class="card-title" id="tokenizer-title">Tokenizer lab</h2>
+            <p class="card-copy">Paste text, inspect token boundaries, and compare the browser-loadable checkpoints without wading through the rest of the site chrome first.</p>
+            <div class="chip-row" aria-label="Tokenizer highlights">
+              <span class="chip">Live browser study</span>
+              <span class="chip">Paste your own text</span>
+              <span class="chip">Public checkpoints</span>
             </div>
-
             <div class="action-row">
-              <a class="site-button primary" href="../tokenizers/">Open full workbench</a>
+              <a class="site-button primary" href="../tokenizers/">Open live demo</a>
             </div>
           </div>
 
-          <div class="artifact-grid tool">
-            <div class="artifact-panel copy-panel">
-              <span class="micro-label">Gallery cut</span>
-              <h4 class="artifact-title">Only the live interaction stays in frame.</h4>
-              <p>The gallery version removes route furniture and keeps one checkpoint, one text field, and the token surface.</p>
-            </div>
-
-            <div class="artifact-frame embed">
-              <iframe
-                id="tokenizer-embed"
-                title="Live tokenizer workbench preview"
-                src="../tokenizers/?embed=showcase&amp;model=qwen3.5-4b&amp;mode=plain&amp;text=English%2C%20%E4%B8%AD%E6%96%87%2C%20and%20emoji%20%F0%9F%9A%80%20inside%20one%20prompt."
-                allow="clipboard-write"
-                loading="eager"></iframe>
-            </div>
-          </div>
-        </section>
-
-        <section class="exhibit-card site-frame" aria-labelledby="signal-deck-title">
-          <div class="exhibit-head">
-            <div class="exhibit-index" aria-hidden="true">02</div>
-
-            <div class="exhibit-copy-block">
-              <span class="section-label">Telemetry exhibit</span>
-              <h3 class="card-title" id="signal-deck-title">Signal Deck</h3>
-              <p class="card-copy">A telemetry surface for system rhythm: completed tasks, thread-token mass estimates, request mix, and authored code churn across the Research tree.</p>
-              <div class="chip-row" aria-label="Signal Deck highlights">
-                <span class="chip">30 day window</span>
-                <span class="chip">Task archive</span>
-                <span class="chip">Git + thread data</span>
+          <div class="preview-surface" aria-hidden="true">
+            <div class="preview-window">
+              <div class="preview-topline">
+                <strong>Tokenizer lab</strong>
+                <span class="preview-pill">Kimi K2.5</span>
+              </div>
+              <div class="preview-editor">
+                <div class="preview-textarea">English, 中文, and emoji 🚀 in one prompt.</div>
+                <div class="token-ribbon">
+                  <span>English</span>
+                  <span>,</span>
+                  <span>中文</span>
+                  <span>emoji</span>
+                  <span>🚀</span>
+                  <span>prompt</span>
+                </div>
+              </div>
+              <div class="preview-toolbar">
+                <span class="preview-chip">Total tokens 24</span>
+                <span class="preview-chip">Unique IDs 17</span>
+                <span class="preview-chip">Chars/token 2.4</span>
               </div>
             </div>
+          </div>
+        </article>
 
+        <article class="exhibit-card site-frame" aria-labelledby="signal-deck-title">
+          <div class="exhibit-copy-block">
+            <span class="section-label">Telemetry exhibit</span>
+            <h2 class="card-title" id="signal-deck-title">Signal Deck</h2>
+            <p class="card-copy">A calm summary of production rhythm: completed task flow, estimated thread mass, request mix, and authored code churn across the Research tree.</p>
+            <div class="chip-row" aria-label="Signal Deck highlights">
+              <span class="chip">30 day window</span>
+              <span class="chip">Task archive</span>
+              <span class="chip">Git history</span>
+            </div>
             <div class="action-row">
               <a class="site-button primary" href="./signal-deck/">Open exhibit</a>
             </div>
           </div>
 
-          <div class="artifact-grid tool">
-            <div class="artifact-panel copy-panel">
-              <span class="micro-label">Grounded surface</span>
-              <h4 class="artifact-title">The stats only use local ledgers Murphy can actually justify.</h4>
-              <p>The deck is built from finished task threads plus authored git history. The token panel is explicitly labeled as a thread-text estimate, because the worker archive still lacks exact billed usage.</p>
-              <a class="site-button" href="./signal-deck/">See the full page</a>
-            </div>
-
-            <div class="artifact-frame embed">
-              <iframe
-                id="signal-deck-embed"
-                data-min-height="820"
-                title="Live Signal Deck preview"
-                src="./signal-deck/?embed=showcase"
-                loading="lazy"></iframe>
-            </div>
-          </div>
-        </section>
-
-        <section class="exhibit-card site-frame" aria-labelledby="res-publica-title">
-          <div class="exhibit-head">
-            <div class="exhibit-index" aria-hidden="true">03</div>
-
-            <div class="exhibit-copy-block">
-              <span class="section-label">Architecture exhibit</span>
-              <h3 class="card-title" id="res-publica-title">Res Publica</h3>
-              <p class="card-copy">A public-facing composition of the three-role split: execution, repair, and review held inside one clear Murphy frame.</p>
-              <div class="chip-row" aria-label="Res Publica roles">
-                <span class="chip role-worker">Worker</span>
-                <span class="chip role-developer">Developer</span>
-                <span class="chip role-tribune">Tribune</span>
+          <div class="preview-surface" aria-hidden="true">
+            <div class="preview-window">
+              <div class="preview-topline">
+                <strong>Signal deck</strong>
+                <span class="preview-pill">Last 30 days</span>
+              </div>
+              <div class="preview-grid">
+                <div class="preview-metric">
+                  <span>Completed tasks</span>
+                  <strong>184</strong>
+                </div>
+                <div class="preview-metric">
+                  <span>Thread mass</span>
+                  <strong>1.9M</strong>
+                </div>
+              </div>
+              <div class="preview-stack">
+                <strong>Request mix</strong>
+                <div class="preview-bars">
+                  <div class="preview-bar"></div>
+                  <div class="preview-bar"></div>
+                  <div class="preview-bar"></div>
+                  <div class="preview-bar"></div>
+                </div>
+                <div class="preview-note">Built from finished task threads and authored git history.</div>
               </div>
             </div>
+          </div>
+        </article>
 
+        <article class="exhibit-card site-frame" aria-labelledby="res-publica-title">
+          <div class="exhibit-copy-block">
+            <span class="section-label">Architecture exhibit</span>
+            <h2 class="card-title" id="res-publica-title">Res Publica</h2>
+            <p class="card-copy">A public explanation of the three-role split: execution, repair, and review held apart so the same system can move quickly without certifying itself.</p>
+            <div class="chip-row" aria-label="Res Publica roles">
+              <span class="chip role-worker">Worker</span>
+              <span class="chip role-developer">Developer</span>
+              <span class="chip role-tribune">Tribune</span>
+            </div>
             <div class="action-row">
               <a class="site-button primary" href="./res-publica/">Open exhibit</a>
             </div>
           </div>
 
-          <div class="artifact-grid figure">
-            <a class="artifact-frame preview-link" href="./res-publica/" aria-label="Open the Res Publica architecture exhibit">
-              <img
-                src="./res-publica-preview.png"
-                alt="Preview of the Res Publica architecture illustration showing the Worker, Developer, and Tribune roles.">
-            </a>
-
-            <div class="artifact-panel copy-panel">
-              <span class="micro-label">Visible contract</span>
-              <h4 class="artifact-title">One exhibit, still in the same house style.</h4>
-              <p>The page keeps its own stage and argument, but the Murphy header, route map, and brutalist neon shell tie it back to the gallery.</p>
-              <a class="site-button" href="./res-publica/">See the full page</a>
+          <div class="preview-surface" aria-hidden="true">
+            <div class="preview-window">
+              <div class="preview-topline">
+                <strong>Res Publica</strong>
+                <span class="preview-pill">Separation of powers</span>
+              </div>
+              <div class="triangle-stage">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <path d="M50 14 L16 82 L84 82 Z"></path>
+                </svg>
+                <div class="triangle-node worker">
+                  <span>Execution</span>
+                  <strong>Worker</strong>
+                  <p>Acts on the thread.</p>
+                </div>
+                <div class="triangle-node developer">
+                  <span>Repair</span>
+                  <strong>Developer</strong>
+                  <p>Touches the machinery.</p>
+                </div>
+                <div class="triangle-node tribune">
+                  <span>Review</span>
+                  <strong>Tribune</strong>
+                  <p>Challenges the answer.</p>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
-      </div>
+        </article>
+      </section>
     </main>
   </div>
-
-  <script src="./assets/showcase.js"></script>
 </body>
 </html>

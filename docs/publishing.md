@@ -14,6 +14,7 @@ The root exporter rewrites `index.html`, `status.json`, `roadmap/index.html`, an
 - manual edits to the root homepage or roadmap page are transient unless the exporter itself changes
 - subroutes such as `showcase/` and `tokenizers/` survive refreshes because the publisher does not overwrite them
 - durable design changes for `/` or `/roadmap/` belong in the exporter source, not as one-off edits to generated HTML
+- design experiments in the generated root pages are acceptable as a short-term preview, but document them as exporter follow-up work before treating them as finished
 
 ## Working rule
 

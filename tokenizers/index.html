@@ -7,29 +7,27 @@
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../showcase/assets/site.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
     :root {
-      --bg-base: #05030c;
-      --bg-panel: rgba(10, 10, 30, 0.9);
-      --bg-panel-2: rgba(12, 9, 34, 0.86);
-      --bg-panel-3: rgba(8, 9, 27, 0.92);
-      --bg-token: rgba(8, 14, 34, 0.94);
-      --border: rgba(74, 239, 255, 0.34);
-      --border-strong: rgba(255, 52, 178, 0.54);
-      --text-main: #eaffff;
-      --text-muted: #9aa8da;
-      --text-dim: #6f7caf;
-      --accent: #38f0ff;
-      --accent-2: #ff2fb3;
-      --good: #4dffb4;
-      --warn: #ffe66a;
-      --bad: #ff6689;
-      --shadow: 0 20px 44px rgba(2, 5, 22, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      --radius-xl: 16px;
-      --radius-lg: 12px;
-      --radius-md: 10px;
-      --radius-sm: 8px;
+      --bg-base: #f5f2eb;
+      --bg-panel: rgba(255, 255, 255, 0.92);
+      --bg-panel-2: rgba(249, 250, 252, 0.96);
+      --bg-panel-3: rgba(243, 246, 250, 0.98);
+      --bg-token: #f7f8fb;
+      --border: rgba(19, 25, 34, 0.09);
+      --border-strong: rgba(44, 99, 223, 0.32);
+      --text-main: #131922;
+      --text-muted: #5d6674;
+      --text-dim: #7a8491;
+      --accent: #2c63df;
+      --accent-2: #1f4eb5;
+      --good: #1c7f5d;
+      --warn: #a06a1f;
+      --bad: #bb4f68;
+      --shadow: 0 18px 42px rgba(15, 23, 42, 0.08), 0 4px 14px rgba(15, 23, 42, 0.05);
+      --radius-xl: 24px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
     }
 
     * {
@@ -44,12 +42,11 @@
       margin: 0;
       min-height: 100vh;
       color: var(--text-main);
-      font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
+      font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 12% 10%, rgba(0, 255, 225, 0.2) 0%, transparent 32%),
-        radial-gradient(circle at 88% 4%, rgba(255, 41, 163, 0.22) 0%, transparent 34%),
-        radial-gradient(circle at 62% 110%, rgba(56, 120, 255, 0.2) 0%, transparent 42%),
-        linear-gradient(150deg, #05030c 0%, #090318 46%, #120720 100%);
+        radial-gradient(circle at top left, rgba(44, 99, 223, 0.08) 0%, transparent 26%),
+        radial-gradient(circle at 92% 2%, rgba(255, 255, 255, 0.74) 0%, transparent 30%),
+        linear-gradient(180deg, #f5f2eb 0%, #eaf0fa 100%);
       overflow-x: hidden;
       position: relative;
     }
@@ -60,21 +57,9 @@
       inset: 0;
       pointer-events: none;
       background:
-        repeating-linear-gradient(
-          to bottom,
-          rgba(96, 128, 255, 0.08) 0,
-          rgba(96, 128, 255, 0.08) 1px,
-          transparent 1px,
-          transparent 4px
-        ),
-        repeating-linear-gradient(
-          to right,
-          rgba(56, 240, 255, 0.045) 0,
-          rgba(56, 240, 255, 0.045) 1px,
-          transparent 1px,
-          transparent 56px
-        );
-      opacity: 0.34;
+        linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, transparent 18%),
+        radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.72) 0%, transparent 36%);
+      opacity: 0.88;
     }
 
     body::after {
@@ -85,9 +70,9 @@
       width: 640px;
       height: 640px;
       pointer-events: none;
-      background: radial-gradient(circle, rgba(255, 47, 179, 0.42) 0%, rgba(255, 47, 179, 0) 70%);
+      background: radial-gradient(circle, rgba(44, 99, 223, 0.16) 0%, rgba(44, 99, 223, 0) 70%);
       filter: blur(36px);
-      opacity: 0.62;
+      opacity: 0.56;
     }
 
     a {
@@ -1741,43 +1726,249 @@
         max-height: none;
       }
     }
+
+    h1,
+    h2,
+    h3,
+    .eyebrow,
+    .nav-link,
+    .status-pill,
+    .field-step,
+    .field-label,
+    .card-kicker,
+    .card-title,
+    .card-subtitle,
+    .summary-kicker,
+    .input-panel-title,
+    .surface-title,
+    .inspector-kicker,
+    .metric-label,
+    .metric-value,
+    .model-details-note h3,
+    .detail-panel h3,
+    .utility-drawer summary,
+    .control-details summary,
+    .mode-switch button,
+    .ghost-button,
+    .metric-chip {
+      font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+      letter-spacing: -0.01em;
+      text-shadow: none;
+      text-transform: none;
+    }
+
+    .page-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .tokenizer-site-header {
+      top: 16px;
+      gap: 0;
+    }
+
+    .tokenizer-header-foot,
+    .tokenizer-path-block,
+    .site-nav-label {
+      display: none;
+    }
+
+    .site-nav-block {
+      gap: 14px;
+    }
+
+    .header-status {
+      max-width: 320px;
+      gap: 10px;
+    }
+
+    .status-pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--accent) 26%, white 24%);
+      background: color-mix(in srgb, rgba(44, 99, 223, 0.1) 72%, white 28%);
+      color: var(--accent-2);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .status-note {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .card,
+    .input-panel,
+    .surface-section,
+    .inspector-card,
+    .metric-card,
+    .detail-panel,
+    .control-details,
+    .utility-drawer,
+    .mode-panel {
+      border-color: var(--border);
+      background: var(--bg-panel);
+      box-shadow: var(--shadow);
+    }
+
+    .card-header,
+    .input-panel-head,
+    .surface-toolbar {
+      border-bottom-color: rgba(19, 25, 34, 0.08);
+    }
+
+    .control-card,
+    .composer-card,
+    .stream-card,
+    .utility-drawer {
+      border-radius: 24px;
+    }
+
+    .control-card {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(247, 249, 252, 0.98) 100%);
+    }
+
+    .control-intro,
+    .summary-strip,
+    .model-details-note,
+    .detail-item,
+    .catalog-list li,
+    .unsupported-list li,
+    .example-drawer,
+    .prompt-box,
+    .ids-box,
+    .table-wrap,
+    .metric-chip,
+    .toggle,
+    .mini-toggle,
+    .live-count {
+      border-color: rgba(19, 25, 34, 0.08);
+      background: rgba(247, 248, 252, 0.9);
+      color: var(--text-main);
+      box-shadow: none;
+    }
+
+    select,
+    textarea,
+    .prompt-box,
+    .ids-box {
+      border-color: rgba(19, 25, 34, 0.1);
+      background: #ffffff;
+      color: var(--text-main);
+    }
+
+    textarea::placeholder {
+      color: var(--text-dim);
+    }
+
+    .mode-switch button,
+    .ghost-button,
+    .example-drawer summary,
+    .utility-drawer summary {
+      border-color: var(--border);
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--text-main);
+    }
+
+    .mode-switch button.active {
+      border-color: color-mix(in srgb, var(--accent) 38%, white 22%);
+      background: color-mix(in srgb, rgba(44, 99, 223, 0.1) 76%, white 24%);
+      color: var(--accent-2);
+    }
+
+    .surface-preview,
+    .token-stream {
+      border-color: rgba(19, 25, 34, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.96) 100%);
+    }
+
+    .token-stream article,
+    .surface-token,
+    .detail-token {
+      box-shadow: none;
+    }
+
+    .metric-card strong,
+    .live-count,
+    .summary-chip b,
+    .detail-item b,
+    .detail-item a {
+      color: var(--text-main);
+    }
+
+    .metric-note,
+    .card-subtitle,
+    .field-caption,
+    .selection-footnote,
+    .detail-summary,
+    .callout-copy,
+    .interaction-note,
+    .status-note {
+      color: var(--text-muted);
+    }
+
+    table {
+      background: #ffffff;
+    }
+
+    th {
+      background: rgba(247, 248, 252, 0.96);
+      color: var(--text-soft);
+    }
+
+    td {
+      border-top-color: rgba(19, 25, 34, 0.08);
+    }
+
+    .workspace-grid {
+      order: 1;
+    }
+
+    .control-card {
+      order: 2;
+    }
+
+    .utility-drawer {
+      order: 3;
+    }
+
+    @media (min-width: 1040px) {
+      .workspace-grid {
+        order: 2;
+      }
+
+      .control-card {
+        order: 1;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="page-shell">
-    <header class="site-header site-frame tokenizer-site-header">
+    <header class="site-header site-frame tokenizer-site-header murphy-shell">
       <div class="site-header-main">
-        <div class="site-brand">
-          <span class="site-brand-kicker">Murphy public surface</span>
-          <h1 class="site-brand-name">Murphy</h1>
-          <p class="site-brand-subtitle">Murphy's live tokenizer lab for token boundaries, ids, and serialization across browser-loadable public checkpoints.</p>
-        </div>
-
-        <div class="site-nav-block">
-          <span class="site-nav-label">Route map</span>
-          <nav class="site-nav" aria-label="Murphy site">
-            <a class="site-link" href="../" data-slot="01">Live monitor</a>
-            <a class="site-link" href="../roadmap/" data-slot="02">Roadmap</a>
-            <a class="site-link" href="../showcase/" data-slot="03">Showcase gallery</a>
-            <a class="site-link" href="./" data-slot="04" aria-current="page">Tokenizer lab</a>
-            <a class="site-link" href="../showcase/res-publica/" data-slot="05">Res Publica</a>
-          </nav>
-        </div>
-      </div>
-
-      <div class="site-header-foot tokenizer-header-foot">
-        <div class="tokenizer-path-block">
-          <span class="site-path-label">Current surface</span>
-          <div class="site-path">
-            <a href="../">Murphy</a>
-            <span class="site-path-separator">/</span>
-            <span>Tokenizer lab</span>
+        <div class="murphy-brand">
+          <a class="murphy-signature" href="../" aria-label="Open Murphy's live monitor">Murphy</a>
+          <div class="site-brand murphy-context">
+            <span class="site-brand-kicker murphy-kicker">Public monitor</span>
+            <p class="site-brand-name">Tokenizer lab</p>
+            <p class="site-brand-subtitle">Paste text and inspect token boundaries across browser-loadable public checkpoints.</p>
           </div>
         </div>
 
-        <div class="header-status">
-          <div class="status-pill" id="model-status">Loading tokenizer</div>
-          <p class="status-note" id="status-note">First load pulls tokenizer assets from Hugging Face, then the browser cache takes over.</p>
+        <div class="site-nav-block">
+          <nav class="site-nav murphy-links" aria-label="Murphy site">
+            <a class="site-link murphy-link" href="../">Monitor</a>
+            <a class="site-link murphy-link" href="../roadmap/">Roadmap</a>
+            <a class="site-link murphy-link" href="../showcase/" aria-current="page">Showcase</a>
+          </nav>
+          <div class="header-status">
+            <div class="status-pill" id="model-status">Loading tokenizer</div>
+            <p class="status-note" id="status-note">First load pulls tokenizer assets from Hugging Face, then the browser cache takes over.</p>
+          </div>
         </div>
       </div>
     </header>

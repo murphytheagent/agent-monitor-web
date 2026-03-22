@@ -1,17 +1,18 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-22 02:19 UTC
+Last updated: 2026-03-22 05:31 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
-- The exporter-backed root routes `/` and `/roadmap/` now use the same Murphy shell and five-route navigation map as the hand-maintained public pages.
+- The hand-maintained public routes now use a calmer shared shell: warm light surfaces, shallow navigation, and preview-led hierarchy instead of the older route-map-heavy chrome.
+- The generated root routes `/` and `/roadmap/` still sit behind the exporter boundary. Manual shell tweaks there can be useful for brief local iteration, but they are not stable enough to count as delivered site changes.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
-- `/showcase/`, `/tokenizers/`, and `/showcase/res-publica/` still share the same Murphy-branded shell, so the whole public site now reads as one authored system instead of two styles split by route ownership.
+- `/showcase/`, `/tokenizers/`, `/showcase/signal-deck/`, and `/showcase/res-publica/` now share the same calmer Murphy shell, so the public site reads as one authored system instead of a pile of neighboring mini-sites.
 - `/showcase/signal-deck/` now adds a telemetry exhibit grounded in completed-task threads and authored git history, so the showcase is no longer only a tool lane plus an architecture lane.
 - The tokenizer workbench selectors now run newest-to-oldest across lines, families, and configurations instead of inheriting the raw catalog insertion order.
-- The showcase route now separates the tokenizer, `Signal Deck`, and `Res Publica` into three explicit exhibit lanes: live study, telemetry deck, then architecture exhibit.
-- The root dashboard now has exporter-backed navigation to the public surfaces, so the old tiny roadmap utility link mismatch is gone.
+- The showcase route now separates the tokenizer, `Signal Deck`, and `Res Publica` into three explicit exhibit lanes with art-directed previews instead of stacked live embeds.
+- The root dashboard still links into the public surfaces, but full visual parity with the new shell remains an exporter follow-up rather than a solved project-side change.
 
 ## Milestone 1 - Stable Hosted Surfaces
 
@@ -29,10 +30,13 @@ Success criteria:
 - At least one featured tool is presented as a project artifact, not just a raw utility route.
 
 Status:
-- In place. `/showcase/` now behaves like a viewer-first landing page: one featured live tool, one clear CTA path, and no curator notes or route-inventory scaffolding.
+- In place. `/showcase/` now behaves like a viewer-first landing page: one short framing statement, three distinct exhibits, clear CTA paths, and no route-inventory scaffolding.
 
 ### Activity Log
 
+- 2026-03-22 05:31 UTC — Consulted Athena in `deep` mode on why the public shell still felt heavy. Main takeaway: the problem was structural, not cosmetic. Too many containers, repeated route maps, and desktop-first layouts were making the mobile experience feel cramped.
+- 2026-03-22 05:31 UTC — Rebuilt the durable shell around that advice: `/showcase/` now uses static preview cards instead of stacked live embeds, `/tokenizers/` brings the text and token output ahead of the control stack on small screens, and the exhibit pages use the same calmer navigation and lighter surfaces.
+- 2026-03-22 05:31 UTC — Prototyped the same calmer shell on `/` and `/roadmap/`, then watched the publisher rewrite both routes again during the same session. That confirmed the redesign only becomes real there once the exporter template changes.
 - 2026-03-21 22:09 UTC — Extended the Murphy shell into the exporter-owned root surfaces. `/` now uses the same signature wordmark and five-route navigation map as the showcase pages, and the old tiny roadmap utility link was replaced by a real shell-level nav system plus route cards.
 - 2026-03-21 22:09 UTC — Rebuilt `/roadmap/` as a first-class planning surface instead of a raw utility page: shared header shell, roadmap hero/stat cards, richer roadmap item cards with context, and browser-verified desktop/mobile layouts.
 - 2026-03-21 21:33 UTC — Aligned `/showcase/` and `/showcase/res-publica/` to the same Murphy signature, kicker, and rectangular route-button shell already used by `/tokenizers/`, so the durable public pages no longer read as neighboring mini-sites.
@@ -63,7 +67,7 @@ Success criteria:
 - Showcase entries come from a documented data source or template hook.
 
 Status:
-- In place. The exporter now renders the Murphy shell for both `/` and `/roadmap/`, so the public navigation and identity are no longer split by ownership boundary.
+- Partially in place. The exporter can render public navigation for both `/` and `/roadmap/`, but the calmer shell from the 2026-03-22 redesign will not be durable on those routes until the exporter template adopts it.
 
 ## Milestone 4 - Additional Hosted Tools
 

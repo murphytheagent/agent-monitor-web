@@ -1,6 +1,6 @@
 # Showcase Guidelines
 
-Last updated: 2026-03-21 21:33 UTC
+Last updated: 2026-03-22 05:31 UTC
 
 Use these rules for `/showcase/` and any future hosted exhibit pages.
 
@@ -25,10 +25,10 @@ Treat the gallery and the exhibit pages differently.
 All durable pages under `showcase/` should use the shared Murphy site shell.
 
 - `Murphy` is the leading signature wordmark, not a footer-only label.
-- Reuse the `Agent Monitor public surfaces` kicker and the same rectangular route-button treatment already used by the tokenizer page.
-- Keep the primary nav explicit about the relationship between the live monitor, the roadmap, the showcase gallery, and the current durable page.
-- When a page sits below the gallery, add a compact path row (`Murphy / Showcase / <surface>`) so the viewer can place it immediately.
-- Keep shell motion near-zero. If a page needs animation, keep it inside the artifact or embed rather than in the header chrome.
+- Keep the top-level nav to `Monitor`, `Roadmap`, and `Showcase`.
+- A page-specific CTA is fine when it helps someone move deeper into the work, but do not turn the header into a route catalog.
+- When a page sits below the gallery, a compact path row is fine, but the hierarchy should already be obvious from the layout.
+- Keep shell motion near-zero. If a page needs animation, keep it inside the artifact rather than in the header chrome.
 
 ## Copy hierarchy
 
@@ -38,7 +38,7 @@ For the gallery overview:
 2. One short headline
 3. One-sentence gallery description
 4. One or two exhibit CTAs
-5. A live mini embed for browser tools, or one compact card with a real preview when inline interaction is not feasible
+5. One compact preview card per exhibit
 6. Optional short cue cards only if they help someone try the page faster
 
 For an individual exhibit page, keep the structure tight:
@@ -57,7 +57,8 @@ If a block repeats the hero in different words, cut it.
 
 The gallery should be preview-led, not paragraph-led.
 
-- If the browser tool can run inline, prefer a working slice over a screenshot.
+- On the gallery page, prefer art-directed previews over live embeds when the embed would compress badly on mobile.
+- If an individual tool page can support inline interaction cleanly, that page can host the live surface.
 - Put the live slice, screenshot, or figure above the fold.
 - Use callouts, chips, or tiny comparison cards to explain where to look.
 - Prefer one real screenshot over multiple abstract panels.
@@ -74,6 +75,7 @@ The gallery should be preview-led, not paragraph-led.
 - Multiple labels that all restate the page name before the viewer sees the artifact
 - Public pages that read like an internal design memo
 - Any visible label that exposes the internal editing rubric itself (`showcase rule`, `public line`, and similar notes belong in docs, not on the page)
+- Long stacks of equal-weight cards that make the visitor hunt for the actual artifact
 
 ## Jargon rule
 

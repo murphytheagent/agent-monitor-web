@@ -12,12 +12,12 @@ python3 -m src.loop.monitor.dashboard --once --export-static-dir projects/agent-
 
 Hosted routes:
 
-- `/` - live agent monitor snapshot. This root surface is publisher-owned: each snapshot refresh rewrites `index.html` and `status.json`, and the exporter now renders the same Murphy shell used by the showcase-side routes.
-- `/roadmap/` - exporter-backed planning surface with the shared Murphy shell, roadmap-specific hero/stat layout, and the same route navigation used across the rest of the site.
-- `/showcase/` - viewer-first landing page for polished browser surfaces. It now treats the tokenizer, `Signal Deck`, and `Res Publica` as three clearly separated exhibits inside the same Murphy-branded site shell: a minimal live tokenizer slice, a telemetry deck grounded in task/git history, and the architecture piece in its own gallery lane.
+- `/` - live agent monitor snapshot. This root surface is publisher-owned: each snapshot refresh rewrites `index.html` and `status.json`, so any shell/layout changes there are durable only once the exporter adopts them.
+- `/roadmap/` - exporter-backed planning surface with the same ownership boundary as `/`. Short-lived local stopgaps are possible, but the publisher can overwrite them immediately; long-term layout changes belong in the exporter.
+- `/showcase/` - viewer-first landing page for polished browser surfaces. It now treats the tokenizer, `Signal Deck`, and `Res Publica` as three clearly separated exhibits inside a calmer Murphy shell, using art-directed previews instead of stacking live embeds.
 - `/showcase/signal-deck/` - telemetry exhibit for Murphy's task archive: completed tasks over time, thread-text token estimates, request mix, task-span rhythms, and authored code churn. Refresh the underlying bundle manually with `python3 scripts/build_signal_deck.py`.
 - `/showcase/res-publica/` - architecture exhibit for the Worker / Developer / Tribune split, presented as a public-facing art page rather than an internal system diagram, while reusing the same Murphy site shell as the gallery and tokenizer workbench.
-- `/tokenizers/` - interactive tokenizer visualizer page for expanded public text-model families, including full Qwen ladders and local Kimi support.
+- `/tokenizers/` - interactive tokenizer visualizer page for expanded public text-model families, including full Qwen ladders and local Kimi support. The shell is shared with the rest of the site, but the page now prioritizes the text and token output before the heavier controls on small screens.
 
 If you want a permanent custom page or navigation outside the existing exporter-backed shell, add it under a subroute such as `showcase/` or `tokenizers/`; a manual root-homepage patch will still be overwritten by the next snapshot export unless the exporter template itself changes.
 
@@ -27,4 +27,4 @@ Additional hosted tool details:
   The page uses a three-level `model line -> family / generation -> configuration` picker, and the main text ladders now expose full public family coverage where the tokenizer relationship is cleanly defined, including the full public `Qwen 2.5`, `Qwen 3`, `Qwen 3.5`, `DeepSeek R1 Distill`, and `Falcon 3` ladders.
   `Kimi` is now supported directly in the browser through locally hosted tokenizer bundles converted from MoonshotAI public `tiktoken.model` files, with per-model chat templates restored for `Kimi K2`, `Kimi Linear`, and `Kimi K2.5`.
   The page still labels whether sibling checkpoints share an exact vocabulary, only share a base tokenizer model, or use different tokenizer files, and the unsupported callout is now limited to genuinely non-browser-ready lines such as `GLM 4`, `InternLM 3`, and `Baichuan 2`.
-- `showcase/` — showcase landing page for hosted project surfaces. It now keeps the three public pieces distinct while sharing the Murphy wordmark and route shell used across the durable public pages: the tokenizer appears as a stripped single-model live study, `Signal Deck` frames the system telemetry story, and `Res Publica` remains the separate architecture lane.
+- `showcase/` — showcase landing page for hosted project surfaces. It now keeps the three public pieces distinct while sharing the Murphy wordmark and route shell used across the durable public pages: the tokenizer appears as a preview card that leads into the lab, `Signal Deck` frames the system telemetry story, and `Res Publica` remains the separate architecture lane.
