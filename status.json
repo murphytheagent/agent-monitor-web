@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T03:54:47Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-22T03:56:51Z",
+    "status": "workers_active",
     "pid": 68391,
-    "loop_count": 161,
+    "loop_count": 177,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,21 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1773897786.579989",
+        "started_at": 1774151761,
+        "elapsed_sec": 49
+      },
+      {
+        "slot": 1,
+        "task": "1773870804.162569",
+        "started_at": 1774151792,
+        "elapsed_sec": 18
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.23,
-      "five": 2.02,
-      "fifteen": 1.94
+      "one": 2.25,
+      "five": 2.04,
+      "fifteen": 1.95
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113101111296,
-    "disk_free_bytes": 132006084608,
-    "runner_log_size_bytes": 363666,
+    "disk_used_bytes": 113092005888,
+    "disk_free_bytes": 132015190016,
+    "runner_log_size_bytes": 364776,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T03:34:25Z",
     "local_ips": []
@@ -36,7 +50,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T03:54:49Z",
+    "checked_at_utc": "2026-03-22T03:56:52Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +60,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 88548,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 51
       },
       {
         "index": 1,
@@ -67,15 +81,15 @@
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 14,
+        "utilization_gpu_pct": 19,
         "memory_used_mb": 62665,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 18,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 32533,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -91,7 +105,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 5,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 32671,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,16 +113,49 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 12,
         "memory_used_mb": 32533,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1773897786.579989": {
+        "mention_ts": "1773897786.579989",
+        "thread_ts": "1773897786.579989",
+        "status": "in_progress",
+        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
+        "summary": "Verified the exact GPQA prompt-profile source bundle and rewrote the Slack draft accordingly; the 1-GPU all-dataset visualization chain is still running behind…",
+        "summary_preview": "Verified the exact GPQA prompt-profile source bundle and rewrote the Slack draft accordingly; the 1-GPU all-dataset visualization chain is still running behind…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773897786.579989",
+        "last_update_ts": "1774151761.190552",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T05:23:06Z"
+        }
+      },
+      "1773870804.162569": {
+        "mention_ts": "1773870804.162569",
+        "thread_ts": "1773870804.162569",
+        "status": "in_progress",
+        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
+        "summary": "Diagnosed the blocked cot-loop sweep as self-inflicted singleton serialization plus stale node-side builder code, fixed both, relaunched in two 2-GPU lanes, an…",
+        "summary_preview": "Diagnosed the blocked cot-loop sweep as self-inflicted singleton serialization plus stale node-side builder code, fixed both, relaunched in two 2-GPU lanes, an…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773870804.162569",
+        "last_update_ts": "1774151792.310709",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T03:56:08Z"
+        }
+      }
+    },
     "incomplete": {
       "1773899776.033029": {
         "mention_ts": "1773899776.033029",
@@ -348,38 +395,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T23:00:37Z"
-        }
-      },
-      "1773870804.162569": {
-        "mention_ts": "1773870804.162569",
-        "thread_ts": "1773870804.162569",
-        "status": "waiting_human",
-        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
-        "summary": "Diagnosed the blocked cot-loop sweep as self-inflicted singleton serialization plus stale node-side builder code, fixed both, relaunched in two 2-GPU lanes, an…",
-        "summary_preview": "Diagnosed the blocked cot-loop sweep as self-inflicted singleton serialization plus stale node-side builder code, fixed both, relaunched in two 2-GPU lanes, an…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773870804.162569",
-        "last_update_ts": "1774141160.072489",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-18T21:53:24Z"
-        }
-      },
-      "1773897786.579989": {
-        "mention_ts": "1773897786.579989",
-        "thread_ts": "1773897786.579989",
-        "status": "waiting_human",
-        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
-        "summary": "Verified the exact GPQA prompt-profile source bundle and rewrote the Slack draft accordingly; the 1-GPU all-dataset visualization chain is still running behind…",
-        "summary_preview": "Verified the exact GPQA prompt-profile source bundle and rewrote the Slack draft accordingly; the 1-GPU all-dataset visualization chain is still running behind…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773897786.579989",
-        "last_update_ts": "1774141874.251407",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T05:23:06Z"
         }
       },
       "1774140823.432069": {
@@ -1680,5 +1695,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T03:54:50Z"
+  "server_time_utc": "2026-03-22T03:56:53Z"
 }
