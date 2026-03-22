@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T00:47:05Z",
+    "last_updated_utc": "2026-03-22T00:54:24Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 1026,
+    "loop_count": 1033,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -15,21 +15,21 @@
     "active_workers": [
       {
         "slot": 0,
-        "task": "1774134037.529099",
-        "started_at": 1774139803,
-        "elapsed_sec": 621
+        "task": "1774140823.432069",
+        "started_at": 1774140852,
+        "elapsed_sec": 11
       },
       {
         "slot": 1,
         "task": "1773897786.579989",
         "started_at": 1774139478,
-        "elapsed_sec": 946
+        "elapsed_sec": 1385
       },
       {
         "slot": 2,
         "task": "1773870804.162569",
         "started_at": 1774139944,
-        "elapsed_sec": 480
+        "elapsed_sec": 919
       }
     ]
   },
@@ -39,15 +39,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.89,
-      "five": 2.06,
-      "fifteen": 2.16
+      "one": 2.17,
+      "five": 2.08,
+      "fifteen": 2.15
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112998789120,
-    "disk_free_bytes": 132108406784,
-    "runner_log_size_bytes": 319192,
+    "disk_used_bytes": 112998232064,
+    "disk_free_bytes": 132108963840,
+    "runner_log_size_bytes": 319948,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T21:51:08Z",
     "local_ips": []
@@ -56,17 +56,17 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T00:52:24Z",
+    "checked_at_utc": "2026-03-22T00:54:26Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 4938,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 88548,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 48
       },
       {
         "index": 1,
@@ -79,7 +79,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 12,
+        "utilization_gpu_pct": 11,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -95,7 +95,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 1,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -111,7 +111,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 4,
         "memory_used_mb": 34101,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -119,7 +119,7 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 11,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 33881,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -159,6 +159,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-18T21:53:24Z"
+        }
+      },
+      "1774140823.432069": {
+        "mention_ts": "1774140823.432069",
+        "thread_ts": "1774140823.432069",
+        "status": "in_progress",
+        "task_description": "I want another feature for the website.",
+        "summary": "I want another feature for the website.",
+        "summary_preview": "I want another feature for the website.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774140823.432069",
+        "last_update_ts": "1774140852.206792",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T00:53:43Z"
         }
       }
     },
@@ -1673,5 +1689,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T00:52:24Z"
+  "server_time_utc": "2026-03-22T00:54:26Z"
 }
