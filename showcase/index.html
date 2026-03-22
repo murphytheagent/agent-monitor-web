@@ -31,19 +31,23 @@
       padding: 18px;
       border: 1px solid var(--line);
       border-radius: 22px;
-      background: var(--surface-muted);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 24%, transparent 100%),
+        var(--surface-muted);
     }
 
     .summary-card strong {
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
+      color: var(--text);
+      font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
 
     .summary-card p {
       margin: 0;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.55;
     }
 
@@ -71,9 +75,11 @@
       border: 1px solid var(--line);
       border-radius: 24px;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(247, 248, 252, 0.94) 100%);
+        radial-gradient(circle at top right, rgba(255, 88, 208, 0.12) 0%, transparent 26%),
+        linear-gradient(180deg, rgba(17, 27, 40, 0.98) 0%, rgba(9, 14, 22, 0.98) 100%);
       padding: 18px;
       min-height: 280px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
 
     .preview-surface::before {
@@ -81,9 +87,16 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at top right, rgba(44, 99, 223, 0.12) 0%, transparent 26%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, transparent 24%);
+        radial-gradient(circle at top left, rgba(99, 230, 255, 0.1) 0%, transparent 30%),
+        repeating-linear-gradient(
+          to right,
+          rgba(99, 230, 255, 0.05) 0,
+          rgba(99, 230, 255, 0.05) 1px,
+          transparent 1px,
+          transparent 96px
+        );
       pointer-events: none;
+      opacity: 0.5;
     }
 
     .preview-window {
@@ -109,11 +122,14 @@
       min-height: 28px;
       padding: 0 10px;
       border-radius: 999px;
-      background: rgba(44, 99, 223, 0.1);
+      border: 1px solid rgba(99, 230, 255, 0.18);
+      background: rgba(19, 31, 46, 0.74);
       color: var(--accent-strong);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .preview-topline {
@@ -123,14 +139,16 @@
 
     .preview-topline strong,
     .preview-stack strong {
-      font-size: 14px;
+      color: var(--text);
+      font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 18px;
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
     }
 
     .preview-note {
       color: var(--text-muted);
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.5;
     }
 
@@ -138,17 +156,17 @@
       display: grid;
       gap: 12px;
       padding: 16px;
-      border: 1px solid rgba(19, 25, 34, 0.08);
+      border: 1px solid rgba(99, 230, 255, 0.12);
       border-radius: 20px;
-      background: #ffffff;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      background: rgba(7, 12, 20, 0.92);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
 
     .preview-textarea {
       min-height: 84px;
       padding: 14px;
       border-radius: 16px;
-      background: #f8f9fc;
+      background: rgba(16, 26, 38, 0.9);
       color: var(--text-muted);
       font-size: 14px;
       line-height: 1.55;
@@ -166,18 +184,21 @@
       min-height: 34px;
       padding: 0 10px;
       border-radius: 14px;
-      background: rgba(44, 99, 223, 0.08);
+      border: 1px solid rgba(99, 230, 255, 0.12);
+      background: rgba(22, 35, 51, 0.84);
       color: var(--text);
       font-size: 13px;
       font-weight: 600;
     }
 
     .token-ribbon span:nth-child(2n) {
-      background: rgba(28, 127, 93, 0.08);
+      border-color: rgba(125, 255, 208, 0.14);
+      background: rgba(16, 38, 34, 0.84);
     }
 
     .token-ribbon span:nth-child(3n) {
-      background: rgba(160, 106, 31, 0.1);
+      border-color: rgba(255, 88, 208, 0.14);
+      background: rgba(41, 20, 40, 0.82);
     }
 
     .preview-grid {
@@ -192,23 +213,26 @@
       display: grid;
       gap: 10px;
       padding: 16px;
-      border: 1px solid rgba(19, 25, 34, 0.08);
+      border: 1px solid rgba(99, 230, 255, 0.12);
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(8, 13, 22, 0.92);
     }
 
     .preview-metric span {
-      color: var(--text-soft);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .preview-metric strong {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
+      color: var(--text);
+      font-family: "Orbitron", "Rajdhani", sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
     .preview-bars {
@@ -220,7 +244,7 @@
     .preview-bar {
       height: 10px;
       border-radius: 999px;
-      background: rgba(19, 25, 34, 0.08);
+      background: rgba(255, 255, 255, 0.06);
       overflow: hidden;
     }
 
@@ -229,7 +253,7 @@
       display: block;
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, #315fd0 0%, #244aad 100%);
+      background: linear-gradient(90deg, rgba(99, 230, 255, 0.92) 0%, rgba(255, 88, 208, 0.82) 100%);
     }
 
     .preview-bar:nth-child(1)::before { width: 84%; }
@@ -240,11 +264,11 @@
     .triangle-stage {
       position: relative;
       min-height: 238px;
-      border: 1px solid rgba(19, 25, 34, 0.08);
+      border: 1px solid rgba(99, 230, 255, 0.12);
       border-radius: 22px;
       background:
-        radial-gradient(circle at center, rgba(44, 99, 223, 0.08) 0%, transparent 38%),
-        #ffffff;
+        radial-gradient(circle at center, rgba(99, 230, 255, 0.1) 0%, transparent 40%),
+        linear-gradient(180deg, rgba(12, 20, 31, 0.98) 0%, rgba(7, 12, 20, 0.98) 100%);
     }
 
     .triangle-stage svg {
@@ -256,7 +280,7 @@
 
     .triangle-stage svg path {
       fill: none;
-      stroke: rgba(44, 99, 223, 0.28);
+      stroke: rgba(99, 230, 255, 0.28);
       stroke-width: 2;
       stroke-linecap: round;
       stroke-dasharray: 10 10;
@@ -269,29 +293,32 @@
       width: 142px;
       padding: 14px;
       border-radius: 18px;
-      border: 1px solid rgba(19, 25, 34, 0.08);
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(99, 230, 255, 0.12);
+      background: rgba(11, 18, 27, 0.94);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
     }
 
     .triangle-node strong {
-      font-size: 16px;
+      color: var(--text);
+      font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 18px;
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
     }
 
     .triangle-node span {
-      color: var(--text-soft);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .triangle-node p {
       margin: 0;
       color: var(--text-muted);
-      font-size: 12px;
+      font-size: 13px;
       line-height: 1.45;
     }
 
@@ -374,8 +401,8 @@
       <section class="showcase-hero site-frame">
         <div class="hero-copy">
           <span class="section-label">Showcase</span>
-          <h1 class="section-title">Public surfaces with less noise and a clearer path in.</h1>
-          <p class="section-copy">The live monitor stays at the root. This gallery holds the durable pages that need more explanation: a tokenizer study, a telemetry deck, and a public architecture exhibit.</p>
+          <h1 class="section-title">Public surfaces, tuned for signal instead of chrome.</h1>
+          <p class="section-copy">The live monitor stays at the root. This gallery holds the routes that deserve a clearer frame: a tokenizer lab, a telemetry deck, and a public architecture exhibit inside the same night-shift shell.</p>
           <div class="action-row">
             <a class="site-button primary" href="../tokenizers/">Open tokenizer lab</a>
             <a class="site-button" href="./signal-deck/">Open Signal Deck</a>
@@ -385,19 +412,19 @@
 
         <div class="hero-summary">
           <article class="summary-card">
-            <span class="micro-label">Viewer first</span>
-            <strong>Three durable pages</strong>
-            <p>Each route now stands on its own instead of nesting live apps and route furniture inside the same screen.</p>
+            <span class="micro-label">One shell</span>
+            <strong>Shared dark system</strong>
+            <p>The gallery, exhibits, and tools now live inside the same restrained cyberpunk frame as the monitor.</p>
           </article>
           <article class="summary-card">
-            <span class="micro-label">Shared shell</span>
-            <strong>One quieter system</strong>
-            <p>Top-level navigation stays shallow. Child destinations live inside Showcase, not in every header.</p>
+            <span class="micro-label">Mobile first</span>
+            <strong>One idea per screen</strong>
+            <p>Each route opens with the artifact or the main story, not a stacked pile of route furniture and control panels.</p>
           </article>
           <article class="summary-card">
-            <span class="micro-label">Mobile intent</span>
-            <strong>Single-column first</strong>
-            <p>Each preview reads in a simple top-to-bottom order before any dense technical detail appears.</p>
+            <span class="micro-label">Accent discipline</span>
+            <strong>Cyan leads, magenta answers</strong>
+            <p>The color language stays cyberpunk, but it behaves like signal: highlights, focus, comparison, not constant wallpaper.</p>
           </article>
         </div>
       </section>

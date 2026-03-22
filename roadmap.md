@@ -1,14 +1,14 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-22 05:31 UTC
+Last updated: 2026-03-22 06:53 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
-- The hand-maintained public routes now use a calmer shared shell: warm light surfaces, shallow navigation, and preview-led hierarchy instead of the older route-map-heavy chrome.
+- The hand-maintained public routes now use a restrained shared shell: dark layered surfaces, shallow navigation, cyan/magenta accents used as signal, and preview-led hierarchy instead of the older route-map-heavy chrome.
 - The generated root routes `/` and `/roadmap/` still sit behind the exporter boundary. Manual shell tweaks there can be useful for brief local iteration, but they are not stable enough to count as delivered site changes.
 - Durable hand-maintained routes now exist under `/tokenizers/` and `/showcase/`.
-- `/showcase/`, `/tokenizers/`, `/showcase/signal-deck/`, and `/showcase/res-publica/` now share the same calmer Murphy shell, so the public site reads as one authored system instead of a pile of neighboring mini-sites.
+- `/showcase/`, `/tokenizers/`, `/showcase/signal-deck/`, and `/showcase/res-publica/` now share the same restrained Murphy shell, so the public site reads as one authored system instead of a pile of neighboring mini-sites.
 - `/showcase/signal-deck/` now adds a telemetry exhibit grounded in completed-task threads and authored git history, so the showcase is no longer only a tool lane plus an architecture lane.
 - The tokenizer workbench selectors now run newest-to-oldest across lines, families, and configurations instead of inheriting the raw catalog insertion order.
 - The showcase route now separates the tokenizer, `Signal Deck`, and `Res Publica` into three explicit exhibit lanes with art-directed previews instead of stacked live embeds.
@@ -34,6 +34,9 @@ Status:
 
 ### Activity Log
 
+- 2026-03-22 06:53 UTC — Reopened the public shell after collaborator feedback that the calmer pass had drifted out of the site's cyberpunk identity. Consulted Athena in `deep` mode (1 turn; log: `.agent/runtime/consult_history/1774155209.676849.jsonl`) on how to translate Apple/OpenAI/Anthropic hierarchy back into a restrained command-deck language. Main takeaway: keep the dark Murphy system, but treat cyan/magenta as sparse signal accents and let spacing and hierarchy carry most of the clarity.
+- 2026-03-22 06:53 UTC — Replaced the warm-light durable shell with a restrained cyberpunk one across `/showcase/`, `/tokenizers/`, `/showcase/signal-deck/`, and `/showcase/res-publica/`: shared dark header, sentence-case navigation, preview-led gallery, and darker tool/exhibit surfaces that still read cleanly on mobile.
+- 2026-03-22 06:53 UTC — Re-verified the durable routes in a mobile browser after the shell swap. The remaining split-brain issue is still exporter-owned: attempts to bring `/` and `/roadmap/` into the same visual system are not durable because the snapshot publisher keeps rewriting those files from the exporter path.
 - 2026-03-22 05:31 UTC — Consulted Athena in `deep` mode on why the public shell still felt heavy. Main takeaway: the problem was structural, not cosmetic. Too many containers, repeated route maps, and desktop-first layouts were making the mobile experience feel cramped.
 - 2026-03-22 05:31 UTC — Rebuilt the durable shell around that advice: `/showcase/` now uses static preview cards instead of stacked live embeds, `/tokenizers/` brings the text and token output ahead of the control stack on small screens, and the exhibit pages use the same calmer navigation and lighter surfaces.
 - 2026-03-22 05:31 UTC — Prototyped the same calmer shell on `/` and `/roadmap/`, then watched the publisher rewrite both routes again during the same session. That confirmed the redesign only becomes real there once the exporter template changes.
@@ -67,7 +70,7 @@ Success criteria:
 - Showcase entries come from a documented data source or template hook.
 
 Status:
-- Partially in place. The exporter can render public navigation for both `/` and `/roadmap/`, but the calmer shell from the 2026-03-22 redesign will not be durable on those routes until the exporter template adopts it.
+- Partially in place. The exporter can render public navigation for both `/` and `/roadmap/`, but the restrained shell from the 2026-03-22 redesign will not be durable on those routes until the exporter template adopts it.
 
 ## Milestone 4 - Additional Hosted Tools
 

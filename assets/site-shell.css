@@ -1,24 +1,31 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Playfair+Display:ital,wght@1,700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 :root {
-  --page-bg: #f5f2eb;
-  --page-bg-accent: #eaf0fa;
-  --surface: rgba(255, 255, 255, 0.74);
-  --surface-strong: #ffffff;
-  --surface-muted: rgba(250, 250, 247, 0.88);
-  --line: rgba(19, 25, 34, 0.09);
-  --line-strong: rgba(19, 25, 34, 0.16);
-  --text: #131922;
-  --text-muted: #5d6674;
-  --text-soft: #7b8594;
-  --accent: #2c63df;
-  --accent-strong: #1f4eb5;
-  --accent-soft: rgba(44, 99, 223, 0.1);
-  --success: #1c7f5d;
-  --warning: #a06a1f;
-  --danger: #bb4f68;
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
-  --shadow-md: 0 18px 42px rgba(15, 23, 42, 0.08);
+  --page-bg: #05080d;
+  --page-bg-deep: #0a1119;
+  --page-bg-accent: #121a27;
+  --surface: rgba(9, 14, 22, 0.82);
+  --surface-strong: rgba(11, 18, 27, 0.94);
+  --surface-raised: rgba(17, 27, 40, 0.98);
+  --surface-muted: rgba(14, 22, 33, 0.9);
+  --line: rgba(163, 184, 215, 0.12);
+  --line-strong: rgba(99, 230, 255, 0.3);
+  --line-soft: rgba(255, 255, 255, 0.06);
+  --text: #eff5ff;
+  --text-muted: #adc0d5;
+  --text-soft: #718197;
+  --muted: var(--text-muted);
+  --accent: #63e6ff;
+  --accent-strong: #8cecff;
+  --accent-soft: rgba(99, 230, 255, 0.16);
+  --accent-2: #ff58d0;
+  --accent-2-soft: rgba(255, 88, 208, 0.14);
+  --success: #7dffd0;
+  --warning: #ffd36a;
+  --danger: #ff7aa7;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.26);
+  --shadow-md: 0 24px 60px rgba(0, 0, 0, 0.36);
+  --shadow-glow: 0 0 0 1px rgba(99, 230, 255, 0.08), 0 18px 48px rgba(0, 0, 0, 0.34);
   --radius-pill: 999px;
 }
 
@@ -28,37 +35,49 @@
 
 .murphy-brand {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  align-items: flex-start;
+  gap: 16px;
   min-width: 0;
 }
 
 .murphy-signature {
+  position: relative;
   flex: 0 0 auto;
   color: var(--text);
-  font-family: "Newsreader", Georgia, serif;
+  font-family: "Playfair Display", Georgia, serif;
   font-size: clamp(32px, 4vw, 42px);
   font-style: italic;
-  font-weight: 600;
-  letter-spacing: -0.04em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   line-height: 0.9;
   text-decoration: none;
+  text-shadow:
+    1px 0 rgba(255, 88, 208, 0.65),
+    -1px 0 rgba(99, 230, 255, 0.78),
+    0 0 18px rgba(99, 230, 255, 0.12);
+  transition:
+    color 160ms ease,
+    text-shadow 160ms ease;
 }
 
 .murphy-signature:hover {
-  color: var(--accent-strong);
+  color: #ffffff;
+  text-shadow:
+    2px 0 rgba(255, 88, 208, 0.74),
+    -2px 0 rgba(99, 230, 255, 0.9),
+    0 0 22px rgba(99, 230, 255, 0.18);
 }
 
 .murphy-context {
   min-width: 0;
   display: grid;
-  gap: 3px;
+  gap: 4px;
 }
 
 .murphy-kicker {
-  color: var(--text-soft);
-  font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
-  font-size: 11px;
+  color: var(--accent);
+  font-family: "Orbitron", "Rajdhani", sans-serif;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -69,6 +88,7 @@
 }
 
 .murphy-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -76,27 +96,41 @@
   padding: 0 16px;
   border-radius: var(--radius-pill) !important;
   border: 1px solid var(--line) !important;
-  background: var(--surface-muted) !important;
+  background: linear-gradient(180deg, rgba(20, 31, 45, 0.88) 0%, rgba(10, 16, 24, 0.94) 100%) !important;
   box-shadow: var(--shadow-sm) !important;
-  color: var(--text) !important;
-  font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif !important;
-  font-size: 14px !important;
+  color: var(--text-muted) !important;
+  font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif !important;
+  font-size: 16px !important;
   font-weight: 600 !important;
-  letter-spacing: -0.01em !important;
+  letter-spacing: 0.01em !important;
   text-transform: none !important;
+  transition:
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease,
+    background 150ms ease;
 }
 
 .murphy-link:hover {
-  border-color: color-mix(in srgb, var(--accent) 24%, var(--line-strong)) !important;
-  background: rgba(255, 255, 255, 0.92) !important;
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08) !important;
+  border-color: var(--line-strong) !important;
+  background: linear-gradient(180deg, rgba(24, 37, 54, 0.94) 0%, rgba(11, 18, 27, 0.98) 100%) !important;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(99, 230, 255, 0.08) !important;
+  color: var(--text) !important;
+  transform: translateY(-1px);
 }
 
 .murphy-link.current,
 .murphy-link[aria-current="page"] {
-  border-color: color-mix(in srgb, var(--accent) 38%, white 20%) !important;
-  background: color-mix(in srgb, var(--accent-soft) 70%, white 30%) !important;
-  color: var(--accent-strong) !important;
+  border-color: rgba(99, 230, 255, 0.52) !important;
+  background:
+    linear-gradient(180deg, rgba(18, 32, 47, 0.96) 0%, rgba(10, 18, 27, 0.98) 100%),
+    linear-gradient(90deg, rgba(99, 230, 255, 0.1) 0%, rgba(255, 88, 208, 0.08) 100%) !important;
+  box-shadow:
+    0 0 0 1px rgba(99, 230, 255, 0.12),
+    0 12px 30px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+  color: var(--text) !important;
 }
 
 @media (max-width: 900px) {
@@ -123,6 +157,6 @@
   .murphy-link {
     min-height: 38px;
     padding: 0 14px;
-    font-size: 13px !important;
+    font-size: 15px !important;
   }
 }

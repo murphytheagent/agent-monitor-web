@@ -566,15 +566,15 @@
     }
 
     .section-title {
-      letter-spacing: -0.05em;
+      letter-spacing: -0.02em;
     }
 
     .role h3,
     .section-head h3,
     .principle-card h3,
     .forum-core strong {
-      font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
-      letter-spacing: -0.03em;
+      font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif;
+      letter-spacing: -0.01em;
       text-transform: none;
       text-shadow: none;
     }
@@ -583,8 +583,8 @@
     .lane,
     .flow-chip,
     .mini-arc span {
-      font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
-      letter-spacing: 0.06em;
+      font-family: "JetBrains Mono", monospace;
+      letter-spacing: 0.08em;
     }
 
     .stage,
@@ -593,33 +593,34 @@
     .flow-board,
     .forum-core,
     .lane {
-      border-color: rgba(19, 25, 34, 0.08);
+      border-color: rgba(99, 230, 255, 0.14);
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(247, 249, 252, 0.96) 100%);
-      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+        linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 20%, transparent 100%),
+        rgba(8, 13, 22, 0.94);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
     }
 
     .stage::before {
       background:
         repeating-linear-gradient(
           to right,
-          rgba(19, 25, 34, 0.04) 0,
-          rgba(19, 25, 34, 0.04) 1px,
+          rgba(99, 230, 255, 0.05) 0,
+          rgba(99, 230, 255, 0.05) 1px,
           transparent 1px,
           transparent 96px
         ),
         repeating-linear-gradient(
           to bottom,
-          rgba(44, 99, 223, 0.04) 0,
-          rgba(44, 99, 223, 0.04) 1px,
+          rgba(255, 255, 255, 0.03) 0,
+          rgba(255, 255, 255, 0.03) 1px,
           transparent 1px,
           transparent 12px
         );
-      opacity: 0.55;
+      opacity: 0.3;
     }
 
     .stage::after {
-      background: radial-gradient(circle, rgba(44, 99, 223, 0.12) 0%, rgba(44, 99, 223, 0) 72%);
+      background: radial-gradient(circle, rgba(99, 230, 255, 0.14) 0%, rgba(99, 230, 255, 0) 72%);
     }
 
     .beam {
@@ -627,11 +628,11 @@
     }
 
     .forum-ring {
-      stroke: rgba(44, 99, 223, 0.18);
+      stroke: rgba(99, 230, 255, 0.18);
     }
 
     .forum-ring.inner {
-      stroke: rgba(28, 127, 93, 0.18);
+      stroke: rgba(255, 88, 208, 0.18);
     }
 
     .role,
@@ -642,8 +643,8 @@
     }
 
     .role {
-      background: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+      background: rgba(11, 18, 27, 0.94);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.24);
     }
 
     .forum-core {
@@ -656,18 +657,18 @@
 
     .principle-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(44, 99, 223, 0.22);
-      box-shadow: 0 18px 34px rgba(15, 23, 42, 0.08);
+      border-color: rgba(99, 230, 255, 0.22);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.26);
     }
 
     .mini-arc::before,
     .mini-arc::after {
-      border-color: rgba(19, 25, 34, 0.08);
+      border-color: rgba(99, 230, 255, 0.14);
     }
 
     .flow-chip {
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(17, 27, 40, 0.9);
     }
   </style>
 </head>

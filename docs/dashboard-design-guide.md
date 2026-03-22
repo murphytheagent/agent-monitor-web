@@ -1,20 +1,20 @@
 # Dashboard Design Guide
 
-Last updated: 2026-03-22 05:31 UTC
+Last updated: 2026-03-22 06:53 UTC
 
 ## Core direction
 
-The current direction is a calm, premium product shell rather than a loud dashboard skin. The best reference points from the 2026-03-22 pass were Apple, Anthropic, and OpenAI: shallow navigation, generous spacing, restrained surfaces, and pages that explain themselves with hierarchy instead of chrome.
+The current direction is restrained cyberpunk: a calm command-deck shell rather than either a neon arcade or a beige productivity site. Apple, Anthropic, and OpenAI are still useful references, but only for structure: shallow navigation, generous spacing, restrained surfaces, and pages that explain themselves with hierarchy instead of chrome.
 
-This site is still data-heavy, but it should feel authored and readable on a phone before it feels dense or "power-user".
+This site is still data-heavy, but it should feel authored and readable on a phone before it feels dense or "power-user". The cyberpunk identity should survive even when most of the accent color is removed.
 
 ## Style requirements
 
-- **Theme:** Warm light backgrounds, soft white cards, subtle borders, restrained blue accents. Avoid pure black, neon treatments, and decorative gradients unless the page itself is an exhibit.
-- **Typography:** `Manrope` for UI and body copy. `Newsreader` is reserved for large hero statements or exhibit headlines. Use monospace only for actual data or code-like strings.
+- **Theme:** Near-black backgrounds, layered dark surfaces, cyan as the primary signal color, magenta as a secondary response color. The goal is signal, not neon wallpaper.
+- **Typography:** `Rajdhani` for UI and body copy. `Playfair Display` is reserved for the Murphy wordmark. `Orbitron` is for small system labels or standout numerals, not whole paragraphs. Use monospace only for actual data, labels, and code-like strings.
 - **Case:** Sentence case by default. Do not force uppercase labels across the shell.
 - **Shape:** Rounded corners are allowed and expected. Favor pill navigation and 20-28px card radii over hard rectangles.
-- **Motion:** Minimal and purposeful. Prefer gentle fades, slight parallax, or static composition. No shimmer, glitch, or always-on animation in the shell.
+- **Motion:** Minimal and purposeful. Prefer gentle fades, slight translate transitions, or static composition. No shimmer, glitch, or always-on animation in the shell.
 - **Density:** Fewer containers, fewer badges, fewer competing callouts. If two boxes can become one quieter section, combine them.
 
 Any new page should inherit this direction unless it is intentionally framed as a standalone exhibit.
@@ -30,15 +30,16 @@ Any new page should inherit this direction unless it is intentionally framed as 
 
 ## What changed in the 2026-03-22 redesign
 
-Athena's diagnosis was that the old UI was not just stylistically dated; it was structurally noisy. Too many bordered containers, too many route labels, and too much desktop-first scaffolding made the mobile experience feel compressed.
+Athena's diagnosis stayed the same after the collaborator asked to keep the cyberpunk theme: the main problem was structural, not cosmetic. Too many bordered containers, too many route labels, and too much desktop-first scaffolding made the mobile experience feel compressed.
 
 The redesign therefore focused on:
 
-- reducing header chrome to a single calm navigation band
+- keeping one dark shell across the durable routes instead of splitting the site into dark root pages and light subpages
+- reducing header chrome to a single shallow navigation band plus one contextual CTA
 - removing route-map and "you are here" blocks from page bodies
 - turning `/showcase/` into a viewer-first gallery with static previews instead of stacked live embeds
 - moving the tokenizer work surface ahead of the control stack on mobile
-- softening exhibit pages so they feel like one site instead of separate microsites with different visual dialects
+- translating premium reference-site hierarchy back into a Murphy-specific command-deck language
 
 ## Visual heuristics
 
@@ -47,10 +48,12 @@ The redesign therefore focused on:
 - Let the biggest heading or preview earn attention naturally instead of forcing it with effects.
 - Prefer one strong preview card over a dense grid of equal-weight cards.
 - On mobile, make the first screen enough to understand what the page is and where to go next.
+- If a component needs both a glow and a border to feel important, the hierarchy is probably wrong.
 
 ## What to avoid
 
-- neon cyan/magenta framing
+- cyan/magenta used at full intensity on text, borders, fills, and backgrounds at the same time
+- light subpages bolted onto dark dashboard pages
 - zero-radius brutalism as the default shell
 - multiple stacked metadata strips above the real content
 - live embeds on the gallery page when a static preview communicates better

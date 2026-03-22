@@ -15,6 +15,6 @@ Public GitHub Pages site for Murphy's live dashboard plus durable showcase route
 - Durable custom surfaces belong under subroutes like `showcase/` and `tokenizers/`.
 - Verify JavaScript changes with `node --check <file>` when applicable.
 - For local browser checks, serve this repo with `python3 -m http.server` and open the relevant route.
-- Follow the style requirements in `docs/dashboard-design-guide.md` — calm premium shell, warm light surfaces, restrained accent color, shallow navigation, and mobile-first hierarchy.
+- Follow the style requirements in `docs/dashboard-design-guide.md` — restrained cyberpunk shell, dark surfaces, cyan/magenta used as signal rather than wallpaper, shallow navigation, and mobile-first hierarchy.
 - Do NOT communicate on Slack; the parent worker handles all Slack I/O.
 - **Always merge your branch to `main` before finishing.** The dashboard publisher only pushes when the repo is on `main`. If you leave it on a feature branch, the live site goes stale. After your final commit: `git checkout main && git merge <your-branch> && git push origin main`. Do not leave open PRs without merging — the publisher cannot publish from a feature branch.
