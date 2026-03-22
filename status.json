@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T10:31:10Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-22T10:33:12Z",
+    "status": "sleeping",
     "pid": 68391,
-    "loop_count": 1163,
+    "loop_count": 1178,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,15 +11,7 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1774162681.090709",
-        "started_at": 1774173373,
-        "elapsed_sec": 2097
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.56,
-      "five": 1.78,
-      "fifteen": 1.9
+      "one": 1.47,
+      "five": 1.68,
+      "fifteen": 1.84
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113375178752,
-    "disk_free_bytes": 131732017152,
-    "runner_log_size_bytes": 443887,
+    "disk_used_bytes": 113374642176,
+    "disk_free_bytes": 131732553728,
+    "runner_log_size_bytes": 444695,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T07:45:44Z",
     "local_ips": []
@@ -44,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T10:31:13Z",
+    "checked_at_utc": "2026-03-22T10:33:16Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89042,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 48
       },
       {
         "index": 1,
@@ -62,13 +54,13 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89012,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 47
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 79399,
+        "memory_used_mb": 89059,
         "memory_total_mb": 97887,
         "temperature_c": 35
       },
@@ -78,62 +70,45 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 89042,
         "memory_total_mb": 97887,
-        "temperature_c": 46
+        "temperature_c": 45
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 32,
-        "memory_used_mb": 78373,
+        "utilization_gpu_pct": 33,
+        "memory_used_mb": 88033,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 36
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 89104,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 46
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 79399,
+        "utilization_gpu_pct": 1,
+        "memory_used_mb": 91003,
         "memory_total_mb": 97887,
         "temperature_c": 36
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 35,
-        "memory_used_mb": 78373,
+        "utilization_gpu_pct": 36,
+        "memory_used_mb": 89977,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 37
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "1774162681.090709": {
-        "mention_ts": "1774162681.090709",
-        "thread_ts": "1774162681.090709",
-        "status": "in_progress",
-        "task_description": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the gold standard for lan…",
-        "summary": "Converted the round-1 landscape into a concrete wave-1 card slate, added a second literature memo and hardware-envelope eval gate, attached a round-2 PDF, and …",
-        "summary_preview": "Converted the round-1 landscape into a concrete wave-1 card slate, added a second literature memo and hardware-envelope eval gate, attached a round-2 PDF, and …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774162681.090709",
-        "last_update_ts": "1774173372.638068",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-22T06:58:01Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1773942694.197309": {
         "mention_ts": "1773942694.197309",
@@ -421,6 +396,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-22T03:56:08Z"
+        }
+      },
+      "1774162681.090709": {
+        "mention_ts": "1774162681.090709",
+        "thread_ts": "1774162681.090709",
+        "status": "in_progress",
+        "task_description": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the gold standard for lan…",
+        "summary": "Added the benchmark manifest, split conversion scoring from backbone scoring, extended the multimodal literature lane, and attached a round-3 memo with per-car…",
+        "summary_preview": "Added the benchmark manifest, split conversion scoring from backbone scoring, extended the multimodal literature lane, and attached a round-3 memo with per-car…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774162681.090709",
+        "last_update_ts": "1774175585.457773",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T06:58:01Z"
         }
       }
     },
@@ -1699,5 +1690,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T10:31:14Z"
+  "server_time_utc": "2026-03-22T10:33:17Z"
 }
