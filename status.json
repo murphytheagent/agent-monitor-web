@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-22T02:52:41Z",
+    "last_updated_utc": "2026-03-22T02:54:49Z",
     "status": "sleeping",
     "pid": 68391,
-    "loop_count": 1947,
+    "loop_count": 1964,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.85,
-      "five": 2.09,
-      "fifteen": 2.0
+      "one": 1.43,
+      "five": 1.84,
+      "fifteen": 1.91
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113071972352,
-    "disk_free_bytes": 132035223552,
-    "runner_log_size_bytes": 349134,
+    "disk_used_bytes": 113074417664,
+    "disk_free_bytes": 132032778240,
+    "runner_log_size_bytes": 349464,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-21T21:51:08Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T02:52:51Z",
+    "checked_at_utc": "2026-03-22T02:54:54Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -46,7 +46,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 88548,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 47
       },
       {
         "index": 1,
@@ -91,7 +91,7 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 12,
+        "utilization_gpu_pct": 4,
         "memory_used_mb": 32627,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -99,10 +99,10 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 2,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 32489,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       }
     ]
   },
@@ -1409,18 +1409,6 @@
         "has_issue": false
       },
       {
-        "id": "AGENT-040",
-        "queue": "feature",
-        "created": "2026-03-21",
-        "priority": "Medium",
-        "status": "open",
-        "task": "Tool-aware worker idle watchdog",
-        "context": "AGENT-028's session-log staleness watchdog can false-kill workers during legitimate long tool calls (e.g., 30-60 min Athena consults). Plan",
-        "done_when": "Watchdog distinguishes idle workers from workers blocked on long tool calls; no false kills during legitimate Athena/GPU operations.",
-        "has_plan": true,
-        "has_issue": false
-      },
-      {
         "id": "AGENT-041",
         "queue": "feature",
         "created": "2026-03-21",
@@ -1446,6 +1434,12 @@
       }
     ],
     "completed": [
+      {
+        "id": "AGENT-040",
+        "created": "2026-03-21",
+        "completed": "2026-03-22",
+        "summary": "Tool-aware worker idle watchdog: session log tail parsing detects MCP tool calls in flight, applies longer ceiling (`WORKER_TOOL_TIMEOUT_SEC=14400`). No false kills during Athena consults. 5 new tests"
+      },
       {
         "id": "FIX-008",
         "created": "2026-03-21",
@@ -1668,5 +1662,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T02:52:52Z"
+  "server_time_utc": "2026-03-22T02:54:55Z"
 }
