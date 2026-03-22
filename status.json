@@ -33,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.79,
-      "five": 1.77,
-      "fifteen": 1.83
+      "one": 1.92,
+      "five": 1.84,
+      "fifteen": 1.84
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113319014400,
-    "disk_free_bytes": 131788181504,
-    "runner_log_size_bytes": 389450,
+    "disk_used_bytes": 113333850112,
+    "disk_free_bytes": 131773345792,
+    "runner_log_size_bytes": 389791,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T04:24:17Z",
     "local_ips": []
@@ -50,7 +50,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-22T05:56:00Z",
+    "checked_at_utc": "2026-03-22T05:58:02Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -65,15 +65,15 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 100,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 89018,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 48
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 32671,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -97,10 +97,10 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 8495,
+        "utilization_gpu_pct": 99,
+        "memory_used_mb": 89038,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 45
       },
       {
         "index": 6,
@@ -116,29 +116,13 @@
         "utilization_gpu_pct": 12,
         "memory_used_mb": 32533,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       }
     ]
   },
   "tasks": {
     "queued": {},
     "active": {
-      "1774155209.676849": {
-        "mention_ts": "1774155209.676849",
-        "thread_ts": "1774155209.676849",
-        "status": "in_progress",
-        "task_description": "The overall design of the our dashboard and other websites just look bad now, especially on a small screen.",
-        "summary": "The overall design of the our dashboard and other websites just look bad now, especially on a small screen.",
-        "summary_preview": "The overall design of the our dashboard and other websites just look bad now, especially on a small screen.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774155209.676849",
-        "last_update_ts": "1774155224.883207",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-22T04:53:29Z"
-        }
-      },
       "1773870804.162569": {
         "mention_ts": "1773870804.162569",
         "thread_ts": "1773870804.162569",
@@ -427,6 +411,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-19T05:23:06Z"
+        }
+      },
+      "1774155209.676849": {
+        "mention_ts": "1774155209.676849",
+        "thread_ts": "1774155209.676849",
+        "status": "waiting_human",
+        "task_description": "The overall design of the our dashboard and other websites just look bad now, especially on a small screen.",
+        "summary": "Redesigned the durable public-site routes around a calmer mobile-first shell, pushed them live, and documented the remaining exporter-side work for the root mo…",
+        "summary_preview": "Redesigned the durable public-site routes around a calmer mobile-first shell, pushed them live, and documented the remaining exporter-side work for the root mo…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774155209.676849",
+        "last_update_ts": "1774158987.511234",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T04:53:29Z"
         }
       }
     },
@@ -1705,5 +1705,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-22T05:56:00Z"
+  "server_time_utc": "2026-03-22T05:58:03Z"
 }
