@@ -19,14 +19,14 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.67,
-      "five": 1.54,
-      "fifteen": 1.57
+      "one": 1.79,
+      "five": 1.57,
+      "fifteen": 1.58
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 114435993600,
-    "disk_free_bytes": 130671202304,
+    "disk_used_bytes": 114440085504,
+    "disk_free_bytes": 130667110400,
     "runner_log_size_bytes": 767357,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T20:24:39Z",
@@ -36,14 +36,14 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T20:57:49Z",
+    "checked_at_utc": "2026-03-23T20:59:51Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 25,
+        "utilization_gpu_pct": 7,
         "memory_used_mb": 24713,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -51,10 +51,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 23,
         "memory_used_mb": 32515,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       },
       {
         "index": 2,
@@ -1426,7 +1426,7 @@
         "done_when": "`roadmap.json` reflects the full arc of agent system development from first commit to present; themes emerge from actual history, not guesswork.",
         "has_plan": true,
         "has_issue": false,
-        "plan_content": "# Plan 49: Backfill Strategic Roadmap from Git History\n\n**Status:** in_review\n**Created:** 2026-03-23\n**Updated:** 2026-03-23\n\n## Goal\n\nPopulate `docs/dev/roadmap.json` with the complete history of agent system development by mining the git commit log, so the roadmap reflects the full arc — not just the current snapshot.\n\n## Analysis: Themes from Actual History\n\nMining 1786 commits (Feb 18 – Mar 23, 2026), the BACKLOG completed table, and the CHANGELOG reveals 7 natural themes — more granular than the current 5, and grounded in what was actually built. The theme breakdown below is illustrative — the implementation must cross-check every completed AGENT-*/FIX-* entry from the BACKLOG (including closed-no-code items like FIX-001, FIX-002, FIX-011) and ensure each maps to a milestone.\n\n### Theme 1: Supervisor & Task Lifecycle (`supervisor`)\nThe foundational dispatch loop, task state machine, and maintenance system. This was the first code written and has been refined continuously.\n\n**Goals & milestones:**\n- **Bootstrap & dispatch loop** (done, Feb 18–23): Init supervisor-worker arch → Task JSON migration (AGENT-008) → Remove legacy text snapshot (AGENT-005) → Hot restart via SIGHUP\n- **Maintenance system** (done, Feb 24–25): Two-phase daily maintenance → Simplified to single task with phase integer → Developer review phase\n- **Dispatch optimization** (done, Feb 27 – Mar 12): Fast polling POLL_INTERVAL=5s (AGENT-004) → Completion gate semantics (AGENT-001) → Remove legacy first_task_objective (AGENT-014) → State rewrite optimization (AGENT-007, AGENT-012) → Consolidate ts_to_int (AGENT-013) → Python 3.9+ compat (AGENT-006)\n- **Queue & lifecycle polish** (done, Feb 28 – Mar 7): Delivery guard → Queue draining → Loop/stop flow fixes → Merge-failure state enforcement\n\n### Theme 2: Multi-Agent Parallel Dispatch (`parallel`)\nScaling from 1 worker to 8 concurrent workers with clean isolation.\n\n**Goals & milestones:**\n- **Parallel infrastructure** (done, Feb 27 – Mar 20): Per-task outcomes + streaming logs (AGENT-002, AGENT-003) → Atomic select+claim (AGENT-011) → WorkerSlot + git worktree isolation (multi-agent dispatch) → Worktree symlink optimization → .agent/ directory reorganization (AGENT-032) → Worktree isolation fix (AGENT-029) → Concurrent .agent/ write coordination (FIX-004) → Worktree reset on fallback merge (FIX-003) → Symlink-mode commit block (FIX-005)\n- **Multi-worker project collaboration** (planned): AGENT-020\n\n### Theme 3: Worker Resilience (`resilience`)\nMaking individual worker processes robust against failures, hangs, and cold starts.\n\n**Goals & milestones:**\n- **Watchdog & recovery** (done, Mar 1 – Mar 22): MCP startup watchdog → Slack API retry/backoff → Worker hang detection (AGENT-028) → Tool-aware idle watchdog (AGENT-040) → Auth failure backoff → Watchdog requeue race fix\n- **Session persistence** (in_progress, Mar 23): Session resume with prompt hashing (AGENT-025) → Remove slot affinity (AGENT-046) → Stop clearing session fields on done tasks (FIX-022, open)\n\n### Theme 4: Research & Consultation (`research`)\nThe actual work Murphy does — external consultation, research delivery, and project execution.\n\n**Goals & milestones:**\n- **Athena integration** (done, Feb 26 – Mar 19): Chrome-based consult MCP → Consult fixes (auto-new-chat, project param, page send) → Consult history persistence (AGENT-021) → Consult selector migration (AGENT-027)\n- **Research delivery** (done, Mar 13 – Mar 19): Visualization system (AGENT-017) → Project sub-sessions → Paper-writing workflow → Shell-job MVP (AGENT-018)\n- **Thread management at scale** (planned): Thread length cap (AGENT-010) → Structured thread presentation (AGENT-016)\n\n### Theme 5: Quality Gates & Review (`quality`)\nAutomated code review and quality assurance infrastructure.\n\n**Goals & milestones:**\n- **Tribune role** (done, Mar 20): Tribune implementation (AGENT-033) → Model fallback for capacity (FIX-006) → Tribune model upgrade (AGENT-042) → Tribune JSON parse fix ",
+        "plan_content": "# Plan 49: Backfill Strategic Roadmap from Git History\n\n**Status:** implemented\n**Created:** 2026-03-23\n**Updated:** 2026-03-23\n\n## Goal\n\nPopulate `docs/dev/roadmap.json` with the complete history of agent system development by mining the git commit log, so the roadmap reflects the full arc — not just the current snapshot.\n\n## Analysis: Themes from Actual History\n\nMining 1786 commits (Feb 18 – Mar 23, 2026), the BACKLOG completed table, and the CHANGELOG reveals 7 natural themes — more granular than the current 5, and grounded in what was actually built. The theme breakdown below is illustrative — the implementation must cross-check every completed AGENT-*/FIX-* entry from the BACKLOG (including closed-no-code items like FIX-001, FIX-002, FIX-011) and ensure each maps to a milestone.\n\n### Theme 1: Supervisor & Task Lifecycle (`supervisor`)\nThe foundational dispatch loop, task state machine, and maintenance system. This was the first code written and has been refined continuously.\n\n**Goals & milestones:**\n- **Bootstrap & dispatch loop** (done, Feb 18–23): Init supervisor-worker arch → Task JSON migration (AGENT-008) → Remove legacy text snapshot (AGENT-005) → Hot restart via SIGHUP\n- **Maintenance system** (done, Feb 24–25): Two-phase daily maintenance → Simplified to single task with phase integer → Developer review phase\n- **Dispatch optimization** (done, Feb 27 – Mar 12): Fast polling POLL_INTERVAL=5s (AGENT-004) → Completion gate semantics (AGENT-001) → Remove legacy first_task_objective (AGENT-014) → State rewrite optimization (AGENT-007, AGENT-012) → Consolidate ts_to_int (AGENT-013) → Python 3.9+ compat (AGENT-006)\n- **Queue & lifecycle polish** (done, Feb 28 – Mar 7): Delivery guard → Queue draining → Loop/stop flow fixes → Merge-failure state enforcement\n\n### Theme 2: Multi-Agent Parallel Dispatch (`parallel`)\nScaling from 1 worker to 8 concurrent workers with clean isolation.\n\n**Goals & milestones:**\n- **Parallel infrastructure** (done, Feb 27 – Mar 20): Per-task outcomes + streaming logs (AGENT-002, AGENT-003) → Atomic select+claim (AGENT-011) → WorkerSlot + git worktree isolation (multi-agent dispatch) → Worktree symlink optimization → .agent/ directory reorganization (AGENT-032) → Worktree isolation fix (AGENT-029) → Concurrent .agent/ write coordination (FIX-004) → Worktree reset on fallback merge (FIX-003) → Symlink-mode commit block (FIX-005)\n- **Multi-worker project collaboration** (planned): AGENT-020\n\n### Theme 3: Worker Resilience (`resilience`)\nMaking individual worker processes robust against failures, hangs, and cold starts.\n\n**Goals & milestones:**\n- **Watchdog & recovery** (done, Mar 1 – Mar 22): MCP startup watchdog → Slack API retry/backoff → Worker hang detection (AGENT-028) → Tool-aware idle watchdog (AGENT-040) → Auth failure backoff → Watchdog requeue race fix\n- **Session persistence** (in_progress, Mar 23): Session resume with prompt hashing (AGENT-025) → Remove slot affinity (AGENT-046) → Stop clearing session fields on done tasks (FIX-022, open)\n\n### Theme 4: Research & Consultation (`research`)\nThe actual work Murphy does — external consultation, research delivery, and project execution.\n\n**Goals & milestones:**\n- **Athena integration** (done, Feb 26 – Mar 19): Chrome-based consult MCP → Consult fixes (auto-new-chat, project param, page send) → Consult history persistence (AGENT-021) → Consult selector migration (AGENT-027)\n- **Research delivery** (done, Mar 13 – Mar 19): Visualization system (AGENT-017) → Project sub-sessions → Paper-writing workflow → Shell-job MVP (AGENT-018)\n- **Thread management at scale** (planned): Thread length cap (AGENT-010) → Structured thread presentation (AGENT-016)\n\n### Theme 5: Quality Gates & Review (`quality`)\nAutomated code review and quality assurance infrastructure.\n\n**Goals & milestones:**\n- **Tribune role** (done, Mar 20): Tribune implementation (AGENT-033) → Model fallback for capacity (FIX-006) → Tribune model upgrade (AGENT-042) → Tribune JSON parse fi",
         "issue_content": ""
       }
     ],
@@ -2514,5 +2514,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T20:57:50Z"
+  "server_time_utc": "2026-03-23T20:59:52Z"
 }

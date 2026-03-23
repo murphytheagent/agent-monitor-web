@@ -1567,5 +1567,399 @@
         "content_preview": "125:| 2026-03-12 | Add AGENT-019 for mid-execution thread awareness. |"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:57:51.770Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "It's only in the Change Log section, not as a real entry. The grep matched a mention in the changelog, not an actual AGENT-019 row. Let me verify more precisely."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:57:56.606Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"# More precise: only match IDs in table rows (| ID | format)\\nBACKLOG_IDS=$(grep -E '^\\\\| (AGENT|FIX)-[0-9]+' /Users/murphy/Research/docs/dev/BACKLOG.md | grep -oE '(AGENT|FIX)-[0-9]+' | head -1 | xargs -I{} echo \\\"checking format\\\" && grep -E '^\\\\| (AGENT|FIX)-[0-9]+' /Users/murphy/Research/docs/dev/BACKLOG.md | sed 's/|.*//' | grep -oE '(AGENT|FIX)-[0-9]+' | sort -u)\\n\\nROADMAP_IDS=$(python3 -c \\\"\\nimport json\\ndata = json.load(open('/Users/murphy/Research/docs/dev/roadmap.json'))"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:57:56.680Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "=== IDs in BACKLOG table rows but NOT in roadmap.json ===\nchecking format\n\nBACKLOG table IDs: 1\nRoadmap IDs: 67"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:04.148Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"# Cleaner approach\\npython3 -c \\\"\\nimport json, re\\n\\n# Parse BACKLOG table rows\\nbacklog_ids = set()\\nwith open('/Users/murphy/Research/docs/dev/BACKLOG.md') as f:\\n    for line in f:\\n        if line.startswith('| AGENT-') or line.startswith('| FIX-'):\\n            m = re.match(r'\\\\|\\\\s*((?:AGENT|FIX)-\\\\d+)', line)\\n            if m:\\n                backlog_ids.add(m.group(1))\\n\\n# Parse roadmap\\ndata = json.load(open('/Users/murphy/Research/docs/dev/roadmap.json'))\\nroadmap_ids "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:58:04.201Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "BACKLOG entries: 67\nRoadmap backlog_ids: 67\nMissing from roadmap: []\nExtra in roadmap: []\nALL BACKLOG ENTRIES COVERED"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:07.278Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 67 BACKLOG entries are covered. Now let me verify the JSON is valid and the roadmap renders correctly."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:10.733Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -c \\\"\\nimport json\\ndata = json.load(open('/Users/murphy/Research/docs/dev/roadmap.json'))\\nthemes = data['themes']\\ntotal_goals = sum(len(t['goals']) for t in themes)\\ntotal_ms = sum(len(g.get('milestones',[])) for t in themes for g in t['goals'])\\ndone_ms = sum(1 for t in themes for g in t['goals'] for m in g.get('milestones',[]) if m['status']=='done')\\nplanned_ms = sum(1 for t in themes for g in t['goals'] for m in g.get('milestones',[]) if m['status']=='planned')\\nip_ms"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:58:10.797Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Themes: 7\nGoals: 24\nMilestones: 78 (done=63, in_progress=2, planned=13)\nTheme names: ['Supervisor & Task Lifecycle', 'Multi-Agent Parallel Dispatch', 'Worker Resilience', 'Research & Consultation', 'Quality Gates & Review', 'Agent Communication & Identity', 'Observability & Dashboard']"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:14.016Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me export the dashboard to regenerate `roadmap.html` and verify the rendering."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:15.592Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m src.loop.monitor.dashboard --once --export-static-dir /tmp/test-dashboard 2>&1 | tail -5\", \"description\": \"One-shot dashboard export to verify rendering\", \"timeout\": 30000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:58:16.193Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "GPU monitor: enabled (tianhaowang-gpu0, poll=120s, timeout=4s)\nStatic export: /tmp/test-dashboard/index.html\nStatic status: /tmp/test-dashboard/status.json"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:19.532Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"ls -la /tmp/test-dashboard/roadmap/ 2>/dev/null && ls -la /Users/murphy/Research/docs/dev/roadmap.html\", \"description\": \"Check generated roadmap files\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:58:19.575Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "total 72\ndrwxr-xr-x@ 4 murphy  wheel    128 Mar 23 13:58 .\ndrwxr-xr-x@ 6 murphy  wheel    192 Mar 23 13:58 ..\n-rw-r--r--@ 1 murphy  wheel  30586 Mar 23 13:58 index.html\n-rw-r--r--@ 1 murphy  wheel      2 Mar 21 21:10 session.json\n-rw-r--r--@ 1 murphy  staff  29419 Mar 23 13:58 /Users/murphy/Research/docs/dev/roadmap.html"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:22.723Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Both files regenerated. Now let me take a screenshot to verify the visual rendering."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:24.214Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"\\\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\\\" --headless --screenshot=/tmp/roadmap-screenshot.png --window-size=1280,2400 \\\"file:///tmp/test-dashboard/roadmap/index.html\\\" 2>&1 | tail -3\", \"description\": \"Screenshot the dashboard roadmap page\", \"timeout\": 15000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:58:24.889Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "[6945:45902451:0323/135824.638756:ERROR:ui/display/mac/cv_display_link_mac.mm:168] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670\n[6945:45902398:0323/135824.638766:ERROR:ui/display/mac/cv_display_link_mac.mm:168] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670\n651406 bytes written to file /tmp/roadmap-screenshot.png"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:27.553Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/tmp/roadmap-screenshot.png\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:58:28.051Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": ""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:40.252Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "The dashboard roadmap page renders beautifully with all 7 themes, 24 goals, and 78 milestones visible. Let me also take a screenshot of the standalone roadmap page."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:41.295Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"\\\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\\\" --headless --screenshot=/tmp/roadmap-standalone.png --window-size=1280,2400 \\\"file:///Users/murphy/Research/docs/dev/roadmap.html\\\" 2>&1 | tail -3\", \"description\": \"Screenshot standalone roadmap.html\", \"timeout\": 15000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:58:41.872Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "[6967:45903067:0323/135841.622177:ERROR:ui/display/mac/cv_display_link_mac.mm:168] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670\n[6967:45903010:0323/135841.622190:ERROR:ui/display/mac/cv_display_link_mac.mm:168] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670\n622119 bytes written to file /tmp/roadmap-standalone.png"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:46.431Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/tmp/roadmap-standalone.png\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:58:46.719Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": ""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:50.537Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Both pages render correctly. Now let me also run the existing tests to verify nothing is broken."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:58:51.568Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -q --tb=short 2>&1 | tail -10\", \"description\": \"Run tests to verify no regressions\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:59:17.052Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "..................................................... [ 11%]\n........................................................................ [ 27%]\n........................................................................ [ 43%]\n..................................................................................................................................... [ 72%]\n........................................................................ [ 88%]\n.....................................................                    [100%]\n455 passed, 30 subtests passed in 25.30s"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:59:20.282Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 455 tests pass. Now let me update the plan status."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:59:21.585Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/49-roadmap-history-backfill.md\", \"old_string\": \"**Status:** in_review\", \"new_string\": \"**Status:** implemented\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:59:21.591Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/49-roadmap-history-backfill.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:59:27.149Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Phase 1: Setup — parse scope, check prerequisites\", \"status\": \"completed\", \"activeForm\": \"Setting up review environment\"}, {\"content\": \"Phase 2: Write implementation plan for AGENT-047\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Phase 3: Review the plan (Tribune + Murphy)\", \"status\": \"completed\", \"activeForm\": \"Reviewing the plan\"}, {\"content\": \"Phase 4: Implement — build roadmap.json from history\", \"status\": \"completed\", \"activeFor"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:59:27.151Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:59:30.498Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "## Phase 5: Review the Implementation\n\nCollecting the implementation diff."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:59:31.311Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git diff HEAD -- docs/dev/roadmap.json docs/dev/roadmap.html docs/dev/plans/49-roadmap-history-backfill.md | wc -c\", \"description\": \"Check implementation diff size\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:59:31.369Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "   54793"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:59:35.596Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "The diff is ~55KB, which exceeds the 50KB limit. I'll send the roadmap.json diff only (the HTML is auto-generated and the plan is already reviewed)."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:59:36.358Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git diff HEAD -- docs/dev/roadmap.json | wc -c\", \"description\": \"Check roadmap.json diff size\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:59:36.408Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "   20075"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:59:39.657Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good, ~20KB for the JSON diff. Let me dispatch both reviewers."
+      }
+    ]
   }
 ]
