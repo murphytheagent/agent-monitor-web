@@ -60,6 +60,10 @@ The redesign therefore focused on:
 - navigation that lists every route on every page
 - headers that compete with the artifact they are supposed to support
 
+## Verification
+
+Every visual change must follow the verification workflow in [`verification-workflow.md`](verification-workflow.md) before reporting completion. Key rules: full-page screenshots (not viewport-only), verify the live public URL (not just local), check both desktop and mobile widths.
+
 ## Durable boundary
 
 The root monitor and roadmap pages are still exporter-owned. If those routes need this shell durably, the exporter template must adopt it. Patching the generated HTML can be useful for immediate iteration, but it is not the long-term source of truth.
