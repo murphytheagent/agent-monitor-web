@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T09:17:36Z",
+    "last_updated_utc": "2026-03-23T09:48:57Z",
     "status": "running_session",
     "pid": 68391,
-    "loop_count": 6675,
+    "loop_count": 6676,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.48,
-      "five": 1.77,
-      "fifteen": 1.8
+      "one": 1.6,
+      "five": 1.64,
+      "fifteen": 1.74
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113575239680,
-    "disk_free_bytes": 131531956224,
-    "runner_log_size_bytes": 680087,
+    "disk_used_bytes": 113573830656,
+    "disk_free_bytes": 131533365248,
+    "runner_log_size_bytes": 681033,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T09:47:11Z",
+    "checked_at_utc": "2026-03-23T09:49:14Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -59,10 +59,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 88473,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 52
       },
       {
         "index": 3,
@@ -83,46 +83,63 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 84,
+        "utilization_gpu_pct": 81,
         "memory_used_mb": 89487,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 46
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 33,
-        "memory_used_mb": 89495,
+        "utilization_gpu_pct": 3,
+        "memory_used_mb": 59457,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 32
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 58,
+        "utilization_gpu_pct": 48,
         "memory_used_mb": 89491,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 40
       }
     ]
   },
   "tasks": {
-    "queued": {},
-    "active": {
-      "1774257429.450109": {
-        "mention_ts": "1774257429.450109",
-        "thread_ts": "1774257429.450109",
-        "status": "in_progress",
-        "task_description": "Development: AGENT-046.",
-        "summary": "Development: AGENT-046.",
-        "summary_preview": "Development: AGENT-046.",
+    "queued": {
+      "1774258406.585549": {
+        "mention_ts": "1774258406.585549",
+        "thread_ts": "1774258406.585549",
+        "status": "queued",
+        "task_description": "Development: AGENT-044.",
+        "summary": "Development: AGENT-044.",
+        "summary_preview": "Development: AGENT-044.",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774257455.903545",
-        "last_update_ts": "1774257455.985408",
+        "created_ts": "1774259328.567422",
+        "last_update_ts": "1774259328.567422",
         "task_type": "development",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-23T09:17:09Z"
+          "time_iso": "2026-03-23T09:33:26Z"
+        }
+      }
+    },
+    "active": {
+      "1774259088.675559": {
+        "mention_ts": "1774259088.675559",
+        "thread_ts": "1774259088.675559",
+        "status": "in_progress",
+        "task_description": "Development: AGENT-045.",
+        "summary": "Development: AGENT-045.",
+        "summary_preview": "Development: AGENT-045.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774259328.566515",
+        "last_update_ts": "1774259336.849175",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T09:44:48Z"
         }
       }
     },
@@ -417,6 +434,22 @@
       }
     },
     "finished": {
+      "1774257429.450109": {
+        "mention_ts": "1774257429.450109",
+        "thread_ts": "1774257429.450109",
+        "status": "done",
+        "task_description": "Development: AGENT-046.",
+        "summary": "Development task completed (1774257429.450109)",
+        "summary_preview": "Development task completed (1774257429.450109)",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774257455.903545",
+        "last_update_ts": "1774259321.891295",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T09:17:09Z"
+        }
+      },
       "1774228855.285039": {
         "mention_ts": "1774228855.285039",
         "thread_ts": "1774228855.285039",
@@ -1200,22 +1233,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-25T00:40:57Z"
         }
-      },
-      "1771832276.357899": {
-        "mention_ts": "1771832276.357899",
-        "thread_ts": "1771832276.357899",
-        "status": "done",
-        "task_description": "Resolve the objective requested in this task thread.",
-        "summary": "Added deferred agent-monitor-web pointer-policy options to ROADMAP.md (AGENT-015), posted in-thread completion update, and closed the maintenance thread.",
-        "summary_preview": "Added deferred agent-monitor-web pointer-policy options to ROADMAP.md (AGENT-015), posted in-thread completion update, and closed the maintenance thread.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771880029.083799",
-        "last_update_ts": "1771978023.618337",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-23T20:53:49Z"
-        }
       }
     }
   },
@@ -1436,21 +1453,15 @@
         "done_when": "`docs/workflows/git-workflow.md` has an explicit exception for `agent-monitor-web` allowing direct pushes to `main`; Murphy merges feature branches to main without PRs for this repo.",
         "has_plan": false,
         "has_issue": false
-      },
-      {
-        "id": "AGENT-046",
-        "queue": "feature",
-        "created": "2026-03-23",
-        "priority": "High",
-        "status": "open",
-        "task": "Remove slot affinity from session resume (AGENT-025 follow-up)",
-        "context": "Session resume requires same slot and same dispatch mode, making it nearly useless in parallel mode (slot assignment is random with 8 slots). Slot affinity was based on incorrect assumption about CWD;",
-        "done_when": "`_should_resume_session()` has no slot/mode checks; resume prompt includes current slot's merge instructions and draft path; session resume works across any slot.",
-        "has_plan": true,
-        "has_issue": false
       }
     ],
     "completed": [
+      {
+        "id": "AGENT-046",
+        "created": "2026-03-23",
+        "completed": "2026-03-23",
+        "summary": "Remove slot affinity from session resume: deleted mode/slot checks from `_should_resume_session()`, added slot-specific overrides to resume prompt (merge instructions + draft path), serial resume canc"
+      },
       {
         "id": "AGENT-025",
         "created": "2026-03-13",
@@ -1739,5 +1750,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T09:47:12Z"
+  "server_time_utc": "2026-03-23T09:49:15Z"
 }
