@@ -2816,5 +2816,274 @@
         "input_preview": "{\"command\": \"IMPL_DIFF=\\\"$(cat /tmp/iterative-review-pLKMz4/impl.diff)\\\"\\n\\nTRIBUNE_PROMPT=\\\"You are the Tribune — an independent quality reviewer. Review the following code changes for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\\n2. **Security issues**: Injection, auth bypass, sensitive data exposure\\n3. **Contract violations**: Does the code violate documented interfaces, schemas, or invariants?\\n4. **Error handling gaps**: Missing error path"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:12:54.320Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "```json\n{\n  \"verdict\": \"approve\",\n  \"findings\": [],\n  \"summary\": \"The code changes successfully decouple the dashboard publisher from the supervisor, improving architectural clarity and reducing coupling. The new standalone process and configuration loading via environment variables are well-implemented and thoroughly tested. Documentation has been updated to reflect the new operational model. No correctness bugs, security issues, contract violations, error handling gaps, or architectural concerns were found.\"\n}\n```"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:08.011Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Tribune (gemini-2.5-flash) approves. Murphy has 2 findings. Let me analyze them:\n\n**CONVERGENCE CHECK: Tribune=approve (gemini-2.5-flash, capacity fallback), Murphy=findings (2), round 1 of 5 → continuing**\n\nMurphy's findings:\n- M-001 (high, integration): `--from-config` only reads from env vars, not from `supervisor_loop.conf`. In deployments that rely on conf-only settings, the publisher would use hardcoded defaults instead.\n- M-002 (medium, runtime): `SUPERVISOR_LOOP_CONFIG_FILE` is resolved at import time, but `.env` is loaded later in `main()`. \n\nSo a `LOOP_CONFIG_FILE` set in `.env` wouldn't affect the config file path. Both findings are valid. For M-001, the issue is that `--from-config` pulls from environment variables with hardcoded fallbacks, but since the bash script is now minimal and doesn't source the conf file, those values never make it into the environment in the first place. The dashboard module does have config reading logic, but it's not being leveraged by the publisher's initialization path.\n\nFor M-002, the global `SUPERVISOR_LOOP_CONFIG_FILE` gets resolved at module import time, before `.env` is even loaded in `main()`. So any `LOOP_CONFIG_FILE` value in the env file arrives too late to affect that initial resolution.\n\nI need to fix both: use the existing config reading function as a fallback for M-001, and re-resolve the config file path after loading the dotenv file for M-002."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:08.022Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**CONVERGENCE CHECK: Tribune=approve (gemini-2.5-flash), Murphy=findings (2), round 1 of 5 → continuing**\n\nBoth Murphy findings are valid. Let me fix them.\n\n**M-001**: `--from-config` should use `read_supervisor_default()` as fallback, not hardcoded defaults.\n**M-002**: `SUPERVISOR_LOOP_CONFIG_FILE` resolves at import time before `.env` is loaded. Need lazy re-resolution."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:08.723Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 76, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:13:08.729Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    76→def _resolve_config_file() -> Path:\n    77→    \"\"\"Honor LOOP_CONFIG_FILE env var, fallback to default.\"\"\"\n    78→    override = os.environ.get(\"LOOP_CONFIG_FILE\")\n    79→    if override:\n    80→        p = Path(override)\n    81→        return p if p.is_absolute() else BASE_DIR / p\n    82→    return BASE_DIR / \"src/config/supervisor_loop.conf\"\n    83→\n    84→SUPERVISOR_LOOP_CONFIG_FILE = _resolve_config_file()\n    85→SUPERVISOR_DEFAULT_RE = re.compile(r'^\\s*:\\s*\"\\$\\{([A-Z0-9_]+):=(.*)\\}\"\\s*$')\n    86→STATIC_EXPORT_TRACKED_FILES = (\"index.html\", \"status.json\", \"roadmap/index.html\", \"roadmap/session.json\")\n    87→ROADMAP_FILE = BASE_DIR / \"docs\" / \"dev\" / \"ROADMAP.md\"\n    88→ROADMAP_SECTION_RE = re.compile(r\"^##\\s+(.+)$\", re.MULTILINE)\n    89→ROADMAP_ROW_RE = re.compile(\n    90→    r\"^\\|\\s*(?P<id>(?:AGENT|FIX)-\\d+)\\s*\\|\""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:13.121Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Fix M-002: Make `SUPERVISOR_LOOP_CONFIG_FILE` re-resolve after `.env` is loaded."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:13.445Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 1207, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:13:13.452Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  1207→\n  1208→\n  1209→def _load_dotenv() -> None:\n  1210→    \"\"\"Load .env with setdefault semantics (env vars take precedence).\"\"\"\n  1211→    dotenv = BASE_DIR / \".env\"\n  1212→    if not dotenv.exists():\n  1213→        return\n  1214→    for raw in dotenv.read_text(encoding=\"utf-8\").splitlines():\n  1215→        line = raw.strip()\n  1216→        if not line or line.startswith(\"#\") or \"=\" not in line:\n  1217→            continue\n  1218→        key, val = line.split(\"=\", 1)\n  1219→        os.environ.setdefault(key.strip(), val.strip().strip('\"').strip(\"'\"))\n  1220→\n  1221→\n  1222→def _parse_bool(value: str) -> bool:\n  1223→    \"\"\"Match supervisor parse_bool semantics: 1/true/yes/y/on (case-insensitive).\"\"\"\n  1224→    return str(value).strip().lower() in {\"1\", \"true\", \"yes\", \"y\", \"on\"}\n  1225→\n  1226→\n  1227→def read_supervisor_default(name: str):\n  1228→    if not SUPERVISOR_LOOP_CONFIG_FILE.exists():\n  1229→        return None\n  1230→    try:\n  1231→        lines = SUPERVISOR_LOOP_CONFIG"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:18.351Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I need to make `read_supervisor_default` use the resolved config file lazily, and make `--from-config` use `read_supervisor_default` for fallbacks. Let me also re-resolve after `_load_dotenv()`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:22.135Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"old_string\": \"def read_supervisor_default(name: str):\\n    if not SUPERVISOR_LOOP_CONFIG_FILE.exists():\\n        return None\\n    try:\\n        lines = SUPERVISOR_LOOP_CONFIG_FILE.read_text(encoding=\\\"utf-8\\\").splitlines()\\n    except Exception:\\n        return None\", \"new_string\": \"def _get_config_file() -> Path:\\n    \\\"\\\"\\\"Return the current config file path (re-resolves after .env loading).\\\"\\\"\\\"\\n   "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:13:22.144Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/monitor/dashboard.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:26.133Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now fix M-001: use `read_supervisor_default()` as fallback in `--from-config`, and re-resolve config file after dotenv loading."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:26.579Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 2710, \"limit\": 40}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:13:26.583Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2710→    parser.add_argument(\"--once\", action=\"store_true\",\n  2711→                        help=\"Write static export once and exit (requires --export-static-dir)\")\n  2712→    parser.add_argument(\"--headless\", action=\"store_true\",\n  2713→                        help=\"Run static export loop in the foreground without starting an HTTP server\")\n  2714→    parser.add_argument(\"--from-config\", action=\"store_true\",\n  2715→                        help=\"Load config from .env and DASHBOARD_* env vars (supervisor-compatible semantics)\")\n  2716→    parser.add_argument(\"--export-static-dir\", type=Path,\n  2717→                        help=\"Optional static export directory (writes index.html + status.json for GitHub Pages)\")\n  2718→    parser.add_argument(\"--static-git-push\", choices=(\"off\", \"on\"), default=None,\n  2719→                        help=\"When exporting static files, optionally commit+push index/status updates on each write (default: off)\")\n  2720→    parser.add_argument(\"--static-git-remo"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:30.042Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 2733, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:13:30.045Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2733→\n  2734→    # --from-config: load .env and populate args from DASHBOARD_* env vars\n  2735→    if args.from_config:\n  2736→        _load_dotenv()\n  2737→        if not _parse_bool(os.environ.get(\"DASHBOARD_EXPORT_ENABLED\", \"true\")):\n  2738→            print(\"Dashboard export disabled (DASHBOARD_EXPORT_ENABLED)\")\n  2739→            return\n  2740→        if args.export_static_dir is None:\n  2741→            args.export_static_dir = Path(os.environ.get(\"DASHBOARD_EXPORT_DIR\", \"projects/agent-monitor-web\"))\n  2742→        if args.static_git_push is None:\n  2743→            args.static_git_push = \"on\" if _parse_bool(os.environ.get(\"DASHBOARD_GIT_PUSH\", \"true\")) else \"off\"\n  2744→        if args.static_git_remote is None:\n  2745→            args.static_git_remote = os.environ.get(\"DASHBOARD_GIT_REMOTE\", \"origin\")\n  2746→        if args.static_git_branch is None:\n  2747→            args.static_git_branch = os.environ.get(\"DASHBOARD_GIT_BRANCH\", \"main\")\n  2748→        if args.gpu_monitor"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:35.145Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now I need to add a helper that reads a DASHBOARD_* setting from: (1) env var, then (2) supervisor_loop.conf via `read_supervisor_default()`. Let me replace the `--from-config` block:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:44.191Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"old_string\": \"    # --from-config: load .env and populate args from DASHBOARD_* env vars\\n    if args.from_config:\\n        _load_dotenv()\\n        if not _parse_bool(os.environ.get(\\\"DASHBOARD_EXPORT_ENABLED\\\", \\\"true\\\")):\\n            print(\\\"Dashboard export disabled (DASHBOARD_EXPORT_ENABLED)\\\")\\n            return\\n        if args.export_static_dir is None:\\n            args.export_static_dir = Path"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:13:44.199Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/monitor/dashboard.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:13:48.254Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add a test for the config file fallback and reload behavior:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:14:01.196Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"    def test_resolve_config_file_honors_loop_config_file(self):\\n        \\\"\\\"\\\"_resolve_config_file should use LOOP_CONFIG_FILE env var when set.\\\"\\\"\\\"\\n        from src.loop.monitor.dashboard import _resolve_config_file, BASE_DIR\\n        with patch.dict(os.environ, {\\\"LOOP_CONFIG_FILE\\\": \\\"/custom/config.conf\\\"}):\\n            result = _resolve_config_file()\\n            self.ass"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:14:01.210Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:14:08.134Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -v -k \\\"TestDashboard\\\" 2>&1 | tail -25\", \"description\": \"Run dashboard tests after fixes\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:14:08.402Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "src/loop/tests/test_supervisor_loop.py::TestDashboardDecoupled::test_config_no_dashboard_fields PASSED [  8%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardDecoupled::test_main_no_dashboard_thread PASSED [ 16%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardDecoupled::test_main_no_threading_import PASSED [ 25%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardHeadlessMode::test_from_config_export_disabled PASSED [ 33%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardHeadlessMode::test_from_config_parse_bool_semantics PASSED [ 41%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardHeadlessMode::test_from_config_reads_conf_file_fallback PASSED [ 50%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardHeadlessMode::test_from_config_reads_env_vars PASSED [ 58%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardHeadlessMode::test_headless_calls_export_loop PASSED [ 66%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardHeadlessMode::test_headless_without_exp"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:14:11.987Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 12 tests pass. Full suite:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:14:12.658Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -q 2>&1 | tail -5\", \"description\": \"Run full test suite after fixes\", \"timeout\": 120000}"
+      }
+    ]
   }
 ]
