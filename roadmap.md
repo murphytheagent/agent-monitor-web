@@ -77,10 +77,18 @@ Success criteria:
 - Showcase entries come from a documented data source or template hook.
 
 Status:
-- Partially in place. The exporter can render public navigation for both `/` and `/roadmap/`, but the restrained shell from the 2026-03-22 redesign will not be durable on those routes until the exporter template adopts it.
+- Partially in place. The exporter now renders `/backlog/` (renamed from `/roadmap/`), a new strategic `/roadmap/` page, and the monitor root. The restrained shell from the 2026-03-22 redesign will not be durable on those routes until the exporter template adopts it.
 
 ### Activity Log
 
+- 2026-03-24 00:30 UTC — Major exporter-side overhaul across multiple commits:
+  - **ROADMAP → BACKLOG rename**: `/roadmap/` page moved to `/backlog/`. All nav links, exports, and templates updated. The concept of "roadmap" is now reserved for the strategic view.
+  - **Strategic roadmap page**: New `/roadmap/` page with fluid visualization — gradient hero, SVG progress rings, flowing milestone chains with pulse animations, Now/Next/Later horizon sections. Data from `docs/dev/roadmap.json` (7 themes, 78 milestones covering full system history).
+  - **Plan/Issue modal**: Clickable Plan/Issue badges on backlog items open a modal overlay with file content (4KB cap, backdrop blur, Escape to close).
+  - **Session viewer → modal**: View Session moved from inline card expansion to modal overlay. Per-item session persistence via `dev_session_map.json` mapping. 14 past dev sessions backfilled. Completed items also show View Session.
+  - **Dispatch state persistence**: Dispatched items stay marked "✓ Dispatched" after page refresh via sessionStorage.
+  - **Tab persistence + refresh button**: Active tab survives refresh; refresh button added to tab bar.
+  - **Nav updated**: Header now shows Roadmap, Backlog, Showcase, Tokenizers, Res Publica.
 - 2026-03-22 07:35 UTC — Re-checked the live generated `/` and `/roadmap/` HTML plus fresh mobile captures after more snapshot refreshes. The remaining issue is no longer just "match the shell"; it is an exporter-side hierarchy problem. Both routes still open with too many equal-weight boxes and early utility controls.
 - 2026-03-22 07:35 UTC — Consulted Athena in `deep` mode (1 turn; log: `.agent/runtime/consult_history/1774155209.676849.jsonl`) specifically on the exporter-owned root routes. Main takeaway: `/` should behave like a `Now` page and `/roadmap/` like a `What ships next` page. Above the fold, each route needs one dominant composite surface, fewer repeated route cues, and collapsed diagnostics/settings on mobile.
 - 2026-03-22 07:35 UTC — Captured that exporter follow-up in `docs/dashboard-design-guide.md` and root developer plan `docs/dev/plans/47-monitor-exporter-mobile-hierarchy.md` so the next template pass has a concrete checklist instead of another vague "make it cleaner" request.
