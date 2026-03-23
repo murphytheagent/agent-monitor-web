@@ -4989,5 +4989,212 @@
         "content": "Add thread awareness after skill learning:"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:14:15.964Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/prompts/session.md\", \"old_string\": \"Skill learning:\\n- If you notice a reusable multi-step workflow that you have performed across **at least two separate tasks** (not just once), log it to `docs/dev/plans/` as a skill candidate. Include: the pattern name, when it applies, the step-by-step procedure, and which tasks demonstrated it. Do not file one-off procedures, project-specific patterns, or narrow variants of existing skills. Dev"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:14:15.970Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/prompts/session.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:14:19.720Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Update loop_context.md:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:14:22.181Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/prompts/loop_context.md\", \"old_string\": \"- Your collaborator may or may not give feedback during the loop. Do not wait for it — make your best judgment and keep moving.\", \"new_string\": \"- Your collaborator may or may not give feedback during the loop. Do not block waiting for it — keep making progress. But do check the thread at phase boundaries (using `conversations_replies`) so you can incorporate feedback if it arrives.\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:14:22.190Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/prompts/loop_context.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:14:24.648Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Update slack-protocols.md:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:14:27.006Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/protocols/slack-protocols.md\", \"old_string\": \"- Always reply in the task's `thread_ts`. Do not start new threads unless the task requires it.\", \"new_string\": \"- Always reply in the task's `thread_ts`. Do not start new threads unless the task requires it.\\n- During sustained work, check for new thread replies at phase boundaries using `conversations_replies`. This lets you incorporate feedback without waiting for re-dispatch.\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:14:27.013Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/protocols/slack-protocols.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:14:30.791Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Phase 2 done. Phase 3 (loop mode) is handled automatically by Phase 1's dispatch branching — no additional code needed. Let me mark it complete and run tests."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:14:35.770Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Read dispatch context and key source files\", \"status\": \"completed\", \"activeForm\": \"Reading dispatch context and key source files\"}, {\"content\": \"Write implementation plan for AGENT-025 remaining work\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Run iterative-review on the plan\", \"status\": \"completed\", \"activeForm\": \"Running iterative-review on the plan\"}, {\"content\": \"Implement Phase 1: session resume wiring\", \"status\": \"completed\", "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:14:35.771Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:14:40.810Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -x -q 2>&1 | tail -30\", \"description\": \"Run existing tests to check for regressions\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:14:44.396Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    def test_legacy_developer_review_without_phase_is_not_requeued(self):\n        with tempfile.TemporaryDirectory() as td:\n            sup = _make_supervisor(Path(td), env_overrides={\"DEFAULT_CHANNEL_ID\": \"CDEFAULT\"})\n            key = \"maintenance\"\n            state = _empty_state()\n            task = _make_task(key, \"in_progress\", \"maintenance\")\n            task[\"thread_ts\"] = \"2000.000001\"\n            task[\"channel_id\"] = \"\"\n            task[\"report_path\"] = \"reports/developer.review.md\"\n            task[\"task_description\"] = \"Developer review: audit recent agent work and fix/improve system code.\"\n            state[\"active_tasks\"][key] = task\n            sup.save_state(state)\n            self._write_outcome(sup, {\n                \"mention_ts\": key, \"status\": \"waiting_human\",\n                \"thread_ts\": \"2000.000001\",\n                \"summary\": \"\", \"completion_confidence\": \"high\",\n                \"requires_human_feedback\": False,\n            })\n            sup.reconcile_task_after_"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:15:46.071Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "There's a test failure. Let me analyze this. The test is `test_legacy_developer_review_without_phase_is_not_requeued` and it's calling `sup.reconcile_task_after_run(key, 0)` — but now the signature has changed! `run_worker_once` now returns a tuple of 3 instead of 2, and `reconcile_task_after_run` has new optional parameters.\n\nWait, the test is calling `reconcile_task_after_run(key, 0)` which should still work since the new parameters are all optional. Let me look at what's actually failing.\n\n\nThe error is `'maintenance' not found in {}` — the task isn't in `incomplete_tasks`. The test creates a maintenance task with `waiting_human` status, which should have been in `incomplete_tasks` before my changes. Let me trace through what my changes did to the reconciliation flow. I need to check what happens when `_clear_session_fields(key)` is called for a maintenance task, but that's only triggered when `final_status == \"done\" and not is_maintenance`, so that's not it. Let me re-examine my actual changes to see where the maintenance task is getting dropped.\n\nActually, I think the issue might be in my changes to `run_worker_once()` — I changed it to return a 3-tuple instead of a 2-tuple, which could break callers. But the test calls `reconcile_task_after_run()` directly, not through the retry wrapper, so that shouldn't matter. Let me look at `_clear_session_fields` more carefully — it loads state, checks `finished_tasks`, removes session fields if found, and saves. The state lock could be interfering here. The error message shows an empty dict, which suggests `incomplete_tasks` is empty when it shouldn't be.\n\nLooking at the reconcile flow more carefully, I think the problem might be in my session_end_ts writing block — I'm checking if `captured_session_id` exists before executing, but it's None by default so that code never runs. Let me trace through the actual test output to see what's happening. The test passed 92 cases and failed 1, so it's not a widespread syntax or import issue. I'm checking where the task state gets updated with the session timestamp — it only happens when `captured_session_id` is set, but in the failing test it's None, so that block never runs. Looking at my other change for storing session metadata, I need to trace through what happens when the worker exits with a non-zero code and the session ID is in the merged data.\n\nThe test case has `worker_exit=0`, `captured_session_id=None`, and it's a maintenance task with `waiting_human` status, so neither the session storage branch nor the final cleanup should execute. But the assertion is failing because the maintenance task isn't in `incomplete_tasks` at all — it's completely missing from the state dictionary.\n\nLooking at the reconciliation logic, there's a code block that redirects maintenance tasks to `finished_tasks` when certain conditions are met. The test creates a maintenance task without a phase, and I need to check if that's triggering an unexpected redirect that's removing it from `incomplete_tasks` entirely. I'm tracing through the logic of `reconcile_task_after_run` to find where the test is breaking — specifically looking at the `_clear_session_fields` call that only triggers when `final_status` is \"done\" and it's not a maintenance task, but in this case the status is \"waiting\" so that wouldn't be the culprit.\n\nLet me work through the maintenance task's reconciliation path: the outcome sets status to \"waiting_human\", the requires_human_feedback check doesn't convert it, the completion gate doesn't apply, and the maintenance-specific checks don't trigger either since the status isn't \"in_progress\". So the task ends up in \"incomplete_tasks\" with \"waiting_human\" status, which seems correct. Now I need to check what happens with the non-final phase logic...\n\nIf the task has no maintenance_phase set, `get_phase()` returns a default, and if that's not the final phase, the code would convert the task to \"finished_tasks\" with status \"done\". But the test expects it to stay in \"incomplete_tasks\", so either `is_final_phase()` returns True for the default, or something else prevents this conversion.\n\nLooking at my `_clear_session_fields` function, I'm loading state, modifying the task by deleting session fields, and saving — but I notice `changed` isn't initialized before the loop, so it might be undefined when I check it at the end. I'm checking the actual test execution to see the full error, but I suspect the issue might be in how I modified the serial dispatch path or the slot reconciliation logic rather than a syntax problem. The test bypasses `_run_serial` entirely by calling `reconcile_task_after_run` directly, so my changes to prompt hashing and session capture shouldn't affect it — but something in `_reconcile_slot` or a related method might be causing the failure."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:15:46.073Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "One test failure. Let me investigate."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:15:46.202Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py::TestReconcileTaskAfterRun::test_legacy_developer_review_without_phase_is_not_requeued -x -v 2>&1 | tail -30\", \"description\": \"Run failing test for diagnosis\", \"timeout\": 30000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:15:46.610Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "============================= test session starts ==============================\nplatform darwin -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0 -- /opt/homebrew/opt/python@3.11/bin/python3.11\ncachedir: .pytest_cache\nrootdir: /Users/murphy/Research\nplugins: anyio-4.12.1\ncollecting ... collected 1 item\n\nsrc/loop/tests/test_supervisor_loop.py::TestReconcileTaskAfterRun::test_legacy_developer_review_without_phase_is_not_requeued PASSED [100%]\n\n============================== 1 passed in 0.22s ==============================="
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:15:49.745Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "It passes when run individually. Could be a test ordering issue. Let me run all tests again:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:15:50.477Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -q 2>&1 | tail -10\", \"description\": \"Run all tests again\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:15.619Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "E           ValueError: not enough values to unpack (expected 3, got 2)\n\nsrc/loop/supervisor/runtime.py:2758: ValueError\n=========================== short test summary info ============================\nFAILED src/loop/tests/test_supervisor_loop.py::TestRunWorkerWithRetries::test_nonzero_nonretriable_returns_immediately\nFAILED src/loop/tests/test_supervisor_loop.py::TestRunWorkerWithRetries::test_success_on_first_attempt\nFAILED src/loop/tests/test_supervisor_loop.py::TestRunWorkerWithRetries::test_transient_backoff_increases\nFAILED src/loop/tests/test_supervisor_loop.py::TestRunWorkerWithRetries::test_transient_retries_up_to_max\nFAILED src/loop/tests/test_supervisor_loop.py::TestRunWorkerWithRetries::test_transient_retry_succeeds_on_second_attempt\n5 failed, 415 passed, 30 subtests passed in 24.98s"
+      }
+    ]
   }
 ]
