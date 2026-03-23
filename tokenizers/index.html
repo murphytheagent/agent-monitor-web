@@ -2002,12 +2002,24 @@
             <a class="site-link murphy-link" href="../roadmap/">Roadmap</a>
             <a class="site-link murphy-link" href="../showcase/" aria-current="page">Showcase</a>
           </nav>
+          <button class="site-menu-toggle" type="button" aria-label="Toggle site navigation" aria-expanded="false" aria-controls="site-menu">
+            <span class="site-menu-icon" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </button>
           <div class="header-status">
             <div class="status-pill" id="model-status">Loading tokenizer</div>
             <p class="status-note" id="status-note">First load pulls tokenizer assets from Hugging Face, then the browser cache takes over.</p>
           </div>
         </div>
       </div>
+      <nav class="site-menu-panel" id="site-menu" aria-label="Murphy site" hidden>
+        <a class="site-link murphy-link site-menu-link" href="../">Monitor</a>
+        <a class="site-link murphy-link site-menu-link" href="../roadmap/">Roadmap</a>
+        <a class="site-link murphy-link site-menu-link" href="../showcase/" aria-current="page">Showcase</a>
+      </nav>
     </header>
 
     <main class="page-grid">
@@ -2320,6 +2332,7 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
     </main>
   </div>
 
+  <script src="../showcase/assets/site-shell.js"></script>
   <script type="module" src="./app.js"></script>
 </body>
 </html>
