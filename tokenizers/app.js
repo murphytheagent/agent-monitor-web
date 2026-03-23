@@ -126,6 +126,7 @@ function captureRefs() {
   refs.showInvisibles = document.getElementById('show-invisibles');
   refs.surfaceTitle = document.getElementById('surface-title');
   refs.surfaceNote = document.getElementById('surface-note');
+  refs.heroCurrent = document.getElementById('hero-current');
   refs.surfacePreview = document.getElementById('surface-preview');
   refs.repoChip = document.getElementById('repo-chip');
   refs.repoLabel = document.getElementById('repo-label');
@@ -405,7 +406,11 @@ function renderModelMeta() {
   const listedConfigurations = family.models.map((entry) => entry.configuration).join(' · ');
   const runtimeNote = runtimeNoteForModel(model);
 
-  document.title = `Tokenizer Workbench | ${model.label}`;
+  document.title = `Tokenizer Lab | ${model.label} | Murphy`;
+  if (refs.heroCurrent) {
+    refs.heroCurrent.textContent = model.label;
+    refs.heroCurrent.title = `${model.line} / ${model.family} / ${model.configuration}`;
+  }
   refs.repoChip.href = `https://huggingface.co/${model.repo}`;
   refs.repoLabel.textContent = model.repo;
   refs.lineLabel.textContent = model.line;
@@ -551,10 +556,10 @@ function setMode(mode) {
 
 function updateModeCopy(payload = state.lastPayload) {
   const isChat = state.mode === 'chat';
-  refs.surfaceTitle.textContent = isChat ? 'Inline prompt tokens' : 'Inline tokens';
+  refs.surfaceTitle.textContent = isChat ? 'Prompt token map' : 'Token map';
 
   if (isChat) {
-    refs.surfaceNote.textContent = 'Template-added control tokens stay inline so the final prompt serialization is visible at a glance.';
+    refs.surfaceNote.textContent = 'Template-added control tokens stay visible in the same prompt surface.';
     refs.serializedTitle.textContent = 'Serialized prompt';
     refs.serializedNote.textContent = 'Exact output from apply_chat_template before token IDs are read.';
     return;
@@ -563,8 +568,8 @@ function updateModeCopy(payload = state.lastPayload) {
   refs.serializedTitle.textContent = 'Serialized text';
   refs.serializedNote.textContent = 'Exact string consumed by the tokenizer in the current mode.';
   refs.surfaceNote.textContent = payload?.surfaceMismatch
-    ? 'Token boundaries stay accurate here even when the decoded surface differs slightly from the raw textarea text.'
-    : 'The surface mirrors the input, grouped by live token boundaries.';
+    ? 'Token boundaries stay accurate here even when rendering differs slightly from the textarea text.'
+    : 'Same prompt, grouped by live token boundaries.';
 }
 
 async function retokenize(forceReload = false) {
