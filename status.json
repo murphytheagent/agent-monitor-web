@@ -1,17 +1,25 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T22:15:21Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-23T23:46:49Z",
+    "status": "workers_active",
     "pid": 68391,
-    "loop_count": 1284,
+    "loop_count": 9,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1774308174.565679",
+        "started_at": 1774309555,
+        "elapsed_sec": 54
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.79,
-      "five": 1.66,
-      "fifteen": 1.68
+      "one": 2.68,
+      "five": 1.97,
+      "fifteen": 1.78
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 112937398272,
-    "disk_free_bytes": 132169797632,
-    "runner_log_size_bytes": 782909,
+    "disk_used_bytes": 113083592704,
+    "disk_free_bytes": 132023603200,
+    "runner_log_size_bytes": 784196,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T22:57:33Z",
     "local_ips": []
@@ -35,29 +43,94 @@
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "unavailable",
-    "checked_at_utc": "2026-03-23T23:44:44Z",
+    "status": "ok",
+    "checked_at_utc": "2026-03-23T23:47:00Z",
     "cache_age_sec": 0,
-    "note": "Remote GPU data unavailable for this snapshot.",
-    "gpus": []
+    "note": "Low-frequency cached nvidia-smi snapshot.",
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 63,
+        "memory_used_mb": 52704,
+        "memory_total_mb": 97887,
+        "temperature_c": 44
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 33759,
+        "memory_total_mb": 97887,
+        "temperature_c": 32
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 24,
+        "memory_used_mb": 21689,
+        "memory_total_mb": 97887,
+        "temperature_c": 33
+      },
+      {
+        "index": 3,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
+        "memory_total_mb": 97887,
+        "temperature_c": 27
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 27921,
+        "memory_total_mb": 97887,
+        "temperature_c": 37
+      },
+      {
+        "index": 5,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 93,
+        "memory_used_mb": 27995,
+        "memory_total_mb": 97887,
+        "temperature_c": 52
+      },
+      {
+        "index": 6,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 96,
+        "memory_used_mb": 27995,
+        "memory_total_mb": 97887,
+        "temperature_c": 56
+      },
+      {
+        "index": 7,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
+        "memory_total_mb": 97887,
+        "temperature_c": 27
+      }
+    ]
   },
   "tasks": {
     "queued": {},
     "active": {
-      "1774303975.615279": {
-        "mention_ts": "1774303975.615279",
-        "thread_ts": "1774303975.615279",
+      "1774308174.565679": {
+        "mention_ts": "1774308174.565679",
+        "thread_ts": "1774308174.565679",
         "status": "in_progress",
-        "task_description": "Development: FIX-020.",
-        "summary": "Development: FIX-020.",
-        "summary_preview": "Development: FIX-020.",
+        "task_description": "Take a look at this: <[link] Can you incorporate this into your trading system?",
+        "summary": "Take a look at this: <[link] Can you incorporate this into your trading system?",
+        "summary_preview": "Take a look at this: <[link] Can you incorporate this into your trading system?",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774304113.233619",
-        "last_update_ts": "1774304120.959807",
-        "task_type": "development",
+        "created_ts": "1774308174.565679",
+        "last_update_ts": "1774309555.290477",
+        "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-23T22:12:55Z"
+          "time_iso": "2026-03-23T23:22:54Z"
         }
       }
     },
@@ -320,6 +393,22 @@
       }
     },
     "finished": {
+      "1774303975.615279": {
+        "mention_ts": "1774303975.615279",
+        "thread_ts": "1774303975.615279",
+        "status": "done",
+        "task_description": "Development: FIX-020.",
+        "summary": "Development task completed (1774303975.615279)",
+        "summary_preview": "Development task completed (1774303975.615279)",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774304113.233619",
+        "last_update_ts": "1774309546.461412",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T22:12:55Z"
+        }
+      },
       "1774298582.137329": {
         "mention_ts": "1774298582.137329",
         "thread_ts": "1774298582.137329",
@@ -1102,22 +1191,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-28T03:14:02Z"
-        }
-      },
-      "1772237476.923639": {
-        "mention_ts": "1772237476.923639",
-        "thread_ts": "1772237476.923639",
-        "status": "done",
-        "task_description": "What is the state of the art on the Kakeya conjecture over finite fields vs over the reals?",
-        "summary": "Ran and confirmed a minimal Athena connectivity test, then posted the pass result in-thread and updated the task report.",
-        "summary_preview": "Ran and confirmed a minimal Athena connectivity test, then posted the pass result in-thread and updated the task report.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772237476.923639",
-        "last_update_ts": "1772240669.511000",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-28T01:01:53Z"
         }
       }
     }
@@ -2484,5 +2557,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T23:44:48Z"
+  "server_time_utc": "2026-03-23T23:47:01Z"
 }

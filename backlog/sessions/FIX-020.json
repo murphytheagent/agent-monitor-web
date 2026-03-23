@@ -4498,5 +4498,127 @@
         "content_preview": "(Bash completed with no output)"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:44:49.110Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "mcp__slack__conversations_add_message",
+        "input_preview": "{\"channel_id\": \"C0AFYQQ4TJ9\", \"thread_ts\": \"1774303975.615279\", \"text\": \"FIX-020 complete. Dashboard publishing now uses git plumbing to push orphan commits to a `deploy` branch instead of 25K+ commits to `main`.\\n\\nChanges:\\n• `publish_to_deploy_branch()` replaces `publish_static_git_snapshot()` — overlays snapshots onto main's full tree, force-pushes orphan commit\\n• Safety guard rejects main/master as deploy target\\n• Config default changed to `deploy`\\n• 9 new tests (464 total), all pass\\n• "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:44:53.867Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "MsgID,UserID,UserName,RealName,Channel,ThreadTs,Text,Time,Reactions,BotName,FileCount,AttachmentIDs,HasMedia,Cursor\n"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:45:00.667Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Phase 1: Setup — read codebase, check prerequisites\", \"status\": \"completed\", \"activeForm\": \"Setting up — reading codebase and checking prerequisites\"}, {\"content\": \"Phase 2: Write implementation plan\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Phase 3: Review the plan (iterative review loop)\", \"status\": \"completed\", \"activeForm\": \"Reviewing the plan with Tribune and Murphy\"}, {\"content\": \"Phase 4: Implement the code\", \"status\": \"com"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:45:00.669Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:45:22.270Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "FIX-020 is complete. All 6 phases done:\n\n1. **Plan** — wrote implementation plan for two-branch publishing strategy\n2. **Plan review** — 5 rounds, 18 findings (full site integrity, submodule gitdir, detached-HEAD recovery, stale snapshot cleanup, fd leak prevention, config defaults, deployment cutover, test coverage)\n3. **Implementation** — replaced `publish_static_git_snapshot()` with `publish_to_deploy_branch()`, updated config/docs\n4. **Impl review** — 5 rounds, 6 findings (main/master guard, test hermeticity, dirty checkout, deployment timing, doc consistency)\n5. **Finalize** — CHANGELOG, BACKLOG, roadmap.json updated; committed and pushed\n\n**Manual cutover still required:**\n1. Restart the dashboard publisher (picks up new `deploy` default)\n2. Verify `deploy` branch created: `cd projects/agent-monitor-web && git ls-remote origin refs/heads/deploy`\n3. Switch GitHub Pages: `gh api repos/murphytheagent/agent-monitor-web/pages -X PUT -f source[branch]=deploy -f source[path]=/`\n4. Untrack generated files on `main` (optional cleanup)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:45:26.233Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "That's a late notification for a background task from the plan review phase — already completed and incorporated. All work for FIX-020 is done and pushed."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:45:30.084Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Another late background task notification from the plan review phase — already incorporated. FIX-020 is fully complete."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:45:33.247Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Late background notification from plan review R4 — already processed. All done."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:45:36.491Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Late notification from impl review R1 — already handled. FIX-020 is complete and pushed."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:45:39.835Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Late notification from impl review R2 — already incorporated. Nothing to do."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:45:42.801Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Late notification from impl review R3 — already processed. All FIX-020 work is complete."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:45:46.221Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Late notification from impl review R4 — already handled. FIX-020 is done and pushed."
+      }
+    ]
   }
 ]
