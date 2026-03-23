@@ -100,6 +100,71 @@
       padding: 10px 0 34px;
     }
 
+    .tokenizer-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px 18px;
+      align-items: end;
+      padding: 18px 20px;
+      margin-bottom: 18px;
+      border-radius: 26px;
+      border: 1px solid rgba(99, 230, 255, 0.16);
+      background:
+        radial-gradient(circle at top right, rgba(99, 230, 255, 0.14) 0%, transparent 34%),
+        linear-gradient(145deg, rgba(10, 18, 29, 0.96) 0%, rgba(7, 13, 22, 0.98) 100%);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.26), 0 0 0 1px rgba(99, 230, 255, 0.05);
+    }
+
+    .tokenizer-intro-copy {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .tokenizer-intro-title {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      color: var(--text-main);
+    }
+
+    .tokenizer-intro-note {
+      margin: 0;
+      max-width: 540px;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .tokenizer-intro-meta {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tokenizer-intro-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(99, 230, 255, 0.18);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .tokenizer-intro-chip.accent {
+      border-color: rgba(99, 230, 255, 0.34);
+      background: linear-gradient(90deg, rgba(38, 71, 126, 0.52) 0%, rgba(17, 27, 42, 0.82) 100%);
+      color: #f4fbff;
+    }
+
     .tokenizer-site-header {
       position: sticky;
       top: 10px;
@@ -874,40 +939,16 @@
     }
 
     .example-block {
-      display: inline-flex;
-    }
-
-    .example-drawer {
-      border: 1px solid rgba(74, 239, 255, 0.18);
-      border-radius: var(--radius-md);
-      background: rgba(7, 13, 23, 0.88);
-      padding: 8px 10px;
-      width: fit-content;
-    }
-
-    .example-drawer summary {
-      list-style: none;
-      cursor: pointer;
-      color: var(--text-main);
-      font-family: "Orbitron", "Rajdhani", sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .example-drawer summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .example-drawer[open] summary {
-      margin-bottom: 8px;
+      display: grid;
+      flex: 1 1 280px;
+      min-width: 0;
     }
 
     .example-list {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      min-width: 0;
     }
 
     .example-list button {
@@ -940,6 +981,7 @@
       color: var(--text-dim);
       font-size: 11px;
       line-height: 1.2;
+      flex-shrink: 0;
     }
 
     .input-footer {
@@ -1125,10 +1167,6 @@
 
     html.embed-showcase .token-pill {
       padding: 8px 10px;
-    }
-
-    html.embed-showcase .example-drawer {
-      padding: 7px 9px;
     }
 
     html.embed-showcase .example-list {
@@ -1647,6 +1685,7 @@
       }
 
       .tokenizer-site-header,
+      .tokenizer-intro,
       .card-header,
       .card-body,
       .control-details,
@@ -1710,6 +1749,15 @@
       .surface-preview {
         min-height: 180px;
         font-size: 15px;
+      }
+
+      .tokenizer-intro {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+      }
+
+      .tokenizer-intro-meta {
+        justify-content: flex-start;
       }
 
       .text-input-field textarea {
@@ -1853,7 +1901,6 @@
     .detail-item,
     .catalog-list li,
     .unsupported-list li,
-    .example-drawer,
     .prompt-box,
     .ids-box,
     .table-wrap,
@@ -1897,9 +1944,10 @@
 
     .surface-preview,
     .token-stream {
-      border-color: rgba(19, 25, 34, 0.08);
+      border-color: rgba(19, 25, 34, 0.1);
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.96) 100%);
+        radial-gradient(circle at top left, rgba(93, 215, 255, 0.14) 0%, transparent 34%),
+        linear-gradient(180deg, rgba(13, 19, 31, 0.98) 0%, rgba(8, 14, 24, 0.98) 100%);
     }
 
     .token-stream article,
@@ -1957,6 +2005,19 @@
         display: none;
       }
 
+      .tokenizer-intro {
+        padding: 14px;
+        margin-bottom: 14px;
+      }
+
+      .tokenizer-intro-title {
+        font-size: 23px;
+      }
+
+      .tokenizer-intro-note {
+        font-size: 14px;
+      }
+
       .tokenizer-site-header .site-header-main {
         gap: 10px;
         padding: 10px 12px;
@@ -1969,6 +2030,19 @@
 
       .site-header .site-brand-name {
         font-size: 19px;
+      }
+
+      .example-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .example-list button {
+        width: 100%;
+      }
+
+      .interaction-note {
+        display: none;
       }
     }
 
@@ -2021,6 +2095,17 @@
         <a class="site-link murphy-link site-menu-link" href="../showcase/" aria-current="page">Showcase</a>
       </nav>
     </header>
+
+    <section class="tokenizer-intro site-frame">
+      <div class="tokenizer-intro-copy">
+        <h1 class="tokenizer-intro-title">Tokenizer Lab</h1>
+        <p class="tokenizer-intro-note">One prompt, multiple public model tokenizers, live browser-side token boundaries.</p>
+      </div>
+      <div class="tokenizer-intro-meta">
+        <span class="tokenizer-intro-chip">Client-side</span>
+        <span class="tokenizer-intro-chip accent" id="hero-current">Kimi-K2.5</span>
+      </div>
+    </section>
 
     <main class="page-grid">
       <section class="card control-card">
@@ -2130,7 +2215,7 @@
                   <div class="input-panel-head">
                     <div class="input-panel-copy">
                       <span class="summary-kicker">Text to tokenize</span>
-                      <h3 class="input-panel-title">Input</h3>
+                      <h3 class="input-panel-title">Prompt</h3>
                       <p class="input-panel-note">This is the primary action for a new user. Replace the sample below or paste your own text and the token view will respond live.</p>
                     </div>
                     <div class="live-count" id="input-summary">Ready.</div>
@@ -2157,15 +2242,12 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
 
                   <div class="input-footer">
                     <div class="example-block">
-                      <details class="example-drawer">
-                        <summary>Examples</summary>
-                        <div class="example-list">
-                          <button type="button" data-example="english">English prose</button>
-                          <button type="button" data-example="mixed">English + 中文</button>
-                          <button type="button" data-example="code">Python code</button>
-                          <button type="button" data-example="emoji">Emojis + markdown</button>
-                        </div>
-                      </details>
+                      <div class="example-list" aria-label="Starter prompts">
+                        <button type="button" data-example="english">English prose</button>
+                        <button type="button" data-example="mixed">English + 中文</button>
+                        <button type="button" data-example="code">Python code</button>
+                        <button type="button" data-example="emoji">Emojis + markdown</button>
+                      </div>
                     </div>
 
                     <p class="interaction-note">Hover previews, click pins, <code class="code-chip">Esc</code> clears.</p>
@@ -2177,7 +2259,7 @@ Try English, 中文, emojis 🚀, or a code snippet and watch how each model sli
                 <div class="surface-toolbar">
                   <div class="surface-copy">
                     <span class="summary-kicker">Live token view</span>
-                    <h3 class="surface-title" id="surface-title">Token-colored input surface</h3>
+                    <h3 class="surface-title" id="surface-title">Token map</h3>
                     <p class="surface-note" id="surface-note">The same text appears here, but grouped and colored by live token boundaries.</p>
                   </div>
                   <label class="mini-toggle">
