@@ -1732,5 +1732,89 @@
         "content_preview": "     1→# FIX-020: Dashboard Publish — Two-Branch Strategy\n     2→\n     3→## Problem\n     4→\n     5→The dashboard publisher commits a snapshot every ~2 minutes to `main` in the `agent-monitor-web` submodule. This has produced 25K+ commits (~334/day), burying real development work (layout PRs, new routes) and growing the repo unboundedly (~24 MB pack now, ~1 GB/year trajectory).\n     6→\n     7→## Solution\n     8→\n     9→Two-branch strategy:\n    10→- **`main`** — development branch with clean history (PRs, meaningful commits). Submodule pointer stays here.\n    11→- **`deploy`** — single-commit orphan branch, force-pushed on every snapshot. GitHub Pages serves from `deploy`.\n    12→\n    13→The publisher uses **git plumbing** to commit to `deploy` without switching the working tree away from `main`. This avoids checkout churn, race conditions with concurrent readers, and the need for worktree management.\n    14→\n    15→## Design\n    16→\n    17→### Core mechanism: overlay snapshot onto `main"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:47:59.660Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Write",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-020-dashboard-publish-two-branch.md\", \"content\": \"# FIX-020: Dashboard Publish — Two-Branch Strategy\\n\\n## Problem\\n\\nThe dashboard publisher commits a snapshot every ~2 minutes to `main` in the `agent-monitor-web` submodule. This has produced 25K+ commits (~334/day), burying real development work (layout PRs, new routes) and growing the repo unboundedly (~24 MB pack now, ~1 GB/year trajectory).\\n\\n## Solution\\n\\nTwo-branch strategy:\\n- **"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:47:59.666Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/fix-020-dashboard-publish-two-branch.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:48:04.186Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Round 4 — dispatch both reviewers."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:48:30.748Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research\\n\\ndiff /dev/null docs/dev/plans/fix-020-dashboard-publish-two-branch.md > /tmp/iterative-review-euzwH6/baseline-R4.diff 2>/dev/null || true\\n\\ncat > /tmp/iterative-review-euzwH6/tribune-R4-prompt.txt << 'ENDPROMPT'\\nYou are the Tribune — an independent quality reviewer. Review the following code changes for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\\n2. **Security issues**: Injection, auth bypass, sensit"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:48:30.820Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Tribune R4:    11791 bytes\nMurphy R4:    12015 bytes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:48:37.344Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/tribune-R4-prompt.txt | GEMINI_SANDBOX=false gemini -m gemini-2.5-pro -p '' --approval-mode plan --output-format text --allowed-mcp-server-names '' 2>/tmp/iterative-review-euzwH6/tribune-R4-stderr.log > /tmp/iterative-review-euzwH6/tribune-R4-stdout.txt; echo \\\"EXIT: $?\\\"\", \"description\": \"Dispatch Tribune R4\", \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:48:39.704Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/murphy-R4-prompt.txt | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema /tmp/iterative-review-euzwH6/findings-schema.json --output-last-message /tmp/iterative-review-euzwH6/murphy-R4.json - > /tmp/iterative-review-euzwH6/murphy-R4-stdout.txt 2>&1; echo \\\"EXIT: $?\\\"\", \"description\": \"Dispatch Murphy R4\", \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:49:28.690Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Keychain initialization encountered an error: Cannot find module '../build/Release/keytar.node'\nRequire stack:\n- /opt/homebrew/Cellar/gemini-cli/0.34.0/libexec/lib/node_modules/@google/gemini-cli/node_modules/keytar/lib/keytar.js\nUsing FileKeychain fallback for secure storage.\nLoaded cached credentials.\nScheduling MCP context refresh...\nExecuting MCP context refresh...\nMCP context refresh complete.\nEXIT:"
+      }
+    ]
   }
 ]
