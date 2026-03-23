@@ -227,86 +227,198 @@
 
 
   :root {
-    --bg: #000; --surface: #0a0a0a; --border: #222; --text: #d9f1ff;
+    --bg: #000; --surface: #0a0a0a; --border: #1a1a2e; --text: #d9f1ff;
     --text-dim: #7b8da6; --brand: #4dc3ff; --good: #4dffb4; --warn: #ffc04d; --bad: #ff5c5c;
+    --glow-brand: rgba(77,195,255,0.15); --glow-good: rgba(77,255,180,0.12); --glow-warn: rgba(255,192,77,0.12);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif; }
 
-  .roadmap-vision {
-    padding: 32px 24px 24px;
-    max-width: 1200px;
+  /* --- Vision hero --- */
+  .vision-hero {
+    position: relative;
+    padding: 56px 32px 48px;
+    max-width: 960px;
     margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
   }
-  .roadmap-vision h1 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--brand);
+  .vision-hero::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(77,195,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
   }
-  .roadmap-vision .vision-text {
-    color: var(--text-dim);
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  .roadmap-vision .updated {
-    color: var(--text-dim);
-    font-size: 12px;
-    margin-top: 8px;
-    opacity: 0.7;
-  }
-
-  .horizon-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 16px 24px;
-  }
-  .horizon-label {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--text-dim);
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
+  .vision-hero h1 {
+    font-size: 40px;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    color: #fff;
     margin-bottom: 16px;
   }
-  .horizon-label.now { color: var(--brand); border-color: var(--brand); }
-  .horizon-label.next { color: var(--warn); border-color: var(--warn); }
-  .horizon-label.later { color: var(--text-dim); border-color: var(--border); }
-
-  .theme-grid {
-    display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    margin-bottom: 24px;
+  .vision-hero h1 span {
+    background: linear-gradient(135deg, var(--brand), var(--good));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
   }
-  .theme-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 16px;
-  }
-  .theme-card:hover {
-    border-color: #333;
-  }
-  .theme-name {
+  .vision-text {
+    color: var(--text-dim);
     font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 4px;
+    line-height: 1.6;
+    max-width: 640px;
+    margin: 0 auto;
   }
-  .theme-desc {
+  .vision-meta {
+    margin-top: 20px;
     font-size: 12px;
     color: var(--text-dim);
-    margin-bottom: 12px;
-    line-height: 1.4;
+    opacity: 0.5;
   }
 
-  .goal-item {
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
+  /* --- Horizon flow --- */
+  .horizon-flow {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+    position: relative;
   }
-  .goal-header {
+  /* Vertical spine */
+  .horizon-flow::before {
+    content: '';
+    position: absolute;
+    left: 52px;
+    top: 0;
+    bottom: 64px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--brand), var(--warn), var(--border));
+    opacity: 0.4;
+  }
+
+  .horizon-group {
+    position: relative;
+    margin-bottom: 48px;
+  }
+  .horizon-marker {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-left: 36px;
+  }
+  .horizon-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid;
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px;
+  }
+  .horizon-dot.now { border-color: var(--brand); box-shadow: 0 0 16px var(--glow-brand); background: rgba(77,195,255,0.2); }
+  .horizon-dot.next { border-color: var(--warn); box-shadow: 0 0 16px var(--glow-warn); background: rgba(255,192,77,0.2); }
+  .horizon-dot.later { border-color: var(--text-dim); box-shadow: none; background: rgba(123,141,166,0.15); }
+  .horizon-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  .horizon-title.now { color: var(--brand); }
+  .horizon-title.next { color: var(--warn); }
+  .horizon-title.later { color: var(--text-dim); }
+
+  /* --- Theme cards --- */
+  .themes-container {
+    padding-left: 68px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .theme-card {
+    background: linear-gradient(135deg, rgba(10,10,20,0.9), rgba(15,15,30,0.7));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .theme-card:hover {
+    border-color: rgba(77,195,255,0.25);
+    box-shadow: 0 4px 24px rgba(77,195,255,0.06);
+  }
+  .theme-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .theme-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .theme-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .progress-ring {
+    width: 28px;
+    height: 28px;
+    position: relative;
+  }
+  .progress-ring svg {
+    transform: rotate(-90deg);
+  }
+  .progress-ring .ring-bg {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 3;
+  }
+  .progress-ring .ring-fill {
+    fill: none;
+    stroke: var(--brand);
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.8s ease;
+  }
+  .theme-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  /* --- Goals --- */
+  .goal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .goal-item {
+    background: rgba(255,255,255,0.02);
+    border-radius: 8px;
+    padding: 14px 16px;
+    border-left: 3px solid transparent;
+    transition: background 0.2s;
+  }
+  .goal-item:hover {
+    background: rgba(255,255,255,0.04);
+  }
+  .goal-item.done { border-left-color: var(--good); }
+  .goal-item.in_progress { border-left-color: var(--brand); }
+  .goal-item.planned { border-left-color: var(--border); }
+
+  .goal-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -314,69 +426,105 @@
   }
   .goal-name {
     font-size: 14px;
-    color: var(--text);
     font-weight: 600;
+    color: var(--text);
   }
-  .goal-status {
-    font-size: 11px;
-    padding: 2px 8px;
-    border: 1px solid;
+  .goal-badge {
+    font-size: 10px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    white-space: nowrap;
+    letter-spacing: 0.8px;
   }
-  .goal-status.done { color: var(--good); border-color: rgba(77,255,180,0.4); }
-  .goal-status.in_progress { color: var(--brand); border-color: rgba(77,195,255,0.4); }
-  .goal-status.planned { color: var(--text-dim); border-color: var(--border); }
+  .goal-badge.done { background: rgba(77,255,180,0.12); color: var(--good); }
+  .goal-badge.in_progress { background: rgba(77,195,255,0.12); color: var(--brand); }
+  .goal-badge.planned { background: rgba(123,141,166,0.1); color: var(--text-dim); }
 
   .goal-desc {
     font-size: 12px;
     color: var(--text-dim);
-    margin-top: 4px;
-    line-height: 1.4;
+    line-height: 1.5;
+    margin-top: 6px;
   }
 
-  .milestone-list {
-    margin-top: 8px;
-    padding-left: 0;
-    list-style: none;
-  }
-  .milestone-list li {
-    font-size: 12px;
-    color: var(--text-dim);
-    padding: 3px 0;
+  /* --- Milestones as progress chain --- */
+  .milestone-chain {
     display: flex;
-    align-items: baseline;
-    gap: 8px;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+    align-items: center;
   }
-  .milestone-list li::before {
-    content: '';
-    display: inline-block;
-    width: 8px;
-    height: 8px;
+  .ms-node {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
     border: 1px solid var(--border);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .milestone-list li.done::before {
-    background: var(--good);
-    border-color: var(--good);
-  }
-  .milestone-list li.in_progress::before {
-    background: var(--brand);
-    border-color: var(--brand);
-  }
-  .milestone-ids {
-    font-size: 10px;
     color: var(--text-dim);
-    opacity: 0.6;
+    transition: all 0.2s;
+  }
+  .ms-node:hover {
+    background: rgba(255,255,255,0.06);
+  }
+  .ms-node.done {
+    border-color: rgba(77,255,180,0.3);
+    color: var(--good);
+  }
+  .ms-node.done::before {
+    content: '¹3';
+    font-size: 10px;
+  }
+  .ms-node.in_progress {
+    border-color: rgba(77,195,255,0.3);
+    color: var(--brand);
+  }
+  .ms-node.in_progress::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--brand);
+    animation: pulse 1.5s ease infinite;
+  }
+  .ms-node.planned::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid var(--text-dim);
+  }
+  .ms-connector {
+    width: 12px;
+    height: 1px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+  .ms-ids {
+    font-size: 9px;
+    opacity: 0.5;
+    margin-left: 2px;
   }
 
-  @media (max-width: 600px) {
-    .roadmap-vision { padding: 20px 16px 16px; }
-    .roadmap-vision h1 { font-size: 22px; }
-    .horizon-section { padding: 12px 16px; }
-    .theme-grid { grid-template-columns: 1fr; }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @media (max-width: 700px) {
+    .vision-hero { padding: 36px 20px 32px; }
+    .vision-hero h1 { font-size: 28px; }
+    .horizon-flow { padding: 0 16px 40px; }
+    .horizon-flow::before { left: 28px; }
+    .horizon-marker { padding-left: 12px; }
+    .themes-container { padding-left: 44px; }
+    .theme-card { padding: 16px; }
+    .milestone-chain { gap: 4px; }
+    .ms-connector { width: 6px; }
   }
 </style>
 </head>
@@ -404,12 +552,12 @@
   <div class="murphy-tools"></div>
 </header>
 <main>
-  <section class="roadmap-vision">
-    <h1>Roadmap</h1>
+  <section class="vision-hero">
+    <h1>Murphy <span>Roadmap</span></h1>
     <p class="vision-text" id="vision-text"></p>
-    <p class="updated" id="updated-text"></p>
+    <p class="vision-meta" id="updated-text"></p>
   </section>
-  <div id="roadmap-content"></div>
+  <div class="horizon-flow" id="roadmap-content"></div>
 </main>
 <script>
 var ROADMAP = {"last_updated": "2026-03-23", "vision": "An autonomous research agent that independently conducts, writes up, and delivers high-quality research while maintaining its own infrastructure.", "themes": [{"id": "reliability", "name": "System Reliability", "description": "Make the supervisor, workers, and dispatch pipeline robust and self-healing", "goals": [{"name": "Stable parallel dispatch", "horizon": "now", "status": "in_progress", "description": "8 concurrent workers with clean worktree isolation, merge coordination, and crash recovery", "milestones": [{"name": "Per-task outcomes + streaming logs", "status": "done", "backlog_ids": ["AGENT-002", "AGENT-003"]}, {"name": "Worker worktree isolation", "status": "done", "backlog_ids": ["AGENT-029"]}, {"name": "Concurrent .agent/ write coordination", "status": "done", "backlog_ids": ["FIX-004"]}, {"name": "Worker hang detection", "status": "done", "backlog_ids": ["AGENT-028"]}, {"name": "Multi-worker project collaboration", "status": "planned", "backlog_ids": ["AGENT-020"]}]}, {"name": "Session persistence", "horizon": "now", "status": "done", "description": "Workers resume codex sessions across re-dispatches, preserving context and reducing cold-start overhead", "milestones": [{"name": "Session resume with prompt hashing", "status": "done", "backlog_ids": ["AGENT-025"]}, {"name": "Remove slot affinity", "status": "done", "backlog_ids": ["AGENT-046"]}]}, {"name": "Quality gate pipeline", "horizon": "now", "status": "in_progress", "description": "Multi-role review (Tribune + iterative-review) ensures code quality before merge", "milestones": [{"name": "Tribune role implementation", "status": "done", "backlog_ids": ["AGENT-033"]}, {"name": "Iterative review skill", "status": "done", "backlog_ids": ["AGENT-035"]}, {"name": "Tribune integration bug fixes", "status": "in_progress", "backlog_ids": ["FIX-010", "FIX-017"]}]}]}, {"id": "research", "name": "Research Workflow", "description": "End-to-end pipeline from task assignment to delivered research artifacts", "goals": [{"name": "Deep research capabilities", "horizon": "now", "status": "in_progress", "description": "Athena consultation, literature search, and structured research delivery", "milestones": [{"name": "Consult history persistence", "status": "done", "backlog_ids": ["AGENT-021"]}, {"name": "Visualization system", "status": "done", "backlog_ids": ["AGENT-017"]}, {"name": "Project sub-sessions", "status": "done", "backlog_ids": []}]}, {"name": "Thread management at scale", "horizon": "next", "status": "planned", "description": "Handle long-running tasks with thread continuation and structured context", "milestones": [{"name": "Thread length cap with continuation", "status": "planned", "backlog_ids": ["AGENT-010"]}, {"name": "Structured thread presentation contract", "status": "planned", "backlog_ids": ["AGENT-016"]}]}]}, {"id": "observability", "name": "Observability \u0026 Dashboard", "description": "Public monitoring, planning surface, and ecosystem awareness", "goals": [{"name": "Public dashboard", "horizon": "now", "status": "done", "description": "GitHub Pages static site with live supervisor state, backlog, and showcase", "milestones": [{"name": "Dashboard redesign", "status": "done", "backlog_ids": ["AGENT-026"]}, {"name": "Backlog page with dispatch", "status": "done", "backlog_ids": ["AGENT-043"]}, {"name": "Decouple publisher from supervisor", "status": "done", "backlog_ids": ["AGENT-044"]}]}, {"name": "Strategic roadmap visualization", "horizon": "now", "status": "in_progress", "description": "Visual roadmap showing themes, goals, and milestones alongside the tactical backlog", "milestones": [{"name": "Roadmap JSON + dashboard page", "status": "in_progress", "backlog_ids": []}, {"name": "Standalone HTML export", "status": "planned", "backlog_ids": []}]}, {"name": "Ecosystem awareness", "horizon": "now", "status": "done", "description": "Daily scouting of agent ecosystem developments to inform system evolution", "milestones": [{"name": "Ecosystem scouting procedure", "status": "done", "backlog_ids": ["AGENT-031"]}]}]}, {"id": "architecture", "name": "System Architecture", "description": "Clean abstractions, contract-driven behavior, and maintainable codebase", "goals": [{"name": "Multi-role behavioral contracts", "horizon": "next", "status": "planned", "description": "Coherent contract architecture across Worker, Developer, and Tribune roles", "milestones": [{"name": "Rethink contract structure", "status": "planned", "backlog_ids": ["AGENT-034"]}]}, {"name": "Credential and asset management", "horizon": "next", "status": "planned", "description": "Structured registry for user-scoped credentials and shared resources", "milestones": [{"name": "User-scoped credential registry", "status": "planned", "backlog_ids": ["AGENT-037"]}]}, {"name": "Skill library", "horizon": "now", "status": "done", "description": "Version-controlled Codex skills with auto-discovery and progressive disclosure", "milestones": [{"name": "Skills to .agent/skills/", "status": "done", "backlog_ids": ["AGENT-009"]}, {"name": "Skill learning workflow", "status": "done", "backlog_ids": ["AGENT-041"]}]}]}, {"id": "resilience", "name": "Data Resilience", "description": "Backup, recovery, and data integrity for runtime artifacts", "goals": [{"name": "Cloud backup", "horizon": "now", "status": "in_progress", "description": "Google Drive syncing for all runtime artifacts that git doesn't track", "milestones": [{"name": "Google Drive for Desktop setup", "status": "in_progress", "backlog_ids": ["AGENT-038"]}]}, {"name": "State validation", "horizon": "now", "status": "done", "description": "JSON integrity validation for all .agent/ data files", "milestones": [{"name": "validate_agent_state.py", "status": "done", "backlog_ids": ["AGENT-030"]}]}]}]};
@@ -418,7 +566,7 @@ function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').re
 (function() {
   document.getElementById('vision-text').textContent = ROADMAP.vision || '';
   var updated = ROADMAP.last_updated || '';
-  if (updated) document.getElementById('updated-text').textContent = 'Last updated: ' + updated;
+  if (updated) document.getElementById('updated-text').textContent = 'Last updated ' + updated;
 
   var themes = ROADMAP.themes || [];
   var horizons = ['now', 'next', 'later'];
@@ -426,41 +574,72 @@ function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').re
   var content = document.getElementById('roadmap-content');
   var html = '';
 
+  function goalProgress(goals) {
+    var total = 0, done = 0;
+    goals.forEach(function(g) {
+      (g.milestones || []).forEach(function(m) {
+        total++;
+        if (m.status === 'done') done++;
+      });
+    });
+    return total > 0 ? Math.round((done / total) * 100) : 0;
+  }
+
+  function progressRingSvg(pct) {
+    var r = 11, c = 2 * Math.PI * r;
+    var offset = c - (pct / 100) * c;
+    return '<div class="progress-ring"><svg width="28" height="28" viewBox="0 0 28 28">' +
+      '<circle class="ring-bg" cx="14" cy="14" r="' + r + '"/>' +
+      '<circle class="ring-fill" cx="14" cy="14" r="' + r + '" ' +
+        'stroke-dasharray="' + c.toFixed(1) + '" stroke-dashoffset="' + offset.toFixed(1) + '"/>' +
+    '</svg></div>';
+  }
+
   horizons.forEach(function(h) {
-    // Collect goals for this horizon across all themes, grouped by theme
     var themeCards = [];
     themes.forEach(function(theme) {
       var goals = (theme.goals || []).filter(function(g) { return g.horizon === h; });
       if (goals.length === 0) return;
+      var pct = goalProgress(goals);
+
       var goalsHtml = goals.map(function(goal) {
-        var milestones = (goal.milestones || []).map(function(m) {
+        var msNodes = (goal.milestones || []).map(function(m, i) {
           var ids = (m.backlog_ids || []).length > 0
-            ? ' <span class="milestone-ids">' + m.backlog_ids.map(esc).join(', ') + '</span>'
+            ? '<span class="ms-ids">' + m.backlog_ids.map(esc).join(', ') + '</span>'
             : '';
-          return '<li class="' + esc(m.status) + '">' + esc(m.name) + ids + '</li>';
+          var connector = i > 0 ? '<span class="ms-connector"></span>' : '';
+          return connector + '<span class="ms-node ' + esc(m.status) + '">' + esc(m.name) + ids + '</span>';
         }).join('');
-        return '<div class="goal-item">' +
-          '<div class="goal-header">' +
+
+        return '<div class="goal-item ' + esc(goal.status) + '">' +
+          '<div class="goal-top">' +
             '<span class="goal-name">' + esc(goal.name) + '</span>' +
-            '<span class="goal-status ' + esc(goal.status) + '">' + esc(goal.status.replace(/_/g, ' ')) + '</span>' +
+            '<span class="goal-badge ' + esc(goal.status) + '">' + esc(goal.status.replace(/_/g, ' ')) + '</span>' +
           '</div>' +
           '<div class="goal-desc">' + esc(goal.description || '') + '</div>' +
-          (milestones ? '<ul class="milestone-list">' + milestones + '</ul>' : '') +
+          (msNodes ? '<div class="milestone-chain">' + msNodes + '</div>' : '') +
         '</div>';
       }).join('');
+
       themeCards.push(
         '<div class="theme-card">' +
-          '<div class="theme-name">' + esc(theme.name) + '</div>' +
+          '<div class="theme-header">' +
+            '<span class="theme-name">' + esc(theme.name) + '</span>' +
+            '<span class="theme-progress">' + progressRingSvg(pct) + pct + '%</span>' +
+          '</div>' +
           '<div class="theme-desc">' + esc(theme.description || '') + '</div>' +
-          goalsHtml +
+          '<div class="goal-list">' + goalsHtml + '</div>' +
         '</div>'
       );
     });
     if (themeCards.length === 0) return;
-    html += '<section class="horizon-section">' +
-      '<div class="horizon-label ' + h + '">' + horizonLabels[h] + '</div>' +
-      '<div class="theme-grid">' + themeCards.join('') + '</div>' +
-    '</section>';
+    html += '<div class="horizon-group">' +
+      '<div class="horizon-marker">' +
+        '<span class="horizon-dot ' + h + '"></span>' +
+        '<span class="horizon-title ' + h + '">' + horizonLabels[h] + '</span>' +
+      '</div>' +
+      '<div class="themes-container">' + themeCards.join('') + '</div>' +
+    '</div>';
   });
 
   content.innerHTML = html;
