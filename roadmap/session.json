@@ -2938,5 +2938,338 @@
         "content": "I'll update the serial context to always provide a context dict (even without draft path) and handle the \"no merge\" override in `_render_resume_prompt`:"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:03.475Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"            # AGENT-046: build serial slot context (draft path only, no merge)\\n            serial_ctx: Optional[Dict[str, str]] = None\\n            if (\\n                self.cfg.tribune_max_review_rounds >= 1\\n                and self._active_task_type != \\\"maintenance\\\"\\n            ):\\n                task_key_for_draft = str(\\n                    dispatch.get(\\\"mention_ts\\\")\\n        "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:39:03.483Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:07.320Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update `_render_resume_prompt` to handle the `serial_mode` flag — when present, add an explicit note that no merge is needed:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:15.127Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"        # AGENT-046: slot-specific overrides for cross-slot resume\\n        slot_overrides_str = \\\"\\\"\\n        if slot_context:\\n            parts: list = []\\n            # Merge instructions (parallel only — serial skips merge)\\n            repo_root = slot_context.get(\\\"repo_root\\\")\\n            branch_name = slot_context.get(\\\"branch_name\\\")\\n            if repo_root and branch_name:\\n "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:39:15.144Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:18.204Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update the test for serial resume to verify the cancellation message:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:24.805Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"    def test_resume_prompt_no_overrides_serial(self):\\n        \\\"\\\"\\\"Serial resume (no slot_context) has no Updated Instructions section.\\\"\\\"\\\"\\n        with tempfile.TemporaryDirectory() as td:\\n            sup = self._sup(td)\\n            dispatch = {\\\"mention_ts\\\": \\\"1.1\\\", \\\"session_end_ts\\\": \\\"0\\\"}\\n            prompt = sup._render_resume_prompt(dispatch, \\\"1.1\\\")\\n           "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:39:24.807Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<tool_use_error>File has not been read yet. Read it first before writing to it.</tool_use_error>"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:28.125Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 2571, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:39:28.130Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2571→    def test_resume_prompt_no_draft_when_tribune_disabled(self):\n  2572→        \"\"\"No draft instructions when TRIBUNE_MAX_REVIEW_ROUNDS=0 (AGENT-046).\"\"\"\n  2573→        with tempfile.TemporaryDirectory() as td:\n  2574→            sup = self._sup(td, TRIBUNE_MAX_REVIEW_ROUNDS=\"0\")\n  2575→            self._write_merge_template(sup)\n  2576→            dispatch = {\"mention_ts\": \"1.1\", \"session_end_ts\": \"0\"}\n  2577→            # No draft_path in context because Tribune is off\n  2578→            ctx = {\n  2579→                \"repo_root\": \"/Users/test/Research\",\n  2580→                \"branch_name\": \"worker-2\",\n  2581→            }\n  2582→            prompt = sup._render_resume_prompt(dispatch, \"1.1\", slot_context=ctx)\n  2583→            self.assertNotIn(\"slack_draft\", prompt)\n  2584→            self.assertNotIn(\"Tribune approval\", prompt)\n  2585→            # Merge instructions should still be present"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:31.318Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 2586, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:39:31.323Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2586→            self.assertIn(\"worker-2\", prompt)\n  2587→\n  2588→    def test_resume_prompt_no_overrides_serial(self):\n  2589→        \"\"\"Serial resume (no slot_context) has no Updated Instructions section.\"\"\"\n  2590→        with tempfile.TemporaryDirectory() as td:\n  2591→            sup = self._sup(td)\n  2592→            dispatch = {\"mention_ts\": \"1.1\", \"session_end_ts\": \"0\"}\n  2593→            prompt = sup._render_resume_prompt(dispatch, \"1.1\")\n  2594→            self.assertNotIn(\"## Updated Instructions\", prompt)\n  2595→\n  2596→    def test_build_resume_cmd_default(self):\n  2597→        \"\"\"Resume command from default WORKER_CMD.\"\"\"\n  2598→        with tempfile.TemporaryDirectory() as td:\n  2599→            sup = self._sup(td)\n  2600→            task = {\"codex_session_id\": \"test-uuid-123\"}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:37.534Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"    def test_resume_prompt_no_overrides_serial(self):\\n        \\\"\\\"\\\"Serial resume (no slot_context) has no Updated Instructions section.\\\"\\\"\\\"\\n        with tempfile.TemporaryDirectory() as td:\\n            sup = self._sup(td)\\n            dispatch = {\\\"mention_ts\\\": \\\"1.1\\\", \\\"session_end_ts\\\": \\\"0\\\"}\\n            prompt = sup._render_resume_prompt(dispatch, \\\"1.1\\\")\\n           "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:39:37.546Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:40.468Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now run the tests again:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:41.658Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -v -k \\\"resume_prompt or resume_session\\\" 2>&1\", \"description\": \"Run updated resume tests\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:39:42.077Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "============================= test session starts ==============================\nplatform darwin -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0 -- /opt/homebrew/opt/python@3.11/bin/python3.11\ncachedir: .pytest_cache\nrootdir: /Users/murphy/Research\nplugins: anyio-4.12.1\ncollecting ... collected 441 items / 430 deselected / 11 selected\n\nsrc/loop/tests/test_supervisor_loop.py::TestSessionResume::test_resume_prompt_includes_draft_override PASSED [  9%]\nsrc/loop/tests/test_supervisor_loop.py::TestSessionResume::test_resume_prompt_includes_merge_override PASSED [ 18%]\nsrc/loop/tests/test_supervisor_loop.py::TestSessionResume::test_resume_prompt_no_draft_when_tribune_disabled PASSED [ 27%]\nsrc/loop/tests/test_supervisor_loop.py::TestSessionResume::test_resume_prompt_no_overrides_bare PASSED [ 36%]\nsrc/loop/tests/test_supervisor_loop.py::TestSessionResume::test_resume_prompt_serial_cancels_merge PASSED [ 45%]\nsrc/loop/tests/test_supervisor_loop.py::TestSessionResume::test_should_resume_session_"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:44.952Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All pass. Run full suite:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:39:45.615Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -v 2>&1 | tail -8\", \"description\": \"Full test suite verification\", \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:40:13.485Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": ">           self.assertIn(\"maintenance\", new_state[\"queued_tasks\"])\nE           AssertionError: 'maintenance' not found in {}\n\nsrc/loop/tests/test_supervisor_loop.py:1793: AssertionError\n=========================== short test summary info ============================\nFAILED src/loop/tests/test_supervisor_loop.py::TestEnqueueReflectTaskIfDue::test_enqueued_reflect_uses_default_channel_id\nFAILED src/loop/tests/test_supervisor_loop.py::TestEnqueueReflectTaskIfDue::test_enqueues_when_due\n============== 2 failed, 439 passed, 30 subtests passed in 27.70s =============="
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:40:17.463Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "439 passed (up from 438 — added 1 net new test), same 2 pre-existing failures only. Now let me collect the updated diff and dispatch Round 2 reviewers."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:40:19.975Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git diff HEAD -- src/loop/supervisor/runtime.py src/loop/tests/test_supervisor_loop.py src/prompts/session_resume.md CLAUDE.md docs/dev/plans/agent-025-remove-slot-affinity.md > /tmp/iterative-review-hRi3vY/baseline-R2.diff 2>&1 && wc -l /tmp/iterative-review-hRi3vY/baseline-R2.diff\", \"description\": \"Collect updated diff for Round 2\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:40:20.037Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     443 /tmp/iterative-review-hRi3vY/baseline-R2.diff"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:40:23.722Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Build Round 2 prompts with fix context:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:40:42.642Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(cat /tmp/iterative-review-hRi3vY/baseline-R2.diff)\\n\\nFIX_CONTEXT=\\\"## Fix Delta (Round 1 → Round 2)\\n\\nFiles modified: src/loop/supervisor/runtime.py, src/loop/tests/test_supervisor_loop.py\\n\\n### Prior Round Context\\n\\nRound 1 findings:\\n- T (Tribune): approve — no issues\\n- M-1-1 (high, integration): Removing mode check allows unsafe parallel-to-serial resumes. Fixed: serial resume now always provides a slot_context with serial_mode=true, which renders an explicit"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:40:42.687Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Tribune R2 prompt written (   25658 bytes)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:40:54.365Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(cat /tmp/iterative-review-hRi3vY/baseline-R2.diff)\\n\\nFIX_CONTEXT=\\\"## Fix Delta (Round 1 → Round 2)\\n\\nFiles modified: src/loop/supervisor/runtime.py, src/loop/tests/test_supervisor_loop.py\\n\\n### Prior Round Context\\n\\nRound 1 findings:\\n- T (Tribune): approve — no issues\\n- M-1-1 (high, integration): Removing mode check allows unsafe parallel-to-serial resumes. Fixed: serial resume now always provides a slot_context with serial_mode=true, which renders an explicit"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:40:54.394Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Murphy R2 prompt written (   25747 bytes)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:41:00.427Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-hRi3vY/tribune-R2.prompt | GEMINI_SANDBOX=false gemini -m gemini-2.5-pro -p '' --approval-mode plan --output-format text --allowed-mcp-server-names '' 2>/dev/null\", \"description\": \"Dispatch Tribune R2 (gemini-2.5-pro)\", \"timeout\": 300000, \"run_in_background\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:41:00.448Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Command running in background with ID: bztljgnx0. Output is being written to: /private/tmp/claude-501/-Users-murphy-Research/a5b9f06b-2b97-5a8f-82ad-8e7ff1ff0cfb/tasks/bztljgnx0.output"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:41:02.332Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-hRi3vY/murphy-R2.prompt | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema /tmp/iterative-review-hRi3vY/findings-schema.json --output-last-message /tmp/iterative-review-hRi3vY/murphy-R2.json -\", \"description\": \"Dispatch Murphy R2 (Codex)\", \"timeout\": 300000, \"run_in_background\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:41:02.346Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Command running in background with ID: bsem23y0j. Output is being written to: /private/tmp/claude-501/-Users-murphy-Research/a5b9f06b-2b97-5a8f-82ad-8e7ff1ff0cfb/tasks/bsem23y0j.output"
+      }
+    ]
   }
 ]
