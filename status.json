@@ -19,14 +19,14 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.37,
-      "five": 1.53,
-      "fifteen": 1.64
+      "one": 1.79,
+      "five": 1.66,
+      "fifteen": 1.68
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113033826304,
-    "disk_free_bytes": 132073369600,
+    "disk_used_bytes": 112937398272,
+    "disk_free_bytes": 132169797632,
     "runner_log_size_bytes": 782909,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T22:57:33Z",
@@ -35,76 +35,11 @@
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
-    "status": "ok",
-    "checked_at_utc": "2026-03-23T23:42:41Z",
+    "status": "unavailable",
+    "checked_at_utc": "2026-03-23T23:44:44Z",
     "cache_age_sec": 0,
-    "note": "Low-frequency cached nvidia-smi snapshot.",
-    "gpus": [
-      {
-        "index": 0,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
-        "memory_used_mb": 52630,
-        "memory_total_mb": 97887,
-        "temperature_c": 47
-      },
-      {
-        "index": 1,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 33759,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 2,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 21689,
-        "memory_total_mb": 97887,
-        "temperature_c": 32
-      },
-      {
-        "index": 3,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 27
-      },
-      {
-        "index": 4,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 60,
-        "memory_used_mb": 27921,
-        "memory_total_mb": 97887,
-        "temperature_c": 45
-      },
-      {
-        "index": 5,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 94,
-        "memory_used_mb": 27995,
-        "memory_total_mb": 97887,
-        "temperature_c": 53
-      },
-      {
-        "index": 6,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
-        "memory_used_mb": 27995,
-        "memory_total_mb": 97887,
-        "temperature_c": 51
-      },
-      {
-        "index": 7,
-        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
-        "memory_total_mb": 97887,
-        "temperature_c": 27
-      }
-    ]
+    "note": "Remote GPU data unavailable for this snapshot.",
+    "gpus": []
   },
   "tasks": {
     "queued": {},
@@ -1280,21 +1215,6 @@
         "session_id": ""
       },
       {
-        "id": "FIX-020",
-        "queue": "fix",
-        "created": "2026-03-23",
-        "priority": "Medium",
-        "status": "open",
-        "task": "Dashboard publish commits pollute git history and grow repo unboundedly",
-        "context": "Supervisor commits a snapshot every 2 min → 25K+ commits, ~334/day. History is noise; repo packs at 24 MB now, ~1 GB/year trajectory. Murphy's real development work (layout PRs, new routes) is buried.",
-        "done_when": "`main` has only meaningful commits; `deploy` is force-pushed per snapshot; GitHub Pages serves from `deploy`; repo size stops growing from snapshot churn.",
-        "has_plan": false,
-        "has_issue": false,
-        "plan_content": "",
-        "issue_content": "",
-        "session_id": "b8ff103d-59dc-57f3-a967-10ee5e8f1b23"
-      },
-      {
         "id": "FIX-022",
         "queue": "fix",
         "created": "2026-03-23",
@@ -1416,6 +1336,13 @@
       }
     ],
     "completed": [
+      {
+        "id": "FIX-020",
+        "created": "2026-03-23",
+        "completed": "2026-03-23",
+        "summary": "Dashboard two-branch publishing: replaced `publish_static_git_snapshot()` (porcelain commits to main) with `publish_to_deploy_branch()` (git plumbing orphan commits to deploy branch). Guard rejects ma",
+        "session_id": "b8ff103d-59dc-57f3-a967-10ee5e8f1b23"
+      },
       {
         "id": "AGENT-047",
         "created": "2026-03-23",
@@ -2471,7 +2398,7 @@
               },
               {
                 "name": "Fix publish commit pollution",
-                "status": "planned",
+                "status": "done",
                 "backlog_ids": [
                   "FIX-020"
                 ]
@@ -2557,5 +2484,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T23:42:42Z"
+  "server_time_utc": "2026-03-23T23:44:48Z"
 }
