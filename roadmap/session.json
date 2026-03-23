@@ -2306,5 +2306,347 @@
         "content": "Now let me add the tests at the end of the file, before `if __name__`:"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:56:30.448Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"if __name__ == \\\"__main__\\\":\\n    unittest.main(verbosity=2)\", \"new_string\": \"# ===========================================================================\\n# Dashboard decoupling (AGENT-044)\\n# ===========================================================================\\n\\nclass TestDashboardDecoupled(unittest.TestCase):\\n    \\\"\\\"\\\"Verify that the supervisor no longer owns dashboar"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:56:30.464Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:56:33.683Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now run the tests:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:56:34.991Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -v -k \\\"TestDashboard\\\" 2>&1 | tail -40\", \"description\": \"Run new dashboard decoupling tests\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:56:35.272Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "============================= test session starts ==============================\nplatform darwin -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0 -- /opt/homebrew/opt/python@3.11/bin/python3.11\ncachedir: .pytest_cache\nrootdir: /Users/murphy/Research\nplugins: anyio-4.12.1\ncollecting ... collected 451 items / 441 deselected / 10 selected\n\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardDecoupled::test_config_no_dashboard_fields PASSED [ 10%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardDecoupled::test_main_no_dashboard_thread PASSED [ 20%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardDecoupled::test_main_no_threading_import PASSED [ 30%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardHeadlessMode::test_from_config_export_disabled PASSED [ 40%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardHeadlessMode::test_from_config_parse_bool_semantics PASSED [ 50%]\nsrc/loop/tests/test_supervisor_loop.py::TestDashboardHeadlessMode::test_from_config_reads_env_vars PASSED"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:56:39.401Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 10 new tests pass. Now run the full test suite:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:56:39.971Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -q 2>&1 | tail -10\", \"description\": \"Run full test suite\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:57:08.813Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "..................................................... [ 11%]\n........................................................................ [ 27%]\n........................................................................ [ 43%]\n..................................................................................................................................... [ 73%]\n........................................................................ [ 89%]\n.................................................                        [100%]\n451 passed, 30 subtests passed in 28.67s"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:12.872Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 451 tests pass (10 new + 441 existing). Let me also do a quick smoke test of the headless CLI:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:13.849Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"timeout 5 python3 -m src.loop.monitor.dashboard --headless --export-static-dir /tmp/test-dashboard-headless --static-git-push off --gpu-monitor off 2>&1 || true\", \"description\": \"Smoke test headless mode (timeout after 5s)\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:57:13.883Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(eval):1: command not found: timeout"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:19.110Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -c \\\"\\nimport subprocess, sys\\nproc = subprocess.Popen(\\n    [sys.executable, '-m', 'src.loop.monitor.dashboard',\\n     '--headless', '--export-static-dir', '/tmp/test-dashboard-headless',\\n     '--static-git-push', 'off', '--gpu-monitor', 'off'],\\n    stdout=subprocess.PIPE, stderr=subprocess.PIPE\\n)\\nimport time; time.sleep(3)\\nproc.kill()\\nout = proc.stdout.read().decode()\\nerr = proc.stderr.read().decode()\\nprint('STDOUT:', out[:500])\\nprint('STDERR:', err[:500])\\n\\\"\", \""
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:57:22.181Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "STDOUT: \nSTDERR:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:26.357Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "The process started and was killed after 3 seconds without error. Let me check if the static files were actually written."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:26.713Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"ls -la /tmp/test-dashboard-headless/ 2>/dev/null | head -10\", \"description\": \"Check if static files were exported\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:57:26.756Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "total 392\ndrwxr-xr-x@   5 murphy  wheel     160 Mar 23 04:57 .\ndrwxrwxrwt  231 root    wheel    7392 Mar 23 04:57 ..\n-rw-r--r--@   1 murphy  wheel  110558 Mar 23 04:57 index.html\ndrwxr-xr-x@   4 murphy  wheel     128 Mar 23 04:57 roadmap\n-rw-r--r--@   1 murphy  wheel   88361 Mar 23 04:57 status.json"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:30.373Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Headless mode works — static files exported successfully. Now verify the `--from-config` mode:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:31.906Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -c \\\"\\nimport subprocess, sys, os\\nenv = os.environ.copy()\\nenv['DASHBOARD_EXPORT_ENABLED'] = 'false'\\nproc = subprocess.run(\\n    [sys.executable, '-m', 'src.loop.monitor.dashboard', '--headless', '--from-config'],\\n    capture_output=True, text=True, env=env\\n)\\nprint('RC:', proc.returncode)\\nprint('OUT:', proc.stdout.strip())\\nprint('ERR:', proc.stderr.strip())\\n\\\"\", \"description\": \"Smoke test --from-config with export disabled\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:57:32.012Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "RC: 0\nOUT: Dashboard export disabled (DASHBOARD_EXPORT_ENABLED)\nERR:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:36.292Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All implementation is complete. Let me update the key files table in CLAUDE.md to reflect the new `scripts/dashboard.sh`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:37.486Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"scripts/run.sh.*Entrypoint\", \"path\": \"/Users/murphy/Research/CLAUDE.md\", \"output_mode\": \"content\", \"-A\": 1}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:57:37.502Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "231:| `scripts/run.sh` | Entrypoint; delegates to `scripts/supervisor_loop.sh` |\n232-| `scripts/supervisor_loop.sh` | Launches the Python supervisor; auto-detects python3.11, version-checks ≥3.9 |"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:42.214Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/CLAUDE.md\", \"old_string\": \"| `scripts/run.sh` | Entrypoint; delegates to `scripts/supervisor_loop.sh` |\\n| `scripts/supervisor_loop.sh` | Launches the Python supervisor; auto-detects python3.11, version-checks ≥3.9 |\", \"new_string\": \"| `scripts/run.sh` | Entrypoint; delegates to `scripts/supervisor_loop.sh` |\\n| `scripts/supervisor_loop.sh` | Launches the Python supervisor; auto-detects python3.11, version-checks ≥3.9 |\\n| `scripts/dash"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:57:42.220Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/CLAUDE.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:45.429Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now move to Phase 5: Review the Implementation."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:47.826Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Phase 1: Setup — parse scope, check prerequisites\", \"status\": \"completed\", \"activeForm\": \"Setting up iterative review\"}, {\"content\": \"Phase 2: Write implementation plan for AGENT-044\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan for AGENT-044\"}, {\"content\": \"Phase 3: Review the plan (Tribune + Murphy)\", \"status\": \"completed\", \"activeForm\": \"Reviewing the plan with Tribune + Murphy\"}, {\"content\": \"Phase 4: Implement the approved plan\", \"status\": \"comp"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:57:47.827Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:51.614Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "## Phase 5: Review the Implementation — Round 1 of 5"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:54.845Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git diff HEAD -- src/loop/monitor/dashboard.py src/loop/supervisor/main.py src/loop/supervisor/config.py src/loop/tests/test_supervisor_loop.py CLAUDE.md docs/operations.md > /tmp/iterative-review-pLKMz4/impl.diff 2>&1\\n# Also create synthetic diff for the new script\\ndiff /dev/null scripts/dashboard.sh >> /tmp/iterative-review-pLKMz4/impl.diff 2>&1 || true\\necho \\\"Diff size: $(wc -c < /tmp/iterative-review-pLKMz4/impl.diff) bytes\\\"\", \"description\": \"Collect implementation diff for "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:57:54.910Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Diff size:    26051 bytes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:57:58.574Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-pLKMz4/impl.diff | head -5\\necho \\\"---\\\"\\nwc -l /tmp/iterative-review-pLKMz4/impl.diff\", \"description\": \"Preview diff header\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:57:58.618Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "diff --git a/CLAUDE.md b/CLAUDE.md\nindex 068e9a6..fb7131b 100644\n--- a/CLAUDE.md\n+++ b/CLAUDE.md\n@@ -27,9 +27,16 @@ These principles guide how we build and evolve the system. Follow them when maki\n---\n     498 /tmp/iterative-review-pLKMz4/impl.diff"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:58:01.979Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good, 26KB diff — under the 30KB threshold. Let me dispatch both reviewers."
+      }
+    ]
   }
 ]
