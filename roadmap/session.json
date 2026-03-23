@@ -1,1 +1,586 @@
-[]
+[
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:17:40.693Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "# Multi-Role Iterative Code Review\n\nYou are the orchestrator for an adversarial multi-role code review. You dispatch two independent reviewers — Tribune (Gemini CLI) and Murphy (Codex CLI) — with distinct review lenses, collect their structured findings, deduplicate and analyze, apply fixes, and iterate until both approve or max rounds are reached.\n\n## Design Principles\n\nJudge all decisions against these principles:\n- **Simple and robust over clever** — if a solution is getting complex, step back and find the simpler structure\n- **Think from first principles** — reason through what the system actually needs, don't pattern-match\n- **Minimal, targeted changes** — fix the issue, nothing more\n\n## Critical Rules\n\n> **NEVER short-circuit the review loop.** If reviewers haven't both approved and rounds remain, you MUST run the next round. The orchestrator's opinion about finding severity does not override the process. This rule exists because the orchestrator has repeatedly rationalized early exit (\"findings are minor, good enough\") — that behavior is a bug.\n\n> **NEVER treat a reviewer failure as approval.** Only an explicit `approve` verdict from valid JSON counts. Timeout, parse error, empty output, and capacity errors are NOT approval.\n\n> **Both plan and implementation must be reviewed.** After the plan review converges, you MUST implement the code and run a second review cycle on the implementation. The plan review alone is not sufficient — the implementation is what ships. This rule exists because AGENT-025's plan got 5 rounds of review but the 932-line implementation got zero.\n\n> **Before EVERY loop decision, print a convergence checkpoint:**\n> `CONVERGENCE CHECK: Tribune=[state], Murphy=[state], round [N] of [MAX] → [continuing/stopping because...]`\n> This is mandatory — do not skip it. It makes the decision visible and auditable.\n\n> **Maintain full reviewer identity every round.** Never strip the reviewer's name, role description, review categories, or design principles from later-round prompts. Review quality degrades when prompts degrade.\n\n> **Only the orchestrator writes files.** Both reviewers run in strict read-only mode (Gemini: `--approval-mode plan`, Codex: `--sandbox read-only`). The orchestrator is the only agent that uses Edit/Write/Bash to modify the codebase.\n\n> **Test every fix before the next round.** After applying fixes, run relevant tests and smoke-test runtime artifacts. Include results in the next round's prompt. Do not send untested fixes to reviewers.\n\n> **Document, commit, and push after every completed review.** Update CHANGELOG (UTC timestamp), ROADMAP (completed items + deferred findings), commit with `[developer]` prefix, push. This is not optional — undocumented changes are invisible, uncommitted changes are lost.\n\n## Configuration\n\n- **MAX_ROUNDS**: 3 (override with `max-rounds:N` in arguments)\n- **REVIEWER_TIMEOUT**: 300000ms (5 min) per reviewer invocation\n- **ROLES**: Tribune (Gemini), Murphy (Codex)\n\n## Execution Phases\n\nThe skill executes six phases:\n\n1. **Setup** — parse scope/arguments, check prerequisites\n2. **Plan** — read ROADMAP + linked files, write implementation plan\n3. **Review the plan** — collect diff, review loop, report; commit the approved plan\n4. **Implement** — write code and tests following the approved plan\n5. **Review the implementation** — collect diff, review loop, report\n6. **Finalize** — document, commit, push, cleanup\n\n---\n\n## Phase 1: Setup\n\n### Parse Scope\n\nParse `max-rounds:5\n\nDevelopment task: implement roadmap item AGENT-046. Read the ROADMAP entry in `docs/dev/ROADMAP.md` and linked plan/issue files in `docs/dev/plans/` and `docs/dev/issues/`.\n\nPost progress updates in the Slack thread using the thread_ts from your dispatch context. Update when you start, when you hit milestones, and when you finish.` to determine review scope:\n\n| Argument | Action |\n|----------|--------|\n| (empty) or `diff` | `git diff HEAD` + synthetic diffs for untracked files |\n| `staged` | `git diff --cached`. Require clean unstaged state. **Single-round only** (report findings, don't fix). |\n| `branch <name>` | `git diff <name>...HEAD`. Verify base matches remote (abort if diverged — stale base = wrong review surface). Require clean worktree. |\n| `files <path...>` | For tracked files: `git diff HEAD -- <file>` (real diff showing actual changes). For untracked files: synthetic diff (`diff /dev/null <file>`). This preserves change context for tracked files. |\n| `recent` | `git diff HEAD~3...HEAD` (validate revision exists). Require clean worktree. |\n| `pr <number>` | `gh pr diff <number>`. Verify local HEAD matches PR head SHA. Require clean worktree. |\n| `project <slug>` | Run all operations inside `projects/<slug>/`. |\n| `max-rounds:N` | Override max rounds (can appear anywhere in args). |\n\nExtract `max-rounds:N` if present. Default MAX_ROUNDS=3. **For `staged` scope: force MAX_ROUNDS=1** regardless of override (single-round only, no iterative fixing).\n\nFor **automatic untracked file discovery** (default `diff` scope only): run `git ls-files --others --exclude-standard`, filter out noisy paths (`.agent/runtime/`, `reports/`, `deliverables/`), then generate synthetic diffs with `diff /dev/null <file>` for each. Append to the main diff. Apply the same 50KB size guard. (The `files` scope handles untracked files passed explicitly as arguments — no auto-discovery needed.)\n\nFor **root-level diffs**: exclude `.agent/runtime/`, `reports/`, `deliverables/` from diff output. Do NOT exclude `.claude/commands/`.\n\n**Secret scanning** (two-layer): Reviewers have full file-read access (`--approval-mode plan` for Gemini, `--sandbox read-only` for Codex), so scanning the diff alone is insufficient — secrets in unchanged lines of in-scope files are still exposed. Secret scanning therefore operates in two layers:\n\n**Layer 1 — Full-file scan**: Resolve the list of files in the review scope directly from scope arguments (not by parsing the diff):\n- `diff`: `git diff --name-only --diff-filter=d HEAD` + `git ls-files --others --exclude-standard` (filtered)\n- `staged`: `git diff --cached --name-only --diff-filter=d`\n- `branch <name>`: `git diff --name-only --diff-filter=d <name>...HEAD`\n- `files <path...>`: `git diff --name-only --diff-filter=d HEAD -- <path...>` + `git ls-files --others --exclude-standard -- <path...>`\n- `recent`: `git diff --name-only --diff-filter=d HEAD~3...HEAD`\n- `pr <number>`: `gh pr diff <number> --name-only` (filter to existing files)\n- `project <slug>`: same as `diff` scoped to `projects/<slug>/`\n\nFilter the file list to existing, regular, text files only (skip binary files). Apply the same root-level path exclusions as the diff (`.agent/runtime/`, `reports/`, `deliverables/`). No size limit — the 50KB guard is for diff output, not secret scanning. Scan each file's full contents for **Tier 1 patterns**:\n- `AKIA[0-9A-Z]{16}` (AWS access key ID)\n- `-----BEGIN.*PRIVATE KEY-----` (PEM private key)\n- `\"?(API_KEY|SECRET_KEY|SECRET|PASSWORD|TOKEN)\"?\\s*[=:]\\s*['\"]?[A-Za-z0-9+/=_-]{20,}` (assignment-style secrets with 20+ char values; supports JSON-quoted keys and TOKEN keyword)\n\n**Layer 2 — Diff scan**: Scan the diff output for **all patterns** (Tier 1 above + Tier 2 below):\n- `\"?(API_KEY|SECRET_KEY|SECRET|PASSWORD|API_TOKEN|AUTH_TOKEN|ACCESS_TOKEN|BEARER_TOKEN)\"?\\s*[=:]\\s*.+` (broad catch-all, any non-empty value; supports JSON-quoted keys, YAML/colon assignments, and common secret token names)\n\nTier 2 is too broad for full-file scanning (matches documentation, example configs, the iterative-review command itself) but appropriate for diffs where these patterns are more likely to indicate real secrets.\n\n**Exclusion**: If either layer detects a match, exclude the affected file entirely — remove its hunks from the diff, warn the user with the file path and which pattern class matched (e.g., \"AWS key\", \"PEM private key\", \"assignment-style secret\") but **never include the matched content or source line** in warnings or the final report. Flag in the final report. User can override with `--include-secrets` in arguments.\n\n**Known limitations**:\n- This reduces passive exposure but cannot prevent reviewers from actively reading files on disk. This is a fundamental constraint of the reviewer access model.\n- Tier 2 patterns are self-referential: diffs of this command file or documentation that references the pattern names (e.g., `API_KEY=`, `TOKEN:`) will trigger matches. The orchestrator should use contextual judgment — pattern references inside markdown documentation or backtick-quoted examples are not actual secrets.\n\n### Check Prerequisites\n\n1. Run `which gemini` and `which codex` to check CLI availability.\n   - Both available: dual-reviewer mode (require both throughout the run).\n   - One missing: single-reviewer mode with a warning.\n   - Neither: abort with error.\n2. For `pr` scope: verify `gh auth status` works, and `git rev-parse HEAD` matches `gh pr view <number> --json headRefOid -q .headRefOid`.\n3. Clean worktree checks (scope-dependent):\n   - `staged`: reject any porcelain entry with a non-space worktree column EXCEPT `??` (untracked files don't affect staged review). This catches `MM`, `AM`, `MD` (mixed staged+unstaged), ` M`, ` D` (tracked-only unstaged edits), and all unmerged states. The goal: the tracked working tree must match HEAD so reviewers reading actual files see content consistent with the staged diff.\n   - `branch`/`recent`/`pr`: verify fully clean worktree with `git status --porcelain`. Abort if dirty.\n4. Create temp directory: `RUNDIR=$(mktemp -d /tmp/iterative-review-XXXXXX)`\n5. Write the findings schema to `$RUNDIR/findings-schema.json` by copying `.claude/commands/iterative-review-schema.json` from the **repo root** (resolve before any `cd` into project scope).\n\n## Phase 2: Plan\n\nRead the ROADMAP entry in `docs/dev/ROADMAP.md` for the target item. Read any linked plan or issue files in `docs/dev/plans/` and `docs/dev/issues/`.\n\nWrite an implementation plan to `docs/dev/plans/`. If a plan file already exists, treat it as a reference — not a pre-approved blueprint. Write a fresh implementation plan informed by the current codebase state. Existing plans may be outdated, incomplete, or make assumptions that no longer hold.\n\nDo NOT use `EnterPlanMode`/`ExitPlanMode` — they require human approval and break automation. Only escalate to the user when reviewers can't converge after max rounds, a deliberate design decision is needed, or the user explicitly requests involvement.\n\n## Phase 3: Review the Plan\n\n### Collect Diff\n\nCollect the diff of the plan file(s) written in Phase 2. Store as `BASELINE_DIFF`. This is captured once and reused across rounds for context.\n\nIf diff is >50KB, truncate and note which files were omitted. Suggest `files` or `project` mode for targeted review.\n\n### Review Loop\n\nFor each round from 1 to MAX_ROUNDS:\n\n#### Build Reviewer Prompts\n\nBuild two prompts — one for Tribune, one for Murphy. Each prompt includes **every round** (never strip identity for later rounds):\n\n**Tribune prompt:**\n```\nYou are the Tribune — an independent quality reviewer. Review the following code changes for:\n\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\n2. **Security issues**: Injection, auth bypass, sensitive data exposure\n3. **Contract violations**: Does the code violate documented interfaces, schemas, or invariants?\n4. **Error handling gaps**: Missing error paths, swallowed exceptions, unclear failure modes\n5. **Architectural concerns**: Coupling, abstraction leaks, design philosophy violations\n\nDesign principles to judge against:\n- \"Simple and robust over clever\" — flag overengineering, unnecessary complexity. When a fix keeps getting more complex across rounds, that's a signal to question whether the problem is real, not to add more machinery.\n- \"Think from first principles\" — reason through what the system actually needs in its real usage context. A theoretical edge case that can't happen in practice is not a finding.\n- \"Minimal, targeted changes\" — flag scope creep, speculative features\n\nYou must NOT flag: style, formatting, naming preferences, or perf micro-optimizations.\nOnly flag issues in the code under review. If you notice issues in other parts of the codebase, mention them briefly in your summary but do NOT include them as findings.\nDo NOT modify any files — this is a read-only review.\n\n## Code Under Review (Baseline)\n\n{BASELINE_DIFF}\n\n{FIX_DELTA_MANIFEST if round > 1}\n\n{PRIOR_ROUND_CONTEXT if round > 1}\n\nRespond with ONLY a JSON object (no markdown fencing, no preamble). Use Tribune IDs (T-) and Tribune categories (correctness, security, contract, error_handling, architecture). Example:\n{\"verdict\": \"findings\", \"findings\": [{\"id\": \"T-1-1\", \"severity\": \"high\", \"category\": \"correctness\", \"file\": \"src/foo.py\", \"line\": 42, \"title\": \"Off-by-one in loop\", \"description\": \"The loop iterates one too many times...\", \"suggestion\": \"Change < to <=\"}], \"summary\": \"One issue found.\"}\n\nIf the code is acceptable: {\"verdict\": \"approve\", \"findings\": [], \"summary\": \"No issues found.\"}\n```\n\n**Murphy prompt:**\n```\nYou are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following code changes for:\n\n1. **Runtime failures**: Will this crash, hang, or produce wrong results in real usage?\n2. **Edge cases**: Unusual inputs, empty collections, concurrent access, large data\n3. **Test coverage**: Are the changes tested? Do the tests appear to cover the changes? Are the test assertions correct?\n4. **Integration issues**: Does this break callers, downstream consumers, or deployment?\n5. **Operational concerns**: Logging, observability, rollback safety, resource leaks\n\nDesign principles to judge against:\n- \"Simple and robust over clever\" — flag overengineering, unnecessary complexity. When a fix keeps getting more complex across rounds, that's a signal to question whether the problem is real, not to add more machinery.\n- \"Think from first principles\" — reason through what the system actually needs in its real usage context. A theoretical edge case that can't happen in practice is not a finding.\n- \"Minimal, targeted changes\" — flag scope creep, speculative features\n\nYou must NOT flag: style, formatting, naming preferences, or theoretical purity.\nOnly flag issues in the code under review. If you notice issues in other parts of the codebase, mention them briefly in your summary but do NOT include them as findings.\nDo NOT modify any files — this is a read-only review.\n\n## Code Under Review (Baseline)\n\n{BASELINE_DIFF}\n\n{FIX_DELTA_MANIFEST if round > 1}\n\n{PRIOR_ROUND_CONTEXT if round > 1}\n\nRespond with ONLY a JSON object (no markdown fencing, no preamble). Murphy findings must use M- prefix and Murphy categories (runtime, edge_case, testing, integration, operational). Example:\n{\"verdict\": \"findings\", \"findings\": [{\"id\": \"M-1-1\", \"severity\": \"high\", \"category\": \"runtime\", \"file\": \"src/foo.py\", \"line\": 42, \"title\": \"Unhandled None return\", \"description\": \"The function can return None but the caller doesn't check...\", \"suggestion\": \"Add a None guard\"}], \"summary\": \"One issue found.\"}\n\nIf the code is acceptable, use: {\"verdict\": \"approve\", \"findings\": [], \"summary\": \"No issues found.\"}\n```\n\n**Prompt size management:** If the total prompt (baseline + prior context + delta) would exceed ~30KB, summarize older round findings instead of including them verbatim (e.g., \"Round 1: 5 findings, all fixed. Round 2: 3 findings, 2 fixed, 1 deferred.\"). Always include the most recent round's findings in full.\n\nFor **round 2+**, append:\n- **Fix delta manifest**: list of files modified/created since round 1 with descriptions.\n- **Prior round context**: all prior findings with fix status (fixed/deferred), orchestrator actions.\n- Instruction: \"Verify fixes by reading actual files. Check new files in the delta for issues introduced by fixes. Do not re-report resolved issues. If a claimed fix is ineffective, re-open it with the prior finding ID in the `reopens` field.\"\n\nFor **project scope**: run reviewer CLIs from within the project directory:\n```bash\n(cd \"projects/$SLUG\" && printf '%s' \"$PROMPT\" | ...)\n```\n\n#### Dispatch Reviewers\n\nRun both reviewers. Use the Bash tool's timeout parameter (300000ms) for each invocation.\n\n**Tribune (with model fallback):**\n\nPrimary model: `gemini-3.1-pro-preview`. Fallback chain: `gemini-2.5-pro`, then `gemini-2.5-flash`.\n\n```bash\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-3.1-pro-preview -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n```\n\nGemini runs in `--approval-mode plan` (read-only mode — can read files, cannot write or edit). This is the correct enforcement for a reviewer: full read access to verify fixes by reading actual files, no write access to maintain the principle that only the orchestrator modifies code. Capture stdout. If Gemini enters its own planning flow instead of responding with JSON (a known quirk with certain prompt structures), treat as `parse_error` and retry.\n\n**Model fallback on capacity error:** If the Tribune invocation exits nonzero and stderr contains capacity indicators (`429`, `capacity`, `resource_exhausted`, `rate_limit`, `overloaded`, `quota`), retry with fallback models in order (`gemini-2.5-pro` → `gemini-3-flash` → `gemini-2.5-flash`) before classifying the state. This capacity-fallback retry is separate from the general retry logic in convergence checking — it happens immediately within the dispatch step. Log which model was actually used in the round details.\n\n```bash\n# Fallback invocations (only on capacity error from prior model):\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-2.5-pro -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n# If still capacity-exhausted:\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-3-flash -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n# If still capacity-exhausted:\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-2.5-flash -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n```\n\n**Murphy:**\n```bash\nprintf '%s' \"$MURPHY_PROMPT\" | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema \"$RUNDIR/findings-schema.json\" --output-last-message \"$RUNDIR/murphy-R$ROUND.json\" -\n```\n\nBoth reviewers run in strict read-only mode. Codex output read from `--output-last-message` file. Tribune output captured from stdout.\n\n#### Parse Reviewer Output\n\nFor each reviewer, determine the state:\n- **Bash timeout** → state = `timeout`\n- **Nonzero exit + auth/capacity error in stderr** (patterns: `429`, `capacity`, `resource_exhausted`, `rate_limit`, `overloaded`, `quota`, `authentication_error`, `401`) → state = `unavailable`. Note: if the capacity-fallback retry in the dispatch step already succeeded, this state won't be reached.\n- **Nonzero exit (other)** → state = `error`\n- **Parse output as JSON**: try raw → fence extraction (```` ```json ... ``` ````) → first `{...}` block\n  - Parse success → validate against `iterative-review-schema.json` (required fields: id, severity, category, title, description, suggestion). If validation fails → state = `parse_error`\n  - Valid JSON with `verdict: \"approve\"` AND empty findings → state = `approve`\n  - Valid JSON with `verdict: \"findings\"` AND non-empty findings → state = `findings`\n  - Valid JSON but verdict/findings mismatch (e.g., approve with findings) → treat as `findings`\n  - Parse failure → state = `parse_error`\n\n#### Check Convergence (before dedup)\n\n1. If **both** reviewers are in `approve` state → **CONVERGED**. Break.\n2. If this is a **single-reviewer run** and that reviewer is `approve` → **CONVERGED**. Break.\n3. If any active reviewer failed this round (applies to both dual-reviewer and single-reviewer runs):\n   - `timeout`/`error`/`parse_error`: round is **inconclusive**. Retry (max 2 consecutive retries for that reviewer). If retries exhausted and the other reviewer is healthy, **downgrade to single-reviewer mode** (don't abort the whole run). If both reviewers are failing, abort.\n   - `unavailable` (auth/capacity failure): retry once. If still unavailable, **downgrade to single-reviewer mode** for the remainder of the run. If already in single-reviewer mode and the last reviewer becomes unavailable, **abort the run** — zero active reviewers means no review is possible. Note any downgrade in the final report.\n\n#### Analyze and Deduplicate Findings\n\nCollect all findings from both reviewers. Using your own judgment (semantic LLM reasoning):\n- Deduplicate: merge findings that describe the same issue in different words\n- Check for re-opens: findings with a `reopens` field reference prior IDs — these are NEVER duplicates\n- Classify severity: critical > high > medium\n- Decide which findings to act on vs. defer\n\n**Last-round check** (after dedup): if this is the last round (round == MAX_ROUNDS), report the merged/deduped findings and stop.\n\n**Convergence is simple**: only \"both approve\" (conditions 1/2) or \"max rounds\" ends the loop. See Critical Rules for anti-short-circuit enforcement.\n\n#### Apply Fixes\n\nFor `staged` scope: do NOT apply fixes (single-round only). Report findings for manual action.\n\nFor all other scopes: apply fixes for validated findings using your Edit/Write/Bash tools. **For `project` scope**: reviewers return project-relative paths (e.g., `src/main.py`); prepend `projects/<slug>/` before using Edit/Write tools (e.g., `projects/my-project/src/main.py`). After fixing:\n- Generate a fix delta manifest: `git diff --name-status` against pre-fix state + any newly created files\n- Record which findings were fixed vs. deferred and why\n- **Secret scan the fix delta**: Before the next round, scan all files created or modified by fixes with Tier 1 patterns (full-file). Also generate a full content diff of the fix changes (`git diff` of the modified files) and scan with both Tier 1 and Tier 2 patterns (diff scan). If any file is flagged, remove it from the FIX_DELTA_MANIFEST, warn the user, and flag in the final report.\n\n#### Verify Fixes\n\n**During plan review (Phase 3):** There is no code to test, but reviewers may make factual claims about the system (\"this flag doesn't exist,\" \"that API returns X,\" \"this command doesn't support Y\"). Ground-check these claims by actually running the command, reading the source, or writing a quick test. Do not take a reviewer's word for how something works — verify it. Include verification results in the next round's prompt.\n\n**During implementation review (Phase 5):** After applying fixes and before the next round:\n- **Run existing tests** if available (`pytest`, `npm test`, etc.) to catch regressions\n- **Smoke-test runtime artifacts** — if a fix creates/modifies a schema, config, or CLI command, actually run it to verify it works (e.g., `codex exec --output-schema <file>` to verify the schema is accepted)\n- **Include test results** in the next round's prompt alongside the fix delta manifest — reviewers should see empirical evidence, not just code changes\n- If tests fail, note the failure explicitly — it becomes an orchestrator finding for reviewers to evaluate\n\nTEST, don't speculate. This rule exists because the original AGENT-035 review missed a schema compatibility issue that a 5-second test would have caught, and during AGENT-025's plan review, a reviewer claimed `codex resume` couldn't accept piped stdin — a single command would have disproved it.\n\n#### Loop\n\nContinue to next round.\n\n### Report\n\nPrint the plan review report:\n\n```markdown\n## Plan Review Report\n\n**Scope:** <plan file path>\n**Rounds:** N of M (converged | max rounds reached)\n**Reviewers:** Tribune (Gemini) + Murphy (Codex)\n\n### Summary\n<1-2 sentence assessment>\n\n### Findings Ledger\n\n| ID | Severity | Category | File:Line | Title | Status |\n|----|----------|----------|-----------|-------|--------|\n| T-1-1 | critical | correctness | plan.md:42 | Description | Fixed |\n| M-1-1 | high | testing | plan.md:10 | Description | Deferred |\n\n### Round Details\n<per-round breakdown: findings count, reviewer states, actions taken>\n\n### Deferred Items\n<items not fixed, with rationale — each must be added to ROADMAP>\n```\n\n**Important:** All deferred findings must be added to `docs/dev/ROADMAP.md` (Fix Queue or Active Queue as appropriate) so they don't get lost. The final report is ephemeral; the ROADMAP is durable.\n\nAfter both reviewers approve, commit the approved plan:\n```bash\ngit add <plan-file> && git commit -m \"[developer] <ITEM-ID>: approved implementation plan\"\n```\n\n## Phase 4: Implement\n\nImplement the code following the approved plan. Write tests for the implementation.\n\n## Phase 5: Review the Implementation\n\nCollect the implementation diff (`git diff HEAD` — all uncommitted changes since the plan commit) and run the same review process as Phase 3: collect diff, build reviewer prompts, dispatch reviewers, parse output, check convergence, apply fixes, verify, loop until convergence or max rounds.\n\nWhen fixing issues found by reviewers, write tests covering the fixes — not just code fixes, but test coverage for every non-trivial fix.\n\nGenerate a final implementation review report (same format as Phase 3's report).\n\n## Phase 6: Finalize\n\n### Document, Commit, Push\n\n> **This step is mandatory after every completed review.** Do not skip it. Changes without documentation are invisible; uncommitted changes risk being lost.\n\n1. **CHANGELOG** (`docs/dev/CHANGELOG.md`): Add entry with UTC minute-level timestamp. Describe what changed and why — the review findings that drove the changes.\n2. **ROADMAP** (`docs/dev/ROADMAP.md`):\n   - Move completed items from Active/Fix Queue to Completed table\n   - Add ALL deferred findings as new entries in the appropriate queue (Fix Queue for bugs, Active Queue for features)\n   - Update the Current Snapshot counts\n3. **Commit**: Stage the changed files. Use `[developer]` prefix. Reference the review scope in the message.\n4. **Push**: `git push` to remote.\n\n### Cleanup\n\nRemove the temp directory: `rm -rf \"$RUNDIR\"`.\n\n## Error Handling\n\n| Failure | Behavior | State |\n|---------|----------|-------|\n| `gemini` not found | Single-role with Codex | `unavailable` |\n| `codex` not found | Single-role with Gemini | `unavailable` |\n| Neither found | Abort | — |\n| Timeout (>5 min) | Kill; retry (max 2), then degrade to other reviewer (or abort if both failing) | `timeout` |\n| Non-JSON output | Multi-level extraction; if all fail, retry (max 2), then degrade (or abort if both failing) | `parse_error` |\n| Auth/capacity (429) | Retry once; if still unavailable, downgrade to single-reviewer (or abort if last reviewer) | `unavailable` |\n| Other nonzero exit | Log stderr; retry (max 2), then degrade (or abort if both failing) | `error` |\n\n**No failure is ever treated as approval.**\n\n## Notes\n\n- This is a purely local skill — no Slack, no supervisor dispatch, no external side effects\n- See Critical Rules for read-only enforcement and convergence protocol\n- When a finding keeps getting reopened with increasingly complex fixes, step back and question whether the problem is real — don't add complexity to solve theoretical edge cases\n- **Resolved precedent — concurrency locking**: This skill deliberately has no worktree lock. During plan review, a lock was developed over 5 rounds (check-then-create → atomic mkdir → PID/birth-time → UUID/heartbeat → coordination-repo-root), each fix adding complexity to address edge cases in the previous fix. The lock was deleted entirely because the premise was wrong: this is a human-invoked slash command where concurrent runs don't happen in practice. Do not re-raise concurrency concerns for this tool.\n"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:17:46.231Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Let me parse the task. I need to implement roadmap item AGENT-046 using the iterative-review process. Let me start by:\n\n1. Reading the ROADMAP to find AGENT-046\n2. Reading any linked plan/issue files\n3. Checking prerequisites (gemini, codex CLIs)\n4. Setting up the review infrastructure\n\nLet me begin."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:17:46.968Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I'll start by reading the ROADMAP entry for AGENT-046 and checking prerequisites in parallel."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:17:47.548Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"grep -n \\\"AGENT-046\\\" docs/dev/ROADMAP.md\", \"description\": \"Find AGENT-046 in ROADMAP\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:17:47.910Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "46:| AGENT-046 | 2026-03-23 | High | open | Remove slot affinity from session resume (AGENT-025 follow-up) | Session resume requires same slot and same dispatch mode, making it nearly useless in parallel mode (slot assignment is random with 8 slots). Slot affinity was based on incorrect assumption about CWD; real constraints (merge instructions, draft paths) are prompt-level and fixed via resume prompt overrides. Reviewed 2 rounds (Tribune + Murphy). [Plan](plans/agent-025-remove-slot-affinity.md) | `_should_resume_session()` has no slot/mode checks; resume prompt includes current slot's merge instructions and draft path; session resume works across any slot. |"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:17:48.632Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"which gemini && which codex\", \"description\": \"Check reviewer CLI availability\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:17:48.664Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/opt/homebrew/bin/gemini\n/Users/murphy/.nvm/versions/node/v24.13.1/bin/codex"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:17:48.849Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"mktemp -d /tmp/iterative-review-XXXXXX\", \"description\": \"Create temp directory for review\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:17:48.883Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/tmp/iterative-review-hRi3vY"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:17:52.493Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"offset\": 40, \"limit\": 20}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:17:52.500Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    40→| AGENT-034 | 2026-03-20 | Medium | open | Rethink behavioral contract structure across three roles | Currently: `AGENTS.md` for Worker (Codex), `CLAUDE.md` for Developer (Claude), `GEMINI.md` for Tribune (Gemini). Each CLI auto-loads its own doc, but the separation needs design review — shared vs. role-specific content, cross-role references, contract versioning, and whether the current naming convention scales. Key sub-question: should `AGENTS.md` and `session.md` be combined? Codex auto-loads `AGENTS.md` at startup, then the supervisor pipes `session.md` as the prompt via stdin — two separate injection points for the same worker. Research needed: exactly how Codex loads `AGENTS.md` (full file? truncated? which context slot?), whether combining them would reduce redundancy or hit context limits, and how prompt-vs-agent-doc semantics differ. | Coherent multi-role contract architecture; clear boundaries between shared system docs and role-specific behavioral contracts; no duplic"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:17:52.971Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/agent-025-remove-slot-affinity.md\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:17:52.976Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# AGENT-025: Remove Slot Affinity and Dispatch Mode Checks\n     2→\n     3→**ROADMAP entry:** AGENT-046\n     4→**Status:** Approved plan (reviewed rounds 1-2)\n     5→**Created:** 2026-03-23\n     6→\n     7→## Problem\n     8→\n     9→The current `_should_resume_session()` requires same-slot and same-dispatch-mode for\n    10→session resume. This makes the feature nearly useless in parallel mode: the slot\n    11→scheduler is slot-first (iterate idle slots, each claims next task), so a task's\n    12→preferred slot being free when it comes back is essentially random with 8 slots.\n    13→\n    14→The original justification — \"session file references use absolute paths from the old\n    15→worktree\" — is incorrect for CWD-based tool execution. However, review uncovered two\n    16→real prompt-level constraints:\n    17→\n    18→1. **Merge instructions**: The initial prompt bakes in concrete `REPO_ROOT` and\n    19→   `BRANCH_NAME` from `merge_instructions.md` (parallel only — serial skips merge"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:17:53.911Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cp /Users/murphy/Research/.claude/commands/iterative-review-schema.json /tmp/iterative-review-hRi3vY/findings-schema.json\", \"description\": \"Copy findings schema to temp dir\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:17:53.950Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(Bash completed with no output)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:17:59.184Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Good, I have the ROADMAP entry and the approved plan. Now let me read the relevant source files to understand the current implementation before writing the plan.\n\nThe plan already exists and was reviewed (2 rounds with Tribune + Murphy). Let me read the relevant source files:\n1. `src/loop/supervisor/runtime.py` - contains `_should_resume_session()` and related code\n2. `src/loop/tests/test_supervisor_loop.py` - tests to update\n3. `src/prompts/merge_instructions.md` - template for merge instructions\n\nLet me start by reading the relevant parts of runtime.py."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:00.048Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good. The plan is already approved (reviewed 2 rounds). Let me read the implementation files to understand the current code."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:00.963Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"_should_resume_session\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:00.980Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2483:    def _should_resume_session(\n2681:                and self._should_resume_session(dispatch, current_slot_id=None)\n3896:                if self._should_resume_session("
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:02.304Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"_render_resume_prompt|_render_slot_resume_prompt\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:02.320Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2546:    def _render_resume_prompt(\n2692:            prompt = self._render_resume_prompt(dispatch, self.selected_key or \"\")\n3909:            self._render_slot_resume_prompt(slot, task_key, dispatch)\n4008:    def _render_slot_resume_prompt(\n4012:        prompt = self._render_resume_prompt(dispatch_json, task_key)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:03.170Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"session_dispatch_mode|session_slot_id\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:03.190Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "557:        \"session_slot_id\",        # slot that last ran this task\n559:        \"session_dispatch_mode\",  # \"serial\" or \"parallel\"\n2500:        stored_mode = task.get(\"session_dispatch_mode\", \"serial\")\n2506:            stored_slot = task.get(\"session_slot_id\")\n2629:        \"codex_session_id\", \"session_prompt_hash\", \"session_slot_id\",\n2630:        \"session_end_ts\", \"session_dispatch_mode\", \"dispatch_prompt_hash\",\n3052:                merged[\"session_dispatch_mode\"] = (\n3056:                    merged[\"session_slot_id\"] = captured_slot_id"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:03.709Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"_SESSION_FIELDS|_DISPATCH_INTERNAL_FIELDS\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:03.726Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "545:    _DISPATCH_INTERNAL_FIELDS = frozenset({\n2197:            if k not in self._DISPATCH_INTERNAL_FIELDS\n2628:    _SESSION_FIELDS = (\n2646:            for field in self._SESSION_FIELDS:\n3060:                for sf in self._SESSION_FIELDS:\n4073:            if k not in self._DISPATCH_INTERNAL_FIELDS"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:06.991Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2483, \"limit\": 80}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:06.994Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2483→    def _should_resume_session(\n  2484→        self, task: Dict[str, Any], current_slot_id: Optional[int] = None\n  2485→    ) -> bool:\n  2486→        \"\"\"Check if we can resume a prior codex session for this task.\"\"\"\n  2487→        if not self.cfg.session_resume_enabled:\n  2488→            return False\n  2489→        session_id = task.get(\"codex_session_id\")\n  2490→        if not session_id:\n  2491→            return False\n  2492→        # Stale prompt check\n  2493→        stored_hash = task.get(\"session_prompt_hash\", \"\")\n  2494→        if stored_hash != system_prompt_hash():\n  2495→            return False\n  2496→        # Tribune revision: need full prompt with feedback block\n  2497→        if task.get(\"tribune_feedback\"):\n  2498→            return False\n  2499→        # Dispatch mode check: serial ↔ parallel mismatch\n  2500→        stored_mode = task.get(\"session_dispatch_mode\", \"serial\")\n  2501→        current_mode = \"parallel\" if current_slot_id is not None else \"serial\"\n  2"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:07.876Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 545, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:07.881Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "   545→    _DISPATCH_INTERNAL_FIELDS = frozenset({\n   546→        \"mention_text\",           # rendered separately as {{THREAD_CONTEXT}}\n   547→        \"mention_text_file\",      # internal file path\n   548→        \"claimed_by\",             # internal scheduler state\n   549→        \"created_ts\",             # redundant with source.time_iso\n   550→        \"last_update_ts\",         # internal scheduler state\n   551→        \"last_error\",             # internal scheduler state\n   552→        \"last_seen_mention_ts\",   # internal scheduler state\n   553→        \"watchdog_retries\",       # internal scheduler state\n   554→        # Session resume fields (AGENT-025)\n   555→        \"codex_session_id\",       # codex session UUID for resume\n   556→        \"session_prompt_hash\",    # prompt hash at dispatch time\n   557→        \"session_slot_id\",        # slot that last ran this task\n   558→        \"session_end_ts\",         # last thread message ts at reconcile\n   559→        \"session_dispatch_mode\",  "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:08.445Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2620, \"limit\": 90}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:08.449Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2620→        result = template\n  2621→        result = result.replace(\"{{NEW_THREAD_MESSAGES}}\", new_messages_str)\n  2622→        result = result.replace(\"{{TASK_STATE_UPDATES}}\", task_state_str)\n  2623→        result = result.replace(\"{{WAKEUP_CONTEXT}}\", wakeup_str)\n  2624→        result = result.replace(\"{{LOOP_CONTEXT}}\", loop_context_str)\n  2625→        result = result.replace(\"{{DISPATCH_OUTCOME_PATH}}\", outcome_path)\n  2626→        return result\n  2627→\n  2628→    _SESSION_FIELDS = (\n  2629→        \"codex_session_id\", \"session_prompt_hash\", \"session_slot_id\",\n  2630→        \"session_end_ts\", \"session_dispatch_mode\", \"dispatch_prompt_hash\",\n  2631→    )\n  2632→\n  2633→    def _clear_session_fields(self, key: str) -> None:\n  2634→        \"\"\"Remove session resume metadata from a definitively finished task.\n  2635→\n  2636→        Only clears if the task is still in finished_tasks — if any\n  2637→        post-dispatch gate (delivery guard, Tribune, merge) moved it\n  2638→        el"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:11.866Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me read the parallel dispatch code and reconciliation."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:12.199Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 3880, \"limit\": 80}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:12.203Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3880→        # Determine command and write-protection level\n  3881→        is_privileged = False\n  3882→        is_resume = False\n  3883→        if self.maintenance.is_maintenance_task(task_type):\n  3884→            dispatch = self.read_json(slot.dispatch_task_file, {})\n  3885→            phase = self.maintenance.get_phase(dispatch)\n  3886→            cmd = self.maintenance.get_worker_cmd(phase)\n  3887→            is_privileged = self.maintenance.is_dev_review_phase(phase)\n  3888→        elif task_type == \"development\":\n  3889→            cmd = list(self.cfg.dev_review_cmd)\n  3890→            is_privileged = True\n  3891→        else:\n  3892→            # AGENT-025: session resume check\n  3893→            dispatch = self.read_json(slot.dispatch_task_file, {})\n  3894→            resume_cmd = (\n  3895→                self._build_resume_cmd(dispatch)\n  3896→                if self._should_resume_session(\n  3897→                    dispatch, current_slot_id=slot.slot_id\n  3898→           "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:13.017Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 3040, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:13.021Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3040→            if new_projects:\n  3041→                existing_proj = merged.get(\"project\") or []\n  3042→                if isinstance(existing_proj, str):\n  3043→                    existing_proj = [existing_proj] if existing_proj else []\n  3044→                merged[\"project\"] = list(dict.fromkeys(existing_proj + new_projects))\n  3045→\n  3046→            # AGENT-025: store session resume metadata\n  3047→            if captured_session_id and not is_maintenance:\n  3048→                merged[\"codex_session_id\"] = captured_session_id\n  3049→                merged[\"session_prompt_hash\"] = (\n  3050→                    dispatch_prompt_hash or system_prompt_hash()\n  3051→                )\n  3052→                merged[\"session_dispatch_mode\"] = (\n  3053→                    \"parallel\" if captured_slot_id is not None else \"serial\"\n  3054→                )\n  3055→                if captured_slot_id is not None:\n  3056→                    merged[\"session_slot_id\"] = captured_slot_id\n  30"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:13.317Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 4000, \"limit\": 80}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:13.321Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  4000→        thread_msgs = self._fetch_thread_messages(channel_id, thread_ts)\n  4001→        if not thread_msgs:\n  4002→            return\n  4003→\n  4004→        self._store_thread_snapshot(mention_text_file, thread_msgs)\n  4005→        dispatch[\"mention_text\"] = self.read_task_text_for_prompt(mention_text_file)\n  4006→        self.atomic_write_json(slot.dispatch_task_file, dispatch)\n  4007→\n  4008→    def _render_slot_resume_prompt(\n  4009→        self, slot, task_key: str, dispatch_json: Dict[str, Any]\n  4010→    ) -> None:\n  4011→        \"\"\"Render a lightweight resume prompt to the slot's prompt file.\"\"\"\n  4012→        prompt = self._render_resume_prompt(dispatch_json, task_key)\n  4013→        slot.dispatch_prompt_file.parent.mkdir(parents=True, exist_ok=True)\n  4014→        slot.dispatch_prompt_file.write_text(prompt, encoding=\"utf-8\")\n  4015→\n  4016→    def _render_slot_prompt(self, slot, task_key: str, task_type: str) -> None:\n  4017→        \"\"\"Render the runtime prompt to the "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:16.750Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me read the `_render_resume_prompt` in full and the `_render_slot_prompt` to understand draft path and merge instructions rendering."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:17.748Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2546, \"limit\": 80}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:17.755Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2546→    def _render_resume_prompt(\n  2547→        self, dispatch_json: Dict[str, Any], task_key: str\n  2548→    ) -> str:\n  2549→        \"\"\"Render the lightweight resume prompt for session re-dispatch.\"\"\"\n  2550→        template_path = self.cfg.session_template.parent / \"session_resume.md\"\n  2551→        try:\n  2552→            template = template_path.read_text(encoding=\"utf-8\")\n  2553→        except FileNotFoundError:\n  2554→            # Fallback inline template\n  2555→            template = (\n  2556→                \"You are resuming your prior session on this task.\\n\\n\"\n  2557→                \"## New Thread Messages\\n{{NEW_THREAD_MESSAGES}}\\n\\n\"\n  2558→                \"## Task State\\n{{TASK_STATE_UPDATES}}\\n\\n\"\n  2559→                \"{{WAKEUP_CONTEXT}}\\n\\n{{LOOP_CONTEXT}}\\n\\n\"\n  2560→                \"Continue from where you left off.\\n\\n\"\n  2561→                \"Write the outcome file to `{{DISPATCH_OUTCOME_PATH}}` \"\n  2562→                \"per the schema in `docs/schemas.md`.\\"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:18.976Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"merge_instructions|TRIBUNE_MAX_REVIEW_ROUNDS|slack_draft|draft_path|_resolve_draft_path\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:18.992Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2244:                    draft_path = str(self.cfg.dispatch_dir / f\"slack_draft.{task_key_for_draft}.md\")\n2252:                        f\"`{draft_path}` as a Markdown file. The supervisor will post it \"\n3109:            and self._resolve_draft_path(key)\n3147:            draft_path = self._resolve_draft_path(key)\n3150:            if draft_path and Path(draft_path).exists():\n3152:                verdict, feedback = self._tribune_review_cycle(key, merged, draft_path)\n3156:                    posted = self._post_slack_draft(merged, draft_path)\n3193:                    Path(draft_path).unlink(missing_ok=True)\n3199:                    posted = self._post_slack_draft(merged, draft_path)\n3280:        self, key: str, task: Dict[str, Any], draft_path: str\n3301:            draft_content = Path(draft_path).read_text(encoding=\"utf-8\")\n3394:    def _post_slack_draft(self, task: Dict[str, Any], draft_path: str) -> bool:\n3407:            draft_text = Path(draft_path).read_text(encoding=\"utf-8\").strip()"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:21.941Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 4100, \"limit\": 60}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:21.946Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  4100→                continue\n  4101→            if line == \"{{LOOP_CONTEXT}}\":\n  4102→                if loop_context_str:\n  4103→                    out.extend(loop_context_str.splitlines())\n  4104→                continue\n  4105→            if line == \"{{USER_PROFILE}}\":\n  4106→                if user_profile_body:\n  4107→                    out.append(\"About your collaborator:\")\n  4108→                    out.extend(user_profile_body.splitlines())\n  4109→                else:\n  4110→                    out.append(\"No prior interaction history with this user.\")\n  4111→                continue\n  4112→            if line == \"{{MERGE_INSTRUCTIONS}}\":\n  4113→                merge_path = self.cfg.session_template.parent / \"merge_instructions.md\"\n  4114→                if merge_path.exists():\n  4115→                    merge_tpl = merge_path.read_text(encoding=\"utf-8\").rstrip(\"\\n\")\n  4116→                    merge_block = merge_tpl.replace(\"{{REPO_ROOT}}\", str(slot.repo_root)).replace(\""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:22.824Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2230, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:22.828Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2230→                if user_profile_body:\n  2231→                    out.append(\"About your collaborator:\")\n  2232→                    out.extend(user_profile_body.splitlines())\n  2233→                else:\n  2234→                    out.append(\"No prior interaction history with this user.\")\n  2235→                continue\n  2236→            if line == \"{{MERGE_INSTRUCTIONS}}\":\n  2237→                continue  # Serial mode — no worktree merge needed\n  2238→            if line == \"{{TRIBUNE_DRAFT_INSTRUCTIONS}}\":\n  2239→                if (\n  2240→                    self.cfg.tribune_max_review_rounds >= 1\n  2241→                    and self._active_task_type != \"maintenance\"\n  2242→                ):\n  2243→                    task_key_for_draft = str(dispatch_json.get(\"mention_ts\") or self.selected_key or \"draft\")\n  2244→                    draft_path = str(self.cfg.dispatch_dir / f\"slack_draft.{task_key_for_draft}.md\")\n  2245→                    out.append(\"\")\n  2246→            "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:22.997Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/prompts/merge_instructions.md\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:22.998Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→Git branching (parallel dispatch):\n     2→You are working in a git worktree on branch `{{BRANCH_NAME}}`.\n     3→\n     4→All your regular git operations (add, commit, status, diff, log) must use plain commands in your current working directory:\n     5→\n     6→    git add <files>\n     7→    git commit -m \"your message\"\n     8→\n     9→Do NOT use `git -C {{REPO_ROOT}}` for add, commit, or any regular work — that targets the main repo on the `main` branch, not your worktree branch.\n    10→\n    11→Before writing the dispatch outcome file, merge your branch into the main repo:\n    12→\n    13→    git -C {{REPO_ROOT}} merge {{BRANCH_NAME}}\n    14→\n    15→If the merge fails with a lock error (another worker is merging), wait 5 seconds and retry (up to 3 times).\n    16→If the merge has conflicts, resolve them by editing files under `{{REPO_ROOT}}/`,\n    17→then `git -C {{REPO_ROOT}} add <files>` and `git -C {{REPO_ROOT}} commit --no-edit`.\n    18→"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:26.463Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me read the session_resume.md template and the relevant tests."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:26.931Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/prompts/session_resume.md\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:26.934Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→You are resuming your prior session on this task. All your previous context\n     2→(files read, reasoning, decisions) is preserved.\n     3→\n     4→## New Thread Messages\n     5→{{NEW_THREAD_MESSAGES}}\n     6→\n     7→## Task State\n     8→{{TASK_STATE_UPDATES}}\n     9→\n    10→{{WAKEUP_CONTEXT}}\n    11→\n    12→{{LOOP_CONTEXT}}\n    13→\n    14→Continue from where you left off. If significant time has passed, re-read\n    15→files before modifying them — other workers may have merged changes.\n    16→\n    17→Write the outcome file to `{{DISPATCH_OUTCOME_PATH}}` per the schema in `docs/schemas.md`.\n    18→"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:28.273Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"test_should_resume_session|test_session_id_capture|test_resume_prompt\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:28.287Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2469:    def test_should_resume_session_basic(self):\n2481:    def test_should_resume_session_disabled(self):\n2492:    def test_should_resume_session_no_session_id(self):\n2499:    def test_should_resume_session_stale_hash(self):\n2510:    def test_should_resume_session_tribune_feedback(self):\n2522:    def test_should_resume_session_mode_mismatch(self):\n2534:    def test_should_resume_session_slot_mismatch(self):\n2547:    def test_should_resume_session_slot_match(self):\n2628:    def test_session_id_capture_in_reconcile(self):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:18:32.029Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 2469, \"limit\": 200}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:18:32.032Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2469→    def test_should_resume_session_basic(self):\n  2470→        \"\"\"Resume when session_id + matching hash + feature enabled.\"\"\"\n  2471→        with tempfile.TemporaryDirectory() as td:\n  2472→            sup = self._sup(td)\n  2473→            current_hash = system_prompt_hash()\n  2474→            task = {\n  2475→                \"codex_session_id\": \"abc-123\",\n  2476→                \"session_prompt_hash\": current_hash,\n  2477→                \"session_dispatch_mode\": \"serial\",\n  2478→            }\n  2479→            self.assertTrue(sup._should_resume_session(task, current_slot_id=None))\n  2480→\n  2481→    def test_should_resume_session_disabled(self):\n  2482→        \"\"\"Don't resume when feature disabled.\"\"\"\n  2483→        with tempfile.TemporaryDirectory() as td:\n  2484→            sup = self._sup(td, SESSION_RESUME_ENABLED=\"false\")\n  2485→            task = {\n  2486→                \"codex_session_id\": \"abc-123\",\n  2487→                \"session_prompt_hash\": system_prompt_hash(),\n  "
+      }
+    ]
+  }
+]
