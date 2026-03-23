@@ -19,14 +19,14 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.37,
-      "five": 1.45,
-      "fifteen": 1.55
+      "one": 1.67,
+      "five": 1.54,
+      "fifteen": 1.57
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 114433523712,
-    "disk_free_bytes": 130673672192,
+    "disk_used_bytes": 114435993600,
+    "disk_free_bytes": 130671202304,
     "runner_log_size_bytes": 767357,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T20:24:39Z",
@@ -36,14 +36,14 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T20:55:43Z",
+    "checked_at_utc": "2026-03-23T20:57:49Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 25,
         "memory_used_mb": 24713,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -51,7 +51,7 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 23,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 32515,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -1744,15 +1744,148 @@
     "vision": "An autonomous research agent that independently conducts, writes up, and delivers high-quality research while maintaining its own infrastructure.",
     "themes": [
       {
-        "id": "reliability",
-        "name": "System Reliability",
-        "description": "Make the supervisor, workers, and dispatch pipeline robust and self-healing",
+        "id": "supervisor",
+        "name": "Supervisor & Task Lifecycle",
+        "description": "The foundational dispatch loop, task state machine, and maintenance system — the first code written and continuously refined",
         "goals": [
           {
-            "name": "Stable parallel dispatch",
+            "name": "Bootstrap & dispatch loop",
             "horizon": "now",
-            "status": "in_progress",
-            "description": "8 concurrent workers with clean worktree isolation, merge coordination, and crash recovery",
+            "status": "done",
+            "description": "Supervisor-worker architecture, task JSON, hot restart, and legacy cleanup",
+            "milestones": [
+              {
+                "name": "Supervisor-worker architecture",
+                "status": "done",
+                "backlog_ids": []
+              },
+              {
+                "name": "Task JSON migration",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-008"
+                ]
+              },
+              {
+                "name": "Remove legacy text snapshot",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-005"
+                ]
+              },
+              {
+                "name": "Hot restart via SIGHUP",
+                "status": "done",
+                "backlog_ids": []
+              }
+            ]
+          },
+          {
+            "name": "Maintenance system",
+            "horizon": "now",
+            "status": "done",
+            "description": "Two-phase daily maintenance simplified to single task with phase integer, plus developer review",
+            "milestones": [
+              {
+                "name": "Single-task multi-phase maintenance",
+                "status": "done",
+                "backlog_ids": []
+              },
+              {
+                "name": "Developer review phase",
+                "status": "done",
+                "backlog_ids": []
+              }
+            ]
+          },
+          {
+            "name": "Dispatch optimization",
+            "horizon": "now",
+            "status": "done",
+            "description": "Fast polling, completion gates, state optimization, and runtime compatibility",
+            "milestones": [
+              {
+                "name": "Fast polling (5s)",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-004"
+                ]
+              },
+              {
+                "name": "Completion gate semantics",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-001"
+                ]
+              },
+              {
+                "name": "Remove legacy first_task_objective",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-014"
+                ]
+              },
+              {
+                "name": "State rewrite optimization",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-007",
+                  "AGENT-012"
+                ]
+              },
+              {
+                "name": "Consolidate ts_to_int",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-013"
+                ]
+              },
+              {
+                "name": "Python 3.9+ compatibility",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-006"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Queue & lifecycle polish",
+            "horizon": "now",
+            "status": "done",
+            "description": "Delivery guard, queue draining, loop/stop flow, and pre-commit hook audit",
+            "milestones": [
+              {
+                "name": "Delivery guard",
+                "status": "done",
+                "backlog_ids": []
+              },
+              {
+                "name": "Loop/stop flow fixes",
+                "status": "done",
+                "backlog_ids": []
+              },
+              {
+                "name": "Pre-commit hook audit",
+                "status": "done",
+                "backlog_ids": [
+                  "FIX-002"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "parallel",
+        "name": "Multi-Agent Parallel Dispatch",
+        "description": "Scaling from 1 worker to 8 concurrent workers with clean worktree isolation and merge coordination",
+        "goals": [
+          {
+            "name": "Parallel infrastructure",
+            "horizon": "now",
+            "status": "done",
+            "description": "WorkerSlot, git worktrees, concurrent writes, merge coordination, and directory reorganization",
             "milestones": [
               {
                 "name": "Per-task outcomes + streaming logs",
@@ -1763,10 +1896,31 @@
                 ]
               },
               {
-                "name": "Worker worktree isolation",
+                "name": "Atomic select+claim",
                 "status": "done",
                 "backlog_ids": [
-                  "AGENT-029"
+                  "AGENT-011"
+                ]
+              },
+              {
+                "name": "WorkerSlot + git worktree isolation",
+                "status": "done",
+                "backlog_ids": []
+              },
+              {
+                "name": ".agent/ directory reorganization",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-032"
+                ]
+              },
+              {
+                "name": "Worktree isolation fixes",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-029",
+                  "FIX-003",
+                  "FIX-005"
                 ]
               },
               {
@@ -1777,6 +1931,60 @@
                 ]
               },
               {
+                "name": "Merge concurrency audit",
+                "status": "done",
+                "backlog_ids": [
+                  "FIX-001"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Multi-worker project collaboration",
+            "horizon": "next",
+            "status": "planned",
+            "description": "Coordination when multiple workers touch the same project submodule",
+            "milestones": [
+              {
+                "name": "Project collaboration coordination",
+                "status": "planned",
+                "backlog_ids": [
+                  "AGENT-020"
+                ]
+              },
+              {
+                "name": "Worktree symlink git flow fixes",
+                "status": "planned",
+                "backlog_ids": [
+                  "FIX-013"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "resilience",
+        "name": "Worker Resilience",
+        "description": "Making individual worker processes robust against failures, hangs, and cold starts",
+        "goals": [
+          {
+            "name": "Watchdog & recovery",
+            "horizon": "now",
+            "status": "done",
+            "description": "MCP startup watchdog, Slack retry/backoff, hang detection, tool-aware idle detection, auth failure handling",
+            "milestones": [
+              {
+                "name": "MCP startup watchdog",
+                "status": "done",
+                "backlog_ids": []
+              },
+              {
+                "name": "Slack API retry/backoff",
+                "status": "done",
+                "backlog_ids": []
+              },
+              {
                 "name": "Worker hang detection",
                 "status": "done",
                 "backlog_ids": [
@@ -1784,18 +1992,23 @@
                 ]
               },
               {
-                "name": "Multi-worker project collaboration",
-                "status": "planned",
+                "name": "Tool-aware idle watchdog",
+                "status": "done",
                 "backlog_ids": [
-                  "AGENT-020"
+                  "AGENT-040"
                 ]
+              },
+              {
+                "name": "Auth failure backoff",
+                "status": "done",
+                "backlog_ids": []
               }
             ]
           },
           {
             "name": "Session persistence",
             "horizon": "now",
-            "status": "done",
+            "status": "in_progress",
             "description": "Workers resume codex sessions across re-dispatches, preserving context and reducing cold-start overhead",
             "milestones": [
               {
@@ -1811,35 +2024,12 @@
                 "backlog_ids": [
                   "AGENT-046"
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Quality gate pipeline",
-            "horizon": "now",
-            "status": "in_progress",
-            "description": "Multi-role review (Tribune + iterative-review) ensures code quality before merge",
-            "milestones": [
-              {
-                "name": "Tribune role implementation",
-                "status": "done",
-                "backlog_ids": [
-                  "AGENT-033"
-                ]
               },
               {
-                "name": "Iterative review skill",
-                "status": "done",
+                "name": "Preserve session fields on done tasks",
+                "status": "planned",
                 "backlog_ids": [
-                  "AGENT-035"
-                ]
-              },
-              {
-                "name": "Tribune integration bug fixes",
-                "status": "in_progress",
-                "backlog_ids": [
-                  "FIX-010",
-                  "FIX-017"
+                  "FIX-022"
                 ]
               }
             ]
@@ -1848,15 +2038,20 @@
       },
       {
         "id": "research",
-        "name": "Research Workflow",
-        "description": "End-to-end pipeline from task assignment to delivered research artifacts",
+        "name": "Research & Consultation",
+        "description": "End-to-end pipeline from task assignment to delivered research artifacts, including external consultation",
         "goals": [
           {
-            "name": "Deep research capabilities",
+            "name": "Athena integration",
             "horizon": "now",
-            "status": "in_progress",
-            "description": "Athena consultation, literature search, and structured research delivery",
+            "status": "done",
+            "description": "Chrome-based consult MCP, history persistence, and selector maintenance",
             "milestones": [
+              {
+                "name": "Chrome-based consult MCP",
+                "status": "done",
+                "backlog_ids": []
+              },
               {
                 "name": "Consult history persistence",
                 "status": "done",
@@ -1864,6 +2059,21 @@
                   "AGENT-021"
                 ]
               },
+              {
+                "name": "Consult selector migration",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-027"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Research delivery",
+            "horizon": "now",
+            "status": "done",
+            "description": "Visualization, project sub-sessions, paper writing, and async job execution",
+            "milestones": [
               {
                 "name": "Visualization system",
                 "status": "done",
@@ -1875,6 +2085,18 @@
                 "name": "Project sub-sessions",
                 "status": "done",
                 "backlog_ids": []
+              },
+              {
+                "name": "Paper-writing workflow",
+                "status": "done",
+                "backlog_ids": []
+              },
+              {
+                "name": "Shell-job MVP",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-018"
+                ]
               }
             ]
           },
@@ -1903,18 +2125,274 @@
         ]
       },
       {
+        "id": "quality",
+        "name": "Quality Gates & Review",
+        "description": "Automated code review and quality assurance infrastructure — Tribune + iterative review",
+        "goals": [
+          {
+            "name": "Tribune role",
+            "horizon": "now",
+            "status": "done",
+            "description": "Independent quality reviewer via Gemini CLI with model fallback",
+            "milestones": [
+              {
+                "name": "Tribune implementation",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-033"
+                ]
+              },
+              {
+                "name": "Model fallback for capacity",
+                "status": "done",
+                "backlog_ids": [
+                  "FIX-006"
+                ]
+              },
+              {
+                "name": "Tribune model upgrade",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-042"
+                ]
+              },
+              {
+                "name": "Tribune JSON parse fix",
+                "status": "done",
+                "backlog_ids": [
+                  "FIX-016"
+                ]
+              },
+              {
+                "name": "Duplicate closing messages fix",
+                "status": "done",
+                "backlog_ids": [
+                  "FIX-015"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Iterative review skill",
+            "horizon": "now",
+            "status": "done",
+            "description": "Multi-role adversarial code review with Tribune + Murphy as reviewers",
+            "milestones": [
+              {
+                "name": "Multi-role iterative review",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-035"
+                ]
+              },
+              {
+                "name": "Full-file secret scanning",
+                "status": "done",
+                "backlog_ids": [
+                  "FIX-007",
+                  "FIX-018"
+                ]
+              },
+              {
+                "name": "Gemini MCP noise fix",
+                "status": "done",
+                "backlog_ids": [
+                  "FIX-014"
+                ]
+              },
+              {
+                "name": "Model long-form fix",
+                "status": "done",
+                "backlog_ids": [
+                  "FIX-012"
+                ]
+              },
+              {
+                "name": "Slack phantom ts audit",
+                "status": "done",
+                "backlog_ids": [
+                  "FIX-011"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Tribune integration hardening",
+            "horizon": "now",
+            "status": "in_progress",
+            "description": "Fixing handoff gaps, identity duplication, token exposure, and secret scanning edge cases",
+            "milestones": [
+              {
+                "name": "Tribune handoff gaps",
+                "status": "planned",
+                "backlog_ids": [
+                  "FIX-010"
+                ]
+              },
+              {
+                "name": "Tribune duplicate identity",
+                "status": "planned",
+                "backlog_ids": [
+                  "FIX-017"
+                ]
+              },
+              {
+                "name": "Tribune Slack token exposure",
+                "status": "planned",
+                "backlog_ids": [
+                  "FIX-009"
+                ]
+              },
+              {
+                "name": "Secret scanning edge cases",
+                "status": "planned",
+                "backlog_ids": [
+                  "FIX-019",
+                  "FIX-021"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Multi-role deliberation",
+            "horizon": "later",
+            "status": "planned",
+            "description": "Generalization of iterative review to collaborative multi-perspective discussions",
+            "milestones": [
+              {
+                "name": "Round-table discussion skill",
+                "status": "planned",
+                "backlog_ids": [
+                  "AGENT-036"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "communication",
+        "name": "Agent Communication & Identity",
+        "description": "How Murphy presents itself, communicates with users, learns skills, and adapts to individuals",
+        "goals": [
+          {
+            "name": "Natural communication",
+            "horizon": "now",
+            "status": "done",
+            "description": "Peer researcher framing, natural tone, dispatch prompt restructuring, and completion signals",
+            "milestones": [
+              {
+                "name": "ACK removal + peer reframing",
+                "status": "done",
+                "backlog_ids": []
+              },
+              {
+                "name": "Dispatch prompt restructuring",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-039"
+                ]
+              },
+              {
+                "name": "Done notification removal",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-022"
+                ]
+              },
+              {
+                "name": "Done marker reaction",
+                "status": "done",
+                "backlog_ids": [
+                  "FIX-008"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "User awareness",
+            "horizon": "now",
+            "status": "done",
+            "description": "Per-user profiling and thread context management",
+            "milestones": [
+              {
+                "name": "User profiling",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-023"
+                ]
+              },
+              {
+                "name": "Bounded thread-context packing",
+                "status": "done",
+                "backlog_ids": []
+              }
+            ]
+          },
+          {
+            "name": "Skill library",
+            "horizon": "now",
+            "status": "done",
+            "description": "Version-controlled Codex skills with auto-discovery and progressive disclosure",
+            "milestones": [
+              {
+                "name": "Skills to .agent/skills/",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-009"
+                ]
+              },
+              {
+                "name": "Skill learning workflow + new skills",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-041"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Behavioral contracts",
+            "horizon": "next",
+            "status": "planned",
+            "description": "Coherent contract architecture across Worker, Developer, and Tribune roles",
+            "milestones": [
+              {
+                "name": "Rethink contract structure",
+                "status": "planned",
+                "backlog_ids": [
+                  "AGENT-034"
+                ]
+              },
+              {
+                "name": "User-scoped credential registry",
+                "status": "planned",
+                "backlog_ids": [
+                  "AGENT-037"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "id": "observability",
         "name": "Observability & Dashboard",
-        "description": "Public monitoring, planning surface, and ecosystem awareness",
+        "description": "Public monitoring, planning surface, ecosystem awareness, and data integrity",
         "goals": [
           {
             "name": "Public dashboard",
             "horizon": "now",
-            "status": "done",
+            "status": "in_progress",
             "description": "GitHub Pages static site with live supervisor state, backlog, and showcase",
             "milestones": [
               {
-                "name": "Dashboard redesign",
+                "name": "Dashboard export",
+                "status": "done",
+                "backlog_ids": []
+              },
+              {
+                "name": "Brutalist cyberpunk redesign",
                 "status": "done",
                 "backlog_ids": [
                   "AGENT-026"
@@ -1933,24 +2411,47 @@
                 "backlog_ids": [
                   "AGENT-044"
                 ]
+              },
+              {
+                "name": "Merge carve-out for monitor web",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-045"
+                ]
+              },
+              {
+                "name": "Pin submodule at checkpoints",
+                "status": "done",
+                "backlog_ids": [
+                  "AGENT-015"
+                ]
+              },
+              {
+                "name": "Fix publish commit pollution",
+                "status": "planned",
+                "backlog_ids": [
+                  "FIX-020"
+                ]
               }
             ]
           },
           {
-            "name": "Strategic roadmap visualization",
+            "name": "Strategic roadmap",
             "horizon": "now",
             "status": "in_progress",
             "description": "Visual roadmap showing themes, goals, and milestones alongside the tactical backlog",
             "milestones": [
               {
-                "name": "Roadmap JSON + dashboard page",
-                "status": "in_progress",
+                "name": "Roadmap JSON + dashboard page + standalone HTML",
+                "status": "done",
                 "backlog_ids": []
               },
               {
-                "name": "Standalone HTML export",
-                "status": "planned",
-                "backlog_ids": []
+                "name": "History backfill from git",
+                "status": "in_progress",
+                "backlog_ids": [
+                  "AGENT-047"
+                ]
               }
             ]
           },
@@ -1965,87 +2466,6 @@
                 "status": "done",
                 "backlog_ids": [
                   "AGENT-031"
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "architecture",
-        "name": "System Architecture",
-        "description": "Clean abstractions, contract-driven behavior, and maintainable codebase",
-        "goals": [
-          {
-            "name": "Multi-role behavioral contracts",
-            "horizon": "next",
-            "status": "planned",
-            "description": "Coherent contract architecture across Worker, Developer, and Tribune roles",
-            "milestones": [
-              {
-                "name": "Rethink contract structure",
-                "status": "planned",
-                "backlog_ids": [
-                  "AGENT-034"
-                ]
-              }
-            ]
-          },
-          {
-            "name": "Credential and asset management",
-            "horizon": "next",
-            "status": "planned",
-            "description": "Structured registry for user-scoped credentials and shared resources",
-            "milestones": [
-              {
-                "name": "User-scoped credential registry",
-                "status": "planned",
-                "backlog_ids": [
-                  "AGENT-037"
-                ]
-              }
-            ]
-          },
-          {
-            "name": "Skill library",
-            "horizon": "now",
-            "status": "done",
-            "description": "Version-controlled Codex skills with auto-discovery and progressive disclosure",
-            "milestones": [
-              {
-                "name": "Skills to .agent/skills/",
-                "status": "done",
-                "backlog_ids": [
-                  "AGENT-009"
-                ]
-              },
-              {
-                "name": "Skill learning workflow",
-                "status": "done",
-                "backlog_ids": [
-                  "AGENT-041"
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "resilience",
-        "name": "Data Resilience",
-        "description": "Backup, recovery, and data integrity for runtime artifacts",
-        "goals": [
-          {
-            "name": "Cloud backup",
-            "horizon": "now",
-            "status": "in_progress",
-            "description": "Google Drive syncing for all runtime artifacts that git doesn't track",
-            "milestones": [
-              {
-                "name": "Google Drive for Desktop setup",
-                "status": "in_progress",
-                "backlog_ids": [
-                  "AGENT-038"
                 ]
               }
             ]
@@ -2064,6 +2484,21 @@
                 ]
               }
             ]
+          },
+          {
+            "name": "Cloud backup",
+            "horizon": "now",
+            "status": "in_progress",
+            "description": "Google Drive syncing for all runtime artifacts that git doesn't track",
+            "milestones": [
+              {
+                "name": "Google Drive for Desktop setup",
+                "status": "in_progress",
+                "backlog_ids": [
+                  "AGENT-038"
+                ]
+              }
+            ]
           }
         ]
       }
@@ -2079,5 +2514,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T20:55:44Z"
+  "server_time_utc": "2026-03-23T20:57:50Z"
 }

@@ -1464,5 +1464,108 @@
         "content_preview": "| FIX-021 | 2026-03-23 | Low | open | TOKEN tier consistency gap in iterative-review secret scanning | Bare `TOKEN` in Tier 1 can match benign `*_TOKEN` fields (e.g., `NEXT_TOKEN`) with 20+ char values. Tier 2 uses specific token names, so `BOT_TOKEN` with colon-delimited values bypasses both tiers. Deferred from FIX-018 review (M-018-1). | Tier 1/2 TOKEN coverage is consistent — either both use the same strategy or gaps are explicitly documented as accepted. |\n| FIX-019 | 2026-03-22 | Low | open | Iterative-review fix-round untracked files bypass Tier 2 scanning | `git diff` in fix delta scanning doesn't show untracked (newly created) files. These only get Tier 1 full-file scan. Extremely unlikely edge case (orchestrator creates code fixes, not secret-bearing configs). | Fix delta scanning covers untracked files via synthetic diffs or index staging. |\n| FIX-009 | 2026-03-21 | High | open | Tribune Slack token exposure in config/docs | Gemini-side Slack MCP config and Tribune design do"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:56:40.336Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Now I have the complete list. Let me count and map everything:\n\n**Open items (Active Queue + Fix Queue):**\n- FIX-021 (open) → quality (secret scanning)\n- FIX-019 (open) → quality (secret scanning)  \n- FIX-009 (open) → quality (Tribune)\n- FIX-010 (open) → quality (Tribune)\n- FIX-013 (open) → parallel (worktree)\n- FIX-017 (open) → quality (Tribune)\n\n\n- FIX-020 (open) → observability (dashboard)\n- FIX-022 (open) → resilience (session)\n\n**Agent items:**\n- AGENT-010 (open) → research (thread)\n- AGENT-016 (open) → research (thread)\n- AGENT-020 (open) → parallel\n- AGENT-038 (open) → observability (backup)\n- AGENT-034 (open) → communication (contracts)\n- AGENT-037 (open) → communication (contracts)\n- AGENT-036 (deferred) → quality (round-table)\n- AGENT-047 (open) → observability (road...)\n\nLooking at what we've already shipped: a bunch of communication, observability, resilience, and quality fixes across both the FIX and AGENT tracks, including work on dashboards, session handling, secret scanning, and prompt improvements. model)\n- FIX-016 → quality (Tribune parse)\n- FIX-015 → quality (Tribune closing)\n- AGENT-040 → resilience (watchdog)\n- FIX-008 → communication (done marker)\n- FIX-004 → parallel (concurrent writes)\n- FIX-003 → parallel (worktree reset)\n- AGENT-043 → observability (backlog page)\n- AGENT-023 → communication (user profiling)\n- FIX-006 → quality (model fallback)\n- AGENT-035 → quality (iterative review)\n- AGENT-033 → quality (Tribune)\n- AGENT-032 → parallel (.agent/ reorg)\n- AGENT-031 → observability (ecosystem)\n- FIX-005 → parallel (symlink block)\n- FIX-001 → parallel (merge audit)\n- AGENT-030 → observability (validation)\n- AGENT-029 → parallel (worktree isolation)\n- AGENT-028 → resilience (hang detection)\n- AGENT-018 → research (shell jobs)\n- AGENT-026 → observability (dashboard redesign)\n- AGENT-021 → research (consult history)\n- AGENT-027 → research (consult fix)\n- AGENT-017 → research (visualization)\n- AGENT-009 → communication (skills)\n- AGENT-015 → observability (submodule pin)\n- AGENT-014 → supervisor (legacy removal)\n- AGENT-022 → communication (done notification)\n- AGENT-007 → supervisor (state optimization)\n- AGENT-012 → supervisor (state optimization, absorbed)\n- AGENT-013 → supervisor (ts consolidation)\n- AGENT-006 → supervisor (Python compat)\n- AGENT-001 → supervisor (completion gate)\n- AGENT-002 → parallel (per-task outcomes)\n- AGENT-003 → parallel (streaming logs)\n- AGENT-004 → supervisor (fast polling)\n- AGENT-005 → supervisor (legacy removal)\n- AGENT-008 → supervisor (task JSON)\n- AGENT-011 → parallel (atomic claim)\n\nNow I'm organizing the closed audit items and mapping them into their respective themes so I can structure the roadmap properly.\n\nBuilding the roadmap.json... I'm looking at the parallel infrastructure work—per-task outcomes with streaming logs, atomic task claiming with worker slot isolation using git worktrees, directory reorganization, and concurrent write coordination are all complete. Next up is multi-worker project collaboration, which involves coordination protocols and symlink git flow fixes. Then there's the worker resilience theme coming up. Visualization system and project sub-sessions are complete, along with the paper-writing workflow and shell-job MVP. Thread management at scale is coming next, with plans to cap thread length and structure how threads are presented. For quality gates, the Tribune role is fully implemented with model fallback, upgrades, and fixes for JSON parsing and duplicate messages, while iterative review skills with multi-role support and secret scanning are also done.\n\nCurrently hardening Tribune integration by addressing handoff gaps, duplicate identity issues, token exposure risks, and secret scanning edge cases. Multi-role deliberation through round-table discussions is deferred for later. Moving into agent communication and identity work, starting with natural communication improvements.\n\nI've completed peer reframing and dispatch prompt restructuring, removed done notifications and markers. User awareness is solid with profiling and thread-context packing done, and I've migrated skills to the proper directory with a learning workflow in place. Next up is rethinking behavioral contracts and building out a credential/asset registry. The observability dashboard is ready with export functionality.\n\nI've finished the brutalist redesign, backlog integration, and decoupled the publisher from supervisor. The strategic roadmap is taking shape with JSON export and dashboard pages done, though I'm still backfilling history. Ecosystem scouting is complete and state validation is underway.\n\nNow I'm verifying coverage across all 67 tracked items, mapping open issues to their respective quality, resilience, and research initiatives. I'm continuing through the completed items list, tracking the remaining agents and fixes mapped to their respective categories across quality, communication, resilience, parallel, and observability domains. I've finished mapping all the agents to their respective modules—67 total entries accounted for. Now I'm ready to generate the JSON output."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:56:40.338Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I have all 67 BACKLOG entries mapped. Now writing the comprehensive `roadmap.json`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:57:32.132Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Write",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/roadmap.json\", \"content\": \"{\\n  \\\"last_updated\\\": \\\"2026-03-23\\\",\\n  \\\"vision\\\": \\\"An autonomous research agent that independently conducts, writes up, and delivers high-quality research while maintaining its own infrastructure.\\\",\\n  \\\"themes\\\": [\\n    {\\n      \\\"id\\\": \\\"supervisor\\\",\\n      \\\"name\\\": \\\"Supervisor & Task Lifecycle\\\",\\n      \\\"description\\\": \\\"The foundational dispatch loop, task state machine, and maintenance system — the first cod"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:57:32.154Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/roadmap.json has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:57:36.078Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me verify all backlog IDs are covered with a smoke check."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:57:40.980Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"# Extract all AGENT-*/FIX-* IDs from BACKLOG completed + open sections\\nBACKLOG_IDS=$(grep -oE '(AGENT|FIX)-[0-9]+' /Users/murphy/Research/docs/dev/BACKLOG.md | sort -u)\\n\\n# Extract all backlog_ids from roadmap.json\\nROADMAP_IDS=$(python3 -c \\\"\\nimport json\\ndata = json.load(open('/Users/murphy/Research/docs/dev/roadmap.json'))\\nids = set()\\nfor theme in data['themes']:\\n    for goal in theme['goals']:\\n        for ms in goal.get('milestones', []):\\n            for bid in ms.get('b"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:57:41.051Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "=== IDs in BACKLOG but NOT in roadmap.json ===\nAGENT-019\n\n=== IDs in roadmap.json but NOT in BACKLOG ===\n\nBACKLOG count: 68\nRoadmap count: 67"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:57:46.845Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "AGENT-019 is in the BACKLOG but not in the roadmap. Let me check what AGENT-019 is.\n\nWait, I didn't see AGENT-019 in the BACKLOG entries I read. Let me check — it's mentioned in the CHANGELOG as \"Add AGENT-019 for mid-execution thread awareness\" but it might have been absorbed or removed from the BACKLOG. Let me check.\n\nActually the grep found it somewhere in the BACKLOG. Let me search for it."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:57:47.647Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"AGENT-019\", \"path\": \"/Users/murphy/Research/docs/dev/BACKLOG.md\", \"output_mode\": \"content\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:57:47.667Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "125:| 2026-03-12 | Add AGENT-019 for mid-execution thread awareness. |"
+      }
+    ]
   }
 ]
