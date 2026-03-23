@@ -3148,5 +3148,15 @@
         "input_preview": "{\"command\": \"IMPL_DIFF=\\\"$(cat /tmp/iterative-review-pLKMz4/impl-R2.diff)\\\"\\n\\nPRIOR_CONTEXT=\\\"## Prior Round Context (Round 1)\\n\\n### Tribune: approved (gemini-2.5-flash, capacity fallback)\\n\\n### Murphy: 2 findings\\n\\nM-001 (high, integration): --from-config only reads env vars with hardcoded fallbacks, ignoring supervisor_loop.conf values. → **Fixed**: Added _cfg() helper that reads env var → read_supervisor_default() → hardcoded fallback. Same precedence as supervisor Config class.\\n\\nM-002 "
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:17:31.240Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "```json\n{\n  \"verdict\": \"approved\",\n  \"findings\": [],\n  \"summary\": \"The code changes successfully decouple the dashboard publisher from the supervisor, as intended. The fixes for M-001 and M-002 are correctly implemented and thoroughly tested. Documentation is updated to reflect the new architecture. No new issues were identified.\"\n}\n```"
+      }
+    ]
   }
 ]
