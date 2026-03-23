@@ -1,10 +1,11 @@
 # agent-monitor-web Roadmap
 
-Last updated: 2026-03-22 07:35 UTC
+Last updated: 2026-03-23 13:09 UTC
 
 ## Current Status
 
 - The hosted root monitor at `/` is live and continuously refreshed by the snapshot publisher.
+- Maintenance re-audit on 2026-03-23 confirmed that the repo currently has no open PR surface and that the recent tokenizer-route fix is already on published `main`.
 - The hand-maintained public routes now use a restrained shared shell: dark layered surfaces, shallow navigation, cyan/magenta accents used as signal, and preview-led hierarchy instead of the older route-map-heavy chrome.
 - The generated root routes `/` and `/roadmap/` still sit behind the exporter boundary. Manual shell tweaks there can be useful for brief local iteration, but they are not stable enough to count as delivered site changes.
 - The remaining root-side problem is now specified more concretely: `/` should compress into a single Now surface and `/roadmap/` into a What-ships-next surface, with utilities demoted and diagnostics/details collapsed behind calmer secondary sections.
@@ -23,6 +24,11 @@ Success criteria:
 
 Status:
 - In place. The current split is `/` for the generated monitor and subroutes for hand-maintained tools.
+
+### Activity Log
+
+- 2026-03-23 08:26 UTC — Fixed the tokenizer-route publish mismatch by merging PR `#25`, returning the checkout to `main`, and verifying that public `/tokenizers/` now serves the darker `Tokenizer Lab` route from published head `935b007f2f38278827f146ad9c33697160cb4805`.
+- 2026-03-22 22:35 UTC — Recovered live publishing after finding the checkout stranded on `murphy-showcase-hierarchy-nav`: switched back to `main`, regenerated the snapshot, let the publisher resume, and closed obsolete PR `#23` once the hosted `status.json` was fresh again.
 
 ## Milestone 2 - Showcase Layer
 
