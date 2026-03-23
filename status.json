@@ -21,12 +21,12 @@
     "load_avg": {
       "one": 2.04,
       "five": 1.92,
-      "fifteen": 1.83
+      "fifteen": 1.84
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113568296960,
-    "disk_free_bytes": 131538898944,
+    "disk_used_bytes": 113565356032,
+    "disk_free_bytes": 131541839872,
     "runner_log_size_bytes": 681757,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T12:51:20Z",
+    "checked_at_utc": "2026-03-23T12:53:23Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -83,15 +83,15 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 31,
-        "memory_used_mb": 89487,
+        "utilization_gpu_pct": 1,
+        "memory_used_mb": 59457,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 32
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 91,
+        "utilization_gpu_pct": 86,
         "memory_used_mb": 89493,
         "memory_total_mb": 97887,
         "temperature_c": 50
@@ -99,10 +99,10 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 60,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 89491,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 53
       }
     ]
   },
@@ -1429,21 +1429,15 @@
         "done_when": "Codex skill automates Overleaf pull/push/conflict resolution, including initial project bootstrap.",
         "has_plan": true,
         "has_issue": false
-      },
-      {
-        "id": "AGENT-044",
-        "queue": "feature",
-        "created": "2026-03-23",
-        "priority": "High",
-        "status": "open",
-        "task": "Decouple dashboard publisher from supervisor",
-        "context": "Publisher runs as a daemon thread inside the supervisor (`main.py:64-108`). Murphy can't edit `dashboard.py` (protected `src/` path) or restart the publisher without restarting the whole supervisor. P",
-        "done_when": "Publisher runs as a standalone process; Murphy can edit dashboard templates and restart the publisher without supervisor restart; `src/loop/monitor/` is excluded from the worker pre-commit hook protec",
-        "has_plan": false,
-        "has_issue": false
       }
     ],
     "completed": [
+      {
+        "id": "AGENT-044",
+        "created": "2026-03-23",
+        "completed": "2026-03-23",
+        "summary": "Decouple dashboard publisher from supervisor: standalone headless process (`scripts/dashboard.sh`), `--headless` + `--from-config` modes, removed daemon thread, pre-commit hook exception for `src/loop"
+      },
       {
         "id": "AGENT-045",
         "created": "2026-03-23",
@@ -1744,5 +1738,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T12:51:21Z"
+  "server_time_utc": "2026-03-23T12:53:24Z"
 }
