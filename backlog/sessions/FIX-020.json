@@ -3042,5 +3042,182 @@
         "content_preview": "{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-1-1\",\"severity\":\"high\",\"category\":\"integration\",\"file\":\"src/loop/monitor/dashboard.py\",\"line\":3297,\"scope\":null,\"title\":\"Legacy `DASHBOARD_GIT_BRANCH=main` now force-rewrites the durable branch\",\"description\":\"`publish_to_deploy_branch()` force-pushes an orphan commit to whatever branch name comes through `static_git_branch`. That is safe for the new `deploy` branch, but existing installs that still set `DASHBOARD_GIT_BRANCH=main` or pass `--static-git-branch main` now take a very different path than before: after the first snapshot change, the publisher will either fail against branch protection every cycle or, if force-push is allowed, replace `main` with a single orphan snapshot commit and discard the branch history. The added tests only exercise `deploy` as the destination, so this backward-compatibility path is uncovered.\",\"suggestion\":\"Hard-fail on protected/source branch names like `main`/`master` unless there is an explicit escape hatc"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:09:56.266Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings - 2 new], round 1 of 5 → continuing because Murphy has not approved.\n\nLet me analyze Murphy's findings:\n\n**M-1-1 (stale DASHBOARD_GIT_BRANCH=main):** This is a valid backward-compatibility concern. If someone has `DASHBOARD_GIT_BRANCH=main` in their config (e.g., via env var override), the new code would force-push an orphan commit to `main`, effectively destroying the branch. This is a serious regression.\n\nFix: Add a guard that refuses to publish to `main` or `master` unless explicitly overridden. Or better, since the function is named `publish_to_deploy_branch`, validate that the target branch is not the source branch.\n \n**M-1-2 (concurrent publishers / force-with-lease):** Murphy flagged this as a deferred concern, but in reality we only have one publisher in production, so the race condition is theoretical. The `--force-with-lease` suggestion is worth considering since it's relatively straightforward to add — we can use the explicit SHA syntax even without a local ref — but given the single-publisher constraint, the added complexity might not justify the safety gain.\n\nI should stick with deferring this per the plan and focus on M-1-1 instead, which is the actual problem we need to solve."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:09:56.744Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings - 2 new], round 1 of 5 → continuing because Murphy has not approved.\n\nM-1-1 is valid — stale `DASHBOARD_GIT_BRANCH=main` would destructively force-push to main. Let me fix it.\n\nM-1-2 (concurrent publishers) was already deferred in plan review (T-1-1) — single publisher in production."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:09:57.143Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 3190, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:09:57.148Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3190→\n  3191→def publish_to_deploy_branch(\n  3192→    out_dir: Path,\n  3193→    remote: str,\n  3194→    deploy_branch: str = \"deploy\",\n  3195→    tracked_files: tuple = STATIC_EXPORT_TRACKED_FILES,\n  3196→) -> Optional[str]:\n  3197→    \"\"\"Publish snapshot files to an orphan deploy branch using git plumbing.\n  3198→\n  3199→    Builds a tree from the remote main branch's full content, overlays the\n  3200→    generated snapshot files, and force-pushes as an orphan commit. The working\n  3201→    tree and HEAD are never modified.\n  3202→\n  3203→    Returns the commit hash on success, None if skipped (no changes).\n  3204→    \"\"\""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:10:07.729Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"old_string\": \"    \\\"\\\"\\\"Publish snapshot files to an orphan deploy branch using git plumbing.\\n\\n    Builds a tree from the remote main branch's full content, overlays the\\n    generated snapshot files, and force-pushes as an orphan commit. The working\\n    tree and HEAD are never modified.\\n\\n    Returns the commit hash on success, None if skipped (no changes).\\n    \\\"\\\"\\\"\\n    # Verify this is a git re"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:10:07.741Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/monitor/dashboard.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:10:15.316Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add a test for the guard:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:10:18.419Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"    def test_stale_snapshot_removal(self):\", \"new_string\": \"    def test_rejects_main_as_deploy_target(self):\\n        \\\"\\\"\\\"Publishing to 'main' or 'master' raises RuntimeError.\\\"\\\"\\\"\\n        from src.loop.monitor.dashboard import publish_to_deploy_branch\\n        with tempfile.TemporaryDirectory() as td:\\n            local, bare = self._init_repo_pair(Path(td))\\n            with"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:10:18.428Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:10:24.828Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch -v 2>&1 | tail -15\", \"description\": \"Run publish tests with new guard test\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:10:28.905Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "src/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_skip_detection PASSED [ 77%]\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_stale_snapshot_removal PASSED [ 88%]\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_submodule_gitdir PASSED [100%]\n\n=============================== warnings summary ===============================\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_changed_content_creates_orphan\n  /Users/murphy/Research/src/loop/monitor/dashboard.py:362: DeprecationWarning: invalid escape sequence '\\s'\n    HTML_TEMPLATE = \"\"\"\\\n\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_changed_content_creates_orphan\n  /Users/murphy/Research/src/loop/monitor/dashboard.py:1851: DeprecationWarning: invalid escape sequence '\\.'\n    BACKLOG_HTML_TEMPLATE = \"\"\"\\\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n======================== 9 passed, 2 warnings in"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:10:37.418Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 9 tests pass. Now Round 2 of implementation review."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:10:58.433Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research\\ngit diff HEAD -- src/loop/monitor/dashboard.py src/config/supervisor_loop.conf CLAUDE.md src/loop/tests/test_supervisor_loop.py > /tmp/iterative-review-euzwH6/impl-R2.diff 2>/dev/null\\n\\ncat > /tmp/iterative-review-euzwH6/tribune-impl-R2-prompt.txt << 'ENDPROMPT'\\nYou are the Tribune — an independent quality reviewer. Review the following code changes for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\\n2. **"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:10:58.513Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Tribune:    30551 bytes\nMurphy:    30441 bytes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:11:05.070Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/tribune-impl-R2-prompt.txt | GEMINI_SANDBOX=false gemini -m gemini-2.5-pro -p '' --approval-mode plan --output-format text --allowed-mcp-server-names '' 2>/tmp/iterative-review-euzwH6/tribune-impl-R2-stderr.log > /tmp/iterative-review-euzwH6/tribune-impl-R2-stdout.txt; echo \\\"EXIT: $?\\\"\", \"description\": \"Dispatch Tribune impl R2\", \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:11:07.327Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/murphy-impl-R2-prompt.txt | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema /tmp/iterative-review-euzwH6/findings-schema.json --output-last-message /tmp/iterative-review-euzwH6/murphy-impl-R2.json - > /tmp/iterative-review-euzwH6/murphy-impl-R2-stdout.txt 2>&1; echo \\\"EXIT: $?\\\"\", \"description\": \"Dispatch Murphy impl R2\", \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:11:47.303Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Keychain initialization encountered an error: Cannot find module '../build/Release/keytar.node'\nRequire stack:\n- /opt/homebrew/Cellar/gemini-cli/0.34.0/libexec/lib/node_modules/@google/gemini-cli/node_modules/keytar/lib/keytar.js\nUsing FileKeychain fallback for secure storage.\nLoaded cached credentials.\nScheduling MCP context refresh...\nExecuting MCP context refresh...\nMCP context refresh complete.\nIgnored 21 files:\nGit-ignored: @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, staticmethod\nEXIT:"
+      }
+    ]
   }
 ]
