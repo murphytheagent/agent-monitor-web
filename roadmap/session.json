@@ -2084,5 +2084,15 @@
         "content_preview": "```json\n{\n  \"verdict\": \"approve\",\n  \"findings\": [],\n  \"summary\": \"No issues found.\"\n}\n```"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:08:56.644Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-005\",\"severity\":\"medium\",\"category\":\"runtime failure\",\"file\":\"docs/workflows/git-workflow.md\",\"line\":16,\"scope\":\"agent-monitor-web direct-to-main retry flow\",\"title\":\"Retry command still breaks under fast-forward-only pull configs\",\"description\":\"The new recovery step uses `git pull --no-rebase origin main` after a rejected push. That resolves the rebase-mode ambiguity, but it still aborts if the local Git config enforces fast-forward-only pulls (`pull.ff=only`), which is exactly the divergent-history case this retry path is meant to recover from. In that setup, the documented retry command fails instead of merging the concurrent exporter snapshot.\",\"suggestion\":\"Make the retry path independent of `git pull` config, for example `git fetch origin main && git merge --no-edit FETCH_HEAD`, or otherwise override ff-only explicitly before retrying the push.\",\"reopens\":null}],\"summary\":\"The carve-out is close, but the concurrent-exporter retry step i"
+      }
+    ]
   }
 ]
