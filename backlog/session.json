@@ -3261,5 +3261,161 @@
         "input_preview": "{\"command\": \"for i in $(seq 1 30); do if [ -f /tmp/iterative-review-euzwH6/murphy-impl-R2.json ] && [ -s /tmp/iterative-review-euzwH6/murphy-impl-R2.json ]; then cat /tmp/iterative-review-euzwH6/murphy-impl-R2.json; exit 0; fi; sleep 5; done; echo \\\"TIMEOUT\\\"\", \"description\": \"Wait for Murphy impl R2\", \"timeout\": 180000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:18:32.661Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-2-1\",\"severity\":\"medium\",\"category\":\"integration\",\"file\":\"src/loop/monitor/dashboard.py\",\"line\":3328,\"scope\":\"static publisher / site checkout\",\"title\":\"Deploy-branch publishing now leaves the site checkout dirty on every real snapshot change\",\"description\":\"The new flow still writes generated files into `projects/agent-monitor-web`, but it no longer commits those files on that repo's `main` branch. In the current repo, `index.html`, `status.json`, `backlog/index.html`, `backlog/session.json`, `roadmap/index.html`, and the per-item `backlog/sessions/*.json` files are still tracked on `main`, so after the first changed export the submodule stays dirty indefinitely. That is an operational regression: normal `git pull` / branch switches in the site repo can start failing on local modifications, and the root repo will continuously report a dirty submodule. The added tests only validate the remote deploy branch and do not cover this local-checkout "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:18:45.429Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings - 2 new], round 2 of 5 → continuing because Murphy has not approved.\n\n**M-2-1 (dirty working tree):** This was already discussed in the plan review. It's an operational concern documented in the plan (step 5 of the cutover procedure). The plan explicitly says to untrack the generated files from `main` via `.gitignore` as a post-deployment step. This finding is about the operational procedure, not the code. The code is correct — it's the deployment procedure that handles this. I could add a note in the code, but this is more of a \"deployment step not yet done\" issue than a code bug.\n \nMurphy's right that the tests don't cover this, but that's more of an integration test concern—the plan already addresses it. **M-2-2 (test hermeticity)** is the real issue though. The tests assume global git config exists, which would break on a fresh machine or in CI. I need to fix this by setting up the required git config within the test environment itself. I'll also add a comment to M-2-1 pointing to the deployment procedure."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:18:45.559Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings - 2 new], round 2 of 5 → continuing.\n\nM-2-1 is about the deployment procedure (already documented in plan step 5/6 — untrack files post-deploy). M-2-2 is a real code fix — tests need hermetic git config. Let me fix both."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:18:52.149Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"    @staticmethod\\n    def _init_repo_pair(workdir: Path):\\n        \\\"\\\"\\\"Create a local repo + bare remote, with main branch and durable files.\\\"\\\"\\\"\\n        bare = workdir / \\\"remote.git\\\"\\n        local = workdir / \\\"local\\\"\\n        subprocess.run([\\\"git\\\", \\\"init\\\", \\\"--bare\\\", str(bare)], capture_output=True, check=True)\\n        subprocess.run([\\\"git\\\", \\\"init\\\", str(local)"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:18:52.170Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:18:55.440Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now fix the `test_remote_only_update_reflected` test — the second clone also needs git identity:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:19:00.262Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"            clone2 = Path(td) / \\\"clone2\\\"\\n            subprocess.run([\\\"git\\\", \\\"clone\\\", str(bare), str(clone2)], capture_output=True, check=True)\\n            (clone2 / \\\"new-durable-file.txt\\\").write_text(\\\"new content\\\")\\n            subprocess.run([\\\"git\\\", \\\"-C\\\", str(clone2), \\\"add\\\", \\\"-A\\\"], capture_output=True, check=True)\\n            subprocess.run([\\\"git\\\", \\\"-C\\\", s"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:19:00.278Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:19:05.404Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch -v 2>&1 | tail -15\", \"description\": \"Run publish tests after hermeticity fix\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:19:09.810Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "rootdir: /Users/murphy/Research\nplugins: anyio-4.12.1\ncollecting ... collected 9 items\n\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_changed_content_creates_orphan PASSED [ 11%]\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_core_publish PASSED [ 22%]\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_feature_branch_durable_files_from_main PASSED [ 33%]\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_first_run_no_deploy_branch PASSED [ 44%]\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_rejects_main_as_deploy_target PASSED [ 55%]\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_remote_only_update_reflected PASSED [ 66%]\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_skip_detection PASSED [ 77%]\nsrc/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch::test_stale_snapshot_removal PASSED [ 88%]\nsrc/loop/tests/te"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:19:13.018Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 9 pass. Let me dispatch Round 3."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:19:34.255Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research\\ngit diff HEAD -- src/loop/monitor/dashboard.py src/config/supervisor_loop.conf CLAUDE.md src/loop/tests/test_supervisor_loop.py > /tmp/iterative-review-euzwH6/impl-R3.diff 2>/dev/null\\n\\ncat > /tmp/iterative-review-euzwH6/tribune-impl-R3-prompt.txt << 'ENDPROMPT'\\nYou are the Tribune — an independent quality reviewer. Review the following code changes for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\\n2. **"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:19:34.326Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Ready"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:19:41.357Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/tribune-impl-R3-prompt.txt | GEMINI_SANDBOX=false gemini -m gemini-2.5-pro -p '' --approval-mode plan --output-format text --allowed-mcp-server-names '' 2>/tmp/iterative-review-euzwH6/tribune-impl-R3-stderr.log > /tmp/iterative-review-euzwH6/tribune-impl-R3-stdout.txt; echo \\\"EXIT: $?\\\"\", \"description\": \"Dispatch Tribune impl R3\", \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:19:43.442Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/murphy-impl-R3-prompt.txt | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema /tmp/iterative-review-euzwH6/findings-schema.json --output-last-message /tmp/iterative-review-euzwH6/murphy-impl-R3.json - > /tmp/iterative-review-euzwH6/murphy-impl-R3-stdout.txt 2>&1; echo \\\"EXIT: $?\\\"\", \"description\": \"Dispatch Murphy impl R3\", \"timeout\": 300000}"
+      }
+    ]
   }
 ]
