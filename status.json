@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T20:16:51Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-23T20:17:52Z",
+    "status": "running_session",
     "pid": 68391,
-    "loop_count": 888,
+    "loop_count": 896,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
     "max_workers": 8
   },
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.23,
-      "five": 1.99,
-      "fifteen": 1.79
+      "one": 1.76,
+      "five": 2.03,
+      "fifteen": 1.84
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 114430914560,
-    "disk_free_bytes": 130676281344,
-    "runner_log_size_bytes": 766688,
+    "disk_used_bytes": 114432909312,
+    "disk_free_bytes": 130674286592,
+    "runner_log_size_bytes": 767357,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T20:10:37Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T20:16:53Z",
+    "checked_at_utc": "2026-03-23T20:18:56Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -51,7 +51,7 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 22,
+        "utilization_gpu_pct": 21,
         "memory_used_mb": 32515,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -62,7 +62,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 20447,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 32
       },
       {
         "index": 3,
@@ -108,7 +108,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1774297049.973959": {
+        "mention_ts": "1774297049.973959",
+        "thread_ts": "1774297049.973959",
+        "status": "in_progress",
+        "task_description": "Development: AGENT-047.",
+        "summary": "Development: AGENT-047.",
+        "summary_preview": "Development: AGENT-047.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774297072.460660",
+        "last_update_ts": "1774297072.550896",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T20:17:29Z"
+        }
+      }
+    },
     "incomplete": {
       "1773984772.225789": {
         "mention_ts": "1773984772.225789",
@@ -2030,5 +2047,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T20:16:54Z"
+  "server_time_utc": "2026-03-23T20:18:57Z"
 }
