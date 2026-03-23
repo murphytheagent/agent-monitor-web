@@ -19,14 +19,14 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.73,
+      "one": 1.81,
       "five": 1.82,
-      "fifteen": 2.03
+      "fifteen": 1.99
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113700929536,
-    "disk_free_bytes": 131406266368,
+    "disk_used_bytes": 113702932480,
+    "disk_free_bytes": 131404263424,
     "runner_log_size_bytes": 682524,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T13:36:21Z",
+    "checked_at_utc": "2026-03-23T13:38:25Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -70,7 +70,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 4,
@@ -83,26 +83,26 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 61,
         "memory_used_mb": 89491,
         "memory_total_mb": 97887,
-        "temperature_c": 48
+        "temperature_c": 45
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 89,
+        "utilization_gpu_pct": 83,
         "memory_used_mb": 89487,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 48
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 3,
+        "utilization_gpu_pct": 92,
+        "memory_used_mb": 89487,
         "memory_total_mb": 97887,
-        "temperature_c": 31
+        "temperature_c": 47
       }
     ]
   },
@@ -1222,18 +1222,6 @@
   "roadmap": {
     "items": [
       {
-        "id": "FIX-002",
-        "queue": "fix",
-        "created": "2026-03-20",
-        "priority": "High",
-        "status": "open",
-        "task": "Extend pre-commit hook to block protected paths on all branches",
-        "context": "Hook only checks protected paths when `current_branch == \"main\"`. Workers can commit `src/` on `worker-N` branch, which then gets merged into main by supervisor fallback.",
-        "done_when": "Protected-path check fires for all branches when `AGENT_WORKER=1`, not just main.",
-        "has_plan": false,
-        "has_issue": false
-      },
-      {
         "id": "FIX-021",
         "queue": "fix",
         "created": "2026-03-23",
@@ -1400,21 +1388,21 @@
         "done_when": "A Claude Code slash command for multi-perspective design discussions.",
         "has_plan": false,
         "has_issue": false
-      },
-      {
-        "id": "AGENT-041",
-        "queue": "feature",
-        "created": "2026-03-21",
-        "priority": "Medium",
-        "status": "open",
-        "task": "Overleaf git sync skill",
-        "context": "Steady-state workflow for syncing Overleaf projects via local git clone. Plan, bootstrap plan",
-        "done_when": "Codex skill automates Overleaf pull/push/conflict resolution, including initial project bootstrap.",
-        "has_plan": true,
-        "has_issue": false
       }
     ],
     "completed": [
+      {
+        "id": "FIX-002",
+        "created": "2026-03-20",
+        "completed": "2026-03-23",
+        "summary": "Closed: pre-commit hook already blocks protected paths on all branches when `AGENT_WORKER=1`. The branch check on line 47 is only for the \"direct commits to main\" rule — the protected-path check (line"
+      },
+      {
+        "id": "AGENT-041",
+        "created": "2026-03-21",
+        "completed": "2026-03-23",
+        "summary": "Overleaf git sync skill: combined `overleaf-git-sync` skill covering first-time project bootstrap and steady-state Git sync. Companion `private-project-bootstrap` and `static-site-publish-triage` skil"
+      },
       {
         "id": "AGENT-044",
         "created": "2026-03-23",
@@ -1721,5 +1709,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T13:36:22Z"
+  "server_time_utc": "2026-03-23T13:38:26Z"
 }
