@@ -22,7 +22,7 @@ Any new page should inherit this direction unless it is intentionally framed as 
 ## Structural rules
 
 - Use one slim shared header with only the top-level routes: `Monitor`, `Roadmap`, and `Showcase`.
-- Child routes such as `Tokenizer Lab` or `Res Publica` can appear as a single contextual CTA, not as a permanent route inventory.
+- Keep page titles and child routes out of the sticky shell. If `Tokenizer Lab`, `Signal Deck`, or `Res Publica` need a route link, place it in the body near the artifact.
 - Do not repeat route maps, "current surface" boxes, or taxonomy panels inside the page body.
 - Put the primary interaction first on small screens. Controls and settings come after the main surface unless they are essential to understanding the page.
 - Showcase and gallery pages should be preview-led. A good static preview is better than a cramped live embed on mobile.

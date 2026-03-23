@@ -108,14 +108,12 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px 24px;
-  padding: 18px 20px;
+  gap: 14px 20px;
+  padding: 14px 18px;
 }
 
 .site-header .site-brand {
-  display: grid;
-  gap: 4px;
-  min-width: 0;
+  display: none;
 }
 
 .site-header .site-brand-kicker {
@@ -142,7 +140,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 0;
   min-width: 0;
 }
 
@@ -210,6 +208,10 @@ textarea {
 .site-button.primary:hover {
   border-color: rgba(99, 230, 255, 0.66);
   background: linear-gradient(135deg, rgba(31, 109, 136, 0.98) 0%, rgba(13, 45, 71, 1) 58%, rgba(39, 24, 69, 0.98) 100%);
+}
+
+.site-nav-block > .site-button {
+  display: none;
 }
 
 .section-label,
@@ -342,11 +344,12 @@ textarea {
   .site-header-main {
     align-items: flex-start;
     flex-direction: column;
+    gap: 10px;
   }
 
   .site-nav-block {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 }
 
@@ -364,7 +367,7 @@ textarea {
 
   .site-header-main {
     gap: 10px;
-    padding: 12px;
+    padding: 10px 12px;
   }
 
   .site-nav-block {

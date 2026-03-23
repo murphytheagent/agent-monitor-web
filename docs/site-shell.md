@@ -6,7 +6,7 @@ The durable public pages under `agent-monitor-web` now share a Murphy-branded sh
 
 - `Murphy` appears as the leading wordmark, treated as a signature rather than another route label.
 - The primary nav stays shallow: `Monitor`, `Roadmap`, and `Showcase`.
-- Subpages below the gallery can carry one contextual CTA such as `Tokenizer lab`, but they should not expand the shell into a route directory.
+- The sticky shell does not carry page titles or child-route CTAs. Child routes belong in the page body, not in the header.
 - The shell is dark, restrained, and signal-led: near-black surfaces, soft cyan/magenta accents, pill controls, and near-zero motion.
 - If a page needs a path hint, keep it compact and secondary. The header should not turn into a sitemap.
 

@@ -107,6 +107,11 @@
       gap: 14px;
     }
 
+    .tokenizer-site-header .site-brand,
+    .tokenizer-site-header .header-status {
+      display: none;
+    }
+
     .tokenizer-header-foot {
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: flex-start;
@@ -1774,6 +1779,11 @@
       gap: 0;
     }
 
+    .tokenizer-site-header .site-header-main {
+      gap: 14px 20px;
+      padding: 14px 18px;
+    }
+
     .tokenizer-header-foot,
     .tokenizer-path-block,
     .site-nav-label {
@@ -1945,6 +1955,11 @@
     @media (max-width: 640px) {
       .header-status {
         display: none;
+      }
+
+      .tokenizer-site-header .site-header-main {
+        gap: 10px;
+        padding: 10px 12px;
       }
 
       .site-header .site-brand-kicker,
