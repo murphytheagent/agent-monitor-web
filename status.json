@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T09:06:14Z",
+    "last_updated_utc": "2026-03-23T09:08:17Z",
     "status": "sleeping",
     "pid": 68391,
-    "loop_count": 6591,
+    "loop_count": 6606,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.53,
-      "five": 1.87,
-      "fifteen": 1.85
+      "one": 2.05,
+      "five": 2.03,
+      "fifteen": 1.91
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113526493184,
-    "disk_free_bytes": 131580702720,
-    "runner_log_size_bytes": 677327,
+    "disk_used_bytes": 113530015744,
+    "disk_free_bytes": 131577180160,
+    "runner_log_size_bytes": 677767,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T09:06:19Z",
+    "checked_at_utc": "2026-03-23T09:08:21Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -54,7 +54,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 88796,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 49
       },
       {
         "index": 2,
@@ -75,34 +75,34 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 37,
-        "memory_used_mb": 66195,
+        "utilization_gpu_pct": 71,
+        "memory_used_mb": 65973,
         "memory_total_mb": 97887,
-        "temperature_c": 41
+        "temperature_c": 49
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 89493,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 49
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 83,
+        "utilization_gpu_pct": 85,
         "memory_used_mb": 89493,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 49
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 97,
         "memory_used_mb": 89489,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 52
       }
     ]
   },
@@ -1419,6 +1419,18 @@
         "done_when": "`docs/workflows/git-workflow.md` has an explicit exception for `agent-monitor-web` allowing direct pushes to `main`; Murphy merges feature branches to main without PRs for this repo.",
         "has_plan": false,
         "has_issue": false
+      },
+      {
+        "id": "AGENT-046",
+        "queue": "feature",
+        "created": "2026-03-23",
+        "priority": "High",
+        "status": "open",
+        "task": "Remove slot affinity from session resume (AGENT-025 follow-up)",
+        "context": "Session resume requires same slot and same dispatch mode, making it nearly useless in parallel mode (slot assignment is random with 8 slots). Slot affinity was based on incorrect assumption about CWD;",
+        "done_when": "`_should_resume_session()` has no slot/mode checks; resume prompt includes current slot's merge instructions and draft path; session resume works across any slot.",
+        "has_plan": true,
+        "has_issue": false
       }
     ],
     "completed": [
@@ -1704,5 +1716,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T09:06:20Z"
+  "server_time_utc": "2026-03-23T09:08:22Z"
 }
