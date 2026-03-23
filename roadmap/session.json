@@ -3857,5 +3857,546 @@
         "content": "Now modify `run_worker_once()` for session resume:"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:16.427Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"    def run_worker_once(self) -> Tuple[int, str]:\\n        is_privileged = False  # Only developer review can edit source\\n        if self.maintenance.is_maintenance_task(self._active_task_type):\\n            dispatch = self.read_json(self.cfg.dispatch_task_file, {})\\n            phase = self.maintenance.get_phase(dispatch)\\n            cmd = self.maintenance.get_worker_cmd(phase)\\n       "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:10:16.434Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:19.807Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update the prompt loading to use resume prompt when applicable, and fix the return to include `was_resume`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:20.218Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2672, \"limit\": 40}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:10:20.222Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2672→            dev_session_id = str(_uuid.uuid5(_uuid.NAMESPACE_URL, f\"development:{self.selected_key}:{now_ts()}\"))\n  2673→            cmd.extend([\"--session-id\", dev_session_id])\n  2674→            self._write_dev_session_id(dev_session_id)\n  2675→        else:\n  2676→            # Session resume check (AGENT-025)\n  2677→            dispatch = self.read_json(self.cfg.dispatch_task_file, {})\n  2678→            resume_cmd = (\n  2679→                self._build_resume_cmd(dispatch)\n  2680→                if not disable_resume\n  2681→                and self._should_resume_session(dispatch, current_slot_id=None)\n  2682→                else []\n  2683→            )\n  2684→            if resume_cmd:\n  2685→                cmd = resume_cmd\n  2686→                was_resume = True\n  2687→            else:\n  2688→                cmd = self._build_fresh_worker_cmd()\n  2689→        prompt = self.cfg.runtime_prompt_file.read_text(encoding=\"utf-8\")\n  2690→        timeout_sec = self.cfg.session"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:31.852Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"        prompt = self.cfg.runtime_prompt_file.read_text(encoding=\\\"utf-8\\\")\\n        timeout_sec = self.cfg.session_minutes * 60\\n\\n        # Strip CLAUDECODE so nested claude -p sessions are not blocked.\\n        env = {k: v for k, v in os.environ.items() if k != \\\"CLAUDECODE\\\"}\\n        # Mark agent workers so the pre-commit hook enforces write protection.\\n        # Only developer revie"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:10:31.862Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:36.804Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update `run_worker_with_retries` to handle the new return type and resume fallback."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:37.425Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2718, \"limit\": 60}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:10:37.434Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2718→                timeout=timeout_sec,\n  2719→                check=False,\n  2720→                env=env,\n  2721→            )\n  2722→            output = (proc.stdout or \"\") + (proc.stderr or \"\")\n  2723→            return proc.returncode, output, was_resume\n  2724→        except subprocess.TimeoutExpired as e:\n  2725→            output = (e.stdout or \"\") + (e.stderr or \"\")\n  2726→            return 124, output, was_resume\n  2727→\n  2728→    @staticmethod\n  2729→    def classify_failure(output: str, exit_code: int) -> str:\n  2730→        if exit_code == 0:\n  2731→            return \"none\"\n  2732→        if exit_code in {124, 137}:\n  2733→            return \"timeout\"\n  2734→        if AUTH_FAILURE_PATTERN.search(output or \"\"):\n  2735→            return \"auth_failure\"\n  2736→        if TRANSIENT_PATTERN.search(output or \"\"):\n  2737→            return \"transient_transport\"\n  2738→        return \"nonzero_exit\"\n  2739→\n  2740→    @staticmethod\n  2741→    def error_preview(output: str,"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:50.962Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"    def run_worker_with_retries(self) -> int:\\n        session_exit = 0\\n        transient_retry_attempt = 0\\n        attempt = 0\\n\\n        while True:\\n            attempt += 1\\n            self.write_heartbeat(\\\"running_session\\\", 0, False, 0, self.last_failure_kind, transient_retry_attempt)\\n            self.log_line(f\\\"session_attempt_start loop={self.loop_count} attempt={attempt} tas"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:10:50.974Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:55.955Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add resume failure fallback in the retry loop. Let me read more of the retry logic."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:56.205Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2770, \"limit\": 50}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:10:56.210Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2770→\n  2771→            failure_kind = self.classify_failure(output, session_exit)\n  2772→\n  2773→            # Post-hoc MCP startup failure check (serial mode)\n  2774→            if failure_kind not in (\"timeout\", \"auth_failure\"):\n  2775→                from .utils import MCP_STARTUP_FAILURE_PATTERN\n  2776→                if MCP_STARTUP_FAILURE_PATTERN.search((output or \"\")[:8192]):\n  2777→                    failure_kind = \"mcp_startup_failed\"\n  2778→\n  2779→            self.last_failure_kind = failure_kind\n  2780→            preview = self.error_preview(output, 500)\n  2781→            self.log_line(\n  2782→                f\"session_attempt_error loop={self.loop_count} attempt={attempt} \"\n  2783→                f\"exit_code={session_exit} failure_kind={failure_kind} preview=\\\"{preview}\\\"\"\n  2784→            )\n  2785→\n  2786→            # Auth failures: exponential backoff, then park as waiting_human\n  2787→            if failure_kind == \"auth_failure\":\n  2788→                if att"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:00.153Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Add resume failure handling right after the failure classification:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:04.829Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"            self.last_failure_kind = failure_kind\\n            preview = self.error_preview(output, 500)\\n            self.log_line(\\n                f\\\"session_attempt_error loop={self.loop_count} attempt={attempt} \\\"\\n                f\\\"exit_code={session_exit} failure_kind={failure_kind} preview=\\\\\\\"{preview}\\\\\\\"\\\"\\n            )\\n\\n            # Auth failures: exponential backoff, then"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:04.840Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:08.345Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now modify `reconcile_task_after_run` to accept and store session metadata. Let me read the current signature and the beginning."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:09.077Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2840, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:09.081Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2840→                self.log_line(\n  2841→                    f\"transient_retry_scheduled loop={self.loop_count} attempt={attempt} retry_in_sec={retry_sleep}\"\n  2842→                )\n  2843→                time.sleep(retry_sleep)\n  2844→                self.transient_backoff_sec = min(\n  2845→                    self.cfg.transient_retry_max,\n  2846→                    self.transient_backoff_sec * self.cfg.transient_retry_multiplier,\n  2847→                )\n  2848→                continue\n  2849→"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:12.343Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"def reconcile_task_after_run\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:12.361Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2853:    def reconcile_task_after_run("
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:15.254Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2853, \"limit\": 5}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:15.262Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2853→    def reconcile_task_after_run(\n  2854→        self, key: str, worker_exit: int, outcome_file_override: Path | None = None\n  2855→    ) -> None:\n  2856→        now_val = now_ts()\n  2857→        status = \"in_progress\""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:20.226Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"    def reconcile_task_after_run(\\n        self, key: str, worker_exit: int, outcome_file_override: Path | None = None\\n    ) -> None:\", \"new_string\": \"    def reconcile_task_after_run(\\n        self, key: str, worker_exit: int,\\n        outcome_file_override: Path | None = None,\\n        captured_session_id: Optional[str] = None,\\n        captured_slot_id: Optional[int] = None,\\n        d"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:20.236Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:23.398Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now I need to find where `merged` is populated and add session fields. Let me find where `merged[\"status\"]` is set:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:23.607Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 3020, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:23.611Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3020→            if not str(merged.get(\"channel_id\") or \"\") and self.cfg.default_channel_id:\n  3021→                merged[\"channel_id\"] = self.cfg.default_channel_id\n  3022→            if not str(merged.get(\"task_description\") or \"\").strip():\n  3023→                merged[\"task_description\"] = self.derive_task_description(merged)\n  3024→            if (\n  3025→                (not outcome_key_mismatch)\n  3026→                and outcome_thread_ts\n  3027→                and re.match(r\"^[0-9]+\\.[0-9]+$\", outcome_thread_ts)\n  3028→            ):\n  3029→                merged[\"thread_ts\"] = outcome_thread_ts\n  3030→            merged[\"status\"] = final_status\n  3031→            merged[\"last_update_ts\"] = now_val\n  3032→            if summary:\n  3033→                merged[\"summary\"] = summary\n  3034→            if error:\n  3035→                merged[\"last_error\"] = error\n  3036→            if ts_gt(now_val, str(merged.get(\"last_seen_mention_ts\") or \"0\")):\n  3037→                merged[\""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:26.777Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I need to add session metadata storage right after the project merging and before `ensure_task_text_file`. Also, let me find where the thread snapshot is captured for `session_end_ts`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:27.291Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 3044, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:27.295Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3044→                merged[\"project\"] = list(dict.fromkeys(existing_proj + new_projects))\n  3045→\n  3046→            self.ensure_task_text_file(merged, bucket_name=destination, legacy_text=str(task.get(\"mention_text\") or \"\"))\n  3047→\n  3048→            state.setdefault(\"active_tasks\", {}).pop(key, None)\n  3049→            state.setdefault(\"queued_tasks\", {}).pop(key, None)\n  3050→            state.setdefault(\"incomplete_tasks\", {}).pop(key, None)\n  3051→            state.setdefault(\"finished_tasks\", {}).pop(key, None)\n  3052→            state.setdefault(destination, {})[key] = merged\n  3053→\n  3054→            self.save_state(state)\n  3055→\n  3056→        # Outside state lock: capture thread snapshot so agent replies are recorded.\n  3057→        mention_text_file = str(merged.get(\"mention_text_file\") or \"\")\n  3058→        channel_id = str(merged.get(\"channel_id\") or \"\")\n  3059→        thread_ts = str(merged.get(\"thread_ts\") or \"\")\n  3060→        thread_msgs: List[Dict[str, str]] = ["
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:30.668Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Add session metadata storage right before `self.ensure_task_text_file`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:37.371Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"            self.ensure_task_text_file(merged, bucket_name=destination, legacy_text=str(task.get(\\\"mention_text\\\") or \\\"\\\"))\\n\\n            state.setdefault(\\\"active_tasks\\\", {}).pop(key, None)\\n            state.setdefault(\\\"queued_tasks\\\", {}).pop(key, None)\\n            state.setdefault(\\\"incomplete_tasks\\\", {}).pop(key, None)\\n            state.setdefault(\\\"finished_tasks\\\", {}).pop(ke"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:37.381Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:41.931Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add `session_end_ts` after thread snapshot capture. Let me read the section after thread snapshot."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:42.580Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 3067, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:42.584Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3067→            state.setdefault(\"incomplete_tasks\", {}).pop(key, None)\n  3068→            state.setdefault(\"finished_tasks\", {}).pop(key, None)\n  3069→            state.setdefault(destination, {})[key] = merged\n  3070→\n  3071→            self.save_state(state)\n  3072→\n  3073→        # Outside state lock: capture thread snapshot so agent replies are recorded.\n  3074→        mention_text_file = str(merged.get(\"mention_text_file\") or \"\")\n  3075→        channel_id = str(merged.get(\"channel_id\") or \"\")\n  3076→        thread_ts = str(merged.get(\"thread_ts\") or \"\")"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:45.210Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 3073, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:45.214Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3073→        # Outside state lock: capture thread snapshot so agent replies are recorded.\n  3074→        mention_text_file = str(merged.get(\"mention_text_file\") or \"\")\n  3075→        channel_id = str(merged.get(\"channel_id\") or \"\")\n  3076→        thread_ts = str(merged.get(\"thread_ts\") or \"\")\n  3077→        thread_msgs: List[Dict[str, str]] = []\n  3078→        if mention_text_file and channel_id and re.match(r\"^[0-9]+\\.[0-9]+$\", thread_ts):\n  3079→            thread_msgs = self._fetch_thread_messages(channel_id, thread_ts)\n  3080→            self._store_thread_snapshot(mention_text_file, thread_msgs)\n  3081→\n  3082→        # Delivery guard: if task resolved to \"done\" but thread has no agent\n  3083→        # reply after the latest human message, downgrade to waiting_human.\n  3084→        # This catches cases where Slack MCP was unavailable and the worker\n  3085→        # reported done without actually delivering a response.\n  3086→        #\n  3087→        # Skip when Tribune draft mod"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:53.931Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"        # Outside state lock: capture thread snapshot so agent replies are recorded.\\n        mention_text_file = str(merged.get(\\\"mention_text_file\\\") or \\\"\\\")\\n        channel_id = str(merged.get(\\\"channel_id\\\") or \\\"\\\")\\n        thread_ts = str(merged.get(\\\"thread_ts\\\") or \\\"\\\")\\n        thread_msgs: List[Dict[str, str]] = []\\n        if mention_text_file and channel_id and re.match(r\\\""
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:11:53.941Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:11:58.622Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now I need to add session cleanup at the end of reconcile (for serial mode). Let me find where the function ends — after all gates."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:12:00.145Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"_assemble_project_conversations|_sync_project_conversations|done.*reaction|white_check_mark\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-n\": true, \"head_limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:12:00.163Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "1160:    def _mark_task_done_reaction(self, channel_id: str, mention_ts: str) -> None:\n1168:                \"name\": \"white_check_mark\",\n1172:                    f\"done_reaction_failed channel={channel_id} ts={mention_ts} \"\n1177:                f\"done_reaction_failed channel={channel_id} ts={mention_ts} \"\n3232:            self._mark_task_done_reaction(channel_id, key)\n\n[Showing results with pagination = limit: 10, offset: 0]"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:12:03.233Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 3220, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:12:03.238Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3220→        # Outside state lock: add a check-mark reaction to the original message\n  3221→        # to signal task completion.  For maintenance, only signal on the final\n  3222→        # phase (intermediate phases re-queue the same task).\n  3223→        skip_done_signal = is_maintenance and not self.maintenance.is_final_phase(\n  3224→            self.maintenance.get_phase(merged)\n  3225→        )\n  3226→        if (\n  3227→            final_status == \"done\"\n  3228→            and not skip_done_signal\n  3229→            and channel_id\n  3230→            and re.match(r\"^[0-9]+\\.[0-9]+$\", key)\n  3231→        ):\n  3232→            self._mark_task_done_reaction(channel_id, key)\n  3233→\n  3234→        # Outside state lock: write project tag to task JSON and sync to project JSONs.\n  3235→        # Maintenance tasks review all projects but don't belong to any — skip sync.\n  3236→        all_projects = merged.get(\"project\") if isinstance(merged, dict) else []\n  3237→        if isinstance(al"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:12:07.329Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 3249, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:12:07.334Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3249→\n  3250→        # Maintenance: advance to next phase, or schedule hot restart after final.\n  3251→        # Only act when the phase actually succeeded (landed in finished_tasks).\n  3252→        if is_maintenance and destination == \"finished_tasks\":\n  3253→            phase = self.maintenance.get_phase(merged)\n  3254→            if not self.maintenance.is_final_phase(phase):\n  3255→                if not self.maintenance.advance_phase(key):\n  3256→                    self.log_line(f\"maintenance_advance_failed key={key} phase={phase}\")\n  3257→            else:\n  3258→                self._auto_commit_system_files()\n  3259→                self._restart_requested = True\n  3260→                self.log_line(\"hot_restart_scheduled reason=maintenance_complete\")\n  3261→\n  3262→        # Clean up per-task outcome file after reconciliation.\n  3263→        per_task_outcome = self._outcome_path_for_task(key)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:12:10.244Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 3262, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:12:10.248Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3262→        # Clean up per-task outcome file after reconciliation.\n  3263→        per_task_outcome = self._outcome_path_for_task(key)\n  3264→        if per_task_outcome.exists():\n  3265→            try:\n  3266→                per_task_outcome.unlink()\n  3267→            except OSError:\n  3268→                pass\n  3269→\n  3270→    # ------------------------------------------------------------------\n  3271→    # Tribune post-dispatch review helpers"
+      }
+    ]
   }
 ]
