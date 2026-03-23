@@ -3029,5 +3029,202 @@
         "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>beplxxq6h</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\n{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-4-1\",\"severity\":\"high\",\"category\":\"runtime\",\"file\":\"docs/dev/plans/25-persistent-thread-sessions-impl.md\",\"line\":63,\"scope\":null,\"title\":\"The plan still stamps the prompt hash after the prompt has already been rendered\",\"description\":\"The new hash is captured in `run_worker_once()` / right before `slot.start()` (plan lines 63-69 and 86-89), but the actual prompt file is rendered earlier in the current control flow: serial dispatch calls `render_runtime_prompt()` before `run_worker_with_retries()` (`src/loop/supervisor/runtime.py:3433-3435`), and parallel dispatch calls `_render_slot_prompt()` before command selection (`src/loop/supervisor/runtime.py:3586-3590`). If `session.md`, `loop_context.md`, or another hashed contract file changes after render but before launch, the "
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:57:55.457Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Murphy found 3 more issues in round 4. Let me analyze:\n\n**CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings], round 4 of 5 → continuing (1 round remaining)**\n\n- M-4-1 (high, runtime): Hash captured after prompt rendering, not before. The hash should be captured before any prompt files are read.\n- M-4-2 (high, integration): Resume prompts don't include Tribune feedback, so revision rounds lose the reviewer's comments.\n- M-4-3 (medium, integration): Session cleanup still runs before parallel merge-failure downgrade.\n\nThese are valid but I'm on round 4 of 5. \n\nI need to address all three issues. For the hash capture, I'll move it to the very start before any file reads. For the Tribune feedback problem, I'll trigger a fresh dispatch whenever feedback is present rather than trying to fold it into the resume prompt. And for cleanup, I'll push it past all the post-dispatch gates including the parallel merge verification."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:57:55.557Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings], round 4 of 5 → continuing**\n\nThree valid findings. Fixing for round 5."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:58:12.182Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"#### 1.4a Prompt hash stamping at dispatch time\\n\\nThe `session_prompt_hash` must be recorded **at dispatch time** (before the worker launches), not at reconciliation time. If a behavioral contract file changes while a worker is running, the reconcile-time hash would reflect the new state, but the worker's session still contains the old instructions. On resume, `_shou"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:58:12.188Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:58:14.737Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**M-4-2 fix**: Force fresh dispatch when Tribune feedback is present."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:58:19.322Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"    # Dispatch mode check: serial sessions can't resume in parallel worktrees\\n    # and vice versa (different filesystem roots).\\n    stored_mode = task.get(\\\"session_dispatch_mode\\\", \\\"serial\\\")\\n    current_mode = \\\"parallel\\\" if current_slot_id is not None else \\\"serial\\\"\\n    if stored_mode != current_mode:\\n        return False\", \"new_string\": \"    # Tribune rev"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:58:19.330Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:58:21.980Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**M-4-3 fix**: Make session cleanup happen after ALL post-dispatch gates, including merge verification."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:58:38.422Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"Session fields must NOT be cleared at the initial `finished_tasks` assignment, because post-dispatch gates (delivery guard, Tribune review) can move the task back to `incomplete_tasks` or `waiting_human`. If cleanup happened early, those follow-up dispatches would lose their session and cold-start.\\n\\n**Cleanup location:** After all post-dispatch gates have finalized."
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:58:38.428Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:58:41.129Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Add tests for the new scenarios."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:58:47.278Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"18. **`test_resume_prompt_includes_wakeup_context`** — Resume prompt renders dispatch_token and pending_job_wakeups when present\", \"new_string\": \"18. **`test_resume_prompt_includes_wakeup_context`** — Resume prompt renders dispatch_token and pending_job_wakeups when present\\n19. **`test_tribune_feedback_forces_fresh_dispatch`** — Task with tribune_feedback present get"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:58:47.284Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:58:50.240Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now dispatch round 5 (final round)."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:58:51.939Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"diff /dev/null docs/dev/plans/25-persistent-thread-sessions-impl.md > /tmp/iterative-review-9JRMbB/round5.diff 2>&1; echo \\\"Size: $(wc -c < /tmp/iterative-review-9JRMbB/round5.diff) bytes\\\"\", \"description\": \"Generate diff for round 5\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:58:51.978Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Size:    27592 bytes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:59:06.012Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(cat /tmp/iterative-review-9JRMbB/round5.diff)\\n\\nPRIOR=\\\"## Prior Context\\nRounds 1-3: 14 findings, all fixed.\\nRound 4: 3 findings, all fixed:\\n- M-4-1: Hash captured after prompt render. Fixed: now captured at start of render_runtime_prompt/_render_slot_prompt before reading any files.\\n- M-4-2: Resume drops Tribune feedback. Fixed: _should_resume_session returns False when tribune_feedback present.\\n- M-4-3: Cleanup before merge-failure downgrade. Fixed: dedicated"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:59:11.154Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(cat /tmp/iterative-review-9JRMbB/round5.diff)\\n\\nPRIOR=\\\"## Prior Context\\nRounds 1-3: 14 findings, all fixed.\\nRound 4: 3 findings, all fixed:\\n- M-4-1: Hash captured after prompt render. Fixed: now at render start.\\n- M-4-2: Resume drops Tribune feedback. Fixed: force fresh when tribune_feedback present.\\n- M-4-3: Cleanup before merge-failure downgrade. Fixed: _clear_session_fields after all gates.\\n\\nVerify by reading the actual plan file. Do not re-report resolve"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:59:30.067Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "```json\n{\n  \"mention_ts\": null,\n  \"thread_ts\": null,\n  \"status\": \"done\",\n  \"summary\": \"Approved: The plan for persistent thread sessions is well-designed, comprehensive, and addresses all prior findings. It prioritizes robustness, security, and leverages existing architecture effectively.\",\n  \"completion_confidence\": \"high\",\n  \"requires_human_feedback\": false,\n  \"tribune_verdict\": \"approved\",\n  \"tribune_feedback\": null\n}\n```"
+      }
+    ]
   }
 ]
