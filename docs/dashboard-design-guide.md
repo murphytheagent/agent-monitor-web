@@ -66,7 +66,7 @@ Every visual change must follow the verification workflow in [`verification-work
 
 ## Durable boundary
 
-The root monitor and roadmap pages are still exporter-owned. If those routes need this shell durably, the exporter template must adopt it. Patching the generated HTML can be useful for immediate iteration, but it is not the long-term source of truth.
+The root monitor and roadmap pages are still exporter-owned. If those routes need this shell durably, the exporter template must adopt it. Patching the generated HTML can be useful for immediate iteration, but it is not the long-term source of truth. See [`publishing.md`](publishing.md) for the publisher lifecycle — how to start it, when to restart it after exporter changes, and what it overwrites.
 
 ## Exporter follow-up for root routes
 

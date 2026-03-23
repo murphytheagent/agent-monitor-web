@@ -69,3 +69,15 @@ Before reporting a visual change as done:
 - [ ] Compared against the user's reported issue specifically
 - [ ] No style discontinuities between above-fold and below-fold content
 - [ ] If dark theme: no white/light backgrounds anywhere on the page (`#ffffff`, `rgba(247,...)`, `rgba(255,255,255,0.8+)` are red flags)
+- [ ] If changes touched `dashboard.py` (generated routes): publisher restarted in the `dashboard` tmux session
+
+## Publisher restart for generated routes
+
+If you modified `src/loop/monitor/dashboard.py` to change `/` or `/roadmap/`, the publisher must be restarted before the live URL will reflect your changes. The publisher is a long-lived process that does not hot-reload. Verify the live URL *after* the restart, not before.
+
+```bash
+tmux send-keys -t dashboard C-c
+tmux send-keys -t dashboard "./scripts/dashboard.sh" Enter
+```
+
+Changes to hand-maintained routes (`/showcase/`, `/tokenizers/`) do not require a publisher restart — commit and push directly.
