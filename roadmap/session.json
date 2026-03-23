@@ -123,5 +123,474 @@
         "content_preview": "    43→| AGENT-041 | 2026-03-21 | Medium | open | Overleaf git sync skill | Steady-state workflow for syncing Overleaf projects via local git clone. [Plan](plans/41-overleaf-git-sync.md), [bootstrap plan](plans/42-overleaf-shared-project-bootstrap.md) | Codex skill automates Overleaf pull/push/conflict resolution, including initial project bootstrap. |\n    44→| AGENT-044 | 2026-03-23 | High | open | Decouple dashboard publisher from supervisor | Publisher runs as a daemon thread inside the supervisor (`main.py:64-108`). Murphy can't edit `dashboard.py` (protected `src/` path) or restart the publisher without restarting the whole supervisor. Publisher should be an independent process (own tmux pane or launchd service). Move `src/loop/monitor/` out of the protected path set so Murphy can edit templates and restart the publisher herself. | Publisher runs as a standalone process; Murphy can edit dashboard templates and restart the publisher without supervisor restart; `src/loop/monitor/` i"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:17.781Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me read the git workflow file and check for any linked plan/issue files for AGENT-045."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:18.251Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/workflows/git-workflow.md\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:18.255Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→## Git workflow guardrails\n     2→- The workspace root (`/Users/murphy/Research`) is the coordination repo, and task completion must be checkpointed there.\n     3→- Local git commands are allowed when required by the task and this contract.\n     4→- Never create or switch branches in the root repo. Commit on the current branch.\n     5→- On completion of every task, create a root-repo git commit that includes the task's updated coordination artifacts (at minimum report/state changes and any other files intentionally modified for that task).\n     6→- Use one commit per completed task. Keep commit scope task-specific; do not batch unrelated work.\n     7→- When dispatched to a parallel worktree (environment variables `REPO_ROOT` and `WORKER_BRANCH` are set), merge the worker branch into the main repo before writing the dispatch outcome file. Resolve any merge conflicts. The specific merge command is in the session prompt.\n     8→- **Worktree symlink behavior:** In parallel-dispatch "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:18.730Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \"docs/dev/plans/*45*\"}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:19.358Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \"docs/dev/issues/*45*\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:19.503Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No files found"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:19.502Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No files found"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:19.652Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \"docs/dev/issues/*agent-monitor*\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:19.800Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No files found"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:20.120Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \"docs/dev/issues/*dashboard*\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:20.283Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No files found"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:21.361Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cp /Users/murphy/Research/.claude/commands/iterative-review-schema.json /tmp/iterative-review-JYCOTb/findings-schema.json 2>/dev/null && echo \\\"Schema copied\\\" || echo \\\"Schema not found\\\"\", \"description\": \"Copy findings schema to temp dir\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:21.398Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Schema copied"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:28.622Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Now I have a clear picture of AGENT-045:\n\n**Problem:** Git workflow (line 16) says \"never push directly to main without explicit human instruction.\" Murphy follows this for `agent-monitor-web`, opening PRs instead of merging to main. But GitHub Pages requires content on `main`, and the dashboard exporter already pushes directly to `main`. Murphy should be allowed to merge/push directly to `main` in `agent-monitor-web`.\n\n**Desired outcome:** `docs/workflows/git-workflow.md` has an explicit exception for `agent-monitor-web` allowing direct pushes to `main`; Murphy merges feature branches to main without PRs for this repo.\n\n\nThe fix is straightforward—I just need to add an exception to line 16 of the git workflow doc. Let me check for any dispatch context or Slack thread information first."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:28.627Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Let me check the dispatch context for Slack updates."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:30.723Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /Users/murphy/Research/.agent/runtime/dispatch/task.json 2>/dev/null | python3 -c \\\"import sys,json; d=json.load(sys.stdin); print(f'thread_ts={d.get(\\\\\\\"thread_ts\\\\\\\",\\\\\\\"\\\\\\\")} channel={d.get(\\\\\\\"channel_id\\\\\\\",\\\\\\\"\\\\\\\")}')\\\" 2>/dev/null || echo \\\"No dispatch context\\\"\", \"description\": \"Check dispatch context for Slack thread\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:30.781Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "thread_ts=1774259088.675559 channel=C0AFYQQ4TJ9"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:34.540Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "ToolSearch",
+        "input_preview": "{\"query\": \"select:mcp__slack__conversations_add_message,TodoWrite\", \"max_results\": 2}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:34.544Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": ""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:44.209Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Good, I have the dispatch context and tools ready. Let me set up the task tracking and post a Slack update that I'm starting.\n\nLet me understand AGENT-045 clearly:\n\n**Problem:** Line 16 of `docs/workflows/git-workflow.md` says \"never push directly to a default/protected branch (for example, `main`/`master`) without an explicit human instruction in-task.\" Murphy follows this for `agent-monitor-web`, opening PRs instead of merging to main. But GitHub Pages requires content on `main`, and the dashboard exporter already pushes directly to `main`. Murphy should be allowed to merge/push directly to `main` in `agent-monitor-web`.\n\n\n**Desired outcome:** `docs/workflows/git-workflow.md` needs an explicit exception for `agent-monitor-web` that allows direct pushes to `main`, so Murphy can merge feature branches without going through PRs.\n\nI've got the setup phase complete with both reviewers available and the schema ready. Now I'm moving into the planning phase to outline how I'll modify the git workflow document, then I'll proceed through review, implementation, and finalization.\n\nLet me start by posting a Slack update to keep everyone informed."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:46.678Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Phase 1: Setup — parse scope, check prerequisites\", \"status\": \"completed\", \"activeForm\": \"Setting up review environment\"}, {\"content\": \"Phase 2: Plan — write implementation plan for AGENT-045\", \"status\": \"in_progress\", \"activeForm\": \"Writing implementation plan for AGENT-045\"}, {\"content\": \"Phase 3: Review the plan with Tribune + Murphy\", \"status\": \"pending\", \"activeForm\": \"Reviewing the plan\"}, {\"content\": \"Phase 4: Implement the approved plan\", \"status\": \"pending\", \"act"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:46.681Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:48.268Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "mcp__slack__conversations_add_message",
+        "input_preview": "{\"channel_id\": \"C0AFYQQ4TJ9\", \"thread_ts\": \"1774259088.675559\", \"text\": \"Starting AGENT-045: Add `agent-monitor-web` merge carve-out to git workflow. Running `/iterative-review` with max 5 rounds. Phase 1 (setup) complete — both reviewers available. Moving to Phase 2 (plan).\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:49.016Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "MsgID,UserID,UserName,RealName,Channel,ThreadTs,Text,Time,Reactions,BotName,FileCount,AttachmentIDs,HasMedia,Cursor\n"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:53.286Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "## Phase 2: Plan\n\nLet me review the relevant context more carefully to write the plan. I need to understand:\n1. The current git workflow rule (line 16)\n2. The existing `agent-monitor-web` pointer drift note (line 9)\n3. How the dashboard exporter currently pushes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:54.616Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"agent-monitor-web\", \"path\": \"/Users/murphy/Research/docs/workflows/git-workflow.md\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:54.632Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "9:- **`agent-monitor-web` pointer drift:** The dashboard exporter pushes snapshots to `projects/agent-monitor-web` continuously. When syncing the root repo's submodule pointer after working on the site, take the current published HEAD — extra commits are just newer dashboard snapshots, not conflicts to report.\n41:  Then update the root submodule pointer to the merged HEAD. This is critical for `projects/agent-monitor-web`, where a lingering feature branch blocks the dashboard exporter from pushing."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:49:55.412Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"agent-monitor-web\", \"path\": \"/Users/murphy/Research\", \"output_mode\": \"content\", \"glob\": \"*.md\", \"head_limit\": 20}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:49:55.445Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "CLAUDE.md:30:The dashboard is deployed as a **GitHub Pages static site**. The supervisor runs a daemon thread that exports `index.html` + `status.json` to the `projects/agent-monitor-web` submodule and pushes to GitHub every `SLEEP_NORMAL` seconds. The published site is at `murphytheagent.github.io/agent-monitor-web`.\nCLAUDE.md:34:- `DASHBOARD_EXPORT_DIR` — export target (default: `projects/agent-monitor-web`)\nCLAUDE.md:42:python3 -m src.loop.monitor.dashboard --once --export-static-dir projects/agent-monitor-web\ndocs/operations.md:37:The dashboard is deployed as a **GitHub Pages static site**, not an HTTP server. A background loop exports `index.html` + `status.json` to the `projects/agent-monitor-web` submodule and pushes to GitHub on each cycle. The published site is at `murphytheagent.github.io/agent-monitor-web`.\ndocs/operations.md:41:- `DASHBOARD_EXPORT_DIR` — export target (default: `projects/agent-monitor-web`)\ndocs/operations.md:53:    --export-static-dir projects/agent-monito"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:50:00.164Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/workflows/git-workflow.md\", \"offset\": 14, \"limit\": 4}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:50:00.169Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    14→- For project/MCP repositories (or any repo where a remote workflow is in use), delivery must be pull-request based: publish local commits on a non-default branch, open/update a PR, and keep that PR current for review.\n    15→- **Upstream PR targeting for forked projects:** When a project repository is a fork (i.e., `origin` is the personal fork and `upstream` is the canonical repository), default the PR base to the upstream repository's default branch, not the fork. Before opening a PR, confirm: (1) the upstream remote exists, (2) the PR base repo is upstream, and (3) the PR base branch is the upstream default branch. For branch publishing: if you have push permission to the upstream branch namespace, push the branch to upstream and open an upstream-to-upstream PR; otherwise, push to the fork (`origin`) and open a fork-to-upstream PR.\n    16→- In project/MCP repositories, never push directly to a default/protected branch (for example, `main`/`master`) without an explicit human "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:50:03.388Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now I have full context. Let me write the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:50:19.822Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Write",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/45-agent-monitor-web-merge-carveout.md\", \"content\": \"# AGENT-045: Add `agent-monitor-web` merge carve-out to git workflow\\n\\n## Problem\\n\\nLine 16 of `docs/workflows/git-workflow.md` says:\\n> In project/MCP repositories, never push directly to a default/protected branch (for example, `main`/`master`) without an explicit human instruction in-task.\\n\\nMurphy follows this literally for `agent-monitor-web`, opening PRs and waiting for merge instea"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:50:19.851Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "File created successfully at: /Users/murphy/Research/docs/dev/plans/45-agent-monitor-web-merge-carveout.md"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:50:23.475Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "## Phase 3: Review the Plan"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:50:25.692Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Phase 1: Setup — parse scope, check prerequisites\", \"status\": \"completed\", \"activeForm\": \"Setting up review environment\"}, {\"content\": \"Phase 2: Plan — write implementation plan for AGENT-045\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan for AGENT-045\"}, {\"content\": \"Phase 3: Review the plan with Tribune + Murphy\", \"status\": \"in_progress\", \"activeForm\": \"Reviewing the plan\"}, {\"content\": \"Phase 4: Implement the approved plan\", \"status\": \"pending\", \"a"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:50:25.694Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:50:29.048Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Collecting the plan diff and dispatching reviewers."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:50:29.810Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git diff /dev/null -- docs/dev/plans/45-agent-monitor-web-merge-carveout.md\", \"description\": \"Get diff of the plan file for review\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:50:29.859Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Exit code 128\nfatal: bad revision '/dev/null'"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:50:33.171Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"diff /dev/null /Users/murphy/Research/docs/dev/plans/45-agent-monitor-web-merge-carveout.md || true\", \"description\": \"Generate synthetic diff for the new plan file\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:50:33.216Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "0a1,53\n> # AGENT-045: Add `agent-monitor-web` merge carve-out to git workflow\n> \n> ## Problem\n> \n> Line 16 of `docs/workflows/git-workflow.md` says:\n> > In project/MCP repositories, never push directly to a default/protected branch (for example, `main`/`master`) without an explicit human instruction in-task.\n> \n> Murphy follows this literally for `agent-monitor-web`, opening PRs and waiting for merge instead of pushing directly to `main`. But `agent-monitor-web` is a GitHub Pages site where:\n> 1. The dashboard exporter already pushes directly to `main` (automated, no PR).\n> 2. GitHub Pages serves from `main` — content must land on `main` to be published.\n> 3. The PR workflow creates friction: feature branches block the exporter (documented in line 41), and PRs are unnecessary overhead for a continuously-overwritten static site.\n> \n> The existing git-workflow already has two `agent-monitor-web`-specific notes (lines 9 and 41) but neither explicitly overrides the line 16 prohibition.\n> \n"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:50:36.454Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me build the reviewer prompts and dispatch both reviewers in parallel."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:50:56.340Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(diff /dev/null /Users/murphy/Research/docs/dev/plans/45-agent-monitor-web-merge-carveout.md || true)\\n\\nTRIBUNE_PROMPT=\\\"You are the Tribune — an independent quality reviewer. Review the following code changes for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\\n2. **Security issues**: Injection, auth bypass, sensitive data exposure\\n3. **Contract violations**: Does the code violate documented interfaces, schemas, or in"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:51:07.597Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(diff /dev/null /Users/murphy/Research/docs/dev/plans/45-agent-monitor-web-merge-carveout.md || true)\\n\\nMURPHY_PROMPT=\\\"You are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following code changes for:\\n\\n1. **Runtime failures**: Will this crash, hang, or produce wrong results in real usage?\\n2. **Edge cases**: Unusual inputs, empty collections, concurrent access, large data\\n3. **Test coverage*"
+      }
+    ]
   }
 ]
