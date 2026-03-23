@@ -3019,5 +3019,15 @@
         "input_preview": "{\"task_id\": \"beplxxq6h\", \"block\": true, \"timeout\": 300000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:57:43.512Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>beplxxq6h</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\n{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-4-1\",\"severity\":\"high\",\"category\":\"runtime\",\"file\":\"docs/dev/plans/25-persistent-thread-sessions-impl.md\",\"line\":63,\"scope\":null,\"title\":\"The plan still stamps the prompt hash after the prompt has already been rendered\",\"description\":\"The new hash is captured in `run_worker_once()` / right before `slot.start()` (plan lines 63-69 and 86-89), but the actual prompt file is rendered earlier in the current control flow: serial dispatch calls `render_runtime_prompt()` before `run_worker_with_retries()` (`src/loop/supervisor/runtime.py:3433-3435`), and parallel dispatch calls `_render_slot_prompt()` before command selection (`src/loop/supervisor/runtime.py:3586-3590`). If `session.md`, `loop_context.md`, or another hashed contract file changes after render but before launch, the "
+      }
+    ]
   }
 ]
