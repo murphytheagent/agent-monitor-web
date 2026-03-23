@@ -1768,5 +1768,66 @@
         "input_preview": "{\"task_id\": \"brzmqgwx6\", \"block\": true, \"timeout\": 300000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:24:34.043Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>brzmqgwx6</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\n{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-1-1\",\"severity\":\"high\",\"category\":\"integration\",\"file\":\"src/loop/supervisor/utils.py\",\"line\":153,\"scope\":null,\"title\":\"Resume safety hash omits files that change worker behavior\",\"description\":\"The plan’s main safety invariant is that a resumed task must go fresh whenever the worker contract changes, but `SYSTEM_PROMPT_FILES` does not currently cover all of that contract. In particular, `docs/persistent-files.md` is required by `AGENTS.md` on every task start, and the plan also introduces `src/prompts/session_resume.md` plus behavior changes in `src/prompts/loop_context.md`. Changes in any of those files would leave `session_prompt_hash` unchanged, so a task could resume under stale file-layout or loop-mode instructions.\",\"suggestion\":\"Expand the hashed contract surface to"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:00.922Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Murphy returned 5 findings, all substantive. Let me analyze both reviewer outputs:\n\n**Tribune (gemini-2.5-flash):**\n- T-1-1 (medium, contract): Silent `--ephemeral` removal from user WORKER_CMD\n\n**Murphy (Codex):**\n- M-1-1 (high, integration): SYSTEM_PROMPT_FILES doesn't cover all files that affect resumed worker behavior (loop_context.md, session_resume.md, persistent-files.md)\n\n\n- M-1-2 (high, runtime): `last_update_ts` isn't a reliable session boundary since scheduler operations rewrite it\n- M-1-3 (high, integration): Resume command is hard-coded and ignores user-configurable WORKER_CMD, breaking custom flags and paths\n- M-1-4 (high, edge_case): Slot affinity design conflicts with the current slot-first scheduler where slots claim tasks rather than the reverse\n- M-1-5 (medium, testing): Missing integration test validating the resume CLI actually works\n\nWe're on round 1 of 5 with both reviewers contributing findings, so I'll keep going.\n\nNow I'm working through the fixes: the WORKER_CMD issue appears in both reviews, so I'll derive the resume command from the configured value instead of hard-coding it and document how --ephemeral gets stripped. I need to add the loop and session resume docs to the system prompt files. For the timestamp problem, I should introduce a dedicated field like `session_end_ts` or `last_prompt_ts` to replace the unstable `last_update_ts`. The slot affinity conflict is real given the scheduler's design—I can either skip affinity for now or restructure task selection to be affinity-aware, with deferring being the simpler path.\n\nGiven the \"simple and robust\" principle, removing slot affinity entirely makes sense since sessions are tied to worktree paths anyway, making cross-worktree resume unsafe. Without affinity, parallel dispatch becomes fresh dispatch, but session resume still delivers value in serial and loop modes where the same slot naturally handles the task. Loop mode is the real win here, and that's worth the trade-off.\n\nFor parallel mode specifically, there's no guarantee the same slot claims a task again even if it's idle — another slot could grab it first. So the pragmatic approach is to skip affinity altogether and check at dispatch time whether the slot matches the task's session slot ID, falling back to fresh dispatch if it doesn't. This keeps things simple without the complexity of trying to enforce slot selection in the scheduler.\n\nThe integration test for M-1-5 would be ideal but requires a real codex binary, which isn't practical for automation — though the Phase 0 spike already validated the CLI interface manually, so I'll note that as sufficient validation for now."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:03.638Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Both reviewers returned findings. Let me analyze and fix the plan.\n\n**CONVERGENCE CHECK: Tribune=[findings], Murphy=[findings], round 1 of 5 → continuing**\n\nRound 1 findings summary:\n- **T-1-1** (medium): Silent `--ephemeral` removal from user-configured `WORKER_CMD` — overlaps with M-1-3\n- **M-1-1** (high): `SYSTEM_PROMPT_FILES` missing `loop_context.md`, `session_resume.md`\n- **M-1-2** (high): `last_update_ts` is not a stable session boundary for filtering new messages\n- **M-1-3** (high): Resume command hard-coded, bypasses user `WORKER_CMD` config\n- **M-1-4** (high): Slot affinity doesn't fit the slot-first scheduler\n- **M-1-5** (medium): No integration test for the resume CLI shape\n\nT-1-1 and M-1-3 are duplicates (both about WORKER_CMD handling). All findings are valid. Let me apply fixes to the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:04.463Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:25:04.667Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# AGENT-025 Implementation Plan: Persistent Thread Sessions\n     2→\n     3→**ROADMAP entry:** AGENT-025\n     4→**Reference plan:** `docs/dev/plans/37-persistent-thread-sessions.md`\n     5→**Status:** Implementation plan for Phase 1 (remaining), Phase 2, and Phase 3\n     6→\n     7→## Scope\n     8→\n     9→Phase 0 (spike) and Phase 1 foundation are already complete:\n    10→- `system_prompt_hash()` and `capture_codex_session_id()` in `utils.py` with tests\n    11→- `SYSTEM_PROMPT_FILES` tuple listing behavioral contract files\n    12→\n    13→This plan covers the remaining implementation:\n    14→- **Phase 1**: Wire session resume into dispatch and reconciliation\n    15→- **Phase 2**: Mid-execution thread awareness (behavioral contract only)\n    16→- **Phase 3**: Loop mode session resume optimization\n    17→\n    18→## Phase 1: Session Resume Wiring\n    19→\n    20→### 1.1 Config changes\n    21→\n    22→**`src/config/supervisor_loop.conf`:**\n    23→- Add `SESSION_RESUME_ENABLED` flag (defa"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:08.042Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me apply fixes to the plan based on all findings."
+      }
+    ]
   }
 ]
