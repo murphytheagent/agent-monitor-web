@@ -383,5 +383,171 @@
         "content_preview": "46716260a19b2f0f67ac8f8ae8d2e7ece135e55a 2026-02-21 00:50:57 -0800 Checkpoint PR #3 follow-up ingestion fixes\nbc0b2494f430a15b6e973b44b47a0a2ebd386cda 2026-02-21 00:40:41 -0800 WIP: checkpoint ingestion PR feedback fixes (1771661351)\n3d769b696208505595e87360d3117d377a5398aa 2026-02-21 00:31:11 -0800 WIP: checkpoint small-swe-train ingestion kickoff\n8fcca484b5b4dcaf9484b14363d3a4417a4fa3af 2026-02-21 00:20:45 -0800 WIP: checkpoint blocked status for task 1771660218.903549\n25e45f86097f86b48ec4507cb3a2a1807cd26519 2026-02-21 00:16:53 -0800 WIP: checkpoint no-reply status for task 1771660218.903549\nc074c86b5a9915c64329bf875c011e51b105b9c5 2026-02-21 00:13:11 -0800 WIP: log no-reply checkpoint for task 1771660218.903549\ndc056b6802a80c30b830d01c99abc5b4ac411a14 2026-02-21 00:09:48 -0800 WIP: log waiting checkpoint for task 1771660218.903549\n705079cc8cd82f07df9608bffea619e37fb123c6 2026-02-21 00:06:08 -0800 WIP: log review checkpoint for task 1771660218.903549\n7df8dd455ddbb0589b7f2718c61d1c33"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:19:31.685Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Now I have a complete picture. Let me understand the full history:\n\nThe system started on 2026-02-18 with \"init: from Z, human\" and \"policy: require root commit per task and nested git repos for project code\".\n\nLet me now trace the natural arc:\n\n**Phase 1: Foundation (Feb 18-19)** - Initial setup, supervisor-worker architecture, submodule workflow, Slack MCP\n**Phase 2: Worker Runtime (Feb 19-20)** - Task execution, MCP improvements, thread management, maintenance\n**Phase 3: Modularization (Feb 20)** - Refactored into src/ modules, scripts/ directory, Python supervisor\n\n\n**Phase 4: Quality & Reliability (Feb 27 - Mar 7)** - Introduced systematic fixes through AGENT-001 to AGENT-014, implemented task-specific JSON configs and hot restart capabilities\n**Phase 5: Advanced Features (Mar 7-13)** - Added persistence for consultations, user profiling, skill tracking, and session resumption with more natural communication patterns\n**Phase 6: Multi-Agent & Parallel (Mar 12-20)** - Enabled parallel task dispatch using worktrees and concurrent writes while adding hang detection\n**Phase 7: Quality Gates (Mar 20-21)** - Implemented Tribune for iterative review and ecosystem scouting\n**Phase 8: Observability (Mar 17-23)** - Redesigned the dashboard, added backlog visibility, and publisher improvements\n\nI'm reconsidering this approach—the phases should reflect what actually got built rather than what I predicted. Looking at the completed work chronologically, I can see the natural progression emerging from the backlog and changelog. The early work focused on bootstrapping the system with supervisor-worker architecture and converting task definitions to JSON. Then came the stabilization phase with faster polling, per-task outcome tracking, and the groundwork for multi-agent support through atomic operations.\n\nWorker reliability became the focus next, addressing watchdog failures, thread safety, and state consistency issues. After that came developer tooling improvements and optimizations around Python runtime and state management. Most recently, the work shifted toward agent identity and communication patterns, including removing unnecessary acknowledgments and refining how agents interact with the consultation system. Looking at the final sprint push, I'm mapping out the review and refinement work—iterative review skills, bug fixes across the Tribune system, user profiling, and dispatch improvements, followed by a polish phase that includes persistent sessions, dashboard decoupling, and various cleanup fixes.\n\nNow I'm identifying the core themes that tie this work together: the supervisor's dispatch loop and task lifecycle, the parallel execution model with worker isolation through worktrees and atomic operations, and the reliability layer that keeps individual workers healthy through watchdogs and failure handling.\n\nThen there's the research pipeline that orchestrates end-to-end task execution with MCP consultation and visualization, quality gates that enforce code review standards, how the agent presents itself and manages communication context, and finally the observability layer that gives visibility into what's happening across the system.\n\nLooking at these nine themes, I'm noticing significant overlap. Agent identity and communication really feed into the research pipeline's output, skills are part of the broader system architecture, and data resilience is a smaller concern that could nest elsewhere. Let me consolidate this down to 6-7 core themes that actually tell the story: supervisor core handling the dispatch loop and task lifecycle, parallel dispatch for multi-agent coordination, and worker reliability ensuring watchdogs and session persistence work properly.\n\nActually, I'm realizing the supervisor core and parallel dispatch could merge since they're really the same evolution, but they're distinct enough in the timeline that keeping them separate makes sense. Let me lock in the themes that capture the actual narrative: supervisor and task lifecycle as the foundation from February onward, then multi-agent...\n\nContinuing with parallel dispatch starting late February, worker resilience in early March, the research and consultation work Murphy actually performs, quality gates and review automation from March onward, and finally how Murphy communicates and maintains identity across interactions.\n\nNow I'm identifying the seven core themes that shape the project narrative. I need to map every completed item and open task back to these themes and their associated milestones, then structure that into a comprehensive roadmap document."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:19:31.686Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now I have a complete picture of the system's history. Let me proceed to **Phase 2: Plan**."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:19:32.211Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "ToolSearch",
+        "input_preview": "{\"query\": \"select:TodoWrite\", \"max_results\": 1}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:19:32.216Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": ""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:19:38.285Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Phase 1: Setup — parse scope, check prerequisites\", \"status\": \"completed\", \"activeForm\": \"Setting up review environment\"}, {\"content\": \"Phase 2: Write implementation plan for AGENT-047\", \"status\": \"in_progress\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Phase 3: Review the plan (Tribune + Murphy)\", \"status\": \"pending\", \"activeForm\": \"Reviewing the plan\"}, {\"content\": \"Phase 4: Implement — build roadmap.json from history\", \"status\": \"pending\", \"activeForm\""
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:19:38.288Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:19:42.952Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now writing the implementation plan based on the full git history analysis."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:20:31.946Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Write",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/49-roadmap-history-backfill.md\", \"content\": \"# Plan 49: Backfill Strategic Roadmap from Git History\\n\\n**Status:** in_review\\n**Created:** 2026-03-23\\n**Updated:** 2026-03-23\\n\\n## Goal\\n\\nPopulate `docs/dev/roadmap.json` with the complete history of agent system development by mining the git commit log, so the roadmap reflects the full arc — not just the current snapshot.\\n\\n## Analysis: Themes from Actual History\\n\\nMining 1786 commits (Feb "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:20:31.964Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/49-roadmap-history-backfill.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:20:36.750Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Phase 1: Setup — parse scope, check prerequisites\", \"status\": \"completed\", \"activeForm\": \"Setting up review environment\"}, {\"content\": \"Phase 2: Write implementation plan for AGENT-047\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Phase 3: Review the plan (Tribune + Murphy)\", \"status\": \"in_progress\", \"activeForm\": \"Reviewing the plan\"}, {\"content\": \"Phase 4: Implement — build roadmap.json from history\", \"status\": \"pending\", \"activeFor"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:20:36.752Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:20:40.463Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "## Phase 3: Review the Plan\n\nCollecting the diff of the plan file."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:20:41.241Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git diff HEAD -- docs/dev/plans/49-roadmap-history-backfill.md\", \"description\": \"Collect plan diff for review\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:20:41.294Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "diff --git a/docs/dev/plans/49-roadmap-history-backfill.md b/docs/dev/plans/49-roadmap-history-backfill.md\nindex 085cd6d..c79b1ee 100644\n--- a/docs/dev/plans/49-roadmap-history-backfill.md\n+++ b/docs/dev/plans/49-roadmap-history-backfill.md\n@@ -1,39 +1,108 @@\n # Plan 49: Backfill Strategic Roadmap from Git History\n \n-**Status:** proposed\n+**Status:** in_review\n **Created:** 2026-03-23\n+**Updated:** 2026-03-23\n \n ## Goal\n \n Populate `docs/dev/roadmap.json` with the complete history of agent system development by mining the git commit log, so the roadmap reflects the full arc — not just the current snapshot.\n \n-## Background\n+## Analysis: Themes from Actual History\n \n-The strategic roadmap was just created with 5 themes inferred from the current backlog. But the system has been evolving since February 2026 and the current themes may not capture the real story. The commit history, BACKLOG completed table, and CHANGELOG contain the ground truth of what was actually built and when.\n+Mining "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:20:45.044Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good, the diff is ~5KB. Now dispatching both reviewers in parallel."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:20:59.260Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"PLAN_DIFF=$(git diff HEAD -- docs/dev/plans/49-roadmap-history-backfill.md)\\n\\nTRIBUNE_PROMPT=\\\"You are the Tribune — an independent quality reviewer. Review the following code changes for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\\n2. **Security issues**: Injection, auth bypass, sensitive data exposure\\n3. **Contract violations**: Does the code violate documented interfaces, schemas, or invariants?\\n4. **Error handling gaps**: Mi"
+      }
+    ]
   }
 ]
