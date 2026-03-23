@@ -1361,5 +1361,118 @@
         "input_preview": "{\"command\": \"BASELINE_DIFF=\\\"$(cat /tmp/iterative-review-pLKMz4/baseline-R2.diff)\\\"\\n\\nPRIOR_CONTEXT=\\\"## Prior Round Context (Round 1)\\n\\n### Tribune findings:\\n- T-044-1 (high, contract): Whitelisting src/loop/monitor/* in pre-commit hook violates system code protection invariant. → **Addressed**: Added risk justification section explaining operational independence, read-only nature of the module, and explicit ROADMAP requirement.\\n- T-044-2 (medium, architecture): HTTP server as process keep-"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:44:20.696Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "```json\n{\n  \"verdict\": \"approve\",\n  \"findings\": [],\n  \"summary\": \"No issues found.\"\n}\n```"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:45:11.580Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Tribune (gemini-2.5-pro) approves. Let me parse that — need to extract JSON from the markdown fencing.\n\nTribune: approve\nMurphy: findings (3 findings - M-2-1, M-2-2, M-2-3)\n\n**CONVERGENCE CHECK: Tribune=approve, Murphy=findings (3), round 2 of 5 → continuing**\n\nLet me analyze Murphy's round 2 findings:\n\nM-2-1 (high, integration, reopens M-1-1): Shell launcher still diverges from supervisor config semantics. Three specific issues:\n1. `source .env` overwrites env vars, while `load_dotenv()` only fills missing keys\n\n\n2. Truthy matcher omits `y`/`Y`\n3. Script doesn't pass `--interval` or `--gpu-poll-interval-sec`, so `dashboard.py`'s `read_supervisor_default()` reads from hardcoded path\n\nM-2-2 (medium, testing, reopens M-1-3): Tests still don't exercise the new standalone path (headless mode, shell wrapper).\n\nM-2-3 (medium, operational): `docs/operations.md` not updated.\n\nM-2-1 is the real blocker here — the environment variable handling and missing CLI flags are creating a fundamental mismatch between how the shell launcher and dashboard initialize themselves. I need to think through whether the right fix is to align the launcher with supervisor semantics or rethink the initialization flow entirely.\n\nThe core problem is that `read_supervisor_default()` always reads from the hardcoded config path regardless of what `LOOP_CONFIG_FILE` points to, which was already a limitation in the daemon thread. For the `.env` precedence issue, I could guard the export to only set variables that aren't already in the environment, or just skip sourcing `.env` entirely and let the calling shell's environment pass through. but only for undefined vars. In bash: `grep -v '^\\s*#' .env | while read line; do eval \"export ${line?}\"; done` — but that's fragile. The simplest: just don't source `.env` in the shell script. The Python module can source it via its own loading if needed, or the user sets env vars in their tmux session.\n\nActually wait, let me re-read. The issue is that `source .env` with `set -a` will overwrite env vars that are already set, while `load_dotenv()` in Python only fills missing keys. I could write a bash loop that only exports variables that aren't already defined, trimming whitespace and skipping comments and empty lines.\n\nBut this is getting unnecessarily complicated. Let me step back: does the dashboard launcher even need to source `.env` at all? The supervisor already handles it in Python with `load_dotenv()`. For the standalone dashboard, if the user runs it from the same tmux session as the supervisor, the environment is already available. If they're in a different pane, they might need those values, but the cleanest solution is to let Python handle the dotenv loading rather than duplicating that logic in bash. I could either add a `load_dotenv()` call to the dashboard's main function, or just document that environment variables should be set before launching.\n\nActually, the real fix is to make the Python entry point responsible for all configuration loading and keep the bash launcher minimal — just selecting the Python interpreter and executing the module. This avoids the semantic mismatch between bash and Python config handling entirely. I'll redesign the launcher to be a thin wrapper that picks the right Python version and passes control to the dashboard module with a flag indicating it should load from config.\n\nNow I'm thinking through how to implement the `--from-config` mode in the dashboard's main function. It needs to load the dotenv file, read the config path from the environment or use a default, parse boolean values correctly, and translate all the dashboard configuration into the equivalent CLI arguments. The challenge is that dashboard.py currently doesn't depend on the supervisor's utilities, so I'd either need to add that dependency or reuse the config reading logic that's already in dashboard.py itself, which has its own way of handling the supervisor defaults.\n\nThe real question is whether the risk of config divergence is worth solving. Since the dashboard runs in the same environment as the supervisor and is only used by one operator, the chance of someone accidentally using different config values is pretty low. But Murphy's right that it's not sound. The simplest approach might be to have the bash script pass the config as CLI arguments directly from Python, or use `set -a` with source to export everything as environment variables that the dashboard can read.\n\nLooking at what `dashboard.py` already does, it reads from environment variables first, then falls back to the config file. The missing piece is just loading the `.env` file at startup. If I add that to the Python entry point, the dashboard would have everything it needs without requiring the bash script to do any config parsing. I'm realizing the cleanest approach is to add environment variable fallbacks directly to the argparse defaults in `dashboard.py`, load `.env` at startup, and let CLI arguments override those defaults—this keeps the bash script minimal while maintaining flexibility. I should also add a note about testing headless mode in an integration test and check whether `docs/operations.md` already exists for the ops documentation task."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:45:11.581Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**CONVERGENCE CHECK: Tribune=approve (gemini-2.5-pro, capacity fallback from gemini-3.1-pro-preview), Murphy=findings (3), round 2 of 5 → continuing**\n\nLet me check the ops doc Murphy mentioned and verify the config loading claims."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:45:11.582Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \"docs/operations*\"}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:45:12.362Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"def load_dotenv|def parse_bool\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/utils.py\", \"output_mode\": \"content\", \"-A\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:45:12.368Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "76:def parse_bool(value: str) -> bool:\n77-    return str(value).strip().lower() in {\"1\", \"true\", \"yes\", \"y\", \"on\"}\n78-\n79-\n80-def iso_from_ts_floor(ts: str) -> str:\n81-    try:\n82-        sec = int(ts.split(\".\")[0]) if ts else 0\n83-        return datetime.fromtimestamp(sec, tz=timezone.utc).strftime(\"%Y-%m-%d %H:%M UTC\")\n84-    except Exception:\n85-        return \"\"\n86-\n87-\n88-def short_ts_format(ts: str) -> str:\n89-    \"\"\"Short human-readable timestamp: '2026 Mar 22 00:53 UTC'.\"\"\"\n90-    if not ts:\n91-        return \"\"\n--\n204:def load_dotenv(path: Path) -> None:\n205-    if not path.exists():\n206-        return\n207-    for raw in path.read_text(encoding=\"utf-8\").splitlines():\n208-        line = raw.strip()\n209-        if not line or line.startswith(\"#\") or \"=\" not in line:\n210-            continue\n211-        key, val = line.split(\"=\", 1)\n212-        key = key.strip()\n213-        val = val.strip().strip('\"').strip(\"'\")\n214-        os.environ.setdefault(key, val)\n215-\n216-\n217-def resol"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:45:12.388Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/Users/murphy/Research/docs/operations.md"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:45:16.114Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"dashboard|publisher\", \"path\": \"/Users/murphy/Research/docs/operations.md\", \"output_mode\": \"content\", \"-C\": 3}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:45:16.131Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "1-# Operations Guide\n2-\n3:Detailed operational procedures for the supervisor, dashboard, and maintenance. Referenced from `CLAUDE.md`.\n4-\n5-## Running the Supervisor\n6-\n--\n34-\n35-## Monitoring Dashboard\n36-\n37:The dashboard is deployed as a **GitHub Pages static site**, not an HTTP server. A background loop exports `index.html` + `status.json` to the `projects/agent-monitor-web` submodule and pushes to GitHub on each cycle. The published site is at `murphytheagent.github.io/agent-monitor-web`.\n38-\n39-Dashboard export is enabled by default and configured via `supervisor_loop.conf` / environment variables:\n40-- `DASHBOARD_EXPORT_ENABLED` — enable/disable (default: `true`)\n--\n49-while true; do\n50-  source src/config/supervisor_loop.conf >/dev/null 2>&1\n51-  interval=${SLEEP_NORMAL:-120}\n52:  python3 -m src.loop.monitor.dashboard --once \\\n53-    --export-static-dir projects/agent-monitor-web \\\n54-    --static-git-push on --static-git-branch main --static-git-remote origin\n55-  sleep \"$inte"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:45:40.833Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "M-2-3 is valid — `docs/operations.md` has a \"Monitoring Dashboard\" section that documents the old bash loop approach. That needs updating.\n\nNow let me address the findings:\n\nM-2-1 (reopens M-1-1): The simplest fix is to make the bash script minimal and move config loading into Python. I'll redesign the approach:\n- The bash script just selects the Python interpreter and execs\n- Dashboard `main()` in Python: when `--from-config` flag is set, load `.env` via the same `load_dotenv()` from utils (or a local equivalent), read `DASHBOARD_*` env vars, and use them as defaults\n\n\n- This eliminates all shell-level config parsing\n\nLooking at the current `dashboard.py`, it already has `SUPERVISOR_LOOP_CONFIG_FILE` hardcoded and `read_supervisor_default()`, so the module already reads from the conf file. The only gap is `.env` loading. I can add a minimal `_load_dotenv()` function directly to `dashboard.py` to handle environment variables without introducing a new dependency.\n\nThe simplest approach is to add a `--from-config` flag to the dashboard's `main()` that loads `.env` using `os.environ.setdefault()`, sources the config from `LOOP_CONFIG_FILE` or the default path via `read_supervisor_default()`, and reads the `DASHBOARD_*` env vars that get populated from sourcing the conf file. The bash script then just becomes the interpreter plus `exec python3 -m ... --headless --from-config` with no config parsing at the shell level.\n\nBut wait, I'm realizing this creates a dependency from `dashboard.py` on the supervisor modules, which I wanted to avoid. Let me reconsider—actually, looking at the existing code, `dashboard.py` already references the supervisor config file directly, so that dependency already exists.\n\nThe cleaner approach is to add the missing pieces directly to `dashboard.py`: dotenv loading, reading `DASHBOARD_*` environment variables, and respecting the `LOOP_CONFIG_FILE` override. This keeps everything in one place without additional shell-level complexity.\n\nSo I'll simplify the launcher to just be a minimal bash wrapper that invokes the Python module, then add a `--from-config` flag to `dashboard.py` that handles loading the `.env` file and applying environment-based configuration as defaults.\n\nActually, I can make this even simpler by tying it to the `--headless` flag—when running in headless mode (production), automatically load config from environment and `.env`, while interactive mode (development) continues using CLI arguments as before. Any explicit CLI flags would still override the loaded defaults. Let me refine the plan with this approach."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:45:42.695Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Verified: `parse_bool()` accepts `y`/`Y` (line 77), `load_dotenv()` uses `setdefault` (line 214), and `docs/operations.md` has a stale dashboard section. All M-2-* claims are accurate.\n\nThe core issue with M-2-1 is that bash config parsing will always drift from the Python config loader. The fix is to eliminate shell config parsing entirely — move all config loading into `dashboard.py` Python, making the bash script trivially simple."
+      }
+    ]
   }
 ]
