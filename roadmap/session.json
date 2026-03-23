@@ -3257,5 +3257,170 @@
         "input_preview": "{\"task_id\": \"basuyql3v\", \"block\": true, \"timeout\": 300000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:06:35.230Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>basuyql3v</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\n{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-5-1\",\"severity\":\"high\",\"category\":\"runtime\",\"file\":\"docs/dev/plans/25-persistent-thread-sessions-impl.md\",\"line\":240,\"scope\":\"resume command assembly\",\"title\":\"The proposed argv builder does not reproduce the CLI shape that was actually validated\",\"description\":\"Lines 245-263 say the resume builder should keep the existing trailing `-` and merely insert `resume <session_id>` after `exec`. With the current default `WORKER_CMD`, that yields `codex exec resume <id> --yolo --skip-git-repo-check -`. But the same section says the Phase 0 spike validated `codex exec resume <id> - ...`. If the CLI requires the stdin marker immediately after the session id, this builder will make every resume launch fail even though the spike passed.\",\"suggestion\":\"Build the resume argv explicitly:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:06:56.796Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "This is the last round (5 of 5). Murphy found 3 more issues. Let me analyze them and decide which to fix vs defer.\n\n**CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings], round 5 of 5 → max rounds reached, reporting**\n\nThe findings:\n- M-5-1 (high): The resume command argv shape may not match what was validated in the spike. The concern is about the position of `-` relative to `<session_id>`.\n- M-5-2 (high): session_end_ts misses human replies during execution. The suggestion to use the highest thread timestamp from the initial context is reasonable but this is really a \"during execution\" concern that Phase 2 (thread awareness) addresses.\n\n\n- M-5-3 (medium): Failed resumes will be retried by run_worker_with_retries before reconciliation clears the session ID.\n\nFor M-5-1, I need to verify the exact argv order against the spike. The spike specifies `codex exec resume <SESSION_ID> - --yolo --skip-git-repo-check`, so the `-` comes immediately after the session ID, not at the end. I need to adjust the builder to place the `-` in the correct position. The positional arguments need to come before the flags in the CLI, so `codex exec resume <SESSION_ID> -` should precede `--yolo` and `--skip-git-repo-check`. For M-5-2, the `session_end_ts` handles replies arriving after the worker exits, while Phase 2 manages replies during execution, leaving only the edge case where a reply lands between those two states.\n\nFor M-5-3, the serial retry loop would keep sending the same broken command, so I need to add fallback logic to switch to a fresh session if resume fails. I'll address all three issues now."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:06:56.993Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings], round 5 of 5 → max rounds reached**\n\nMurphy found 3 final issues. Since this is the last round, I'll fix all three in the plan and report deferred items."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:07:02.202Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"    session_id = task[\\\"codex_session_id\\\"]\\n    base = list(self.cfg.worker_cmd)\\n    # Remove flags incompatible with resume\\n    if \\\"--ephemeral\\\" in base:\\n        base.remove(\\\"--ephemeral\\\")\\n    # Insert 'resume <session_id>' after 'exec' (keep `-` for stdin)\", \"new_string\": \"    session_id = task[\\\"codex_session_id\\\"]\\n    base = list(self.cfg.worker_cmd)\\n  "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:07:02.212Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:07:09.475Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"    try:\\n        exec_idx = base.index(\\\"exec\\\")\\n        base.insert(exec_idx + 1, \\\"resume\\\")\\n        base.insert(exec_idx + 2, session_id)\\n    except ValueError:\\n        # WORKER_CMD doesn't use 'exec' — can't derive resume command\\n        return []  # caller should fall back to fresh\\n    return base\", \"new_string\": \"    try:\\n        exec_idx = base.index(\\\""
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:07:09.481Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:07:13.643Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**M-5-2 fix**: Use last agent message ts or last seen thread ts as cutoff instead of subprocess exit time."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:07:29.986Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"**`session_end_ts` field:** Must reflect when the worker process actually exited, NOT when reconciliation runs (which can be delayed in parallel mode). Implementation:\\n- **Parallel path:** Add `self.ended_at = time.time()` in `WorkerSlot._run_subprocess()` right before setting `self._result`. Pass `slot.ended_at` through to reconciliation.\\n- **Serial path:** Capture"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:07:29.993Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:07:32.894Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**M-5-3 fix**: Add resume-failure fallback within the retry loop."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:07:41.460Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"### 1.8 Fallback handling\\n\\nIf `codex exec resume` fails (nonzero exit), the reconciliation logic clears `codex_session_id` from the task. On the next dispatch, the task gets a fresh session. No special retry logic — the existing retry mechanism handles this naturally.\", \"new_string\": \"### 1.8 Fallback handling\\n\\n**Within the retry loop:** `run_worker_with_retries()"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:07:41.469Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:07:43.639Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Add tests for the final fixes."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:07:48.874Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"22. **`test_session_cleanup_only_on_definitive_finish`** — _clear_session_fields is no-op if task was moved out of finished_tasks\", \"new_string\": \"22. **`test_session_cleanup_only_on_definitive_finish`** — _clear_session_fields is no-op if task was moved out of finished_tasks\\n23. **`test_resume_cmd_argv_order`** — Assert exact argv order matches Phase 0 spike: `codex"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:07:48.882Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
   }
 ]
