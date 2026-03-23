@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T21:05:56Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-23T21:07:58Z",
+    "status": "workers_active",
     "pid": 68391,
-    "loop_count": 896,
+    "loop_count": 912,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1774298582.137329",
+        "started_at": 1774299969,
+        "elapsed_sec": 109
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.56,
-      "five": 1.7,
-      "fifteen": 1.65
+      "one": 1.66,
+      "five": 1.72,
+      "fifteen": 1.66
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 114445398016,
-    "disk_free_bytes": 130661797888,
-    "runner_log_size_bytes": 767530,
+    "disk_used_bytes": 114437468160,
+    "disk_free_bytes": 130669727744,
+    "runner_log_size_bytes": 768179,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T20:24:39Z",
     "local_ips": []
@@ -36,14 +44,14 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T21:06:00Z",
+    "checked_at_utc": "2026-03-23T21:08:02Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 17,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 24713,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -51,15 +59,15 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 23,
         "memory_used_mb": 32515,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 6,
         "memory_used_mb": 20447,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -108,24 +116,25 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
-    "incomplete": {
-      "1773984772.225789": {
-        "mention_ts": "1773984772.225789",
-        "thread_ts": "1773984772.225789",
-        "status": "waiting_human",
-        "task_description": "Can you access and edit: <[link] <[link].",
-        "summary": "Rewrote both shared Overleaf drafts into fuller manuscript-style landscape notes, pushed them, re-verified the live editor source on the web side, and recorded…",
-        "summary_preview": "Rewrote both shared Overleaf drafts into fuller manuscript-style landscape notes, pushed them, re-verified the live editor source on the web side, and recorded…",
+    "active": {
+      "1774298582.137329": {
+        "mention_ts": "1774298582.137329",
+        "thread_ts": "1774298582.137329",
+        "status": "in_progress",
+        "task_description": "The vs code on your machine is outdated.",
+        "summary": "The vs code on your machine is outdated.",
+        "summary_preview": "The vs code on your machine is outdated.",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773984772.225789",
-        "last_update_ts": "1774040425.288766",
+        "created_ts": "1774298582.137329",
+        "last_update_ts": "1774299968.898546",
         "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-20T06:00:38Z"
+          "time_iso": "2026-03-23T20:43:02Z"
         }
-      },
+      }
+    },
+    "incomplete": {
       "1774103566.709609": {
         "mention_ts": "1774103566.709609",
         "thread_ts": "1774103566.709609",
@@ -2489,5 +2498,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T21:06:01Z"
+  "server_time_utc": "2026-03-23T21:08:03Z"
 }
