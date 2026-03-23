@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T20:14:49Z",
+    "last_updated_utc": "2026-03-23T20:16:51Z",
     "status": "sleeping",
     "pid": 68391,
-    "loop_count": 872,
+    "loop_count": 888,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.93,
-      "five": 1.87,
-      "fifteen": 1.73
+      "one": 2.23,
+      "five": 1.99,
+      "fifteen": 1.79
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 114429095936,
-    "disk_free_bytes": 130678099968,
-    "runner_log_size_bytes": 766248,
+    "disk_used_bytes": 114430914560,
+    "disk_free_bytes": 130676281344,
+    "runner_log_size_bytes": 766688,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T20:10:37Z",
     "local_ips": []
@@ -36,14 +36,14 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T20:14:50Z",
+    "checked_at_utc": "2026-03-23T20:16:53Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 18,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 24713,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -51,7 +51,7 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 22,
         "memory_used_mb": 32515,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -59,7 +59,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 3,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 20447,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -1367,6 +1367,18 @@
         "done_when": "A Claude Code slash command for multi-perspective design discussions.",
         "has_plan": false,
         "has_issue": false
+      },
+      {
+        "id": "AGENT-047",
+        "queue": "feature",
+        "created": "2026-03-23",
+        "priority": "Medium",
+        "status": "open",
+        "task": "Backfill strategic roadmap from git history",
+        "context": "Mine full commit history to populate `docs/dev/roadmap.json` with complete system evolution — rethink themes from actual history rather than current backlog snapshot. Plan",
+        "done_when": "`roadmap.json` reflects the full arc of agent system development from first commit to present; themes emerge from actual history, not guesswork.",
+        "has_plan": true,
+        "has_issue": false
       }
     ],
     "completed": [
@@ -2018,5 +2030,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T20:14:51Z"
+  "server_time_utc": "2026-03-23T20:16:54Z"
 }
