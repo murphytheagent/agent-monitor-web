@@ -652,7 +652,10 @@ function dispatchItem(itemId) {
     body: JSON.stringify({ text: text }),
   })
   .then(function() {
-    if (btn) { btn.textContent = '✓ Dispatched'; btn.className = 'dispatch-btn success'; btn.disabled = true; }
+    if (btn) { btn.textContent = '✓ Sent'; btn.className = 'dispatch-btn success'; }
+    setTimeout(function() {
+      if (btn) { btn.textContent = '▶ Dispatch'; btn.className = 'dispatch-btn'; btn.disabled = false; }
+    }, 3000);
   })
   .catch(function(err) {
     if (btn) { btn.textContent = '✗ Error'; btn.className = 'dispatch-btn error'; }
