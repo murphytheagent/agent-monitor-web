@@ -1829,5 +1829,367 @@
         "content": "Now let me apply fixes to the plan based on all findings."
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:14.920Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"**`supervisor_loop.conf` — `WORKER_CMD` default stays unchanged.** The `--ephemeral` flag stays in the default `WORKER_CMD`. Instead, the dispatch logic will build the resume command as a separate code path. This avoids breaking existing behavior — `WORKER_CMD` is a user-visible config that external overrides depend on. The dispatch logic conditionally drops `--epheme"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:25:14.929Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:18.487Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now fix M-1-1: expand SYSTEM_PROMPT_FILES."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:23.304Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"Phase 0 (spike) and Phase 1 foundation are already complete:\\n- `system_prompt_hash()` and `capture_codex_session_id()` in `utils.py` with tests\\n- `SYSTEM_PROMPT_FILES` tuple listing behavioral contract files\", \"new_string\": \"Phase 0 (spike) and Phase 1 foundation are already complete:\\n- `system_prompt_hash()` and `capture_codex_session_id()` in `utils.py` with test"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:25:23.310Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:25.758Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Fix M-1-2: replace `last_update_ts` with a dedicated `session_end_ts`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:35.851Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"**Resume prompt rendering** (`_render_resume_prompt`):\\n\\n- `{{NEW_THREAD_MESSAGES}}`: Thread messages with `ts > task[\\\"last_update_ts\\\"]`. Use existing `_render_thread_context` filtered to new messages only. If none: \\\"No new messages since your last session.\\\"\\n- `{{TASK_STATE_UPDATES}}`: Brief note if task metadata changed (e.g., re-activated from waiting_human). "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:25:35.857Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:38.251Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Fix M-1-3: derive resume command from configured WORKER_CMD."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:49.440Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"**Building the resume command:**\\n\\n```python\\ndef _build_resume_cmd(self, task: dict) -> list[str]:\\n    \\\"\\\"\\\"Build codex exec resume command for session re-dispatch.\\\"\\\"\\\"\\n    session_id = task[\\\"codex_session_id\\\"]\\n    return [\\\"codex\\\", \\\"exec\\\", \\\"resume\\\", session_id, \\\"--yolo\\\", \\\"--skip-git-repo-check\\\"]\\n```\\n\\nNote: `codex exec resume` does NOT take `-` ("
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:25:49.445Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:25:53.507Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Fix M-1-4: simplify slot affinity to dispatch-time check instead of scheduler restructuring."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:10.414Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"### 1.5 Slot affinity\\n\\nWhen capturing session ID, also record the slot:\\n\\n```python\\nmerged[\\\"session_slot_id\\\"] = slot_id  # in _reconcile_slot\\n```\\n\\nIn `_run_parallel()` slot-filling loop, prefer the slot that last ran the task:\\n\\n```python\\n# When selecting a slot for a task, check affinity\\npreferred_slot = task.get(\\\"session_slot_id\\\")\\nif preferred_slot is"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:26:10.420Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:12.862Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Fix M-1-5: add note about integration testing and the Phase 0 spike validation."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:30.796Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"### New tests to add:\\n\\n1. **`test_should_resume_session`** — True when session_id + matching hash; False when no session_id, hash mismatch, or feature disabled\\n2. **`test_build_resume_cmd`** — Correct command construction from session ID\\n3. **`test_build_fresh_worker_cmd`** — Drops `--ephemeral` when enabled, preserves when disabled\\n4. **`test_session_id_capture_"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:26:30.802Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:33.649Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update the session cleanup section to include `session_end_ts`, and update the internal fields section."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:36.496Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"When a task reaches `status=done` and is moved to `finished_tasks`, clear the session fields:\\n\\n```python\\nif destination == \\\"finished_tasks\\\":\\n    merged.pop(\\\"codex_session_id\\\", None)\\n    merged.pop(\\\"session_prompt_hash\\\", None)\\n    merged.pop(\\\"session_slot_id\\\", None)\\n```\", \"new_string\": \"When a task reaches `status=done` and is moved to `finished_tasks`, "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:26:36.502Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:40.207Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"Add `codex_session_id`, `session_prompt_hash`, and `session_slot_id` to `_DISPATCH_INTERNAL_FIELDS` so they don't leak into worker prompts.\", \"new_string\": \"Add `codex_session_id`, `session_prompt_hash`, `session_slot_id`, and `session_end_ts` to `_DISPATCH_INTERNAL_FIELDS` so they don't leak into worker prompts.\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:26:40.213Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:43.031Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Also update the session ID capture snippet to include `session_end_ts`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:46.123Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"Inside the state lock, store it on the task:\\n\\n```python\\nif session_id:\\n    merged[\\\"codex_session_id\\\"] = session_id\\n    merged[\\\"session_prompt_hash\\\"] = system_prompt_hash()\\nelif \\\"codex_session_id\\\" in merged:\\n    del merged[\\\"codex_session_id\\\"]\\n    merged.pop(\\\"session_prompt_hash\\\", None)\\n```\", \"new_string\": \"Inside the state lock, store it on the task:"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:26:46.129Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:48.395Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Also update the _should_resume_session to handle empty resume cmd."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:56.846Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"**Serial path — `run_worker_once()`:**\\n\\nCurrently at line 2486: `cmd = list(self.cfg.worker_cmd)`\\n\\nChange to:\\n```python\\ndispatch = self.read_json(self.cfg.dispatch_task_file, {})\\nif self._should_resume_session(dispatch):\\n    cmd = self._build_resume_cmd(dispatch)\\n    prompt = self._render_resume_prompt(dispatch)\\nelse:\\n    cmd = self._build_fresh_worker_cmd("
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:26:56.852Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:26:59.044Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Also update the parallel path."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:27:04.680Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"Same branching logic using `slot.dispatch_task_file` data:\\n```python\\ndispatch = self.read_json(slot.dispatch_task_file, {})\\nif self._should_resume_session(dispatch):\\n    cmd = self._build_resume_cmd(dispatch)\\n    # Render resume prompt instead of full prompt\\n    self._render_slot_resume_prompt(slot, task_key, dispatch)\\nelse:\\n    cmd = self._build_fresh_worker_"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:27:04.686Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:27:07.646Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me run round 2 of the review. First, generate the fix delta."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:27:09.285Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"diff /dev/null docs/dev/plans/25-persistent-thread-sessions-impl.md > /tmp/iterative-review-9JRMbB/round2.diff 2>&1; echo \\\"Size: $(wc -c < /tmp/iterative-review-9JRMbB/round2.diff) bytes\\\"\", \"description\": \"Generate updated diff for round 2\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:27:09.327Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Size:    18438 bytes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:27:11.712Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now dispatch both reviewers for round 2 with fix context."
+      }
+    ]
   }
 ]
