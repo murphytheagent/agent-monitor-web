@@ -2264,5 +2264,285 @@
         "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>bflmsrsio</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\n{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-2-1\",\"severity\":\"high\",\"category\":\"runtime\",\"file\":\"docs/dev/plans/25-persistent-thread-sessions-impl.md\",\"line\":116,\"scope\":null,\"title\":\"Resume command drops the only stdin prompt path\",\"description\":\"The plan removes the `-` prompt argument when building `codex exec resume`. The actual CLI help says `codex exec resume [SESSION_ID] [PROMPT]` and only reads stdin when `[PROMPT]` is `-`; the Phase 0 spike in `docs/dev/plans/37-persistent-thread-sessions.md` also validated `codex exec resume <id> - ...`, not the no-`-` form. With the planned command, `_render_resume_prompt()` still writes to stdin but the resumed worker will not reliably consume that follow-up prompt, so it can resume without the new thread/task context or fail unexpectedly.\",\"suggestion\":\"Keep the `-` prom"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:37:40.372Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Murphy found 4 new issues. Let me analyze:\n\n**CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings], round 2 of 5 → continuing**\n\nMurphy's findings:\n- M-2-1 (high, runtime): Resume command drops `-` stdin marker. The spike validated with `-`, but the plan removes it. Need to keep it.\n- M-2-2 (high, runtime, reopens M-1-2): `session_end_ts` at reconcile time is still too late - a human reply between process exit and reconciliation would be missed. Need to use subprocess exit time or last agent message ts.\n\n\n- M-2-3 (high, integration): Prompt hash is stamped at reconcile time instead of dispatch, so if files change during execution, the task records the new hash and allows resume with stale instructions.\n- M-2-4 (medium, integration, reopens M-1-1): SYSTEM_PROMPT_FILES is missing `docs/schemas.md` and `src/prompts/merge_instructions.md`.\n\nAll valid findings. For M-2-1, I'll preserve the `-` in the resume command. For M-2-2, I need to capture the worker's actual end time when the subprocess finishes rather than using reconcile time, and in the parallel path I'll reference the result slot directly.\n\nFor the parallel execution path, I can add an `ended_at` timestamp right when the subprocess thread sets the result, then use that in reconcile. For serial mode, I'll capture the timestamp immediately after `subprocess.run` returns. This gives me precise timing without relying on reconcile loop timing.\n\nFor M-2-3, I need to capture the prompt hash at dispatch time and store it on the task before the worker launches. For M-2-4, I should add the docs and prompt files to the system prompt files list."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:37:40.430Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings], round 2 of 5 → continuing**\n\nMurphy found 4 issues (2 reopens). All valid. Let me fix."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:37:40.641Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:37:40.836Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# AGENT-025 Implementation Plan: Persistent Thread Sessions\n     2→\n     3→**ROADMAP entry:** AGENT-025\n     4→**Reference plan:** `docs/dev/plans/37-persistent-thread-sessions.md`\n     5→**Status:** Implementation plan for Phase 1 (remaining), Phase 2, and Phase 3\n     6→\n     7→## Scope\n     8→\n     9→Phase 0 (spike) and Phase 1 foundation are already complete:\n    10→- `system_prompt_hash()` and `capture_codex_session_id()` in `utils.py` with tests\n    11→- `SYSTEM_PROMPT_FILES` tuple listing behavioral contract files\n    12→\n    13→**Pre-implementation fix:** Expand `SYSTEM_PROMPT_FILES` in `utils.py` to include `src/prompts/loop_context.md` and `docs/persistent-files.md` (both referenced by workers). Also add `src/prompts/session_resume.md` once it's created. Changes to any of these files will invalidate the prompt hash and force fresh dispatch, preventing resumed workers from running under stale instructions.\n    14→\n    15→This plan covers the remaining implementation:\n  "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:37:44.853Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now apply the 4 fixes:\n\n**M-2-1**: Keep `-` in resume command for stdin prompt delivery."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:37:58.325Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"    Derives from the configured WORKER_CMD to preserve user-specified\\n    binary path, model flags, and other launch options. Transforms:\\n      codex exec [flags] -  →  codex exec resume <session_id> [flags]\\n    Drops --ephemeral and stdin marker (-) since they're incompatible\\n    with resume mode.\\n    \\\"\\\"\\\"\\n    session_id = task[\\\"codex_session_id\\\"]\\n    base"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:37:58.332Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:00.852Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**M-2-2**: Use subprocess exit timestamp instead of reconcile-time `now_val`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:10.863Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"**`session_end_ts` field:** Set in `reconcile_task_after_run()` at the same time as `codex_session_id`, to the current timestamp (`now_ts()`). This field represents \\\"the last moment this worker session was active\\\" and is used exclusively for filtering new thread messages in the resume prompt. It is NOT rewritten during scheduler operations (claim, refresh, re-activa"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:38:10.870Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:13.347Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update the reconcile snippet to use subprocess exit time."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:16.114Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"if session_id:\\n    merged[\\\"codex_session_id\\\"] = session_id\\n    merged[\\\"session_prompt_hash\\\"] = system_prompt_hash()\\n    merged[\\\"session_end_ts\\\"] = now_val  # stable cutoff for resume prompt message filtering\", \"new_string\": \"if session_id:\\n    merged[\\\"codex_session_id\\\"] = session_id\\n    merged[\\\"session_prompt_hash\\\"] = dispatch_time_hash  # stamped at di"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:38:16.120Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:19.693Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**M-2-3**: Stamp prompt hash at dispatch time, not reconcile time."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:27.590Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"### 1.4 Dispatch logic: resume vs fresh\\n\\n**Core decision function** (new private method in `SupervisorRuntime`):\", \"new_string\": \"### 1.4 Dispatch logic: resume vs fresh\\n\\n#### 1.4a Prompt hash stamping at dispatch time\\n\\nThe `session_prompt_hash` must be recorded **at dispatch time** (before the worker launches), not at reconciliation time. If a behavioral contra"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:38:27.601Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:32.188Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**M-2-4**: Add missing files to SYSTEM_PROMPT_FILES."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:38.773Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"**Pre-implementation fix:** Expand `SYSTEM_PROMPT_FILES` in `utils.py` to include `src/prompts/loop_context.md` and `docs/persistent-files.md` (both referenced by workers). Also add `src/prompts/session_resume.md` once it's created. Changes to any of these files will invalidate the prompt hash and force fresh dispatch, preventing resumed workers from running under sta"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:38:38.781Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:42.222Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add test for the prompt hash dispatch-time stamping."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:47.178Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"12. **`test_session_end_ts_not_rewritten_by_scheduler`** — Verify session_end_ts is set once at reconcile and not modified by select_and_claim or refresh_waiting_human_tasks\", \"new_string\": \"12. **`test_session_end_ts_not_rewritten_by_scheduler`** — Verify session_end_ts is set once at reconcile and not modified by select_and_claim or refresh_waiting_human_tasks\\n13. "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:38:47.181Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:49.902Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now dispatch round 3 reviewers."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:38:51.642Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"diff /dev/null docs/dev/plans/25-persistent-thread-sessions-impl.md > /tmp/iterative-review-9JRMbB/round3.diff 2>&1; echo \\\"Size: $(wc -c < /tmp/iterative-review-9JRMbB/round3.diff) bytes\\\"\", \"description\": \"Generate updated diff for round 3\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:38:51.684Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Size:    20818 bytes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:39:15.808Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(cat /tmp/iterative-review-9JRMbB/round3.diff)\\n\\nPRIOR_CONTEXT=\\\"## Prior Round Context\\n\\n### Round 1: 6 findings, all fixed.\\n### Round 2: 4 findings, all fixed:\\n- M-2-1 (high, runtime): Resume command dropped stdin marker. **Fixed:** Kept - in resume cmd; matches Phase 0 spike validation.\\n- M-2-2 (high, runtime, reopens M-1-2): session_end_ts at reconcile time too late. **Fixed:** Now uses subprocess exit timestamp (slot.ended_at / time after subprocess.run). Hu"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:39:25.561Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(cat /tmp/iterative-review-9JRMbB/round3.diff)\\n\\nPRIOR_CONTEXT=\\\"## Prior Round Context\\n\\n### Round 1: 6 findings, all fixed.\\n### Round 2: 4 findings, all fixed:\\n- M-2-1 (high, runtime): Resume command dropped stdin marker. **Fixed:** Kept - in resume cmd; matches Phase 0 spike validation.\\n- M-2-2 (high, runtime, reopens M-1-2): session_end_ts at reconcile time too late. **Fixed:** Now uses subprocess exit timestamp (slot.ended_at / time after subprocess.run). Hu"
+      }
+    ]
   }
 ]
