@@ -1942,6 +1942,21 @@
       order: 3;
     }
 
+    @media (max-width: 640px) {
+      .header-status {
+        display: none;
+      }
+
+      .site-header .site-brand-kicker,
+      .site-header .site-brand-subtitle {
+        display: none;
+      }
+
+      .site-header .site-brand-name {
+        font-size: 19px;
+      }
+    }
+
     @media (min-width: 1040px) {
       .workspace-grid {
         order: 2;
@@ -1962,7 +1977,7 @@
           <div class="site-brand murphy-context">
             <span class="site-brand-kicker murphy-kicker">Public monitor</span>
             <p class="site-brand-name">Tokenizer lab</p>
-            <p class="site-brand-subtitle">Paste text and inspect token boundaries across browser-loadable public checkpoints.</p>
+            <p class="site-brand-subtitle">Compare how browser-loadable model families break text into tokens.</p>
           </div>
         </div>
 
