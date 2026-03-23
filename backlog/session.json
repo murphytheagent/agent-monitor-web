@@ -1132,5 +1132,99 @@
         "input_preview": "{\"command\": \"sleep 45 && cat /tmp/iterative-review-oaMNUy/murphy-R3.json 2>/dev/null || echo \\\"Still waiting\\\"\", \"description\": \"Wait longer for Murphy R3\", \"timeout\": 60000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:45:41.689Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-004\",\"severity\":\"high\",\"category\":\"correctness\",\"file\":\"docs/dev/plans/49-roadmap-history-backfill.md\",\"line\":13,\"scope\":\"history inventory / acceptance coverage\",\"title\":\"The historical inventory is already incomplete, so the proposed backfill cannot satisfy its own acceptance criteria\",\"description\":\"Line 13 says the BACKLOG completed table has 38 entries, but the current `docs/dev/BACKLOG.md` has 51 completed AGENT/FIX rows. The proposed theme breakdown also drops completed work that is already part of the roadmap surface, including AGENT-009 and AGENT-041 (the skill-library work) plus FIX-001, FIX-002, and FIX-011. Because line 107 still requires every completed AGENT/FIX entry to map to a milestone, implementing this plan as written will produce an incomplete historical roadmap.\",\"suggestion\":\"Recompute the source inventory from the current BACKLOG/CHANGELOG before finalizing themes, add an explicit home for the skill-library history, and"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:45:49.480Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good findings from Murphy. Let me apply these fixes.\n\n**CONVERGENCE CHECK: Tribune=approve, Murphy=findings (2), round 3 of 5 → continuing**\n\nBoth findings are valid:\n- M-004: The completed count is stale (38 vs actual ~51) and some items are missing from the theme mapping. Will fix by noting the count is approximate and ensuring the implementation maps all entries.\n- M-005: Standalone HTML export already exists — should be marked done, not planned."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:45:55.653Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/49-roadmap-history-backfill.md\", \"old_string\": \"Mining 1786 commits (Feb 18 – Mar 23, 2026), the BACKLOG completed table (38 entries), and the CHANGELOG reveals 7 natural themes — more granular than the current 5, and grounded in what was actually built.\", \"new_string\": \"Mining 1786 commits (Feb 18 – Mar 23, 2026), the BACKLOG completed table, and the CHANGELOG reveals 7 natural themes — more granular than the current 5, "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:45:55.663Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/49-roadmap-history-backfill.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:46:01.044Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/49-roadmap-history-backfill.md\", \"old_string\": \"- **Strategic roadmap** (in_progress): Roadmap JSON + dashboard page → History backfill (AGENT-047) → Standalone HTML export\", \"new_string\": \"- **Strategic roadmap** (in_progress): Roadmap JSON + dashboard page + standalone HTML export → History backfill (AGENT-047)\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T20:46:01.050Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/49-roadmap-history-backfill.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:46:04.589Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now dispatch round 4 — Tribune already approved, so only Murphy needs to verify."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:46:10.492Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"PLAN_DIFF=$(git diff HEAD -- docs/dev/plans/49-roadmap-history-backfill.md)\\n\\nMURPHY_PROMPT=\\\"You are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following code changes for:\\n\\n1. **Runtime failures**: Will this crash, hang, or produce wrong results in real usage?\\n2. **Edge cases**: Unusual inputs, empty collections, concurrent access, large data\\n3. **Test coverage**: Are the changes tested? Do the tests a"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T20:46:15.328Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"PLAN_DIFF=$(git diff HEAD -- docs/dev/plans/49-roadmap-history-backfill.md)\\n\\nTRIBUNE_PROMPT=\\\"You are the Tribune — an independent quality reviewer. Review the following code changes for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\\n2. **Security issues**: Injection, auth bypass, sensitive data exposure\\n3. **Contract violations**: Does the code violate documented interfaces, schemas, or invariants?\\n4. **Error handling gaps**: Mi"
+      }
+    ]
   }
 ]
