@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T21:32:36Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-23T21:34:32Z",
+    "status": "workers_active",
     "pid": 68391,
-    "loop_count": 1066,
+    "loop_count": 1082,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1774298582.137329",
+        "started_at": 1774301660,
+        "elapsed_sec": 11
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.04,
-      "five": 1.89,
-      "fifteen": 1.79
+      "one": 2.25,
+      "five": 2.12,
+      "fifteen": 1.9
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113830526976,
-    "disk_free_bytes": 131276668928,
-    "runner_log_size_bytes": 773428,
+    "disk_used_bytes": 113828827136,
+    "disk_free_bytes": 131278368768,
+    "runner_log_size_bytes": 774056,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T20:24:39Z",
     "local_ips": []
@@ -36,22 +44,22 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T21:32:40Z",
+    "checked_at_utc": "2026-03-23T21:34:43Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 18,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 24713,
         "memory_total_mb": 97887,
-        "temperature_c": 34
+        "temperature_c": 33
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 25,
         "memory_used_mb": 33759,
         "memory_total_mb": 97887,
         "temperature_c": 33
@@ -59,10 +67,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 5,
         "memory_used_mb": 21689,
         "memory_total_mb": 97887,
-        "temperature_c": 33
+        "temperature_c": 34
       },
       {
         "index": 3,
@@ -108,7 +116,24 @@
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1774298582.137329": {
+        "mention_ts": "1774298582.137329",
+        "thread_ts": "1774298582.137329",
+        "status": "in_progress",
+        "task_description": "The vs code on your machine is outdated.",
+        "summary": "Restarted VS Code, applied the staged 1.112.0 update, and verified the existing GitHub-backed tunnel stayed connected.",
+        "summary_preview": "Restarted VS Code, applied the staged 1.112.0 update, and verified the existing GitHub-backed tunnel stayed connected.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774298582.137329",
+        "last_update_ts": "1774301659.681025",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T21:33:46Z"
+        }
+      }
+    },
     "incomplete": {
       "1774103566.709609": {
         "mention_ts": "1774103566.709609",
@@ -368,22 +393,6 @@
       }
     },
     "finished": {
-      "1774298582.137329": {
-        "mention_ts": "1774298582.137329",
-        "thread_ts": "1774298582.137329",
-        "status": "done",
-        "task_description": "The vs code on your machine is outdated.",
-        "summary": "Restarted VS Code, applied the staged 1.112.0 update, and verified the existing GitHub-backed tunnel stayed connected.",
-        "summary_preview": "Restarted VS Code, applied the staged 1.112.0 update, and verified the existing GitHub-backed tunnel stayed connected.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774298582.137329",
-        "last_update_ts": "1774300437.328979",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-23T20:43:02Z"
-        }
-      },
       "1774297049.973959": {
         "mention_ts": "1774297049.973959",
         "thread_ts": "1774297049.973959",
@@ -1166,6 +1175,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-02-28T01:01:53Z"
+        }
+      },
+      "1772237465.347469": {
+        "mention_ts": "1772237465.347469",
+        "thread_ts": "1772237465.347469",
+        "status": "done",
+        "task_description": "Find the current best known upper and lower bounds for the Ramsey number R(5,5).",
+        "summary": "Delivered current best known bounds for R(5,5) as 43<=R(5,5)<=46, consulted Athena, summarized key papers, and posted a PDF summary in-thread.",
+        "summary_preview": "Delivered current best known bounds for R(5,5) as 43<=R(5,5)<=46, consulted Athena, summarized key papers, and posted a PDF summary in-thread.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1772237465.347469",
+        "last_update_ts": "1772240243.309016",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-02-28T00:11:05Z"
         }
       }
     }
@@ -2473,5 +2498,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T21:32:41Z"
+  "server_time_utc": "2026-03-23T21:34:44Z"
 }
