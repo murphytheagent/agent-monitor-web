@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T05:47:19Z",
+    "last_updated_utc": "2026-03-23T05:49:22Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 5309,
+    "loop_count": 5325,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,13 +17,13 @@
         "slot": 0,
         "task": "1773870804.162569",
         "started_at": 1774244685,
-        "elapsed_sec": 154
+        "elapsed_sec": 276
       },
       {
         "slot": 1,
         "task": "1774125045.062829",
         "started_at": 1774243987,
-        "elapsed_sec": 852
+        "elapsed_sec": 974
       }
     ]
   },
@@ -33,15 +33,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.98,
-      "five": 2.21,
-      "fifteen": 2.14
+      "one": 2.2,
+      "five": 2.3,
+      "fifteen": 2.19
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113638739968,
-    "disk_free_bytes": 131468455936,
-    "runner_log_size_bytes": 637174,
+    "disk_used_bytes": 113639804928,
+    "disk_free_bytes": 131467390976,
+    "runner_log_size_bytes": 637687,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -50,57 +50,57 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T05:47:23Z",
+    "checked_at_utc": "2026-03-23T05:49:26Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 53,
-        "memory_used_mb": 72115,
+        "utilization_gpu_pct": 48,
+        "memory_used_mb": 72069,
         "memory_total_mb": 97887,
         "temperature_c": 44
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 88796,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 53
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 88469,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 51
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 50,
-        "memory_used_mb": 70779,
+        "utilization_gpu_pct": 48,
+        "memory_used_mb": 70701,
         "memory_total_mb": 97887,
         "temperature_c": 45
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 87,
-        "memory_used_mb": 66879,
+        "utilization_gpu_pct": 36,
+        "memory_used_mb": 66511,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 39
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 97,
         "memory_used_mb": 89493,
         "memory_total_mb": 97887,
-        "temperature_c": 54
+        "temperature_c": 50
       },
       {
         "index": 6,
@@ -108,7 +108,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 26
+        "temperature_c": 27
       },
       {
         "index": 7,
@@ -116,7 +116,7 @@
         "utilization_gpu_pct": 98,
         "memory_used_mb": 89493,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 50
       }
     ]
   },
@@ -157,22 +157,6 @@
       }
     },
     "incomplete": {
-      "1773953858.111269": {
-        "mention_ts": "1773953858.111269",
-        "thread_ts": "1773953858.111269",
-        "status": "waiting_human",
-        "task_description": "What's the result of actually training the new objective in cot loop?",
-        "summary": "PR #7 is back to CLEAN/MERGEABLE at head 03fe64a after merging upstream main and extending the prompt-profile path to direct [code] , [code] regression, and re…",
-        "summary_preview": "PR #7 is back to CLEAN/MERGEABLE at head 03fe64a after merging upstream main and extending the prompt-profile path to direct [code] , [code] regression, and re…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773953858.111269",
-        "last_update_ts": "1773985648.067819",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T20:57:38Z"
-        }
-      },
       "1774027184.232059": {
         "mention_ts": "1774027184.232059",
         "thread_ts": "1774027184.232059",
@@ -1699,5 +1683,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T05:47:24Z"
+  "server_time_utc": "2026-03-23T05:49:27Z"
 }
