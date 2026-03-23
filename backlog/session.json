@@ -1681,5 +1681,56 @@
         "input_preview": "{\"command\": \"for i in $(seq 1 30); do if [ -f /tmp/iterative-review-euzwH6/murphy-R3.json ] && [ -s /tmp/iterative-review-euzwH6/murphy-R3.json ]; then cat /tmp/iterative-review-euzwH6/murphy-R3.json; exit 0; fi; sleep 5; done; echo \\\"TIMEOUT\\\"\", \"description\": \"Wait for Murphy R3 output\", \"timeout\": 180000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:47:02.968Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-1\",\"severity\":\"high\",\"category\":\"Murphy/operational\",\"file\":\"docs/dev/plans/fix-020-dashboard-publish-two-branch.md\",\"line\":51,\"scope\":\"publish_to_deploy_branch temp index lifecycle\",\"title\":\"The temp-index plan leaks one file descriptor per publish cycle\",\"description\":\"The plan switches to `tempfile.mkstemp()` for the temporary index and only calls out deleting the path in `finally`. `mkstemp()` returns an open fd as well as the pathname; if that fd is not explicitly closed, the headless publisher leaks one descriptor every cycle. On the current ~2 minute loop that is hundreds of leaked fds per day, and the process will eventually start failing git/subprocess calls with `EMFILE`. The proposed tests are all short-lived, so they would not catch this.\",\"suggestion\":\"Close the fd immediately after `mkstemp()` (or use a temp-file API that closes it for you) before handing the path to Git, and add a regression that asserts the close happens.\",\"reo"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:47:22.163Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "CONVERGENCE CHECK: Tribune=[findings - 1 new], Murphy=[findings - 3 new], round 3 of 5 → continuing because neither approved.\n\nLet me analyze the findings:\n\n**Tribune T-1-2 (stale snapshot files):** This is about snapshot files that are removed from the build process. In practice, `STATIC_EXPORT_TRACKED_FILES` is a hardcoded tuple — files don't get removed from the build dynamically. However, this is a valid correctness point for robustness. The fix is simple: remove tracked file paths from the index before overlaying. I'll add this to the plan.\n\n\n**Murphy M-1 (fd leak from mkstemp):** Valid concern — `tempfile.mkstemp()` returns a file descriptor that needs closing, so I'll either close it immediately or switch to `NamedTemporaryFile(delete=False)`.\n\n**Murphy M-2 (detached HEAD / no local main):** The current implementation handles detached HEAD by fetching and recreating the local branch, but the new design reads directly from `refs/heads/main^{tree}`, which fails if that ref doesn't exist. In production the working tree is always on main, though, so this might be a non-issue in practice.\n\nActually, detached HEAD is a real scenario when someone runs `git submodule update`. The fix is straightforward — fall back to `origin/main` if the local ref doesn't exist, or fetch first to ensure it's available.\n\n**Murphy M-3 (rollout order):** The deployment sequence creates a window where the site goes stale because Pages still serves from main until manually switched, even though the config now defaults to deploy. The fix is to make the cutover atomic — either switch Pages first or pre-create the deploy branch, then flip the config.\n\nThe deployment flow is: code deploys, publisher starts pushing to deploy instead of main, then someone manually switches GitHub Pages from main to deploy. Between steps two and three, Pages serves stale content. Pre-creating the deploy branch and switching Pages before flipping the config is the simpler approach. I'll update the one-time setup section to specify this order and incorporate all these fixes into the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:47:22.164Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "CONVERGENCE CHECK: Tribune=[findings - 1 new], Murphy=[findings - 3 new], round 3 of 5 → continuing because neither approved.\n\nAll findings are valid. Let me fix the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:47:22.385Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-020-dashboard-publish-two-branch.md\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:47:22.394Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# FIX-020: Dashboard Publish — Two-Branch Strategy\n     2→\n     3→## Problem\n     4→\n     5→The dashboard publisher commits a snapshot every ~2 minutes to `main` in the `agent-monitor-web` submodule. This has produced 25K+ commits (~334/day), burying real development work (layout PRs, new routes) and growing the repo unboundedly (~24 MB pack now, ~1 GB/year trajectory).\n     6→\n     7→## Solution\n     8→\n     9→Two-branch strategy:\n    10→- **`main`** — development branch with clean history (PRs, meaningful commits). Submodule pointer stays here.\n    11→- **`deploy`** — single-commit orphan branch, force-pushed on every snapshot. GitHub Pages serves from `deploy`.\n    12→\n    13→The publisher uses **git plumbing** to commit to `deploy` without switching the working tree away from `main`. This avoids checkout churn, race conditions with concurrent readers, and the need for worktree management.\n    14→\n    15→## Design\n    16→\n    17→### Core mechanism: overlay snapshot onto `main"
+      }
+    ]
   }
 ]
