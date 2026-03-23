@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T08:41:41Z",
+    "last_updated_utc": "2026-03-23T08:43:50Z",
     "status": "sleeping",
     "pid": 68391,
-    "loop_count": 6409,
+    "loop_count": 6425,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.8,
-      "five": 1.8,
-      "fifteen": 1.76
+      "one": 1.91,
+      "five": 1.84,
+      "fifteen": 1.78
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113518886912,
-    "disk_free_bytes": 131588308992,
-    "runner_log_size_bytes": 672267,
+    "disk_used_bytes": 113519017984,
+    "disk_free_bytes": 131588177920,
+    "runner_log_size_bytes": 672707,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -36,17 +36,17 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T08:41:47Z",
+    "checked_at_utc": "2026-03-23T08:43:50Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 19,
-        "memory_used_mb": 42717,
+        "utilization_gpu_pct": 20,
+        "memory_used_mb": 60703,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 39
       },
       {
         "index": 1,
@@ -54,7 +54,7 @@
         "utilization_gpu_pct": 100,
         "memory_used_mb": 88796,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 51
       },
       {
         "index": 2,
@@ -68,33 +68,33 @@
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 20,
-        "memory_used_mb": 60595,
+        "memory_used_mb": 60505,
         "memory_total_mb": 97887,
-        "temperature_c": 40
+        "temperature_c": 43
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 35,
-        "memory_used_mb": 58591,
+        "utilization_gpu_pct": 36,
+        "memory_used_mb": 66655,
         "memory_total_mb": 97887,
-        "temperature_c": 38
+        "temperature_c": 42
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
+        "utilization_gpu_pct": 88,
         "memory_used_mb": 89493,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 48
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 98,
         "memory_used_mb": 89493,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 50
       },
       {
         "index": 7,
@@ -1289,6 +1289,18 @@
         "has_issue": false
       },
       {
+        "id": "FIX-020",
+        "queue": "fix",
+        "created": "2026-03-23",
+        "priority": "Medium",
+        "status": "open",
+        "task": "Dashboard publish commits pollute git history and grow repo unboundedly",
+        "context": "Supervisor commits a snapshot every 2 min → 25K+ commits, ~334/day. History is noise; repo packs at 24 MB now, ~1 GB/year trajectory. Murphy's real development work (layout PRs, new routes) is buried.",
+        "done_when": "`main` has only meaningful commits; `deploy` is force-pushed per snapshot; GitHub Pages serves from `deploy`; repo size stops growing from snapshot churn.",
+        "has_plan": false,
+        "has_issue": false
+      },
+      {
         "id": "AGENT-010",
         "queue": "feature",
         "created": "2026-02-27",
@@ -1668,5 +1680,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T08:41:48Z"
+  "server_time_utc": "2026-03-23T08:43:51Z"
 }
