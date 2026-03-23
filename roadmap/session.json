@@ -936,5 +936,15 @@
         "input_preview": "{\"command\": \"BASELINE_DIFF=\\\"$(cat /tmp/iterative-review-pLKMz4/baseline.diff)\\\" && MURPHY_PROMPT=\\\"You are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following code changes for:\\n\\n1. **Runtime failures**: Will this crash, hang, or produce wrong results in real usage?\\n2. **Edge cases**: Unusual inputs, empty collections, concurrent access, large data\\n3. **Test coverage**: Are the changes tested? Do the tests appear to"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:15:13.781Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\"verdict\": \"findings\", \"findings\": [{\"id\": \"T-044-1\", \"severity\": \"high\", \"category\": \"contract\", \"file\": \".git/hooks/pre-commit\", \"line\": 0, \"title\": \"Violation of system code protection invariant\", \"description\": \"The plan proposes whitelisting `src/loop/monitor/*` in the pre-commit hook to allow the Worker (Murphy) to modify dashboard code. This directly violates the established behavioral contract that Workers must not modify system code (`src/`, `scripts/`, `mcp/`). Allowing an autonomous agent to freely edit executable Python code in `src/` bypasses core security invariants.\", \"suggestion\": \"Do not modify the pre-commit hook to whitelist `src/loop/monitor/*`. If dashboard templates require frequent worker edits, extract them to an unprotected directory (e.g., an external `templates/` folder) instead of weakening codebase protection.\"}, {\"id\": \"T-044-2\", \"severity\": \"medium\", \"category\": \"architecture\", \"file\": \"scripts/dashboard.sh\", \"line\": 0, \"title\": \"Fragile process blocking"
+      }
+    ]
   }
 ]
