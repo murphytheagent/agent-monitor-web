@@ -1,15 +1,15 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T13:26:12Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-23T18:20:32Z",
+    "status": "sleeping",
     "pid": 68391,
-    "loop_count": 6679,
+    "loop_count": 28,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
     "max_workers": 8
   },
@@ -19,24 +19,24 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.11,
-      "five": 1.93,
-      "fifteen": 2.01
+      "one": 1.92,
+      "five": 2.0,
+      "fifteen": 1.87
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113689055232,
-    "disk_free_bytes": 131418140672,
-    "runner_log_size_bytes": 682524,
+    "disk_used_bytes": 113670541312,
+    "disk_free_bytes": 131436654592,
+    "runner_log_size_bytes": 742273,
     "dashboard_pid": null,
-    "dashboard_started_utc": "2026-03-22T12:56:42Z",
+    "dashboard_started_utc": "2026-03-23T18:20:33Z",
     "local_ips": []
   },
   "gpu": {
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T13:40:28Z",
+    "checked_at_utc": "2026-03-23T18:20:34Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -44,25 +44,25 @@
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "memory_used_mb": 24709,
         "memory_total_mb": 97887,
-        "temperature_c": 28
+        "temperature_c": 33
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "utilization_gpu_pct": 2,
+        "memory_used_mb": 32511,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 33
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
-        "memory_used_mb": 0,
+        "utilization_gpu_pct": 23,
+        "memory_used_mb": 20447,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 33
       },
       {
         "index": 3,
@@ -70,7 +70,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 4,
@@ -83,66 +83,33 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 91,
-        "memory_used_mb": 89491,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 27
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 78,
-        "memory_used_mb": 89487,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 45
+        "temperature_c": 26
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 92,
-        "memory_used_mb": 89487,
+        "utilization_gpu_pct": 0,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 27
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {
-      "maintenance": {
-        "mention_ts": "maintenance",
-        "thread_ts": "1774270452.078809",
-        "status": "in_progress",
-        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
-        "summary": "Completed maintenance reflection: refreshed memory/profile/project docs, re-audited live PR surfaces, and flagged code-facing blockers for developer review.",
-        "summary_preview": "Completed maintenance reflection: refreshed memory/profile/project docs, re-audited live PR surfaces, and flagged code-facing blockers for developer review.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774264266.181847",
-        "last_update_ts": "1774272371.849672",
-        "task_type": "maintenance",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-23T11:11:06Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
-      "1774027184.232059": {
-        "mention_ts": "1774027184.232059",
-        "thread_ts": "1774027184.232059",
-        "status": "waiting_human",
-        "task_description": "I have a spare windows pc that you can use it to do tests.",
-        "summary": "Researched the Windows access plan for the Terraria smoke test, switched the same-LAN default to Sunshine+Moonlight, documented the hardened setup plus the Mic…",
-        "summary_preview": "Researched the Windows access plan for the Terraria smoke test, switched the same-LAN default to Sunshine+Moonlight, documented the hardened setup plus the Mic…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774027184.232059",
-        "last_update_ts": "1774029569.821117",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-20T17:19:44Z"
-        }
-      },
       "1773984772.225789": {
         "mention_ts": "1773984772.225789",
         "thread_ts": "1773984772.225789",
@@ -417,6 +384,22 @@
       }
     },
     "finished": {
+      "maintenance": {
+        "mention_ts": "maintenance",
+        "thread_ts": "1774270452.078809",
+        "status": "done",
+        "task_description": "Developer review: audit recent agent work and fix/improve system code.",
+        "summary": "Developer review: registered murphy-supervisor-lab submodule, implemented 3 new Codex skills (overleaf-git-sync, private-project-bootstrap, static-site-publish…",
+        "summary_preview": "Developer review: registered murphy-supervisor-lab submodule, implemented 3 new Codex skills (overleaf-git-sync, private-project-bootstrap, static-site-publish…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774264266.181847",
+        "last_update_ts": "1774273339.296843",
+        "task_type": "maintenance",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T11:11:06Z"
+        }
+      },
       "1774258406.585549": {
         "mention_ts": "1774258406.585549",
         "thread_ts": "1774258406.585549",
@@ -1200,22 +1183,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T05:24:04Z"
         }
-      },
-      "1772080474.439369": {
-        "mention_ts": "1772080474.439369",
-        "thread_ts": "1772080474.439369",
-        "status": "done",
-        "task_description": "What's the PR #2 for the gd-vs-online-sgd project?",
-        "summary": "Explained PR #2 content in plain language, confirmed project relevance, received human merge direction, and merged PR #2 successfully (merge commit 696d70088f9…",
-        "summary_preview": "Explained PR #2 content in plain language, confirmed project relevance, received human merge direction, and merged PR #2 successfully (merge commit 696d70088f9…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1772080474.439369",
-        "last_update_ts": "1772081089.051510",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-26T04:34:34Z"
-        }
       }
     }
   },
@@ -1709,5 +1676,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T13:40:29Z"
+  "server_time_utc": "2026-03-23T18:20:35Z"
 }
