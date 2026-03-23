@@ -3624,5 +3624,484 @@
         "input_preview": "{\"command\": \"for i in $(seq 1 36); do if [ -f /tmp/iterative-review-euzwH6/murphy-impl-R4.json ] && [ -s /tmp/iterative-review-euzwH6/murphy-impl-R4.json ]; then cat /tmp/iterative-review-euzwH6/murphy-impl-R4.json; exit 0; fi; sleep 5; done; echo \\\"TIMEOUT\\\"\", \"description\": \"Wait for Murphy impl R4\", \"timeout\": 200000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:40:42.070Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-4-1\",\"severity\":\"medium\",\"category\":\"integration\",\"file\":\"docs/workflows/git-workflow.md\",\"line\":16,\"scope\":\"agent-monitor-web deploy cutover\",\"title\":\"Required workflow docs still describe `main` as the live publishing branch\",\"description\":\"The code now publishes snapshots to `deploy`, but the required pre-task workflow doc still says `agent-monitor-web` is the exception where the exporter pushes directly to `main`. `docs/operations.md:43` also still documents `DASHBOARD_GIT_BRANCH` defaulting to `main`. After the cutover, future agents/operators will read the old branch contract before doing site work, so publish triage and rollback decisions can target the stale branch even though the runtime code has moved on.\",\"suggestion\":\"Update the workflow/operations docs in the same rollout so they consistently say development stays on `main` while the publisher and GitHub Pages serve `deploy`. If the Pages switch is intentionally still pending, mar"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:40:46.805Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings - 1 medium about docs], round 4 of 5 → continuing.\n\nMurphy's finding M-4-1 is about documentation consistency. Valid — let me check if `docs/workflows/git-workflow.md` and `docs/operations.md` reference the dashboard publishing branch.\n\nThis is a documentation update, not a code bug. Let me fix it."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:40:47.287Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings - 1 medium (docs)], round 4 of 5 → continuing. Let me fix the documentation references."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:40:48.681Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"agent-monitor-web.*main|exporter.*pushes.*main|DASHBOARD_GIT_BRANCH.*main\", \"path\": \"/Users/murphy/Research/docs\", \"output_mode\": \"content\", \"-n\": true, \"-i\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:40:48.720Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "docs/dev/BACKLOG.md:54:| AGENT-045 | 2026-03-23 | 2026-03-23 | Add `agent-monitor-web` merge carve-out to git workflow: exceptions to lines 14, 16, 35 of `docs/workflows/git-workflow.md` allowing direct-to-`main` merges. 5-round plan + 5-round impl review (Tribune + Murphy). [Plan](plans/45-agent-monitor-web-merge-carveout.md) |\ndocs/dev/plans/fix-020-dashboard-publish-two-branch.md:71:- Change `DASHBOARD_GIT_BRANCH` default in `src/config/supervisor_loop.conf` line 113 from `main` to `deploy`.\ndocs/dev/plans/fix-020-dashboard-publish-two-branch.md:72:- Change the Python hardcoded fallback in `dashboard.py` `_cfg(\"DASHBOARD_GIT_BRANCH\", ...)` from `\"main\"` to `\"deploy\"`.\ndocs/dev/plans/fix-020-dashboard-publish-two-branch.md:77:After deployment, `write_static_site()` still writes snapshot files to the working tree in `projects/agent-monitor-web/`, but they're no longer committed to `main`. This leaves the working tree permanently dirty for those files.\ndocs/dev/plans/fix-020-dashboard-"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:40:55.636Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/workflows/git-workflow.md\", \"offset\": 13, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:40:55.641Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    13→- Root coordination work is local-first: a root remote is optional, and root-only tasks are completed via local commits plus Slack/report checkpoints unless a human explicitly requests remote publishing.\n    14→- For project/MCP repositories (or any repo where a remote workflow is in use), delivery must be pull-request based: publish local commits on a non-default branch, open/update a PR, and keep that PR current for review. **Exception: `projects/agent-monitor-web`** — see direct-to-`main` exception below.\n    15→- **Upstream PR targeting for forked projects:** When a project repository is a fork (i.e., `origin` is the personal fork and `upstream` is the canonical repository), default the PR base to the upstream repository's default branch, not the fork. Before opening a PR, confirm: (1) the upstream remote exists, (2) the PR base repo is upstream, and (3) the PR base branch is the upstream default branch. For branch publishing: if you have push permission to the upstream bran"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:40:56.260Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/operations.md\", \"offset\": 40, \"limit\": 8}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:40:56.265Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    40→- `DASHBOARD_EXPORT_ENABLED` — enable/disable (default: `true`)\n    41→- `DASHBOARD_EXPORT_DIR` — export target (default: `projects/agent-monitor-web`)\n    42→- `DASHBOARD_GIT_PUSH` — auto-commit and push (default: `true`)\n    43→- `DASHBOARD_GIT_REMOTE` / `DASHBOARD_GIT_BRANCH` — push target (default: `origin` / `main`)\n    44→- `DASHBOARD_GPU_MONITOR` — remote GPU snapshot (default: `true`)\n    45→- `DASHBOARD_GPU_NODE_ALIAS` — SSH alias (default: `tianhaowang-gpu0`)\n    46→\n    47→**Production command** (run in the dedicated `dashboard` tmux session):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:00.672Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/operations.md\", \"old_string\": \"- `DASHBOARD_GIT_REMOTE` / `DASHBOARD_GIT_BRANCH` — push target (default: `origin` / `main`)\", \"new_string\": \"- `DASHBOARD_GIT_REMOTE` / `DASHBOARD_GIT_BRANCH` — push target (default: `origin` / `deploy`)\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:41:00.679Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/operations.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:04.509Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update the git workflow docs — the exception for `agent-monitor-web` direct-to-`main` pushes needs updating since the publisher no longer pushes to `main`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:07.875Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/workflows/git-workflow.md\", \"old_string\": \"- In project/MCP repositories, never push directly to a default/protected branch (for example, `main`/`master`) without an explicit human instruction in-task. **Exception: `projects/agent-monitor-web`** — this is a GitHub Pages site where `main` is the publishing branch and the dashboard exporter pushes directly to `main`. Murphy may merge feature branches to `main` and push without a PR o"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:41:07.883Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/workflows/git-workflow.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:12.203Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me run the final round (R5) with Tribune (who already approved 3 times) being satisfied, and Murphy seeing the doc fix."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:28.393Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research\\ngit diff HEAD -- src/loop/monitor/dashboard.py src/config/supervisor_loop.conf CLAUDE.md src/loop/tests/test_supervisor_loop.py docs/operations.md docs/workflows/git-workflow.md > /tmp/iterative-review-euzwH6/impl-R5.diff 2>/dev/null\\n\\ncat > /tmp/iterative-review-euzwH6/murphy-impl-R5-prompt.txt << 'ENDPROMPT'\\nYou are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following code chan"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:41:28.460Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "EXIT: 127"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:33.710Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/murphy-impl-R5.json 2>/dev/null || echo \\\"Not found\\\"; echo \\\"---\\\"; cat /tmp/iterative-review-euzwH6/murphy-impl-R5-stdout.txt 2>/dev/null | tail -20\", \"description\": \"Check Murphy R5 output\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:41:33.760Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Not found\n---\n(eval):44: command not found: codex"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:37.538Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "`codex` not found with exit 127 — the PATH might not be set correctly for this invocation. Let me use the full path."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:39.281Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"CODEX_PATH=$(which codex) && cat /tmp/iterative-review-euzwH6/murphy-impl-R5-prompt.txt | \\\"$CODEX_PATH\\\" exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema /tmp/iterative-review-euzwH6/findings-schema.json --output-last-message /tmp/iterative-review-euzwH6/murphy-impl-R5.json - > /tmp/iterative-review-euzwH6/murphy-impl-R5-stdout2.txt 2>&1; echo \\\"EXIT: $?\\\"\", \"description\": \"Retry Murphy R5 with full path\", \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:41:39.310Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "EXIT: 1"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:43.139Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/murphy-impl-R5.json 2>/dev/null || echo \\\"---JSON not found---\\\"; tail -5 /tmp/iterative-review-euzwH6/murphy-impl-R5-stdout2.txt 2>/dev/null\", \"description\": \"Check Murphy R5 retry output\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:41:43.174Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Exit code 1\n---JSON not found---"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:46.810Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"head -20 /tmp/iterative-review-euzwH6/murphy-impl-R5-stdout2.txt 2>/dev/null\", \"description\": \"Check Murphy R5 full output\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:41:46.824Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Exit code 1"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:50.166Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"wc -c /tmp/iterative-review-euzwH6/murphy-impl-R5-prompt.txt; wc -c /tmp/iterative-review-euzwH6/murphy-impl-R5-stdout2.txt 2>/dev/null\", \"description\": \"Check file sizes\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:41:50.188Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Exit code 1\n   35386 /tmp/iterative-review-euzwH6/murphy-impl-R5-prompt.txt"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:54.129Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/murphy-impl-R5-prompt.txt | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema /tmp/iterative-review-euzwH6/findings-schema.json --output-last-message /tmp/iterative-review-euzwH6/murphy-impl-R5.json -\", \"description\": \"Retry Murphy R5\", \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:41:54.162Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Exit code 127\n(eval):1: command not found: codex"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:41:59.091Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"export PATH=\\\"/Users/murphy/.nvm/versions/node/v24.13.1/bin:$PATH\\\" && cat /tmp/iterative-review-euzwH6/murphy-impl-R5-prompt.txt | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema /tmp/iterative-review-euzwH6/findings-schema.json --output-last-message /tmp/iterative-review-euzwH6/murphy-impl-R5.json - > /tmp/iterative-review-euzwH6/murphy-impl-R5-stdout3.txt 2>&1; echo \\\"EXIT: $?\\\"\", \"description\": \"Retry Murphy R5 with explicit PATH\", \"timeout\": 300"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:41:59.128Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "EXIT: 127"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:42:04.082Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"/Users/murphy/.nvm/versions/node/v24.13.1/bin/codex --version 2>&1; echo \\\"---\\\"; cat /tmp/iterative-review-euzwH6/murphy-impl-R5-prompt.txt | /Users/murphy/.nvm/versions/node/v24.13.1/bin/codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema /tmp/iterative-review-euzwH6/findings-schema.json --output-last-message /tmp/iterative-review-euzwH6/murphy-impl-R5.json - 2>&1 | tail -10; echo \\\"EXIT: $?\\\"\", \"description\": \"Retry Murphy R5 with absolute codex path\""
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:42:04.131Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(eval):1: no such file or directory: /Users/murphy/.nvm/versions/node/v24.13.1/bin/codex\n---\n(eval):1: no such file or directory: /Users/murphy/.nvm/versions/node/v24.13.1/bin/codex\nEXIT:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:42:08.104Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"ls -la $(which codex 2>/dev/null || echo \\\"NOT_FOUND\\\") 2>/dev/null; command -v codex 2>/dev/null || echo \\\"codex not in PATH\\\"\", \"description\": \"Find codex binary\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:42:08.142Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "codex not in PATH"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:42:12.244Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Codex seems to have become unavailable. It was available earlier (we ran it successfully multiple times). This might be a temporary shell environment issue. Let me try sourcing the shell profile or using bash directly."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:42:13.057Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"bash -lc 'which codex' 2>/dev/null || echo \\\"NOT_FOUND_IN_BASH\\\"\", \"description\": \"Find codex in bash login shell\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:42:13.101Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "NOT_FOUND_IN_BASH"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:42:17.340Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"find /Users/murphy/.nvm -name \\\"codex\\\" -type f 2>/dev/null; find /opt/homebrew -name \\\"codex\\\" -type f 2>/dev/null; find /usr/local -name \\\"codex\\\" -type f 2>/dev/null; ls /Users/murphy/.nvm/versions/node/*/bin/codex 2>/dev/null\", \"description\": \"Search for codex binary\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:42:25.593Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Exit code 1\n/Users/murphy/.nvm/versions/node/v24.13.1/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex/codex\n/Users/murphy/.nvm/versions/node/v24.13.1/lib/node_modules/@openai/.codex-8L5kTvIb/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex/codex\n(eval):1: no matches found: /Users/murphy/.nvm/versions/node/*/bin/codex"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:42:30.427Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"ls /Users/murphy/.nvm/versions/node/v24.13.1/bin/ | grep -i codex 2>/dev/null\", \"description\": \"Check nvm bin for codex\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:42:30.454Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(Bash completed with no output)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:42:35.441Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "It seems like the `codex` binary is no longer in the PATH. It was there at the beginning of the conversation. It seems like the nvm node version might have changed or the symlink was removed. The actual binary is deeply nested in `node_modules`.\n\nLet me try using the direct path to the binary, or use npm/npx."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:42:36.517Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"CODEX=\\\"/Users/murphy/.nvm/versions/node/v24.13.1/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex/codex\\\" && \\\"$CODEX\\\" --version 2>&1\", \"description\": \"Test direct codex binary\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:42:36.553Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Exit code 137\n[Request interrupted by user for tool use]"
+      }
+    ]
   }
 ]
