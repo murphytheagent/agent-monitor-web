@@ -768,7 +768,7 @@ function renderBacklog() {
           '<span' + priClass + '>' + esc(item.priority) + '</span>' +
           '<span>' + esc(item.created) + '</span>' +
           badges +
-          (item.session_id ? '<button class="view-session-btn" data-session="' + esc(item.id) + '">View Session</button>' : '') +
+          (item.session_id || isActive ? '<button class="view-session-btn" data-session="' + esc(item.id) + '">View Session</button>' : '') +
         '</div>' +
       '</div>';
     }).join('') + '</div>';
@@ -881,14 +881,31 @@ function renderSessionHtml(entries) {
 function openSessionModal(itemId) {
   openDocModal('Session: ' + itemId, '<div style="padding:12px;color:var(--text-dim)">Loading...</div>', true);
   fetch('sessions/' + encodeURIComponent(itemId) + '.json?_ts=' + Date.now())
-    .then(function(r) { return r.json(); })
+    .then(function(r) {
+      if (!r.ok) throw new Error('not found');
+      return r.json();
+    })
     .then(function(entries) {
       var html = renderSessionHtml(entries);
       document.getElementById('doc-modal-body').innerHTML = html;
       document.getElementById('doc-modal-body').scrollTop = document.getElementById('doc-modal-body').scrollHeight;
     })
-    .catch(function(err) {
-      document.getElementById('doc-modal-body').innerHTML = '<div style="padding:12px;color:var(--bad)">Error: ' + esc(err.message) + '</div>';
+    .catch(function() {
+      // Fallback: active dev items may only have the legacy session.json
+      if (ACTIVE_DEV_ITEMS.indexOf(itemId) >= 0) {
+        fetch('session.json?_ts=' + Date.now())
+          .then(function(r) { return r.json(); })
+          .then(function(entries) {
+            var html = renderSessionHtml(entries);
+            document.getElementById('doc-modal-body').innerHTML = html;
+            document.getElementById('doc-modal-body').scrollTop = document.getElementById('doc-modal-body').scrollHeight;
+          })
+          .catch(function(err) {
+            document.getElementById('doc-modal-body').innerHTML = '<div style="padding:12px;color:var(--bad)">Error: ' + esc(err.message) + '</div>';
+          });
+      } else {
+        document.getElementById('doc-modal-body').innerHTML = '<div style="padding:12px;color:var(--text-dim)">No session data available.</div>';
+      }
     });
 }
 
