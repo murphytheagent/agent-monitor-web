@@ -3489,5 +3489,202 @@
         "input_preview": "{\"task_id\": \"bfrz78vu3\", \"block\": true, \"timeout\": 300000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:39:15.335Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>bfrz78vu3</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\n{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-001\",\"severity\":\"high\",\"category\":\"Murphy/operational\",\"file\":\"src/loop/monitor/dashboard.py\",\"line\":2737,\"scope\":\"dashboard startup\",\"title\":\"`--from-config` silently degrades into a 2-second publish loop when its config file is missing\",\"description\":\"The new launcher always uses `--from-config`, but that path treats a missing `LOOP_CONFIG_FILE`/`supervisor_loop.conf` as an empty config. `_cfg()` then falls back to hardcoded defaults (`DASHBOARD_EXPORT_ENABLED=true`, `DASHBOARD_GIT_PUSH=on`, export dir `projects/agent-monitor-web`), and `resolve_supervisor_poll_interval_sec()` falls back to `DEFAULT_LOCAL_WRITE_INTERVAL_SEC=2`. A typo in `.env` can therefore start the publisher against `origin/main` and churn snapshot commits every two seconds instead of failing fast the"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:39:42.615Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "**CONVERGENCE CHECK: Tribune=approve (gemini-2.5-flash), Murphy=findings (2), round 3 of 5 → continuing**\n\nLet me evaluate Murphy's findings:\n\n**M-001 (high, operational)**: When the config file is missing, `read_supervisor_default()` returns None for everything, so `_cfg()` falls through to hardcoded defaults. The interval falls back to `DEFAULT_LOCAL_WRITE_INTERVAL_SEC = 2`. A typo in `LOOP_CONFIG_FILE` would cause a 2-second publish loop.\n \nNow I'm checking whether this is actually a real problem. The dashboard launcher runs from the repo directory, and the config file is always present there. The only realistic way to hit this is if someone explicitly sets `LOOP_CONFIG_FILE` to a bad path, which would indeed trigger the 2-second fallback. That's a genuine issue. The solution would be to add validation when `--from-config` is used.\n\nBut looking at how the config reading works, it already handles missing files gracefully by returning None. This fallback behavior has always existed — the 2-second default has been the safety net whenever the config couldn't be read. The daemon thread in the supervisor used the same pattern, pulling `sleep_normal` from the Config class which tried env vars first, then the conf file, then fell back to defaults. The standalone dashboard now does something similar through `resolve_supervisor_poll_interval_sec()`, checking env and conf in sequence before hitting the default.\n\nSo this isn't a new problem introduced by my change — it's pre-existing behavior in the dashboard module. That said, Murphy's right that we should at least warn if someone explicitly points to a nonexistent config file via `LOOP_CONFIG_FILE`. The fix is straightforward: when `--from-config` is used and the file is explicitly specified, verify it exists and fail fast. But if we're using the default config path, it'll always be there in the repo.\n\nOn the `DASHBOARD_EXPORT_ENABLED` issue, the startup note only reads from env, not from the conf file, so if it's disabled in config but not in the environment, the note still prints. It's a valid concern but minor since the note is just informational.\n\nThe real question is whether it's worth adding complexity to fix this. The supervisor's `main.py` doesn't import the dashboard config reader, and the `Config` class no longer has dashboard fields. I could do a quick conf file read for consistency, but that feels like overkill for a convenience reminder. If dashboard export is disabled in the conf but the env var suggests otherwise, the operator will see both the note and the actual \"Dashboard export disabled\" message from the publisher, so they'll understand what's happening.\n\nFor the config file issue, the pre-existing `DEFAULT_LOCAL_WRITE_INTERVAL_SEC` fallback is a design choice of the dashboard module itself, not something this PR introduced. But the case where `LOOP_CONFIG_FILE` points to a nonexistent file is worth protecting against. I'll add a minimal guard in the `--from-config` path to verify the file exists when that env var is explicitly set. For the startup note, I'll either print it unconditionally or skip it entirely and rely on documentation instead."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:39:44.125Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**CONVERGENCE CHECK: Tribune=approve, Murphy=findings (2), round 3 of 5 → continuing**\n\nLet me evaluate these and fix:\n\n**M-001**: Valid — explicit `LOOP_CONFIG_FILE` pointing to a nonexistent file would silently degrade to 2-second loop. Fix: add a guard.\n\n**M-002**: The startup note is purely informational — if disabled in conf, the publisher exits immediately with \"Dashboard export disabled.\" No harm. But let me simplify it to avoid the env-only check."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:39:47.821Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"old_string\": \"        _load_dotenv()\\n        _reload_config_file()  # pick up LOOP_CONFIG_FILE from .env\\n\\n        def _cfg(name: str, fallback: str) -> str:\", \"new_string\": \"        _load_dotenv()\\n        _reload_config_file()  # pick up LOOP_CONFIG_FILE from .env\\n\\n        # Fail fast if an explicitly-set config file doesn't exist\\n        explicit_config = os.environ.get(\\\"LOOP_CONFIG_FILE\\\")\\n   "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:39:47.832Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/monitor/dashboard.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:39:51.704Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "For M-002, simplify the supervisor note to always print (it's just a reminder):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:39:54.162Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/main.py\", \"old_string\": \"    # Dashboard publisher is a standalone process since AGENT-044.\\n    # Remind the operator if dashboard export is configured.\\n    if parse_bool(os.environ.get(\\\"DASHBOARD_EXPORT_ENABLED\\\", \\\"true\\\")):\\n        print(\\n            \\\"NOTE: Dashboard publisher runs separately — start it with: ./scripts/dashboard.sh\\\"\\n        )\", \"new_string\": \"    # Dashboard publisher is a standalone proce"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:39:54.167Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/main.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:39:57.407Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Add a test for the missing config guard:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:40:01.800Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"    def test_reload_config_file_after_dotenv(self):\", \"new_string\": \"    def test_from_config_fails_on_missing_explicit_config(self):\\n        \\\"\\\"\\\"--from-config should exit if LOOP_CONFIG_FILE points to nonexistent file.\\\"\\\"\\\"\\n        from src.loop.monitor.dashboard import main as dashboard_main\\n        import src.loop.monitor.dashboard as dash_mod\\n        orig_config = dash_m"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:40:01.816Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:40:06.096Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -q 2>&1 | tail -5\", \"description\": \"Run full test suite after round 3 fixes\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:40:35.163Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  /Users/murphy/Research/src/loop/monitor/dashboard.py:1810: DeprecationWarning: invalid escape sequence '\\.'\n    ROADMAP_HTML_TEMPLATE = \"\"\"\\\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n454 passed, 2 warnings, 30 subtests passed in 28.90s"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:40:39.626Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "454 tests pass (13 new). Let me dispatch round 4.\n\n### Implementation Review — Round 4 of 5"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:40:42.324Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git diff HEAD -- src/loop/monitor/dashboard.py src/loop/supervisor/main.py src/loop/supervisor/config.py src/loop/tests/test_supervisor_loop.py CLAUDE.md docs/operations.md > /tmp/iterative-review-pLKMz4/impl-R4.diff 2>&1\\ndiff /dev/null scripts/dashboard.sh >> /tmp/iterative-review-pLKMz4/impl-R4.diff 2>&1 || true\\necho \\\"Diff size: $(wc -c < /tmp/iterative-review-pLKMz4/impl-R4.diff) bytes\\\"\", \"description\": \"Collect diff for round 4\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T12:40:42.384Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Diff size:    31632 bytes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:40:45.977Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Slightly over 30KB. Let me summarize the older round context to keep the prompt manageable."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:40:58.981Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"IMPL_DIFF=\\\"$(cat /tmp/iterative-review-pLKMz4/impl-R4.diff)\\\"\\n\\nPRIOR_CONTEXT=\\\"## Prior Round Context\\n\\nRounds 1-2: Tribune approved both. Murphy: 5 findings total, all fixed (config fallback, import-time resolution, deployment handoff, Python version guard, test state leak).\\n\\nRound 3: Tribune approved. Murphy: 2 findings:\\n- M-001 (high): Missing config file causes silent 2-second publish loop → **Fixed**: Added fail-fast guard when LOOP_CONFIG_FILE is explicitly set but none"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T12:41:03.592Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"IMPL_DIFF=\\\"$(cat /tmp/iterative-review-pLKMz4/impl-R4.diff)\\\"\\n\\nPRIOR_CONTEXT=\\\"## Prior Round Context\\n\\nRounds 1-2: Tribune approved both. Murphy: 5 findings total, all fixed (config fallback, import-time resolution, deployment handoff, Python version guard, test state leak).\\n\\nRound 3: Tribune approved. Murphy: 2 findings:\\n- M-001 (high): Missing config file causes silent 2-second publish loop → **Fixed**: Added fail-fast guard when LOOP_CONFIG_FILE is explicitly set but none"
+      }
+    ]
   }
 ]
