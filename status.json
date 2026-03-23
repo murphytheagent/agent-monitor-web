@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T11:11:14Z",
+    "last_updated_utc": "2026-03-23T12:53:54Z",
     "status": "running_session",
     "pid": 68391,
-    "loop_count": 6677,
+    "loop_count": 6678,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.04,
-      "five": 1.92,
-      "fifteen": 1.84
+      "one": 1.84,
+      "five": 1.97,
+      "fifteen": 1.88
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113565356032,
-    "disk_free_bytes": 131541839872,
-    "runner_log_size_bytes": 681757,
+    "disk_used_bytes": 113565736960,
+    "disk_free_bytes": 131541458944,
+    "runner_log_size_bytes": 682190,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T12:53:23Z",
+    "checked_at_utc": "2026-03-23T12:55:26Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -70,7 +70,7 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 27
+        "temperature_c": 28
       },
       {
         "index": 4,
@@ -83,15 +83,15 @@
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 1,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 59457,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 31
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 86,
+        "utilization_gpu_pct": 91,
         "memory_used_mb": 89493,
         "memory_total_mb": 97887,
         "temperature_c": 50
@@ -102,44 +102,27 @@
         "utilization_gpu_pct": 98,
         "memory_used_mb": 89491,
         "memory_total_mb": 97887,
-        "temperature_c": 53
+        "temperature_c": 52
       }
     ]
   },
   "tasks": {
-    "queued": {
+    "queued": {},
+    "active": {
       "maintenance": {
         "mention_ts": "maintenance",
         "thread_ts": "maintenance",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Run maintenance reflection checklist and summarize findings.",
         "summary": "Run maintenance reflection checklist and summarize findings.",
         "summary_preview": "Run maintenance reflection checklist and summarize findings.",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774264266.181847",
-        "last_update_ts": "1774264266.181847",
+        "last_update_ts": "1774270434.263869",
         "task_type": "maintenance",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-23T11:11:06Z"
-        }
-      }
-    },
-    "active": {
-      "1774258406.585549": {
-        "mention_ts": "1774258406.585549",
-        "thread_ts": "1774258406.585549",
-        "status": "in_progress",
-        "task_description": "Development: AGENT-044.",
-        "summary": "Development: AGENT-044.",
-        "summary_preview": "Development: AGENT-044.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774259328.567422",
-        "last_update_ts": "1774264274.235894",
-        "task_type": "development",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-23T09:33:26Z"
         }
       }
     },
@@ -434,6 +417,22 @@
       }
     },
     "finished": {
+      "1774258406.585549": {
+        "mention_ts": "1774258406.585549",
+        "thread_ts": "1774258406.585549",
+        "status": "done",
+        "task_description": "Development: AGENT-044.",
+        "summary": "Development task completed (1774258406.585549)",
+        "summary_preview": "Development task completed (1774258406.585549)",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774259328.567422",
+        "last_update_ts": "1774270425.389404",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T09:33:26Z"
+        }
+      },
       "1774259088.675559": {
         "mention_ts": "1774259088.675559",
         "thread_ts": "1774259088.675559",
@@ -1217,22 +1216,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T04:34:34Z"
         }
-      },
-      "1771980057.419759": {
-        "mention_ts": "1771980057.419759",
-        "thread_ts": "1771980057.419759",
-        "status": "done",
-        "task_description": "How is your SESSION_MEMORY_CONTEXT constructed and is it loaded correctly into session prompt?",
-        "summary": "Explained how SESSION_MEMORY_CONTEXT is constructed in runtime.py and verified it is correctly injected into .agent/runtime_session_prompt.md for this session.",
-        "summary_preview": "Explained how SESSION_MEMORY_CONTEXT is constructed in runtime.py and verified it is correctly injected into .agent/runtime_session_prompt.md for this session.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771980057.419759",
-        "last_update_ts": "1771980273.145342",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T00:40:57Z"
-        }
       }
     }
   },
@@ -1738,5 +1721,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T12:53:24Z"
+  "server_time_utc": "2026-03-23T12:55:27Z"
 }
