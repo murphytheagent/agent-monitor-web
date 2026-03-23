@@ -2438,5 +2438,390 @@
         "content_preview": "41-- `DASHBOARD_EXPORT_DIR` — export target (default: `projects/agent-monitor-web`)\n42-- `DASHBOARD_GIT_PUSH` — auto-commit and push (default: `true`)\n43:- `DASHBOARD_GIT_REMOTE` / `DASHBOARD_GIT_BRANCH` — push target (default: `origin` / `main`)\n44-- `DASHBOARD_GPU_MONITOR` — remote GPU snapshot (default: `true`)\n45-- `DASHBOARD_GPU_NODE_ALIAS` — SSH alias (default: `tianhaowang-gpu0`)"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:59:42.231Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/CLAUDE.md\", \"old_string\": \"- `DASHBOARD_GIT_REMOTE` / `DASHBOARD_GIT_BRANCH` — push target (default: `origin` / `main`)\", \"new_string\": \"- `DASHBOARD_GIT_REMOTE` / `DASHBOARD_GIT_BRANCH` — push target (default: `origin` / `deploy`)\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:59:42.232Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<tool_use_error>File has not been read yet. Read it first before writing to it.</tool_use_error>"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:59:45.642Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/CLAUDE.md\", \"offset\": 38, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:59:45.645Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    38→\n    39→Dashboard export is configured via `supervisor_loop.conf` / environment variables:\n    40→- `DASHBOARD_EXPORT_ENABLED` — enable/disable (default: `true`)\n    41→- `DASHBOARD_EXPORT_DIR` — export target (default: `projects/agent-monitor-web`)\n    42→- `DASHBOARD_GIT_PUSH` — auto-commit and push (default: `true`)\n    43→- `DASHBOARD_GIT_REMOTE` / `DASHBOARD_GIT_BRANCH` — push target (default: `origin` / `main`)\n    44→- `DASHBOARD_GPU_MONITOR` — remote GPU snapshot (default: `true`)\n    45→- `DASHBOARD_GPU_NODE_ALIAS` — SSH alias (default: `tianhaowang-gpu0`)\n    46→\n    47→**One-shot export** (useful for testing):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:59:49.130Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/CLAUDE.md\", \"old_string\": \"- `DASHBOARD_GIT_REMOTE` / `DASHBOARD_GIT_BRANCH` — push target (default: `origin` / `main`)\", \"new_string\": \"- `DASHBOARD_GIT_REMOTE` / `DASHBOARD_GIT_BRANCH` — push target (default: `origin` / `deploy`)\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:59:49.138Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/CLAUDE.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:59:52.083Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me write the tests. Let me first check what the existing test file looks like."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:59:52.983Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"wc -l /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"description\": \"Check test file size\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:59:53.016Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    8141 /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:59:53.879Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"def test_.*publish|def test_.*deploy|def test_.*snapshot\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:59:53.897Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2015:    def test_waiting_human_feedback_is_deferred_to_refresh_snapshot_path(self):\n2109:    def test_reactivates_with_readable_context_snapshot(self):\n2285:    def test_store_thread_snapshot_replaces_context_snapshot(self):\n2320:    def test_store_thread_snapshot_noop_on_empty(self):\n2343:    def test_reconcile_captures_thread_snapshot(self):\n4446:    def test_no_snapshots_falls_back_to_regular(self):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:59:57.804Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 8130, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:59:57.807Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  8130→        import src.loop.monitor.dashboard as dash_mod\n  8131→        orig = dash_mod.SUPERVISOR_LOOP_CONFIG_FILE\n  8132→        try:\n  8133→            with patch.dict(os.environ, {\"LOOP_CONFIG_FILE\": \"/late/config.conf\"}):\n  8134→                dash_mod._reload_config_file()\n  8135→                self.assertEqual(dash_mod.SUPERVISOR_LOOP_CONFIG_FILE, Path(\"/late/config.conf\"))\n  8136→        finally:\n  8137→            dash_mod.SUPERVISOR_LOOP_CONFIG_FILE = orig\n  8138→\n  8139→\n  8140→if __name__ == \"__main__\":\n  8141→    unittest.main(verbosity=2)\n  8142→"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:00:02.258Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"class.*Test.*Dashboard|class.*Test.*Monitor|class.*Test.*deploy\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:00:02.281Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "7916:class TestDashboardDecoupled(unittest.TestCase):\n7950:class TestDashboardHeadlessMode(unittest.TestCase):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:00:05.364Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 7916, \"limit\": 40}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:00:05.369Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  7916→class TestDashboardDecoupled(unittest.TestCase):\n  7917→    \"\"\"Verify that the supervisor no longer owns dashboard config or threads.\"\"\"\n  7918→\n  7919→    def test_config_no_dashboard_fields(self):\n  7920→        \"\"\"Config class should not have dashboard_* attributes after decoupling.\"\"\"\n  7921→        with tempfile.TemporaryDirectory() as td:\n  7922→            tmp = Path(td)\n  7923→            conf = _make_conf(tmp)\n  7924→            with patch.dict(os.environ, {\"SLACK_MCP_XOXP_TOKEN\": \"x\",\n  7925→                                          \"SESSION_MINUTES\": \"5\",\n  7926→                                          \"SLEEP_NORMAL\": \"1\"}):\n  7927→                cfg = sl.Config(conf)\n  7928→            # These fields should no longer exist\n  7929→            for attr in (\"dashboard_export_dir\", \"dashboard_export_enabled\",\n  7930→                         \"dashboard_git_push\", \"dashboard_git_remote\",\n  7931→                         \"dashboard_git_branch\", \"dashboard_gpu_monitor\",\n  7"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:00:08.690Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good. Now let me write the tests. I'll add a new test class after the existing dashboard tests."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:00:09.193Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 1, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:00:09.199Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→#!/usr/bin/env python3\n     2→\"\"\"Tests for the Python supervisor loop implementation.\n     3→\n     4→All tests use isolated temporary directories — they never touch the live\n     5→.agent/ directory or any running supervisor state.\n     6→\n     7→Run with:\n     8→    python3 -m pytest src/loop/tests/test_supervisor_loop.py -v\n     9→or:\n    10→    python3 -m unittest src.loop.tests.test_supervisor_loop -v\n    11→\"\"\"\n    12→\n    13→from __future__ import annotations\n    14→\n    15→import json"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:00:12.495Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 15, \"limit\": 20}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:00:12.499Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    15→import json\n    16→import os\n    17→import subprocess\n    18→import sys\n    19→import tempfile\n    20→import time\n    21→import unittest\n    22→from datetime import datetime, timedelta, timezone\n    23→from pathlib import Path\n    24→from unittest.mock import MagicMock, call, patch\n    25→\n    26→# ---------------------------------------------------------------------------\n    27→# Bootstrap: make the supervisor module importable without executing main().\n    28→# The `main()` function is guarded by __name__==\"__main__\" so import is safe.\n    29→# ---------------------------------------------------------------------------\n    30→\n    31→# Ensure the repo root is on sys.path so imports work when tests are run\n    32→# from any working directory.\n    33→REPO_ROOT = Path(__file__).resolve().parents[3]\n    34→sys.path.insert(0, str(REPO_ROOT))"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:00:15.801Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me add the test class at the end of the file (before `if __name__`):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:00:55.215Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"if __name__ == \\\"__main__\\\":\\n    unittest.main(verbosity=2)\", \"new_string\": \"class TestPublishToDeployBranch(unittest.TestCase):\\n    \\\"\\\"\\\"Tests for the plumbing-based deploy branch publishing.\\\"\\\"\\\"\\n\\n    @staticmethod\\n    def _init_repo_pair(workdir: Path):\\n        \\\"\\\"\\\"Create a local repo + bare remote, with main branch and durable files.\\\"\\\"\\\"\\n        bare = workdir / \\\""
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:00:55.225Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:00:59.167Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I need to add `import shutil` to the test file since the submodule test uses it."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:00:59.886Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"^import shutil\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:00:59.905Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No matches found"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:01:03.760Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"import json\\nimport os\\nimport subprocess\\nimport sys\\nimport tempfile\", \"new_string\": \"import json\\nimport os\\nimport shutil\\nimport subprocess\\nimport sys\\nimport tempfile\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:01:03.776Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:01:06.519Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me run the tests to verify everything works."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:01:07.741Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py::TestPublishToDeployBranch -v 2>&1 | tail -30\", \"description\": \"Run deploy branch publish tests\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:01:11.963Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "            (local / \"index.html\").write_text(\"<h1>Feature Branch</h1>\")\n            subprocess.run([\"git\", \"-C\", str(local), \"add\", \"index.html\"], capture_output=True, check=True)\n            subprocess.run([\"git\", \"-C\", str(local), \"commit\", \"-m\", \"feature change\"], capture_output=True, check=True)\n            # Publish — should use main's content, not feature's.\n            sha = publish_to_deploy_branch(local, \"origin\", \"deploy\", tracked)\n            self.assertIsNotNone(sha)\n            show = subprocess.run(\n                [\"git\", \"-C\", str(bare), \"show\", \"deploy:index.html\"],\n                capture_output=True, text=True,\n            )\n>           self.assertEqual(show.stdout, \"<h1>Dashboard</h1>\")  # main's content\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE           AssertionError: '<h1>Feature Branch</h1>' != '<h1>Dashboard</h1>'\nE           - <h1>Feature Branch</h1>\nE           + <h1>Dashboard</h1>\n\nsrc/loop/tests/test_supervisor_loop.py:8259: Assert"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:01:32.817Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "The feature-branch test failed — the deploy tree has the feature branch's content for `index.html` instead of `main`'s. This is because `publish_to_deploy_branch()` correctly reads `origin/main^{tree}` for the base tree, but then overlays the snapshot files from disk. The disk file `index.html` was modified by the feature branch commit.\n\nWait, let me re-think this. The function:\n1. Fetches `origin main` — this gives us `main` on the remote, which has the original content\n2. Reads `origin/main^{tree}` — gets the tree from main\n\n\n3. Creates a temporary index from that tree, clears the snapshot entries, and then overlays the actual snapshot files from disk — which is where the problem lies. In the feature-branch test, the disk `index.html` contains the feature branch's content, so that's what gets written to the deploy tree. This is actually the intended behavior since the function is supposed to overlay the current working tree's snapshot files onto `main`'s tree, so the test expectation is what needs fixing.\n\nBut wait — in production, `write_static_site()` generates these files fresh each cycle, so the disk version is always the latest generated snapshot regardless of what's checked out. The test is conflating two different file types: durable files like showcase assets that should come from `main`, and snapshot files like `index.html` that should always come from the latest disk output. The test setup is actually wrong — it should be verifying that a durable file retains `main`'s version, not a snapshot file. , let me re-read the test more carefully. The test creates a feature branch that modifies `index.html` and commits it. Then it calls `publish_to_deploy_branch()`. The test expects that `deploy:index.html` has `main`'s version.\n\nBut `index.html` is in `tracked_files` (snapshot files). The function overlays snapshot files from disk. On disk, `index.html` was modified by the feature branch (both committed and on disk). So the overlay reads the disk version, which is the feature branch's content.\n\nThe question is: should the function use main's version of snapshot files, or the disk version?\n\nIn production, the disk version is the generated snapshot (from `write_static_site()`). It doesn't matter what branch is checked out — the snapshot is always freshly generated. The function should use the disk version.\n\nSo the test expectation is wrong. The real test should verify that durable files from main are preserved in deploy even when on a feature branch, while snapshot files correctly come from the current disk state. The more important case to test is whether a new durable file added on the feature branch gets excluded from deploy — only main's durable files should make it through."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:01:32.818Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "7 passed, 1 failed. The feature-branch test expectation is wrong — snapshot files are always overlaid from disk (the latest generated output), which is correct behavior. Let me fix the test to verify that **durable files** come from `main`, not a feature branch's content."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T23:01:40.410Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"    def test_feature_branch_publishes_main_content(self):\\n        \\\"\\\"\\\"When checkout is on a feature branch, deploy tree has main's content.\\\"\\\"\\\"\\n        from src.loop.monitor.dashboard import publish_to_deploy_branch\\n        tracked = (\\\"index.html\\\", \\\"status.json\\\", \\\"backlog/index.html\\\",\\n                    \\\"backlog/session.json\\\", \\\"roadmap/index.html\\\")\\n        with "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T23:01:40.421Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
   }
 ]
