@@ -5570,5 +5570,430 @@
         "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:18:22.165Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now I need to add the import for `system_prompt_hash` in the test file:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:18:23.449Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"^from.*utils import|^from.*supervisor.*import\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true, \"head_limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:18:23.472Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "3330:from src.loop.supervisor.worker_slot import WorkerSlot\n7538:from src.loop.supervisor.filelock import agent_file_lock, locked_append\n\n[Showing results with pagination = limit: 10, offset: 0]"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:18:25.872Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:18:25.879Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→#!/usr/bin/env python3\n     2→\"\"\"Tests for the Python supervisor loop implementation.\n     3→\n     4→All tests use isolated temporary directories — they never touch the live\n     5→.agent/ directory or any running supervisor state.\n     6→\n     7→Run with:\n     8→    python3 -m pytest src/loop/tests/test_supervisor_loop.py -v\n     9→or:\n    10→    python3 -m unittest src.loop.tests.test_supervisor_loop -v\n    11→\"\"\"\n    12→\n    13→from __future__ import annotations\n    14→\n    15→import json"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:18:28.977Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 15, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:18:28.983Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    15→import json\n    16→import os\n    17→import subprocess\n    18→import sys\n    19→import tempfile\n    20→import time\n    21→import unittest\n    22→from datetime import datetime, timedelta, timezone\n    23→from pathlib import Path\n    24→from unittest.mock import MagicMock, call, patch\n    25→\n    26→# ---------------------------------------------------------------------------\n    27→# Bootstrap: make the supervisor module importable without executing main().\n    28→# The `main()` function is guarded by __name__==\"__main__\" so import is safe.\n    29→# ---------------------------------------------------------------------------"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:18:32.036Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 29, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:18:32.040Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    29→# ---------------------------------------------------------------------------\n    30→\n    31→# Ensure the repo root is on sys.path so imports work when tests are run\n    32→# from any working directory.\n    33→REPO_ROOT = Path(__file__).resolve().parents[3]\n    34→sys.path.insert(0, str(REPO_ROOT))\n    35→\n    36→import src.loop.supervisor.main as sl  # noqa: E402  (after sys.path fixup)\n    37→\n    38→\n    39→# ---------------------------------------------------------------------------\n    40→# Helpers\n    41→# ---------------------------------------------------------------------------\n    42→\n    43→def _make_conf(tmp: Path, overrides: dict | None = None) -> Path:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:18:36.902Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I need to add the import after the main module import:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:18:38.219Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"import src.loop.supervisor.main as sl  # noqa: E402  (after sys.path fixup)\\n\\n\\n# ---------------------------------------------------------------------------\\n# Helpers\", \"new_string\": \"import src.loop.supervisor.main as sl  # noqa: E402  (after sys.path fixup)\\nfrom src.loop.supervisor.utils import system_prompt_hash  # noqa: E402\\n\\n\\n# ------------------------------------------"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:18:38.233Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:18:40.848Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now run the tests:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:18:42.007Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -q 2>&1 | tail -10\", \"description\": \"Run all tests including new session resume tests\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:19:08.499Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "..................................................... [ 12%]\n........................................................................ [ 28%]\n........................................................................ [ 44%]\n............................................................. [ 58%]\n........................................................................ [ 75%]\n........................................................................ [ 91%]\n....................................                                     [100%]\n438 passed, 30 subtests passed in 26.32s"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:19:11.576Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 438 tests pass (18 new tests added). Now let me update the documentation and commit."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:19:14.337Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Read dispatch context and key source files\", \"status\": \"completed\", \"activeForm\": \"Reading dispatch context and key source files\"}, {\"content\": \"Write implementation plan for AGENT-025 remaining work\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Run iterative-review on the plan\", \"status\": \"completed\", \"activeForm\": \"Running iterative-review on the plan\"}, {\"content\": \"Implement Phase 1: session resume wiring\", \"status\": \"completed\", "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:19:14.340Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:19:16.795Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Let me update CHANGELOG and ROADMAP:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:19:17.295Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/CHANGELOG.md\", \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:19:17.299Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# Changelog (Agent Source Only)\n     2→\n     3→Scope: root-repo agent source changes in `src/`, `scripts/`, root launchers, and related supervisor prompts/config. Excludes project-specific code and task-only report churn.\n     4→\n     5→## 2026-03-22 18:09 UTC — Full-file secret scanning for iterative-review (FIX-007)\n     6→\n     7→Extended iterative-review secret scanning from diff-only to two-layer (full-file + diff backstop). Reviewers have full file-read access, so scanning only the diff left secrets in unchanged hunks exposed.\n     8→\n     9→- **Layer 1 (full-file)**: Resolves file list from scope arguments (per scope type, using `--diff-filter=d` and `git ls-files` for untracked), scans full contents with high-confidence Tier 1 patterns (AWS keys, PEM keys, assignment-style secrets with 20+ char values).\n    10→- **Layer 2 (diff backstop)**: Continues scanning the diff with Tier 1 + broader Tier 2 patterns (`API_KEY=.+`, etc.). Catches secrets in deleted file content."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:19:21.956Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"date -u \\\"+%Y-%m-%d %H:%M\\\"\", \"description\": \"Get current UTC timestamp\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:19:21.994Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2026-03-23 03:19"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:19:48.577Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/CHANGELOG.md\", \"old_string\": \"## 2026-03-22 18:09 UTC — Full-file secret scanning for iterative-review (FIX-007)\", \"new_string\": \"## 2026-03-23 03:19 UTC — Persistent thread sessions: session resume + mid-execution thread awareness (AGENT-025)\\n\\nImplement session resume for codex workers across re-dispatches, eliminating cold-start penalty. Workers can now resume prior sessions with full LLM context preserved, and check for hu"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:19:48.589Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/CHANGELOG.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:19:50.895Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update ROADMAP — move AGENT-025 to Completed:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:19:56.347Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"old_string\": \"| AGENT-025 | 2026-03-13 | High | open | Persistent thread sessions: session resume + mid-execution thread awareness. [Plan](plans/37-persistent-thread-sessions.md) | Phase 0 spike completed (2026-03-21). Phase 1 foundation landed (2026-03-22): `system_prompt_hash()` and `capture_codex_session_id()` in utils.py with tests. Next: wire into dispatch logic, drop `--ephemeral`, create resume prompt templ"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:19:56.354Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/ROADMAP.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:19:58.939Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Add to Completed table:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:20:02.485Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"old_string\": \"| FIX-007 | 2026-03-21 | 2026-03-22 | Full-file secret scanning for iterative-review\", \"new_string\": \"| AGENT-025 | 2026-03-13 | 2026-03-23 | Persistent thread sessions: session resume (`codex exec resume`) + mid-execution thread awareness (behavioral contract) + loop mode optimization. `SESSION_RESUME_ENABLED` config flag, dispatch-time prompt hashing, slot affinity, resume failure fallback, deferre"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:20:02.491Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/ROADMAP.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:20:05.743Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Update snapshot counts:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:20:08.204Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"old_string\": \"- `python3 -m pytest src/loop/tests/test_supervisor_loop.py -q` passes (`420 passed, 30 subtests passed`).\", \"new_string\": \"- `python3 -m pytest src/loop/tests/test_supervisor_loop.py -q` passes (`438 passed, 30 subtests passed`).\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:20:08.211Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/ROADMAP.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:20:11.862Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Update Active Queue count (removed 1 item):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:20:13.529Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"old_string\": \"- 9 open items in Active Queue (features, incl. 1 deferred). 7 open items in Fix Queue (reliability).\", \"new_string\": \"- 8 open items in Active Queue (features, incl. 1 deferred). 7 open items in Fix Queue (reliability).\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:20:13.534Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/ROADMAP.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:20:17.314Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Also update plan 37 status:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:20:19.266Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/ROADMAP.md\", \"old_string\": \"- Plan 37 Phase 1 in progress — foundation utilities landed (prompt hash, session ID capture).\", \"new_string\": \"- AGENT-025 (Plan 37) complete — session resume, thread awareness, loop optimization all landed.\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:20:19.271Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/ROADMAP.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:20:22.127Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Update the plans count:"
+      }
+    ]
   }
 ]

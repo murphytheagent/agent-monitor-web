@@ -19,14 +19,14 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.57,
-      "five": 1.73,
-      "fifteen": 1.73
+      "one": 1.34,
+      "five": 1.61,
+      "fifteen": 1.67
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113550508032,
-    "disk_free_bytes": 131556687872,
+    "disk_used_bytes": 113551949824,
+    "disk_free_bytes": 131555246080,
     "runner_log_size_bytes": 601128,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T03:18:19Z",
+    "checked_at_utc": "2026-03-23T03:20:21Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -44,65 +44,65 @@
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 9409,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 29
       },
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 10807,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 28
       },
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 10807,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 29
       },
       {
         "index": 3,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 10807,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 29
       },
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 10807,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 31
+        "temperature_c": 28
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 10807,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 31
+        "temperature_c": 28
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 10807,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 31
+        "temperature_c": 27
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 0,
-        "memory_used_mb": 2733,
+        "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 28
       }
     ]
   },
@@ -1390,18 +1390,6 @@
         "has_issue": false
       },
       {
-        "id": "AGENT-025",
-        "queue": "feature",
-        "created": "2026-03-13",
-        "priority": "High",
-        "status": "open",
-        "task": "Persistent thread sessions: session resume + mid-execution thread awareness. Plan",
-        "context": "Phase 0 spike completed (2026-03-21). Phase 1 foundation landed (2026-03-22): `system_prompt_hash()` and `capture_codex_session_id()` in utils.py with tests. Next: wire into dispatch logic, drop `--ep",
-        "done_when": "Phase 1: drop `--ephemeral`, capture session IDs, re-dispatch via `codex exec resume <ID>` with slot affinity. Phase 2: workers check `conversations_replies` at phase boundaries (behavioral contract).",
-        "has_plan": false,
-        "has_issue": false
-      },
-      {
         "id": "AGENT-038",
         "queue": "feature",
         "created": "2026-03-20",
@@ -1463,6 +1451,12 @@
       }
     ],
     "completed": [
+      {
+        "id": "AGENT-025",
+        "created": "2026-03-13",
+        "completed": "2026-03-23",
+        "summary": "Persistent thread sessions: session resume (`codex exec resume`) + mid-execution thread awareness (behavioral contract) + loop mode optimization. `SESSION_RESUME_ENABLED` config flag, dispatch-time pr"
+      },
       {
         "id": "FIX-007",
         "created": "2026-03-21",
@@ -1739,5 +1733,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T03:18:20Z"
+  "server_time_utc": "2026-03-23T03:20:23Z"
 }
