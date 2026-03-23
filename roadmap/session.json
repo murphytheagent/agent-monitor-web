@@ -1184,5 +1184,524 @@
         "content_preview": "  4016→                tool_timeout_sec=self.cfg.worker_tool_timeout_sec,\n  4017→            )\n  4018→            if stale_reason:\n  4019→                kill_kind = (\n  4020→                    \"watchdog_tool_kill\"\n  4021→                    if stale_reason.startswith(\"tool_call_stale\")\n  4022→                    else \"watchdog_idle_kill\"\n  4023→                )\n  4024→                self.log_line(\n  4025→                    f\"{kill_kind} slot={slot.slot_id} task={slot.task_key} \"\n  4026→                    f\"reason={stale_reason}\"\n  4027→                )\n  4028→                slot.kill_worker(stale_reason)\n  4029→\n  4030→    def _refresh_slot_thread_context(self, slot) -> None:\n  4031→        \"\"\"Like refresh_dispatch_thread_context but uses slot's dispatch file.\"\"\"\n  4032→        dispatch = self.read_json(slot.dispatch_task_file, {})\n  4033→        channel_id = str(dispatch.get(\"channel_id\") or \"\")\n  4034→        thread_ts = str(dispatch.get(\"thread_ts\") or \"\")\n  4035→        men"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:20:40.784Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"def _render_slot_resume_prompt\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:20:40.799Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "4051:    def _render_slot_resume_prompt("
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:20:43.974Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 4051, \"limit\": 15}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:20:43.978Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  4051→    def _render_slot_resume_prompt(\n  4052→        self, slot, task_key: str, dispatch_json: Dict[str, Any]\n  4053→    ) -> None:\n  4054→        \"\"\"Render a lightweight resume prompt to the slot's prompt file.\"\"\"\n  4055→        prompt = self._render_resume_prompt(dispatch_json, task_key)\n  4056→        slot.dispatch_prompt_file.parent.mkdir(parents=True, exist_ok=True)\n  4057→        slot.dispatch_prompt_file.write_text(prompt, encoding=\"utf-8\")\n  4058→\n  4059→    def _render_slot_prompt(self, slot, task_key: str, task_type: str) -> None:\n  4060→        \"\"\"Render the runtime prompt to the slot's prompt file.\"\"\"\n  4061→        dispatch_json = self.read_json(slot.dispatch_task_file, {})\n  4062→        # Inject async job wakeup context (dispatch_token + pending wakeups)\n  4063→        self._inject_wakeup_context(dispatch_json, task_key)\n  4064→        dispatch_str = json.dumps(dispatch_json, ensure_ascii=False, indent=2)  # full, for maintenance/dev\n  4065→"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:20:47.056Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I need to read the slot object properties to understand `repo_root` and `branch_name`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:20:48.004Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"repo_root|branch_name\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/worker_slot.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:20:48.020Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "38:        repo_root: Path,\n45:        self.repo_root = repo_root\n47:        self.branch_name = f\"worker-{slot_id}\"\n108:        self._git([\"worktree\", \"prune\"], cwd=self.repo_root)\n122:            self._git([\"branch\", \"-D\", self.branch_name], cwd=self.repo_root)\n128:            [\"worktree\", \"add\", str(self.worktree_path), \"-b\", self.branch_name, \"HEAD\"],\n129:            cwd=self.repo_root,\n162:        self._git([\"checkout\", \"-B\", self.branch_name, base], cwd=self.worktree_path)\n183:        if self.worktree_path.resolve() == self.repo_root.resolve():\n185:                f\"CRITICAL: worktree_path == repo_root ({self.worktree_path}), \"\n195:        agent_src = self.repo_root / \".agent\"\n206:            parent_src = self.repo_root / submod_parent\n251:        codex_src = self.repo_root / \".codex\"\n291:        history_dir = str(self.repo_root / \".agent\" / \"runtime\" / \"consult_history\")\n371:            \"CONSULT_HISTORY_DIR\": str(self.repo_root / \".agent\" / \"runtime\" / \"consult_history\"),\n372:   "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:20:52.585Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good — `slot.repo_root` and `slot.branch_name` are available. Now I also need to check the task_type for the Tribune gating. Let me look at what `_render_slot_resume_prompt` has access to:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:20:52.881Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 3930, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:20:52.885Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3930→            phase = self.maintenance.get_phase(dispatch)\n  3931→            cmd = self.maintenance.get_worker_cmd(phase)\n  3932→            is_privileged = self.maintenance.is_dev_review_phase(phase)\n  3933→        elif task_type == \"development\":\n  3934→            cmd = list(self.cfg.dev_review_cmd)\n  3935→            is_privileged = True\n  3936→        else:\n  3937→            # AGENT-025: session resume check\n  3938→            dispatch = self.read_json(slot.dispatch_task_file, {})\n  3939→            resume_cmd = (\n  3940→                self._build_resume_cmd(dispatch)\n  3941→                if self._should_resume_session(dispatch)\n  3942→                else []\n  3943→            )\n  3944→            if resume_cmd:\n  3945→                cmd = resume_cmd\n  3946→                is_resume = True\n  3947→            else:\n  3948→                cmd = self._build_fresh_worker_cmd()\n  3949→\n  3950→        # Render prompt (resume or full)\n  3951→        if is_resume:\n  3952→     "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:20:57.032Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I can see that `_render_slot_resume_prompt` is only called in the `else` branch (not maintenance, not development), so `task_type` is always a regular task type. But I need access to `task_type` to check the maintenance gate. Let me pass `task_type` through:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:01.612Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"    def _render_slot_resume_prompt(\\n        self, slot, task_key: str, dispatch_json: Dict[str, Any]\\n    ) -> None:\\n        \\\"\\\"\\\"Render a lightweight resume prompt to the slot's prompt file.\\\"\\\"\\\"\\n        prompt = self._render_resume_prompt(dispatch_json, task_key)\\n        slot.dispatch_prompt_file.parent.mkdir(parents=True, exist_ok=True)\\n        slot.dispatch_prompt_file.write_tex"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:21:01.624Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:04.505Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update the caller to pass `task_type`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:05.752Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"        # Render prompt (resume or full)\\n        if is_resume:\\n            self._render_slot_resume_prompt(slot, task_key, dispatch)\\n        else:\", \"new_string\": \"        # Render prompt (resume or full)\\n        if is_resume:\\n            self._render_slot_resume_prompt(slot, task_key, dispatch, task_type)\\n        else:\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:21:05.762Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:12.724Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Remove slot/mode checks from _should_resume_session()\", \"status\": \"completed\", \"activeForm\": \"Removing slot/mode checks from _should_resume_session()\"}, {\"content\": \"Update callers to drop current_slot_id parameter\", \"status\": \"completed\", \"activeForm\": \"Updating callers to drop current_slot_id parameter\"}, {\"content\": \"Stop writing session_dispatch_mode and session_slot_id in reconcile\", \"status\": \"completed\", \"activeForm\": \"Stopping writes of legacy session fields in re"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:21:12.728Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:16.577Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**Change 5: Update tests**"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:16.906Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 2469, \"limit\": 100}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:21:16.912Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2469→    def test_should_resume_session_basic(self):\n  2470→        \"\"\"Resume when session_id + matching hash + feature enabled.\"\"\"\n  2471→        with tempfile.TemporaryDirectory() as td:\n  2472→            sup = self._sup(td)\n  2473→            current_hash = system_prompt_hash()\n  2474→            task = {\n  2475→                \"codex_session_id\": \"abc-123\",\n  2476→                \"session_prompt_hash\": current_hash,\n  2477→                \"session_dispatch_mode\": \"serial\",\n  2478→            }\n  2479→            self.assertTrue(sup._should_resume_session(task, current_slot_id=None))\n  2480→\n  2481→    def test_should_resume_session_disabled(self):\n  2482→        \"\"\"Don't resume when feature disabled.\"\"\"\n  2483→        with tempfile.TemporaryDirectory() as td:\n  2484→            sup = self._sup(td, SESSION_RESUME_ENABLED=\"false\")\n  2485→            task = {\n  2486→                \"codex_session_id\": \"abc-123\",\n  2487→                \"session_prompt_hash\": system_prompt_hash(),\n  "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:22.256Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now I'll update the tests. I need to:\n1. Remove `current_slot_id` from all `_should_resume_session()` calls\n2. Delete `test_should_resume_session_mode_mismatch` and `test_should_resume_session_slot_mismatch`\n3. Update `test_should_resume_session_slot_match` → verify resume works regardless of slot/mode\n4. Update `test_should_resume_session_basic` to remove `session_dispatch_mode`\n5. Add tests for resume prompt slot overrides\n6. Update `test_session_id_capture_in_reconcile` to remove `session_dispatch_mode` assertion"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:37.415Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"    def test_should_resume_session_basic(self):\\n        \\\"\\\"\\\"Resume when session_id + matching hash + feature enabled.\\\"\\\"\\\"\\n        with tempfile.TemporaryDirectory() as td:\\n            sup = self._sup(td)\\n            current_hash = system_prompt_hash()\\n            task = {\\n                \\\"codex_session_id\\\": \\\"abc-123\\\",\\n                \\\"session_prompt_hash\\\": current_"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:21:37.434Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:40.058Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update `test_session_id_capture_in_reconcile`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:42.610Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"            self.assertEqual(task.get(\\\"codex_session_id\\\"), \\\"test-uuid-456\\\")\\n            self.assertEqual(task.get(\\\"session_prompt_hash\\\"), \\\"hash123\\\")\\n            self.assertEqual(task.get(\\\"session_dispatch_mode\\\"), \\\"serial\\\")\", \"new_string\": \"            self.assertEqual(task.get(\\\"codex_session_id\\\"), \\\"test-uuid-456\\\")\\n            self.assertEqual(task.get(\\\"session_p"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:21:42.624Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:46.172Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add the new tests for resume prompt slot overrides. Let me find the right place to insert them:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:46.740Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 2556, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:21:46.745Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2556→            self.assertEqual(cmd, [])\n  2557→\n  2558→    def test_build_fresh_worker_cmd_strips_ephemeral(self):\n  2559→        \"\"\"Fresh cmd strips --ephemeral when resume enabled.\"\"\"\n  2560→        with tempfile.TemporaryDirectory() as td:\n  2561→            sup = self._sup(td)\n  2562→            cmd = sup._build_fresh_worker_cmd()\n  2563→            self.assertNotIn(\"--ephemeral\", cmd)\n  2564→            self.assertIn(\"codex\", cmd)\n  2565→"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:50.739Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I'll add the new resume prompt tests right after `test_should_resume_session_cross_slot` and before `test_build_resume_cmd_default`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:21:51.248Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 2528, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:21:51.253Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2528→            }\n  2529→            self.assertTrue(sup._should_resume_session(task))\n  2530→\n  2531→    def test_build_resume_cmd_default(self):\n  2532→        \"\"\"Resume command from default WORKER_CMD.\"\"\"\n  2533→        with tempfile.TemporaryDirectory() as td:\n  2534→            sup = self._sup(td)\n  2535→            task = {\"codex_session_id\": \"test-uuid-123\"}\n  2536→            cmd = sup._build_resume_cmd(task)\n  2537→            # Should be: codex exec resume test-uuid-123 - --yolo --skip-git-repo-check\n  2538→            self.assertIn(\"resume\", cmd)\n  2539→            self.assertIn(\"test-uuid-123\", cmd)\n  2540→            self.assertNotIn(\"--ephemeral\", cmd)\n  2541→            # exec should come before resume\n  2542→            exec_idx = cmd.index(\"exec\")\n  2543→            resume_idx = cmd.index(\"resume\")\n  2544→            self.assertEqual(resume_idx, exec_idx + 1)\n  2545→            # session id right after resume\n  2546→            self.assertEqual(cmd[resume_idx + 1], "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:22:06.433Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"    def test_build_resume_cmd_default(self):\\n        \\\"\\\"\\\"Resume command from default WORKER_CMD.\\\"\\\"\\\"\", \"new_string\": \"    def test_resume_prompt_includes_merge_override(self):\\n        \\\"\\\"\\\"Parallel resume prompt contains merge instructions for current slot (AGENT-046).\\\"\\\"\\\"\\n        with tempfile.TemporaryDirectory() as td:\\n            sup = self._sup(td)\\n            disp"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:22:06.442Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:22:12.102Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Remove slot/mode checks from _should_resume_session()\", \"status\": \"completed\", \"activeForm\": \"Removing slot/mode checks from _should_resume_session()\"}, {\"content\": \"Update callers to drop current_slot_id parameter\", \"status\": \"completed\", \"activeForm\": \"Updating callers to drop current_slot_id parameter\"}, {\"content\": \"Stop writing session_dispatch_mode and session_slot_id in reconcile\", \"status\": \"completed\", \"activeForm\": \"Stopping writes of legacy session fields in re"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:22:12.104Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:22:15.285Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**Change 6: Update documentation**\n\nUpdate CLAUDE.md session resume description:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:22:16.684Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"Session resume|session_resume|slot affinity\", \"path\": \"/Users/murphy/Research/CLAUDE.md\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:22:16.699Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "104:[Omitted long matching line]"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:22:20.217Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/CLAUDE.md\", \"offset\": 104, \"limit\": 3}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:22:20.221Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "   104→**Session resume** (`SESSION_RESUME_ENABLED`, default `true`): When enabled, the supervisor persists codex sessions across re-dispatches. On fresh dispatch, `--ephemeral` is stripped from `WORKER_CMD` so sessions persist. On re-dispatch, the supervisor uses `codex exec resume <session_id>` with a lightweight resume prompt. Fallback to fresh dispatch when: session ID missing, prompt hash changed, dispatch mode changed (serial↔parallel), wrong slot (parallel), Tribune feedback pending, or resume fails. Set `SESSION_RESUME_ENABLED=false` to disable all session persistence and restore exact `WORKER_CMD` execution.\n   105→\n   106→Tribune CLI is configurable via `TRIBUNE_CMD` (default: `gemini -m gemini-3.1-pro-preview -p '' -y --output-format text`). On capacity errors (429), the supervisor automatically falls back through `TRIBUNE_FALLBACK_MODELS` (comma-separated, default: `gemini-2.5-pro,gemini-3-flash,gemini-2.5-flash`). The iterative-review skill uses the same primary/fallback m"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:22:26.090Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/CLAUDE.md\", \"old_string\": \"**Session resume** (`SESSION_RESUME_ENABLED`, default `true`): When enabled, the supervisor persists codex sessions across re-dispatches. On fresh dispatch, `--ephemeral` is stripped from `WORKER_CMD` so sessions persist. On re-dispatch, the supervisor uses `codex exec resume <session_id>` with a lightweight resume prompt. Fallback to fresh dispatch when: session ID missing, prompt hash changed, dispatch mode "
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:22:26.104Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/CLAUDE.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:22:29.401Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now update the plan file to mark it as implemented:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:22:32.008Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/agent-025-remove-slot-affinity.md\", \"old_string\": \"**ROADMAP entry:** AGENT-046\\n**Status:** Approved plan (reviewed rounds 1-2)\\n**Created:** 2026-03-23\", \"new_string\": \"**ROADMAP entry:** AGENT-046\\n**Status:** Implemented\\n**Created:** 2026-03-23\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:22:32.014Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/agent-025-remove-slot-affinity.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:22:38.140Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Remove slot/mode checks from _should_resume_session()\", \"status\": \"completed\", \"activeForm\": \"Removing slot/mode checks from _should_resume_session()\"}, {\"content\": \"Update callers to drop current_slot_id parameter\", \"status\": \"completed\", \"activeForm\": \"Updating callers to drop current_slot_id parameter\"}, {\"content\": \"Stop writing session_dispatch_mode and session_slot_id in reconcile\", \"status\": \"completed\", \"activeForm\": \"Stopping writes of legacy session fields in re"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:22:38.142Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:22:40.812Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**Run tests to verify:**"
+      }
+    ]
   }
 ]
