@@ -2688,5 +2688,255 @@
         "content_preview": "Keychain initialization encountered an error: Cannot find module '../build/Release/keytar.node'\nRequire stack:\n- /opt/homebrew/Cellar/gemini-cli/0.34.0/libexec/lib/node_modules/@google/gemini-cli/node_modules/keytar/lib/keytar.js\nUsing FileKeychain fallback for secure storage.\nLoaded cached credentials."
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:37:04.473Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"sleep 30 && cat /private/tmp/claude-501/-Users-murphy-Research/a5b9f06b-2b97-5a8f-82ad-8e7ff1ff0cfb/tasks/bm9ewrghi.output 2>/dev/null | grep -c \\\"verdict\\\" && echo \\\"Tribune has output\\\" || echo \\\"Tribune still running...\\\"\", \"description\": \"Wait and check for Tribune output\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:37:34.671Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "1\nTribune has output"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:37:38.058Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Tribune has produced output. Let me read it along with Murphy's:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:37:38.731Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /private/tmp/claude-501/-Users-murphy-Research/a5b9f06b-2b97-5a8f-82ad-8e7ff1ff0cfb/tasks/bm9ewrghi.output 2>/dev/null | grep -A 500 '{' | head -100\", \"description\": \"Read Tribune JSON output\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:37:38.770Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\n  \"verdict\": \"approve\",\n  \"findings\": [],\n  \"summary\": \"No issues found. The changes correctly remove session slot affinity, supported by updated tests and documentation. The implementation is clean and robust.\"\n}\n```"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:37:42.100Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-hRi3vY/murphy-R1.json 2>/dev/null || echo \\\"Not yet\\\"\", \"description\": \"Check Murphy output file\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:37:42.135Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Not yet"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:37:45.604Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"sleep 30 && cat /tmp/iterative-review-hRi3vY/murphy-R1.json 2>/dev/null || echo \\\"Still not ready\\\"\", \"description\": \"Wait for Murphy\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:38:15.690Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-1-1\",\"severity\":\"high\",\"category\":\"integration\",\"file\":\"src/loop/supervisor/runtime.py\",\"line\":2483,\"scope\":\"session resume\",\"title\":\"Removing the mode check allows unsafe parallel-to-serial resumes\",\"description\":\"`_should_resume_session()` now permits serial<->parallel transitions, but the serial resume path only injects a draft-path override and otherwise leaves the old session contract intact. If a task originally ran in a parallel worktree, that preserved context still includes the worktree-only merge instructions from `merge_instructions.md` (`git -C <repo_root> merge worker-N`). After a restart or config change that redispatches the task serially, the resumed worker can still follow those stale instructions in the main repo, producing the wrong merge or a failed run.\",\"suggestion\":\"Either keep the dispatch-mode guard for parallel->serial resumes, or make serial resumes explicitly override the old contract (for example: state that the ta"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:38:27.654Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good. Both reviewers have returned.\n\n**CONVERGENCE CHECK: Tribune=approve (gemini-2.5-pro), Murphy=findings (2 findings), round 1 of 5 → continuing because Murphy has not approved.**\n\n### Round 1 Analysis\n\n**Tribune**: Approve. No issues found.\n\n**Murphy**: 2 findings:\n- **M-1-1 (high, integration)**: Claims parallel-to-serial resume is unsafe because old session context has stale merge instructions. \n- **M-1-2 (medium, testing)**: Claims `test_resume_prompt_no_overrides_serial` asserts broken behavior.\n\nLet me evaluate M-1-1 from first principles. The concern is: if a task originally ran in parallel (with merge instructions baked into the prompt), and is then resumed in serial mode, the worker still has the old merge instructions from the previous session context. \n\nBut this is a theoretical edge case that doesn't happen in practice:\n1. The supervisor either runs in serial mode (`MAX_CONCURRENT_WORKERS=1`) or parallel mode. It doesn't switch between modes mid-session.\n2. The prompt hash check in `_should_resume_session()` would catch most config changes (changing worker count triggers a different prompt).\n3. Even if it did happen, the `codex exec resume` command resumes with preserved context — the worker would see both the old instructions AND the new resume prompt's \"Updated Instructions\" section, which explicitly says \"Continue from where you left off.\" The new instructions supersede the old.\n\nHowever, to be safe and thorough, let me verify: does changing `MAX_CONCURRENT_WORKERS` affect the prompt hash?"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:38:28.973Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"system_prompt_hash\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"output_mode\": \"content\", \"-n\": true, \"head_limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:38:28.982Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "38:    system_prompt_hash,\n2492:        if stored_hash != system_prompt_hash():\n3096:                    dispatch_prompt_hash or system_prompt_hash()\n3747:                    dispatch[\"dispatch_prompt_hash\"] = system_prompt_hash()\n3922:            dispatch[\"dispatch_prompt_hash\"] = system_prompt_hash()\n\n[Showing results with pagination = limit: 10, offset: 0]"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:38:33.089Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"def system_prompt_hash\", \"path\": \"/Users/murphy/Research/src/loop/supervisor\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:38:33.113Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "src/loop/supervisor/utils.py:172:def system_prompt_hash(root: Optional[Path] = None) -> str:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:38:36.607Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/utils.py\", \"offset\": 172, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:38:36.611Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "   172→def system_prompt_hash(root: Optional[Path] = None) -> str:\n   173→    \"\"\"SHA-256 digest of the concatenated worker behavioral contract files.\n   174→\n   175→    Returns the first 16 hex chars (64 bits) — enough to detect changes\n   176→    reliably without bloating task JSON.  Missing files are hashed as empty\n   177→    (so the hash still changes when a file is added or removed).\n   178→    \"\"\"\n   179→    h = hashlib.sha256()\n   180→    base = root or Path.cwd()\n   181→    for rel in SYSTEM_PROMPT_FILES:\n   182→        p = base / rel\n   183→        try:\n   184→            h.update(p.read_bytes())\n   185→        except OSError:\n   186→            pass  # missing file hashed as empty\n   187→    return h.hexdigest()[:16]\n   188→\n   189→\n   190→# Pattern to capture the codex session ID from worker output.\n   191→# codex prints \"session id: <UUID>\" in its startup header.\n   192→_CODEX_SESSION_ID_RE = re.compile(r\"session id:\\s*([0-9a-f-]{36})\", re.IGNORECASE)\n   193→\n   194→\n   195"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:38:40.239Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"SYSTEM_PROMPT_FILES\", \"path\": \"/Users/murphy/Research/src/loop/supervisor/utils.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:38:40.254Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "153:SYSTEM_PROMPT_FILES = (\n181:    for rel in SYSTEM_PROMPT_FILES:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:38:43.836Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/utils.py\", \"offset\": 153, \"limit\": 20}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:38:43.841Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "   153→SYSTEM_PROMPT_FILES = (\n   154→    \"src/prompts/session.md\",\n   155→    \"src/prompts/loop_context.md\",\n   156→    \"src/prompts/merge_instructions.md\",\n   157→    \"src/prompts/session_resume.md\",\n   158→    \"AGENTS.md\",\n   159→    \"docs/protocols/slack-protocols.md\",\n   160→    \"docs/protocols/maintenance-protocols.md\",\n   161→    \"docs/workflows/git-workflow.md\",\n   162→    \"docs/workflows/research-workflow.md\",\n   163→    \"docs/workflows/remote-gpu-workflow.md\",\n   164→    \"docs/workflows/project-workflow.md\",\n   165→    \"docs/workflows/paper-writing-workflow.md\",\n   166→    \"docs/mcp-integrations.md\",\n   167→    \"docs/persistent-files.md\",\n   168→    \"docs/schemas.md\",\n   169→)\n   170→\n   171→\n   172→def system_prompt_hash(root: Optional[Path] = None) -> str:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:38:54.887Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "The prompt hash includes `session.md` and `merge_instructions.md` but NOT the config value `MAX_CONCURRENT_WORKERS`. So theoretically, if someone changes only the worker count without changing any prompt files, the hash would match and a stale session could resume across modes.\n\nHowever, let me think about this more carefully: \n- In serial mode, the supervisor calls `run_worker_once()` which builds serial context (draft only, no merge instructions in slot context). The resume prompt explicitly provides the serial slot context.\n- The codex session has the OLD merge instructions from the prior parallel run. But the resume prompt has no merge override (serial has no merge block). The worker sees the old instructions in its session history.\n\nThis IS a real concern. If a task that originally had merge instructions (from parallel) resumes in serial mode, the worker still has those old merge instructions in its session context. It might try to `git -C /path/to/worktree merge worker-N` even though it's now running in the main repo with no worktree.\n\nHowever, this scenario requires:\n1. Task ran in parallel with merge instructions\n2. Supervisor restarted with `MAX_CONCURRENT_WORKERS=1` \n3. Same prompt hash (no prompt files changed)\n4. Task gets resumed\n\nThis is an edge case but let me address it. The simplest fix: in the serial resume path, when there's no merge context, add an explicit \"no merge needed\" override to cancel stale instructions."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:38:55.159Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2716, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:38:55.166Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2716→        # Use resume prompt if resuming, otherwise full rendered prompt\n  2717→        if was_resume:\n  2718→            dispatch = self.read_json(self.cfg.dispatch_task_file, {})\n  2719→            # AGENT-046: build serial slot context (draft path only, no merge)\n  2720→            serial_ctx: Optional[Dict[str, str]] = None\n  2721→            if (\n  2722→                self.cfg.tribune_max_review_rounds >= 1\n  2723→                and self._active_task_type != \"maintenance\"\n  2724→            ):\n  2725→                task_key_for_draft = str(\n  2726→                    dispatch.get(\"mention_ts\")\n  2727→                    or self.selected_key or \"draft\"\n  2728→                )\n  2729→                serial_ctx = {\n  2730→                    \"draft_path\": str(\n  2731→                        self.cfg.dispatch_dir\n  2732→                        / f\"slack_draft.{task_key_for_draft}.md\"\n  2733→                    ),\n  2734→                }\n  2735→            prompt = self._ren"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T09:38:58.767Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I'll update the serial context to always provide a context dict (even without draft path) and handle the \"no merge\" override in `_render_resume_prompt`:"
+      }
+    ]
   }
 ]
