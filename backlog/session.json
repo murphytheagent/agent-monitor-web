@@ -1359,5 +1359,15 @@
         "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/murphy-R2-prompt.txt | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema /tmp/iterative-review-euzwH6/findings-schema.json --output-last-message /tmp/iterative-review-euzwH6/murphy-R2.json - > /tmp/iterative-review-euzwH6/murphy-R2-stdout.txt 2>&1; echo \\\"EXIT: $?\\\"\", \"description\": \"Dispatch Murphy (Codex) for plan review R2\", \"timeout\": 300000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:32:04.942Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Keychain initialization encountered an error: Cannot find module '../build/Release/keytar.node'\nRequire stack:\n- /opt/homebrew/Cellar/gemini-cli/0.34.0/libexec/lib/node_modules/@google/gemini-cli/node_modules/keytar/lib/keytar.js\nUsing FileKeychain fallback for secure storage.\nLoaded cached credentials.\nScheduling MCP context refresh...\nExecuting MCP context refresh...\nMCP context refresh complete.\nEXIT:"
+      }
+    ]
   }
 ]
