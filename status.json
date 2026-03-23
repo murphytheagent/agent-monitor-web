@@ -1,17 +1,43 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T02:08:33Z",
-    "status": "running_session",
+    "last_updated_utc": "2026-03-23T03:24:18Z",
+    "status": "workers_active",
     "pid": 68391,
-    "loop_count": 4244,
+    "loop_count": 4257,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 0,
+    "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1774125045.062829",
+        "started_at": 1774236172,
+        "elapsed_sec": 86
+      },
+      {
+        "slot": 1,
+        "task": "1773897786.579989",
+        "started_at": 1774236172,
+        "elapsed_sec": 85
+      },
+      {
+        "slot": 2,
+        "task": "1773870804.162569",
+        "started_at": 1774236174,
+        "elapsed_sec": 84
+      },
+      {
+        "slot": 3,
+        "task": "1774162681.090709",
+        "started_at": 1774236174,
+        "elapsed_sec": 83
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +45,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.72,
-      "five": 1.64,
-      "fifteen": 1.67
+      "one": 1.09,
+      "five": 1.47,
+      "fifteen": 1.6
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113551339520,
-    "disk_free_bytes": 131555856384,
-    "runner_log_size_bytes": 601128,
+    "disk_used_bytes": 113535205376,
+    "disk_free_bytes": 131571990528,
+    "runner_log_size_bytes": 602336,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -36,7 +62,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T03:22:24Z",
+    "checked_at_utc": "2026-03-23T03:24:27Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -109,20 +135,68 @@
   "tasks": {
     "queued": {},
     "active": {
-      "1774228855.285039": {
-        "mention_ts": "1774228855.285039",
-        "thread_ts": "1774228855.285039",
+      "1774125045.062829": {
+        "mention_ts": "1774125045.062829",
+        "thread_ts": "1774125045.062829",
         "status": "in_progress",
-        "task_description": "Development: AGENT-025.",
-        "summary": "Development: AGENT-025.",
-        "summary_preview": "Development: AGENT-025.",
+        "task_description": "Let's come back to the design for the website.",
+        "summary": "PR #23 now gives the durable site a cleaner hierarchy: [code] is the parent route, with [code] and [code] grouped beneath it under a lighter shared header.",
+        "summary_preview": "PR #23 now gives the durable site a cleaner hierarchy: [code] is the parent route, with [code] and [code] grouped beneath it under a lighter shared header.",
         "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774228877.476801",
-        "last_update_ts": "1774231713.367882",
-        "task_type": "development",
+        "created_ts": "1774125045.062829",
+        "last_update_ts": "1774236171.877688",
+        "task_type": "slack_mention",
         "source": {
           "user_name": "[redacted]",
-          "time_iso": "2026-03-23T01:20:55Z"
+          "time_iso": "2026-03-21T20:30:45Z"
+        }
+      },
+      "1773897786.579989": {
+        "mention_ts": "1773897786.579989",
+        "thread_ts": "1773897786.579989",
+        "status": "in_progress",
+        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
+        "summary": "Verified from Slurm accounting that jobs 1525 and 1533 were canceled at the exact switchover to the 1-GPU chain 1539-1543, and updated the Slack draft plus coo…",
+        "summary_preview": "Verified from Slurm accounting that jobs 1525 and 1533 were canceled at the exact switchover to the 1-GPU chain 1539-1543, and updated the Slack draft plus coo…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773897786.579989",
+        "last_update_ts": "1774236172.376194",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-19T05:23:06Z"
+        }
+      },
+      "1773870804.162569": {
+        "mention_ts": "1773870804.162569",
+        "thread_ts": "1773870804.162569",
+        "status": "in_progress",
+        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
+        "summary": "The cot-loop objective recommendation is now a two-head default: ship [code] as the stable utility score, train [code] beside it as the failure-prox companion,…",
+        "summary_preview": "The cot-loop objective recommendation is now a two-head default: ship [code] as the stable utility score, train [code] beside it as the failure-prox companion,…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1773870804.162569",
+        "last_update_ts": "1774236172.987409",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T03:56:08Z"
+        }
+      },
+      "1774162681.090709": {
+        "mention_ts": "1774162681.090709",
+        "thread_ts": "1774162681.090709",
+        "status": "in_progress",
+        "task_description": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the gold standard for lan…",
+        "summary": "Reattached and render-verified the round-6 pressure-test memo, updated the task record, and staged the final Slack draft around the tightened post-transformer …",
+        "summary_preview": "Reattached and render-verified the round-6 pressure-test memo, updated the task record, and staged the final Slack draft around the tightened post-transformer …",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774162681.090709",
+        "last_update_ts": "1774236174.165560",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-22T06:58:01Z"
         }
       }
     },
@@ -271,22 +345,6 @@
           "time_iso": "2026-03-21T22:21:48Z"
         }
       },
-      "1774125045.062829": {
-        "mention_ts": "1774125045.062829",
-        "thread_ts": "1774125045.062829",
-        "status": "waiting_human",
-        "task_description": "Let's come back to the design for the website.",
-        "summary": "PR #23 now gives the durable site a cleaner hierarchy: [code] is the parent route, with [code] and [code] grouped beneath it under a lighter shared header.",
-        "summary_preview": "PR #23 now gives the durable site a cleaner hierarchy: [code] is the parent route, with [code] and [code] grouped beneath it under a lighter shared header.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774125045.062829",
-        "last_update_ts": "1774133516.487999",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T20:30:45Z"
-        }
-      },
       "1774037278.773229": {
         "mention_ts": "1774037278.773229",
         "thread_ts": "1774037278.773229",
@@ -351,22 +409,6 @@
           "time_iso": "2026-03-22T00:53:43Z"
         }
       },
-      "1773897786.579989": {
-        "mention_ts": "1773897786.579989",
-        "thread_ts": "1773897786.579989",
-        "status": "waiting_human",
-        "task_description": "Cot loop, i want to visually see if it is possible to separate different kinds of rollouts: wrong versus correct, non-loop versus loop, hit max length versus not hit max length, e…",
-        "summary": "Verified from Slurm accounting that jobs 1525 and 1533 were canceled at the exact switchover to the 1-GPU chain 1539-1543, and updated the Slack draft plus coo…",
-        "summary_preview": "Verified from Slurm accounting that jobs 1525 and 1533 were canceled at the exact switchover to the 1-GPU chain 1539-1543, and updated the Slack draft plus coo…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773897786.579989",
-        "last_update_ts": "1774152108.792902",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-19T05:23:06Z"
-        }
-      },
       "1774155209.676849": {
         "mention_ts": "1774155209.676849",
         "thread_ts": "1774155209.676849",
@@ -381,38 +423,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-22T04:53:29Z"
-        }
-      },
-      "1773870804.162569": {
-        "mention_ts": "1773870804.162569",
-        "thread_ts": "1773870804.162569",
-        "status": "waiting_human",
-        "task_description": "Cot-loop detection, based on your latest rollout statistics report, how should we build the loop predictor?",
-        "summary": "The cot-loop objective recommendation is now a two-head default: ship [code] as the stable utility score, train [code] beside it as the failure-prox companion,…",
-        "summary_preview": "The cot-loop objective recommendation is now a two-head default: ship [code] as the stable utility score, train [code] beside it as the failure-prox companion,…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1773870804.162569",
-        "last_update_ts": "1774168350.482316",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-22T03:56:08Z"
-        }
-      },
-      "1774162681.090709": {
-        "mention_ts": "1774162681.090709",
-        "thread_ts": "1774162681.090709",
-        "status": "waiting_human",
-        "task_description": "Brainstorm a bunch of architecture that has the potential to be similar or even better than transformers, first we need to review why transformers become the gold standard for lan…",
-        "summary": "Reattached and render-verified the round-6 pressure-test memo, updated the task record, and staged the final Slack draft around the tightened post-transformer …",
-        "summary_preview": "Reattached and render-verified the round-6 pressure-test memo, updated the task record, and staged the final Slack draft around the tightened post-transformer …",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774162681.090709",
-        "last_update_ts": "1774190546.751512",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-22T06:58:01Z"
         }
       },
       "1774219656.352939": {
@@ -465,6 +475,22 @@
       }
     },
     "finished": {
+      "1774228855.285039": {
+        "mention_ts": "1774228855.285039",
+        "thread_ts": "1774228855.285039",
+        "status": "done",
+        "task_description": "Development: AGENT-025.",
+        "summary": "Development task completed (1774228855.285039)",
+        "summary_preview": "Development task completed (1774228855.285039)",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774228877.476801",
+        "last_update_ts": "1774236157.551388",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T01:20:55Z"
+        }
+      },
       "1774218284.229149": {
         "mention_ts": "1774218284.229149",
         "thread_ts": "1774218284.229149",
@@ -1248,22 +1274,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-23T20:53:49Z"
         }
-      },
-      "1771906196.179619": {
-        "mention_ts": "1771906196.179619",
-        "thread_ts": "1771906196.179619",
-        "status": "done",
-        "task_description": "!restart.",
-        "summary": "Restart request was already processed; human confirmed Murphy restarted on its own, and task was closed with final in-thread updates and a root checkpoint comm…",
-        "summary_preview": "Restart request was already processed; human confirmed Murphy restarted on its own, and task was closed with final in-thread updates and a root checkpoint comm…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771906196.179619",
-        "last_update_ts": "1771912582.247629",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-24T04:09:56Z"
-        }
       }
     }
   },
@@ -1733,5 +1743,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T03:22:25Z"
+  "server_time_utc": "2026-03-23T03:24:27Z"
 }
