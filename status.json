@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T00:32:39Z",
-    "status": "sleeping",
+    "last_updated_utc": "2026-03-23T00:34:35Z",
+    "status": "workers_active",
     "pid": 68391,
-    "loop_count": 3549,
+    "loop_count": 3564,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -11,7 +11,15 @@
     "pending_backoff_sec": 120,
     "next_sleep_sec": 5,
     "poll_interval": 5,
-    "max_workers": 8
+    "max_workers": 8,
+    "active_workers": [
+      {
+        "slot": 0,
+        "task": "1774078137.264779",
+        "started_at": 1774226025,
+        "elapsed_sec": 50
+      }
+    ]
   },
   "system": {
     "hostname": "redacted-host",
@@ -19,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.29,
-      "five": 1.92,
-      "fifteen": 1.8
+      "one": 2.13,
+      "five": 1.95,
+      "fifteen": 1.83
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113521586176,
-    "disk_free_bytes": 131585609728,
-    "runner_log_size_bytes": 574897,
+    "disk_used_bytes": 113515438080,
+    "disk_free_bytes": 131591757824,
+    "runner_log_size_bytes": 575579,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -36,7 +44,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T00:32:43Z",
+    "checked_at_utc": "2026-03-23T00:34:46Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -62,7 +70,7 @@
         "utilization_gpu_pct": 13,
         "memory_used_mb": 83443,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 38
       },
       {
         "index": 3,
@@ -75,7 +83,7 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 32,
         "memory_used_mb": 69189,
         "memory_total_mb": 97887,
         "temperature_c": 35
@@ -91,10 +99,10 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 19,
+        "utilization_gpu_pct": 26,
         "memory_used_mb": 57267,
         "memory_total_mb": 97887,
-        "temperature_c": 37
+        "temperature_c": 35
       },
       {
         "index": 7,
@@ -102,13 +110,30 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 95327,
         "memory_total_mb": 97887,
-        "temperature_c": 35
+        "temperature_c": 34
       }
     ]
   },
   "tasks": {
     "queued": {},
-    "active": {},
+    "active": {
+      "1774078137.264779": {
+        "mention_ts": "1774078137.264779",
+        "thread_ts": "1774078137.264779",
+        "status": "in_progress",
+        "task_description": "Let's work on something ambitious.",
+        "summary": "Verified the generalized CEG builder and four-page PDF in-tree, added provider-aware trading-system docs and a canonical object model, and attached a tighter p…",
+        "summary_preview": "Verified the generalized CEG builder and four-page PDF in-tree, added provider-aware trading-system docs and a canonical object model, and attached a tighter p…",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774078137.264779",
+        "last_update_ts": "1774226024.648777",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-21T07:28:57Z"
+        }
+      }
+    },
     "incomplete": {
       "1773942694.197309": {
         "mention_ts": "1773942694.197309",
@@ -412,22 +437,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-22T22:47:36Z"
-        }
-      },
-      "1774078137.264779": {
-        "mention_ts": "1774078137.264779",
-        "thread_ts": "1774078137.264779",
-        "status": "waiting_human",
-        "task_description": "Let's work on something ambitious.",
-        "summary": "Verified the generalized CEG builder and four-page PDF in-tree, added provider-aware trading-system docs and a canonical object model, and attached a tighter p…",
-        "summary_preview": "Verified the generalized CEG builder and four-page PDF in-tree, added provider-aware trading-system docs and a canonical object model, and attached a tighter p…",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774078137.264779",
-        "last_update_ts": "1774224404.525502",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-21T07:28:57Z"
         }
       }
     },
@@ -1706,5 +1715,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T00:32:44Z"
+  "server_time_utc": "2026-03-23T00:34:47Z"
 }
