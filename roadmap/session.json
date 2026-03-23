@@ -3422,5 +3422,440 @@
         "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:10.883Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me generate the final report for the plan review.\n\n## Iterative Review Report (Plan Review)\n\n**Scope:** `files docs/dev/plans/25-persistent-thread-sessions-impl.md` (AGENT-025 implementation plan)\n**Rounds:** 5 of 5 (max rounds reached)\n**Reviewers:** Tribune (Gemini 2.5 Flash — primary models quota-exhausted) + Murphy (Codex)\n**Tribune note:** Primary model (gemini-3.1-pro-preview) and first fallback (gemini-2.5-pro) were capacity-exhausted. All rounds used gemini-2.5-flash.\n\n### Summary\n\nThe plan underwent 5 rounds of adversarial review with 17 total findings (all fixed). Tribune approved in rounds 2-5. Murphy surfaced increasingly specific integration and runtime concerns through all 5 rounds. All findings were addressed in the plan. The final 3 findings (round 5) were fixed but not verified by reviewers — they should be validated during implementation.\n\n### Findings Ledger\n\n| ID | Severity | Category | Title | Status |\n|----|----------|----------|-------|--------|\n| T-1-1 | medium | contract | Silent --ephemeral removal from WORKER_CMD | Fixed R1 |\n| M-1-1 | high | integration | SYSTEM_PROMPT_FILES incomplete | Fixed R1, reopened+fixed R2 (M-2-4) |\n| M-1-2 | high | runtime | last_update_ts not stable for message filtering | Fixed R1, reopened+fixed R2 (M-2-2) |\n| M-1-3 | high | integration | Resume command hard-coded | Fixed R1 |\n| M-1-4 | high | edge_case | Slot affinity doesn't fit scheduler | Fixed R1 |\n| M-1-5 | medium | testing | No integration test for resume CLI | Fixed R1 |\n| M-2-1 | high | runtime | Resume command drops stdin marker | Fixed R2 |\n| M-2-3 | high | integration | Prompt hash stamped at reconcile, not dispatch | Fixed R2 |\n| M-3-1 | high | runtime | Dispatch-time metadata not plumbed into reconcile | Fixed R3 |\n| M-3-2 | high | integration | Serial/parallel mode crossover | Fixed R3 |\n| M-3-3 | high | integration | Resume prompt omits wakeup context | Fixed R3 |\n| M-3-4 | medium | integration | Session cleanup before post-dispatch gates | Fixed R3 |\n| M-4-1 | high | runtime | Hash captured after prompt render | Fixed R4 |\n| M-4-2 | high | integration | Resume drops Tribune feedback | Fixed R4 |\n| M-4-3 | medium | integration | Cleanup before merge-failure downgrade | Fixed R4 |\n| M-5-1 | high | runtime | Resume argv order mismatch | Fixed R5 (unverified) |\n| M-5-2 | high | integration | session_end_ts misses during-execution replies | Fixed R5 (unverified) |\n| M-5-3 | medium | operations | Resume retried on broken path in retry loop | Fixed R5 (unverified) |\n\n### Deferred Items\n\nNone — all findings were addressed in the plan. The 3 round-5 fixes should be validated during implementation review.\n\nNow let me proceed with implementation. The plan is approved by Tribune and has had all Murphy findings fixed."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:16.080Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Read dispatch context and key source files\", \"status\": \"completed\", \"activeForm\": \"Reading dispatch context and key source files\"}, {\"content\": \"Write implementation plan for AGENT-025 remaining work\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Run iterative-review on the plan\", \"status\": \"completed\", \"activeForm\": \"Running iterative-review on the plan\"}, {\"content\": \"Implement Phase 1: session resume wiring\", \"status\": \"in_progress\""
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:08:16.084Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:22.975Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "mcp__slack__conversations_add_message",
+        "input_preview": "{\"channel_id\": \"C0AFYQQ4TJ9\", \"thread_ts\": \"1774228855.285039\", \"text\": \"Plan review complete — 5 rounds, 17 findings all fixed. Tribune approved (rounds 2-5), Murphy surfaced deep integration concerns through all 5 rounds. Key improvements from review: dispatch-time prompt hashing (not reconcile-time), subprocess exit timestamps for message cutoff, serial/parallel mode safety, Tribune feedback exclusion, deferred session cleanup past all post-dispatch gates, retry-loop resume fallback. Starting"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:08:23.719Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "MsgID,UserID,UserName,RealName,Channel,ThreadTs,Text,Time,Reactions,BotName,FileCount,AttachmentIDs,HasMedia,Cursor\n"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:26.836Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me implement. I'll start with the foundation changes, then work through each section of the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:27.923Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/utils.py\", \"offset\": 140, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:08:27.929Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "   140→        classified = _classify_thread_message(m, slack_id)\n   141→        classified[\"source\"] = \"context_snapshot\"\n   142→        result.append(classified)\n   143→    return result\n   144→\n   145→\n   146→# ---------------------------------------------------------------------------\n   147→# Plan 37 — session resume foundations\n   148→# ---------------------------------------------------------------------------\n   149→\n   150→# Files whose content defines the worker behavioral contract.  A change in any\n   151→# of these files means a resumed session would run on stale instructions, so\n   152→# the supervisor should force a fresh dispatch when the hash changes.\n   153→SYSTEM_PROMPT_FILES = (\n   154→    \"src/prompts/session.md\",\n   155→    \"AGENTS.md\",\n   156→    \"docs/protocols/slack-protocols.md\",\n   157→    \"docs/protocols/maintenance-protocols.md\",\n   158→    \"docs/workflows/git-workflow.md\",\n   159→    \"docs/workflows/research-workflow.md\",\n   160→    \"docs/workflows/remote-g"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:30.853Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "First, expand `SYSTEM_PROMPT_FILES` (M-1-1 / M-2-4 fix)."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:34.397Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/utils.py\", \"old_string\": \"SYSTEM_PROMPT_FILES = (\\n    \\\"src/prompts/session.md\\\",\\n    \\\"AGENTS.md\\\",\\n    \\\"docs/protocols/slack-protocols.md\\\",\\n    \\\"docs/protocols/maintenance-protocols.md\\\",\\n    \\\"docs/workflows/git-workflow.md\\\",\\n    \\\"docs/workflows/research-workflow.md\\\",\\n    \\\"docs/workflows/remote-gpu-workflow.md\\\",\\n    \\\"docs/workflows/project-workflow.md\\\",\\n    \\\"docs/workflows/paper-writing-workflo"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:08:34.403Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/utils.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:37.202Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add `SESSION_RESUME_ENABLED` to config."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:41.916Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/config/supervisor_loop.conf\", \"old_string\": \"# Merge-failure enforcement (annotation-only when false; downgrades done→waiting_human when true)\\n: \\\"${MERGE_FAILURE_BLOCKS_DONE:=false}\\\"\", \"new_string\": \"# Session resume (AGENT-025): persist codex sessions and resume on re-dispatch.\\n# When true, --ephemeral is stripped from WORKER_CMD for fresh dispatches so\\n# sessions persist.  Set to false to disable all session persistence behav"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:08:41.923Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/config/supervisor_loop.conf has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:45.929Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/config.py\", \"old_string\": \"        # Merge-failure enforcement (plan 09)\\n        self.merge_failure_blocks_done = parse_bool(get(\\\"MERGE_FAILURE_BLOCKS_DONE\\\", \\\"false\\\"))\", \"new_string\": \"        # Session resume (AGENT-025)\\n        self.session_resume_enabled = parse_bool(get(\\\"SESSION_RESUME_ENABLED\\\", \\\"true\\\"))\\n\\n        # Merge-failure enforcement (plan 09)\\n        self.merge_failure_blocks_done = parse_boo"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:08:45.935Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/config.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:49.286Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now create the resume prompt template."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:53.411Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Write",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/prompts/session_resume.md\", \"content\": \"You are resuming your prior session on this task. All your previous context\\n(files read, reasoning, decisions) is preserved.\\n\\n## New Thread Messages\\n{{NEW_THREAD_MESSAGES}}\\n\\n## Task State\\n{{TASK_STATE_UPDATES}}\\n\\n{{WAKEUP_CONTEXT}}\\n\\n{{LOOP_CONTEXT}}\\n\\nContinue from where you left off. If significant time has passed, re-read\\nfiles before modifying them — other workers may have merged changes.\\n\\nWrite th"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:08:53.418Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "File created successfully at: /Users/murphy/Research/src/prompts/session_resume.md"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:57.172Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now the big part — wire session resume into `runtime.py`. Let me add the internal fields, the helper methods, and modify the dispatch/reconcile paths. Let me first read the relevant sections I need to modify."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:57.491Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 27, \"limit\": 20}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:08:57.497Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    27→from .utils import (\n    28→    AUTH_FAILURE_PATTERN,\n    29→    CAPACITY_PATTERN,\n    30→    CHANNEL_ID_RE,\n    31→    THREAD_TS_RE,\n    32→    TRANSIENT_PATTERN,\n    33→    format_waiting_human_context_messages,\n    34→    iso_from_ts_floor,\n    35→    now_ts,\n    36→    short_ts_format,\n    37→    timestamp_utc,\n    38→    ts_gt,\n    39→    ts_to_int,\n    40→)\n    41→\n    42→def _swap_model_in_cmd(cmd: list[str], model: str) -> list[str]:\n    43→    \"\"\"Replace or insert ``-m <model>`` in a CLI command.\n    44→\n    45→    Handles ``-m <model>``, ``--model <model>``, and ``--model=<model>``.\n    46→    A bare trailing ``-m`` or ``--model`` (no following value) is repaired"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:08:59.476Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Add the imports needed:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:09:02.213Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"from .utils import (\\n    AUTH_FAILURE_PATTERN,\\n    CAPACITY_PATTERN,\\n    CHANNEL_ID_RE,\\n    THREAD_TS_RE,\\n    TRANSIENT_PATTERN,\\n    format_waiting_human_context_messages,\\n    iso_from_ts_floor,\\n    now_ts,\\n    short_ts_format,\\n    timestamp_utc,\\n    ts_gt,\\n    ts_to_int,\\n)\", \"new_string\": \"from .utils import (\\n    AUTH_FAILURE_PATTERN,\\n    CAPACITY_PATTERN,\\n    CHANNEL_ID_"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:09:02.223Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:09:05.157Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add session fields to `_DISPATCH_INTERNAL_FIELDS`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:09:11.308Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"    _DISPATCH_INTERNAL_FIELDS = frozenset({\\n        \\\"mention_text\\\",           # rendered separately as {{THREAD_CONTEXT}}\\n        \\\"mention_text_file\\\",      # internal file path\\n        \\\"claimed_by\\\",             # internal scheduler state\\n        \\\"created_ts\\\",             # redundant with source.time_iso\\n        \\\"last_update_ts\\\",         # internal scheduler state\\n        \\\""
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:09:11.320Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:09:22.871Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now add the session resume helper methods. Let me find a good location — after the existing helper methods, before `run_worker_once`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:09:23.285Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2464, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:09:23.294Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2464→            keep_chars = max(0, keep_chars - overflow - 64)\n  2465→            if keep_chars <= 0:\n  2466→                sections[curated_index][\"body\"] = self.PROMPT_MEMORY_COLLAPSED_BODY\n  2467→            else:\n  2468→                sections[curated_index][\"body\"] = self._trim_with_note_to_recent(\n  2469→                    curated_original,\n  2470→                    keep_chars,\n  2471→                    self.PROMPT_MEMORY_DROPPED_EARLY_NOTE,\n  2472→                )\n  2473→            context = self._render_memory_sections(sections)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:09:25.947Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2473, \"limit\": 8}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:09:25.953Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2473→            context = self._render_memory_sections(sections)\n  2474→\n  2475→        if len(context) <= total_limit:\n  2476→            return context\n  2477→        return self._hard_clip_with_prefix(context, total_limit, self.PROMPT_MEMORY_SOFT_GUARD_NOTE)\n  2478→\n  2479→    def run_worker_once(self) -> Tuple[int, str]:\n  2480→        is_privileged = False  # Only developer review can edit source"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:09:29.070Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I'll add the session resume helper methods right before `run_worker_once`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:09:59.044Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"old_string\": \"    def run_worker_once(self) -> Tuple[int, str]:\\n        is_privileged = False  # Only developer review can edit source\", \"new_string\": \"    # ------------------------------------------------------------------\\n    # Session resume helpers (AGENT-025)\\n    # ------------------------------------------------------------------\\n\\n    def _should_resume_session(\\n        self, task: Dict[str"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:09:59.063Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/supervisor/runtime.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:01.648Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now modify `run_worker_once()` to support session resume. Let me read the current version."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:02.425Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2580, \"limit\": 60}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:10:02.429Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2580→                        name = m.get(\"user_name\") or m.get(\"role\") or \"unknown\"\n  2581→                        text = m.get(\"text\") or \"\"\n  2582→                        lines.append(f\"[{name}] {text}\")\n  2583→                    new_messages_str = \"\\n\".join(lines)\n  2584→            except Exception:\n  2585→                pass\n  2586→\n  2587→        # Task state updates\n  2588→        status = str(dispatch_json.get(\"status\") or \"\")\n  2589→        task_state_str = \"\"\n  2590→        if status == \"in_progress\":\n  2591→            prev_error = str(dispatch_json.get(\"last_error\") or \"\")\n  2592→            if \"waiting_human\" in prev_error or \"reactivated\" in prev_error:\n  2593→                task_state_str = (\n  2594→                    \"Task was waiting for your collaborator's input and has \"\n  2595→                    \"been re-activated by their reply.\"\n  2596→                )\n  2597→\n  2598→        # Wakeup context\n  2599→        wakeup_str = \"\"\n  2600→        self._inject_wakeu"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:05.381Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/supervisor/runtime.py\", \"offset\": 2648, \"limit\": 50}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:10:05.385Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2648→                    del task[field]\n  2649→                    changed = True\n  2650→            if changed:\n  2651→                self.save_state(state)\n  2652→\n  2653→    def run_worker_once(self) -> Tuple[int, str]:\n  2654→        is_privileged = False  # Only developer review can edit source\n  2655→        if self.maintenance.is_maintenance_task(self._active_task_type):\n  2656→            dispatch = self.read_json(self.cfg.dispatch_task_file, {})\n  2657→            phase = self.maintenance.get_phase(dispatch)\n  2658→            cmd = self.maintenance.get_worker_cmd(phase)\n  2659→            is_privileged = self.maintenance.is_dev_review_phase(phase)\n  2660→        elif self._active_task_type == \"development\":\n  2661→            cmd = list(self.cfg.dev_review_cmd)\n  2662→            is_privileged = True\n  2663→            # Session ID: deterministic from marker + task key + timestamp.\n  2664→            import uuid as _uuid\n  2665→            dev_session_id = str(_uuid.uuid5"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:10:08.520Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now modify `run_worker_once()` for session resume:"
+      }
+    ]
   }
 ]
