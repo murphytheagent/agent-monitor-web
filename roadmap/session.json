@@ -2254,5 +2254,15 @@
         "input_preview": "{\"task_id\": \"bflmsrsio\", \"block\": true, \"timeout\": 300000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:37:22.153Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>bflmsrsio</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\n{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-2-1\",\"severity\":\"high\",\"category\":\"runtime\",\"file\":\"docs/dev/plans/25-persistent-thread-sessions-impl.md\",\"line\":116,\"scope\":null,\"title\":\"Resume command drops the only stdin prompt path\",\"description\":\"The plan removes the `-` prompt argument when building `codex exec resume`. The actual CLI help says `codex exec resume [SESSION_ID] [PROMPT]` and only reads stdin when `[PROMPT]` is `-`; the Phase 0 spike in `docs/dev/plans/37-persistent-thread-sessions.md` also validated `codex exec resume <id> - ...`, not the no-`-` form. With the planned command, `_render_resume_prompt()` still writes to stdin but the resumed worker will not reliably consume that follow-up prompt, so it can resume without the new thread/task context or fail unexpectedly.\",\"suggestion\":\"Keep the `-` prom"
+      }
+    ]
   }
 ]
