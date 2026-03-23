@@ -767,5 +767,131 @@
         "content": "## Phase 2: Writing Implementation Plan"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:17:54.564Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Write",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-020-dashboard-publish-two-branch.md\", \"content\": \"# FIX-020: Dashboard Publish — Two-Branch Strategy\\n\\n## Problem\\n\\nThe dashboard publisher commits a snapshot every ~2 minutes to `main` in the `agent-monitor-web` submodule. This has produced 25K+ commits (~334/day), burying real development work (layout PRs, new routes) and growing the repo unboundedly (~24 MB pack now, ~1 GB/year trajectory).\\n\\n## Solution\\n\\nTwo-branch strategy:\\n- **"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:17:54.588Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "File created successfully at: /Users/murphy/Research/docs/dev/plans/fix-020-dashboard-publish-two-branch.md"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:17:57.545Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "## Phase 3: Review the Plan\n\nNow let me collect the plan diff and dispatch the reviewers."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:17:59.416Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Phase 1: Setup — read codebase, check prerequisites\", \"status\": \"completed\", \"activeForm\": \"Setting up — reading codebase and checking prerequisites\"}, {\"content\": \"Phase 2: Write implementation plan\", \"status\": \"completed\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Phase 3: Review the plan (iterative review loop)\", \"status\": \"in_progress\", \"activeForm\": \"Reviewing the plan with Tribune and Murphy\"}, {\"content\": \"Phase 4: Implement the code\", \"status\": \"p"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:17:59.419Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:18:02.567Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research && git diff /dev/null -- docs/dev/plans/fix-020-dashboard-publish-two-branch.md 2>/dev/null | head -300\", \"description\": \"Collect plan diff for reviewers\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:18:02.617Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(Bash completed with no output)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:18:05.364Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"diff /dev/null docs/dev/plans/fix-020-dashboard-publish-two-branch.md | head -200\", \"description\": \"Generate synthetic diff for untracked plan file\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:18:05.403Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "0a1,109\n> # FIX-020: Dashboard Publish — Two-Branch Strategy\n> \n> ## Problem\n> \n> The dashboard publisher commits a snapshot every ~2 minutes to `main` in the `agent-monitor-web` submodule. This has produced 25K+ commits (~334/day), burying real development work (layout PRs, new routes) and growing the repo unboundedly (~24 MB pack now, ~1 GB/year trajectory).\n> \n> ## Solution\n> \n> Two-branch strategy:\n> - **`main`** — development branch with clean history (PRs, meaningful commits). Submodule pointer stays here.\n> - **`deploy`** — single-commit orphan branch, force-pushed on every snapshot. GitHub Pages serves from `deploy`.\n> \n> The publisher uses **git plumbing** to commit to `deploy` without switching the working tree away from `main`. This avoids checkout churn, race conditions with concurrent readers, and the need for worktree management.\n> \n> ## Design\n> \n> ### Core mechanism: plumbing-based commit to `deploy`\n> \n> Instead of `git add` + `git commit` + `git push` on the current b"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:18:09.525Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good. Now let me build the reviewer prompts and dispatch both reviewers in parallel. This is Round 1 of the plan review."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:18:28.711Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(diff /dev/null docs/dev/plans/fix-020-dashboard-publish-two-branch.md)\\n\\nTRIBUNE_PROMPT=\\\"You are the Tribune — an independent quality reviewer. Review the following code changes for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\\n2. **Security issues**: Injection, auth bypass, sensitive data exposure\\n3. **Contract violations**: Does the code violate documented interfaces, schemas, or invariants?\\n4. **Error handling"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:18:41.528Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=$(diff /dev/null docs/dev/plans/fix-020-dashboard-publish-two-branch.md)\\n\\nMURPHY_PROMPT=\\\"You are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following code changes for:\\n\\n1. **Runtime failures**: Will this crash, hang, or produce wrong results in real usage?\\n2. **Edge cases**: Unusual inputs, empty collections, concurrent access, large data\\n3. **Test coverage**: Are the changes tested? Do "
+      }
+    ]
   }
 ]
