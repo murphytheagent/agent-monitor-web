@@ -5196,5 +5196,379 @@
         "content_preview": "E           ValueError: not enough values to unpack (expected 3, got 2)\n\nsrc/loop/supervisor/runtime.py:2758: ValueError\n=========================== short test summary info ============================\nFAILED src/loop/tests/test_supervisor_loop.py::TestRunWorkerWithRetries::test_nonzero_nonretriable_returns_immediately\nFAILED src/loop/tests/test_supervisor_loop.py::TestRunWorkerWithRetries::test_success_on_first_attempt\nFAILED src/loop/tests/test_supervisor_loop.py::TestRunWorkerWithRetries::test_transient_backoff_increases\nFAILED src/loop/tests/test_supervisor_loop.py::TestRunWorkerWithRetries::test_transient_retries_up_to_max\nFAILED src/loop/tests/test_supervisor_loop.py::TestRunWorkerWithRetries::test_transient_retry_succeeds_on_second_attempt\n5 failed, 415 passed, 30 subtests passed in 24.98s"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:19.643Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "5 failures — all in `TestRunWorkerWithRetries`. The issue is that `run_worker_once` now returns 3 values but tests mock it to return 2. Let me find and fix the mock."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:20.799Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"run_worker_once.*return|mock.*run_worker_once\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:20.816Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2393:            with patch.object(sup, \"run_worker_once\", return_value=(0, \"ok\")):\n2432:            with patch.object(sup, \"run_worker_once\", return_value=(2, \"some error\")):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:23.986Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"run_worker_once.*return_value\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:24.004Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2393:            with patch.object(sup, \"run_worker_once\", return_value=(0, \"ok\")):\n2432:            with patch.object(sup, \"run_worker_once\", return_value=(2, \"some error\")):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:26.505Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 2380, \"limit\": 20}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:26.510Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2380→class TestRunWorkerWithRetries(unittest.TestCase):\n  2381→\n  2382→    def _sup(self, tmp):\n  2383→        return _make_supervisor(Path(tmp))\n  2384→\n  2385→    def _write_prompt(self, sup):\n  2386→        sup.cfg.runtime_prompt_file.parent.mkdir(parents=True, exist_ok=True)\n  2387→        sup.cfg.runtime_prompt_file.write_text(\"# test prompt\\n\")\n  2388→\n  2389→    def test_success_on_first_attempt(self):\n  2390→        with tempfile.TemporaryDirectory() as td:\n  2391→            sup = self._sup(td)\n  2392→            self._write_prompt(sup)\n  2393→            with patch.object(sup, \"run_worker_once\", return_value=(0, \"ok\")):\n  2394→                with patch.object(sup, \"write_heartbeat\"):\n  2395→                    result = sup.run_worker_with_retries()\n  2396→            self.assertEqual(result, 0)\n  2397→\n  2398→    def test_transient_retries_up_to_max(self):\n  2399→        with tempfile.TemporaryDirectory() as td:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:29.808Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I need to fix the test mocks to return 3-tuples. Let me also check the other test cases:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:30.519Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 2398, \"limit\": 60}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:30.524Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2398→    def test_transient_retries_up_to_max(self):\n  2399→        with tempfile.TemporaryDirectory() as td:\n  2400→            sup = self._sup(td)\n  2401→            self._write_prompt(sup)\n  2402→            transient_output = \"stream disconnected before completion\"\n  2403→            # All attempts return transient failure; max_transient_retries=2 means 3 attempts total\n  2404→            side_effects = [(1, transient_output)] * 10\n  2405→\n  2406→            with patch.object(sup, \"run_worker_once\", side_effect=side_effects):\n  2407→                with patch.object(sup, \"write_heartbeat\"):\n  2408→                    with patch(\"time.sleep\"):\n  2409→                        result = sup.run_worker_with_retries()\n  2410→\n  2411→            # Should give up after max_transient_retries+1 attempts\n  2412→            self.assertNotEqual(result, 0)\n  2413→\n  2414→    def test_transient_retry_succeeds_on_second_attempt(self):\n  2415→        with tempfile.TemporaryDirectory() as td:\n  241"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:33.569Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Update all test mocks to return 3-tuples (adding `False` for `was_resume`):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:35.211Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"            with patch.object(sup, \\\"run_worker_once\\\", return_value=(0, \\\"ok\\\")):\", \"new_string\": \"            with patch.object(sup, \\\"run_worker_once\\\", return_value=(0, \\\"ok\\\", False)):\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:35.223Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:39.379Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"            side_effects = [(1, transient_output)] * 10\\n\\n            with patch.object(sup, \\\"run_worker_once\\\", side_effect=side_effects):\", \"new_string\": \"            side_effects = [(1, transient_output, False)] * 10\\n\\n            with patch.object(sup, \\\"run_worker_once\\\", side_effect=side_effects):\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:39.390Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:42.381Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"            effects = [(1, transient_output), (0, \\\"success\\\")]\", \"new_string\": \"            effects = [(1, transient_output, False), (0, \\\"success\\\", False)]\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:42.393Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:49.139Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"            with patch.object(sup, \\\"run_worker_once\\\", return_value=(2, \\\"some error\\\")):\", \"new_string\": \"            with patch.object(sup, \\\"run_worker_once\\\", return_value=(2, \\\"some error\\\", False)):\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:49.153Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:52.479Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"            effects = [(1, transient_output)] * 5\\n            with patch.object(sup, \\\"run_worker_once\\\", side_effect=effects):\", \"new_string\": \"            effects = [(1, transient_output, False)] * 5\\n            with patch.object(sup, \\\"run_worker_once\\\", side_effect=effects):\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:52.495Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:55.482Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now check for any other test that mocks `run_worker_once`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:56.319Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"run_worker_once\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:16:56.339Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2393:            with patch.object(sup, \"run_worker_once\", return_value=(0, \"ok\", False)):\n2406:            with patch.object(sup, \"run_worker_once\", side_effect=side_effects):\n2421:            with patch.object(sup, \"run_worker_once\", side_effect=effects):\n2432:            with patch.object(sup, \"run_worker_once\", return_value=(2, \"some error\", False)):\n2448:            with patch.object(sup, \"run_worker_once\", side_effect=effects):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:16:59.680Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good, all updated. Let me also check for `auth_failure` related tests:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:17:00.347Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"auth.*retry|auth_failure.*test\", \"path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:17:00.364Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No matches found"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:17:03.264Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good. Now let me run all tests again:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:17:03.984Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m pytest src/loop/tests/test_supervisor_loop.py -q 2>&1 | tail -10\", \"description\": \"Run all tests after fixing mocks\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:17:29.301Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "..................................................... [ 12%]\n........................................................................ [ 29%]\n........................................................................ [ 46%]\n............................................................. [ 61%]\n........................................................................ [ 78%]\n........................................................................ [ 95%]\n..................                                                       [100%]\n420 passed, 30 subtests passed in 25.15s"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:17:32.349Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "All 420 tests pass with 30 subtests. Now let me add the new tests for session resume functionality."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:17:32.656Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"offset\": 2455, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:17:32.665Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  2455→                self.assertGreaterEqual(sleep_calls[i], sleep_calls[i - 1])\n  2456→\n  2457→\n  2458→# ===========================================================================\n  2459→# 15. render_runtime_prompt\n  2460→# ===========================================================================\n  2461→\n  2462→class TestRenderRuntimePrompt(unittest.TestCase):\n  2463→\n  2464→    def _sup(self, tmp):"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:17:37.023Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I'll add the session resume tests right after `TestRunWorkerWithRetries` and before `TestRenderRuntimePrompt`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T03:18:19.113Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/tests/test_supervisor_loop.py\", \"old_string\": \"# ===========================================================================\\n# 15. render_runtime_prompt\\n# ===========================================================================\\n\\nclass TestRenderRuntimePrompt(unittest.TestCase):\\n\\n    def _sup(self, tmp):\", \"new_string\": \"# ===========================================================================\\n# 14b. Session Resume"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T03:18:19.138Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/tests/test_supervisor_loop.py has been updated successfully."
+      }
+    ]
   }
 ]
