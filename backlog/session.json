@@ -8,5 +8,754 @@
         "content": "# Multi-Role Iterative Code Review\n\nYou are the orchestrator for an adversarial multi-role code review. You dispatch two independent reviewers — Tribune (Gemini CLI) and Murphy (Codex CLI) — with distinct review lenses, collect their structured findings, deduplicate and analyze, apply fixes, and iterate until both approve or max rounds are reached.\n\n## Design Principles\n\nJudge all decisions against these principles:\n- **Simple and robust over clever** — if a solution is getting complex, step back and find the simpler structure\n- **Think from first principles** — reason through what the system actually needs, don't pattern-match\n- **Minimal, targeted changes** — fix the issue, nothing more\n\n## Critical Rules\n\n> **NEVER short-circuit the review loop.** If reviewers haven't both approved and rounds remain, you MUST run the next round. The orchestrator's opinion about finding severity does not override the process. This rule exists because the orchestrator has repeatedly rationalized early exit (\"findings are minor, good enough\") — that behavior is a bug.\n\n> **NEVER treat a reviewer failure as approval.** Only an explicit `approve` verdict from valid JSON counts. Timeout, parse error, empty output, and capacity errors are NOT approval.\n\n> **Both plan and implementation must be reviewed.** After the plan review converges, you MUST implement the code and run a second review cycle on the implementation. The plan review alone is not sufficient — the implementation is what ships. This rule exists because AGENT-025's plan got 5 rounds of review but the 932-line implementation got zero.\n\n> **NEVER skip any phase.** Execute all six phases in order. Do not rationalize skipping a phase because prior work exists (\"plan already approved\"), because findings seem minor, or for any other reason. This rule exists because the model skipped Phases 2-3 on the very first use of the restructured skill, rationalizing that a prior plan was \"already approved.\"\n\n> **Before EVERY loop decision, print a convergence checkpoint:**\n> `CONVERGENCE CHECK: Tribune=[state], Murphy=[state], round [N] of [MAX] → [continuing/stopping because...]`\n> This is mandatory — do not skip it. It makes the decision visible and auditable.\n\n> **Maintain full reviewer identity every round.** Never strip the reviewer's name, role description, review categories, or design principles from later-round prompts. Review quality degrades when prompts degrade.\n\n> **Only the orchestrator writes files.** Both reviewers run in strict read-only mode (Gemini: `--approval-mode plan`, Codex: `--sandbox read-only`). The orchestrator is the only agent that uses Edit/Write/Bash to modify the codebase.\n\n> **Test every fix before the next round.** After applying fixes, run relevant tests and smoke-test runtime artifacts. Include results in the next round's prompt. Do not send untested fixes to reviewers.\n\n> **Document, commit, and push after every completed review.** Update CHANGELOG (UTC timestamp), ROADMAP (completed items + deferred findings), commit with `[developer]` prefix, push. This is not optional — undocumented changes are invisible, uncommitted changes are lost.\n\n## Configuration\n\n- **MAX_ROUNDS**: 3 (override with `max-rounds:N` in arguments)\n- **REVIEWER_TIMEOUT**: 300000ms (5 min) per reviewer invocation\n- **ROLES**: Tribune (Gemini), Murphy (Codex)\n\n## Execution Phases\n\nThe skill executes six phases:\n\n1. **Setup** — parse scope/arguments, check prerequisites\n2. **Plan** — read ROADMAP + linked files, write implementation plan\n3. **Review the plan** — collect diff, review loop, report; commit the approved plan\n4. **Implement** — write code and tests following the approved plan\n5. **Review the implementation** — collect diff, review loop, report\n6. **Finalize** — document, commit, push, cleanup\n\n---\n\n## Phase 1: Setup\n\n### Parse Scope\n\nParse `max-rounds:5\n\nDevelopment task: implement backlog item FIX-020. Read the BACKLOG entry in `docs/dev/BACKLOG.md` and linked plan/issue files in `docs/dev/plans/` and `docs/dev/issues/`.\n\nPost progress updates in the Slack thread using the thread_ts from your dispatch context. Update when you start, when you hit milestones, and when you finish.` to determine review scope:\n\n| Argument | Action |\n|----------|--------|\n| (empty) or `diff` | `git diff HEAD` + synthetic diffs for untracked files |\n| `staged` | `git diff --cached`. Require clean unstaged state. **Single-round only** (report findings, don't fix). |\n| `branch <name>` | `git diff <name>...HEAD`. Verify base matches remote (abort if diverged — stale base = wrong review surface). Require clean worktree. |\n| `files <path...>` | For tracked files: `git diff HEAD -- <file>` (real diff showing actual changes). For untracked files: synthetic diff (`diff /dev/null <file>`). This preserves change context for tracked files. |\n| `recent` | `git diff HEAD~3...HEAD` (validate revision exists). Require clean worktree. |\n| `pr <number>` | `gh pr diff <number>`. Verify local HEAD matches PR head SHA. Require clean worktree. |\n| `project <slug>` | Run all operations inside `projects/<slug>/`. |\n| `max-rounds:N` | Override max rounds (can appear anywhere in args). |\n\nExtract `max-rounds:N` if present. Default MAX_ROUNDS=3. **For `staged` scope: force MAX_ROUNDS=1** regardless of override (single-round only, no iterative fixing).\n\nFor **automatic untracked file discovery** (default `diff` scope only): run `git ls-files --others --exclude-standard`, filter out noisy paths (`.agent/runtime/`, `reports/`, `deliverables/`), then generate synthetic diffs with `diff /dev/null <file>` for each. Append to the main diff. Apply the same 50KB size guard. (The `files` scope handles untracked files passed explicitly as arguments — no auto-discovery needed.)\n\nFor **root-level diffs**: exclude `.agent/runtime/`, `reports/`, `deliverables/` from diff output. Do NOT exclude `.claude/commands/`.\n\n**Secret scanning** (two-layer): Reviewers have full file-read access (`--approval-mode plan` for Gemini, `--sandbox read-only` for Codex), so scanning the diff alone is insufficient — secrets in unchanged lines of in-scope files are still exposed. Secret scanning therefore operates in two layers:\n\n**Layer 1 — Full-file scan**: Resolve the list of files in the review scope directly from scope arguments (not by parsing the diff):\n- `diff`: `git diff --name-only --diff-filter=d HEAD` + `git ls-files --others --exclude-standard` (filtered)\n- `staged`: `git diff --cached --name-only --diff-filter=d`\n- `branch <name>`: `git diff --name-only --diff-filter=d <name>...HEAD`\n- `files <path...>`: `git diff --name-only --diff-filter=d HEAD -- <path...>` + `git ls-files --others --exclude-standard -- <path...>`\n- `recent`: `git diff --name-only --diff-filter=d HEAD~3...HEAD`\n- `pr <number>`: `gh pr diff <number> --name-only` (filter to existing files)\n- `project <slug>`: same as `diff` scoped to `projects/<slug>/`\n\nFilter the file list to existing, regular, text files only (skip binary files). Apply the same root-level path exclusions as the diff (`.agent/runtime/`, `reports/`, `deliverables/`). No size limit — the 50KB guard is for diff output, not secret scanning. Scan each file's full contents for **Tier 1 patterns**:\n- `AKIA[0-9A-Z]{16}` (AWS access key ID)\n- `-----BEGIN.*PRIVATE KEY-----` (PEM private key)\n- `\"?(API_KEY|SECRET_KEY|SECRET|PASSWORD|TOKEN)\"?\\s*[=:]\\s*['\"]?[A-Za-z0-9+/=_-]{20,}` (assignment-style secrets with 20+ char values; supports JSON-quoted keys and TOKEN keyword)\n\n**Layer 2 — Diff scan**: Scan the diff output for **all patterns** (Tier 1 above + Tier 2 below):\n- `\"?(API_KEY|SECRET_KEY|SECRET|PASSWORD|API_TOKEN|AUTH_TOKEN|ACCESS_TOKEN|BEARER_TOKEN)\"?\\s*[=:]\\s*.+` (broad catch-all, any non-empty value; supports JSON-quoted keys, YAML/colon assignments, and common secret token names)\n\nTier 2 is too broad for full-file scanning (matches documentation, example configs, the iterative-review command itself) but appropriate for diffs where these patterns are more likely to indicate real secrets.\n\n**Exclusion**: If either layer detects a match, exclude the affected file entirely — remove its hunks from the diff, warn the user with the file path and which pattern class matched (e.g., \"AWS key\", \"PEM private key\", \"assignment-style secret\") but **never include the matched content or source line** in warnings or the final report. Flag in the final report. User can override with `--include-secrets` in arguments.\n\n**Known limitations**:\n- This reduces passive exposure but cannot prevent reviewers from actively reading files on disk. This is a fundamental constraint of the reviewer access model.\n- Tier 2 patterns are self-referential: diffs of this command file or documentation that references the pattern names (e.g., `API_KEY=`, `TOKEN:`) will trigger matches. The orchestrator should use contextual judgment — pattern references inside markdown documentation or backtick-quoted examples are not actual secrets.\n\n### Check Prerequisites\n\n1. Run `which gemini` and `which codex` to check CLI availability.\n   - Both available: dual-reviewer mode (require both throughout the run).\n   - One missing: single-reviewer mode with a warning.\n   - Neither: abort with error.\n2. For `pr` scope: verify `gh auth status` works, and `git rev-parse HEAD` matches `gh pr view <number> --json headRefOid -q .headRefOid`.\n3. Clean worktree checks (scope-dependent):\n   - `staged`: reject any porcelain entry with a non-space worktree column EXCEPT `??` (untracked files don't affect staged review). This catches `MM`, `AM`, `MD` (mixed staged+unstaged), ` M`, ` D` (tracked-only unstaged edits), and all unmerged states. The goal: the tracked working tree must match HEAD so reviewers reading actual files see content consistent with the staged diff.\n   - `branch`/`recent`/`pr`: verify fully clean worktree with `git status --porcelain`. Abort if dirty.\n4. Create temp directory: `RUNDIR=$(mktemp -d /tmp/iterative-review-XXXXXX)`\n5. Write the findings schema to `$RUNDIR/findings-schema.json` by copying `.claude/commands/iterative-review-schema.json` from the **repo root** (resolve before any `cd` into project scope).\n\n## Phase 2: Plan\n\nRead the ROADMAP entry in `docs/dev/ROADMAP.md` for the target item. Read any linked plan or issue files in `docs/dev/plans/` and `docs/dev/issues/`.\n\nWrite an implementation plan to `docs/dev/plans/`. **Always write a fresh plan and review it, even if a plan file already exists.** Existing plans are references, not pre-approved blueprints — they may be outdated, incomplete, or make assumptions that no longer hold. Never skip Phases 2-3 because a prior plan exists or was previously reviewed.\n\nDo NOT use `EnterPlanMode`/`ExitPlanMode` — they require human approval and break automation. Only escalate to the user when reviewers can't converge after max rounds, a deliberate design decision is needed, or the user explicitly requests involvement.\n\n## Phase 3: Review the Plan\n\n### Collect Diff\n\nCollect the diff of the plan file(s) written in Phase 2. Store as `BASELINE_DIFF`. This is captured once and reused across rounds for context.\n\nIf diff is >50KB, truncate and note which files were omitted. Suggest `files` or `project` mode for targeted review.\n\n### Review Loop\n\nFor each round from 1 to MAX_ROUNDS:\n\n#### Build Reviewer Prompts\n\nBuild two prompts — one for Tribune, one for Murphy. Each prompt includes **every round** (never strip identity for later rounds):\n\n**Tribune prompt:**\n```\nYou are the Tribune — an independent quality reviewer. Review the following code changes for:\n\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\n2. **Security issues**: Injection, auth bypass, sensitive data exposure\n3. **Contract violations**: Does the code violate documented interfaces, schemas, or invariants?\n4. **Error handling gaps**: Missing error paths, swallowed exceptions, unclear failure modes\n5. **Architectural concerns**: Coupling, abstraction leaks, design philosophy violations\n\nDesign principles to judge against:\n- \"Simple and robust over clever\" — flag overengineering, unnecessary complexity. When a fix keeps getting more complex across rounds, that's a signal to question whether the problem is real, not to add more machinery.\n- \"Think from first principles\" — reason through what the system actually needs in its real usage context. A theoretical edge case that can't happen in practice is not a finding.\n- \"Minimal, targeted changes\" — flag scope creep, speculative features\n\nYou must NOT flag: style, formatting, naming preferences, or perf micro-optimizations.\nOnly flag issues in the code under review. If you notice issues in other parts of the codebase, mention them briefly in your summary but do NOT include them as findings.\nDo NOT modify any files — this is a read-only review.\n\n## Code Under Review (Baseline)\n\n{BASELINE_DIFF}\n\n{FIX_DELTA_MANIFEST if round > 1}\n\n{PRIOR_ROUND_CONTEXT if round > 1}\n\nRespond with ONLY a JSON object (no markdown fencing, no preamble). Use Tribune IDs (T-) and Tribune categories (correctness, security, contract, error_handling, architecture). Example:\n{\"verdict\": \"findings\", \"findings\": [{\"id\": \"T-1-1\", \"severity\": \"high\", \"category\": \"correctness\", \"file\": \"src/foo.py\", \"line\": 42, \"title\": \"Off-by-one in loop\", \"description\": \"The loop iterates one too many times...\", \"suggestion\": \"Change < to <=\"}], \"summary\": \"One issue found.\"}\n\nIf the code is acceptable: {\"verdict\": \"approve\", \"findings\": [], \"summary\": \"No issues found.\"}\n```\n\n**Murphy prompt:**\n```\nYou are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following code changes for:\n\n1. **Runtime failures**: Will this crash, hang, or produce wrong results in real usage?\n2. **Edge cases**: Unusual inputs, empty collections, concurrent access, large data\n3. **Test coverage**: Are the changes tested? Do the tests appear to cover the changes? Are the test assertions correct?\n4. **Integration issues**: Does this break callers, downstream consumers, or deployment?\n5. **Operational concerns**: Logging, observability, rollback safety, resource leaks\n\nDesign principles to judge against:\n- \"Simple and robust over clever\" — flag overengineering, unnecessary complexity. When a fix keeps getting more complex across rounds, that's a signal to question whether the problem is real, not to add more machinery.\n- \"Think from first principles\" — reason through what the system actually needs in its real usage context. A theoretical edge case that can't happen in practice is not a finding.\n- \"Minimal, targeted changes\" — flag scope creep, speculative features\n\nYou must NOT flag: style, formatting, naming preferences, or theoretical purity.\nOnly flag issues in the code under review. If you notice issues in other parts of the codebase, mention them briefly in your summary but do NOT include them as findings.\nDo NOT modify any files — this is a read-only review.\n\n## Code Under Review (Baseline)\n\n{BASELINE_DIFF}\n\n{FIX_DELTA_MANIFEST if round > 1}\n\n{PRIOR_ROUND_CONTEXT if round > 1}\n\nRespond with ONLY a JSON object (no markdown fencing, no preamble). Murphy findings must use M- prefix and Murphy categories (runtime, edge_case, testing, integration, operational). Example:\n{\"verdict\": \"findings\", \"findings\": [{\"id\": \"M-1-1\", \"severity\": \"high\", \"category\": \"runtime\", \"file\": \"src/foo.py\", \"line\": 42, \"title\": \"Unhandled None return\", \"description\": \"The function can return None but the caller doesn't check...\", \"suggestion\": \"Add a None guard\"}], \"summary\": \"One issue found.\"}\n\nIf the code is acceptable, use: {\"verdict\": \"approve\", \"findings\": [], \"summary\": \"No issues found.\"}\n```\n\n**Prompt size management:** If the total prompt (baseline + prior context + delta) would exceed ~30KB, summarize older round findings instead of including them verbatim (e.g., \"Round 1: 5 findings, all fixed. Round 2: 3 findings, 2 fixed, 1 deferred.\"). Always include the most recent round's findings in full.\n\nFor **round 2+**, append:\n- **Fix delta manifest**: list of files modified/created since round 1 with descriptions.\n- **Prior round context**: all prior findings with fix status (fixed/deferred), orchestrator actions.\n- Instruction: \"Verify fixes by reading actual files. Check new files in the delta for issues introduced by fixes. Do not re-report resolved issues. If a claimed fix is ineffective, re-open it with the prior finding ID in the `reopens` field.\"\n\nFor **project scope**: run reviewer CLIs from within the project directory:\n```bash\n(cd \"projects/$SLUG\" && printf '%s' \"$PROMPT\" | ...)\n```\n\n#### Dispatch Reviewers\n\nRun both reviewers. Use the Bash tool's timeout parameter (300000ms) for each invocation.\n\n**Tribune (with model fallback):**\n\nPrimary model: `gemini-3.1-pro-preview`. Fallback chain: `gemini-2.5-pro`, then `gemini-2.5-flash`.\n\n```bash\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-3.1-pro-preview -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n```\n\nGemini runs in `--approval-mode plan` (read-only mode — can read files, cannot write or edit). This is the correct enforcement for a reviewer: full read access to verify fixes by reading actual files, no write access to maintain the principle that only the orchestrator modifies code. Capture stdout. If Gemini enters its own planning flow instead of responding with JSON (a known quirk with certain prompt structures), treat as `parse_error` and retry.\n\n**Model fallback on capacity error:** If the Tribune invocation exits nonzero and stderr contains capacity indicators (`429`, `capacity`, `resource_exhausted`, `rate_limit`, `overloaded`, `quota`), retry with fallback models in order (`gemini-2.5-pro` → `gemini-3-flash` → `gemini-2.5-flash`) before classifying the state. This capacity-fallback retry is separate from the general retry logic in convergence checking — it happens immediately within the dispatch step. Log which model was actually used in the round details.\n\n```bash\n# Fallback invocations (only on capacity error from prior model):\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-2.5-pro -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n# If still capacity-exhausted:\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-3-flash -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n# If still capacity-exhausted:\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-2.5-flash -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n```\n\n**Murphy:**\n```bash\nprintf '%s' \"$MURPHY_PROMPT\" | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema \"$RUNDIR/findings-schema.json\" --output-last-message \"$RUNDIR/murphy-R$ROUND.json\" -\n```\n\nBoth reviewers run in strict read-only mode. Codex output read from `--output-last-message` file. Tribune output captured from stdout.\n\n#### Parse Reviewer Output\n\nFor each reviewer, determine the state:\n- **Bash timeout** → state = `timeout`\n- **Nonzero exit + auth/capacity error in stderr** (patterns: `429`, `capacity`, `resource_exhausted`, `rate_limit`, `overloaded`, `quota`, `authentication_error`, `401`) → state = `unavailable`. Note: if the capacity-fallback retry in the dispatch step already succeeded, this state won't be reached.\n- **Nonzero exit (other)** → state = `error`\n- **Parse output as JSON**: try raw → fence extraction (```` ```json ... ``` ````) → first `{...}` block\n  - Parse success → validate against `iterative-review-schema.json` (required fields: id, severity, category, title, description, suggestion). If validation fails → state = `parse_error`\n  - Valid JSON with `verdict: \"approve\"` AND empty findings → state = `approve`\n  - Valid JSON with `verdict: \"findings\"` AND non-empty findings → state = `findings`\n  - Valid JSON but verdict/findings mismatch (e.g., approve with findings) → treat as `findings`\n  - Parse failure → state = `parse_error`\n\n#### Check Convergence (before dedup)\n\n1. If **both** reviewers are in `approve` state → **CONVERGED**. Break.\n2. If this is a **single-reviewer run** and that reviewer is `approve` → **CONVERGED**. Break.\n3. If any active reviewer failed this round (applies to both dual-reviewer and single-reviewer runs):\n   - `timeout`/`error`/`parse_error`: round is **inconclusive**. Retry (max 2 consecutive retries for that reviewer). If retries exhausted and the other reviewer is healthy, **downgrade to single-reviewer mode** (don't abort the whole run). If both reviewers are failing, abort.\n   - `unavailable` (auth/capacity failure): retry once. If still unavailable, **downgrade to single-reviewer mode** for the remainder of the run. If already in single-reviewer mode and the last reviewer becomes unavailable, **abort the run** — zero active reviewers means no review is possible. Note any downgrade in the final report.\n\n#### Analyze and Deduplicate Findings\n\nCollect all findings from both reviewers. Using your own judgment (semantic LLM reasoning):\n- Deduplicate: merge findings that describe the same issue in different words\n- Check for re-opens: findings with a `reopens` field reference prior IDs — these are NEVER duplicates\n- Classify severity: critical > high > medium\n- Decide which findings to act on vs. defer\n\n**Last-round check** (after dedup): if this is the last round (round == MAX_ROUNDS), report the merged/deduped findings and stop.\n\n**Convergence is simple**: only \"both approve\" (conditions 1/2) or \"max rounds\" ends the loop. See Critical Rules for anti-short-circuit enforcement.\n\n#### Apply Fixes\n\nFor `staged` scope: do NOT apply fixes (single-round only). Report findings for manual action.\n\nFor all other scopes: apply fixes for validated findings using your Edit/Write/Bash tools. **For `project` scope**: reviewers return project-relative paths (e.g., `src/main.py`); prepend `projects/<slug>/` before using Edit/Write tools (e.g., `projects/my-project/src/main.py`). After fixing:\n- Generate a fix delta manifest: `git diff --name-status` against pre-fix state + any newly created files\n- Record which findings were fixed vs. deferred and why\n- **Secret scan the fix delta**: Before the next round, scan all files created or modified by fixes with Tier 1 patterns (full-file). Also generate a full content diff of the fix changes (`git diff` of the modified files) and scan with both Tier 1 and Tier 2 patterns (diff scan). If any file is flagged, remove it from the FIX_DELTA_MANIFEST, warn the user, and flag in the final report.\n\n#### Verify Fixes\n\n**During plan review (Phase 3):** There is no code to test, but reviewers may make factual claims about the system (\"this flag doesn't exist,\" \"that API returns X,\" \"this command doesn't support Y\"). Ground-check these claims by actually running the command, reading the source, or writing a quick test. Do not take a reviewer's word for how something works — verify it. Include verification results in the next round's prompt.\n\n**During implementation review (Phase 5):** After applying fixes and before the next round:\n- **Run existing tests** if available (`pytest`, `npm test`, etc.) to catch regressions\n- **Smoke-test runtime artifacts** — if a fix creates/modifies a schema, config, or CLI command, actually run it to verify it works (e.g., `codex exec --output-schema <file>` to verify the schema is accepted)\n- **Include test results** in the next round's prompt alongside the fix delta manifest — reviewers should see empirical evidence, not just code changes\n- If tests fail, note the failure explicitly — it becomes an orchestrator finding for reviewers to evaluate\n\nTEST, don't speculate. This rule exists because the original AGENT-035 review missed a schema compatibility issue that a 5-second test would have caught, and during AGENT-025's plan review, a reviewer claimed `codex resume` couldn't accept piped stdin — a single command would have disproved it.\n\n#### Loop\n\nContinue to next round.\n\n### Report\n\nPrint the plan review report:\n\n```markdown\n## Plan Review Report\n\n**Scope:** <plan file path>\n**Rounds:** N of M (converged | max rounds reached)\n**Reviewers:** Tribune (Gemini) + Murphy (Codex)\n\n### Summary\n<1-2 sentence assessment>\n\n### Findings Ledger\n\n| ID | Severity | Category | File:Line | Title | Status |\n|----|----------|----------|-----------|-------|--------|\n| T-1-1 | critical | correctness | plan.md:42 | Description | Fixed |\n| M-1-1 | high | testing | plan.md:10 | Description | Deferred |\n\n### Round Details\n<per-round breakdown: findings count, reviewer states, actions taken>\n\n### Deferred Items\n<items not fixed, with rationale — each must be added to ROADMAP>\n```\n\n**Important:** All deferred findings must be added to `docs/dev/ROADMAP.md` (Fix Queue or Active Queue as appropriate) so they don't get lost. The final report is ephemeral; the ROADMAP is durable.\n\nAfter both reviewers approve, commit the approved plan:\n```bash\ngit add <plan-file> && git commit -m \"[developer] <ITEM-ID>: approved implementation plan\"\n```\n\n## Phase 4: Implement\n\nImplement the code following the approved plan. Write tests for the implementation.\n\n## Phase 5: Review the Implementation\n\nCollect the implementation diff (`git diff HEAD` — all uncommitted changes since the plan commit) and run the same review process as Phase 3: collect diff, build reviewer prompts, dispatch reviewers, parse output, check convergence, apply fixes, verify, loop until convergence or max rounds.\n\nWhen fixing issues found by reviewers, write tests covering the fixes — not just code fixes, but test coverage for every non-trivial fix.\n\nGenerate a final implementation review report (same format as Phase 3's report).\n\n## Phase 6: Finalize\n\n### Document, Commit, Push\n\n> **This step is mandatory after every completed review.** Do not skip it. Changes without documentation are invisible; uncommitted changes risk being lost.\n\n1. **CHANGELOG** (`docs/dev/CHANGELOG.md`): Add entry with UTC minute-level timestamp. Describe what changed and why — the review findings that drove the changes.\n2. **ROADMAP** (`docs/dev/ROADMAP.md`):\n   - Move completed items from Active/Fix Queue to Completed table\n   - Add ALL deferred findings as new entries in the appropriate queue (Fix Queue for bugs, Active Queue for features)\n   - Update the Current Snapshot counts\n3. **Commit**: Stage the changed files. Use `[developer]` prefix. Reference the review scope in the message.\n4. **Push**: `git push` to remote.\n\n### Cleanup\n\nRemove the temp directory: `rm -rf \"$RUNDIR\"`.\n\n## Error Handling\n\n| Failure | Behavior | State |\n|---------|----------|-------|\n| `gemini` not found | Single-role with Codex | `unavailable` |\n| `codex` not found | Single-role with Gemini | `unavailable` |\n| Neither found | Abort | — |\n| Timeout (>5 min) | Kill; retry (max 2), then degrade to other reviewer (or abort if both failing) | `timeout` |\n| Non-JSON output | Multi-level extraction; if all fail, retry (max 2), then degrade (or abort if both failing) | `parse_error` |\n| Auth/capacity (429) | Retry once; if still unavailable, downgrade to single-reviewer (or abort if last reviewer) | `unavailable` |\n| Other nonzero exit | Log stderr; retry (max 2), then degrade (or abort if both failing) | `error` |\n\n**No failure is ever treated as approval.**\n\n## Notes\n\n- When dispatching Tribune and Murphy as reviewers, ensure they cannot post Slack messages, write outcome files, or cause supervisor side effects — this is why Tribune uses `--approval-mode plan --allowed-mcp-server-names ''` and Murphy uses `--sandbox read-only`. The orchestrator (you) may post Slack progress updates at phase transitions when dispatched as a development task\n- See Critical Rules for read-only enforcement and convergence protocol\n- When a finding keeps getting reopened with increasingly complex fixes, step back and question whether the problem is real — don't add complexity to solve theoretical edge cases\n- **Resolved precedent — concurrency locking**: This skill deliberately has no worktree lock. During plan review, a lock was developed over 5 rounds (check-then-create → atomic mkdir → PID/birth-time → UUID/heartbeat → coordination-repo-root), each fix adding complexity to address edge cases in the previous fix. The lock was deleted entirely because the premise was wrong: this is a human-invoked slash command where concurrent runs don't happen in practice. Do not re-raise concurrency concerns for this tool.\n"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:29.743Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Let me start by understanding the task. I need to implement backlog item FIX-020. Let me first read the BACKLOG to understand what FIX-020 is, then follow the iterative review process.\n\nLet me begin with Phase 1: Setup - reading the BACKLOG and checking prerequisites."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:30.636Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I'll start by reading the BACKLOG entry for FIX-020 and checking prerequisites in parallel."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:31.533Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"FIX-020\", \"path\": \"/Users/murphy/Research/docs/dev\", \"output_mode\": \"content\", \"-C\": 5}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:15:31.569Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/Users/murphy/Research/docs/dev/roadmap.html-537-    <p class=\"vision-meta\" id=\"updated-text\"></p>\n/Users/murphy/Research/docs/dev/roadmap.html-538-  </section>\n/Users/murphy/Research/docs/dev/roadmap.html-539-  <div class=\"horizon-flow\" id=\"roadmap-content\"></div>\n/Users/murphy/Research/docs/dev/roadmap.html-540-</main>\n/Users/murphy/Research/docs/dev/roadmap.html-541-<script>\ndocs/dev/roadmap.html:542:[Omitted long matching line]\n/Users/murphy/Research/docs/dev/roadmap.html-543-function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;'); }\n/Users/murphy/Research/docs/dev/roadmap.html-544-\n/Users/murphy/Research/docs/dev/roadmap.html-545-(function() {\n/Users/murphy/Research/docs/dev/roadmap.html-546-  document.getElementById('vision-text').textContent = ROADMAP.vision || '';\n/Users/murphy/Research/docs/dev/roadmap.html-547-  var updated = ROADMAP.last_updated || '';\n--\n/Users/murphy/Research/docs/dev/BACKLOG.md-24-| FIX-019"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:32.428Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"which gemini && which codex\", \"description\": \"Check reviewer CLI availability\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:15:32.875Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/opt/homebrew/bin/gemini\n/Users/murphy/.nvm/versions/node/v24.13.1/bin/codex"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:33.201Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /Users/murphy/Research/.claude/commands/iterative-review-schema.json 2>/dev/null || echo \\\"Schema file not found\\\"\", \"description\": \"Check findings schema file\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:15:33.238Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\n  \"type\": \"object\",\n  \"required\": [\"verdict\", \"findings\", \"summary\"],\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"verdict\": {\n      \"type\": \"string\",\n      \"enum\": [\"approve\", \"findings\"]\n    },\n    \"findings\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"required\": [\"id\", \"severity\", \"category\", \"file\", \"line\", \"scope\", \"title\", \"description\", \"suggestion\", \"reopens\"],\n        \"additionalProperties\": false,\n        \"properties\": {\n          \"id\": { \"type\": \"string\" },\n          \"severity\": { \"type\": \"string\", \"enum\": [\"critical\", \"high\", \"medium\"] },\n          \"category\": { \"type\": \"string\" },\n          \"file\": { \"type\": [\"string\", \"null\"] },\n          \"line\": { \"type\": [\"integer\", \"null\"] },\n          \"scope\": { \"type\": [\"string\", \"null\"] },\n          \"title\": { \"type\": \"string\" },\n          \"description\": { \"type\": \"string\" },\n          \"suggestion\": { \"type\": \"string\" },\n          \"reopens\": { \"type\": [\"string\", \"null\"] }\n        }\n    "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:36.535Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Let me get the full FIX-020 BACKLOG entry and check for linked plan/issue files."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:37.049Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Let me read the full FIX-020 entry and check for linked files."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:37.975Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/BACKLOG.md\", \"offset\": 25, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:15:37.981Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    25→| FIX-009 | 2026-03-21 | High | open | Tribune Slack token exposure in config/docs | Gemini-side Slack MCP config and Tribune design docs contain literal Slack token values instead of env var indirection. Risk of leak into logs/context/history. [Issue](issues/2026-03-21-tribune-slack-token-exposure.md) | All Slack tokens use env var indirection; literal values scrubbed from config, docs, and git history. |\n    26→| FIX-010 | 2026-03-21 | High | open | Tribune review handoff integration gaps (4 bugs) | AGENT-033 shipped the Tribune role but left 4 integration bugs: (1) worker prompt doesn't override `waiting_human` for draft-requiring tasks, (2) Slack post failure after approval doesn't requeue, (3) serial draft lookup not task-bound, (4) Tribune maintenance summaries have no delivery path. [Issue](issues/2026-03-20-tribune-review-handoff-gaps.md) | All 4 handoff gaps resolved; Tribune review → Slack delivery path reliable end-to-end. |\n    27→| FIX-013 | 2026-03-21 | Medium | op"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:38.408Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \"docs/dev/issues/*020*\"}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:38.417Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \"docs/dev/plans/*020*\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:15:38.789Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No files found"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:15:38.788Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No files found"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:38.894Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \"docs/dev/issues/*publish*\"}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:38.996Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \"docs/dev/plans/*publish*\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:15:39.047Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No files found"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:15:39.132Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "No files found"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:46.650Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Now I have a clear picture of FIX-020. Let me understand the task:\n\n**FIX-020**: Dashboard publish commits pollute git history and grow repo unboundedly\n- Supervisor commits a snapshot every 2 min → 25K+ commits, ~334/day\n- Solution: two-branch strategy — `main` for development, `deploy` for publishing (single-commit, force-pushed)\n- GitHub Pages serves from `deploy`\n- Submodule stays on `main`\n- `publish_static_git_snapshot()` commits to `deploy` via git plumbing without switching the working tree\n\nNo linked plan or issue files exist. I need to:\n\n\n1. Understand the current dashboard publishing code\n2. Write an implementation plan\n3. Get it reviewed\n4. Implement the changes\n5. Get the implementation reviewed\n6. Finalize\n\nLet me start by checking for dispatch context and exploring the codebase to understand how the current publishing mechanism works."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:46.674Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "ToolSearch",
+        "input_preview": "{\"query\": \"select:TodoWrite\", \"max_results\": 1}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:15:46.677Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": ""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:54.799Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Phase 1: Setup — read codebase, check prerequisites\", \"status\": \"in_progress\", \"activeForm\": \"Setting up — reading codebase and checking prerequisites\"}, {\"content\": \"Phase 2: Write implementation plan\", \"status\": \"pending\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Phase 3: Review the plan (iterative review loop)\", \"status\": \"pending\", \"activeForm\": \"Reviewing the plan with Tribune and Murphy\"}, {\"content\": \"Phase 4: Implement the code\", \"status\": \"pendi"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:15:54.801Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:59.001Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me check for dispatch context (Slack thread_ts) and read the current dashboard publishing code."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:15:59.870Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \".agent/runtime/dispatch/worker-*.task.json\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:00.055Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/Users/murphy/Research/.agent/runtime/dispatch/worker-6.task.json\n/Users/murphy/Research/.agent/runtime/dispatch/worker-5.task.json\n/Users/murphy/Research/.agent/runtime/dispatch/worker-4.task.json\n/Users/murphy/Research/.agent/runtime/dispatch/worker-2.task.json\n/Users/murphy/Research/.agent/runtime/dispatch/worker-3.task.json\n/Users/murphy/Research/.agent/runtime/dispatch/worker-1.task.json\n/Users/murphy/Research/.agent/runtime/dispatch/worker-0.task.json"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:00.308Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Glob",
+        "input_preview": "{\"pattern\": \".agent/runtime/dispatch/task.json\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:00.474Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/Users/murphy/Research/.agent/runtime/dispatch/task.json"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:01.648Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"publish_static_git_snapshot|def publish_static|git.*commit.*snapshot|git.*push.*deploy\", \"path\": \"/Users/murphy/Research/src/loop/monitor\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:01.685Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "src/loop/monitor/dashboard.py:3148:def publish_static_git_snapshot(out_dir: Path, remote: str, branch: Optional[str]):\nsrc/loop/monitor/dashboard.py:3232:                commit_hash = publish_static_git_snapshot(static_dir, static_git_remote, static_git_branch)\nsrc/loop/monitor/dashboard.py:3413:                commit_hash = publish_static_git_snapshot(args.export_static_dir, args.static_git_remote, args.static_git_branch)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:04.433Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/.agent/runtime/dispatch/task.json\", \"limit\": 20}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:04.435Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→{\n     2→  \"mention_ts\": \"1774303975.615279\",\n     3→  \"thread_ts\": \"1774303975.615279\",\n     4→  \"channel_id\": \"C0AFYQQ4TJ9\",\n     5→  \"mention_text_file\": \".agent/tasks/active/1774303975.615279.json\",\n     6→  \"status\": \"in_progress\",\n     7→  \"claimed_by\": \"Murphys-Mac-mini.local-agent-slot-0\",\n     8→  \"summary\": \"\",\n     9→  \"task_description\": \"Development: FIX-020.\",\n    10→  \"report_path\": \"reports/1774303975.615279.md\",\n    11→  \"created_ts\": \"1774304113.233619\",\n    12→  \"last_update_ts\": \"1774304120.959807\",\n    13→  \"source\": {\n    14→    \"user_id\": \"\",\n    15→    \"user_name\": \"murphy development\",\n    16→    \"time_iso\": \"2026-03-23T22:12:55Z\"\n    17→  },\n    18→  \"task_type\": \"development\",\n    19→  \"last_error\": null,\n    20→  \"last_seen_mention_ts\": \"1774304113.233619\","
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:04.877Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 3140, \"limit\": 100}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:04.883Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3140→        [\"git\", \"-C\", str(repo_dir), *args],\n  3141→        capture_output=True,\n  3142→        text=True,\n  3143→        timeout=timeout_sec,\n  3144→        check=False,\n  3145→    )\n  3146→\n  3147→\n  3148→def publish_static_git_snapshot(out_dir: Path, remote: str, branch: Optional[str]):\n  3149→    if not (out_dir / \".git\").exists():\n  3150→        raise RuntimeError(f\"static export directory is not a git repo: {out_dir}\")\n  3151→\n  3152→    # Ensure we're on the target branch before committing.\n  3153→    # If the checkout is on a feature branch (worker doing project work), skip this\n  3154→    # publish cycle to avoid contaminating the feature branch with snapshot commits\n  3155→    # or accidentally pushing feature commits to the remote target branch.\n  3156→    target_branch = branch or \"main\"\n  3157→    head_ref = run_git(out_dir, [\"symbolic-ref\", \"--quiet\", \"HEAD\"])\n  3158→    if head_ref.returncode != 0:\n  3159→        # Detached HEAD — fetch latest and reset branch to "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:09.317Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Let me also check the STATIC_EXPORT_TRACKED_FILES, the callers, and any configuration related to git push settings."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:10.239Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Let me read more context around the configuration, the `STATIC_EXPORT_TRACKED_FILES`, and how the function is called from `__main__`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:11.179Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"STATIC_EXPORT_TRACKED_FILES\", \"path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:11.192Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "86:STATIC_EXPORT_TRACKED_FILES = (\"index.html\", \"status.json\", \"backlog/index.html\", \"backlog/session.json\", \"roadmap/index.html\")\n3176:    add_proc = run_git(out_dir, [\"add\", \"--\", *STATIC_EXPORT_TRACKED_FILES])\n3181:    diff_proc = run_git(out_dir, [\"diff\", \"--cached\", \"--name-only\", \"--\", *STATIC_EXPORT_TRACKED_FILES])"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:12.065Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 3380, \"limit\": 80}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:12.068Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3380→    gpu_poll_interval = args.gpu_poll_interval_sec if args.gpu_poll_interval_sec is not None else resolve_supervisor_poll_interval_sec()\n  3381→\n  3382→    configure_gpu_monitor(\n  3383→        enabled=(args.gpu_monitor == \"on\"),\n  3384→        node_alias=args.gpu_node_alias,\n  3385→        poll_interval_sec=gpu_poll_interval,\n  3386→        command_timeout_sec=args.gpu_command_timeout_sec,\n  3387→    )\n  3388→    writer_interval = resolve_writer_interval(args.interval)\n  3389→    static_git_push_enabled = args.static_git_push == \"on\"\n  3390→\n  3391→    if args.gpu_monitor == \"on\":\n  3392→        print(\n  3393→            f\"GPU monitor: enabled ({args.gpu_node_alias}, poll={max(gpu_poll_interval, 30)}s, \"\n  3394→            f\"timeout={max(args.gpu_command_timeout_sec, 2)}s)\"\n  3395→        )\n  3396→    else:\n  3397→        print(\"GPU monitor: disabled for this run (set --gpu-monitor on to enable)\")\n  3398→\n  3399→    if args.export_static_dir:\n  3400→        # Fail fast if git p"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:13.348Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"static.git.branch|deploy_branch|DASHBOARD_GIT_BRANCH|static-git-branch\", \"path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:13.371Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "17:      --static-git-push on --static-git-branch task/live-monitor\n3221:    static_git_branch: Optional[str] = None,\n3232:                commit_hash = publish_static_git_snapshot(static_dir, static_git_remote, static_git_branch)\n3234:                    target = f\"{static_git_remote}:{static_git_branch}\" if static_git_branch else f\"{static_git_remote}:<current-branch>\"\n3315:    parser.add_argument(\"--static-git-branch\", default=None,\n3359:        if args.static_git_branch is None:\n3360:            args.static_git_branch = _cfg(\"DASHBOARD_GIT_BRANCH\", \"main\")\n3413:                commit_hash = publish_static_git_snapshot(args.export_static_dir, args.static_git_remote, args.static_git_branch)\n3416:                        f\"{args.static_git_remote}:{args.static_git_branch}\"\n3417:                        if args.static_git_branch\n3439:            static_export_loop(writer_interval, args.export_static_dir, static_git_push_enabled, args.static_git_remote, args.static_git_branch)\n3448:      "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:16.570Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me check the dashboard submodule state and current git history to understand the scope of the problem."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:17.910Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research/projects/agent-monitor-web && git log --oneline -10 2>/dev/null; echo \\\"---\\\"; git rev-list --count HEAD 2>/dev/null; echo \\\"---\\\"; git remote -v 2>/dev/null; echo \\\"---\\\"; git branch -a 2>/dev/null\", \"description\": \"Check dashboard submodule git state\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:18.162Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2b117591c chore: refresh monitor snapshot 2026-03-23 22:15 UTC\nd4a4361bc chore: refresh monitor snapshot 2026-03-23 22:13 UTC\n54ac15189 chore: refresh monitor snapshot 2026-03-23 22:11 UTC\nb6ab1e732 chore: refresh monitor snapshot 2026-03-23 22:11 UTC\nebff7b29e chore: refresh monitor snapshot 2026-03-23 22:09 UTC\n831fd91e5 chore: refresh monitor snapshot 2026-03-23 22:07 UTC\n4885d5119 chore: refresh monitor snapshot 2026-03-23 22:05 UTC\n6cf6b3da1 chore: refresh monitor snapshot 2026-03-23 22:03 UTC\n60680533b chore: refresh monitor snapshot 2026-03-23 22:01 UTC\n51762a0e2 chore: refresh monitor snapshot 2026-03-23 21:59 UTC\n---\n25673\n---\norigin\tgit@github.com:murphytheagent/agent-monitor-web.git (fetch)\norigin\tgit@github.com:murphytheagent/agent-monitor-web.git (push)\n---\n* main\n  murphy-showcase-hierarchy-nav\n  murphy-site-shell\n  murphy/tokenizer-families-kimi\n  remotes/origin/HEAD -> origin/main\n  remotes/origin/main\n  remotes/origin/maintenance/20260310-readme-freshness-note\n  remote"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:18.405Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 3290, \"limit\": 80}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:18.409Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3290→        for info in socket.getaddrinfo(socket.gethostname(), None):\n  3291→            addr = info[4][0]\n  3292→            if not addr.startswith(\"127.\") and \":\" not in addr:\n  3293→                ips.add(addr)\n  3294→    except Exception:\n  3295→        pass\n  3296→    return sorted(ips)\n  3297→\n  3298→\n  3299→def main():\n  3300→    parser = argparse.ArgumentParser(description=__doc__,\n  3301→                                     formatter_class=argparse.RawDescriptionHelpFormatter)\n  3302→    parser.add_argument(\"port\", nargs=\"?\", type=int, default=8765,\n  3303→                        help=\"HTTP server port (default: 8765)\")\n  3304→    parser.add_argument(\"--interval\", type=int,\n  3305→                        help=\"Static export write interval in seconds (defaults to root SLEEP_NORMAL)\")\n  3306→    parser.add_argument(\"--once\", action=\"store_true\",\n  3307→                        help=\"Write static export once and exit (requires --export-static-dir)\")\n  3308→    parser.add_arg"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:28.274Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Now I have a clear picture. Let me also check the `run_git` helper and how the `scripts/dashboard.sh` works."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:28.763Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Let me also check the dashboard startup script and the `run_git` helper."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:29.371Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/scripts/dashboard.sh\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:29.375Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→#!/usr/bin/env bash\n     2→# Standalone dashboard publisher. Run in the dedicated 'dashboard' tmux session.\n     3→# All config loaded from .env + supervisor_loop.conf by the Python module.\n     4→set -euo pipefail\n     5→SCRIPT_DIR=\"$(cd \"$(dirname \"$0\")\" && pwd)\"\n     6→REPO_ROOT=\"$(cd \"${SCRIPT_DIR}/..\" && pwd)\"\n     7→cd \"$REPO_ROOT\"\n     8→\n     9→PYTHON_BIN=\"${PYTHON_BIN:-python3}\"\n    10→if [ \"$PYTHON_BIN\" = \"python3\" ] && command -v python3.11 >/dev/null 2>&1; then\n    11→    PYTHON_BIN=\"python3.11\"\n    12→fi\n    13→\n    14→# Verify minimum Python version (3.9+ required; mirrors supervisor_loop.sh)\n    15→if ! \"$PYTHON_BIN\" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 9) else 1)' 2>/dev/null; then\n    16→    echo \"ERROR: Python 3.9+ required. Found: $(\"$PYTHON_BIN\" --version 2>&1)\" >&2\n    17→    echo \"Set PYTHON_BIN to a supported interpreter.\" >&2\n    18→    exit 1\n    19→fi\n    20→\n    21→exec \"$PYTHON_BIN\" -m src.loop.monitor.dashboard --headless --from-conf"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:30.282Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 3130, \"limit\": 20}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:30.285Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3130→            )\n  3131→    # Legacy session.json for backwards compat.\n  3132→    session_log = _build_session_log()\n  3133→    atomic_write_text(\n  3134→        backlog_dir / \"session.json\",\n  3135→        json.dumps(session_log or [], default=str, ensure_ascii=False, indent=2),\n  3136→    )\n  3137→    # Strategic roadmap page\n  3138→    roadmap_data = payload.get(\"roadmap\") or {\"vision\": \"\", \"themes\": [], \"last_updated\": \"\"}\n  3139→    write_roadmap_html(out_dir=out_dir, roadmap_data=roadmap_data)\n  3140→    write_standalone_roadmap_html(roadmap_data)\n  3141→\n  3142→\n  3143→def run_git(repo_dir: Path, args, timeout_sec: int = 25):\n  3144→    return subprocess.run(\n  3145→        [\"git\", \"-C\", str(repo_dir), *args],\n  3146→        capture_output=True,\n  3147→        text=True,\n  3148→        timeout=timeout_sec,\n  3149→        check=False,"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:30.493Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/config/supervisor_loop.conf\", \"limit\": 20}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:30.496Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# Supervisor loop defaults.\n     2→# Any value can be overridden via environment variables (including .env).\n     3→\n     4→# Runtime and sleep policy\n     5→: \"${SESSION_MINUTES:=360}\"\n     6→# Single cadence source for supervisor polling and monitor static/frontend refresh defaults.\n     7→: \"${SLEEP_NORMAL:=120}\"\n     8→: \"${POLL_INTERVAL:=5}\"\n     9→: \"${WAITING_REFRESH_INTERVAL:=30}\"\n    10→: \"${PENDING_CHECK_INITIAL:=120}\"\n    11→: \"${PENDING_CHECK_MULTIPLIER:=2}\"\n    12→: \"${PENDING_CHECK_MAX:=600}\"\n    13→: \"${FAILURE_SLEEP_SEC:=120}\"\n    14→\n    15→# Transient transport/network recovery\n    16→: \"${MAX_TRANSIENT_RETRIES:=3}\"\n    17→: \"${TRANSIENT_RETRY_INITIAL:=15}\"\n    18→: \"${TRANSIENT_RETRY_MULTIPLIER:=2}\"\n    19→: \"${TRANSIENT_RETRY_MAX:=300}\"\n    20→"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:33.493Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me check GitHub Pages configuration to understand what branch it's currently serving from."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:35.791Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research && gh api repos/murphytheagent/agent-monitor-web/pages 2>/dev/null | python3 -c \\\"import sys,json; d=json.load(sys.stdin); print(json.dumps({'source': d.get('source'), 'build_type': d.get('build_type'), 'url': d.get('html_url')}, indent=2))\\\" 2>/dev/null || echo \\\"Could not fetch Pages config\\\"\", \"description\": \"Check GitHub Pages configuration\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:36.210Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\n  \"source\": {\n    \"branch\": \"main\",\n    \"path\": \"/\"\n  },\n  \"build_type\": \"legacy\",\n  \"url\": \"https://murphytheagent.github.io/agent-monitor-web/\"\n}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:36.723Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research/projects/agent-monitor-web && du -sh .git 2>/dev/null; echo \\\"---\\\"; git count-objects -v 2>/dev/null | head -5\", \"description\": \"Check repo size\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:36.868Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "4.0K\t.git\n---\ncount: 2644\nsize: 50140\nin-pack: 94237\npacks: 14\nsize-pack: 24431"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:48.189Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Now I have a complete picture. Let me also check the `.git` structure since it showed 4K - that's suspiciously small, probably it's a submodule with a `.git` file, not a `.git` directory.\n\nActually, let me check - the submodule's `.git` is a file pointing to the parent repo's `.git/modules/...`.\n\nOK, I have enough context now. Let me also quickly check the Slack thread_ts for posting progress updates. The task shows:\n- thread_ts: \"1774303975.615279\"\n- channel_id: \"C0AFYQQ4TJ9\"\n\n\nI'll set up the temp directory for the review first, then post a progress update and move into Phase 2."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:48.190Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good. I have the full picture now. Let me set up the review temp directory and post a Slack progress update."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:50.372Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"RUNDIR=$(mktemp -d /tmp/iterative-review-XXXXXX) && echo \\\"$RUNDIR\\\" && cp /Users/murphy/Research/.claude/commands/iterative-review-schema.json \\\"$RUNDIR/findings-schema.json\\\"\", \"description\": \"Create temp directory and copy schema\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:50.399Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/tmp/iterative-review-euzwH6"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:51.028Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "ToolSearch",
+        "input_preview": "{\"query\": \"select:mcp__slack__conversations_add_message\", \"max_results\": 1}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:51.029Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": ""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:16:56.174Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "mcp__slack__conversations_add_message",
+        "input_preview": "{\"channel_id\": \"C0AFYQQ4TJ9\", \"thread_ts\": \"1774303975.615279\", \"text\": \"Starting FIX-020: dashboard publish commit pollution. Reading codebase, writing implementation plan, then running iterative review with Tribune + Murphy.\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:16:56.693Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "MsgID,UserID,UserName,RealName,Channel,ThreadTs,Text,Time,Reactions,BotName,FileCount,AttachmentIDs,HasMedia,Cursor\n"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:17:05.048Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "TodoWrite",
+        "input_preview": "{\"todos\": [{\"content\": \"Phase 1: Setup — read codebase, check prerequisites\", \"status\": \"completed\", \"activeForm\": \"Setting up — reading codebase and checking prerequisites\"}, {\"content\": \"Phase 2: Write implementation plan\", \"status\": \"in_progress\", \"activeForm\": \"Writing implementation plan\"}, {\"content\": \"Phase 3: Review the plan (iterative review loop)\", \"status\": \"pending\", \"activeForm\": \"Reviewing the plan with Tribune and Murphy\"}, {\"content\": \"Phase 4: Implement the code\", \"status\": \"pen"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:17:05.051Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Todos have been modified successfully. Ensure that you continue to use the todo list to track your progress. Please proceed with the current tasks if applicable"
+      }
+    ]
   }
 ]

@@ -703,6 +703,9 @@ function dispatchItem(itemId) {
   })
   .then(function() {
     if (btn) { btn.textContent = '✓ Dispatched'; btn.className = 'dispatch-btn success'; btn.disabled = true; }
+    var dispatched = JSON.parse(sessionStorage.getItem('dispatched_items') || '[]');
+    if (dispatched.indexOf(itemId) < 0) dispatched.push(itemId);
+    sessionStorage.setItem('dispatched_items', JSON.stringify(dispatched));
   })
   .catch(function(err) {
     if (btn) { btn.textContent = '✗ Error'; btn.className = 'dispatch-btn error'; }
@@ -738,6 +741,8 @@ function renderBacklog() {
     if (!arr.length) return '<div class="empty">No items</div>';
     return '<div class="roadmap-grid">' + arr.map(function(item) {
       var isActive = ACTIVE_DEV_ITEMS.indexOf(item.id) >= 0;
+      var dispatched = JSON.parse(sessionStorage.getItem('dispatched_items') || '[]');
+      var wasDispatched = dispatched.indexOf(item.id) >= 0;
       var statusClass = isActive ? 'pill-in_progress' : 'pill-' + item.status.replace(/ /g, '_');
       var statusText = isActive ? 'in progress' : item.status;
       var isDeferred = item.status === 'deferred';
@@ -752,9 +757,9 @@ function renderBacklog() {
           '<span class="roadmap-id">' + esc(item.id) + '</span>' +
           '<div class="roadmap-controls">' +
             '<span class="pill ' + statusClass + '">' + esc(statusText) + '</span>' +
-            '<button class="dispatch-btn" data-dispatch="' + esc(item.id) + '" ' +
-              (isDeferred || isActive ? 'disabled title="' + (isActive ? 'In progress' : 'Deferred') + '"' : '') +
-              '>' + (isActive ? '⟳ Running' : '▶ Dispatch') + '</button>' +
+            '<button class="dispatch-btn' + (wasDispatched ? ' success' : '') + '" data-dispatch="' + esc(item.id) + '" ' +
+              (isDeferred || isActive || wasDispatched ? 'disabled title="' + (isActive ? 'In progress' : wasDispatched ? 'Already dispatched' : 'Deferred') + '"' : '') +
+              '>' + (isActive ? '⟳ Running' : wasDispatched ? '✓ Dispatched' : '▶ Dispatch') + '</button>' +
           '</div>' +
         '</div>' +
         '<div class="roadmap-task">' + esc(item.task) + '</div>' +
