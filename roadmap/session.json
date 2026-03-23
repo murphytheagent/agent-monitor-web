@@ -602,5 +602,15 @@
         "content_preview": "```json\n{\n  \"verdict\": \"findings\",\n  \"findings\": [\n    {\n      \"id\": \"T-1-1\",\n      \"severity\": \"high\",\n      \"category\": \"error_handling\",\n      \"file\": \"Plan\",\n      \"line\": 35,\n      \"title\": \"Race condition on direct push to main\",\n      \"description\": \"The plan notes that the dashboard exporter pushes to `main` continuously. A direct push by Murphy is therefore highly likely to fail with a non-fast-forward error due to concurrent remote updates. The proposed rule does not specify how to handle this expected push rejection.\",\n      \"suggestion\": \"Update the proposed rule to explicitly instruct the agent to fetch and rebase (`git pull --rebase origin main`) immediately before pushing.\"\n    },\n    {\n      \"id\": \"T-1-2\",\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"file\": \"Plan\",\n      \"line\": 52,\n      \"title\": \"Inconsistent cleanup rule documentation\",\n      \"description\": \"The plan explicitly leaves the existing `agent-monitor-web` note on line 41 ('Submodule"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T09:59:27.913Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-1-1\",\"severity\":\"medium\",\"category\":\"operational\",\"file\":\"docs/dev/plans/45-agent-monitor-web-merge-carveout.md\",\"line\":23,\"scope\":\"AGENT-045 plan\",\"title\":\"The line 14 carve-out is broader than the failure mode it is trying to fix\",\"description\":\"The concrete production problem is that `agent-monitor-web` must end on `main` so GitHub Pages and the background exporter can publish. The proposed line 16 exception addresses that. Expanding line 14 as well removes the normal PR/@codex review path for all `agent-monitor-web` changes, including hand-maintained routes like `/showcase/` and `/tokenizers/`, even though those changes do not need to skip PRs in order to keep publishing working. That is a policy broadening on a public site, not a targeted fix.\",\"suggestion\":\"Narrow the exception to the actual requirement: allow Murphy to merge a feature branch into `main` and push without waiting for separate human instruction, but do not blanket-exempt t"
+      }
+    ]
   }
 ]
