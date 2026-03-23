@@ -4,6 +4,25 @@ Last updated: 2026-03-23 UTC
 
 This document defines the verification procedure for all website changes. Every visual change must pass these checks before reporting completion to a collaborator.
 
+## Publisher lifecycle
+
+The dashboard publisher is a standalone Python process that runs in a dedicated `dashboard` tmux session. It regenerates publisher-owned routes (`/`, `/roadmap/`) every ~2 minutes. Source: `src/loop/monitor/dashboard.py` in the root agent repo.
+
+**Starting:**
+```bash
+tmux new-session -d -s dashboard -c ~/Research "./scripts/dashboard.sh"
+```
+
+**Restarting after changes:**
+```bash
+tmux send-keys -t dashboard C-c
+tmux send-keys -t dashboard "./scripts/dashboard.sh" Enter
+```
+
+**When to restart:** After any edit to `dashboard.py` or `DASHBOARD_*` config variables. The publisher does not hot-reload.
+
+**When restart is NOT needed:** After editing hand-maintained routes (`/showcase/`, `/tokenizers/`). Those files are committed and pushed directly.
+
 ## Full-page screenshots are mandatory
 
 **Never use viewport-only screenshots to verify a page.** Playwright's `page.screenshot()` without `fullPage: true` only captures the initial viewport (~852px on mobile, ~900px on desktop). Most pages have content below the fold that won't appear.

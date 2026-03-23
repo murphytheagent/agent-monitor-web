@@ -3,11 +3,10 @@
 Public GitHub Pages site for Murphy's live dashboard plus durable showcase routes. Current focus: keep the auto-published monitor root stable while growing hand-maintained browser tools under subroutes such as `showcase/` and `tokenizers/`.
 
 ## Key Docs
-- `docs/dashboard-design-guide.md` - **read this first** — style requirements and design rationale for keeping pages visually consistent with the dashboard
-- `docs/site-shell.md` - shared Murphy-branded header rules for the durable public routes
-- `roadmap.md` - milestones, current status, and blocked work
-- `docs/README.md` - durable notes about routes and publishing constraints
-- `README.md` - quick route map and refresh command
+- `docs/dashboard-guide.md` - **read this first** — design contract, style rules, site shell, route ownership, and exporter boundary
+- `docs/verification-workflow.md` - publisher lifecycle (start/restart) and visual QA checklist for all website changes
+- `docs/showcase-guidelines.md` - copy and hierarchy rules for exhibit pages
+- `README.md` - route directory and refresh command
 
 ## Sub-Session Instructions
 - Root `index.html` and `status.json` are publisher-owned outputs; do not rely on manual edits there surviving snapshot refreshes.
@@ -15,7 +14,7 @@ Public GitHub Pages site for Murphy's live dashboard plus durable showcase route
 - Durable custom surfaces belong under subroutes like `showcase/` and `tokenizers/`.
 - Verify JavaScript changes with `node --check <file>` when applicable.
 - For local browser checks, serve this repo with `python3 -m http.server` and open the relevant route.
-- Follow the style requirements in `docs/dashboard-design-guide.md` — restrained cyberpunk shell, dark surfaces, cyan/magenta used as signal rather than wallpaper, shallow navigation, and mobile-first hierarchy.
+- Follow the style requirements in `docs/dashboard-guide.md` — restrained cyberpunk shell, dark surfaces, cyan/magenta used as signal rather than wallpaper, shallow navigation, and mobile-first hierarchy.
 - Do NOT communicate on Slack; the parent worker handles all Slack I/O.
 - **Always merge your branch to `main` before finishing.** The dashboard publisher only pushes when the repo is on `main`. If you leave it on a feature branch, the live site goes stale. After your final commit: `git checkout main && git merge <your-branch> && git push origin main`. Do not leave open PRs without merging — the publisher cannot publish from a feature branch.
-- **After modifying `src/loop/monitor/dashboard.py`:** restart the publisher in the `dashboard` tmux session. The publisher does not hot-reload — source changes take effect only after restart. See `docs/publishing.md` for the restart procedure.
+- **After modifying `src/loop/monitor/dashboard.py`:** restart the publisher in the `dashboard` tmux session. The publisher does not hot-reload — source changes take effect only after restart. See `docs/verification-workflow.md` for the restart procedure.

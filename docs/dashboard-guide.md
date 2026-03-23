@@ -1,16 +1,18 @@
-# Dashboard Design Guide
+# Dashboard Guide
 
-Last updated: 2026-03-22 06:53 UTC
+Last updated: 2026-03-23 UTC
 
 ## Core direction
 
-The current direction is restrained cyberpunk: a calm command-deck shell rather than either a neon arcade or a beige productivity site. Apple, Anthropic, and OpenAI are still useful references, but only for structure: shallow navigation, generous spacing, restrained surfaces, and pages that explain themselves with hierarchy instead of chrome.
+**This site is cyberpunk. That is not a suggestion — it is the identity.** Every page, every component, every new route must read as part of a dark command-deck system. If a change makes the site look more like a conventional SaaS dashboard or a light-mode productivity app, it is wrong regardless of how "clean" it looks.
 
-This site is still data-heavy, but it should feel authored and readable on a phone before it feels dense or "power-user". The cyberpunk identity should survive even when most of the accent color is removed.
+Restrained cyberpunk: a calm command-deck, not a neon arcade. Apple, Anthropic, and OpenAI are useful references for *structure* only (shallow navigation, generous spacing, pages that explain themselves with hierarchy). The visual language is ours — dark surfaces, signal-color accents, terminal-grade typography.
+
+The cyberpunk identity must survive even when most accent color is removed. If you strip the cyan and magenta, the page should still feel dark, atmospheric, and authored — never light, generic, or corporate.
 
 ## Style requirements
 
-- **Theme:** Near-black backgrounds, layered dark surfaces, cyan as the primary signal color, magenta as a secondary response color. The goal is signal, not neon wallpaper.
+- **Theme:** Near-black backgrounds, layered dark surfaces, cyan as the primary signal color, magenta as a secondary response color. The goal is signal, not neon wallpaper. **No white or light backgrounds anywhere.** Every surface must use `--bg-*` CSS variables or dark rgba values. If you see `#ffffff`, `rgba(247,...)`, or `rgba(255, 255, 255, 0.8+)` in your CSS, it is a bug.
 - **Typography:** `Rajdhani` for UI and body copy. `Playfair Display` is reserved for the Murphy wordmark. `Orbitron` is for small system labels or standout numerals, not whole paragraphs. Use monospace only for actual data, labels, and code-like strings.
 - **Case:** Sentence case by default. Do not force uppercase labels across the shell.
 - **Shape:** Rounded corners are allowed and expected. Favor pill navigation and 20-28px card radii over hard rectangles.
@@ -28,18 +30,55 @@ Any new page should inherit this direction unless it is intentionally framed as 
 - Showcase and gallery pages should be preview-led. A good static preview is better than a cramped live embed on mobile.
 - Keep hero copy short. The layout should do most of the explaining.
 
-## What changed in the 2026-03-22 redesign
+## Shared site shell
 
-Athena's diagnosis stayed the same after the collaborator asked to keep the cyberpunk theme: the main problem was structural, not cosmetic. Too many bordered containers, too many route labels, and too much desktop-first scaffolding made the mobile experience feel compressed.
+- `Murphy` appears as the leading wordmark, treated as a signature rather than another route label.
+- The primary nav stays shallow: `Monitor`, `Roadmap`, and `Showcase`.
+- The sticky shell does not carry page titles or child-route CTAs. Child routes belong in the page body, not in the header.
+- On phones, the top-level nav collapses behind a single menu button so the shell stays down to the wordmark plus one control.
+- The shell is dark, restrained, and signal-led: near-black surfaces, soft cyan/magenta accents, pill controls, and near-zero motion.
+- If a page needs a path hint, keep it compact and secondary. The header should not turn into a sitemap.
 
-The redesign therefore focused on:
+### Shell scope
 
-- keeping one dark shell across the durable routes instead of splitting the site into dark root pages and light subpages
-- reducing header chrome to a single shallow navigation band plus one contextual CTA
-- removing route-map and "you are here" blocks from page bodies
-- turning `/showcase/` into a viewer-first gallery with static previews instead of stacked live embeds
-- moving the tokenizer work surface ahead of the control stack on mobile
-- translating premium reference-site hierarchy back into a Murphy-specific command-deck language
+The shared shell is authoritative for `/showcase/`, `/tokenizers/`, `/showcase/signal-deck/`, and `/showcase/res-publica/`.
+
+`/` and `/roadmap/` should visually echo the same system, but their durable source is the exporter (see "Route ownership" below).
+
+### Implementation notes
+
+- `assets/site-shell.css` owns the Murphy wordmark, shared typography, pill navigation, and the restrained cyberpunk tokens used across the durable public pages.
+- `showcase/assets/site-shell.js` owns the compact mobile menu state for the durable public routes.
+- `showcase/assets/site.css` imports that shell and carries the common gallery and exhibit-page framing so `/showcase/`, `/showcase/signal-deck/`, and `/showcase/res-publica/` read as one system.
+- `tokenizers/index.html` reuses the same shell but keeps the main work surface ahead of the option stack on small screens.
+- The root pages can be locally prototyped against the same shell for quick iteration, but the durable implementation for `/` and `/roadmap/` still belongs in `src/loop/monitor/dashboard.py`.
+
+## Route ownership
+
+- `/` — live monitor root. Regenerated by the exporter. Publisher-owned.
+- `/roadmap/` — live planning surface. Regenerated by the exporter. Publisher-owned.
+- `/showcase/` — hand-maintained gallery. Survives snapshot refreshes.
+- `/tokenizers/` — hand-maintained tool. Survives snapshot refreshes.
+
+### What the publisher overwrites
+
+Every ~2 minutes, the publisher regenerates and commits: `index.html`, `status.json`, `roadmap/index.html`, and `roadmap/session.json`. Manual edits to these files are overwritten within minutes.
+
+Subroutes such as `showcase/` and `tokenizers/` survive refreshes because the publisher does not touch them.
+
+### Rule for generated routes
+
+Design changes to `/` or `/roadmap/` must be made in `src/loop/monitor/dashboard.py`, not by editing the generated HTML in this repo. The generated files are transient output — the exporter source is the durable source of truth. The correct workflow is: edit `dashboard.py` → restart publisher → verify live URL.
+
+Design experiments in the generated root pages are acceptable as a short-term preview, but document them as exporter follow-up work before treating them as finished.
+
+### Adding new routes
+
+When a new browser experience should live on the site before the monitor exporter grows new extension points:
+
+1. Add it as a subroute in this repo
+2. Link it from `/showcase/`
+3. Document any missing root-homepage integration as an exporter issue instead of patching generated HTML by hand
 
 ## Visual heuristics
 
@@ -62,11 +101,7 @@ The redesign therefore focused on:
 
 ## Verification
 
-Every visual change must follow the verification workflow in [`verification-workflow.md`](verification-workflow.md) before reporting completion. Key rules: full-page screenshots (not viewport-only), verify the live public URL (not just local), check both desktop and mobile widths.
-
-## Durable boundary
-
-The root monitor and roadmap pages are still exporter-owned. If those routes need this shell durably, the exporter template must adopt it. Patching the generated HTML can be useful for immediate iteration, but it is not the long-term source of truth. See [`publishing.md`](publishing.md) for the publisher lifecycle — how to start it, when to restart it after exporter changes, and what it overwrites.
+Every visual change must follow the verification workflow in [`verification-workflow.md`](verification-workflow.md) before reporting completion. Key rules: full-page screenshots (not viewport-only), verify the live public URL (not just local), check both desktop and mobile widths. If changes touched `dashboard.py`, restart the publisher first.
 
 ## Exporter follow-up for root routes
 

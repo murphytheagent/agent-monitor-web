@@ -1,8 +1,6 @@
 # Agent Monitor Web
 
-GitHub Pages site for published snapshots of the local agent monitor dashboard.
-
-Snapshots publish continuously on `origin/main`; use the latest commit there as the freshness signal rather than this README.
+GitHub Pages site for Murphy's live dashboard and durable showcase routes.
 
 Refresh command from the root coordination repo:
 
@@ -10,22 +8,13 @@ Refresh command from the root coordination repo:
 python3 -m src.loop.monitor.dashboard --once --export-static-dir projects/agent-monitor-web
 ```
 
-Hosted routes:
+## Routes
 
-- `/` - live agent monitor snapshot. This root surface is publisher-owned: each snapshot refresh rewrites `index.html` and `status.json`, so any shell/layout changes there are durable only once the exporter adopts them.
-- `/roadmap/` - exporter-backed planning surface with the same ownership boundary as `/`. Short-lived local stopgaps are possible, but the publisher can overwrite them immediately; long-term layout changes belong in the exporter.
-- `/showcase/` - viewer-first landing page for polished browser surfaces. It now treats the tokenizer, `Signal Deck`, and `Res Publica` as three clearly separated exhibits inside a restrained cyberpunk shell, using art-directed previews instead of stacking live embeds.
-- `/showcase/signal-deck/` - telemetry exhibit for Murphy's task archive: completed tasks over time, thread-text token estimates, request mix, task-span rhythms, and authored code churn. Refresh the underlying bundle manually with `python3 scripts/build_signal_deck.py`.
-- `/showcase/res-publica/` - architecture exhibit for the Worker / Developer / Tribune split, presented as a public-facing art page rather than an internal system diagram, while reusing the same Murphy site shell as the gallery and tokenizer workbench.
-- `/tokenizers/` - interactive tokenizer visualizer page for expanded public text-model families, including full Qwen ladders and local Kimi support. The shell is shared with the rest of the site, but the page now prioritizes the text and token output before the heavier controls on small screens.
+- `/` — live agent monitor (publisher-owned, regenerated every ~2 min)
+- `/roadmap/` — planning surface with dispatch (publisher-owned)
+- `/showcase/` — viewer-first gallery for polished browser surfaces
+- `/showcase/signal-deck/` — telemetry exhibit (task archive, token estimates, code churn)
+- `/showcase/res-publica/` — architecture exhibit (Worker / Developer / Tribune)
+- `/tokenizers/` — interactive tokenizer visualizer for public text-model families
 
-If you want a permanent custom page or navigation outside the existing exporter-backed shell, add it under a subroute such as `showcase/` or `tokenizers/`; a manual root-homepage patch will still be overwritten by the next snapshot export unless the exporter template itself changes.
-
-Additional hosted tool details:
-
-- `tokenizers/` — interactive tokenizer visualizer page for expanded public text-model families, now grouped into lines such as `Qwen`, `DeepSeek`, `Kimi`, `MiniMax`, `Yi`, `Mistral`, `Phi`, `SmolLM`, and `Falcon`.
-  The page uses a three-level `model line -> family / generation -> configuration` picker, and the main text ladders now expose full public family coverage where the tokenizer relationship is cleanly defined, including the full public `Qwen 2.5`, `Qwen 3`, `Qwen 3.5`, `DeepSeek R1 Distill`, and `Falcon 3` ladders.
-  `Kimi` is now supported directly in the browser through locally hosted tokenizer bundles converted from MoonshotAI public `tiktoken.model` files, with per-model chat templates restored for `Kimi K2`, `Kimi Linear`, and `Kimi K2.5`.
-  The page still labels whether sibling checkpoints share an exact vocabulary, only share a base tokenizer model, or use different tokenizer files, and the unsupported callout is now limited to genuinely non-browser-ready lines such as `GLM 4`, `InternLM 3`, and `Baichuan 2`.
-- `showcase/` — showcase landing page for hosted project surfaces. It now keeps the three public pieces distinct while sharing the Murphy wordmark and route shell used across the durable public pages: the tokenizer appears as a preview card that leads into the lab, `Signal Deck` frames the system telemetry story, and `Res Publica` remains the separate architecture lane.
-  The current visual contract is restrained cyberpunk rather than warm editorial: dark layered surfaces, shallow navigation, and cyan/magenta accents used as signal instead of default chrome.
+Publisher-owned routes (`/`, `/roadmap/`) are overwritten by the exporter on each cycle. Durable changes belong in `src/loop/monitor/dashboard.py`. Hand-maintained routes (`/showcase/`, `/tokenizers/`) are committed directly. See `docs/dashboard-guide.md` for the full route ownership model.
