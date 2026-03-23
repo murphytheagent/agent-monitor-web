@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.32,
-      "five": 1.89,
-      "fifteen": 1.79
+      "one": 2.17,
+      "five": 1.95,
+      "fifteen": 1.82
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113576067072,
-    "disk_free_bytes": 131531128832,
-    "runner_log_size_bytes": 681033,
+    "disk_used_bytes": 113573740544,
+    "disk_free_bytes": 131533455360,
+    "runner_log_size_bytes": 681095,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T11:09:02Z",
+    "checked_at_utc": "2026-03-23T11:11:05Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -78,15 +78,15 @@
         "utilization_gpu_pct": 0,
         "memory_used_mb": 0,
         "memory_total_mb": 97887,
-        "temperature_c": 26
+        "temperature_c": 27
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 68,
+        "utilization_gpu_pct": 53,
         "memory_used_mb": 89491,
         "memory_total_mb": 97887,
-        "temperature_c": 44
+        "temperature_c": 41
       },
       {
         "index": 6,
@@ -99,10 +99,10 @@
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 88,
+        "utilization_gpu_pct": 81,
         "memory_used_mb": 89487,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 48
       }
     ]
   },
@@ -125,24 +125,7 @@
         }
       }
     },
-    "active": {
-      "1774259088.675559": {
-        "mention_ts": "1774259088.675559",
-        "thread_ts": "1774259088.675559",
-        "status": "in_progress",
-        "task_description": "Development: AGENT-045.",
-        "summary": "Development: AGENT-045.",
-        "summary_preview": "Development: AGENT-045.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774259328.566515",
-        "last_update_ts": "1774259336.849175",
-        "task_type": "development",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-23T09:44:48Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1774027184.232059": {
         "mention_ts": "1774027184.232059",
@@ -434,6 +417,22 @@
       }
     },
     "finished": {
+      "1774259088.675559": {
+        "mention_ts": "1774259088.675559",
+        "thread_ts": "1774259088.675559",
+        "status": "done",
+        "task_description": "Development: AGENT-045.",
+        "summary": "Development task completed (1774259088.675559)",
+        "summary_preview": "Development task completed (1774259088.675559)",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774259328.566515",
+        "last_update_ts": "1774264265.016322",
+        "task_type": "development",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T09:44:48Z"
+        }
+      },
       "1774257429.450109": {
         "mention_ts": "1774257429.450109",
         "thread_ts": "1774257429.450109",
@@ -1217,22 +1216,6 @@
           "user_name": "[redacted]",
           "time_iso": "2026-02-26T04:34:34Z"
         }
-      },
-      "1771980057.419759": {
-        "mention_ts": "1771980057.419759",
-        "thread_ts": "1771980057.419759",
-        "status": "done",
-        "task_description": "How is your SESSION_MEMORY_CONTEXT constructed and is it loaded correctly into session prompt?",
-        "summary": "Explained how SESSION_MEMORY_CONTEXT is constructed in runtime.py and verified it is correctly injected into .agent/runtime_session_prompt.md for this session.",
-        "summary_preview": "Explained how SESSION_MEMORY_CONTEXT is constructed in runtime.py and verified it is correctly injected into .agent/runtime_session_prompt.md for this session.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1771980057.419759",
-        "last_update_ts": "1771980273.145342",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-02-25T00:40:57Z"
-        }
       }
     }
   },
@@ -1441,21 +1424,15 @@
         "done_when": "Publisher runs as a standalone process; Murphy can edit dashboard templates and restart the publisher without supervisor restart; `src/loop/monitor/` is excluded from the worker pre-commit hook protec",
         "has_plan": false,
         "has_issue": false
-      },
-      {
-        "id": "AGENT-045",
-        "queue": "feature",
-        "created": "2026-03-23",
-        "priority": "High",
-        "status": "open",
-        "task": "Add `agent-monitor-web` merge carve-out to git workflow",
-        "context": "Git workflow (line 16) says \"never push directly to main without explicit human instruction.\" Murphy follows this for `agent-monitor-web`, opening PRs instead of merging to main. But GitHub Pages requ",
-        "done_when": "`docs/workflows/git-workflow.md` has an explicit exception for `agent-monitor-web` allowing direct pushes to `main`; Murphy merges feature branches to main without PRs for this repo.",
-        "has_plan": false,
-        "has_issue": false
       }
     ],
     "completed": [
+      {
+        "id": "AGENT-045",
+        "created": "2026-03-23",
+        "completed": "2026-03-23",
+        "summary": "Add `agent-monitor-web` merge carve-out to git workflow: exceptions to lines 14, 16, 35 of `docs/workflows/git-workflow.md` allowing direct-to-`main` merges. 5-round plan + 5-round impl review (Tribun"
+      },
       {
         "id": "AGENT-046",
         "created": "2026-03-23",
@@ -1750,5 +1727,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T11:09:03Z"
+  "server_time_utc": "2026-03-23T11:11:06Z"
 }
