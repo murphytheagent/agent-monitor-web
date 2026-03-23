@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-23T09:10:12Z",
+    "last_updated_utc": "2026-03-23T09:12:21Z",
     "status": "sleeping",
     "pid": 68391,
-    "loop_count": 6621,
+    "loop_count": 6637,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -19,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.87,
-      "five": 1.98,
-      "fifteen": 1.91
+      "one": 1.92,
+      "five": 1.9,
+      "fifteen": 1.88
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113529552896,
-    "disk_free_bytes": 131577643008,
-    "runner_log_size_bytes": 678207,
+    "disk_used_bytes": 113536626688,
+    "disk_free_bytes": 131570569216,
+    "runner_log_size_bytes": 678537,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-22T12:56:42Z",
     "local_ips": []
@@ -36,7 +36,7 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-23T09:10:24Z",
+    "checked_at_utc": "2026-03-23T09:12:27Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
@@ -51,10 +51,10 @@
       {
         "index": 1,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 99,
+        "utilization_gpu_pct": 100,
         "memory_used_mb": 88796,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 51
       },
       {
         "index": 2,
@@ -62,7 +62,7 @@
         "utilization_gpu_pct": 99,
         "memory_used_mb": 88473,
         "memory_total_mb": 97887,
-        "temperature_c": 50
+        "temperature_c": 49
       },
       {
         "index": 3,
@@ -76,33 +76,33 @@
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "utilization_gpu_pct": 36,
-        "memory_used_mb": 73913,
+        "memory_used_mb": 73887,
         "memory_total_mb": 97887,
-        "temperature_c": 39
+        "temperature_c": 42
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 98,
+        "utilization_gpu_pct": 92,
         "memory_used_mb": 89493,
         "memory_total_mb": 97887,
-        "temperature_c": 49
+        "temperature_c": 48
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 82,
+        "utilization_gpu_pct": 99,
         "memory_used_mb": 89493,
         "memory_total_mb": 97887,
-        "temperature_c": 47
+        "temperature_c": 48
       },
       {
         "index": 7,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 82,
         "memory_used_mb": 89489,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 49
       }
     ]
   },
@@ -1217,14 +1217,14 @@
         "has_issue": false
       },
       {
-        "id": "FIX-018",
+        "id": "FIX-021",
         "queue": "fix",
-        "created": "2026-03-22",
+        "created": "2026-03-23",
         "priority": "Low",
         "status": "open",
-        "task": "Iterative-review secret pattern coverage gaps",
-        "context": "Tier 1 patterns don't match JSON-quoted keys (`\"API_KEY\": \"...\"`), Tier 2 doesn't support YAML/colon/spaced assignments, no `TOKEN` keyword. Separate from FIX-007 (full-file scanning).",
-        "done_when": "Patterns match common config formats (JSON, YAML, spaced assignments) and include TOKEN keyword.",
+        "task": "TOKEN tier consistency gap in iterative-review secret scanning",
+        "context": "Bare `TOKEN` in Tier 1 can match benign `*_TOKEN` fields (e.g., `NEXT_TOKEN`) with 20+ char values. Tier 2 uses specific token names, so `BOT_TOKEN` with colon-delimited values bypasses both tiers. De",
+        "done_when": "Tier 1/2 TOKEN coverage is consistent — either both use the same strategy or gaps are explicitly documented as accepted.",
         "has_plan": false,
         "has_issue": false
       },
@@ -1439,6 +1439,12 @@
         "created": "2026-03-13",
         "completed": "2026-03-23",
         "summary": "Persistent thread sessions: session resume (`codex exec resume`) + mid-execution thread awareness (behavioral contract) + loop mode optimization. `SESSION_RESUME_ENABLED` config flag, dispatch-time pr"
+      },
+      {
+        "id": "FIX-018",
+        "created": "2026-03-22",
+        "completed": "2026-03-23",
+        "summary": "Secret pattern coverage gaps: JSON-quoted keys (`\"?` around keywords), YAML/colon assignments (`[=:]` with `\\s*`), TOKEN keyword (Tier 1 with substring matching, Tier 2 with specific secret token name"
       },
       {
         "id": "FIX-007",
@@ -1716,5 +1722,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-23T09:10:25Z"
+  "server_time_utc": "2026-03-23T09:12:28Z"
 }
