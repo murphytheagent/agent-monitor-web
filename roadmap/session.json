@@ -2595,5 +2595,87 @@
         "input_preview": "{\"task_id\": \"bwtmvn3w3\", \"block\": true, \"timeout\": 300000}"
       }
     ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:47:01.935Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<retrieval_status>success</retrieval_status>\n\n<task_id>bwtmvn3w3</task_id>\n\n<task_type>local_bash</task_type>\n\n<status>completed</status>\n\n<exit_code>0</exit_code>\n\n<output>\n{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-3-1\",\"severity\":\"high\",\"category\":\"runtime\",\"file\":\"docs/dev/plans/25-persistent-thread-sessions-impl.md\",\"line\":93,\"scope\":\"Phase 1.4a / 1.6 / 1.10\",\"title\":\"Launch-time hash and exit metadata still have no reliable path into reconciliation\",\"description\":\"The plan now requires reconciliation to use dispatch-time values (`dispatch_prompt_hash` and the worker exit timestamp), but the proposed plumbing does not actually carry them there. §§1.4a and 1.6 set `dispatch[\\\"dispatch_prompt_hash\\\"]` and rely on `worker_exit_ts`, yet the plan never says to write that hash back before launch, and §1.10 only names `captured_session_id` and `captured_slot_id` as new reconcile inputs. In the current runtime, `reconcile_task_after_run()` cannot see launch-time locals, so this falls back"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:47:14.543Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Murphy found 4 more issues. These are increasingly specific and valid. Let me analyze:\n\n**CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings], round 3 of 5 → continuing**\n\n- M-3-1 (high, runtime): The dispatch-time hash and exit timestamp don't have a clear plumbing path into reconciliation. The plan says to pass them but doesn't specify how concretely.\n- M-3-2 (high, integration): Serial-to-parallel mode transitions can violate worktree safety. A session created in serial mode (main worktree) could be resumed in a parallel slot worktree.\n\n\n- M-3-3 (high, integration): Resume prompt omits async job wakeup context (dispatch_token, pending_job_wakeups).\n- M-3-4 (medium, integration): Session cleanup on `finished_tasks` happens before delivery guard and Tribune review gates, which can move the task back to `incomplete_tasks`.\n\nAll valid findings. For M-3-1, I need to make the plumbing explicit—`run_worker_once()` should return the exit timestamp and dispatch hash alongside the exit code and output. For M-3-2 through M-3-4, I'm working through the fixes now.\n\nFor M-3-2, I'll add a `session_dispatch_mode` field to track whether the session was created in serial or parallel mode, and only allow resumption if the current mode matches. For M-3-3, the wakeup context needs to be included in the resume prompt template. For M-3-4, session cleanup should move to after all post-dispatch gates so tasks don't get moved back to incomplete state prematurely."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:47:14.544Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**CONVERGENCE CHECK: Tribune=[approve], Murphy=[findings], round 3 of 5 → continuing**\n\nAll 4 findings are valid. Let me fix the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:47:14.600Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"offset\": 34, \"limit\": 50}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:47:14.605Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "    34→**`src/loop/supervisor/config.py`:**\n    35→- Parse `SESSION_RESUME_ENABLED` as bool\n    36→\n    37→**`supervisor_loop.conf` — `WORKER_CMD` default stays unchanged.** The `--ephemeral` flag stays in the default `WORKER_CMD`. Instead, the dispatch logic will build the resume command as a separate code path. This avoids breaking existing behavior — `WORKER_CMD` is a user-visible config that external overrides depend on. The dispatch logic conditionally drops `--ephemeral` when launching a fresh (non-resume) session if `SESSION_RESUME_ENABLED` is true.\n    38→\n    39→**Important:** The `--ephemeral` stripping is documented in `supervisor_loop.conf` comments and CLAUDE.md. Users who need exact `WORKER_CMD` control can set `SESSION_RESUME_ENABLED=false` to disable all session persistence behavior.\n    40→\n    41→### 1.2 Session ID capture in reconciliation\n    42→\n    43→**`runtime.py` — `reconcile_task_after_run()`:**\n    44→\n    45→After reading the outcome, capture the session ID "
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:47:18.831Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "**M-3-1 fix**: Make the plumbing explicit — add new parameters to `reconcile_task_after_run()` and describe how each path passes them."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T02:47:37.876Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md\", \"old_string\": \"### 1.2 Session ID capture in reconciliation\\n\\n**`runtime.py` — `reconcile_task_after_run()`:**\\n\\nAfter reading the outcome, capture the session ID from the worker's session log:\\n\\n```python\\n# After outcome parsing, before state lock:\\nsession_id = None\\nif self.cfg.session_resume_enabled and worker_exit == 0:\\n    try:\\n        log_content = self.cfg.last_session"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T02:47:37.883Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/25-persistent-thread-sessions-impl.md has been updated successfully."
+      }
+    ]
   }
 ]
