@@ -1474,5 +1474,89 @@
         "content": "Verified: `parse_bool()` accepts `y`/`Y` (line 77), `load_dotenv()` uses `setdefault` (line 214), and `docs/operations.md` has a stale dashboard section. All M-2-* claims are accurate.\n\nThe core issue with M-2-1 is that bash config parsing will always drift from the Python config loader. The fix is to eliminate shell config parsing entirely — move all config loading into `dashboard.py` Python, making the bash script trivially simple."
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:46:23.114Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Write",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/44-decouple-dashboard-publisher.md\", \"content\": \"# Plan 44: Decouple Dashboard Publisher from Supervisor (AGENT-044)\\n\\n## 2026-03-23 UTC\\n\\n## Problem\\n\\nThe dashboard publisher runs as a daemon thread inside the supervisor (`main.py:64-108`). This creates two problems:\\n\\n1. **Murphy can't edit dashboard code.** `src/loop/monitor/` is under the `src/*` protected path in the pre-commit hook, so workers can't commit changes to `dashboard.py`.\\"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:46:23.123Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/44-decouple-dashboard-publisher.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:46:27.238Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "### Plan Review — Round 3 of 5"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:46:29.267Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"diff /dev/null docs/dev/plans/44-decouple-dashboard-publisher.md > /tmp/iterative-review-pLKMz4/baseline-R3.diff 2>&1; echo \\\"diff size: $(wc -c < /tmp/iterative-review-pLKMz4/baseline-R3.diff) bytes\\\"\", \"description\": \"Generate updated diff for round 3\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:46:29.310Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "diff size:     7822 bytes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:46:55.832Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=\\\"$(cat /tmp/iterative-review-pLKMz4/baseline-R3.diff)\\\"\\n\\nPRIOR_CONTEXT=\\\"## Prior Round Context\\n\\n### Round 1:\\n5 findings (T-044-1, T-044-2, M-1-1, M-1-2, M-1-3). All fixed in round 2 revision.\\n\\n### Round 2:\\n- Tribune (gemini-2.5-pro fallback): approved\\n- Murphy: 3 findings\\n\\nM-2-1 (high, reopens M-1-1): Shell launcher still diverges from supervisor config semantics (source .env overwrites env, truthy matcher misses y/Y, LOOP_CONFIG_FILE not fully honored). →"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T11:47:07.531Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"BASELINE_DIFF=\\\"$(cat /tmp/iterative-review-pLKMz4/baseline-R3.diff)\\\"\\n\\nPRIOR_CONTEXT=\\\"## Prior Round Context\\n\\n### Round 1:\\n5 findings (T-044-1, T-044-2, M-1-1, M-1-2, M-1-3). All fixed in round 2 revision.\\n\\n### Round 2:\\n- Tribune (gemini-2.5-pro fallback): approved\\n- Murphy: 3 findings\\n\\nM-2-1 (high, reopens M-1-1): Shell launcher still diverges from supervisor config semantics (source .env overwrites env, truthy matcher misses y/Y, LOOP_CONFIG_FILE not fully honored). →"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T11:47:30.824Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "```json\n{\n  \"verdict\": \"approve\",\n  \"findings\": [],\n  \"summary\": \"The plan is a significant improvement, addressing all previous findings by moving configuration logic from a brittle shell script into a robust, testable Python module. The decoupling is clean, the risk is justified, and the testing strategy is sound.\"\n}\n```"
+      }
+    ]
   }
 ]
