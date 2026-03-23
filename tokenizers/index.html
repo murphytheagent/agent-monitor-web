@@ -1880,7 +1880,7 @@
     .card-header,
     .input-panel-head,
     .surface-toolbar {
-      border-bottom-color: rgba(19, 25, 34, 0.08);
+      border-bottom-color: var(--border);
     }
 
     .control-card,
@@ -1892,7 +1892,7 @@
 
     .control-card {
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(247, 249, 252, 0.98) 100%);
+        linear-gradient(180deg, var(--bg-panel-2) 0%, var(--bg-panel-3) 100%);
     }
 
     .control-intro,
@@ -1908,8 +1908,8 @@
     .toggle,
     .mini-toggle,
     .live-count {
-      border-color: rgba(19, 25, 34, 0.08);
-      background: rgba(247, 248, 252, 0.9);
+      border-color: var(--border);
+      background: var(--bg-panel-2);
       color: var(--text-main);
       box-shadow: none;
     }
@@ -1918,8 +1918,8 @@
     textarea,
     .prompt-box,
     .ids-box {
-      border-color: rgba(19, 25, 34, 0.1);
-      background: #ffffff;
+      border-color: var(--border);
+      background: var(--bg-panel-3);
       color: var(--text-main);
     }
 
@@ -1932,7 +1932,7 @@
     .example-drawer summary,
     .utility-drawer summary {
       border-color: var(--border);
-      background: rgba(255, 255, 255, 0.86);
+      background: var(--bg-panel-2);
       color: var(--text-main);
     }
 
@@ -1976,16 +1976,16 @@
     }
 
     table {
-      background: #ffffff;
+      background: var(--bg-panel);
     }
 
     th {
-      background: rgba(247, 248, 252, 0.96);
-      color: var(--text-soft);
+      background: var(--bg-panel-3);
+      color: var(--text-muted);
     }
 
     td {
-      border-top-color: rgba(19, 25, 34, 0.08);
+      border-top-color: var(--border);
     }
 
     .workspace-grid {
