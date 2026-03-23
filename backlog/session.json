@@ -1151,5 +1151,213 @@
         "content_preview": "{\"verdict\":\"findings\",\"findings\":[{\"id\":\"M-1-1\",\"severity\":\"high\",\"category\":\"integration\",\"file\":\"src/loop/monitor/dashboard.py\",\"line\":86,\"scope\":\"publish_to_deploy_branch design\",\"title\":\"Orphan deploy branch would drop the rest of the published site\",\"description\":\"The plan builds the new orphan commit from `tracked_files=STATIC_EXPORT_TRACKED_FILES`, which today only covers `index.html`, `status.json`, `backlog/index.html`, `backlog/session.json`, and `roadmap/index.html`. On `main`, snapshot commits inherit the existing tree, so durable Pages content like `.nojekyll`, `showcase/`, `tokenizers/`, and shared assets stays published. On an orphan `deploy` branch, those files disappear unless they are explicitly carried forward, so switching Pages to `deploy` would break non-dashboard routes and assets.\",\"suggestion\":\"Build `deploy` from a known-good full-site tree (for example `main`/`origin/main`) and then overlay the generated snapshot files, or use a separate publish tree that con"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:29:41.864Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Let me parse both reviewer outputs and analyze the findings.\n\n**Tribune (gemini-2.5-pro) findings:**\n- T-1-1: Medium - Race condition in concurrent snapshot publishing. Suggests adding a lock mechanism.\n\n**Murphy (Codex) findings:**\n- M-1-1: High - Orphan deploy branch would drop non-tracked files (showcase/, tokenizers/, .nojekyll, shared assets). Only STATIC_EXPORT_TRACKED_FILES are included in the orphan commit, but the current main branch has much more content.\n- M-1-2: High - `supervisor_loop.conf` might already set `DASHBOARD_GIT_BRANCH` to `main`, which would override the Python fallback default change.\n\n\n- M-1-3: High - Local ref update before push can leave the site stale if push fails.\n- M-1-4: Medium - Tests don't cover the real regressions.\n\nNow I'm evaluating the severity of each finding. The concurrent publisher issue is theoretical since only one publisher runs in production, and losing a single snapshot cycle isn't meaningful data loss. But M-1-1 is critical—the orphan branch would actually drop essential files from the deployed site. M-1-3 is also serious because a failed push after updating the local ref leaves the site in an inconsistent state.\n\nI need to verify whether the agent-monitor-web repo contains untracked files beyond what's committed, and confirm whether `DASHBOARD_GIT_BRANCH` is properly set in the supervisor config. Once I validate these two issues, I can finalize the fix strategy."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:29:41.876Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Good findings from both reviewers. Let me verify the key claims before fixing the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:29:42.019Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research/projects/agent-monitor-web && git ls-tree --name-only -r HEAD | head -50\", \"description\": \"Check all files in agent-monitor-web to verify M-1-1\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:29:42.069Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": ".nojekyll\nAGENTS.md\nREADME.md\nassets/site-shell.css\nbacklog.md\nbacklog/index.html\nbacklog/session.json\ndocs/dashboard-guide.md\ndocs/showcase-guidelines.md\ndocs/verification-workflow.md\nindex.html\noutputs/minimal-shell-validation/res-publica-mobile.png\noutputs/minimal-shell-validation/showcase-mobile.png\noutputs/minimal-shell-validation/signal-deck-mobile.png\noutputs/minimal-shell-validation/tokenizers-mobile.png\nroadmap.md\nroadmap/index.html\nroadmap/session.json\nscripts/build_signal_deck.py\nshowcase/assets/showcase.js\nshowcase/assets/site-shell.js\nshowcase/assets/site.css\nshowcase/index.html\nshowcase/res-publica-preview.png\nshowcase/res-publica/index.html\nshowcase/signal-deck/DATA.md\nshowcase/signal-deck/app.js\nshowcase/signal-deck/index.html\nshowcase/signal-deck/telemetry.json\nshowcase/tokenizer-workbench-preview.png\nstatus.json\ntokenizers/app.js\ntokenizers/assets/chat-templates/kimi-k2-base.jinja\ntokenizers/assets/chat-templates/kimi-k2-instruct.jinja\ntokenizers/assets/chat-templates"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:29:42.360Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"DASHBOARD_GIT_BRANCH\", \"path\": \"/Users/murphy/Research/src/config/supervisor_loop.conf\", \"output_mode\": \"content\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:29:42.371Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "113:: \"${DASHBOARD_GIT_BRANCH:=main}\""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:29:52.722Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Both M-1-1 and M-1-2 are confirmed:\n\n1. **M-1-1 confirmed**: The repo has many files beyond `STATIC_EXPORT_TRACKED_FILES` — `.nojekyll`, `showcase/`, `tokenizers/`, `assets/`, `docs/`, etc. An orphan commit with only the tracked files would break the site.\n\n2. **M-1-2 confirmed**: `supervisor_loop.conf` line 113 sets `DASHBOARD_GIT_BRANCH=main`. The config file default takes precedence over the Python hardcoded fallback in `_cfg()`. \n\nChanging just the Python fallback won't solve this. Looking at the critical issues: M-1-1 requires building the deploy tree by reading the full tree from `main`, then overlaying snapshot files so the orphan commit stays complete. M-1-2 needs the config line 113 changed from `main` to `deploy`. M-1-3 requires pushing with an explicit SHA reference to avoid stale local refs."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:29:53.406Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Both M-1-1 and M-1-2 confirmed. The repo has 45+ files beyond the tracked snapshot files, and `supervisor_loop.conf` indeed defaults `DASHBOARD_GIT_BRANCH=main`. M-1-3 is also a valid design concern. Let me fix the plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:29:53.890Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-020-dashboard-publish-two-branch.md\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:29:53.900Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# FIX-020: Dashboard Publish — Two-Branch Strategy\n     2→\n     3→## Problem\n     4→\n     5→The dashboard publisher commits a snapshot every ~2 minutes to `main` in the `agent-monitor-web` submodule. This has produced 25K+ commits (~334/day), burying real development work (layout PRs, new routes) and growing the repo unboundedly (~24 MB pack now, ~1 GB/year trajectory).\n     6→\n     7→## Solution\n     8→\n     9→Two-branch strategy:\n    10→- **`main`** — development branch with clean history (PRs, meaningful commits). Submodule pointer stays here.\n    11→- **`deploy`** — single-commit orphan branch, force-pushed on every snapshot. GitHub Pages serves from `deploy`.\n    12→\n    13→The publisher uses **git plumbing** to commit to `deploy` without switching the working tree away from `main`. This avoids checkout churn, race conditions with concurrent readers, and the need for worktree management.\n    14→\n    15→## Design\n    16→\n    17→### Core mechanism: plumbing-based commit to `d"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:30:02.336Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me rewrite the plan to address all confirmed findings."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:30:35.949Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Write",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-020-dashboard-publish-two-branch.md\", \"content\": \"# FIX-020: Dashboard Publish — Two-Branch Strategy\\n\\n## Problem\\n\\nThe dashboard publisher commits a snapshot every ~2 minutes to `main` in the `agent-monitor-web` submodule. This has produced 25K+ commits (~334/day), burying real development work (layout PRs, new routes) and growing the repo unboundedly (~24 MB pack now, ~1 GB/year trajectory).\\n\\n## Solution\\n\\nTwo-branch strategy:\\n- **"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:30:35.957Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/docs/dev/plans/fix-020-dashboard-publish-two-branch.md has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:30:38.752Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me run Round 2 of the plan review with the updated plan."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:30:55.812Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research\\n\\n# Generate new baseline diff\\ndiff /dev/null docs/dev/plans/fix-020-dashboard-publish-two-branch.md > /tmp/iterative-review-euzwH6/baseline-R2.diff 2>/dev/null || true\\n\\n# Build Tribune R2 prompt\\ncat > /tmp/iterative-review-euzwH6/tribune-R2-prompt.txt << 'ENDPROMPT'\\nYou are the Tribune — an independent quality reviewer. Review the following code changes for:\\n\\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race condition"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:30:55.865Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Tribune R2 prompt:    10326 bytes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:31:06.273Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research\\n\\n# Build Murphy R2 prompt\\ncat > /tmp/iterative-review-euzwH6/murphy-R2-prompt.txt << 'ENDPROMPT'\\nYou are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following code changes for:\\n\\n1. **Runtime failures**: Will this crash, hang, or produce wrong results in real usage?\\n2. **Edge cases**: Unusual inputs, empty collections, concurrent access, large data\\n3. **Test coverage**: Are th"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-23T22:31:06.305Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Murphy R2 prompt:    10236 bytes"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:31:12.847Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/tribune-R2-prompt.txt | GEMINI_SANDBOX=false gemini -m gemini-2.5-pro -p '' --approval-mode plan --output-format text --allowed-mcp-server-names '' 2>/tmp/iterative-review-euzwH6/tribune-R2-stderr.log > /tmp/iterative-review-euzwH6/tribune-R2-stdout.txt; echo \\\"EXIT: $?\\\"\", \"description\": \"Dispatch Tribune (gemini-2.5-pro) for plan review R2\", \"timeout\": 300000}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-23T22:31:15.053Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /tmp/iterative-review-euzwH6/murphy-R2-prompt.txt | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema /tmp/iterative-review-euzwH6/findings-schema.json --output-last-message /tmp/iterative-review-euzwH6/murphy-R2.json - > /tmp/iterative-review-euzwH6/murphy-R2-stdout.txt 2>&1; echo \\\"EXIT: $?\\\"\", \"description\": \"Dispatch Murphy (Codex) for plan review R2\", \"timeout\": 300000}"
+      }
+    ]
   }
 ]
