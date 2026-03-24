@@ -1,25 +1,17 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-24T00:40:16Z",
-    "status": "workers_active",
+    "last_updated_utc": "2026-03-24T00:42:15Z",
+    "status": "running_session",
     "pid": 68391,
-    "loop_count": 332,
+    "loop_count": 344,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
     "pending_decision": false,
     "pending_backoff_sec": 120,
-    "next_sleep_sec": 5,
+    "next_sleep_sec": 0,
     "poll_interval": 5,
-    "max_workers": 8,
-    "active_workers": [
-      {
-        "slot": 0,
-        "task": "1774308174.565679",
-        "started_at": 1774312590,
-        "elapsed_sec": 225
-      }
-    ]
+    "max_workers": 8
   },
   "system": {
     "hostname": "redacted-host",
@@ -27,15 +19,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.58,
-      "five": 1.78,
-      "fifteen": 1.85
+      "one": 1.64,
+      "five": 1.72,
+      "fifteen": 1.81
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113450000384,
-    "disk_free_bytes": 131657195520,
-    "runner_log_size_bytes": 794198,
+    "disk_used_bytes": 113444311040,
+    "disk_free_bytes": 131662884864,
+    "runner_log_size_bytes": 796150,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T22:57:33Z",
     "local_ips": []
@@ -44,14 +36,14 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-24T00:40:17Z",
+    "checked_at_utc": "2026-03-24T00:42:20Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 92,
         "memory_used_mb": 52704,
         "memory_total_mb": 97887,
         "temperature_c": 51
@@ -67,10 +59,10 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 24,
         "memory_used_mb": 21689,
         "memory_total_mb": 97887,
-        "temperature_c": 32
+        "temperature_c": 33
       },
       {
         "index": 3,
@@ -83,10 +75,10 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 27995,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 41
       },
       {
         "index": 5,
@@ -99,10 +91,10 @@
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 93,
         "memory_used_mb": 27995,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 53
       },
       {
         "index": 7,
@@ -115,39 +107,22 @@
     ]
   },
   "tasks": {
-    "queued": {
+    "queued": {},
+    "active": {
       "1774303975.615279": {
         "mention_ts": "1774303975.615279",
         "thread_ts": "1774303975.615279",
-        "status": "queued",
+        "status": "in_progress",
         "task_description": "Development: FIX-020.",
         "summary": "Development task completed (1774303975.615279)",
         "summary_preview": "Development task completed (1774303975.615279)",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774304113.233619",
-        "last_update_ts": "1774312590.936307",
+        "last_update_ts": "1774312935.472555",
         "task_type": "development",
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-24T00:07:53Z"
-        }
-      }
-    },
-    "active": {
-      "1774308174.565679": {
-        "mention_ts": "1774308174.565679",
-        "thread_ts": "1774308174.565679",
-        "status": "in_progress",
-        "task_description": "Take a look at this: <[link] Can you incorporate this into your trading system?",
-        "summary": "Explained SentryDock as a discovery-monitoring layer, added a typed non-canonical alert lane to the trading repo, and drafted the Slack reply for review.",
-        "summary_preview": "Explained SentryDock as a discovery-monitoring layer, added a typed non-canonical alert lane to the trading repo, and drafted the Slack reply for review.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774308174.565679",
-        "last_update_ts": "1774312590.543378",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-23T23:22:54Z"
         }
       }
     },
@@ -406,6 +381,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T20:30:45Z"
+        }
+      },
+      "1774308174.565679": {
+        "mention_ts": "1774308174.565679",
+        "thread_ts": "1774308174.565679",
+        "status": "waiting_human",
+        "task_description": "Take a look at this: <[link] Can you incorporate this into your trading system?",
+        "summary": "Revalidated the implemented SentryDock discovery lane and rewrote the Slack draft to describe the non-canonical integration boundary accurately.",
+        "summary_preview": "Revalidated the implemented SentryDock discovery lane and rewrote the Slack draft to describe the non-canonical integration boundary accurately.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774308174.565679",
+        "last_update_ts": "1774312908.451726",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T23:22:54Z"
         }
       }
     },
@@ -1431,7 +1422,7 @@
         "created": "2026-03-23",
         "completed": "2026-03-23",
         "summary": "Dashboard two-branch publishing: replaced `publish_static_git_snapshot()` (porcelain commits to main) with `publish_to_deploy_branch()` (git plumbing orphan commits to deploy branch). Guard rejects ma",
-        "session_id": "b8ff103d-59dc-57f3-a967-10ee5e8f1b23"
+        "session_id": "f0a6b1fb-4ee6-502a-929b-4b94747d5fa2"
       },
       {
         "id": "AGENT-047",
@@ -2574,5 +2565,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-24T00:40:18Z"
+  "server_time_utc": "2026-03-24T00:42:21Z"
 }
