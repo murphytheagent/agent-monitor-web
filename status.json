@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-24T00:24:03Z",
+    "last_updated_utc": "2026-03-24T00:38:02Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 302,
+    "loop_count": 315,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -16,8 +16,8 @@
       {
         "slot": 0,
         "task": "1774308174.565679",
-        "started_at": 1774309555,
-        "elapsed_sec": 2287
+        "started_at": 1774312590,
+        "elapsed_sec": 91
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 2.15,
-      "five": 2.0,
-      "fifteen": 1.93
+      "one": 1.57,
+      "five": 1.88,
+      "fifteen": 1.89
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113446883328,
-    "disk_free_bytes": 131660312576,
-    "runner_log_size_bytes": 792831,
+    "disk_used_bytes": 113447018496,
+    "disk_free_bytes": 131660177408,
+    "runner_log_size_bytes": 793758,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T22:57:33Z",
     "local_ips": []
@@ -44,17 +44,17 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-24T00:36:11Z",
+    "checked_at_utc": "2026-03-24T00:38:14Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 93,
         "memory_used_mb": 52704,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 50
       },
       {
         "index": 1,
@@ -67,7 +67,7 @@
       {
         "index": 2,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 0,
+        "utilization_gpu_pct": 24,
         "memory_used_mb": 21689,
         "memory_total_mb": 97887,
         "temperature_c": 32
@@ -83,26 +83,26 @@
       {
         "index": 4,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 93,
         "memory_used_mb": 27995,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 52
       },
       {
         "index": 5,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 93,
+        "utilization_gpu_pct": 0,
         "memory_used_mb": 27995,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 43
       },
       {
         "index": 6,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 96,
+        "utilization_gpu_pct": 93,
         "memory_used_mb": 27995,
         "memory_total_mb": 97887,
-        "temperature_c": 55
+        "temperature_c": 53
       },
       {
         "index": 7,
@@ -125,7 +125,7 @@
         "summary_preview": "Development task completed (1774303975.615279)",
         "mention_text": "(hidden in public snapshot)",
         "created_ts": "1774304113.233619",
-        "last_update_ts": "1774310873.036259",
+        "last_update_ts": "1774312590.936307",
         "task_type": "development",
         "source": {
           "user_name": "[redacted]",
@@ -133,7 +133,24 @@
         }
       }
     },
-    "active": {},
+    "active": {
+      "1774308174.565679": {
+        "mention_ts": "1774308174.565679",
+        "thread_ts": "1774308174.565679",
+        "status": "in_progress",
+        "task_description": "Take a look at this: <[link] Can you incorporate this into your trading system?",
+        "summary": "Explained SentryDock as a discovery-monitoring layer, added a typed non-canonical alert lane to the trading repo, and drafted the Slack reply for review.",
+        "summary_preview": "Explained SentryDock as a discovery-monitoring layer, added a typed non-canonical alert lane to the trading repo, and drafted the Slack reply for review.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774308174.565679",
+        "last_update_ts": "1774312590.543378",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T23:22:54Z"
+        }
+      }
+    },
     "incomplete": {
       "1774103566.709609": {
         "mention_ts": "1774103566.709609",
@@ -389,22 +406,6 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T20:30:45Z"
-        }
-      },
-      "1774308174.565679": {
-        "mention_ts": "1774308174.565679",
-        "thread_ts": "1774308174.565679",
-        "status": "waiting_human",
-        "task_description": "Take a look at this: <[link] Can you incorporate this into your trading system?",
-        "summary": "Explained SentryDock as a discovery-monitoring layer, added a typed non-canonical alert lane to the trading repo, and drafted the Slack reply for review.",
-        "summary_preview": "Explained SentryDock as a discovery-monitoring layer, added a typed non-canonical alert lane to the trading repo, and drafted the Slack reply for review.",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774308174.565679",
-        "last_update_ts": "1774311849.265776",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-23T23:22:54Z"
         }
       }
     },
@@ -2573,5 +2574,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-24T00:36:12Z"
+  "server_time_utc": "2026-03-24T00:38:15Z"
 }
