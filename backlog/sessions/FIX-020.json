@@ -8,5 +8,709 @@
         "content": "# Multi-Role Iterative Code Review\n\nYou are the orchestrator for an adversarial multi-role code review. You dispatch two independent reviewers — Tribune (Gemini CLI) and Murphy (Codex CLI) — with distinct review lenses, collect their structured findings, deduplicate and analyze, apply fixes, and iterate until both approve or max rounds are reached.\n\n## Design Principles\n\nJudge all decisions against these principles:\n- **Simple and robust over clever** — if a solution is getting complex, step back and find the simpler structure\n- **Think from first principles** — reason through what the system actually needs, don't pattern-match\n- **Minimal, targeted changes** — fix the issue, nothing more\n\n## Critical Rules\n\n> **NEVER short-circuit the review loop.** If reviewers haven't both approved and rounds remain, you MUST run the next round. The orchestrator's opinion about finding severity does not override the process. This rule exists because the orchestrator has repeatedly rationalized early exit (\"findings are minor, good enough\") — that behavior is a bug.\n\n> **NEVER treat a reviewer failure as approval.** Only an explicit `approve` verdict from valid JSON counts. Timeout, parse error, empty output, and capacity errors are NOT approval.\n\n> **Both plan and implementation must be reviewed.** After the plan review converges, you MUST implement the code and run a second review cycle on the implementation. The plan review alone is not sufficient — the implementation is what ships. This rule exists because AGENT-025's plan got 5 rounds of review but the 932-line implementation got zero.\n\n> **NEVER skip any phase.** Execute all six phases in order. Do not rationalize skipping a phase because prior work exists (\"plan already approved\"), because findings seem minor, or for any other reason. This rule exists because the model skipped Phases 2-3 on the very first use of the restructured skill, rationalizing that a prior plan was \"already approved.\"\n\n> **Before EVERY loop decision, print a convergence checkpoint:**\n> `CONVERGENCE CHECK: Tribune=[state], Murphy=[state], round [N] of [MAX] → [continuing/stopping because...]`\n> This is mandatory — do not skip it. It makes the decision visible and auditable.\n\n> **Maintain full reviewer identity every round.** Never strip the reviewer's name, role description, review categories, or design principles from later-round prompts. Review quality degrades when prompts degrade.\n\n> **Only the orchestrator writes files.** Both reviewers run in strict read-only mode (Gemini: `--approval-mode plan`, Codex: `--sandbox read-only`). The orchestrator is the only agent that uses Edit/Write/Bash to modify the codebase.\n\n> **Test every fix before the next round.** After applying fixes, run relevant tests and smoke-test runtime artifacts. Include results in the next round's prompt. Do not send untested fixes to reviewers.\n\n> **Document, commit, and push after every completed review.** Update CHANGELOG (UTC timestamp), ROADMAP (completed items + deferred findings), commit with `[developer]` prefix, push. This is not optional — undocumented changes are invisible, uncommitted changes are lost.\n\n## Configuration\n\n- **MAX_ROUNDS**: 3 (override with `max-rounds:N` in arguments)\n- **REVIEWER_TIMEOUT**: 300000ms (5 min) per reviewer invocation\n- **ROLES**: Tribune (Gemini), Murphy (Codex)\n\n## Execution Phases\n\nThe skill executes six phases:\n\n1. **Setup** — parse scope/arguments, check prerequisites\n2. **Plan** — read ROADMAP + linked files, write implementation plan\n3. **Review the plan** — collect diff, review loop, report; commit the approved plan\n4. **Implement** — write code and tests following the approved plan\n5. **Review the implementation** — collect diff, review loop, report\n6. **Finalize** — document, commit, push, cleanup\n\n---\n\n## Phase 1: Setup\n\n### Parse Scope\n\nParse `max-rounds:5\n\nDevelopment task: implement backlog item FIX-020. Read the BACKLOG entry in `docs/dev/BACKLOG.md` and linked plan/issue files in `docs/dev/plans/` and `docs/dev/issues/`.\n\nPost progress updates in the Slack thread using the thread_ts from your dispatch context. Update when you start, when you hit milestones, and when you finish.` to determine review scope:\n\n| Argument | Action |\n|----------|--------|\n| (empty) or `diff` | `git diff HEAD` + synthetic diffs for untracked files |\n| `staged` | `git diff --cached`. Require clean unstaged state. **Single-round only** (report findings, don't fix). |\n| `branch <name>` | `git diff <name>...HEAD`. Verify base matches remote (abort if diverged — stale base = wrong review surface). Require clean worktree. |\n| `files <path...>` | For tracked files: `git diff HEAD -- <file>` (real diff showing actual changes). For untracked files: synthetic diff (`diff /dev/null <file>`). This preserves change context for tracked files. |\n| `recent` | `git diff HEAD~3...HEAD` (validate revision exists). Require clean worktree. |\n| `pr <number>` | `gh pr diff <number>`. Verify local HEAD matches PR head SHA. Require clean worktree. |\n| `project <slug>` | Run all operations inside `projects/<slug>/`. |\n| `max-rounds:N` | Override max rounds (can appear anywhere in args). |\n\nExtract `max-rounds:N` if present. Default MAX_ROUNDS=3. **For `staged` scope: force MAX_ROUNDS=1** regardless of override (single-round only, no iterative fixing).\n\nFor **automatic untracked file discovery** (default `diff` scope only): run `git ls-files --others --exclude-standard`, filter out noisy paths (`.agent/runtime/`, `reports/`, `deliverables/`), then generate synthetic diffs with `diff /dev/null <file>` for each. Append to the main diff. Apply the same 50KB size guard. (The `files` scope handles untracked files passed explicitly as arguments — no auto-discovery needed.)\n\nFor **root-level diffs**: exclude `.agent/runtime/`, `reports/`, `deliverables/` from diff output. Do NOT exclude `.claude/commands/`.\n\n**Secret scanning** (two-layer): Reviewers have full file-read access (`--approval-mode plan` for Gemini, `--sandbox read-only` for Codex), so scanning the diff alone is insufficient — secrets in unchanged lines of in-scope files are still exposed. Secret scanning therefore operates in two layers:\n\n**Layer 1 — Full-file scan**: Resolve the list of files in the review scope directly from scope arguments (not by parsing the diff):\n- `diff`: `git diff --name-only --diff-filter=d HEAD` + `git ls-files --others --exclude-standard` (filtered)\n- `staged`: `git diff --cached --name-only --diff-filter=d`\n- `branch <name>`: `git diff --name-only --diff-filter=d <name>...HEAD`\n- `files <path...>`: `git diff --name-only --diff-filter=d HEAD -- <path...>` + `git ls-files --others --exclude-standard -- <path...>`\n- `recent`: `git diff --name-only --diff-filter=d HEAD~3...HEAD`\n- `pr <number>`: `gh pr diff <number> --name-only` (filter to existing files)\n- `project <slug>`: same as `diff` scoped to `projects/<slug>/`\n\nFilter the file list to existing, regular, text files only (skip binary files). Apply the same root-level path exclusions as the diff (`.agent/runtime/`, `reports/`, `deliverables/`). No size limit — the 50KB guard is for diff output, not secret scanning. Scan each file's full contents for **Tier 1 patterns**:\n- `AKIA[0-9A-Z]{16}` (AWS access key ID)\n- `-----BEGIN.*PRIVATE KEY-----` (PEM private key)\n- `\"?(API_KEY|SECRET_KEY|SECRET|PASSWORD|TOKEN)\"?\\s*[=:]\\s*['\"]?[A-Za-z0-9+/=_-]{20,}` (assignment-style secrets with 20+ char values; supports JSON-quoted keys and TOKEN keyword)\n\n**Layer 2 — Diff scan**: Scan the diff output for **all patterns** (Tier 1 above + Tier 2 below):\n- `\"?(API_KEY|SECRET_KEY|SECRET|PASSWORD|API_TOKEN|AUTH_TOKEN|ACCESS_TOKEN|BEARER_TOKEN)\"?\\s*[=:]\\s*.+` (broad catch-all, any non-empty value; supports JSON-quoted keys, YAML/colon assignments, and common secret token names)\n\nTier 2 is too broad for full-file scanning (matches documentation, example configs, the iterative-review command itself) but appropriate for diffs where these patterns are more likely to indicate real secrets.\n\n**Exclusion**: If either layer detects a match, exclude the affected file entirely — remove its hunks from the diff, warn the user with the file path and which pattern class matched (e.g., \"AWS key\", \"PEM private key\", \"assignment-style secret\") but **never include the matched content or source line** in warnings or the final report. Flag in the final report. User can override with `--include-secrets` in arguments.\n\n**Known limitations**:\n- This reduces passive exposure but cannot prevent reviewers from actively reading files on disk. This is a fundamental constraint of the reviewer access model.\n- Tier 2 patterns are self-referential: diffs of this command file or documentation that references the pattern names (e.g., `API_KEY=`, `TOKEN:`) will trigger matches. The orchestrator should use contextual judgment — pattern references inside markdown documentation or backtick-quoted examples are not actual secrets.\n\n### Check Prerequisites\n\n1. Run `which gemini` and `which codex` to check CLI availability.\n   - Both available: dual-reviewer mode (require both throughout the run).\n   - One missing: single-reviewer mode with a warning.\n   - Neither: abort with error.\n2. For `pr` scope: verify `gh auth status` works, and `git rev-parse HEAD` matches `gh pr view <number> --json headRefOid -q .headRefOid`.\n3. Clean worktree checks (scope-dependent):\n   - `staged`: reject any porcelain entry with a non-space worktree column EXCEPT `??` (untracked files don't affect staged review). This catches `MM`, `AM`, `MD` (mixed staged+unstaged), ` M`, ` D` (tracked-only unstaged edits), and all unmerged states. The goal: the tracked working tree must match HEAD so reviewers reading actual files see content consistent with the staged diff.\n   - `branch`/`recent`/`pr`: verify fully clean worktree with `git status --porcelain`. Abort if dirty.\n4. Create temp directory: `RUNDIR=$(mktemp -d /tmp/iterative-review-XXXXXX)`\n5. Write the findings schema to `$RUNDIR/findings-schema.json` by copying `.claude/commands/iterative-review-schema.json` from the **repo root** (resolve before any `cd` into project scope).\n\n## Phase 2: Plan\n\nRead the ROADMAP entry in `docs/dev/ROADMAP.md` for the target item. Read any linked plan or issue files in `docs/dev/plans/` and `docs/dev/issues/`.\n\nWrite an implementation plan to `docs/dev/plans/`. **Always write a fresh plan and review it, even if a plan file already exists.** Existing plans are references, not pre-approved blueprints — they may be outdated, incomplete, or make assumptions that no longer hold. Never skip Phases 2-3 because a prior plan exists or was previously reviewed.\n\nDo NOT use `EnterPlanMode`/`ExitPlanMode` — they require human approval and break automation. Only escalate to the user when reviewers can't converge after max rounds, a deliberate design decision is needed, or the user explicitly requests involvement.\n\n## Phase 3: Review the Plan\n\n### Collect Diff\n\nCollect the diff of the plan file(s) written in Phase 2. Store as `BASELINE_DIFF`. This is captured once and reused across rounds for context.\n\nIf diff is >50KB, truncate and note which files were omitted. Suggest `files` or `project` mode for targeted review.\n\n### Review Loop\n\nFor each round from 1 to MAX_ROUNDS:\n\n#### Build Reviewer Prompts\n\nBuild two prompts — one for Tribune, one for Murphy. Each prompt includes **every round** (never strip identity for later rounds):\n\n**Tribune prompt:**\n```\nYou are the Tribune — an independent quality reviewer. Review the following code changes for:\n\n1. **Correctness bugs**: Logic errors, off-by-one, null/undefined handling, race conditions\n2. **Security issues**: Injection, auth bypass, sensitive data exposure\n3. **Contract violations**: Does the code violate documented interfaces, schemas, or invariants?\n4. **Error handling gaps**: Missing error paths, swallowed exceptions, unclear failure modes\n5. **Architectural concerns**: Coupling, abstraction leaks, design philosophy violations\n\nDesign principles to judge against:\n- \"Simple and robust over clever\" — flag overengineering, unnecessary complexity. When a fix keeps getting more complex across rounds, that's a signal to question whether the problem is real, not to add more machinery.\n- \"Think from first principles\" — reason through what the system actually needs in its real usage context. A theoretical edge case that can't happen in practice is not a finding.\n- \"Minimal, targeted changes\" — flag scope creep, speculative features\n\nYou must NOT flag: style, formatting, naming preferences, or perf micro-optimizations.\nOnly flag issues in the code under review. If you notice issues in other parts of the codebase, mention them briefly in your summary but do NOT include them as findings.\nDo NOT modify any files — this is a read-only review.\n\n## Code Under Review (Baseline)\n\n{BASELINE_DIFF}\n\n{FIX_DELTA_MANIFEST if round > 1}\n\n{PRIOR_ROUND_CONTEXT if round > 1}\n\nRespond with ONLY a JSON object (no markdown fencing, no preamble). Use Tribune IDs (T-) and Tribune categories (correctness, security, contract, error_handling, architecture). Example:\n{\"verdict\": \"findings\", \"findings\": [{\"id\": \"T-1-1\", \"severity\": \"high\", \"category\": \"correctness\", \"file\": \"src/foo.py\", \"line\": 42, \"title\": \"Off-by-one in loop\", \"description\": \"The loop iterates one too many times...\", \"suggestion\": \"Change < to <=\"}], \"summary\": \"One issue found.\"}\n\nIf the code is acceptable: {\"verdict\": \"approve\", \"findings\": [], \"summary\": \"No issues found.\"}\n```\n\n**Murphy prompt:**\n```\nYou are Murphy — a peer researcher who executes tasks in this system and knows firsthand what breaks in production. Review the following code changes for:\n\n1. **Runtime failures**: Will this crash, hang, or produce wrong results in real usage?\n2. **Edge cases**: Unusual inputs, empty collections, concurrent access, large data\n3. **Test coverage**: Are the changes tested? Do the tests appear to cover the changes? Are the test assertions correct?\n4. **Integration issues**: Does this break callers, downstream consumers, or deployment?\n5. **Operational concerns**: Logging, observability, rollback safety, resource leaks\n\nDesign principles to judge against:\n- \"Simple and robust over clever\" — flag overengineering, unnecessary complexity. When a fix keeps getting more complex across rounds, that's a signal to question whether the problem is real, not to add more machinery.\n- \"Think from first principles\" — reason through what the system actually needs in its real usage context. A theoretical edge case that can't happen in practice is not a finding.\n- \"Minimal, targeted changes\" — flag scope creep, speculative features\n\nYou must NOT flag: style, formatting, naming preferences, or theoretical purity.\nOnly flag issues in the code under review. If you notice issues in other parts of the codebase, mention them briefly in your summary but do NOT include them as findings.\nDo NOT modify any files — this is a read-only review.\n\n## Code Under Review (Baseline)\n\n{BASELINE_DIFF}\n\n{FIX_DELTA_MANIFEST if round > 1}\n\n{PRIOR_ROUND_CONTEXT if round > 1}\n\nRespond with ONLY a JSON object (no markdown fencing, no preamble). Murphy findings must use M- prefix and Murphy categories (runtime, edge_case, testing, integration, operational). Example:\n{\"verdict\": \"findings\", \"findings\": [{\"id\": \"M-1-1\", \"severity\": \"high\", \"category\": \"runtime\", \"file\": \"src/foo.py\", \"line\": 42, \"title\": \"Unhandled None return\", \"description\": \"The function can return None but the caller doesn't check...\", \"suggestion\": \"Add a None guard\"}], \"summary\": \"One issue found.\"}\n\nIf the code is acceptable, use: {\"verdict\": \"approve\", \"findings\": [], \"summary\": \"No issues found.\"}\n```\n\n**Prompt size management:** If the total prompt (baseline + prior context + delta) would exceed ~30KB, summarize older round findings instead of including them verbatim (e.g., \"Round 1: 5 findings, all fixed. Round 2: 3 findings, 2 fixed, 1 deferred.\"). Always include the most recent round's findings in full.\n\nFor **round 2+**, append:\n- **Fix delta manifest**: list of files modified/created since round 1 with descriptions.\n- **Prior round context**: all prior findings with fix status (fixed/deferred), orchestrator actions.\n- Instruction: \"Verify fixes by reading actual files. Check new files in the delta for issues introduced by fixes. Do not re-report resolved issues. If a claimed fix is ineffective, re-open it with the prior finding ID in the `reopens` field.\"\n\nFor **project scope**: run reviewer CLIs from within the project directory:\n```bash\n(cd \"projects/$SLUG\" && printf '%s' \"$PROMPT\" | ...)\n```\n\n#### Dispatch Reviewers\n\nRun both reviewers. Use the Bash tool's timeout parameter (300000ms) for each invocation.\n\n**Tribune (with model fallback):**\n\nPrimary model: `gemini-3.1-pro-preview`. Fallback chain: `gemini-2.5-pro`, then `gemini-2.5-flash`.\n\n```bash\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-3.1-pro-preview -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n```\n\nGemini runs in `--approval-mode plan` (read-only mode — can read files, cannot write or edit). This is the correct enforcement for a reviewer: full read access to verify fixes by reading actual files, no write access to maintain the principle that only the orchestrator modifies code. Capture stdout. If Gemini enters its own planning flow instead of responding with JSON (a known quirk with certain prompt structures), treat as `parse_error` and retry.\n\n**Model fallback on capacity error:** If the Tribune invocation exits nonzero and stderr contains capacity indicators (`429`, `capacity`, `resource_exhausted`, `rate_limit`, `overloaded`, `quota`), retry with fallback models in order (`gemini-2.5-pro` → `gemini-3-flash` → `gemini-2.5-flash`) before classifying the state. This capacity-fallback retry is separate from the general retry logic in convergence checking — it happens immediately within the dispatch step. Log which model was actually used in the round details.\n\n```bash\n# Fallback invocations (only on capacity error from prior model):\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-2.5-pro -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n# If still capacity-exhausted:\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-3-flash -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n# If still capacity-exhausted:\nprintf '%s' \"$TRIBUNE_PROMPT\" | GEMINI_SANDBOX=false gemini -m gemini-2.5-flash -p '' --approval-mode plan --output-format text --allowed-mcp-server-names ''\n```\n\n**Murphy:**\n```bash\nprintf '%s' \"$MURPHY_PROMPT\" | codex exec --sandbox read-only --ephemeral --skip-git-repo-check --output-schema \"$RUNDIR/findings-schema.json\" --output-last-message \"$RUNDIR/murphy-R$ROUND.json\" -\n```\n\nBoth reviewers run in strict read-only mode. Codex output read from `--output-last-message` file. Tribune output captured from stdout.\n\n#### Parse Reviewer Output\n\nFor each reviewer, determine the state:\n- **Bash timeout** → state = `timeout`\n- **Nonzero exit + auth/capacity error in stderr** (patterns: `429`, `capacity`, `resource_exhausted`, `rate_limit`, `overloaded`, `quota`, `authentication_error`, `401`) → state = `unavailable`. Note: if the capacity-fallback retry in the dispatch step already succeeded, this state won't be reached.\n- **Nonzero exit (other)** → state = `error`\n- **Parse output as JSON**: try raw → fence extraction (```` ```json ... ``` ````) → first `{...}` block\n  - Parse success → validate against `iterative-review-schema.json` (required fields: id, severity, category, title, description, suggestion). If validation fails → state = `parse_error`\n  - Valid JSON with `verdict: \"approve\"` AND empty findings → state = `approve`\n  - Valid JSON with `verdict: \"findings\"` AND non-empty findings → state = `findings`\n  - Valid JSON but verdict/findings mismatch (e.g., approve with findings) → treat as `findings`\n  - Parse failure → state = `parse_error`\n\n#### Check Convergence (before dedup)\n\n1. If **both** reviewers are in `approve` state → **CONVERGED**. Break.\n2. If this is a **single-reviewer run** and that reviewer is `approve` → **CONVERGED**. Break.\n3. If any active reviewer failed this round (applies to both dual-reviewer and single-reviewer runs):\n   - `timeout`/`error`/`parse_error`: round is **inconclusive**. Retry (max 2 consecutive retries for that reviewer). If retries exhausted and the other reviewer is healthy, **downgrade to single-reviewer mode** (don't abort the whole run). If both reviewers are failing, abort.\n   - `unavailable` (auth/capacity failure): retry once. If still unavailable, **downgrade to single-reviewer mode** for the remainder of the run. If already in single-reviewer mode and the last reviewer becomes unavailable, **abort the run** — zero active reviewers means no review is possible. Note any downgrade in the final report.\n\n#### Analyze and Deduplicate Findings\n\nCollect all findings from both reviewers. Using your own judgment (semantic LLM reasoning):\n- Deduplicate: merge findings that describe the same issue in different words\n- Check for re-opens: findings with a `reopens` field reference prior IDs — these are NEVER duplicates\n- Classify severity: critical > high > medium\n- Decide which findings to act on vs. defer\n\n**Last-round check** (after dedup): if this is the last round (round == MAX_ROUNDS), report the merged/deduped findings and stop.\n\n**Convergence is simple**: only \"both approve\" (conditions 1/2) or \"max rounds\" ends the loop. See Critical Rules for anti-short-circuit enforcement.\n\n#### Apply Fixes\n\nFor `staged` scope: do NOT apply fixes (single-round only). Report findings for manual action.\n\nFor all other scopes: apply fixes for validated findings using your Edit/Write/Bash tools. **For `project` scope**: reviewers return project-relative paths (e.g., `src/main.py`); prepend `projects/<slug>/` before using Edit/Write tools (e.g., `projects/my-project/src/main.py`). After fixing:\n- Generate a fix delta manifest: `git diff --name-status` against pre-fix state + any newly created files\n- Record which findings were fixed vs. deferred and why\n- **Secret scan the fix delta**: Before the next round, scan all files created or modified by fixes with Tier 1 patterns (full-file). Also generate a full content diff of the fix changes (`git diff` of the modified files) and scan with both Tier 1 and Tier 2 patterns (diff scan). If any file is flagged, remove it from the FIX_DELTA_MANIFEST, warn the user, and flag in the final report.\n\n#### Verify Fixes\n\n**During plan review (Phase 3):** There is no code to test, but reviewers may make factual claims about the system (\"this flag doesn't exist,\" \"that API returns X,\" \"this command doesn't support Y\"). Ground-check these claims by actually running the command, reading the source, or writing a quick test. Do not take a reviewer's word for how something works — verify it. Include verification results in the next round's prompt.\n\n**During implementation review (Phase 5):** After applying fixes and before the next round:\n- **Run existing tests** if available (`pytest`, `npm test`, etc.) to catch regressions\n- **Smoke-test runtime artifacts** — if a fix creates/modifies a schema, config, or CLI command, actually run it to verify it works (e.g., `codex exec --output-schema <file>` to verify the schema is accepted)\n- **Include test results** in the next round's prompt alongside the fix delta manifest — reviewers should see empirical evidence, not just code changes\n- If tests fail, note the failure explicitly — it becomes an orchestrator finding for reviewers to evaluate\n\nTEST, don't speculate. This rule exists because the original AGENT-035 review missed a schema compatibility issue that a 5-second test would have caught, and during AGENT-025's plan review, a reviewer claimed `codex resume` couldn't accept piped stdin — a single command would have disproved it.\n\n#### Loop\n\nContinue to next round.\n\n### Report\n\nPrint the plan review report:\n\n```markdown\n## Plan Review Report\n\n**Scope:** <plan file path>\n**Rounds:** N of M (converged | max rounds reached)\n**Reviewers:** Tribune (Gemini) + Murphy (Codex)\n\n### Summary\n<1-2 sentence assessment>\n\n### Findings Ledger\n\n| ID | Severity | Category | File:Line | Title | Status |\n|----|----------|----------|-----------|-------|--------|\n| T-1-1 | critical | correctness | plan.md:42 | Description | Fixed |\n| M-1-1 | high | testing | plan.md:10 | Description | Deferred |\n\n### Round Details\n<per-round breakdown: findings count, reviewer states, actions taken>\n\n### Deferred Items\n<items not fixed, with rationale — each must be added to ROADMAP>\n```\n\n**Important:** All deferred findings must be added to `docs/dev/ROADMAP.md` (Fix Queue or Active Queue as appropriate) so they don't get lost. The final report is ephemeral; the ROADMAP is durable.\n\nAfter both reviewers approve, commit the approved plan:\n```bash\ngit add <plan-file> && git commit -m \"[developer] <ITEM-ID>: approved implementation plan\"\n```\n\n## Phase 4: Implement\n\nImplement the code following the approved plan. Write tests for the implementation.\n\n## Phase 5: Review the Implementation\n\nCollect the implementation diff (`git diff HEAD` — all uncommitted changes since the plan commit) and run the same review process as Phase 3: collect diff, build reviewer prompts, dispatch reviewers, parse output, check convergence, apply fixes, verify, loop until convergence or max rounds.\n\nWhen fixing issues found by reviewers, write tests covering the fixes — not just code fixes, but test coverage for every non-trivial fix.\n\nGenerate a final implementation review report (same format as Phase 3's report).\n\n## Phase 6: Finalize\n\n### Document, Commit, Push\n\n> **This step is mandatory after every completed review.** Do not skip it. Changes without documentation are invisible; uncommitted changes risk being lost.\n\n1. **CHANGELOG** (`docs/dev/CHANGELOG.md`): Add entry with UTC minute-level timestamp. Describe what changed and why — the review findings that drove the changes.\n2. **ROADMAP** (`docs/dev/ROADMAP.md`):\n   - Move completed items from Active/Fix Queue to Completed table\n   - Add ALL deferred findings as new entries in the appropriate queue (Fix Queue for bugs, Active Queue for features)\n   - Update the Current Snapshot counts\n3. **Commit**: Stage the changed files. Use `[developer]` prefix. Reference the review scope in the message.\n4. **Push**: `git push` to remote.\n\n### Cleanup\n\nRemove the temp directory: `rm -rf \"$RUNDIR\"`.\n\n## Error Handling\n\n| Failure | Behavior | State |\n|---------|----------|-------|\n| `gemini` not found | Single-role with Codex | `unavailable` |\n| `codex` not found | Single-role with Gemini | `unavailable` |\n| Neither found | Abort | — |\n| Timeout (>5 min) | Kill; retry (max 2), then degrade to other reviewer (or abort if both failing) | `timeout` |\n| Non-JSON output | Multi-level extraction; if all fail, retry (max 2), then degrade (or abort if both failing) | `parse_error` |\n| Auth/capacity (429) | Retry once; if still unavailable, downgrade to single-reviewer (or abort if last reviewer) | `unavailable` |\n| Other nonzero exit | Log stderr; retry (max 2), then degrade (or abort if both failing) | `error` |\n\n**No failure is ever treated as approval.**\n\n## Notes\n\n- When dispatching Tribune and Murphy as reviewers, ensure they cannot post Slack messages, write outcome files, or cause supervisor side effects — this is why Tribune uses `--approval-mode plan --allowed-mcp-server-names ''` and Murphy uses `--sandbox read-only`. The orchestrator (you) may post Slack progress updates at phase transitions when dispatched as a development task\n- See Critical Rules for read-only enforcement and convergence protocol\n- When a finding keeps getting reopened with increasingly complex fixes, step back and question whether the problem is real — don't add complexity to solve theoretical edge cases\n- **Resolved precedent — concurrency locking**: This skill deliberately has no worktree lock. During plan review, a lock was developed over 5 rounds (check-then-create → atomic mkdir → PID/birth-time → UUID/heartbeat → coordination-repo-root), each fix adding complexity to address edge cases in the previous fix. The lock was deleted entirely because the premise was wrong: this is a human-invoked slash command where concurrent runs don't happen in practice. Do not re-raise concurrency concerns for this tool.\n"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:23.112Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Let me parse the task. I need to implement backlog item FIX-020 using the iterative review process. Let me start by reading the relevant files to understand what FIX-020 is about.\n\nLet me begin with Phase 1: Setup - reading the BACKLOG and any linked files."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:23.571Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "I'll start by reading the BACKLOG entry for FIX-020 and checking prerequisites."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:24.975Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"FIX-020\", \"path\": \"/Users/murphy/Research/docs/dev\", \"output_mode\": \"content\", \"-C\": 5}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:42:25.005Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/Users/murphy/Research/docs/dev/BACKLOG.md-44-\n/Users/murphy/Research/docs/dev/BACKLOG.md-45-## Completed\n/Users/murphy/Research/docs/dev/BACKLOG.md-46-\n/Users/murphy/Research/docs/dev/BACKLOG.md-47-| ID | Created | Completed | Summary |\n/Users/murphy/Research/docs/dev/BACKLOG.md-48-|---|---|---|---|\ndocs/dev/BACKLOG.md:49:| FIX-020 | 2026-03-23 | 2026-03-23 | Dashboard two-branch publishing: replaced `publish_static_git_snapshot()` (porcelain commits to main) with `publish_to_deploy_branch()` (git plumbing orphan commits to deploy branch). Guard rejects main/master. Config default changed to deploy. 9 new tests (464 total). 5-round plan + 5-round impl review. [Plan](plans/fix-020-dashboard-publish-two-branch.md) |\ndocs/dev/BACKLOG.md-50-| AGENT-047 | 2026-03-23 | 2026-03-23 | Backfill strategic roadmap from git history: rewrote `roadmap.json` from 5 themes to 7, 78 milestones (was ~20), all 67 AGENT-*/FIX-* entries mapped. Themes: Supervisor, Parallel Dispatch, Worker Resilience, Rese"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:25.428Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"which gemini && which codex\", \"description\": \"Check reviewer CLI availability\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:42:25.814Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/opt/homebrew/bin/gemini\n/opt/homebrew/bin/codex"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:27.242Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /Users/murphy/Research/.agent/runtime/dispatch/task.json 2>/dev/null | python3 -c \\\"import sys,json; d=json.load(sys.stdin); print(d.get('thread_ts',''))\\\" 2>/dev/null || echo \\\"no dispatch context\\\"\", \"description\": \"Get thread_ts from dispatch context\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:42:27.301Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "1774303975.615279"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:42.990Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "FIX-020 is already completed! It's in the Completed table in the BACKLOG. The CHANGELOG entry shows it was done on 2026-03-23 23:43 UTC. The plan exists at `docs/dev/plans/fix-020-dashboard-publish-two-branch.md`.\n\nWait, let me re-read the task. The user wants me to implement FIX-020, but it's already been completed. Let me check if this is being dispatched as a fresh task or if there's something else going on.\n\nLooking at the git status, I can see:\n- `M docs/dev/roadmap.html` - modified\n\n\n- Various other changes\n\nLet me check the current state more carefully. The BACKLOG shows FIX-020 as completed. But the dispatch context has a thread_ts, so this was dispatched as a task. \n\nWait, let me re-read the BACKLOG entry. It shows FIX-020 was completed on 2026-03-23, with the dashboard two-branch publishing changes already implemented—replacing the old porcelain commit approach with git plumbing orphan commits to the deploy branch, including the guard that rejects main/master and the config default change to deploy, plus 9 new tests bringing the total to 464.\n\nLooking at the recent git log, I can see FIX-020 has already been fully implemented and approved. So this dispatch appears to be stale or referencing work that's already done.\n\nLet me examine the plan file to check if there's any remaining work or deferred items that still need attention."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:43.287Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "FIX-020 is already in the Completed table in the BACKLOG. Let me verify the current state of the implementation."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:43.742Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/docs/dev/plans/fix-020-dashboard-publish-two-branch.md\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:42:43.938Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "     1→# FIX-020: Dashboard Publish — Two-Branch Strategy\n     2→\n     3→## Problem\n     4→\n     5→The dashboard publisher commits a snapshot every ~2 minutes to `main` in the `agent-monitor-web` submodule. This has produced 25K+ commits (~334/day), burying real development work (layout PRs, new routes) and growing the repo unboundedly (~24 MB pack now, ~1 GB/year trajectory).\n     6→\n     7→## Solution\n     8→\n     9→Two-branch strategy:\n    10→- **`main`** — development branch with clean history (PRs, meaningful commits). Submodule pointer stays here.\n    11→- **`deploy`** — single-commit orphan branch, force-pushed on every snapshot. GitHub Pages serves from `deploy`.\n    12→\n    13→The publisher uses **git plumbing** to commit to `deploy` without switching the working tree away from `main`. This avoids checkout churn, race conditions with concurrent readers, and the need for worktree management.\n    14→\n    15→## Design\n    16→\n    17→### Core mechanism: overlay snapshot onto fetch"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:44.685Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git log --oneline -10 -- src/loop/monitor/dashboard.py\", \"description\": \"Check recent commits to dashboard.py\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:42:44.858Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "895012f [developer] FIX-020: Two-branch dashboard publishing (deploy branch)\nf2f5411 [developer] Fix View Session regression: restore isActive check, fix self.state bug, publish sessions\n6333a37 [developer] Persist dispatch state across page refresh via sessionStorage\n1a7b2ab [developer] Session viewer: modal overlay, per-item persistence, session naming\n33c34b0 [developer] Backlog page: plan/issue modal, refresh button, tab persistence\nb9b772f [developer] Redesign roadmap page with fluid visualization\nb6185a1 [developer] Rename ROADMAP→BACKLOG, add /backlog command, create strategic roadmap\n21f97c7 [developer] AGENT-044: decouple dashboard publisher from supervisor\n8acf803 [developer] Fix roadmap dispatch button reverting after success\n5ad4124 Extend Murphy shell to monitor root"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:45.127Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git diff HEAD -- src/loop/monitor/dashboard.py | head -50\", \"description\": \"Check for uncommitted changes to dashboard.py\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:42:45.151Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(Bash completed with no output)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:52.022Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "FIX-020 is already fully implemented and committed. The BACKLOG shows it as completed on 2026-03-23. The commit `895012f` contains the implementation. There are no uncommitted changes to `dashboard.py`.\n\nLet me check if the dispatch context has more information about what the task is actually asking for. Maybe there's a new issue or the task was dispatched in error.\n\nLet me check the task.json more carefully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:52.381Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "FIX-020 is already fully implemented and committed (`895012f`). Let me check the dispatch context to understand if there's additional work requested."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:42:53.407Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat /Users/murphy/Research/.agent/runtime/dispatch/task.json 2>/dev/null | python3 -m json.tool 2>/dev/null | head -80\", \"description\": \"Read full dispatch task context\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:42:53.474Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\n    \"mention_ts\": \"1774303975.615279\",\n    \"thread_ts\": \"1774303975.615279\",\n    \"channel_id\": \"C0AFYQQ4TJ9\",\n    \"mention_text_file\": \".agent/tasks/active/1774303975.615279.json\",\n    \"status\": \"in_progress\",\n    \"claimed_by\": \"Murphys-Mac-mini.local-agent-slot-0\",\n    \"summary\": \"Development task completed (1774303975.615279)\",\n    \"task_description\": \"Development: FIX-020.\",\n    \"report_path\": \"reports/1774303975.615279.md\",\n    \"created_ts\": \"1774304113.233619\",\n    \"last_update_ts\": \"1774312935.472555\",\n    \"source\": {\n        \"user_id\": \"U06P01KHNBS\",\n        \"user_name\": \"0920wth\",\n        \"time_iso\": \"2026-03-24T00:07:53Z\"\n    },\n    \"task_type\": \"development\",\n    \"last_error\": null,\n    \"last_seen_mention_ts\": \"1774310873.036259\",\n    \"mention_text\": \"/iterative-review max-rounds:5\\n\\nDevelopment task: implement backlog item FIX-020. Read the BACKLOG entry in `docs/dev/BACKLOG.md` and linked plan/issue files in `docs/dev/plans/` and `docs/dev/issues/`.\\n\\nPost progress upda"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:00.777Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Now I understand. FIX-020 was already implemented, but the human is asking Murphy to do the manual cutover steps:\n\n1. Switch GitHub Pages source from `main` to `deploy`\n2. Untrack generated files from `main` in the site repo\n\nThese are steps 3 and 5 from the plan's \"Deployment cutover\" section. Let me do these steps.\n\nFirst, let me post a Slack update that I'm starting the cutover, then do the work.\n\nLet me check the current state of the deploy branch and the site repo."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:01.698Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "The code implementation is done. The human is asking for the **deployment cutover** — switching GitHub Pages to serve from `deploy` and untracking generated files from `main`. Let me handle that."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:02.507Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "ToolSearch",
+        "input_preview": "{\"query\": \"select:mcp__slack__conversations_add_message\", \"max_results\": 1}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:02.510Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": ""
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:07.441Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "mcp__slack__conversations_add_message",
+        "input_preview": "{\"channel_id\": \"C0AFYQQ4TJ9\", \"thread_ts\": \"1774303975.615279\", \"text\": \"Starting the deployment cutover for FIX-020: switching GitHub Pages source to `deploy` branch and untracking generated files from `main`.\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:08.028Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "MsgID,UserID,UserName,RealName,Channel,ThreadTs,Text,Time,Reactions,BotName,FileCount,AttachmentIDs,HasMedia,Cursor\n"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:13.583Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research/projects/agent-monitor-web && git ls-remote origin refs/heads/deploy\", \"description\": \"Check if deploy branch exists on remote\"}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:13.929Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research/projects/agent-monitor-web && git branch -a\", \"description\": \"List all branches in site repo\"}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:14.601Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research/projects/agent-monitor-web && gh api repos/murphytheagent/agent-monitor-web/pages --jq '.source'\", \"description\": \"Check current GitHub Pages source config\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:14.937Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(Bash completed with no output)"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:14.982Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "* main\n  murphy-showcase-hierarchy-nav\n  murphy-site-shell\n  murphy/tokenizer-families-kimi\n  remotes/origin/HEAD -> origin/main\n  remotes/origin/main\n  remotes/origin/maintenance/20260310-readme-freshness-note\n  remotes/origin/murphy-showcase-hierarchy-nav\n  remotes/origin/murphy-site-shell\n  remotes/origin/murphy/tokenizer-dashboard-compression\n  remotes/origin/murphy/tokenizer-families-kimi\n  remotes/origin/murphy/tokenizer-input-first-workspace\n  remotes/origin/murphy/tokenizer-route-refresh\n  remotes/origin/murphy/tokenizer-token-surface-ui\n  remotes/origin/murphy/tokenizer-ui-polish\n  remotes/origin/murphy/tokenizer-vocab-families\n  remotes/origin/task/1771749821-gh-pages\n  remotes/origin/task/1773701002-tokenizer-lineup"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:15.642Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\"branch\":\"main\",\"path\":\"/\"}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:21.481Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "The `deploy` branch doesn't exist on the remote yet. I need to:\n\n1. First, make sure the publisher has been running and has created the deploy branch. But it seems the publisher hasn't pushed to `deploy` yet, or it's not running.\n\nLet me check if the publisher is running and what it's configured to do. Let me check the dashboard config.\n\nActually, let me check the current state of the publisher - is it running? And has the code change already been deployed to it?\n\n\nNow I'm looking at the dashboard.py code to understand what it's currently doing."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:22.077Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "The `deploy` branch doesn't exist yet on the remote, and Pages is still serving from `main`. The publisher needs to create the `deploy` branch first. Let me check if the publisher is running."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:23.103Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"tmux list-sessions 2>/dev/null | grep dashboard || echo \\\"no dashboard session\\\"\", \"description\": \"Check if dashboard tmux session exists\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:23.144Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "dashboard: 1 windows (created Mon Mar 23 15:57:33 2026)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:23.282Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"ps aux | grep -i dashboard | grep -v grep || echo \\\"no dashboard process\\\"\", \"description\": \"Check for running dashboard process\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:23.380Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "murphy           49724   0.0  0.1 435284352  24960 s002  Ss+   3:57PM   0:10.36 /opt/homebrew/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python -m src.loop.monitor.dashboard --headless --from-config"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:29.555Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "The dashboard publisher is running (PID 49724), but started at 3:57 PM. Since the FIX-020 code was committed earlier, the publisher may have been started before the code change, or it was restarted after. Let me check if this running instance has the new code. \n\nActually, the publisher was started at 3:57 PM, and the commit `895012f` (FIX-020 implementation) was made... let me check when."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:29.964Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "The publisher is running. Let me check if it was started after the FIX-020 code change."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:30.947Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git log --format=\\\"%ci\\\" -1 895012f\", \"description\": \"Check commit time for FIX-020\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:31.001Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Exit code 128\nfatal: ambiguous argument '895012f': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:31.454Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"ls -la /Users/murphy/Research/projects/agent-monitor-web/index.html 2>/dev/null | head -1\", \"description\": \"Check when last snapshot was written\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:31.456Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "<tool_use_error>Cancelled: parallel tool call Bash(git log --format=\"%ci\" -1 895012f) errored</tool_use_error>"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:36.440Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research && git log --format=\\\"%ci %s\\\" --all | grep \\\"FIX-020\\\" | head -3\", \"description\": \"Find FIX-020 commit time\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:36.539Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "2026-03-23 16:44:15 -0700 [developer] FIX-020: Two-branch dashboard publishing (deploy branch)\n2026-03-23 15:57:39 -0700 [developer] FIX-020: approved implementation plan for two-branch publishing"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:37.132Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"ls -la /Users/murphy/Research/projects/agent-monitor-web/index.html 2>/dev/null\", \"description\": \"Check last snapshot modification time\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:37.166Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "-rw-r--r--@ 1 murphy  staff  121870 Mar 23 17:42 /Users/murphy/Research/projects/agent-monitor-web/index.html"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:46.231Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "The FIX-020 commit was at 16:44 local time, and the publisher was started at 15:57 — before the code change. So the running publisher instance has the OLD code. It needs to be restarted.\n\nBut wait, the snapshot was written at 17:42, so the publisher IS running. It's just running the old code that pushes to `main`.\n\nLet me check if there's a deploy branch. The `git ls-remote` showed nothing for `deploy`, so the publisher hasn't created it. This confirms the publisher is running old code.\n \nI think the best approach is to trigger a one-shot publish first to create the deploy branch, then switch GitHub Pages over to it and clean up the generated files from `main`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:46.756Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "The publisher was started at 15:57 but the FIX-020 code was committed at 16:44 — the running publisher has the **old code**. I need to:\n\n1. Run a one-shot publish to create the `deploy` branch\n2. Switch GitHub Pages source\n3. Untrack files from `main`\n4. Restart the publisher\n\nLet me first do a one-shot publish to create the `deploy` branch."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:48.192Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m src.loop.monitor.dashboard --once --export-static-dir projects/agent-monitor-web 2>&1 | tail -30\", \"description\": \"One-shot export to create deploy branch\", \"timeout\": 60000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:43:49.468Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "GPU monitor: enabled (tianhaowang-gpu0, poll=120s, timeout=4s)\nStatic export: projects/agent-monitor-web/index.html\nStatic status: projects/agent-monitor-web/status.json"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:58.017Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "The one-shot export just wrote the files but didn't push — it needs `--static-git-push on` to actually push. Let me check the current state. \n\nWait, looking at the plan again: the `--once` flag just writes static files and exits. The git push happens as part of `publish_to_deploy_branch()` which is called in the export loop or one-shot path only if git push is enabled.\n\nLet me check the config and try again with git push enabled."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:58.141Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "That only wrote the files but didn't push. Let me check the config and run with git push enabled."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:43:59.353Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m src.loop.monitor.dashboard --once --export-static-dir projects/agent-monitor-web --static-git-push on --static-git-branch deploy --static-git-remote origin 2>&1 | tail -30\", \"description\": \"One-shot export with git push to deploy branch\", \"timeout\": 60000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:44:01.440Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Deploy publish error: git hash-object -w index.html failed: fatal: could not open 'projects/agent-monitor-web/index.html' for reading: No such file or directory\nGPU monitor: enabled (tianhaowang-gpu0, poll=120s, timeout=4s)\nStatic export: projects/agent-monitor-web/index.html\nStatic status: projects/agent-monitor-web/status.json"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:06.622Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "The publish function is running from the `projects/agent-monitor-web` directory and trying to hash files relative to the repo root. Let me look at the actual code to understand the working directory issue."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:07.032Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "There's a path issue — the publish function is running from the wrong directory. Let me check the code."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:07.899Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"publish_to_deploy_branch\", \"path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:44:07.917Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "3191:def publish_to_deploy_branch(\n3330:                commit_hash = publish_to_deploy_branch(static_dir, static_git_remote, static_git_branch or \"deploy\")\n3513:                commit_hash = publish_to_deploy_branch(args.export_static_dir, args.static_git_remote, deploy_branch)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:11.436Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 3191, \"limit\": 100}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:44:11.441Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3191→def publish_to_deploy_branch(\n  3192→    out_dir: Path,\n  3193→    remote: str,\n  3194→    deploy_branch: str = \"deploy\",\n  3195→    tracked_files: tuple = STATIC_EXPORT_TRACKED_FILES,\n  3196→) -> Optional[str]:\n  3197→    \"\"\"Publish snapshot files to an orphan deploy branch using git plumbing.\n  3198→\n  3199→    Builds a tree from the remote main branch's full content, overlays the\n  3200→    generated snapshot files, and force-pushes as an orphan commit. The working\n  3201→    tree and HEAD are never modified.\n  3202→\n  3203→    Returns the commit hash on success, None if skipped (no changes).\n  3204→    \"\"\"\n  3205→    # Guard: refuse to force-push to main/master — this would destroy the\n  3206→    # development branch. Catches stale DASHBOARD_GIT_BRANCH=main configs.\n  3207→    if deploy_branch in (\"main\", \"master\"):\n  3208→        raise RuntimeError(\n  3209→            f\"Refusing to publish to '{deploy_branch}' — this would destroy the \"\n  3210→            f\"development bran"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:15.329Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 3255, \"limit\": 10}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:44:15.339Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3255→        for rel_path in all_overlay_files:\n  3256→            abs_path = out_dir / rel_path\n  3257→            if not abs_path.is_file():\n  3258→                continue\n  3259→            # Write blob to object store.\n  3260→            blob_proc = run_git(out_dir, [\"hash-object\", \"-w\", str(abs_path)])\n  3261→            _git_check(blob_proc, f\"hash-object -w {rel_path}\")\n  3262→            blob_sha = blob_proc.stdout.strip()\n  3263→            # Add to temp index.\n  3264→            _git_check("
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:21.413Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "I see the issue. On line 3260, `run_git(out_dir, [\"hash-object\", \"-w\", str(abs_path)])` passes the absolute path to `hash-object`. But `run_git` runs git with `cwd=out_dir`. So git is running in `projects/agent-monitor-web/` and the absolute path should work.\n\nWait, let me look at the error message again:\n```\nDeploy publish error: git hash-object -w index.html failed: fatal: could not open 'projects/agent-monitor-web/index.html' for reading: No such file or directory\n\n\n```\n\nIt's passing `projects/agent-monitor-web/index.html` to `hash-object`, not the absolute path. I need to check what `run_git` is actually doing with the arguments."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:21.741Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "The error shows `hash-object` is receiving a relative path `projects/agent-monitor-web/index.html` instead of the absolute path. Let me check `run_git`."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:22.191Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"^def run_git\", \"path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:44:22.208Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "3161:def run_git(repo_dir: Path, args, timeout_sec: int = 25):"
+      }
+    ]
   }
 ]
