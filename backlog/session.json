@@ -712,5 +712,503 @@
         "content_preview": "3161:def run_git(repo_dir: Path, args, timeout_sec: int = 25):"
       }
     ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:25.500Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 3161, \"limit\": 30}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:44:25.504Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3161→def run_git(repo_dir: Path, args, timeout_sec: int = 25):\n  3162→    return subprocess.run(\n  3163→        [\"git\", \"-C\", str(repo_dir), *args],\n  3164→        capture_output=True,\n  3165→        text=True,\n  3166→        timeout=timeout_sec,\n  3167→        check=False,\n  3168→    )\n  3169→\n  3170→\n  3171→def _run_git_with_index(repo_dir: Path, args, index_file: str, timeout_sec: int = 25):\n  3172→    \"\"\"Run a git command with a custom GIT_INDEX_FILE environment variable.\"\"\"\n  3173→    env = {**os.environ, \"GIT_INDEX_FILE\": index_file}\n  3174→    return subprocess.run(\n  3175→        [\"git\", \"-C\", str(repo_dir), *args],\n  3176→        capture_output=True,\n  3177→        text=True,\n  3178→        timeout=timeout_sec,\n  3179→        check=False,\n  3180→        env=env,\n  3181→    )\n  3182→\n  3183→\n  3184→def _git_check(proc, operation: str):\n  3185→    \"\"\"Raise RuntimeError if a git subprocess failed.\"\"\"\n  3186→    if proc.returncode != 0:\n  3187→        detail = (proc.stderr or pr"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:41.628Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "I see. `run_git` uses `git -C repo_dir`, which changes git's working directory to `repo_dir`. But line 3260 passes `str(abs_path)` which is `out_dir / rel_path`. Since `out_dir` is `Path(\"projects/agent-monitor-web\")` (a relative path) and `rel_path` is e.g., `index.html`, `abs_path` = `Path(\"projects/agent-monitor-web/index.html\")`.\n\nBut when `git -C projects/agent-monitor-web hash-object -w projects/agent-monitor-web/index.html` is run, git is in `projects/agent-monitor-web/` and looks for `projects/agent-monitor-web/index.html` relative to that — so it's looking for `projects/agent-monitor-web/projects/agent-monitor-web/index.html`.\n\n\nThe fix is to pass just `rel_path` directly since git's working directory is already set to `out_dir`, or use the absolute resolved path instead of the relative one. I need to verify whether this is actually a bug by checking how `out_dir` gets passed to the function—it might already be resolved to an absolute path in the static export loop, which would explain why the tests passed."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:42.462Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Found the bug. `run_git` uses `git -C out_dir` which makes git's CWD = `out_dir`, but line 3260 passes `str(abs_path)` which is `out_dir / rel_path` — a relative path that gets resolved relative to `out_dir`, creating a double-nested path. Let me verify and fix."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:42.975Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 3500, \"limit\": 25}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:44:42.982Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3500→        if static_git_push_enabled and not (git_marker.is_dir() or git_marker.is_file()):\n  3501→            print(\n  3502→                f\"Error: export dir is not a git repo: {args.export_static_dir} \"\n  3503→                f\"(git push is enabled but .git is missing)\",\n  3504→                file=sys.stderr,\n  3505→            )\n  3506→            sys.exit(1)\n  3507→        write_static_site(args.export_static_dir)\n  3508→        print(f\"Static export: {args.export_static_dir / 'index.html'}\")\n  3509→        print(f\"Static status: {args.export_static_dir / 'status.json'}\")\n  3510→        if static_git_push_enabled:\n  3511→            try:\n  3512→                deploy_branch = args.static_git_branch or \"deploy\"\n  3513→                commit_hash = publish_to_deploy_branch(args.export_static_dir, args.static_git_remote, deploy_branch)\n  3514→                if commit_hash:\n  3515→                    print(f\"Deploy publish: {commit_hash} -> {args.static_git_remote}:{deploy_bra"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:53.503Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "So when called from the command line with `--export-static-dir projects/agent-monitor-web`, `args.export_static_dir` is a `Path(\"projects/agent-monitor-web\")` (relative). Then `publish_to_deploy_branch(args.export_static_dir, ...)` receives `out_dir = Path(\"projects/agent-monitor-web\")`.\n\nInside the function:\n- `abs_path = out_dir / rel_path` = `Path(\"projects/agent-monitor-web/index.html\")` — still relative\n\n\n- When `run_git(out_dir, [\"hash-object\", \"-w\", str(abs_path)])` executes, it runs git with `-C projects/agent-monitor-web`, but then passes the full relative path, causing git to look for `projects/agent-monitor-web/projects/agent-monitor-web/index.html`. The fix is to pass just `rel_path` instead since the working directory is already set correctly.\n- The tests passed because they use absolute paths from `tempfile.mkdtemp()`, which work regardless of the `-C` flag. The bug only surfaces when `out_dir` is relative.\n- Now I need to check how the `--from-config` export path handles this to see if it has the same issue."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:53.524Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Read",
+        "input_preview": "{\"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"offset\": 3320, \"limit\": 20}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:44:53.528Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "  3320→):\n  3321→    first = True\n  3322→    while True:\n  3323→        if first:\n  3324→            first = False\n  3325→        else:\n  3326→            time.sleep(interval)\n  3327→        try:\n  3328→            write_static_site(static_dir)\n  3329→            if static_git_push:\n  3330→                commit_hash = publish_to_deploy_branch(static_dir, static_git_remote, static_git_branch or \"deploy\")\n  3331→                if commit_hash:\n  3332→                    print(f\"[writer] deploy publish {commit_hash} -> {static_git_remote}:{static_git_branch or 'deploy'}\")\n  3333→        except Exception as exc:\n  3334→            print(f\"[writer] error: {exc}\", file=sys.stderr)\n  3335→\n  3336→\n  3337→def resolve_writer_interval(interval_arg: Optional[int]) -> int:\n  3338→    if interval_arg is not None and interval_arg > 0:\n  3339→        return interval_arg"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:44:58.202Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"static_dir.*=.*Path|export_static_dir.*=.*Path\", \"path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:44:58.222Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "3451:            args.export_static_dir = Path(_cfg(\"DASHBOARD_EXPORT_DIR\", \"projects/agent-monitor-web\"))"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:06.525Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "So in `--from-config` mode, `args.export_static_dir = Path(\"projects/agent-monitor-web\")` which is relative. The same bug exists in the long-running export loop. The bug is real — it just happens that the tests all use absolute paths from `tempfile.mkdtemp()`.\n\nLet me fix line 3260 to use `rel_path` instead of `str(abs_path)`. Since `run_git` already sets `-C out_dir`, all paths should be relative to `out_dir`.\n\nActually, wait — this is a real bug that's preventing the publisher from working. \n\nThe FIX-020 code was committed but never actually tested against the real publisher setup, so I need to verify it actually works now."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:07.651Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Found the bug: `publish_to_deploy_branch` passes `str(abs_path)` (which is `out_dir/rel_path`) to `git hash-object -w`, but `run_git` already sets `-C out_dir`. When `out_dir` is relative, this creates a double-nested path. Tests passed because `tempfile.mkdtemp()` returns absolute paths.\n\nThe fix: use `rel_path` instead of `str(abs_path)` on line 3260."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:08.477Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Edit",
+        "input_preview": "{\"replace_all\": false, \"file_path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"old_string\": \"            blob_proc = run_git(out_dir, [\\\"hash-object\\\", \\\"-w\\\", str(abs_path)])\", \"new_string\": \"            blob_proc = run_git(out_dir, [\\\"hash-object\\\", \\\"-w\\\", rel_path])\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:45:08.514Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "The file /Users/murphy/Research/src/loop/monitor/dashboard.py has been updated successfully."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:12.982Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Now let me verify the fix works with a one-shot publish:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:14.367Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"python3 -m src.loop.monitor.dashboard --once --export-static-dir projects/agent-monitor-web --static-git-push on --static-git-branch deploy --static-git-remote origin 2>&1\", \"description\": \"One-shot export with fix to create deploy branch\", \"timeout\": 120000}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:45:21.503Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "GPU monitor: enabled (tianhaowang-gpu0, poll=120s, timeout=4s)\nStatic export: projects/agent-monitor-web/index.html\nStatic status: projects/agent-monitor-web/status.json\nDeploy publish: 4b15361296c5a43bf0a4464624be8b0f7e9f8440 -> origin:deploy"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:26.289Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Deploy branch created. Now let me verify it exists and switch GitHub Pages."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:27.064Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cd /Users/murphy/Research/projects/agent-monitor-web && git ls-remote origin refs/heads/deploy\", \"description\": \"Verify deploy branch exists on remote\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:45:28.562Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "4b15361296c5a43bf0a4464624be8b0f7e9f8440\trefs/heads/deploy"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:32.741Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Deploy branch is live. Now switch GitHub Pages source from `main` to `deploy`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:34.080Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"gh api repos/murphytheagent/agent-monitor-web/pages -X PUT -f source[branch]=deploy -f source[path]=/\", \"description\": \"Switch GitHub Pages to serve from deploy branch\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:45:34.124Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "Exit code 1\n(eval):1: no matches found: source[branch]=deploy"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:39.603Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"gh api repos/murphytheagent/agent-monitor-web/pages -X PUT --input - <<'EOF'\\n{\\\"source\\\":{\\\"branch\\\":\\\"deploy\\\",\\\"path\\\":\\\"/\\\"}}\\nEOF\", \"description\": \"Switch GitHub Pages source to deploy branch\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:45:40.120Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(Bash completed with no output)"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:43.819Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"gh api repos/murphytheagent/agent-monitor-web/pages --jq '.source'\", \"description\": \"Verify GitHub Pages now serves from deploy\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:45:44.178Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "{\"branch\":\"deploy\",\"path\":\"/\"}"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:48.736Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "GitHub Pages now serves from `deploy`. Now untrack generated files from `main`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:49.945Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git status --short | head -20\", \"description\": \"Check working tree state in site repo\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:45:50.008Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": " M backlog/session.json\n M backlog/sessions/FIX-020.json\n M status.json\n?? .gitignore\n?? .playwright-cli/\n?? output/\n?? outputs/design-refresh-mobile/\n?? outputs/restrained-cyberpunk-mobile/\n?? outputs/showcase-hierarchy-validation/\n?? outputs/site-shell-validation/"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:54.350Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "Wait, I need to be in the site repo directory. Let me cd into it.\n\nActually, `git status` above ran from the root. Let me check the current directory state."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:45:55.421Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git status --short | head -20\", \"description\": \"Check working tree state in site repo\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:45:55.479Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": " M backlog/session.json\n M backlog/sessions/FIX-020.json\n M status.json\n?? .gitignore\n?? .playwright-cli/\n?? output/\n?? outputs/design-refresh-mobile/\n?? outputs/restrained-cyberpunk-mobile/\n?? outputs/showcase-hierarchy-validation/\n?? outputs/site-shell-validation/"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:46:00.083Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git status --short | head -20\", \"description\": \"Check site repo working tree state\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:46:00.133Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": " M backlog/session.json\n M backlog/sessions/FIX-020.json\n M status.json\n?? .gitignore\n?? .playwright-cli/\n?? output/\n?? outputs/design-refresh-mobile/\n?? outputs/restrained-cyberpunk-mobile/\n?? outputs/showcase-hierarchy-validation/\n?? outputs/site-shell-validation/"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:46:03.711Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"pwd\", \"description\": \"Check current directory\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:46:03.737Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "/Users/murphy/Research/projects/agent-monitor-web"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:46:10.218Z",
+    "blocks": [
+      {
+        "type": "thinking",
+        "content": "I'm in the site repo. Now I need to:\n\n1. Check which generated files are tracked on `main`\n2. Add them to `.gitignore`\n3. `git rm --cached` them\n4. Commit\n\nLet me check what's tracked. The plan mentions these files:\n- `index.html`\n- `status.json`\n- `backlog/index.html`\n- `backlog/session.json`\n- `roadmap/index.html`\n\nLet me also check what `STATIC_EXPORT_TRACKED_FILES` includes."
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:46:10.919Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Grep",
+        "input_preview": "{\"pattern\": \"STATIC_EXPORT_TRACKED_FILES\", \"path\": \"/Users/murphy/Research/src/loop/monitor/dashboard.py\", \"output_mode\": \"content\", \"-n\": true}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:46:10.937Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "87:STATIC_EXPORT_TRACKED_FILES = (\"index.html\", \"status.json\", \"backlog/index.html\", \"backlog/session.json\", \"roadmap/index.html\")\n3195:    tracked_files: tuple = STATIC_EXPORT_TRACKED_FILES,"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:46:15.626Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"git ls-files -- index.html status.json backlog/index.html backlog/session.json roadmap/index.html backlog/sessions/\", \"description\": \"Check which generated files are currently tracked on main\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:46:15.678Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "backlog/index.html\nbacklog/session.json\nbacklog/sessions/AGENT-023.json\nbacklog/sessions/AGENT-025.json\nbacklog/sessions/AGENT-044.json\nbacklog/sessions/AGENT-045.json\nbacklog/sessions/AGENT-046.json\nbacklog/sessions/AGENT-047.json\nbacklog/sessions/FIX-003.json\nbacklog/sessions/FIX-004.json\nbacklog/sessions/FIX-007.json\nbacklog/sessions/FIX-008.json\nbacklog/sessions/FIX-011.json\nbacklog/sessions/FIX-012.json\nbacklog/sessions/FIX-014.json\nbacklog/sessions/FIX-018.json\nbacklog/sessions/FIX-020.json\nindex.html\nroadmap/index.html\nstatus.json"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:46:20.150Z",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "Need to untrack all of these. Let me also check/create the `.gitignore`:"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:46:20.597Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat .gitignore 2>/dev/null || echo \\\"no .gitignore\\\"\", \"description\": \"Check existing .gitignore\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:46:20.635Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "# macOS Google Drive folder icons.\nIcon?"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "timestamp": "2026-03-24T00:46:25.192Z",
+    "blocks": [
+      {
+        "type": "tool_use",
+        "tool": "Bash",
+        "input_preview": "{\"command\": \"cat >> .gitignore <<'EOF'\\n\\n# Generated snapshot files (published via deploy branch)\\nindex.html\\nstatus.json\\nbacklog/index.html\\nbacklog/session.json\\nbacklog/sessions/\\nroadmap/index.html\\nEOF\", \"description\": \"Add generated files to .gitignore\"}"
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "timestamp": "2026-03-24T00:46:25.232Z",
+    "blocks": [
+      {
+        "type": "tool_result",
+        "content_preview": "(Bash completed with no output)"
+      }
+    ]
   }
 ]
