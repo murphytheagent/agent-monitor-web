@@ -1,9 +1,9 @@
 {
   "heartbeat": {
-    "last_updated_utc": "2026-03-24T00:23:50Z",
+    "last_updated_utc": "2026-03-24T00:24:03Z",
     "status": "workers_active",
     "pid": 68391,
-    "loop_count": 300,
+    "loop_count": 302,
     "last_exit_code": 0,
     "last_failure_kind": "none",
     "transient_retry_attempt": 0,
@@ -17,7 +17,7 @@
         "slot": 0,
         "task": "1774308174.565679",
         "started_at": 1774309555,
-        "elapsed_sec": 2275
+        "elapsed_sec": 2287
       }
     ]
   },
@@ -27,15 +27,15 @@
     "python_version": "3.11.14",
     "cpu_count": 10,
     "load_avg": {
-      "one": 1.7,
-      "five": 1.84,
-      "fifteen": 1.91
+      "one": 1.69,
+      "five": 1.77,
+      "fifteen": 1.87
     },
     "memory_total_bytes": 17179869184,
     "disk_total_bytes": 245107195904,
-    "disk_used_bytes": 113138647040,
-    "disk_free_bytes": 131968548864,
-    "runner_log_size_bytes": 792251,
+    "disk_used_bytes": 113249456128,
+    "disk_free_bytes": 131857739776,
+    "runner_log_size_bytes": 792561,
     "dashboard_pid": null,
     "dashboard_started_utc": "2026-03-23T22:57:33Z",
     "local_ips": []
@@ -44,17 +44,17 @@
     "enabled": true,
     "node_alias": "redacted-node",
     "status": "ok",
-    "checked_at_utc": "2026-03-24T00:23:52Z",
+    "checked_at_utc": "2026-03-24T00:25:55Z",
     "cache_age_sec": 0,
     "note": "Low-frequency cached nvidia-smi snapshot.",
     "gpus": [
       {
         "index": 0,
         "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "utilization_gpu_pct": 95,
+        "utilization_gpu_pct": 96,
         "memory_used_mb": 52704,
         "memory_total_mb": 97887,
-        "temperature_c": 51
+        "temperature_c": 54
       },
       {
         "index": 1,
@@ -94,7 +94,7 @@
         "utilization_gpu_pct": 93,
         "memory_used_mb": 27995,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 49
       },
       {
         "index": 6,
@@ -102,7 +102,7 @@
         "utilization_gpu_pct": 93,
         "memory_used_mb": 27995,
         "memory_total_mb": 97887,
-        "temperature_c": 52
+        "temperature_c": 53
       },
       {
         "index": 7,
@@ -133,24 +133,7 @@
         }
       }
     },
-    "active": {
-      "1774308174.565679": {
-        "mention_ts": "1774308174.565679",
-        "thread_ts": "1774308174.565679",
-        "status": "in_progress",
-        "task_description": "Take a look at this: <[link] Can you incorporate this into your trading system?",
-        "summary": "Take a look at this: <[link] Can you incorporate this into your trading system?",
-        "summary_preview": "Take a look at this: <[link] Can you incorporate this into your trading system?",
-        "mention_text": "(hidden in public snapshot)",
-        "created_ts": "1774308174.565679",
-        "last_update_ts": "1774309555.290477",
-        "task_type": "slack_mention",
-        "source": {
-          "user_name": "[redacted]",
-          "time_iso": "2026-03-23T23:22:54Z"
-        }
-      }
-    },
+    "active": {},
     "incomplete": {
       "1774103566.709609": {
         "mention_ts": "1774103566.709609",
@@ -406,6 +389,22 @@
         "source": {
           "user_name": "[redacted]",
           "time_iso": "2026-03-21T20:30:45Z"
+        }
+      },
+      "1774308174.565679": {
+        "mention_ts": "1774308174.565679",
+        "thread_ts": "1774308174.565679",
+        "status": "waiting_human",
+        "task_description": "Take a look at this: <[link] Can you incorporate this into your trading system?",
+        "summary": "Explained SentryDock as a discovery-monitoring layer, added a typed non-canonical alert lane to the trading repo, and drafted the Slack reply for review.",
+        "summary_preview": "Explained SentryDock as a discovery-monitoring layer, added a typed non-canonical alert lane to the trading repo, and drafted the Slack reply for review.",
+        "mention_text": "(hidden in public snapshot)",
+        "created_ts": "1774308174.565679",
+        "last_update_ts": "1774311849.265776",
+        "task_type": "slack_mention",
+        "source": {
+          "user_name": "[redacted]",
+          "time_iso": "2026-03-23T23:22:54Z"
         }
       }
     },
@@ -2574,5 +2573,5 @@
     "task_text_access": "Thread-scoped task_description plus compact previews; requester identities are redacted.",
     "source_code_exposure": "No repository files are published by this dashboard output."
   },
-  "server_time_utc": "2026-03-24T00:23:53Z"
+  "server_time_utc": "2026-03-24T00:25:56Z"
 }
