@@ -1,19 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Playfair+Display:ital,wght@1,700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 :root {
-  --page-bg: #05080d;
-  --page-bg-deep: #0a1119;
-  --page-bg-accent: #121a27;
-  --surface: rgba(9, 14, 22, 0.82);
-  --surface-strong: rgba(11, 18, 27, 0.94);
-  --surface-raised: rgba(17, 27, 40, 0.98);
-  --surface-muted: rgba(14, 22, 33, 0.9);
-  --line: rgba(163, 184, 215, 0.12);
-  --line-strong: rgba(99, 230, 255, 0.3);
-  --line-soft: rgba(255, 255, 255, 0.06);
+  --page-bg: #02050b;
+  --page-bg-deep: #08101a;
+  --page-bg-accent: #111725;
+  --surface: rgba(6, 10, 18, 0.82);
+  --surface-strong: rgba(8, 13, 21, 0.94);
+  --surface-raised: rgba(13, 20, 31, 0.98);
+  --surface-muted: rgba(10, 16, 25, 0.92);
+  --line: rgba(99, 230, 255, 0.18);
+  --line-strong: rgba(99, 230, 255, 0.48);
+  --line-soft: rgba(255, 255, 255, 0.04);
   --text: #eff5ff;
-  --text-muted: #adc0d5;
-  --text-soft: #718197;
+  --text-muted: #a2b7d0;
+  --text-soft: #677791;
   --muted: var(--text-muted);
   --accent: #63e6ff;
   --accent-strong: #8cecff;
@@ -23,9 +23,9 @@
   --success: #7dffd0;
   --warning: #ffd36a;
   --danger: #ff7aa7;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.26);
-  --shadow-md: 0 24px 60px rgba(0, 0, 0, 0.36);
-  --shadow-glow: 0 0 0 1px rgba(99, 230, 255, 0.08), 0 18px 48px rgba(0, 0, 0, 0.34);
+  --shadow-sm: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --shadow-md: 8px 8px 0 rgba(255, 88, 208, 0.12), -2px -2px 0 rgba(99, 230, 255, 0.12), 0 24px 60px rgba(0, 0, 0, 0.42);
+  --shadow-glow: 6px 6px 0 rgba(255, 88, 208, 0.1), -2px -2px 0 rgba(99, 230, 255, 0.1), 0 18px 48px rgba(0, 0, 0, 0.38);
   --radius-pill: 999px;
 }
 
@@ -52,9 +52,9 @@
   line-height: 0.9;
   text-decoration: none;
   text-shadow:
-    1px 0 rgba(255, 88, 208, 0.65),
-    -1px 0 rgba(99, 230, 255, 0.78),
-    0 0 18px rgba(99, 230, 255, 0.12);
+    1px 0 rgba(255, 88, 208, 0.72),
+    -1px 0 rgba(99, 230, 255, 0.86),
+    0 0 18px rgba(99, 230, 255, 0.16);
   transition:
     color 160ms ease,
     text-shadow 160ms ease;
@@ -77,9 +77,9 @@
 .murphy-kicker {
   color: var(--accent);
   font-family: "Orbitron", "Rajdhani", sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -96,7 +96,7 @@
   padding: 0 16px;
   border-radius: var(--radius-pill) !important;
   border: 1px solid var(--line) !important;
-  background: linear-gradient(180deg, rgba(20, 31, 45, 0.88) 0%, rgba(10, 16, 24, 0.94) 100%) !important;
+  background: linear-gradient(180deg, rgba(14, 23, 36, 0.96) 0%, rgba(7, 12, 20, 0.98) 100%) !important;
   box-shadow: var(--shadow-sm) !important;
   color: var(--text-muted) !important;
   font-family: "Rajdhani", "Avenir Next", "Segoe UI", sans-serif !important;
@@ -113,9 +113,9 @@
 }
 
 .murphy-link:hover {
-  border-color: var(--line-strong) !important;
-  background: linear-gradient(180deg, rgba(24, 37, 54, 0.94) 0%, rgba(11, 18, 27, 0.98) 100%) !important;
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(99, 230, 255, 0.08) !important;
+  border-color: rgba(255, 88, 208, 0.38) !important;
+  background: linear-gradient(180deg, rgba(18, 29, 45, 0.98) 0%, rgba(9, 15, 24, 0.99) 100%) !important;
+  box-shadow: 4px 4px 0 rgba(255, 88, 208, 0.16), -1px -1px 0 rgba(99, 230, 255, 0.14), 0 16px 32px rgba(0, 0, 0, 0.34) !important;
   color: var(--text) !important;
   transform: translateY(-1px);
 }
@@ -124,11 +124,12 @@
 .murphy-link[aria-current="page"] {
   border-color: rgba(99, 230, 255, 0.52) !important;
   background:
-    linear-gradient(180deg, rgba(18, 32, 47, 0.96) 0%, rgba(10, 18, 27, 0.98) 100%),
-    linear-gradient(90deg, rgba(99, 230, 255, 0.1) 0%, rgba(255, 88, 208, 0.08) 100%) !important;
+    linear-gradient(180deg, rgba(18, 32, 47, 0.98) 0%, rgba(9, 16, 26, 0.99) 100%),
+    linear-gradient(90deg, rgba(99, 230, 255, 0.12) 0%, rgba(255, 88, 208, 0.1) 100%) !important;
   box-shadow:
-    0 0 0 1px rgba(99, 230, 255, 0.12),
-    0 12px 30px rgba(0, 0, 0, 0.28),
+    4px 4px 0 rgba(255, 88, 208, 0.14),
+    -1px -1px 0 rgba(99, 230, 255, 0.14),
+    0 12px 30px rgba(0, 0, 0, 0.32),
     inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
   color: var(--text) !important;
 }
